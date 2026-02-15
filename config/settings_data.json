@@ -24,6 +24,9 @@
     "type_header_font": "old_standard_tt_n4",
     "type_body_font": "nunito_sans_n4",
     "type_additional_font": "nunito_sans_n4",
+    "cart_type": "drawer",
+    "show_vendor": true,
+    "show_cart_note": true,
     "sections": {
       "sl-custom-preheader": {
         "type": "sl-custom-preheader",
