@@ -78,7 +78,7 @@
         "settings": {
           "show_announcement": true,
           "text": "FREE SHIPPING ON ALL SKINCARE ORDERS $50+ →",
-          "link": "",
+          "link": "shopify://collections/skincare",
           "bg_color": "#b5b88f",
           "text_color": "#ffffff",
           "font_size": 13,
