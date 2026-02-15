@@ -1,1 +1,162 @@
-{"current":{"colors_solid_button_labels":"#8c9b6d","colors_accent_1":"#1a1a1a","gradient_accent_1":"","colors_accent_2":"#ffffff","gradient_accent_2":"","colors_accent_3":"#ffffff","colors_accent_4":"#1a1a1a","colors_accent_8":"#8c9b6d","colors_text":"#1a1a1a","colors_outline_button_labels":"#8c9b6d","colors_background_1":"#ffffff","gradient_background_1":"","colors_background_2":"#faf0e4","gradient_background_2":"","colors_background_3":"#8c9b6d","overlay_color":"#e9dcf2","preloader_enable":true,"preloader":"shopify:\/\/shop_images\/Dual_Ball-1s-304px.gif","type_header_font":"old_standard_tt_n4","heading_scale":100,"custom_font_script_1":"","custom_font_family_1":"","type_body_font":"nunito_sans_n4","body_scale":100,"custom_font_script_2":"","custom_font_family_2":"","type_additional_font":"nunito_n4","custom_font_script_3":"","custom_font_family_3":"","display_color_variant":true,"display_item_size":false,"enable_timer":true,"enable_wishlist":true,"enable_compare":true,"enable_quickview":true,"enable_quickadd":true,"enable_scroll_to_top":true,"offer_price_enable":true,"page_width":1240,"page_full_width_spacing":4,"spacing_sections":0,"spacing_grid_horizontal":30,"spacing_grid_vertical":30,"sidebar_width":300,"buttons_border_thickness":0,"buttons_border_opacity":100,"buttons_radius":0,"buttons_shadow_opacity":0,"buttons_shadow_horizontal_offset":-12,"buttons_shadow_vertical_offset":-12,"buttons_shadow_blur":0,"variant_pills_border_thickness":0,"variant_pills_border_opacity":55,"variant_pills_radius":0,"variant_pills_shadow_opacity":0,"variant_pills_shadow_horizontal_offset":0,"variant_pills_shadow_vertical_offset":4,"variant_pills_shadow_blur":5,"inputs_border_thickness":1,"inputs_border_opacity":100,"inputs_radius":0,"inputs_shadow_opacity":0,"inputs_shadow_horizontal_offset":0,"inputs_shadow_vertical_offset":2,"inputs_shadow_blur":0,"card_style":"card","button_style":"icon","card_image_padding":0,"card_text_alignment":"center","card_color_scheme":"background-1","card_border_thickness":0,"card_border_opacity":0,"card_corner_radius":0,"card_shadow_opacity":0,"card_shadow_horizontal_offset":0,"card_shadow_vertical_offset":4,"card_shadow_blur":5,"text_boxes_border_thickness":0,"text_boxes_border_opacity":10,"text_boxes_radius":0,"text_boxes_shadow_opacity":0,"text_boxes_shadow_horizontal_offset":0,"text_boxes_shadow_vertical_offset":4,"text_boxes_shadow_blur":5,"media_border_thickness":0,"media_border_opacity":0,"media_radius":0,"media_shadow_opacity":0,"media_shadow_horizontal_offset":0,"media_shadow_vertical_offset":4,"media_shadow_blur":5,"popup_border_thickness":0,"popup_border_opacity":0,"popup_corner_radius":0,"popup_shadow_opacity":20,"popup_shadow_horizontal_offset":6,"popup_shadow_vertical_offset":6,"popup_shadow_blur":10,"drawer_border_thickness":0,"drawer_border_opacity":0,"drawer_shadow_opacity":0,"drawer_shadow_horizontal_offset":0,"drawer_shadow_vertical_offset":4,"drawer_shadow_blur":0,"badge_position":"top-left","badge_corner_radius":40,"sale_badge_color_scheme":"accent-2","sold_out_badge_color_scheme":"inverse","accent_icons":"accent-1","breadcrumb_image":"shopify:\/\/shop_images\/breadcrumb-1_bf98965d-4e79-4cf1-8fdb-fbcd66e7e9af.jpg","breadcrumb_style":"center","image_overlay_opacity":90,"breadcrumb_padding_top":70,"breadcrumb_padding_bottom":70,"breadcrumb_margin_bottom":68,"social_twitter_link":"#","social_facebook_link":"#","social_pinterest_link":"#","social_instagram_link":"#","social_tiktok_link":"","social_tumblr_link":"","social_snapchat_link":"","social_youtube_link":"","social_vimeo_link":"","predictive_search_enabled":true,"predictive_search_show_vendor":false,"predictive_search_show_price":true,"favicon":"shopify:\/\/shop_images\/favicon.png","currency_code_enabled":false,"cart_type":"drawer","show_vendor":false,"show_cart_note":true,"cart_drawer_collection":"acne","checkout_logo_image":"shopify:\/\/shop_images\/logo.png","checkout_logo_position":"center","checkout_logo_size":"small","checkout_body_background_color":"#f7f7f7","checkout_input_background_color_mode":"white","checkout_sidebar_background_color":"#f7f7f7","checkout_accent_color":"#1a1a1a","checkout_button_color":"#ebbaa9","checkout_error_color":"#e22120","enable_cart_icon":false,"enable_search":false,"enable_stock_status_bar":false,"sections":{"announcement-bar":{"type":"announcement-bar","custom_css":["p {color: white; font-size: 16px; font-family: sans-serif; font-weight: 100;}"],"settings":{"show_announcement":true,"text":"FREE SHIPPING ON ALL SKINCARE ORDERS $50+ →","link":"shopify:\/\/collections\/skincare","bg_color":"#8c9b6d","text_color":"#ffffff","font_size":13,"font_size_mobile":12,"padding_vertical":12}},"header":{"type":"header","blocks":{"promo_image_QJ3chb":{"type":"promo_image","disabled":true,"settings":{"mega_1":"Services","image_1":"shopify:\/\/shop_images\/BrandingPhotography-C_Mae-5388.jpg","title_1":"Shop Post-Treatment Skin Care →","link_1":"shopify:\/\/collections\/skincare","image_2":"shopify:\/\/shop_images\/BrandingPhotography-C_Mae-6099.jpg","title_2":"Book a Brazilian →","button_2":"EXLORE ALL WAXING SERVICES","link_2":"shopify:\/\/pages\/brazilian-wax-mchenry"}},"promo_image_bmNmht":{"type":"promo_image","disabled":true,"settings":{"mega_1":"Shop Skincare","title_1":"","link_1":"","image_2":"shopify:\/\/shop_images\/Andrea-Butler_2.webp","title_2":"Learn About Acne Bootcamp →","button_2":"NOW AVILABLE VIRTUALLY","link_2":"shopify:\/\/pages\/acne-bootcamp"}}},"block_order":["promo_image_QJ3chb","promo_image_bmNmht"],"settings":{"page_full_width":false,"page_full_width_spacing":false,"enable_mega_menu":true,"sl_header_bg_color":"#ffffff","sl_header_text_color":"#333333","sl_nav_font_size":14,"sl_nav_font_size_mobile":13,"sl_nav_font_weight":"400","sl_mega_divider_color":"#e5e5e5","sl_mega_border_color":"#c5c8a0","color_scheme":"background-1","logo":"shopify:\/\/shop_images\/Secondary-Logo-Green.png","logo_width":250,"logo_position":"top-center","menu_alignment":"center","menu":"main-menu","show_secondary_menu":true,"secondary_menu":"","mobile_screen_width":"1280","show_line_separator":true,"enable_sticky_header":true,"enable_transparent_header":false,"enable_search_box":true,"enable_country_selector":false,"enable_language_selector":false,"show_search":true,"show_header_wishlist":false,"show_header_compare":false,"show_account":false,"show_header_cart":true,"header_icon_type":"icon","mobile_cta_text":"Book A Spa Service","mobile_cta_url":"","show_category_menu":false,"category_heading":"All categories","category_menu":"main-menu","margin_bottom":0}},"footer":{"type":"footer","blocks":{"014b8af3-3edf-4429-a3f4-80a2e6eb4e88":{"type":"text","settings":{"heading":"","subtext":"<p>Smell fresh and feel fresh.<\/p>","subtext_duplicate":"<p><a href=\"\/collections\" target=\"_blank\" title=\"All collections\">@_savonsoap<\/a><\/p>","alignment":"left"}},"3408e200-d33a-433c-bdd0-1d9c73fff07e":{"type":"link_list","settings":{"heading":"about","menu":"","alignment":"","list_style":"vertical"}},"8c88a831-9d3f-4039-9e74-6f7b20caa8ff":{"type":"link_list","settings":{"heading":"information","menu":"","alignment":"","list_style":"vertical"}},"c74e60da-4417-4dfc-a562-f773ffc44358":{"type":"link_list","settings":{"heading":"support","menu":"","alignment":"","list_style":"vertical"}},"18a296a7-cf6e-4bbd-80ce-b9648bde011d":{"type":"link_list","settings":{"heading":"help","menu":"footer","alignment":"left","list_style":"vertical"}}},"block_order":["014b8af3-3edf-4429-a3f4-80a2e6eb4e88","3408e200-d33a-433c-bdd0-1d9c73fff07e","8c88a831-9d3f-4039-9e74-6f7b20caa8ff","c74e60da-4417-4dfc-a562-f773ffc44358","18a296a7-cf6e-4bbd-80ce-b9648bde011d"],"settings":{"page_full_width":false,"page_full_width_spacing":false,"color_scheme":"accent-2","show_social":true,"payment_enable":true,"footer_default":false,"border_right":false,"margin_top":0,"padding_top":60,"padding_bottom":60}},"main-password-header":{"type":"main-password-header","settings":{"logo":"shopify:\/\/shop_images\/logo.png","logo_max_width":200,"color_scheme":"background-1"}},"main-password-footer":{"type":"main-password-footer","settings":{"color_scheme":"background-1"}},"suggested-products":{"type":"suggested-products","blocks":{"a4ab6c6f-a1de-4166-8ecc-4cb9642b61db":{"type":"image","settings":{"product":"argan-soap","from":"Texas, US","time":"10 minutes ago"}},"4b6529a8-a8a9-4f12-a6e8-ff1b2f7cf0c4":{"type":"image","settings":{"product":"papaya-soap","from":"Texas, US","time":"10 minutes ago"}},"42ae4107-12ee-478f-bb4e-306167b6e754":{"type":"image","settings":{"product":"lavender-soap","from":"Texas, US","time":"10 minutes ago"}},"75993eba-eba5-4cca-8f8b-ff60848fced5":{"type":"image","settings":{"product":"rose-lavendar-soap","from":"Texas, US","time":"10 minutes ago"}},"9efa6dea-8720-4adc-9a8e-25df62f53b11":{"type":"image","settings":{"product":"sandal-wood-soap","from":"Texas, US","time":"10 minutes ago"}}},"block_order":["a4ab6c6f-a1de-4166-8ecc-4cb9642b61db","4b6529a8-a8a9-4f12-a6e8-ff1b2f7cf0c4","42ae4107-12ee-478f-bb4e-306167b6e754","75993eba-eba5-4cca-8f8b-ff60848fced5","9efa6dea-8720-4adc-9a8e-25df62f53b11"],"settings":{"display_recent_purchase":false,"placement":"left","text":"Customer recently purchased"}},"cookie-banner":{"type":"cookie-banner","settings":{"show_gdpr":false,"style":"bottom","color_scheme":"background-1","text":"Please click on the cookies to move to the website acess.","accept":"Accept","decline":"Decline","button_padding":"5px 15px 5px 15px"}},"newsletter-modal":{"type":"newsletter-modal","blocks":{"ad2319a5-3b0a-4abe-8f83-a627ca9b3c2c":{"type":"heading","disabled":true,"settings":{"heading":"Subscribe to our emails"}},"03297923-22c8-4e4e-bcf4-b26fb6693c69":{"type":"paragraph","disabled":true,"settings":{"paragraph":"<p>Be the first to know about new collections and exclusive offers.<\/p>"}},"8b169acd-6538-4ffb-8180-993928abf105":{"type":"email_form","disabled":true,"settings":{}}},"block_order":["ad2319a5-3b0a-4abe-8f83-a627ca9b3c2c","03297923-22c8-4e4e-bcf4-b26fb6693c69","8b169acd-6538-4ffb-8180-993928abf105"],"settings":{"color_scheme":"background-1","modal_bg_opacity":"0.8","enable_newsletter_modal":false,"cookie_expires":1,"cookie_modal_delay":"1000","block_text_align":"text-center","enable_social_icon":true}},"top-bar":{"type":"top-bar","settings":{"page_full_width":false,"page_full_width_spacing":false,"top_bar_color_scheme":"background-1","disable_topbar":true,"disable_topbar_mobile":true,"header_mail":"sample@somedomain.com","header_phone":"9876543210","text":"Free express shipping over $50 & 60 day return*","link_text":"Shop Now","link":"\/","show_social":true,"enable_country_selector":false,"enable_language_selector":true}},"footer_style1":{"type":"footer_style1","blocks":{"footer_style1-0":{"type":"link_list","settings":{"heading":"Information","menu":"footer","alignment":"","list_style":"vertical"}},"23ddf3e1-de11-4185-a308-e181892b515c":{"type":"link_list","settings":{"heading":"Quick links","menu":"quicklink","alignment":"","list_style":"vertical"}},"8b9321c8-3132-44f6-8db2-a87e6d3547a8":{"type":"address","settings":{"address_heading":"Our store","footer_address":"Find a location nearest you.<span><a href=\"#\">See Our Stores<\/a><\/span>","footer_contact_no":"+391 (0)35 2568 4593","footer_contact_id":"hello@domain.com","office_hours":"","alignment":""}},"de6bbb78-9eca-404b-82c5-fa2fc0c63f90":{"type":"newsletter","settings":{"heading":"Subscribe","newsletter_subtext":"<p>Enter your email below to be the first to know about new collections and product launches.<\/p>","alignment":"left","enable_socialicon":false}}},"block_order":["footer_style1-0","23ddf3e1-de11-4185-a308-e181892b515c","8b9321c8-3132-44f6-8db2-a87e6d3547a8","de6bbb78-9eca-404b-82c5-fa2fc0c63f90"],"settings":{"page_full_width":true,"page_full_width_spacing":true,"color_scheme":"background-1","show_social":true,"show_usd":true,"payment_enable":true,"footer_default":false,"border_right":true,"margin_top":0,"padding_top":40,"padding_bottom":0}},"footer_style2":{"type":"footer_style2","blocks":{"d85fbe91-23cd-45c0-9022-7e5745232243":{"type":"newsletter","settings":{"sub_heading":"Newsletter","heading":"Join Our Community And Get 20% Off On Your First Order","newsletter_subtext":"","alignment":"center","enable_socialicon":true}}},"block_order":["d85fbe91-23cd-45c0-9022-7e5745232243"],"settings":{"page_full_width":false,"page_full_width_spacing":false,"color_scheme":"background-2","image":"shopify:\/\/shop_images\/bg-footer_1.jpg","show_social":true,"show_usd":false,"show_footer_bottom":false,"payment_enable":true,"footer_default":true,"border_right":false,"margin_top":0,"padding_top":80,"padding_bottom":80}},"footer_style3":{"type":"footer_style3","blocks":{"0ac9df81-ef04-4735-91b0-b3455773ee12":{"type":"newsletter","settings":{"sub_heading":"","heading":"SIGN UP FOR NEWSLETTER","newsletter_subtext":"<p>Sign up now for sale alerts & special offers.<\/p>","alignment":"center","enable_socialicon":false}},"b253cadd-e46c-4b5c-b5f7-7eb84a92988a":{"type":"address","settings":{"address_heading":"CONTACT US","footer_address":"Rains HQ, Jens Olsens Vej 13 ,8200 Aarhus\n\nN,Denmark","footer_contact_no":"Phone (+45) 7199 2516","footer_contact_id":"Email : sayhello@unsenstore.com","office_hours":"","enable_socialicon":true,"alignment":"left"}},"a7817e3b-b4ba-4fb9-9181-073b8dc38c6e":{"type":"link_list","settings":{"heading":"INFORMATION","menu":"information","alignment":"","list_style":"vertical"}},"3d388e38-c98c-4234-89f3-84dfe340d3f7":{"type":"link_list","settings":{"heading":"ABOUT","menu":"quicklink","alignment":"","list_style":"vertical"}},"bd11441b-83e5-4381-bcc2-4a9431cfe4d7":{"type":"link_list","settings":{"heading":"SHOP BY","menu":"quicklink","alignment":"","list_style":"vertical"}}},"block_order":["0ac9df81-ef04-4735-91b0-b3455773ee12","b253cadd-e46c-4b5c-b5f7-7eb84a92988a","a7817e3b-b4ba-4fb9-9181-073b8dc38c6e","3d388e38-c98c-4234-89f3-84dfe340d3f7","bd11441b-83e5-4381-bcc2-4a9431cfe4d7"],"settings":{"page_full_width":false,"page_full_width_spacing":false,"color_scheme":"background-2","show_social":true,"show_usd":true,"show_footer_bottom":true,"payment_enable":true,"footer_default":false,"border_right":false,"show_bottom-icon":true,"margin_top":0,"padding_top":60,"padding_bottom":36}},"sl-custom-preheader":{"type":"sl-custom-preheader","settings":{"bg_color":"#f7f7f5","text_color":"#333333","show_border":true,"border_color":"#e5e5e5","font_size":13,"padding_vertical":10,"login_text":"Log In","link_1_text":"Contact Us","link_1_url":"shopify:\/\/pages\/contact","link_2_text":"","link_2_url":"shopify:\/\/pages\/brazilian-wax-mchenry","cta_text":"Book A Spa Service","cta_url":""}}},"content_for_index":[],"blocks":{"14060646107696862457":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/judgeme_core\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","disabled":false,"settings":{}}}},"presets":{"Default":{"colors_solid_button_labels":"#ffffff","colors_accent_1":"#121212","gradient_accent_1":"","colors_accent_2":"#334fb4","gradient_accent_2":"","colors_text":"#121212","colors_outline_button_labels":"#121212","colors_background_1":"#ffffff","gradient_background_1":"","colors_background_2":"#f3f3f3","gradient_background_2":"","type_header_font":"assistant_n4","heading_scale":100,"type_body_font":"assistant_n4","body_scale":100,"page_width":1200,"spacing_sections":0,"spacing_grid_horizontal":8,"spacing_grid_vertical":8,"buttons_border_thickness":1,"buttons_border_opacity":100,"buttons_radius":0,"buttons_shadow_opacity":0,"buttons_shadow_horizontal_offset":0,"buttons_shadow_vertical_offset":4,"buttons_shadow_blur":5,"variant_pills_border_thickness":1,"variant_pills_border_opacity":55,"variant_pills_radius":40,"variant_pills_shadow_opacity":0,"variant_pills_shadow_horizontal_offset":0,"variant_pills_shadow_vertical_offset":4,"variant_pills_shadow_blur":5,"inputs_border_thickness":1,"inputs_border_opacity":55,"inputs_radius":0,"inputs_shadow_opacity":0,"inputs_shadow_horizontal_offset":0,"inputs_shadow_vertical_offset":4,"inputs_shadow_blur":5,"card_style":"standard","card_image_padding":0,"card_text_alignment":"left","card_color_scheme":"background-2","card_border_thickness":0,"card_border_opacity":10,"card_corner_radius":0,"card_shadow_opacity":0,"card_shadow_horizontal_offset":0,"card_shadow_vertical_offset":4,"card_shadow_blur":5,"text_boxes_border_thickness":0,"text_boxes_border_opacity":10,"text_boxes_radius":0,"text_boxes_shadow_opacity":0,"text_boxes_shadow_horizontal_offset":0,"text_boxes_shadow_vertical_offset":4,"text_boxes_shadow_blur":5,"media_border_thickness":1,"media_border_opacity":5,"media_radius":0,"media_shadow_opacity":0,"media_shadow_horizontal_offset":0,"media_shadow_vertical_offset":4,"media_shadow_blur":5,"popup_border_thickness":1,"popup_border_opacity":10,"popup_corner_radius":0,"popup_shadow_opacity":0,"popup_shadow_horizontal_offset":0,"popup_shadow_vertical_offset":4,"popup_shadow_blur":5,"drawer_border_thickness":1,"drawer_border_opacity":10,"drawer_shadow_opacity":0,"drawer_shadow_horizontal_offset":0,"drawer_shadow_vertical_offset":4,"drawer_shadow_blur":5,"badge_position":"bottom left","badge_corner_radius":40,"sale_badge_color_scheme":"accent-2","sold_out_badge_color_scheme":"inverse","accent_icons":"text","social_twitter_link":"","social_facebook_link":"","social_pinterest_link":"","social_instagram_link":"","social_tiktok_link":"","social_tumblr_link":"","social_snapchat_link":"","social_youtube_link":"","social_vimeo_link":"","predictive_search_enabled":true,"predictive_search_show_vendor":false,"predictive_search_show_price":false,"currency_code_enabled":true,"sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"announcement-bar-0":{"type":"announcement","settings":{"text":"Welcome to our store","link":""}}},"block_order":["announcement-bar-0"],"settings":{}},"header":{"type":"header","settings":{"color_scheme":"background-1","logo_width":90,"logo_position":"middle-left","menu":"main-menu","show_line_separator":true,"enable_sticky_header":true,"margin_bottom":0}},"footer":{"type":"footer","blocks":{"footer-0":{"type":"link_list","settings":{"heading":"Quick links","menu":"footer"}},"footer-1":{"type":"link_list","settings":{"heading":"Info","menu":"footer"}},"footer-2":{"type":"text","settings":{"heading":"Our mission","subtext":"<p>Share contact information, store details, and brand content with your customers.<\/p>"}}},"block_order":["footer-0","footer-1","footer-2"],"settings":{"color_scheme":"background-1","show_social":true,"payment_enable":true,"margin_top":48,"padding_top":36,"padding_bottom":36}},"main-password-header":{"type":"main-password-header","settings":{"logo_max_width":100,"color_scheme":"background-1"}},"main-password-footer":{"type":"main-password-footer","settings":{"color_scheme":"background-1"}}}}}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "type_header_font": "old_standard_tt_n4",
+    "type_body_font": "nunito_sans_n4",
+    "type_additional_font": "nunito_sans_n4",
+    "sections": {
+      "sl-custom-preheader": {
+        "type": "sl-custom-preheader",
+        "settings": {
+          "bg_color": "#f7f7f5",
+          "text_color": "#333333",
+          "show_border": true,
+          "border_color": "#e5e5e5",
+          "font_size": 13,
+          "padding_vertical": 10,
+          "login_text": "Log In",
+          "link_1_text": "Contact Us",
+          "link_1_url": "",
+          "link_2_text": "",
+          "link_2_url": "",
+          "cta_text": "Book A Spa Service",
+          "cta_url": ""
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "page_full_width": false,
+          "page_full_width_spacing": false,
+          "enable_mega_menu": true,
+          "sl_header_bg_color": "#ffffff",
+          "sl_header_text_color": "#333333",
+          "sl_nav_font_size": 14,
+          "sl_nav_font_size_mobile": 13,
+          "sl_nav_font_weight": "400",
+          "sl_mega_divider_color": "#e5e5e5",
+          "sl_mega_border_color": "#c5c8a0",
+          "color_scheme": "background-1",
+          "logo_width": 100,
+          "logo_position": "middle-left",
+          "menu_alignment": "center",
+          "menu": "main-menu",
+          "show_secondary_menu": false,
+          "secondary_menu": "main-menu",
+          "mobile_screen_width": "1280",
+          "show_line_separator": true,
+          "enable_sticky_header": true,
+          "enable_transparent_header": false,
+          "enable_search_box": false,
+          "enable_country_selector": true,
+          "enable_language_selector": true,
+          "show_search": false,
+          "show_header_wishlist": true,
+          "show_header_compare": true,
+          "show_account": true,
+          "show_header_cart": true,
+          "header_icon_type": "icon",
+          "mobile_cta_text": "Book A Spa Service",
+          "mobile_cta_url": "",
+          "show_category_menu": false,
+          "category_heading": "All categories",
+          "category_menu": "",
+          "margin_bottom": 0
+        }
+      },
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show_announcement": true,
+          "text": "FREE SHIPPING ON ALL SKINCARE ORDERS $50+ →",
+          "link": "",
+          "bg_color": "#b5b88f",
+          "text_color": "#ffffff",
+          "font_size": 13,
+          "font_size_mobile": 12,
+          "padding_vertical": 12
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick links",
+              "menu": "footer",
+              "alignment": "center",
+              "list_style": "vertical"
+            }
+          },
+          "footer-1": {
+            "type": "text",
+            "settings": {
+              "heading": "Heading",
+              "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>",
+              "subtext_duplicate": "<p>Share contact information, store details, and brand content with your customers.</p>",
+              "alignment": "center"
+            }
+          }
+        },
+        "block_order": [
+          "footer-0",
+          "footer-1"
+        ],
+        "settings": {
+          "page_full_width": false,
+          "page_full_width_spacing": false,
+          "color_scheme": "background-1",
+          "show_social": false,
+          "payment_enable": true,
+          "footer_default": true,
+          "border_right": true,
+          "margin_top": 0,
+          "padding_top": 36,
+          "padding_bottom": 36
+        }
+      },
+      "suggested-products": {
+        "type": "suggested-products",
+        "settings": {
+          "display_recent_purchase": true,
+          "placement": "right",
+          "text": "Someone recently bought a"
+        }
+      },
+      "cookie-banner": {
+        "type": "cookie-banner",
+        "settings": {
+          "show_gdpr": false,
+          "style": "bottom",
+          "color_scheme": "background-1",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "accept": "Accept",
+          "decline": "Decline",
+          "button_padding": "10px 20px 10px 20px"
+        }
+      },
+      "newsletter-modal": {
+        "type": "newsletter-modal",
+        "settings": {
+          "color_scheme": "background-1",
+          "modal_bg_opacity": "",
+          "enable_newsletter_modal": false,
+          "cookie_expires": 1,
+          "cookie_modal_delay": "5000",
+          "block_text_align": "text-center",
+          "enable_social_icon": false
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}
