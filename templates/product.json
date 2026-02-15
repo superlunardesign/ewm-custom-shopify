@@ -251,7 +251,7 @@
         "heading_size": 24,
         "heading_weight": "500",
         "heading_transform": "uppercase",
-        "price_placement": "title_row",
+        "price_placement": "button",
         "collection": "acne",
         "fallback_collection_handle": "{{ section.settings.collection.title }}",
         "products_limit": 8,
