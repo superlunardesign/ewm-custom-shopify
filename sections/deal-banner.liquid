@@ -1,0 +1,352 @@
+{{ 'section-deal-banner.css' | asset_url | stylesheet_tag }}
+
+
+
+{%- style -%}
+  
+  {%  unless section.settings.before_image == blank %}
+    #Banner-{{ section.id }} .banner__media::before {
+   content: ""; position: absolute;
+    background: url({{ section.settings.before_image |  image_url: width: 1920 }});
+    background-repeat: no-repeat;width: 100%; height: 100%; top: 0px; bottom: 0; transition:all 0.3s linear; z-index:1;
+  
+    }
+ #Banner-{{ section.id }}.custom-second-banner::before { background:var(--gradient-background);}
+    {% endunless %}
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+{%- endstyle -%}
+
+<div id="Banner-{{ section.id }}" class="deal-banner banner {{ section.settings.custom_class_name }} banner--content-align-{{ section.settings.desktop_content_alignment }} banner--content-align-mobile-{{ section.settings.mobile_content_alignment }} banner--{{ section.settings.image_height }}{% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank %} banner--stacked{% endif %}{% if section.settings.adapt_height_first_image and section.settings.image != blank %} banner--adapt{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} banner--desktop-transparent{% endif %}">
+ <div class="{% if section.settings.page_full_width %} page-full-width {% else %} page-width {% endif %} {% if section.settings.page_full_width_spacing %} page-full-width_spacing {% endif %}section-{{ section.id }}-padding isolate section-{{ section.id }}-padding">
+  <div class="row">
+     <div class="deal-banner-wrapper">   
+    {%- if section.settings.image != blank -%}
+    <div class="banner__media bg-image media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}">
+      <img
+        srcset="{%- if section.settings.image.width >= 375 -%}{{ section.settings.image | image_url: width: 375 }} 375w,{%- endif -%}
+          {%- if section.settings.image.width >= 550 -%}{{ section.settings.image | image_url: width: 550 }} 550w,{%- endif -%}
+          {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if section.settings.image.width >= 1100 -%}{{ section.settings.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+          {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {%- if section.settings.image.width >= 1780 -%}{{ section.settings.image | image_url: width: 1780 }} 1780w,{%- endif -%}
+          {%- if section.settings.image.width >= 2000 -%}{{ section.settings.image | image_url: width: 2000 }} 2000w,{%- endif -%}
+          {%- if section.settings.image.width >= 3000 -%}{{ section.settings.image | image_url: width: 3000 }} 3000w,{%- endif -%}
+          {%- if section.settings.image.width >= 3840 -%}{{ section.settings.image | image_url: width: 3840 }} 3840w,{%- endif -%}
+          {{ section.settings.image | image_url }} {{ section.settings.image.width }}w"
+        sizes="{% if section.settings.image_2 != blank and section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image_2 != blank %}50vw{% else %}100vw{% endif %}"
+        src="{{ section.settings.image | image_url: width: 1500 }}"
+        loading="lazy"
+        alt="{{ section.settings.image.alt | escape }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio }}"
+        {% if section.settings.image_2 != blank %}class="banner__media-image-half"{% endif %}
+      >
+    </div>
+  {%- elsif section.settings.image_2 == blank -%}
+    <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}">
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {%- endif -%}
+  <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width">
+    <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
+      <h6 class="banner__sub_heading">
+      <span>{{ section.settings.sub-heading | escape }}</span>
+      </h6>
+      <h2 class="banner__heading {{ section.settings.heading_size }}" >
+      <span>{{ section.settings.heading | escape }}</span>
+      </h2>
+       <div class="banner__text">
+        <span>{{ section.settings.text | escape }}</span>
+      </div>
+      <div class="deals-counter">
+            {% if section.settings.deal_end_date != blank %}
+            <div class="deal-clock lof-clock-timer-detail4"></div>
+            {% assign dealTime = section.settings.deal_end_date | date: "%d %b %Y" %}
+            <div class="product-deal-count" data-end-time="{{ dealTime }}">
+              <div class="notice"></div>
+              <div class="deal-clock">
+                <ul>
+                  <li class="days"></li>
+                  <li class="hours"></li>
+                  <li class="minutes"></li>
+                  <li class="seconds"></li>
+                </ul>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+     <div class="banner__buttons{% if section.settings.button_label_1 != blank and section.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}">
+        {%- if section.settings.button_label_1 != blank -%}
+        <a{% if section.settings.button_link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.button_link_1 }}"{% endif %} class="button{% if section.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}">{{ section.settings.button_label_1 | escape }}</a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+        <a{% if section.settings.button_link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.button_link_2 }}"{% endif %} class="button{% if section.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}">{{ section.settings.button_label_2 | escape }}</a>
+        {%- endif -%}
+
+      </div>
+      
+    </div>
+  </div>
+  </div>     
+ </div>
+</div>  
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.deal-banner.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type":"checkbox",
+      "id":"page_full_width",
+       "default": false,
+      "label": "t:sections.all.page_full_width.label"
+    },
+    {
+      "type":"checkbox",
+      "id":"page_full_width_spacing",
+       "default": false,
+      "label": "t:sections.all.page_full_width_spacing.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.deal-banner.settings.image.label"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.deal-banner.settings.image_height.options__1.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.deal-banner.settings.image_height.options__2.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.deal-banner.settings.image_height.options__3.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.deal-banner.settings.image_height.label",
+      "info": "t:sections.deal-banner.settings.image_height.info"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:sections.deal-banner.settings.desktop_content_position.options__1.label"
+        },
+        {
+          "value": "top-center",
+          "label": "t:sections.deal-banner.settings.desktop_content_position.options__2.label"
+        },
+        {
+          "value": "top-right",
+          "label": "t:sections.deal-banner.settings.desktop_content_position.options__3.label"
+        },
+        {
+          "value": "middle-left",
+          "label": "t:sections.deal-banner.settings.desktop_content_position.options__4.label"
+        },
+        {
+          "value": "middle-center",
+          "label": "t:sections.deal-banner.settings.desktop_content_position.options__5.label"
+        },
+        {
+          "value": "middle-right",
+          "label": "t:sections.deal-banner.settings.desktop_content_position.options__6.label"
+        },
+        {
+          "value": "bottom-left",
+          "label": "t:sections.deal-banner.settings.desktop_content_position.options__7.label"
+        },
+        {
+          "value": "bottom-center",
+          "label": "t:sections.deal-banner.settings.desktop_content_position.options__8.label"
+        },
+        {
+          "value": "bottom-right",
+          "label": "t:sections.deal-banner.settings.desktop_content_position.options__9.label"
+        }
+      ],
+      "default": "middle-center",
+      "label": "t:sections.deal-banner.settings.desktop_content_position.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text_box",
+      "default": true,
+      "label": "t:sections.deal-banner.settings.show_text_box.label"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.deal-banner.settings.desktop_content_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.deal-banner.settings.desktop_content_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.deal-banner.settings.desktop_content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.deal-banner.settings.desktop_content_alignment.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.deal-banner.settings.color_scheme.info"
+    },
+    {
+    "type": "header",
+    "content": "t:sections.deal-banner.settings.deal_banner_settings.content"
+    },
+    {
+          "type": "text",
+          "id": "heading",
+          "default": "Deal banner",
+          "label": "t:sections.deal-banner.settings.heading.label"
+    },
+    {
+          "type": "text",
+          "id": "sub-heading",
+          "default": "Deal banner",
+          "label": "t:sections.deal-banner.settings.sub-heading.label"
+    },
+    {
+          "type": "text",
+          "id": "text",
+          "default": "Give customers details about the banner image(s) or content on the template.",
+          "label": "t:sections.deal-banner.settings.text.label"
+        },
+      {
+          "type": "text",
+          "id": "deal_end_date",
+          "label": "t:sections.deal-banner.settings.deal_end_date.label",
+          "info": "t:sections.deal-banner.settings.deal_end_date.info"
+      },
+   {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "Button label",
+          "label": "t:sections.deal-banner.settings.button_label_1.label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "t:sections.deal-banner.settings.button_link_1.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_1",
+          "default": false,
+          "label": "t:sections.deal-banner.settings.button_style_secondary_1.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "default": "Button label",
+          "label": "t:sections.deal-banner.settings.button_label_2.label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "t:sections.deal-banner.settings.button_link_2.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_2",
+          "default": false,
+          "label": "t:sections.deal-banner.settings.button_style_secondary_2.label"
+        },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    },
+   {
+    "type": "header",
+    "content": "t:sections.deal-banner.settings.custom_class_heading.content"
+    },
+    {
+    "type": "text",
+    "id": "custom_class_name",
+    "label": "t:sections.deal-banner.settings.custom_class_name.label"
+    }
+  ],
+ "presets": [
+    {
+      "name": "t:sections.deal-banner.presets.name"
+   }
+  ]
+}
+{% endschema %}

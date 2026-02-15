@@ -1,0 +1,663 @@
+{{ 'section-team-section.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+
+  case section.settings.team-section
+  when '1'
+  when '2'
+  assign column = 'two-column'
+  when '3'
+  assign column = 'three-column'
+  when '4'
+  assign column = 'four-column'
+  when '5'
+  assign column = 'five-column'
+  when '6'
+  assign column = 'six-column'
+  else
+  assign column = 'three-column'
+  endcase
+  if section.settings.swiper_enable
+  assign enable_slider = true  
+  endif
+ %}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+   .team-section .team-section-wrapper .team-section-block-image > svg {
+    width: 100%;
+    height: 300px;
+}
+{%- endstyle -%}
+
+<div class="team-section color-{{ section.settings.color_scheme }} gradient{% if section.settings.title == blank %} no-heading{% endif %} {{ section.settings.custom_class_name }} ">
+  <div class="{% if section.settings.page_full_width %} page-full-width {% else %} page-width {% endif %} {% if section.settings.page_full_width_spacing %} page-full-width_spacing {% endif %}section-{{ section.id }}-padding isolate">
+<div class="row">
+  <div class="team-section-wrapper">
+      {%- unless section.settings.title == blank -%}
+      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin content-align--{{ section.settings.column_alignment }}">
+         {%- if section.settings.sub_heading != blank -%}  
+         <h6 class="sub-heading">{{ section.settings.sub_heading | escape }}</h6>
+         {%- endif -%} 
+         {%- if section.settings.title != blank -%}  
+          <h2 class="title {{ section.settings.heading_size }}">
+            {{ section.settings.title | escape }}
+          </h2>
+          {%- endif -%} 
+          {%- if section.settings.description != blank -%}  
+          <p class="description">{{ section.settings.description }}</p>
+          {%- endif -%}   
+          {%- if section.settings.button_label != blank -%}
+            <a {% if section.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.button_link }}"{% endif %} class="button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}">{{ section.settings.button_label | escape }}</a>
+          {%- endif -%}
+          </div>
+    {%- endunless -%}
+       {% unless enable_slider %}
+     <div class="team-section-section {{ column }} grid {% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}">
+         {% else %}
+    <team-slider class="team-section-slider {% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}">
+      <div data-slider-options='{"loop": "{%- if section.settings.centered_slide -%}1{%- else -%}2{%- endif -%}","desktop": "{{ section.settings.desktop_column }}", "tablet": "{{ section.settings.tablet_column }}","mobile": "{{ section.settings.mobile_column }}","auto_play": "{{ section.settings.auto_play }}"}'>
+      <div class="swiper" data-swiper-slider>
+        <div class="swiper-wrapper">
+      {%- endunless -%}
+       {%- for block in section.blocks -%} 
+       <div class="{% unless enable_slider %}team-section-wrapper{% else %} swiper-slide{% endunless %}">   
+         <div class="team-section-block-image">
+          {%- if block.settings.enable_title_link %} <a href="{{ block.settings.block_button_link }}" class="team-section-image">{% endif %}
+          {% if block.settings.block_image != blank %}
+            <img
+                      class="team-section-image"
+                      srcset="{%- if block.settings.block_image.width >= 375 -%}{{ block.settings.block_image | image_url: width: 375 }} 375w,{%- endif -%}
+                      {%- if block.settings.block_image.width >= 550 -%}{{ block.settings.block_image | image_url: width: 550 }} 550w,{%- endif -%}
+                      {%- if block.settings.block_image.width >= 750 -%}{{ block.settings.block_image | image_url: width: 750 }} 750w,{%- endif -%}
+                      {%- if block.settings.block_image.width >= 1100 -%}{{ block.settings.block_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                      {%- if block.settings.block_image.width >= 1500 -%}{{ block.settings.block_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                      {%- if block.settings.block_image.width >= 1780 -%}{{ block.settings.block_image | image_url: width: 1780 }} 1780w,{%- endif -%}
+                      {%- if block.settings.block_image.width >= 2000 -%}{{ block.settings.block_image | image_url: width: 2000 }} 2000w,{%- endif -%}
+                      {%- if block.settings.block_image.width >= 3000 -%}{{ block.settings.block_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+                      {%- if block.settings.block_image.width >= 3840 -%}{{ block.settings.block_image | image_url: width: 3840 }} 3840w,{%- endif -%}
+                      {{ block.settings.block_image | image_url: width: 1500 }} {{ block.settings.block_image.width }}w"
+                      sizes="100vw"
+                      src="{{ block.settings.block_image | image_url: width: 1500 }}"
+                      loading="lazy"              
+                      alt="{{ block.settings.block_image.alt | escape }}"
+                      width="{{ block.settings.block_image.width }}"
+                      height="{{ block.settings.block_image.width | divided_by: block.settings.block_image.aspect_ratio | round }}"
+                    >
+            {% else %}
+            {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+{%- assign placeholder_image = 'product-apparel-' | append: placeholder_image_index -%}
+{{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </a>
+         <div class="team-section-content-icon">
+                           <ul class="team__list-social list-unstyled list-social" role="list">
+                  {%- if settings.social_twitter_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_twitter_link }}" class="link list-social__link" >
+                      {%- render 'icon-twitter' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_facebook_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_facebook_link }}" class="link list-social__link" >
+                      {%- render 'icon-facebook' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_pinterest_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_pinterest_link }}" class="link list-social__link" >
+                      {%- render 'icon-pinterest' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_instagram_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_instagram_link }}" class="link list-social__link" >
+                      {%- render 'icon-instagram' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_tiktok_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_tiktok_link }}" class="link list-social__link" >
+                      {%- render 'icon-tiktok' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_tumblr_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_tumblr_link }}" class="link list-social__link" >
+                      {%- render 'icon-tumblr' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_snapchat_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_snapchat_link }}" class="link list-social__link" >
+                      {%- render 'icon-snapchat' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_youtube_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_youtube_link }}" class="link list-social__link" >
+                      {%- render 'icon-youtube' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_vimeo_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_vimeo_link }}" class="link list-social__link" >
+                      {%- render 'icon-vimeo' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                </ul>
+         </div> 
+         </div>    
+          <div class="team-section-content {% unless block.settings.show_content %}hidden {% endunless %}">
+             <div class="team-section-inner banner--content-align-{{ block.settings.desktop_content_alignment }}">
+                {% if block.settings.block_title != blank %}
+                    <h4 class="main-title ">  {{ block.settings.block_title }}  </h4>
+                    {% endif %}
+                    {% if block.settings.block_sub_title != blank %}
+                    <h6 class="sub-title">{{ block.settings.block_sub_title }}</h6>
+                    {% endif %}
+                    {% if block.settings.block_description != blank %}
+                    <p class="description">{{ block.settings.block_description }}</p>
+                    {% endif %}
+                    {% if block.settings.block_button_link != blank %}
+                    <a href="{{ block.settings.block_button_link }}" class="banner-button button button--secondary">{{ block.settings.block_button_text }}</a>
+                 {% endif %}
+             </div> 
+          </div>  
+       </div>  
+         {% endfor %}   
+     {% unless enable_slider %}
+     </div> 
+       {% else %}
+       </div>
+        {% if section.settings.swiper_navigation != blank %}
+        <div class="swiper-button-next"><span></span></div>
+        <div class="swiper-button-prev"><span></span></div>
+        {% endif %}
+      </div>
+      {% if section.settings.swiper_pagination != blank %}
+    <div class="swiper-pagination"></div>
+    {% endif %}
+        </div>
+      </team-slider>
+      {%- endunless -%}
+      
+  </div>
+</div>
+</div>
+</div>
+
+{%  javascript %}
+ class TeamSlider extends HTMLElement {
+  constructor() {
+    super();
+    this.slider = this.querySelector('[data-slider-options]');
+    this.init();
+  }
+
+  init() {
+    const predefine = {
+      effect: 'slide',
+      direction: 'horizontal',
+      autoplay: true,
+      autoplaySpeed: 5,
+      space: 30,
+      center: true,
+      options: {},
+    };    
+    const slider_options = this.slider.getAttribute('data-slider-options');
+    if (slider_options === null || slider_options === '') {
+      return null;
+    }
+    const grouping = $.extend(true, predefine, JSON.parse(slider_options));
+    const isNumberic = /^\d+$/;
+    Object.keys(grouping).forEach((key) => {
+      if (typeof grouping[key] === 'string' && isNumberic.test(grouping[key])) {
+        grouping[key] = parseInt(grouping[key], 10);
+      }
+    });
+    let autoplay = false;
+    if (grouping.auto_play > 0) {
+      autoplay = {
+        delay: grouping.auto_play * 1000,
+      };
+    }
+    let loop = false;
+    let centeredSlides = false;
+    if (grouping.loop === 'true' || grouping.loop === true) {
+      loop = true;
+    } else {
+      if (grouping.loop === 1 ) {
+        loop = true;
+        centeredSlides = true;
+      } else {
+        centeredSlides = false;
+        loop = false;
+      }
+    }    
+    const option = $.extend(true, {
+      init: false,
+      spaceBetween: 30,
+      loop,
+      autoplay,
+      centeredSlides,
+      navigation: {
+        nextEl: this.slider.querySelector('.swiper-button-next'),
+        prevEl: this.slider.querySelector('.swiper-button-prev'),
+      },
+      pagination: {
+        el: this.slider.querySelector('.swiper-pagination'),
+        clickable: true,
+      },
+      lazy: true,
+      breakpoints: {
+       320: {
+         slidesPerView: grouping.mobile,
+         slidesPerColumn: 1,
+       },
+       560: {
+         slidesPerView: grouping.tablet,
+         slidesPerColumn: 1,
+       },
+       992: {
+         slidesPerView: grouping.desktop,
+         slidesPerColumn: 1,
+       },
+     },
+    }, grouping.options);
+    const container = this.slider.querySelector('[data-swiper-slider]');
+    const initiate = new Swiper(container, option);
+    initiate.on('init', () => {
+    initiate.update();
+    });
+    initiate.init();
+  }
+}
+
+customElements.define('team-slider', TeamSlider);  
+
+
+   $(document).ready(function(){
+    $( ".gridPlay" ).each(function( index ) {
+      $(this).on('click', function(){
+      $(this).css('display','none');
+      $(this).next('.gridPause').css('display','flex');
+      $(this).closest('.team-section').find('video').trigger('play');
+      });
+    });
+    $( ".gridPause" ).each(function( index ) {
+      $(this).on('click', function(){
+      $(this).css('display','none');
+      $(this).prev('.gridPlay').css('display','flex');
+      $(this).closest('.team-section').find('video').trigger('pause');
+      });
+    });
+  });
+{% endjavascript %}
+
+
+{% schema %}
+{
+  "name": "t:sections.team-section.name",
+  "class": "section",
+  "tag": "section",
+  "settings": [
+    {
+      "type":"checkbox",
+      "id":"page_full_width",
+       "default": false,
+      "label": "t:sections.all.page_full_width.label"
+    },
+    {
+      "type":"checkbox",
+      "id":"page_full_width_spacing",
+       "default": false,
+      "label": "t:sections.all.page_full_width_spacing.label"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Grid banner",
+      "label": "t:sections.all.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "t:sections.all.sub_heading.label"
+    },
+     {
+      "type": "text",
+      "id": "description",
+      "label": "t:sections.all.description.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Button label",
+      "label": "t:sections.all.button_label.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.all.button_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary",
+      "default": false,
+      "label": "t:sections.all.button_style_secondary.label"
+      },
+    {
+      "type": "select",
+      "id": "column_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.team-section.settings.column_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.team-section.settings.column_alignment.options__2.label"
+        }
+      ],
+      "default": "left",
+      "label": "t:sections.team-section.settings.column_alignment.label"
+    },
+    {
+      "type": "select",
+      "id": "background_style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.team-section.settings.background_style.options__1.label"
+        },
+        {
+          "value": "primary",
+          "label": "t:sections.team-section.settings.background_style.options__2.label"
+        }
+      ],
+      "default": "primary",
+      "label": "t:sections.team-section.settings.background_style.label"
+    },
+    {
+    "type": "select",
+    "id": "team-section",
+    "options": [
+    {
+    "value": "1",
+    "label": "t:sections.team-section.settings.team-section.options__1.label"
+    },
+    {
+    "value": "2",
+    "label": "t:sections.team-section.settings.team-section.options__2.label"
+    },
+    {
+    "value": "3",
+    "label": "t:sections.team-section.settings.team-section.options__3.label"
+    },
+    {
+    "value": "4",
+    "label": "t:sections.team-section.settings.team-section.options__4.label"
+    },
+    {
+    "value": "5",
+    "label": "t:sections.team-section.settings.team-section.options__5.label"
+    },
+    {
+    "value": "6",
+    "label": "t:sections.team-section.settings.team-section.options__6.label"
+    }
+    ],
+    "default": "2",
+    "label": "t:sections.team-section.settings.team-section.label" 
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    },
+    {
+    "type": "header",
+    "content": "t:sections.team-section.settings.custom_class_heading.content"
+    },
+    {
+    "type": "text",
+    "id": "custom_class_name",
+    "label": "t:sections.team-section.settings.custom_class_name.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.swiper.swiper_slider_title"
+    },
+    {
+      "type": "checkbox",
+      "id": "swiper_enable",
+      "default": false,
+      "label": "t:sections.all.swiper.swiper_slider_enable"
+    },
+    {
+      "type": "range",
+      "id": "desktop_column",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:sections.all.swiper.desktop_column",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "tablet_column",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "t:sections.all.swiper.tablet_column",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "mobile_column",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "t:sections.all.swiper.mobile_column",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "centered_slide",
+      "default": false,
+      "label": "t:sections.all.swiper.centered_slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "swiper_pagination",
+      "default": false,
+      "label": "t:sections.all.swiper.swiper_pagination"
+    },
+    {
+      "type": "checkbox",
+      "id": "swiper_navigation",
+      "default": false,
+      "label": "t:sections.all.swiper.swiper_navigation"
+    },
+    {
+      "type": "range",
+      "id": "auto_play",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "t:sections.all.swiper.auto_play",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+    "type": "text",
+    "name": "t:sections.team-section.blocks.text.name",
+    "settings": [
+    {
+    "type": "image_picker",
+    "id": "block_image",
+    "label": "t:sections.team-section.blocks.text.settings.block_image.label",
+    "info": "Size: 1280x820 [Act as poster image for video type]"
+    },
+    {
+    "type": "checkbox",
+    "id": "show_content",
+    "label": "t:sections.team-section.blocks.text.settings.show_content.label",
+    "default": true
+    },
+    {
+    "type": "text",
+    "id": "block_title",
+    "label": "t:sections.team-section.blocks.text.settings.block_title.label",
+    "default": "Title"
+    },
+    {
+    "type": "text",
+    "id": "block_sub_title",
+    "label": "t:sections.team-section.blocks.text.settings.block_sub_title.label",
+    "default": "Sub title"
+    },
+    {
+    "type": "text",
+    "id": "block_description",
+    "label": "t:sections.team-section.blocks.text.settings.block_description.label",
+    "default": "Short description"
+    },
+    {
+    "type": "text",
+    "id": "block_button_text",
+    "label": "t:sections.team-section.blocks.text.settings.block_button_text.label"
+    },
+    {
+    "type": "url",
+    "id": "block_button_link",
+    "label": "t:sections.team-section.blocks.text.settings.block_button_link.label"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "options": [
+       {
+          "value": "left",
+          "label": "t:sections.team-section.blocks.text.settings.desktop_content_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.team-section.blocks.text.settings.desktop_content_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.team-section.blocks.text.settings.desktop_content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.team-section.blocks.text.settings.desktop_content_alignment.label"
+    }
+    ]
+    }
+    ],
+    "presets": [
+    {
+      "name": "t:sections.team-section.presets.name"
+    }
+  ]
+}
+
+{% endschema %}        

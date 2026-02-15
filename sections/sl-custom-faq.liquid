@@ -1,0 +1,819 @@
+{% comment %}
+  FAQ Section
+  Expandable FAQ items with flexible display options
+  Supports accordion mode, show all, and anchor links
+{% endcomment %}
+
+<style>
+  /* Anchor offset for fixed headers */
+  {% if section.settings.enable_anchor %}
+    #{{ section.settings.anchor_id }} {
+      scroll-margin-top: {{ section.settings.anchor_offset }}px;
+      display: block;
+    }
+    
+    .section-anchor-wrapper {
+      position: relative;
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.section_padding }}px 0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #shopify-section-{{ section.id }} .section-header {
+    text-align: {{ section.settings.header_alignment }};
+    margin-bottom: {{ section.settings.header_margin }}px;
+  }
+
+  #shopify-section-{{ section.id }} .section-header h2 {
+    color: {{ section.settings.header_color }};
+    font-size: {{ section.settings.header_size }}px;
+    font-weight: {{ section.settings.header_weight }};
+    text-transform: {{ section.settings.header_text_transform }};
+    margin: 0 0 15px 0;
+  }
+
+  #shopify-section-{{ section.id }} .section-header p {
+    color: {{ section.settings.subheader_color }};
+    font-size: {{ section.settings.subheader_size }}px;
+    margin: 0;
+  }
+
+  /* FAQ Item Styles */
+  #shopify-section-{{ section.id }} .faq-item {
+    border-bottom: 1px solid {{ section.settings.border_color }};
+    padding: {{ section.settings.item_padding }}px 0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Question Row */
+  #shopify-section-{{ section.id }} .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 20px;
+    position: relative;
+    padding-right: 40px;
+  }
+
+  {% unless section.settings.show_toggle_button %}
+    #shopify-section-{{ section.id }} .faq-question {
+      cursor: default;
+      padding-right: 0;
+    }
+  {% endunless %}
+
+  #shopify-section-{{ section.id }} .question-text {
+    color: {{ section.settings.question_color }};
+    font-size: {{ section.settings.question_size }}px;
+    font-weight: {{ section.settings.question_weight }};
+    flex: 1;
+    margin: 0;
+  }
+
+  /* Toggle Button */
+  #shopify-section-{{ section.id }} .toggle-button {
+    position: absolute;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ section.settings.toggle_color }};
+    transition: transform 0.3s ease, color 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  {% unless section.settings.show_toggle_button %}
+    #shopify-section-{{ section.id }} .toggle-button {
+      display: none;
+    }
+  {% endunless %}
+
+  #shopify-section-{{ section.id }} .faq-question:hover .toggle-button {
+    color: {{ section.settings.toggle_hover_color }};
+  }
+
+  #shopify-section-{{ section.id }} .toggle-button svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .faq-item.expanded .toggle-button {
+    transform: rotate(45deg);
+  }
+
+  /* Answer Content */
+  #shopify-section-{{ section.id }} .faq-answer {
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+  }
+
+  {% if section.settings.default_open %}
+    #shopify-section-{{ section.id }} .faq-answer {
+      max-height: 1000px;
+      opacity: 1;
+      padding: 20px 0 10px 0;
+    }
+  {% else %}
+    #shopify-section-{{ section.id }} .faq-answer {
+      max-height: 0;
+      opacity: 0;
+      padding: 0;
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .faq-item.expanded .faq-answer {
+    max-height: 1000px;
+    opacity: 1;
+    padding: 20px 0 10px 0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-item.collapsed .faq-answer {
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+  }
+
+  #shopify-section-{{ section.id }} .answer-content {
+    color: {{ section.settings.answer_color }};
+    font-size: {{ section.settings.answer_size }}px;
+    line-height: 1.6;
+    padding-right: 40px;
+  }
+
+  {% unless section.settings.show_toggle_button %}
+    #shopify-section-{{ section.id }} .answer-content {
+      padding-right: 0;
+    }
+  {% endunless %}
+
+  #shopify-section-{{ section.id }} .answer-content p {
+    margin-bottom: 15px;
+  }
+
+  #shopify-section-{{ section.id }} .answer-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .answer-content ul,
+  #shopify-section-{{ section.id }} .answer-content ol {
+    margin: 10px 0;
+    padding-left: 25px;
+  }
+
+  #shopify-section-{{ section.id }} .answer-content li {
+    margin: 5px 0;
+  }
+
+  /* Animation */
+  {% if section.settings.enable_animation %}
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #shopify-section-{{ section.id }} .faq-item {
+      animation: fadeInUp {{ section.settings.animation_duration }}ms ease-out forwards;
+      animation-play-state: paused;
+      opacity: 0;
+    }
+
+    {% for i in (0..9) %}
+      {% assign delay = section.settings.animation_delay | plus: i | times: 50 %}
+      #shopify-section-{{ section.id }} .faq-item:nth-child({{ i | plus: 1 }}) {
+        animation-delay: {{ delay }}ms;
+      }
+    {% endfor %}
+  {% endif %}
+
+  /* Mobile Styles */
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .faq-container {
+      padding: 0 15px;
+    }
+
+    #shopify-section-{{ section.id }} .section-header h2 {
+      font-size: {{ section.settings.mobile_header_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .section-header p {
+      font-size: {{ section.settings.mobile_subheader_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .question-text {
+      font-size: {{ section.settings.mobile_question_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .answer-content {
+      font-size: {{ section.settings.mobile_answer_size }}px;
+      padding-right: 30px;
+    }
+
+    {% unless section.settings.show_toggle_button %}
+      #shopify-section-{{ section.id }} .answer-content {
+        padding-right: 0;
+      }
+    {% endunless %}
+
+    #shopify-section-{{ section.id }} .faq-item {
+      padding: {{ section.settings.mobile_item_padding }}px 0;
+    }
+  }
+
+  /* Tablet adjustments */
+  @media (max-width: 1100px) and (min-width: 768px) {
+    #shopify-section-{{ section.id }} .question-text {
+      font-size: calc({{ section.settings.question_size }}px * 0.95);
+    }
+  }
+</style>
+
+{% if section.settings.enable_anchor %}
+  <div id="{{ section.settings.anchor_id }}" class="section-anchor-wrapper">
+  
+  {% comment %} Show anchor info in theme editor only {% endcomment %}
+  {% if request.design_mode %}
+    <div style="background: #f0f8ff; border: 1px solid #4a90e2; padding: 15px; margin: 10px auto 20px; max-width: 500px; text-align: center; font-family: monospace; border-radius: 5px;">
+      <strong style="color: #333; display: block; margin-bottom: 8px;">🔗 Anchor Link Enabled</strong>
+      <code style="background: white; padding: 8px 12px; border-radius: 3px; display: inline-block; color: #4a90e2; font-size: 14px; user-select: all;">
+        #{{ section.settings.anchor_id }}
+      </code>
+      <p style="margin: 10px 0 0; color: #666; font-size: 12px; font-family: sans-serif;">
+        Copy this link for buttons/navigation to scroll to this section
+      </p>
+    </div>
+  {% endif %}
+{% endif %}
+
+<div class="faq-container">
+  {% if section.settings.section_title != blank or section.settings.section_subtitle != blank %}
+    <div class="section-header">
+      {% if section.settings.section_title != blank %}
+        <h2>{{ section.settings.section_title }}</h2>
+      {% endif %}
+      {% if section.settings.section_subtitle != blank %}
+        <p>{{ section.settings.section_subtitle }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="faq-list">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'faq_item' %}
+          <div class="faq-item {% if section.settings.default_open %}expanded{% endif %}" {{ block.shopify_attributes }}>
+            <div class="faq-question" {% if section.settings.show_toggle_button %}role="button" tabindex="0" aria-expanded="{% if section.settings.default_open %}true{% else %}false{% endif %}"{% endif %}>
+              <h3 class="question-text">{{ block.settings.question }}</h3>
+              {% if section.settings.show_toggle_button %}
+                <span class="toggle-button" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
+              {% endif %}
+            </div>
+            
+            <div class="faq-answer">
+              <div class="answer-content">
+                {{ block.settings.answer }}
+              </div>
+            </div>
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+{% if section.settings.enable_anchor %}
+  </div><!-- End anchor wrapper -->
+{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('#shopify-section-{{ section.id }}');
+    const faqItems = section.querySelectorAll('.faq-item');
+    const showToggle = {{ section.settings.show_toggle_button }};
+    const allowMultiple = {{ section.settings.allow_multiple }};
+    const defaultOpen = {{ section.settings.default_open }};
+    
+    {% if section.settings.enable_animation %}
+      // Handle animations
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+      
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            const items = section.querySelectorAll('.faq-item');
+            items.forEach(function(item) {
+              item.style.animationPlayState = 'running';
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      const faqList = section.querySelector('.faq-list');
+      if (faqList) {
+        observer.observe(faqList);
+      }
+    {% endif %}
+    
+    // Only add click handlers if toggle is enabled
+    if (showToggle) {
+      faqItems.forEach(function(item) {
+        const question = item.querySelector('.faq-question');
+        
+        function toggleItem() {
+          const isExpanded = item.classList.contains('expanded');
+          
+          // If not allowing multiple and opening an item, close others
+          if (!allowMultiple && !isExpanded) {
+            faqItems.forEach(function(otherItem) {
+              if (otherItem !== item) {
+                otherItem.classList.remove('expanded');
+                otherItem.classList.add('collapsed');
+                const otherQuestion = otherItem.querySelector('.faq-question');
+                if (otherQuestion) {
+                  otherQuestion.setAttribute('aria-expanded', 'false');
+                }
+              }
+            });
+          }
+          
+          // Toggle current item
+          if (isExpanded) {
+            item.classList.remove('expanded');
+            item.classList.add('collapsed');
+            question.setAttribute('aria-expanded', 'false');
+          } else {
+            item.classList.remove('collapsed');
+            item.classList.add('expanded');
+            question.setAttribute('aria-expanded', 'true');
+          }
+        }
+        
+        // Click handler
+        question.addEventListener('click', toggleItem);
+        
+        // Keyboard handler (Enter or Space)
+        question.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleItem();
+          }
+        });
+      });
+    }
+    
+    {% if section.settings.enable_anchor %}
+      // Smooth scroll for anchor links
+      function scrollToSection() {
+        const hash = window.location.hash;
+        if (hash === '#{{ section.settings.anchor_id }}') {
+          const target = document.getElementById('{{ section.settings.anchor_id }}');
+          if (target) {
+            target.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      }
+      
+      // Handle clicks on anchor links
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href === '#{{ section.settings.anchor_id }}') {
+            e.preventDefault();
+            history.pushState(null, null, href);
+            scrollToSection();
+          }
+        }
+      });
+      
+      // Check on page load
+      if (window.location.hash === '#{{ section.settings.anchor_id }}') {
+        setTimeout(scrollToSection, 100);
+      }
+    {% endif %}
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Anchor Link Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_anchor",
+      "label": "Enable Anchor Link",
+      "default": false,
+      "info": "Allow direct linking to this section"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "default": "faq",
+      "info": "Use only letters, numbers, and hyphens. No spaces."
+    },
+    {
+      "type": "range",
+      "id": "anchor_offset",
+      "label": "Scroll Offset",
+      "info": "Pixels to offset scroll (useful for fixed headers)",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "Find answers to common questions"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section Padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum Width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "default": 900
+    },
+    {
+      "type": "header",
+      "content": "Display Options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_toggle_button",
+      "label": "Show Toggle Button",
+      "default": true,
+      "info": "Uncheck to show all answers always open"
+    },
+    {
+      "type": "checkbox",
+      "id": "default_open",
+      "label": "Default Open",
+      "default": false,
+      "info": "Start with all questions expanded (only works with toggle button)"
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_multiple",
+      "label": "Allow Multiple Open",
+      "default": true,
+      "info": "Allow multiple questions to be open at once (accordion mode when unchecked)"
+    },
+    {
+      "type": "header",
+      "content": "Header Styling"
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Header Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "header_size",
+      "label": "Header Size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "header_weight",
+      "label": "Header Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "select",
+      "id": "header_text_transform",
+      "label": "Header Text Transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "UPPERCASE" },
+        { "value": "lowercase", "label": "lowercase" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "header_margin",
+      "label": "Header Bottom Margin",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "subheader_color",
+      "label": "Subheader Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "subheader_size",
+      "label": "Subheader Size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Question Styling"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "question_size",
+      "label": "Question Size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "question_weight",
+      "label": "Question Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "header",
+      "content": "Answer Styling"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Answer Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "answer_size",
+      "label": "Answer Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Item Styling"
+    },
+    {
+      "type": "range",
+      "id": "item_padding",
+      "label": "Item Padding",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "default": 25
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#eeeeee"
+    },
+    {
+      "type": "header",
+      "content": "Toggle Button"
+    },
+    {
+      "type": "color",
+      "id": "toggle_color",
+      "label": "Toggle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "toggle_hover_color",
+      "label": "Toggle Hover Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_header_size",
+      "label": "Mobile Header Size",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "mobile_subheader_size",
+      "label": "Mobile Subheader Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "mobile_question_size",
+      "label": "Mobile Question Size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_answer_size",
+      "label": "Mobile Answer Size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "mobile_item_padding",
+      "label": "Mobile Item Padding",
+      "min": 10,
+      "max": 30,
+      "step": 5,
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable Animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation Duration (ms)",
+      "min": 300,
+      "max": 1000,
+      "step": 100,
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation Start Delay (ms)",
+      "min": 0,
+      "max": 300,
+      "step": 50,
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What are your business hours?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>We are open Monday through Friday from 9:00 AM to 6:00 PM, and Saturday from 10:00 AM to 4:00 PM. We are closed on Sundays and major holidays.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Section",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I book an appointment?",
+            "answer": "<p>You can book an appointment through our online booking system by clicking the 'Book Now' button, or you can call us directly at (555) 123-4567.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your cancellation policy?",
+            "answer": "<p>We require at least 24 hours notice for cancellations. Cancellations made less than 24 hours in advance may be subject to a cancellation fee.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer gift cards?",
+            "answer": "<p>Yes! We offer both physical and digital gift cards in various denominations. They make perfect gifts for any occasion.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

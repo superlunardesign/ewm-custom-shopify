@@ -1,0 +1,57 @@
+.flex-banner .image-bar__item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+  }
+  
+  .flex-banner .image-bar__item.content-start {justify-content: flex-start;}
+  .flex-banner .image-bar__item.content-end {justify-content: flex-end;}
+  .flex-banner .image-bar__item.content-center {justify-content: center;}
+  .flex-banner .image-bar__item.text-start .image-gallery-overlay {text-align:left;}
+  .flex-banner .image-bar__item.text-end .image-gallery-overlay {text-align:right;}
+  .flex-banner .image-bar__item.text-center .image-gallery-overlay {text-align: center;}
+   .flex-banner .image-bar__item .image-gallery-overlay {
+  	position: relative;  display: flex;text-align:left; justify-content: center;flex-direction: column;opacity: 1;transition: all var(--duration-default) linear;padding-bottom:10px;
+/*     background: {{ settings.primary_color  | color_modify: 'alpha', 0.5 }}; 
+    background: {{ section.settings.image_overlay_color  | color_modify: 'alpha', 0.5 }};  */
+    max-width: 200px;
+
+  }
+  
+  .flex-banner .image-bar__item:hover .image-gallery-overlay {
+    opacity: 1; 
+  }
+   
+  .flex-banner .image-bar__item .image-gallery-overlay > *:not(:last-child) { margin: 0 0 10px; }
+  .flex-banner .image-bar__item .image-gallery-overlay .image-overlay-title { position: relative;margin:0;display: flex;align-items: center;color: {{ section.settings.image_link_text_color }};font-size: var(--DTFontSize_H6);font-weight: 500; } 
+  .flex-banner .image-bar__item img { height: 100%;width: 100%;object-fit: cover; }
+ 
+
+  .flex-banner .image-bar__section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .flex-banner .image-bar__section .image-bar__section-inner { margin: 0;display:flex;justify-content:center;align-items:center;width:100%;overflow:hidden;padding:0; }
+  .flex-banner .image-bar__section .dt-sc-image-list-btn { position: absolute; padding: 20px 80px; border-radius: var(--DTRadius);
+    z-index: 1;
+    }
+  
+  
+  .flex-banner .image-bar__section .image-bar__section-inner .image-bar__item:before{content:'';position: absolute;width: 100%; height: 100%; opacity: 0;left:-100%;top:0;transition: all var(--duration-default) linear;background:rgba(var(--color-overlay), 0.8);z-index:0}
+  .flex-banner .image-bar__section .image-bar__section-inner .image-bar__item:hover:before{opacity:1;left:0;}
+  .flex-banner .image-bar__item .image-gallery-overlay{z-index:1;}
+
+  
+  
+ 
+
+  
+  
+ 

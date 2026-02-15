@@ -1,0 +1,82 @@
+{%- assign dt_mega = false -%}
+{%- assign primary = false -%}
+{%- if link.levels == 1 -%}
+{%- assign primary = true -%}
+{%- endif -%}
+{%- assign secondary = false -%}
+{%- if link.levels == 2 -%}
+{%- assign secondary = true -%}
+{%- endif -%}
+
+{%- for block in section.blocks -%}
+{% for i in (1..5) %}
+{%- assign megamenu_title = '' -%}
+{%- assign link_title = link.title | escape | strip | handleize -%}
+{%- assign dt_menu_pick = i | prepend: 'mega_' -%}
+{% if block.settings[dt_menu_pick] != blank %}
+{% assign megamenu_title = block.settings[dt_menu_pick] | handleize %}
+
+{%- if  link_title == megamenu_title -%}
+{% assign columnSize = block.settings.mega_columns %}
+{% assign tabColumnSize = block.settings.tab_columns %}
+{% if  block.settings.row_reverse %}
+{% assign reverse = true %}
+{% endif %}
+
+{% assign tabStyle =  block.settings.tab-menu -%}
+
+
+{% assign blockType = block.type %}
+
+{%- assign dt_mega = true -%}
+
+{%- endif -%}
+{%- endif -%}
+{%- endfor -%}
+{%- endfor -%}
+
+
+<li class="{{link.levels}}
+           top-level-link
+           {% if dt_mega %} has-mega-menu dt-sc-primary
+           {% elsif secondary %} dt-sc-secondary
+           {% else %} dt-sc-child
+           {%endif%}
+           {% if link.active %}active{% endif %} {% if primary or secondary or dt_mega %}menu-item-has-children{% endif %}">
+  <a href="{{ link.url }}" class=" {% if dt_mega %}mega-menu{% endif %} dt-sc-nav-link dropdown">
+    <span>
+      {{ link.title | escape }}
+    </span>
+  </a>
+ {%- if link.links != blank -%}
+  <div class="sub-menu-block is-hidden">    
+    <div class="dt-sc-dropdown-menu{% if primary or secondary %} dt-sc_main-menu--has-links{% endif %}">
+      <ul class="sub-menu-lists">
+
+        {%- for child_link in link.links -%}
+        <li class="{% if primary or secondary %}  {%- if child_link.links != blank -%}menu-item-has-children{% endif %}{% endif %}{% if child_link.active %} active{% endif %}">
+          <a href="{{ child_link.url }}" {% if child_link.active %}aria-current="page"{% endif %}>
+            {{ child_link.title }}
+          </a>
+          {%- if child_link.links != blank -%}
+          <div class="sub-menu-block is-hidden">
+            <div class="dt-sc_main-menu--has-links">
+              <ul class="sub-menu-lists">
+                {%- for grandchild_link in child_link.links -%}
+                <li class="{% if grandchild_link.active %} active{% endif %}">
+                  <a href="{{ grandchild_link.url }}" {% if grandchild_link.active %}aria-current="page"{% endif %}>
+                    {{ grandchild_link.title }}
+                  </a>
+                </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          </div>
+          {%- endif -%}
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+</li>

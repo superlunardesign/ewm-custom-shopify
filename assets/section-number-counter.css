@@ -1,0 +1,21 @@
+.number-counter-section.grid--1-col-desktop { display: grid;  grid-template-columns: repeat(1,1fr);}
+.number-counter-section.grid--2-col-desktop { display: grid;  grid-template-columns: repeat(2,1fr);}
+.number-counter-section.grid--3-col-desktop { display: grid;  grid-template-columns: repeat(3,1fr);}
+.number-counter-section.grid--4-col-desktop { display: grid; grid-template-columns: repeat(4,1fr);}
+.number-counter-section.grid--5-col-desktop {  display: grid; grid-template-columns: repeat(5,1fr);}
+.number-counter-section.grid--6-col-desktop { display: grid; grid-template-columns: repeat(6,1fr);}
+.number-counter-block.column-alignment-center{ align-items: center;  display: flex; flex-direction: column;}
+.number-counter-block.column-alignment-left{text-align:left;}
+.title-wrapper-with-link.title-wrapper--self-padded-mobile.title-wrapper--no-top-margin.content-align--center { text-align: center;}
+.title-wrapper-with-link.title-wrapper--self-padded-mobile.title-wrapper--no-top-margin.content-align--left { text-align: left;}
+.number-counter-icon img.support-block-card__image{width:100px; height:auto;}
+@media screen and (max-width: 749px){
+.number-counter-section.grid--4-col-desktop{
+  display: grid;  grid-template-columns: repeat(2,1fr);
+}
+}
+/* @media screen and (min-width: 750px) and (max-width: 1200px) {
+.number-counter-section.grid--4-col-desktop{
+  display: grid;  grid-template-columns: repeat(3,1fr);
+}
+} */

@@ -1,0 +1,75 @@
+{% comment %}
+  Instagram Reel Embed Section
+
+  Settings:
+  - section_heading: Title text
+  - reel_url: Full Instagram Reel URL (e.g. https://www.instagram.com/p/SHORTCODE/)
+{% endcomment %}
+
+<style>
+  .reel-section {
+    padding: 60px 20px;
+    background: #f3f0f8;
+    text-align: center;
+  }
+  .reel-section h2 {
+    font-size: 32px;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+  }
+  .reel-frame {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 360px;
+    border: 16px solid #000;
+    border-radius: 40px;
+    overflow: hidden;
+  }
+  .reel-frame iframe,
+  .reel-frame video {
+    width: 100%;
+    height: 640px;
+    border: none;
+  }
+</style>
+
+<section class="reel-section">
+    <h2>{{ section.settings.section_heading }}</h2>
+  <div class="reel-frame">
+    {% if section.settings.reel_url contains "instagram.com/p/" %}
+      {% assign parts = section.settings.reel_url | split: '/' %}
+      {% assign shortcode = parts[4] %}
+      <div id="instagram-reel-container"></div>
+
+      <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const shortcode = '{{ shortcode }}';
+        const container = document.getElementById('instagram-reel-container');
+        // Direct embed URL
+        const embedUrl = `https://www.instagram.com/p/${shortcode}/embed/`;
+        const iframe = document.createElement('iframe');
+        iframe.src = embedUrl + '?autoplay=true&mute=true';
+        iframe.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        container.appendChild(iframe);
+      });
+      </script>
+    {% else %}
+      <p>Please enter a valid Instagram Reel URL.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram Reel Embed",
+  "settings": [
+    { "type": "text", "id": "section_heading", "label": "Section Heading", "default": "Latest Reel" },
+    { "type": "url",  "id": "reel_url",       "label": "Reel URL" }
+  ],
+  "presets": [
+    { "name": "Instagram Reel Embed", "category": "Custom", "settings": { "reel_url": "https://www.instagram.com/p/DLqXmMbxqkB/" } }
+  ]
+}
+{% endschema %}

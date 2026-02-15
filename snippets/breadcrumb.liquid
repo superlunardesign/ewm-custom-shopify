@@ -1,0 +1,116 @@
+{% if settings.use_breadcrumb %}
+ {%  style %}
+ .breadcrumb {background:url({{ settings.breadcrumb_image | image_url: width: 1920 }});background-repeat:no-repeat;background-size:cover;}  
+ .breadcrumb a{color: rgba(var(--color-foreground),1);}  
+ .breadcrumb a:hover{ color: var(--gradient-base-accent-2);}
+ .breadcrumb{padding-top:{{settings.breadcrumb_padding_top}}px;padding-bottom:{{settings.breadcrumb_padding_bottom}}px;margin-bottom:{{settings.breadcrumb_margin_bottom}}px;position: relative;z-index: 1;}  
+ .breadcrumb .breadcrumb_title{margin:0;text-transform: uppercase;letter-spacing: 2px;font-size: 2.1em; font-weight: 700;}
+ .breadcrumb a, .breadcrumb span{display: inline-block;margin-top: 15px; padding-right: 2px;  margin-right: 2px; font-size: 1.6rem; letter-spacing: normal;} 
+ .breadcrumb.text-center{text-align:center;}  
+ .breadcrumb.text-start{text-align:left;}  
+ .breadcrumb.text-end{text-align:right;}
+ .breadcrumb:before { position: absolute; content: "";  display: block;  width: 100%;  height: 100%;  left: 0;  top: 0;  z-index: -1;background:var(--gradient-base-background-2);opacity:.{{settings.image_overlay_opacity}};}  
+  @media screen and (min-width: 1024px) and (max-width: 1540px){
+    .breadcrumb .breadcrumb_title{font-size: 1.90em;}
+  }
+  @media screen and (min-width: 768px) and (max-width: 1023px){
+    .breadcrumb .breadcrumb_title{font-size: 1.80em;}
+  }
+   
+  @media screen and (max-width: 767px){
+    .breadcrumb .breadcrumb_title{font-size: 1.60em;}
+    .breadcrumb{margin-bottom:{{settings.breadcrumb_margin_bottom | times: 0.60 | round: 0 }}px;}
+      
+  } 
+  {% endstyle %}
+{% unless template == 'index' %}
+<nav class="breadcrumb text-{{ settings.breadcrumb_style }}"  aria-label="breadcrumbs">
+  <div class="page-width">
+    <div class="row"> 
+    {% if template contains 'product' %}
+    <h1 class="breadcrumb_title">{{ 'general.breadcrumbs.products' | t }}</h1>
+    {% if collection %}
+    <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a> 
+    <span aria-hidden="true" class="breadcrumb__sep">&#47;</span>
+    {% if collection.handle %}
+    {% capture url %}/collections/{{ collection.metafields.custom.parent_collection }}/{{ collection.handle }}{% endcapture %}
+    {{ collection.title | link_to: url }}  
+    {% endif %}
+    {% else %}
+    {% capture url %}/collections/all{% endcapture %}
+    <a href="{{ url }}">{{ 'general.breadcrumbs.all' | t }}</a>
+    
+    {% endif %}
+
+    <span aria-hidden="true" class="breadcrumb__sep">&#47;</span>
+    <span>{{ product.title }}</span>
+    
+
+
+    {% elsif template contains 'collection' and collection.handle %}
+    {% if template == 'list-collections' %}
+    <h1 class="breadcrumb_title">{{ 'general.breadcrumbs.all_collections' | t }}</h1>
+    {% else %}
+    <h1 class="breadcrumb_title">{{ 'general.breadcrumbs.collection' | t }}</h1>
+    <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+
+    <span aria-hidden="true" class="breadcrumb__sep">&#47;</span>
+    {% if current_tags %}
+    {% capture url %}/collections/{{ collection.metafields.custom.parent_collection }}/{{ collection.handle }}{% endcapture %}
+    {{ collection.title | link_to: url }}
+    <span aria-hidden="true" class="breadcrumb__sep">&#47;</span>
+    <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+    <span>{{ collection.title }}</span>
+
+    {% endif %}  
+    {% endif %}
+    {% elsif template == 'blog' %}
+    <h1 class="breadcrumb_title">{{ blog.title }}</h1>
+    <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+
+    <span aria-hidden="true" class="breadcrumb__sep">&#47;</span>
+    {% if current_tags %}
+    {{ blog.title | link_to: blog.url }}
+    <span aria-hidden="true" class="breadcrumb__sep">&#47;</span>
+    <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+
+    <span>{{ blog.title }}</span>
+
+    {% endif %}
+
+    {% elsif template == 'article' %}
+    <h1 class="breadcrumb_title">{{ article.title }}</h1>
+    <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+
+    <span aria-hidden="true" class="breadcrumb__sep">&#47;</span>
+    {{ blog.title | link_to: blog.url }}
+    <span aria-hidden="true" class="breadcrumb__sep">&#47;</span>
+    <span>{{ article.title }}</span>
+
+    {% elsif template contains 'page' %}
+    <h1 class="breadcrumb_title">{{ page.title }}</h1>
+    <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+
+    <span aria-hidden="true" class="breadcrumb__sep">&#47;</span>
+    <span>{{ page.title }}</span>
+
+    {% else %}
+    {% if template == 'list-collections' %}
+    <h1 class="breadcrumb_title">{{ 'general.breadcrumbs.all_collections' | t }}</h1>
+    {% else %}
+    <h1 class="breadcrumb_title">{{ page_title }}</h1>
+    <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+
+    <span aria-hidden="true" class="breadcrumb__sep">&#47;</span>
+    <span>{{ page_title }}</span>
+
+    {% endif %}
+
+    {% endif %}
+  </div> 
+  </div>
+</nav>
+{% endunless %}
+{% endif %}

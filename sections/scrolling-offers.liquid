@@ -1,0 +1,238 @@
+{% comment %}
+  Infinite Scrolling Services Section
+  
+  Settings available in theme customizer:
+  - static_text: The static text above (e.g., "WE OFFER")
+  - background_color: Background color of the section
+  - text_color: Text color
+  - scroll_speed: Animation speed (1-10 scale)
+  - services: Array of service blocks
+  
+  Block settings for each service:
+  - service_name: Name of the service
+{% endcomment %}
+
+<section class="infinite-scroll-section" style="background-color: {{ section.settings.background_color | default: '#8b7cb6' }}; color: {{ section.settings.text_color | default: '#ffffff' }};">
+  <div class="scroll-container">
+    {% if section.settings.static_text != blank %}
+      <p class="static-text">{{ section.settings.static_text }}</p>
+    {% endif %}
+    
+    {% if section.blocks.size > 0 %}
+      <div class="scrolling-text-wrapper">
+        <div class="scrolling-text" 
+             data-speed="{{ section.settings.scroll_speed | default: 5 }}"
+             style="--animation-duration: {{ section.blocks.size | times: section.settings.scroll_speed | default: 5 }}s;">
+          {% comment %} First set of services {% endcomment %}
+          {% for block in section.blocks %}
+            <h2 class="service-item" {{ block.shopify_attributes }}>{{ block.settings.service_name }}</h2>
+          {% endfor %}
+          
+          {% comment %} Duplicate set for seamless loop {% endcomment %}
+          {% for block in section.blocks %}
+            <h2 class="service-item" aria-hidden="true">{{ block.settings.service_name }}</h2>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .infinite-scroll-section {
+    padding: 60px 0px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .scroll-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .static-text {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 0 20px 0;
+    opacity: 0.9;
+  }
+  
+  .scrolling-text-wrapper {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .scrolling-text {
+    display: inline-flex;
+    animation: scroll-horizontal linear infinite;
+    animation-duration: var(--animation-duration);
+    white-space: nowrap;
+  }
+  
+  .service-item {
+    font-size: 48px;
+    font-weight: 300;
+    margin: 0;
+    padding: 0 60px;
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+  
+  @keyframes scroll-horizontal {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  /* Pause animation on hover */
+  .infinite-scroll-section:hover .scrolling-text {
+    animation-play-state: paused;
+  }
+  
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .infinite-scroll-section {
+      padding: 40px 0px;
+    }
+    
+    .static-text {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    
+    .service-item {
+      font-size: 32px;
+      padding: 0 40px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .service-item {
+      font-size: 24px;
+      padding: 0 30px;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Calculate animation duration based on content width and desired speed
+  const scrollingElements = document.querySelectorAll('.scrolling-text');
+  
+  scrollingElements.forEach(element => {
+    const speed = element.dataset.speed || 5;
+    const itemCount = element.querySelectorAll('.service-item').length / 2; // Divided by 2 because we duplicate
+    
+    // Base duration calculation: more items = longer duration, higher speed = shorter duration
+    const baseDuration = itemCount * 3; // 3 seconds per item as base
+    const duration = baseDuration / (speed / 5); // Adjust by speed setting
+    
+    element.style.setProperty('--animation-duration', duration + 's');
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Scrolling Offers",
+  "tag": "section",
+  "class": "infinite-scroll-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "static_text",
+      "label": "Static Text",
+      "default": "WE OFFER"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#8b7cb6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll Speed",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "info": "Lower numbers = faster scrolling"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        {
+          "type": "text",
+          "id": "service_name",
+          "label": "Service Name",
+          "default": "Anti-Aging Facials"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling Offers",
+      "settings": {
+        "static_text": "WE OFFER",
+        "background_color": "#8b7cb6",
+        "text_color": "#ffffff",
+        "scroll_speed": 5
+      },
+      "blocks": [
+        {
+          "type": "service",
+          "settings": {
+            "service_name": "Anti-Aging Facials"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "service_name": "Acne Facials"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "service_name": "Facials for Sensitive Skin"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "service_name": "Brazilian Waxing"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "service_name": "Red Light Therapy"
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10
+}
+{% endschema %}

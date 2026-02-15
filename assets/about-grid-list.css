@@ -1,0 +1,177 @@
+.grid-banner .grid-banner-section.one-column{display: grid; grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section.two-column{ display: grid; grid-template-columns: repeat(2,1fr);}
+.grid-banner .grid-banner-section.three-column{ display: grid;  grid-template-columns: repeat(3,1fr);}
+.grid-banner .grid-banner-section.four-column{ display: grid; grid-template-columns: repeat(4,1fr);}
+.grid-banner .grid-banner-section.five-column{ display: grid; grid-template-columns: repeat(5,1fr);}
+.grid-banner .grid-banner-section.six-column{ display: grid; grid-template-columns: repeat(6,1fr);}
+.grid-banner .grid-banner-section{ column-gap: var(--grid-desktop-horizontal-spacing); row-gap: var(--grid-desktop-vertical-spacing);}
+@media screen and (max-width: 1199px) and (min-width: 751px) {
+.grid-banner .grid-banner-section.four-column{ display: grid; grid-template-columns: repeat(2,1fr);}
+.grid-banner .grid-banner-section.five-column{ display: grid; grid-template-columns: repeat(3,1fr);}
+.grid-banner .grid-banner-section.six-column{ display: grid; grid-template-columns: repeat(3,1fr);}
+.grid-banner .grid-banner-section { column-gap: var(--grid-mobile-horizontal-spacing); row-gap: var(--grid-mobile-vertical-spacing);}  
+}
+ @media screen and (max-width: 750px) {
+ .grid-banner .grid-banner-section.two-column{ display: grid; grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section.three-column{ display: grid;  grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section.four-column{ display: grid; grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section.five-column{ display: grid; grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section.six-column{ display: grid; grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section { column-gap: var(--grid-mobile-horizontal-spacing); row-gap: var(--grid-mobile-vertical-spacing);}
+ }
+
+.grid-banner .title-wrapper-with-link.content-align--left{align-items: flex-start;}
+.grid-banner .title-wrapper-with-link.content-align--center{align-items: center;}
+.grid-banner .grid-banner-section .grid-banner-wrapper .grid-banner-block-image img.grid-banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.section.about-grid-list .grid-banner .image-content{width:100%}
+.section.about-grid-list .grid-banner .grid-banner-block-image{width:100%}
+.section.about-grid-list .grid-banner .grid-banner-content{width:100%;}
+.section.about-grid-list .grid-banner .grid-banner-inner a.button{margin-bottom:30px;}
+.section.about-grid-list .grid-banner .image-content{ display: flex; margin-bottom: 30px;justify-content: space-between;align-items: center; flex-direction: row-reverse;grid-gap: 30px;}
+.section.about-grid-list .grid-banner .image-content.grids-chang--reverse{ display:flex;   flex-direction: row-reverse;}
+.section.about-grid-list .grid-banner .reverse.grid__item {width:100%;max-width:100%;display:flex;flex-direction: row-reverse;justify-content: space-between;}
+.grid-banner-inner.banner--content-align-center {
+    align-items: center !important;
+    text-align: center;
+}
+.section.about-grid-list  .grid-banner-inner.banner--content-align-right {
+    align-items: flex-end !important;
+    text-align: right;
+}
+.section.about-grid-list .grid-banner-inner.banner--content-align-left {
+    align-items: flex-start !important;
+    text-align: left;
+}
+
+.section.about-grid-list  .grid-banner .grid-banner-section:not(.background-none) .grid-banner-wrapper {
+  background: rgb(var(--color-background));
+  height: 100%;
+}
+.section.about-grid-list .grid-banner-inner.banner--content-align-left blockquote{margin:2.5rem 0; padding:0;padding-left:30px;  border-color: var(--gradient-base-accent-2);
+    border-width: 0 0 0 3px; font-size:1.6rem; color: var(--gradient-base-accent-1); letter-spacing: normal;}
+.section.about-grid-list .grid-banner .grid-banner-content .image-group .images{display: flex;flex-direction: column; align-items: center;}
+.section.about-grid-list .grid-banner .grid-banner-content .image-group .images p{font-size:1.4rem;text-transform:uppercase;letter-spacing:1px;margin-top:20px;font-weight:500;}
+.section.about-grid-list  .grid-banner .dt-sc-grid-banner-section.background-primary .grid-banner-wrapper {
+  background: rgb(var(--color-background)) linear-gradient(rgba(var(--color-foreground), 0.04), rgba(var(--color-foreground), 0.04));}
+.section.about-grid-list .grid-banner .grid-banner-inner p.description{line-height: 1.7;
+    margin-bottom: 15px; margin-top:0px;font-size:1.6rem; padding: 0;letter-spacing:normal; }
+.section.about-grid-list .grid-banner .grid-banner-inner a.banner-button:before{content:'';position:absolute;width:0;height:100%;background:transparent;transition:all 0.3s linear}
+.section.about-grid-list .grid-banner .grid-banner-inner a.banner-button:hover:before{width:100%;background:var(--gradient-base-accent-3)}
+.section.about-grid-list  .grid-banner-section .grid-banner-wrapper .grid-banner-content .grid-banner-inner h4.main-title a{color:var(--color-foreground);}
+.section.about-grid-list .grid-banner .grid-banner-content {padding:0px;display: flex;z-index:1;
+    align-items: center;flex-wrap: wrap;}
+.section.about-grid-list .grid-banner .grid-banner-block-image{line-height:0;padding:0px;overflow:visible}
+.section.about-grid-list .grid-banner .grid-banner-inner h2.main-title{margin: 0 0 20px; font-size: 2.8rem;
+    line-height: normal; letter-spacing: normal; text-transform: capitalize; font-weight: 700;}
+.section.about-grid-list .grid-banner .grid-banner-inner h2.main-title a{color:var(--color-foreground);transition: var(--duration-long);}
+.section.about-grid-list .grid-banner .grid-banner-inner h2.main-title a:hover{color: var(--gradient-base-accent-2);}
+.section.about-grid-list .grid-banner .grid-banner-inner.banner--content-align-left{max-width:100%;}
+.section.about-grid-list .grid-banner .grid-banner-inner.banner--content-align-center{max-width:70%;margin:auto}
+.section.about-grid-list .grid-banner .grid-banner-inner.banner--content-align-right{    max-width: 90%;
+    margin-left: auto;}
+.section.about-grid-list .grid-banner .grid-banner-content .image-group{display: flex;    width: 80%;
+    justify-content: space-between;}
+@media(max-width:991px){
+.section.about-grid-list .grid-banner .grid-banner-block-image{width:100%}
+}
+@media(max-width:1400px){
+.section.about-grid-list .grid-banner  .grids-chang--normal .grid-banner-content{margin-left:40px;}
+}
+@media(max-width:1540px){
+  .section.about-grid-list .grid-banner .grid-banner-inner h2.main-title{font-size:2.8rem}
+.section.about-grid-list .grid-banner .grid-banner-inner p.description br:empty{display:none}
+}
+@media(min-width:1540px){
+.section.about-grid-list .page-full-width.page-full-width_spacing{padding:0 1rem}
+}
+@media(min-width:1880px){
+.section.about-grid-list  .page-full-width.page-full-width_spacing {padding:0 7rem}
+}
+
+ @media screen and (max-width: 1440px) {
+
+ .section.about-grid-list .grid-banner .grid-banner-content .image-group .images p{font-size:1.5rem;letter-spacing:0}
+
+   .section.about-grid-list .grid-banner .page-width{padding:0 2rem}
+   .section.about-grid-list .grid-banner .grid-banner-inner.banner--content-align-center{max-width:74%;margin:auto}
+ }
+ @media screen and (max-width: 1340px) {
+.section.about-grid-list .grid-banner .grid__item {gap:50px;}
+}
+ @media screen and (max-width: 1280px) {
+.section.about-grid-list .grid-banner .grids-chang--reverse .grid-banner-content{margin-right:40px;}
+}
+
+@media screen and (max-width: 1199px) {
+    .section.about-grid-list .grid-banner .grid-banner-content .image-group{width:100%;}
+  .section.about-grid-list .grid-banner .grid-banner-inner p.description{font-size:1.4rem}
+  .section.about-grid-list .grid-banner .grid-banner-inner h2.main-title{line-height:1.2}
+  .section.about-grid-list .grid-banner .grid__item {gap:8px;}
+.section.about-grid-list .grid-banner .page-width{margin:0 2rem;padding:0rem}
+
+   .section.about-grid-list .grid-banner .grid-banner-inner.banner--content-align-center{max-width:100%;margin:auto}
+ }
+@media screen and (max-width: 1024px) {
+
+.section.about-grid-list .grid-banner .grid-banner-inner h2.main-title{font-size:2.4rem}
+}
+@media screen and (max-width: 991px) {
+  .section.about-grid-list .grid-banner .image-content.grids-chang--reverse{display: flex;
+    flex-direction: column;}
+  .section.about-grid-list .grid-banner .grids-chang--normal .grid-banner-content{margin:0;}
+  .section.about-grid-list .grid-banner .image-content{display:flex; flex-direction:column-reverse;}
+  .section.about-grid-list .grid-banner .grid-banner-content .image-group{    justify-content: space-evenly;}
+  .section.about-grid-list .grid-banner .grid-banner-inner p.description {max-width:100%;margin:0 auto;font-size:1.6rem; text-align: left;}
+.section.about-grid-list .grid-banner .grid-banner-content .image-group .images p{    font-size: 1.5rem;}
+  .section.about-grid-list .grid-banner-inner.banner--content-align-left,
+  .section.about-grid-list .grid-banner-inner.banner--content-align-center,
+  .section.about-grid-list .grid-banner-inner.banner--content-align-right{text-align: center;}
+  .section.about-grid-list .grid-banner .reverse.grid__item{ flex-direction: column;display:flex}
+
+  .section.about-grid-list .grid-banner .grid-banner-block-image img{width:100%}
+  .section.about-grid-list .grid-banner .grid-banner-content{width:100%}
+  .section.about-grid-list .grid-banner .grid-banner-block-image{padding:0;}
+   .section.about-grid-list .grid-banner .page-width{margin:0 2rem;padding:0rem}
+   .section.about-grid-list .grid-banner .grid-banner-content{    padding: 30px 10px; display: flex; align-items: center; justify-content: center;}
+  .section.about-grid-list .grid-banner-inner.banner--content-align-left blockquote{text-align: left;}
+}
+@media screen and (max-width: 749px) {
+  .section.about-grid-list .grid-banner .grid-banner-inner.banner--content-align-left a.banner-button {font-size:1.4rem}
+  .section.about-grid-list .grid-banner .grid-banner-inner.banner--content-align-left{max-width:100%}
+.section.about-grid-list .grid-banner .grid-banner-inner h2.main-title a{font-size:2.4rem;}
+
+}
+@media screen and (max-width: 840px) {
+  .section.about-grid-list .grid-banner .grid-banner-inner h2.main-title br:empty{display:none;}
+  .section.about-grid-list .grid-banner .grid-banner-inner h2.main-title a,
+   .section.about-grid-list .grid-banner .grid-banner-inner h2.main-title{font-size:2.4rem;}
+  .section.about-grid-list .grid-banner .grid-banner-inner p.description,
+  .section.about-grid-list .grid-banner .grid-banner-inner h2.main-title{margin-bottom:20px;}
+.section.about-grid-list .grid-banner .grid__item{display:flex;flex-direction: column;}
+  .section.about-grid-list .grid-banner .grid-banner-block-image,
+  .section.about-grid-list .grid-banner .grid-banner-content{width:100%}
+}
+@media screen and (max-width: 767px) {
+  .section.about-grid-list .grid-banner .grid-banner-inner p.description{max-width:100%}
+  .section.about-grid-list .grid-banner .page-full-width.page-full-width_spacing {padding:0 2rem}
+  .section.about-grid-list .grid-banner .grid-banner-inner h2.main-title a,
+   .section.about-grid-list .grid-banner .grid-banner-inner h2.main-title{font-size:2.4rem;}
+}
+@media screen and (max-width: 576px) {
+  .section.about-grid-list .grid-banner-inner.banner--content-align-left blockquote{padding: 0 0 0 20px;}
+  .section.about-grid-list .grid-banner .grid-banner-content .image-group{    justify-content: space-evenly;}
+  .section.about-grid-list .grid-banner .grid-banner-content{padding:20px 0;}
+}
+@media screen and (max-width: 450px) {
+  .section.about-grid-list .grid-banner .grid-banner-inner p.description{padding:0}
+.section.about-grid-list .grid-banner .grid-banner-content .image-group{flex-direction:column}
+}
+.grid-banner-section.list .grid-banner-wrapper { display: flex; height: auto;}
+.grid-banner-section.list .grid-banner-wrapper .grid-banner-block-image { width: 50%;}
+.grid-banner-section.list .grid-banner-wrapper .grid-banner-content {  width: 50%;      display: flex; align-items: center; justify-content: center;}
+
+

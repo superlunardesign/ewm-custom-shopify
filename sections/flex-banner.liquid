@@ -1,0 +1,443 @@
+{{ 'section-flex-banner.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  case section.settings.grid-column
+  when '1'
+  when '2'
+  assign column = 'two-column'
+  when '3'
+  assign column = 'three-column'
+  when '4'
+  assign column = 'four-column'
+  when '5'
+  assign column = 'five-column'
+  when '6'
+  assign column = 'six-column'
+  else
+  assign column = 'three-column'
+  endcase
+  if section.settings.swiper_enable
+  assign enable_slider = true  
+  endif
+-%}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+  .section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  }
+  {% for block in section.blocks %} 
+  .flex-banner .image-bar__item.{{block.type}}-{{block.id}}{transition: all var(--duration-default) linear;;background: url({{block.settings.image | image_url: width: 1920}});background-repeat:no-repeat;background-size: cover;padding: 35px;overflow:hidden;width:100%; }
+  .flex-banner .image-bar__section .image-bar__section-inner.item-2  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 50%;}
+  .flex-banner .image-bar__section .image-bar__section-inner.item-3  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 33.33%;}
+  .flex-banner .image-bar__section .image-bar__section-inner.item-4  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 25%;}
+  .flex-banner .image-bar__section .image-bar__section-inner.item-5  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 20%;}
+  .flex-banner .image-bar__section-inner.item-5  .image-bar__item.{{block.type}}-{{block.id}}:hover{flex-basis:30%;}
+  .flex-banner .image-bar__section-inner.item-3  .image-bar__item.{{block.type}}-{{block.id}}:hover{flex-basis:50%;} 
+  .flex-banner .image-bar__section-inner.item-4  .image-bar__item.{{block.type}}-{{block.id}}:hover{flex-basis:50%;}
+  .flex-banner .image-bar__section-inner.item-2  .image-bar__item.{{block.type}}-{{block.id}}:hover{flex-basis:60%;}
+  /*.flex-banner .image-bar__item.{{block.type}}-{{block.id}} .image-gallery-overlay .image-overlay-count{font-size:var(--DTFontSize_H1);font-weight:700;font-family:var(--DTFontTypo_Heading);line-height:normal;transition: all var(--duration-default) linear;color: {{ section.settings.image_link_text_color }};margin:0;}*/
+  .flex-banner .image-bar__item.{{block.type}}-{{block.id}} .image-gallery-overlay .image-gallery-title-count {display: grid;grid-template-columns: auto auto;align-self: center;grid-gap: 10px;}
+  /* .flex-banner .image-bar__section-inner .image-bar__item.{{block.type}}-{{block.id}}:hover .image-gallery-overlay .image-overlay-count{font-size:calc( var(--DTFontSize_H1) + 40px );}*/
+  @media only screen and (max-width: 1199px) {
+  .flex-banner .image-bar__item.{{block.type}}-{{block.id}}{padding:20px;}
+  .flex-banner .image-bar__section .image-bar__section-inner{flex-wrap: wrap;} 
+  .flex-banner .image-bar__section .image-bar__section-inner.item-3  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 33.33%;}
+  .flex-banner .image-bar__section .image-bar__section-inner.item-4  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 33.3%;}
+  .flex-banner .image-bar__section .image-bar__section-inner.item-5  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 33.3%;}
+  .flex-banner .image-bar__section .image-bar__section-inner.item-2  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 50%;}
+  /*     .flex-banner .image-bar__section .image-bar__section-inner.item-5  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 50%;} */
+  /*     .flex-banner .image-bar__section-inner.item-5  .image-bar__item.{{block.type}}-{{block.id}}:hover,
+  .flex-banner .image-bar__section-inner.item-3  .image-bar__item.{{block.type}}-{{block.id}}:hover,
+  .flex-banner .image-bar__section-inner.item-4  .image-bar__item.{{block.type}}-{{block.id}}:hover{flex-basis:40%;} */ 
+  }  
+  @media (max-width:992px) {
+  .flex-banner .image-bar__section .image-bar__section-inner.item-3  .image-bar__item.{{block.type}}-{{block.id}},
+  .flex-banner .image-bar__section .image-bar__section-inner.item-4  .image-bar__item.{{block.type}}-{{block.id}},
+  .flex-banner .image-bar__section .image-bar__section-inner.item-5  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 50%;}
+  .flex-banner .image-bar__section .image-bar__section-inner.item-3  .image-bar__item.{{block.type}}-{{block.id}}:last-child,
+  .flex-banner .image-bar__section .image-bar__section-inner.item-5  .image-bar__item.{{block.type}}-{{block.id}}:last-child{width: 100%;flex-basis: 100%;}
+  /*   .flex-banner .image-bar__section-inner.item-5  .image-bar__item.{{block.type}}-{{block.id}}:hover,
+  .flex-banner .image-bar__section-inner.item-3  .image-bar__item.{{block.type}}-{{block.id}}:hover,
+  .flex-banner .image-bar__section-inner.item-4  .image-bar__item.{{block.type}}-{{block.id}}:hover{flex-basis:60%;} */
+  }
+  @media (max-width:767px) {
+  .flex-banner .image-bar__section .image-bar__section-inner.item-3  .image-bar__item.{{block.type}}-{{block.id}},
+  .flex-banner .image-bar__section .image-bar__section-inner.item-4  .image-bar__item.{{block.type}}-{{block.id}},
+  .flex-banner .image-bar__section .image-bar__section-inner.item-5  .image-bar__item.{{block.type}}-{{block.id}},
+  .flex-banner .image-bar__section .image-bar__section-inner.item-2  .image-bar__item.{{block.type}}-{{block.id}}{flex-basis: 100%;}
+  } 
+  {% endfor %}  
+  @media (min-width:1541px) {
+  .flex-banner .image-bar__item .image-gallery-overlay .image-overlay-title{max-width:400px;}
+  .flex-banner .image-bar__item {height: {{section.settings.item_height_desktop}}px;}   
+  }
+  @media (max-width:1540px) {
+  .flex-banner .image-bar__item { height: {{section.settings.item_height_laptop}}px; }
+  }
+  @media only screen and (max-width: 1199px) {
+  .flex-banner .image-bar__item { height: {{section.settings.item_height_tab}}px; }
+  }
+  @media (max-width:767px) {
+  .flex-banner .image-bar__section .dt-sc-image-list-btn { position: static; margin-top: 30px; }
+  .flex-banner .image-bar__item { height: {{section.settings.item_height_mobile}}px; }
+  }  
+  @media only screen and (min-width: 577px) and (max-width: 767px) {
+  .flex-banner .image-bar__section .image-bar__section-inner { grid-template-columns: repeat(2,1fr); }
+  }
+{%- endstyle -%}
+<div class="flex-banner color-{{ section.settings.color_scheme }} gradient{% if section.settings.title == blank %} no-heading{% endif %} {{ section.settings.custom_class_name }} ">
+   <div class="{% if section.settings.page_full_width %} page-full-width {% else %} page-width {% endif %} {% if section.settings.page_full_width_spacing %} page-full-width_spacing {% endif %}section-{{ section.id }}-padding isolate">
+      <div class="row">
+         <div class="flex-banner-wrapper">
+            {%- unless section.settings.title == blank -%}
+            <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin content-align--{{ section.settings.column_alignment }}">
+               {%- if section.settings.sub_heading != blank -%}  
+               <h6 class="sub-heading">{{ section.settings.sub_heading | escape }}</h6>
+               {%- endif -%} 
+               {%- if section.settings.title != blank -%}  
+               <h2 class="title {{ section.settings.heading_size }}">
+                  {{ section.settings.title | escape }}
+               </h2>
+               {%- endif -%} 
+               {%- if section.settings.description != blank -%}  
+               <p class="description">{{ section.settings.description }}</p>
+               {%- endif -%}   
+               {%- if section.settings.button_label != blank -%}
+               <a {% if section.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.button_link }}"{% endif %} class="button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}">{{ section.settings.button_label | escape }}</a>
+               {%- endif -%}
+            </div>
+            {%- endunless -%}
+            
+            <div class="image-bar__section wow">
+               <ul class="image-bar__section-inner  item-{{section.blocks.size}}">
+                  {%- for block in section.blocks -%}
+                  <li class="image-bar__item  wow  {{block.type}}-{{block.id}} {{section.settings.content_position}} {{ section.settings.block_text_align}}" {{ block.shopify_attributes }} >
+                  <div class="image-gallery-overlay">
+                     {% if block.settings.block_title != blank %}
+                     <h4 class="block-main-title">{{block.settings.block_title}}</h4>
+                     {% endif %}
+                     {% if block.settings.block_sub_title != blank %}
+                     <h6 class="block-sub-title">{{block.settings.block_sub_title}}</h6>
+                     {% endif %}
+                     {% if block.settings.block_description != blank %}
+                     <p class="block-description">{{block.settings.block_description}}</p>
+                     {% endif %}
+                     {% if block.settings.block_button_link != blank %}
+                     <a href="{{block.settings.block_button_link}}" class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"">{{block.settings.block_button_text}}</a>
+                     {% endif %}
+                  </div>
+                  </li>
+                  {%- endfor -%}
+               </ul>
+              
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% schema %}
+{
+"name": "t:sections.flex-banner.name",
+"class": "section",
+"max_blocks": 5,
+"settings": [
+{
+"type":"checkbox",
+"id":"page_full_width",
+"default": false,
+"label": "t:sections.all.page_full_width.label"
+},
+{
+"type":"checkbox",
+"id":"page_full_width_spacing",
+"default": false,
+"label": "t:sections.all.page_full_width_spacing.label"
+},
+{
+"type": "text",
+"id": "title",
+"default": "Flex banner",
+"label": "t:sections.all.title.label"
+},
+{
+"type": "select",
+"id": "heading_size",
+"options": [
+{
+"value": "h2",
+"label": "t:sections.all.heading_size.options__1.label"
+},
+{
+"value": "h1",
+"label": "t:sections.all.heading_size.options__2.label"
+},
+{
+"value": "h0",
+"label": "t:sections.all.heading_size.options__3.label"
+}
+],
+"default": "h1",
+"label": "t:sections.all.heading_size.label"
+},
+{
+"type": "text",
+"id": "sub_heading",
+"label": "t:sections.all.sub_heading.label"
+},
+{
+"type": "text",
+"id": "description",
+"label": "t:sections.all.description.label"
+},
+{
+"type": "text",
+"id": "button_label",
+"default": "Button label",
+"label": "t:sections.all.button_label.label"
+},
+{
+"type": "url",
+"id": "button_link",
+"label": "t:sections.all.button_link.label"
+},
+{
+"type": "checkbox",
+"id": "button_style_secondary",
+"default": false,
+"label": "t:sections.all.button_style_secondary.label"
+},
+{
+"type": "select",
+"id": "column_alignment",
+"options": [
+{
+"value": "left",
+"label": "t:sections.flex-banner.settings.column_alignment.options__1.label"
+},
+{
+"value": "center",
+"label": "t:sections.flex-banner.settings.column_alignment.options__2.label"
+}
+],
+"default": "left",
+"label": "t:sections.flex-banner.settings.column_alignment.label"
+},
+{
+"type": "select",
+"id": "color_scheme",
+"options": [
+{
+"value": "accent-1",
+"label": "t:sections.all.colors.accent_1.label"
+},
+{
+"value": "accent-2",
+"label": "t:sections.all.colors.accent_2.label"
+},
+{
+"value": "background-1",
+"label": "t:sections.all.colors.background_1.label"
+},
+{
+"value": "background-2",
+"label": "t:sections.all.colors.background_2.label"
+},
+{
+"value": "inverse",
+"label": "t:sections.all.colors.inverse.label"
+}
+],
+"default": "background-1",
+"label": "t:sections.all.colors.label"
+},
+{
+"type": "header",
+"content": "t:sections.flex-banner.settings.item_height_settings.content"
+}, 
+{	
+"type": "range",	
+"id": "item_height_desktop",	
+"label": "t:sections.flex-banner.settings.item_height_desktop.label",
+"min": 50,	
+"max": 1000,	
+"step": 10,	
+"default": 450,	
+"unit": "px"	
+},
+{	
+"type": "range",	
+"id": "item_height_laptop",	
+"label": "t:sections.flex-banner.settings.item_height_laptop.label",
+"min": 50,	
+"max": 1000,	
+"step": 10,	
+"default": 400,	
+"unit": "px"	
+},
+{	
+"type": "range",	
+"id": "item_height_tab",	
+"label": "t:sections.flex-banner.settings.item_height_tab.label",
+"min": 50,	
+"max": 1000,	
+"step": 10,	
+"default": 350,	
+"unit": "px"	
+},
+{	
+"type": "range",	
+"id": "item_height_mobile",	
+"label": "t:sections.flex-banner.settings.item_height_mobile.label",
+"min": 50,	
+"max": 1000,	
+"step": 10,	
+"default": 300,	
+"unit": "px"	
+},
+{
+"type": "header",
+"content": "t:sections.flex-banner.settings.block_settings.content"
+},
+{
+"type": "select",
+"id": "content_position",
+"label": "t:sections.flex-banner.settings.content_position.label",
+"options": [
+{
+"value": "content-center",
+"label": "t:sections.flex-banner.settings.content_position.content-center.label"
+},
+{
+"value": "content-start",
+"label": "t:sections.flex-banner.settings.content_position.content-start.label"
+},
+{
+"value": "content-end",
+"label": "t:sections.flex-banner.settings.content_position.content-end.label"
+}
+]
+}, 
+{
+"type": "select",
+"id": "block_text_align",
+"label": "t:sections.flex-banner.settings.block_text_align.label",
+"options": [
+{
+"value": "text-center",
+"label": "t:sections.flex-banner.settings.block_text_align.text-center.label"
+},
+{
+"value": "text-start",
+"label": "t:sections.flex-banner.settings.block_text_align.text-start.label"
+},
+{
+"value": "text-end",
+"label": "t:sections.flex-banner.settings.block_text_align.text-end.label"
+}
+]
+},
+{
+"type": "header",
+"content": "t:sections.all.padding.section_padding_heading"
+},
+{
+"type": "range",
+"id": "padding_top",
+"min": 0,
+"max": 100,
+"step": 4,
+"unit": "px",
+"label": "t:sections.all.padding.padding_top",
+"default": 36
+},
+{
+"type": "range",
+"id": "padding_bottom",
+"min": 0,
+"max": 100,
+"step": 4,
+"unit": "px",
+"label": "t:sections.all.padding.padding_bottom",
+"default": 36
+},
+{
+"type": "header",
+"content": "t:sections.flex-banner.settings.custom_class_heading.content"
+},
+{
+"type": "text",
+"id": "custom_class_name",
+"label": "t:sections.flex-banner.settings.custom_class_name.label"
+}
+],
+"blocks": [
+{
+"type": "image_image",
+"name": "t:sections.flex-banner.blocks.image_image.name",
+"settings": [
+{
+"type": "image_picker",
+"id": "image",
+"label": "t:sections.flex-banner.blocks.image_image.settings.image.label"
+},
+{
+"type": "text",
+"id": "block_title",
+"label": "t:sections.flex-banner.blocks.image_image.settings.block_title.label",
+"default": "Title"
+},
+{
+"type": "text",
+"id": "block_sub_title",
+"label": "t:sections.flex-banner.blocks.image_image.settings.block_sub_title.label",
+"default": "Sub title"
+},  
+{
+"type": "text",
+"id": "block_description",
+"label": "t:sections.flex-banner.blocks.image_image.settings.block_description.label",
+"default": "Short description"
+},  
+{
+"type": "text",
+"id": "block_button_text",
+"label": "t:sections.flex-banner.blocks.image_image.settings.block_button_text.label"
+},
+{
+"type": "url",
+"id": "block_button_link",
+"label": "t:sections.flex-banner.blocks.image_image.settings.block_button_link.label"
+},
+{
+"type": "checkbox",
+"id": "button_style_secondary",
+"default": false,
+"label": "t:sections.all.button_style_secondary.label"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Flex Banner",
+"category": "Image",
+"blocks": [
+{
+"type": "image_image"
+},
+{
+"type": "image_image"
+},
+{
+"type": "image_image"
+}
+]
+}
+]
+}
+{% endschema %}

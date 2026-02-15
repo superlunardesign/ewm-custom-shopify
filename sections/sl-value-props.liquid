@@ -1,0 +1,748 @@
+{% comment %}
+  Responsive Value Props Section by SL Co.
+  Grid layout with decorative corner images and 4 value proposition blocks
+{% endcomment %}
+
+<style>
+#shopify-section-{{ section.id }}{
+    background-color: {{ section.settings.section_background }};
+}
+
+  #shopify-section-{{ section.id }} .wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 20px;
+    width: 100vw;
+    height: auto;
+    max-width: 1440px;
+    margin: auto;
+
+  }
+
+  /* Animation Keyframes */
+  @keyframes floatIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes floatInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes floatInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Apply animations when enabled */
+  {% if section.settings.enable_animation %}
+    #shopify-section-{{ section.id }} .box2 {
+      animation: floatIn {{ section.settings.animation_duration }}ms ease-out;
+      animation-delay: {{ section.settings.animation_delay }}ms;
+      animation-fill-mode: both;
+    }
+
+    #shopify-section-{{ section.id }} .box3 {
+      animation: floatIn {{ section.settings.animation_duration }}ms ease-out;
+      animation-delay: calc({{ section.settings.animation_delay }}ms + 100ms);
+      animation-fill-mode: both;
+    }
+
+    #shopify-section-{{ section.id }} .box4 {
+      animation: floatIn {{ section.settings.animation_duration }}ms ease-out;
+      animation-delay: calc({{ section.settings.animation_delay }}ms + 200ms);
+      animation-fill-mode: both;
+    }
+
+    #shopify-section-{{ section.id }} .box5 {
+      animation: floatIn {{ section.settings.animation_duration }}ms ease-out;
+      animation-delay: calc({{ section.settings.animation_delay }}ms + 300ms);
+      animation-fill-mode: both;
+    }
+
+    #shopify-section-{{ section.id }} .box6 {
+      animation: floatIn {{ section.settings.animation_duration }}ms ease-out;
+      animation-delay: calc({{ section.settings.animation_delay }}ms + 400ms);
+      animation-fill-mode: both;
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .box1 {
+    grid-column: 1;
+    grid-row: 1;
+    {% if section.settings.corner_image_top != blank %}
+      background-image: url('{{ section.settings.corner_image_top | image_url: width: 500 }}');
+    {% else %}
+      background-color: #f0f0f0;
+    {% endif %}
+    width: auto;
+    height: 30vh;
+    background-position: {{ section.settings.corner_image_position_x }}% {{ section.settings.corner_image_position_y }}%;
+    background-size: cover;
+  }
+
+  #shopify-section-{{ section.id }} .box2 {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row: 1;
+    padding: 5%;
+    align-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .box3 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 2;
+    padding: 5%;
+    align-content: start;
+    background-color: {{ section.settings.prop_background }};
+    {% if section.settings.prop_border_radius > 0 %}
+      border-radius: {{ section.settings.prop_border_radius }}px;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .box4 {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row: 2;
+    padding: 5%;
+    align-content: start;
+    background-color: {{ section.settings.prop_background }};
+    {% if section.settings.prop_border_radius > 0 %}
+      border-radius: {{ section.settings.prop_border_radius }}px;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .box5 {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row: 2;
+    padding: 5%;
+    align-content: start;
+    background-color: {{ section.settings.prop_background }};
+    {% if section.settings.prop_border_radius > 0 %}
+      border-radius: {{ section.settings.prop_border_radius }}px;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .box6 {
+    grid-column-start: 5;
+    grid-column-end: 6;
+    grid-row: 2;
+    padding: 5%;
+    align-content: start;
+    background-color: {{ section.settings.prop_background }};
+    {% if section.settings.prop_border_radius > 0 %}
+      border-radius: {{ section.settings.prop_border_radius }}px;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .center {
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .box7 {
+    grid-column: 6;
+    grid-row: 3;
+    {% if section.settings.corner_image_bottom != blank %}
+      background-image: url('{{ section.settings.corner_image_bottom | image_url: width: 500 }}');
+    {% else %}
+      background-color: #f0f0f0;
+    {% endif %}
+    width: auto;
+    height: 30vh;
+    background-position: {{ section.settings.corner_image_position_x }}% {{ section.settings.corner_image_position_y }}%;
+    background-size: cover;
+  }
+
+  #shopify-section-{{ section.id }} .box2 h2 {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
+    margin-bottom: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .box2 h4 {
+    color: {{ section.settings.subheading_color }};
+    font-size: {{ section.settings.subheading_size }}px;
+  }
+
+  #shopify-section-{{ section.id }} .value-prop h3 {
+    color: {{ section.settings.prop_heading_color }};
+    font-size: {{ section.settings.prop_heading_size }}px;
+    margin: 15px 0 10px 0;
+  }
+
+  #shopify-section-{{ section.id }} .value-prop p {
+    color: {{ section.settings.prop_text_color }};
+    font-size: {{ section.settings.prop_text_size }}px;
+    line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .value-prop img {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    object-fit: contain;
+  }
+
+  /* Tablet Layout */
+  @media (max-width: 1100px) {
+    #shopify-section-{{ section.id }} .wrapper {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    #shopify-section-{{ section.id }} .box1 {
+      grid-column-start: 1;
+      grid-column-end: 1;
+      width: 20vw;
+    }
+
+    #shopify-section-{{ section.id }} .box2 {
+      grid-column-start: 2;
+      grid-column-end: 4;
+      grid-row: 1;
+    }
+
+    #shopify-section-{{ section.id }} .box3 {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      
+    }
+
+    #shopify-section-{{ section.id }} .box4 {
+      grid-column-start: 3;
+      grid-column-end: 4;
+    }
+
+    #shopify-section-{{ section.id }} .box5 {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row: 3;
+    }
+
+    #shopify-section-{{ section.id }} .box6 {
+      grid-column-start: 3;
+      grid-column-end: 4;
+      grid-row: 3;
+    }
+
+    #shopify-section-{{ section.id }} .box7 {
+      grid-column-start: 4;
+      grid-column-end: 4;
+      grid-row: 4;
+      width: 20vw;
+    }
+  }
+
+  /* Mobile Layout */
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .wrapper {
+      grid-template-columns: 2fr;
+    }
+
+    #shopify-section-{{ section.id }} .box1 {
+      grid-column: 1;
+      grid-row: 1;
+      width: 20vw;
+      height: 10vh;
+    }
+
+    #shopify-section-{{ section.id }} .box2 {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row: 2;
+    }
+
+    #shopify-section-{{ section.id }} .box3 {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row: 3;
+    }
+
+    #shopify-section-{{ section.id }} .box4 {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row: 4;
+    }
+
+    #shopify-section-{{ section.id }} .box5 {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row: 5;
+    }
+
+    #shopify-section-{{ section.id }} .box6 {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row: 6;
+    }
+
+    #shopify-section-{{ section.id }} .box7 {
+      grid-column: 2;
+      grid-row: 7;
+      width: 20vw;
+      height: 10vh;
+    }
+
+    #shopify-section-{{ section.id }} .box2 h2 {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .box2 h4 {
+      font-size: {{ section.settings.mobile_subheading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .value-prop h3 {
+      font-size: {{ section.settings.mobile_prop_heading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .value-prop p {
+      font-size: {{ section.settings.mobile_prop_text_size }}px;
+      width: 70%;
+      margin: auto;
+    }
+  }
+</style>
+
+<div class="wrapper">
+  <div class="box1">&nbsp;</div>
+
+  <div class="box2 center">
+    {% if section.settings.main_heading != blank %}
+      <h2>{{ section.settings.main_heading }}</h2>
+    {% endif %}
+    {% if section.settings.main_subheading != blank %}
+      <h4>{{ section.settings.main_subheading }}</h4>
+    {% endif %}
+  </div>
+
+  <div class="box3 center value-prop">
+    {% if section.settings.prop1_icon != blank %}
+      <img src="{{ section.settings.prop1_icon | image_url: width: 200 }}" alt="{{ section.settings.prop1_heading }}" width="" height="">
+    {% endif %}
+    {% if section.settings.prop1_heading != blank %}
+      <h3>{{ section.settings.prop1_heading }}</h3>
+    {% endif %}
+    {% if section.settings.prop1_text != blank %}
+      <p>{{ section.settings.prop1_text }}</p>
+    {% endif %}
+  </div>
+
+  <div class="box4 center value-prop">
+    {% if section.settings.prop2_icon != blank %}
+      <img src="{{ section.settings.prop2_icon | image_url: width: 200 }}" alt="{{ section.settings.prop2_heading }}" width="" height="">
+    {% endif %}
+    {% if section.settings.prop2_heading != blank %}
+      <h3>{{ section.settings.prop2_heading }}</h3>
+    {% endif %}
+    {% if section.settings.prop2_text != blank %}
+      <p>{{ section.settings.prop2_text }}</p>
+    {% endif %}
+  </div>
+
+  <div class="box5 center value-prop">
+    {% if section.settings.prop3_icon != blank %}
+      <img src="{{ section.settings.prop3_icon | image_url: width: 200 }}" alt="{{ section.settings.prop3_heading }}" width="" height="">
+    {% endif %}
+    {% if section.settings.prop3_heading != blank %}
+      <h3>{{ section.settings.prop3_heading }}</h3>
+    {% endif %}
+    {% if section.settings.prop3_text != blank %}
+      <p>{{ section.settings.prop3_text }}</p>
+    {% endif %}
+  </div>
+
+  <div class="box6 center value-prop">
+    {% if section.settings.prop4_icon != blank %}
+      <img src="{{ section.settings.prop4_icon | image_url: width: 200 }}" alt="{{ section.settings.prop4_heading }}" width="" height="">
+    {% endif %}
+    {% if section.settings.prop4_heading != blank %}
+      <h3>{{ section.settings.prop4_heading }}</h3>
+    {% endif %}
+    {% if section.settings.prop4_text != blank %}
+      <p>{{ section.settings.prop4_text }}</p>
+    {% endif %}
+  </div>
+
+  <div class="box7">&nbsp;</div>
+</div>
+
+{% if section.settings.enable_animation %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('#shopify-section-{{ section.id }}');
+    const valueProps = section.querySelectorAll('.box2, .box3, .box4, .box5, .box6');
+    
+    // Reset animations initially
+    valueProps.forEach(function(elem) {
+      elem.style.animationPlayState = 'paused';
+    });
+    
+    // Create intersection observer
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          // Trigger animations for all value props
+          valueProps.forEach(function(elem) {
+            elem.style.animationPlayState = 'running';
+          });
+          // Unobserve after triggering
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Observe the section
+    observer.observe(section);
+  });
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Value Props Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Main Content"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "OUR APPROACH"
+    },
+    {
+      "type": "text",
+      "id": "main_subheading",
+      "label": "Main Subheading",
+      "default": "REAL-TIME RELEVANCE. NOT RIGID FORMULAS"
+    },
+    {
+      "type": "header",
+      "content": "Corner Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "corner_image_top",
+      "label": "Top Left Corner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "corner_image_bottom",
+      "label": "Bottom Right Corner Image"
+    },
+    {
+      "type": "range",
+      "id": "corner_image_position_x",
+      "label": "Corner Images Horizontal Position",
+      "info": "Adjust left/right focal point",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "corner_image_position_y",
+      "label": "Corner Images Vertical Position",
+      "info": "Adjust up/down focal point",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Value Prop 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "prop1_icon",
+      "label": "Icon 1"
+    },
+    {
+      "type": "text",
+      "id": "prop1_heading",
+      "label": "Heading 1",
+      "default": "Deep Integration"
+    },
+    {
+      "type": "textarea",
+      "id": "prop1_text",
+      "label": "Text 1",
+      "default": "Learn your business inside-out—from your signature approach to food safety standards if needed. No disruption to your workflow."
+    },
+    {
+      "type": "header",
+      "content": "Value Prop 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "prop2_icon",
+      "label": "Icon 2"
+    },
+    {
+      "type": "text",
+      "id": "prop2_heading",
+      "label": "Heading 2",
+      "default": "Deep Integration"
+    },
+    {
+      "type": "textarea",
+      "id": "prop2_text",
+      "label": "Text 2",
+      "default": "Learn your business inside-out—from your signature approach to food safety standards if needed. No disruption to your workflow."
+    },
+    {
+      "type": "header",
+      "content": "Value Prop 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "prop3_icon",
+      "label": "Icon 3"
+    },
+    {
+      "type": "text",
+      "id": "prop3_heading",
+      "label": "Heading 3",
+      "default": "Deep Integration"
+    },
+    {
+      "type": "textarea",
+      "id": "prop3_text",
+      "label": "Text 3",
+      "default": "Learn your business inside-out—from your signature approach to food safety standards if needed. No disruption to your workflow."
+    },
+    {
+      "type": "header",
+      "content": "Value Prop 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "prop4_icon",
+      "label": "Icon 4"
+    },
+    {
+      "type": "text",
+      "id": "prop4_heading",
+      "label": "Heading 4",
+      "default": "Deep Integration"
+    },
+    {
+      "type": "textarea",
+      "id": "prop4_text",
+      "label": "Text 4",
+      "default": "Learn your business inside-out—from your signature approach to food safety standards if needed. No disruption to your workflow."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "prop_background",
+      "label": "Value Props Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "range",
+      "id": "prop_border_radius",
+      "label": "Value Props Border Radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Main Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Main Subheading Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "prop_heading_color",
+      "label": "Value Prop Headings Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "prop_text_color",
+      "label": "Value Prop Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Font Sizes - Desktop"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "label": "Section Height",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Main Heading Size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Main Subheading Size",
+      "min": 14,
+      "max": 40,
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "prop_heading_size",
+      "label": "Value Prop Heading Size",
+      "min": 16,
+      "max": 36,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "prop_text_size",
+      "label": "Value Prop Text Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Size",
+      "min": 40,
+      "max": 100,
+      "step": 4,
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Font Sizes - Mobile"
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile Main Heading Size",
+      "min": 18,
+      "max": 40,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_subheading_size",
+      "label": "Mobile Main Subheading Size",
+      "min": 12,
+      "max": 30,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_prop_heading_size",
+      "label": "Mobile Value Prop Heading Size",
+      "min": 14,
+      "max": 30,
+      "step": 2,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_prop_text_size",
+      "label": "Mobile Value Prop Text Size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Animation Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable Float-in Animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation Duration (ms)",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation Start Delay (ms)",
+      "min": 0,
+      "max": 1000,
+      "step": 100,
+      "default": 200
+    }
+  ],
+  "presets": [
+    {
+      "name": "Value Props Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

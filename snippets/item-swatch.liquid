@@ -1,0 +1,144 @@
+{% if settings.display_color_variant %}
+{%- assign file_extension = 'png' -%}
+
+
+{% for option in product.options %}
+{% assign downcased_option = option | downcase %}    
+{% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+{% assign optionCount = 0 %}
+{% assign optionControl = 4 %}
+{%- assign option_index = forloop.index0 -%}
+{%- assign values = '' -%}
+
+<ul class="variant-option-color">
+  {% for variant in product.variants %}  
+  {%- assign value = variant.options[option_index] -%}
+  {% unless values contains value %}
+  {%- assign values = values | join: ',' -%}
+  {%- assign values = values | append: ',' | append: value -%}
+  {%- assign values = values | split: ',' -%}  
+   {%- capture colorCODE -%}
+    {%- if variant.image != null -%}
+    {%- assign value =   value | replace: ' ' , '-'  -%}
+    {%- if value contains '-' -%}                   
+    bg-variant-image-as-color
+    {%- else -%}
+    bg-color-{{- value -}}
+    {%- endif -%}
+    {%- endif -%}
+    {%- endcapture -%}
+  {% if optionCount < 4 %}  
+  <li class="color-values">            
+    <a data-href="{{ variant.url | within: collection }}" class="swatch swatch-element color {{ colorCODE | downcase -}}" data-swatch-meta="name-{{ downcased_option }}_{{ value | replace: ' ', '_' | downcase }}">
+      <tooltip class="tooltip">{{value}}</tooltip>
+      <span {% if variant.image != null %} data-image="{{ variant.image.src  | product_img_url: '460x' }}"
+            {% else %}
+            data-image="{{ variant.featured_image | product_img_url: '460x' }}"{% endif %} 
+            style="background-size: cover;
+                   {% if settings.show_mixed_swatch %}
+                   {%- if variant.image != null -%}                  
+                   {%- assign value =   value | replace: ' ' , '-'  -%}
+                   {% if value contains '-' %}                   
+                   background-image: url('{{ variant.image.src  | product_img_url: '460x' }}');                  
+                   {%- endif -%}
+                   {% endif %}                   
+                   {%- endif -%}
+                   {% unless settings.show_mixed_swatch %}
+                   {% if variant.image != null %}                   
+                   background-image: url('{{ variant.image.src  | product_img_url: '460x' }}');  
+                   {% else %}
+                   background-color: {{ value | split: ' ' | last | handle }};
+                   {% endif %}
+                   {% endunless %}"
+            data-id="{{variant.id}}"
+            data-variant-title-id="color" data-variant-item="{{ value | replace: ' ', '-' | downcase }}"  data-variant-title="{{ variant.title }}"></span>
+
+    </a>          
+    {% assign optionCount = optionCount | plus : 1 %}
+  </li>
+  {% else %}    
+  <li class="color-values show-on-click" style="display:none">
+    <a data-href="{{ variant.url | within: collection }}" class="swatch color {{ colorCODE | downcase -}}" data-swatch-meta="name-{{ downcased_option }}_{{ value | replace: ' ', '_' | downcase }}">
+{% comment %} <!--       <tooltip class="tooltip">{{value}}</tooltip> --> {% endcomment %}
+      <span {% if variant.image != null %} data-image="{{ variant.image.src  | image_url: width: 460 }}"
+            {% else %}
+            data-image="{{ variant.featured_image | image_url: width: 460 }}"{% endif %} 
+            style="background-size: cover;
+                   {% if settings.show_mixed_swatch %}
+                   {%- if variant.image != null -%}                  
+                   {%- assign value =   value | replace: ' ' , '-'  -%}
+                   {% if value contains '-' %}                   
+                   background-image: url('{{ variant.image.src  | product_img_url: '460x' }}');                  
+                   {%- endif -%}
+                   {% endif %}                   
+                   {%- endif -%}
+                   {% unless settings.show_mixed_swatch %}
+                   {% if variant.image != null %}                   
+                   background-image: url('{{ variant.image.src  | product_img_url: '460x' }}');  
+                   {% else %}
+                   background-color: {{ value | split: ' ' | last | handle }};
+                   {% endif %}
+                   {% endunless %}"
+            data-id="{{variant.id}}"
+            data-variant-title-id="color" data-variant-item="{{ value | replace: ' ', '-' | downcase }}"  data-variant-title="{{ variant.title }}"></span>
+
+    </a>  
+  </li>
+  {% assign optionCount = optionCount | plus : 1 %}
+  {% endif %}
+
+  {% endunless %}
+  {% endfor %}
+
+  {% for itemOption in product.options_with_values %}  
+  {% assign  lowercase_value = itemOption.name | downcase %}    
+  {% if lowercase_value contains 'color' %}  
+  {% if itemOption.values.size > 4 %}
+  <li class="color-values-plus">
+    <span><a href="#">+{{ itemOption.values.size | minus : 4 }}</a></span>
+  </li>
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+
+</ul>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if settings.display_item_size %}
+{% for option in product.options %}
+{% assign downcased_option = option | downcase %}    
+{% if downcased_option contains 'size'  %}
+{%- assign option_index = forloop.index0 -%}
+{%- assign values = '' -%}
+<ul class="variant-option-size">
+  {% for variant in product.variants %}
+  {%- assign value = variant.options[option_index] -%}
+  {% unless values contains value %}
+  {%- assign values = values | join: ',' -%}
+  {%- assign values = values | append: ',' | append: value -%}
+  {%- assign values = values | split: ',' -%}
+  <li class="size-values">   
+    <input 
+           type="radio" 
+           name="id" 
+           class="variant-option hide"
+           value="{{ variant.id }}" 
+           id="variant-option-{{ variant.id }}" 
+           {% unless variant.available %} disabled{% endunless %}
+           {% if current_variant.id == variant.id %} checked{% endif %}
+           >    
+    <a data-url="{{ variant.url | within: collection }}" class="swatch size" data-swatch-meta="name-{{ downcased_option }}_{{ value | replace: ' ', '_' | downcase }}">
+      <span {% if variant.image != null %} data-image="{{ variant.image.src  | product_img_url: '460x' }}"
+            {% else %}
+            data-image="{{ variant.featured_image | product_img_url: '460x' }}"{% endif %} 
+            data-id="{{variant.id}}" data-variant-title-id="size" data-variant-item="{{ value | replace: ' ', '-' | downcase }}" data-variant-title="{{ variant.title }}">{{ value | escape }}</span>
+    </a>          
+  </li>
+  {% endunless %}
+  {% endfor %}
+</ul>
+{% endif %}
+{% endfor %}
+{% endif %}

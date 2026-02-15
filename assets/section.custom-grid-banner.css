@@ -1,0 +1,129 @@
+.grid-banner .grid-banner-section.one-column{display: grid; grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section.two-column{ display: grid; grid-template-columns: repeat(2,1fr);}
+.grid-banner .grid-banner-section.three-column{ display: grid;  grid-template-columns: repeat(3,1fr);}
+.grid-banner .grid-banner-section.four-column{ display: grid; grid-template-columns: repeat(4,1fr);}
+.grid-banner .grid-banner-section.five-column{ display: grid; grid-template-columns: repeat(5,1fr);}
+.grid-banner .grid-banner-section.six-column{ display: grid; grid-template-columns: repeat(6,1fr);}
+.grid-banner .grid-banner-section{ column-gap: var(--grid-desktop-horizontal-spacing); row-gap: var(--grid-desktop-vertical-spacing);}
+@media screen and (max-width: 1199px) and (min-width: 751px) {
+.grid-banner .grid-banner-section.four-column{ display: grid; grid-template-columns: repeat(2,1fr);}
+.grid-banner .grid-banner-section.five-column{ display: grid; grid-template-columns: repeat(3,1fr);}
+.grid-banner .grid-banner-section.six-column{ display: grid; grid-template-columns: repeat(3,1fr);}
+.grid-banner .grid-banner-section { column-gap: var(--grid-mobile-horizontal-spacing); row-gap: var(--grid-mobile-vertical-spacing);}  
+}
+ @media screen and (max-width: 750px) {
+ .grid-banner .grid-banner-section.two-column{ display: grid; grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section.three-column{ display: grid;  grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section.four-column{ display: grid; grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section.five-column{ display: grid; grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section.six-column{ display: grid; grid-template-columns: repeat(1,1fr);}
+.grid-banner .grid-banner-section { column-gap: var(--grid-mobile-horizontal-spacing); row-gap: var(--grid-mobile-vertical-spacing);}
+ }
+
+.grid-banner .title-wrapper-with-link.content-align--left{align-items: flex-start;}
+.grid-banner .title-wrapper-with-link.content-align--center{align-items: center;}
+.grid-banner .grid-banner-section .grid-banner-wrapper .grid-banner-block-image img.grid-banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.section.custom-grid-banner .grid-banner .grid__item {width:100%;max-width:100%;}
+.grid-banner-inner.banner--content-align-center {
+    align-items: center !important;
+    text-align: center;
+}
+.grid-banner-inner.banner--content-align-right {
+    align-items: flex-end !important;
+    text-align: right;
+}
+.grid-banner-inner.banner--content-align-left {
+    align-items: flex-start !important;
+    text-align: left;
+}
+
+.grid-banner .grid-banner-section:not(.background-none) .grid-banner-wrapper {
+  background: rgb(var(--color-background));
+  height: 100%;
+}
+.grid-banner .dt-sc-grid-banner-section.background-primary .grid-banner-wrapper {
+  background: rgb(var(--color-background)) linear-gradient(rgba(var(--color-foreground), 0.04), rgba(var(--color-foreground), 0.04));}
+.section.custom-grid-banner .grid-banner .grid-banner-inner p.description{line-height: 24px; margin: 0 0 15px;font-size: 1.6rem;letter-spacing: normal; color: var(--color-base-accent-4);}
+.section.custom-grid-banner .grid-banner .grid-banner-inner.banner--content-align-left a.banner-button{font-size:1.5rem}
+.grid-banner-section .grid-banner-wrapper .grid-banner-content .grid-banner-inner h4.main-title a{color:var(--color-foreground);}
+.section.custom-grid-banner .grid-banner .grid-banner-content {padding:0 15px;}
+.section.custom-grid-banner .grid-banner .grid-banner-block-image{line-height:0;}
+.section.custom-grid-banner .grid-banner .grid-banner-inner h2.main-title{margin-bottom:20px;margin-top:0}
+.section.custom-grid-banner .grid-banner .grid-banner-inner h2.main-title a{color:var(--color-foreground);transition: var(--duration-long); font-size: 2.2rem; line-height: 20px; letter-spacing: normal;font-weight: 700; text-transform: capitalize;}
+.section.custom-grid-banner .grid-banner .grid-banner-inner h2.main-title a:hover{color:var(--gradient-base-background-3);}
+.section.custom-grid-banner .grid-banner .grid-banner-inner.banner--content-align-left{max-width:100%;}
+.section.custom-grid-banner .grid-banner .grid-banner-inner.banner--content-align-center{max-width:100%;margin:auto}
+.section.custom-grid-banner .grid-banner .grid-banner-inner.banner--content-align-right{    max-width: 90%;
+    margin-left: auto;}
+a.grid-banner-image.empty_place_holder {
+    width: 100%;
+}
+@media(min-width:992px){
+  .section.custom-grid-banner .grid-banner .page-width{padding:0 2rem}
+}
+
+
+ @media screen and (max-width: 1440px) {
+   .section.custom-grid-banner .grid-banner .grid-banner-content {padding:30px 0px}
+   .section.custom-grid-banner .grid-banner .page-width{margin:0 3rem;padding:0rem}
+
+ }
+
+@media screen and (max-width: 1199px) {
+
+  .section.custom-grid-banner .grid-banner .grid-banner-content{padding:30px 0px;}
+   .section.custom-grid-banner .grid-banner .grid-banner-inner.banner--content-align-center{max-width:100%;margin:auto}
+ }
+
+@media screen and (max-width: 991px) {
+  .section.custom-grid-banner .grid-banner .grid-banner-inner p.description{font-size:1.4rem}
+   .section.custom-grid-banner .grid-banner .page-width{margin:0 2rem;padding:0rem}
+   .section.custom-grid-banner .grid-banner .grid-banner-content{padding:30px 0px;}
+}
+@media screen and (max-width: 767px) {
+.section.custom-grid-banner .grid-banner .grid-banner-inner p.description {font-size:1.6rem}
+}
+@media screen and (max-width: 749px) {
+  .section.custom-grid-banner .grid-banner .grid-banner-inner.banner--content-align-left{max-width:100%}
+.section.custom-grid-banner .grid-banner .grid-banner-inner h2.main-title a{font-size:2.4rem}
+}
+
+/*custom css file*/
+.custom-grid-banner .grid-banner .grid-banner-wrapper .swiper-button-next, .grid-banner .swiper-button-prev{bottom:0;top:auto}
+.custom-grid-banner .grid-banner .grid-banner-wrapper{display: inline-flex;flex-wrap: wrap; width: 100%; align-items: center;}
+.custom-grid-banner .grid-banner .grid-banner-wrapper .title-wrapper-with-link{width: 25%;}
+.custom-grid-banner .grid-banner .grid-banner-wrapper grid-slider-1{width: 75%;}
+.custom-grid-banner .grid-banner .grid-banner-wrapper .title-wrapper-with-link h2.title.h1{ font-size: 2.8rem; line-height: 33px; margin: 0 0 20px; letter-spacing: normal; font-weight: 700;}
+.custom-grid-banner .grid-banner .grid-banner-wrapper p.grid-banner-list-title__text{color: var(--color-base-accent-4); letter-spacing: normal; font-size: 1.6rem; text-transform: capitalize;font-weight: 500; line-height: 28px;}
+.custom-grid-banner .grid-banner .grid-banner-wrapper .title-wrapper-with-link{display: block;}
+.custom-grid-banner .grid-banner .grid-banner-wrapper .grid-banner-inner .button{padding: 0;}
+.custom-grid-banner .grid-banner .grid-banner-wrapper .grid-banner-inner .button:after{
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    z-index: -1;
+    transition: all 300ms linear;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-base-background-3);
+    transition: all .3s linear;
+  }
+.custom-grid-banner .grid-banner .grid-banner-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal{bottom: 50px;}
+.custom-grid-banner .grid-banner .grid-banner-wrapper .swiper-pagination-clickable .swiper-pagination-bullet{width: 15px; height: 15px;}
+.custom-grid-banner .grid-banner .grid-banner-wrapper .grid-banner-inner .button:hover:after{background: var(--gradient-base-accent-2); height: 12px;}
+.grid-banner .grid-banner-wrapper .title-wrapper-with-link .button {margin-top: 25px;}
+.custom-grid-banner .grid-banner .grid-banner-wrapper .title-wrapper--no-top-margin{margin-top: 22px;}
+/*responsive*/
+@media screen and (max-width: 1199px){
+  .custom-grid-banner .grid-banner .grid-banner-wrapper{display: block;}
+  .custom-grid-banner .grid-banner .grid-banner-wrapper .title-wrapper-with-link{width: 100%; text-align: center;}
+  .custom-grid-banner .grid-banner .grid-banner-wrapper .title-wrapper-with-link h2.title.h1{font-size: 3.0rem;}
+}
+@media screen and (max-width: 991px){
+  .custom-grid-banner .grid-banner .grid-banner-wrapper grid-slider-1{cursor: grab;}
+}

@@ -1,0 +1,193 @@
+<div class="enquiry-modal">
+  <div class="enquiry-content">
+    <span class="close-button button close-icon"> {% render 'icon-close' %}</span>
+    <span class="enquiry-content-inner">
+      <h5 class="enquiry-title">{{ 'enquiry.form.sub_heading' | t }}</h5>
+      {% form 'contact' %}
+        {% if form.posted_successfully? %}
+          <p class="note form-success">
+            {{ 'templates.contact.form.post_success' | t }}
+          </p>
+        {% endif %}
+        {{ form.errors | default_errors }}
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+
+        <input
+          type="text"
+          id="ContactFormName"
+          name="contact[Name]"
+          placeholder="Name"
+        >
+
+        <input
+          autocomplete="email"
+          type="email"
+          id="ContactForm-email"
+          name="contact[email]"
+          spellcheck="false"
+          autocapitalize="off"
+          value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+          aria-required="true"
+          {% if form.errors contains 'email' %}
+            aria-invalid="true"
+            aria-describedby="ContactForm-email-error"
+          {% endif %}
+          required="required"
+          placeholder="{{ 'enquiry.form.email' | t }}"
+        >
+
+        <input
+          type="text"
+          id="ContactFormPhone"
+          name="contact[Phone]"
+          placeholder="Phone"
+        >
+
+        <textarea
+          rows="7"
+          type="textarea"
+          id="ContactFormMsg"
+          name="contact[Msg]"
+          placeholder="Subject"
+        ></textarea>
+
+        <div class="enquiry-choose">
+          <input
+            type="radio"
+            id="ContactViaEmail"
+            name="contact[By]"
+            value="Email"
+          >
+          <label for="ContactViaEmail">{{ 'enquiry.form.by_email' | t }}</label>
+          <input
+            type="radio"
+            id="contactFormViaPhone"
+            name="contact[By]"
+            value="Phone"
+          >
+          <label for="contactFormViaPhone">{{ 'enquiry.form.by_phone' | t }}</label>
+          <input
+            type="radio"
+            id="contactFormViaBoth"
+            name="contact[By]"
+            value="Both"
+          >
+          <label for="contactFormViaBoth">{{ 'enquiry.form.by_both' | t }}</label>
+          <input
+            type="hidden"
+            id="Product_name"
+            class="input-full"
+            name="contact[Product_name]"
+            placeholder="{{ 'contact.form.product' | t }}"
+            value="{{ product.title }} - {{ product.vendor }}"
+          >
+        </div>
+        <button type="submit" class="button button--primary ">{{ 'templates.contact.form.send' | t }}</button>
+      {% endform %}
+    </span>
+  </div>
+</div>
+<script>
+
+  const EnquiryModal = document.querySelector(".enquiry-modal");
+  const EnquiryTrigger = document.querySelector("#trigger-enquiry");
+  const Enquiryclose = document.querySelector(".enquiry-modal .close-button");
+
+  function toggleModal() {
+    EnquiryModal.classList.toggle("show-enquiry");
+  }
+  function windowOnClick(event) {
+    if (event.target === EnquiryModal) {
+      toggleModal();
+    }
+  }
+
+  EnquiryTrigger.addEventListener("click", toggleModal);
+  Enquiryclose.addEventListener("click", toggleModal);
+  window.addEventListener("click", windowOnClick);
+</script>
+
+<style>
+
+  .enquiry-modal { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden; transition: all 0.3s linear; z-index: 10000; }
+
+  .enquiry-modal .enquiry-content { position: absolute; background-color: var(--gradient-background); color: black; padding: 3rem; width: 700px; max-height: 90%; max-width: 90%; margin: auto;
+  -webkit-transition: all 0.3s linear; transition: all 0.3s linear; border-radius: var(--DTRadius);  display: inline-block; left: 0; right: 0; top: calc(50% + 30px); bottom: auto; transform: translateY(-50%); }
+
+  .enquiry-modal .enquiry-content .enquiry-title { margin: 0 0 20px; font-size:2rem; font-weight: 700; letter-spacing: normal;}
+  .enquiry-modal .enquiry-content .contact-form { display: flex; justify-content: space-between; flex-wrap: wrap; }
+  .enquiry-modal .enquiry-content .contact-form > * { margin-bottom: 15px;    font-family: var(--font-body-family); }
+  .enquiry-modal .enquiry-content .contact-form > #ContactFormName,
+  .enquiry-modal .enquiry-content .contact-form > #ContactForm-email,
+  .enquiry-modal .enquiry-content .contact-form > #ContactFormPhone,
+  .enquiry-modal .enquiry-content .contact-form .btn { width: calc(33.33% - 7.5px); }
+  .enquiry-modal .enquiry-content .contact-form .btn { margin: 0; }
+  .enquiry-modal .enquiry-content .contact-form .enquiry-choose input { margin-right: 5px;     margin-bottom: 3px; }
+  .enquiry-modal .enquiry-content .contact-form .enquiry-choose input:not(:first-child) { margin-left: 15px; }
+
+  .enquiry-modal .enquiry-content table { table-layout: auto; margin: 0; }
+  .enquiry-modal .enquiry-content .close-button { position: absolute; right: -10px; top: -10px; }
+
+  .enquiry-modal.show-enquiry { opacity: 1; visibility: visible; }
+  .enquiry-modal.show-enquiry .enquiry-content { top: 50%; }
+  .enquiry-modal .enquiry-content .contact-form .button{margin: 0; padding: 12px 20px; border: none; background: var(--gradient-base-accent-2); text-transform: capitalize; width: 150px; transition: all 0.3s linear;}
+  .enquiry-modal .enquiry-content .contact-form .button:hover{background: var(--gradient-base-background-3); color: var(--gradient-base-accent-3);}
+  .trigger-enquiry { margin: -10px 0px 5px 140px; display: flex; line-height: 1.5; }
+  .trigger-enquiry svg { margin-right:5px; }
+  .dt-sc-btn.close-icon {  margin: 0;  padding: 5px;  border-radius: var(--DT_Button_Border_Radius);  box-shadow: none;}
+  input[type="text"], input[type="email"],
+   textarea, input.text{
+        display: block;
+      margin: 0;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      outline: none;
+      padding: 12px 20px 12px 20px;
+      border: 1px solid var(--color-base-accent-6);
+      background: var(--gradient-base-background-1);
+      word-break: break-all;
+     transition: all 0.3s linear;
+  }
+    input[type="text"], input[type="email"]{height: 4.5rem;}
+    input[type="text"]:focus, input[type="email"]:focus, textarea:focus{border: 1px solid var(--gradient-base-background-3);}
+    .field__input{ flex-grow: unset;}
+    .enquiry-modal .enquiry-content .contact-form > #ContactFormName, .enquiry-modal .enquiry-content .contact-form > #ContactForm-email,
+    .enquiry-modal .enquiry-content .contact-form > #ContactFormPhone, .enquiry-modal .enquiry-content .contact-form .btn{
+          width: calc(33.33% - 7.5px);
+    }
+    p.note.form-success{  color:#008000;  width: 100%;     margin-top: 0;}
+    .close-button.button.close-icon {
+      margin: 0;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      min-width: 25px;
+      min-height: 25px;
+      background: var(--gradient-base-accent-2);
+      transition: all 300ms linear;
+  }
+    .close-button.button.close-icon:hover{background: var(--gradient-base-background-3);}
+    .close-button.button.close-icon svg{width:15px; height:15px; color:var(--color-button);}
+    .close-button.button.close-icon svg path{transition: all 300ms linear;}
+    .close-button.button.close-icon:hover svg path{fill: var(--gradient-base-accent-3);}
+  @media only screen and (min-width: 768px) {
+  .enquiry-modal .enquiry-content .contact-form .enquiry-choose { display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; margin: 0; }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .enquiry-modal .enquiry-content { padding: 3rem; max-width: 75%; }
+    .enquiry-modal .enquiry-content,
+    .size-chart-content table,
+    .enquiry-modal .enquiry-content .contact-form > #ContactFormName,
+    .enquiry-modal .enquiry-content .contact-form > #ContactForm-email,
+    .enquiry-modal .enquiry-content .contact-form > #ContactFormPhone,
+    .enquiry-modal .enquiry-content .contact-form .btn { width: 100%; }
+    .size-chart-content th, .size-chart-content td { padding: 10px;}
+  }
+
+  @media only screen and (max-width: 576px) {
+    .enquiry-modal .enquiry-content { max-width: 90%; }
+  }
+</style>

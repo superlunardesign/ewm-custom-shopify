@@ -1,0 +1,133 @@
+table{
+    border-collapse: collapse;
+    border-color: inherit;
+    text-indent: 0;
+    border-spacing: 0;
+    clear: both;
+    margin: 0 0 1rem;
+    width: 100%;
+}
+pre, table td, table th {
+    border: 1px solid var(--gradient-base-background-2);
+}
+table td, table th {
+    padding: 10px;
+    text-align: center;
+    word-break: break-word;
+}
+.compare table td{padding: 5px;}
+.compare table td span{font-size: 1.6rem; letter-spacing: normal; line-height: calc(1 + .5 / var(--font-body-scale)); color: rgb(var(--color-foreground)); font-weight: 700;}
+/* dtx-wishlist-grid table{
+    border: 1px solid var(--gradient-base-background-2);
+} */
+dtx-wishlist-grid table thead>tr {
+    background-color: var(--gradient-base-background-2);
+    border: 1px solid var(--gradient-base-background-2);
+}
+dtx-wishlist-grid table
+thead>tr th {
+    border-top: medium none;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-weight: 700;
+    color:var(--gradient-base-accent-2);
+}
+/* dtx-wishlist-grid table tbody>tr {
+    border-bottom: 1px solid var(--gradient-base-background-2);
+} */
+/* dtx-wishlist-grid table tbody>tr td.product-thumbnail {
+    width: 150px;
+} */
+dtx-wishlist-grid table tbody>tr td {
+    border: none;
+}
+dtx-wishlist-grid table tbody>tr td.product-thumbnail img {
+    border-radius:Calc(var(--buttons-radius) - 30px);
+}
+dtx-wishlist-grid a.remove-item.product-cart svg {
+    width: 20px;
+    height: 20px;
+/*     color: var(--color-icon); */
+}
+dtx-wishlist-grid table tbody>tr td a {
+    color: var(--gradient-base-accent-1);
+    font-weight:700;
+}
+dtx-wishlist-grid table tbody>tr td a:hover{color: var(--gradient-base-accent-2);}
+
+@media only screen and (max-width: 991px){
+dtx-wishlist-grid table thead {
+    display: none;
+}
+/* dtx-wishlist-grid table tbody>tr {
+    width: 50%;
+    display: inline-block;
+    float: left;
+}   */
+dtx-wishlist-grid table tbody>tr td, dtx-wishlist-grid table tbody>tr td.product-thumbnail {
+    width: 100%;
+    display: inline-block;
+} 
+}
+@media only screen and (max-width: 767px){
+dtx-wishlist-grid table thead {
+    display: none;
+}
+dtx-wishlist-grid table tbody>tr td, dtx-wishlist-grid table tbody>tr td.product-thumbnail {
+    width: 100%;
+    display: block;
+} 
+}
+
+@media only screen and (max-width: 576px){
+dtx-wishlist-grid table tbody>tr {
+    width: 100%;
+}  
+}
+@media only screen and (max-width: 1199px){
+   .page-width.wishlist, .page-width.compare{
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+   } 
+}
+table.dtx-table.dtx-grid-hide {
+    display: none;
+}
+.dtx-grid-empty.dtx-grid-hide {
+    display: none;
+}
+.dtx-grid-empty.dtx-grid-show{    
+  text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;}
+.dtx-grid-empty.dtx-grid-show img{ margin-bottom:30px;}
+.compare-wrapper .dtx-table tbody{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(275px,1fr));
+    gap: 30px;
+
+}
+.compare-wrapper .dtx-table tbody tr{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--color-base-accent-6);
+    border-radius: var(--card-corner-radius);
+    transition: all 300ms linear;
+}
+.compare-wrapper .dtx-table tbody tr:hover{
+  border: 1px solid var(--gradient-base-background-3);
+}
+.dtx-grid-empty a:hover{color: var(--gradient-base-accent-2);}
+
+.compare td.product-thumbnail {
+    padding-bottom: 0 !important;
+}
+.compare td.product-name {
+    padding-top: 0 !important;
+}
+.dtx-grid-empty h2{    margin-top: 0;}
+.dtx-grid-empty .button{padding:0;}

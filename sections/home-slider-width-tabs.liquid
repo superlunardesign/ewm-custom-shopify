@@ -1,0 +1,781 @@
+<script src="{{ 'slick.min.js' | asset_url }}" async></script>
+{{ 'slick.min.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign margin = section.settings.margin | split: ','
+  assign margin_top = margin[0]
+  assign margin_bottom = margin[1]
+  assign padding = section.settings.padding | split: ','
+  assign padding_top = padding[0]
+  assign padding_bottom = padding[1]
+
+  if section.settings.enable_overlay
+  assign section_overlay = 'dt-sc-overlay'
+  endif
+
+    if section.settings.show_background_image
+  assign lazyScript = "lazyload"
+  endif
+ %}
+<section class="dt-sc-section-wrapper  {{ lazyScript }} {{ section_overlay }} {% if section.settings.background_style == 'parallax' %} parallax-initiated{% endif %}" {% if section.settings.background_style == 'parallax' %} data-speed="2" data-style="parallax"{% endif %} style="{% render 'bg-color-image-padding' %} background-size: {{- section.settings.background_size -}}; {% if section.settings.background_style == 'fixed' %}background-attachment: fixed;{% endif %} background-repeat:{% if section.settings.background_size == 'repeat' %}repeat{% else %}no-repeat;{% endif %}" {% render 'bg_image' %}>
+  <div class="{% render 'container-settings' %}">
+    <div class="row {{ section.settings.custom_class_name }}">
+      {% render 'section-heading', class: section.id %}
+      <div class="dt-sc-slider-image wow {% if section.settings.animation_effect_section != 'none' %} {{ section.settings.animation_effect_section }} {% endif %} ">
+        <div id="sliderTabs-{{ section.id }}-ctrls"></div>
+        <div id="sliderTabs-{{ section.id }}-slider">
+          {% for block in section.blocks %}
+          <div class="top-data_block">
+            <div class="dt-sc-banner-content dt-sc-progress-content--{{ block.id }}">
+                {% if block.settings.show_image %}
+              {% if block.settings.image != blank %}
+                <img
+                  srcset="{%- if block.settings.image.width >= 165 -%}{{ block.settings.image | image_url: width: 165 }} 165w,{%- endif -%}
+                    {%- if block.settings.image.width >= 360 -%}{{ block.settings.image | image_url: width: 360 }} 360w,{%- endif -%}
+                    {%- if block.settings.image.width >= 535 -%}{{ block.settings.image | image_url: width: 535 }} 535w,{%- endif -%}
+                    {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+                    {%- if block.settings.image.width >= 1070 -%}{{ block.settings.image | image_url: width: 1070 }} 1070w,{%- endif -%}
+                    {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                    {{ block.settings.image | image_url: width: 1920 }} {{ block.settings.image.width }}w"
+                  src="{{ block.settings.image | image_url: width: 1500 }}"
+                  sizes="(min-width: {{ settings.container_width }}px) {{ settings.container_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
+                  alt="{{ block.settings.image.alt }}"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder_svg' }}
+              {% endif %}
+               {% endif %}
+              {% if block.settings.show_content %}
+                <div class="dt-sc-slider-content  content_position-{{ block.settings.content_position }}">
+                    <div class="dt-sc-align-{{ block.settings.text_alignment }}">
+                      {% if block.settings.sub_title != blank %}
+                      <h4>{{ block.settings.sub_title }}</h4>
+                      {% endif %}
+                      {% if block.settings.main_title != blank %}
+                      <h2>{{ block.settings.main_title }}</h2>
+                      {% endif %}
+                      {% if block.settings.text != blank %}
+                      <p>{{ block.settings.text }}</p>
+                      {% endif %}
+                      {% if block.settings.link != blank %}
+                      <a href="{{ block.settings.link }}" class="dt-sc-btn">{{ block.settings.link_text }}</a>
+                      {% endif %}
+                    </div>
+                  </div>
+                 {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div id="sliderTabs-{{ section.id }}-nav">
+          {% for block in section.blocks %}
+          <div class="dt-sc-progress-tab">
+            <div class="dt-sc-progress-wrapper">
+              <div class="dt-sc-progress-content dt-sc-progress-content--{{ block.id }}">
+                  {% if block.settings.show_content %}
+                {% if block.settings.tab != blank %}
+                <h4><p>{{ block.settings.tab }}</p><span class="dt-sc-on-progress"></span></h4>
+                {% endif %}
+                  {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- style -%}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-heading .dt-sc-main-heading { color: var(--DTColor_Heading); color:{{ section.settings.section_heading_color }}; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-heading .dt-sc-sub-heading { color: var(--DTColor_Heading); color:{{ section.settings.section_sub_heading_color }}; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-heading .dt-sc-heading-description { color: var(--DTColor_Body); color:{{ section.settings.section_description_color }}; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-heading .dt-sc-btn {
+      background: var(--DT_Button_BG_Color);
+        background:{{ section.settings.section_button_bg_color }};
+        color: var(--DT_Button_Text_Color);
+          color:{{ section.settings.section_button_text_color }};
+          }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-heading .dt-sc-btn:hover {
+      background: var(--DT_Button_BG_Hover_Color);
+        background:{{ section.settings.section_button_hover_bg_color }};
+        color: var(--DT_Button_Text_Hover_Color);
+          color:{{ section.settings.section_button_hover_text_color }}; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-overlay:before  {
+      color: var(--DTTertiaryColor);
+        color: {{ section.settings.background_color }};
+        background: currentcolor;
+        opacity: {{ section.settings.overlay_transparency }}; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .home-slider-with-tabs .dt-sc-banner-content { position: relative; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-slider-content { position: absolute; width: 100%; display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: center; left: 0; flex-direction: column; z-index: 1;  text-align: center;/*margin:80px;*/}
+
+/*   { max-width: 600px; padding: var(--DTGutter_Width); } */
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-slider-content > *,
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-slider-content > *:not(:only-child) { margin:0; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-slider-content > *:not(:last-child){ margin:0 0 15px 0; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-tab h4 p { color: var(--DTColor_Heading); color: {{ section.settings.slider_progress_title_color }}; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab h4 span.dt-sc-on-progress {
+      background: var(--DTTertiaryColor);
+        background: {{ section.settings.slider_progress_bar_color }}; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab h4 span.dt-sc-on-progress:before {
+      background: var(--DTPrimaryColor);
+        background: {{ section.settings.slider_progress_bar_bg_color }};
+        }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-banner-content h2,
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-banner-content h4 { margin: 0; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-banner-content h4 p {  margin-bottom: 0; padding: 0 10px; }
+    {% for block in section.blocks %}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} h2 { color: var(--DTColor_Heading); color: {{ block.settings.slider_heading_color }};
+      font-size: {{ block.settings.main_title_size }}px; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} h4 { color: var(--DTColor_Heading); color: {{ block.settings.slider_sub_heading_color }};
+      font-size: {{ block.settings.sub_title_size }}px;}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} p { color: var(--DTColor_Body); color: {{ block.settings.slider_description_color }};
+      font-size:{{ block.settings.text_size }}px; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .dt-sc-btn {
+      background-color: {{ block.settings.slider_button_bg_color }}; color: {{ block.settings.slider_button_text_color }}; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .dt-sc-btn:hover {
+      background-color: {{ block.settings.slider_button_hover_bg_color }}; color: {{ block.settings.slider_button_hover_text_color }}; }
+
+    #shopify-section-{{ section.id }}.home-slider-with-tabs  .dt-sc-progress-content--{{ block.id }} .dt-sc-slider-content div:before  {
+  content: "";
+  display: block;
+  position: absolute;
+  left:0;
+  width: 100%;
+  top: 0;
+  height: 100%; z-index: -1;
+  background: var(--DTTertiaryColor);
+  background: {{ block.settings.slider_overlay_color | color_modify: 'alpha', 0.75 }};
+
+  }
+   #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} img{width:100%;object-fit:cover;height:100%}
+   @media screen and (min-width: 1540px) {
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} img{ height: {{ section.settings.slider_height }}px; }
+      }
+    @media screen and (max-width: 1540px) {
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} img{ height: {{ section.settings.slider_height_lap }}px; }
+      }
+    @media screen and (max-width: 1199px) {
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} h2 { font-size: calc(.9 * {{ block.settings.main_title_size }}px); }
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} h4 { font-size: calc(.9 * {{ block.settings.sub_title_size }}px);}
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} img{ height: {{ section.settings.slider_height_tab }}px; }
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} p { font-size: calc(.9 * {{ block.settings.text_size }}px);}
+      }
+    @media screen and (max-width: 767px) {
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} h2 { font-size: calc(.65 * {{ block.settings.main_title_size }}px); }
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} h4 { font-size: calc(.65 * {{ block.settings.sub_title_size }}px);}
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} p { font-size: calc(.65 * {{ block.settings.text_size }}px);}
+
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} img{ height: {{ section.settings.slider_height_mobile }}px; }
+
+      }
+
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .content_position-top-left { align-items: flex-start;top:0;}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .content_position-top-right {align-items: flex-end;top:0; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .content_position-top-center {align-items:center ;top:0;}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .content_position-bottom-left { align-items: flex-start;bottom:0;}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .content_position-bottom-right {align-items: flex-end;bottom:0;}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .content_position-bottom-center {align-items:center;bottom:0;}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .content_position-center { left: 0; right: 0; margin: auto; top: 0; bottom: 0; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .content_position-center-left { align-items: flex-start;top: 0;bottom: 0;}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .content_position-center-right {align-items: flex-end;top: 0;bottom: 0; }
+
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .dt-sc-align-left { justify-content:left;align-items:flex-start;    text-align: left; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .dt-sc-align-right { justify-content:right;align-items:flex-end;    text-align: right; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .dt-sc-align-center { justify-content:center;align-items:center;    text-align: center; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .dt-sc-slider-content  div{display:flex;flex-direction:column;padding:30px;position:relative;margin:80px;}
+    {% endfor %}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-slider-image { width: 100%; position: relative; float: left; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 1; cursor: pointer;
+      font-size: 30px; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .prev-arrow { left: 30px; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .next-arrow { right: 30px; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab { width:auto !important; display:inline-block; float: none;
+      transition: var(--DTBaseTransition); }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab h4 { cursor: pointer; padding: 0 14px;
+      width: auto; height: auto; display: block; margin: 0; text-transform: initial; font-weight: 600; line-height: 1.2; background: 0 0 !important; opacity: .5;
+      font-size: 16px; transition: var(--DTBaseTransition); margin-bottom: 20px; min-width: 100px;
+        }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav { position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .slick-track { transform: none !important; text-align: center; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab .slick-current h4,
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab:hover h4 { opacity: 1; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab h4 span.dt-sc-on-progress { width: 100%; height: 2px; display: block; margin: 8px 0 0; transition: var(--DTBaseTransition); position: relative; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab h4 span.dt-sc-on-progress:before { content: ''; width: 100%; height: 100%; display: block; transform-origin: left; transform: scaleX(0); }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab.slick-current h4 { opacity: 1; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab.slick-current h4 span.dt-sc-on-progress:before {
+      animation: 2.35s linear forwards running progress-horizontal;
+    }
+    {% if section.settings.disable_arrows != blank %}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls { display: none; }
+    {% endif %}
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls { height: 100%; position: absolute; width: 100%; top: 0; left: 0; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow { margin: 0; width: 40px; height: 40px; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow.prev-arrow:after,
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow.next-arrow:after { content: "" !important; display: block; background: none;  width: 12px; height: 12px; transform: rotate(45deg); position: absolute; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow.prev-arrow:after { right: 10px; border-left: 1px solid; border-bottom: 1px solid; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow.next-arrow:after { left: 10px; border-right: 1px solid; border-top: 1px solid; }
+    @keyframes progress-horizontal { from { transform:scaleX(0) } to { transform:scaleX(1) } }
+    @media only screen and (min-width: 1200px) {
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-section-wrapper { margin-top:{{ margin_top }}px; margin-bottom:{{ margin_bottom }}px;padding-top:{{ padding_top }}px; padding-bottom:{{ padding_bottom }}px; }
+    }
+    @media only screen and (max-width: 1199px) {
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-section-wrapper { margin-top:{{ margin_top | divided_by: 2 }}px; margin-bottom:{{ margin_bottom | divided_by: 2 }}px;padding-top:{{ padding_top | divided_by: 2 }}px; padding-bottom:{{ padding_bottom | divided_by: 2 }}px;}
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-slider-content > *:not(:last-child){ margin:0 0 8px 0; }
+    }
+    @media screen and (max-width: 767px) {
+      #shopify-section-{{ section.id }}.home-slider-with-tabs h4 p { display: none; }
+      #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab h4 { min-width: 75px; }
+     {% for block in section.blocks %}
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .dt-sc-slider-content  div{margin:30px;}
+     {% endfor %}
+    }
+    @media screen and (max-width: 576px) {
+
+      #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-slider-content > *:not(:last-child){ margin:0 0 0 0; }
+      #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-nav .dt-sc-progress-tab h4 { min-width: 60px; }
+      {% for block in section.blocks %}
+       #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .dt-sc-slider-content{align-items: center!important;justify-content: center!important; top: 0;bottom: 0;}
+       #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .dt-sc-slider-content  div{margin:10px;text-align:center!important}
+       #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-progress-content--{{ block.id }} .dt-sc-slider-content div> *{margin:10px auto 0;text-align:center!important}
+
+        {% endfor %}
+          }
+  {%- endstyle -%}
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#sliderTabs-{{ section.id }}-slider').not('.slick-initialized').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      appendArrows: '#sliderTabs-{{ section.id }}-ctrls',
+      prevArrow: '<a class="prev-arrow dt-sc-btn"></a>',
+      nextArrow: '<a class="next-arrow dt-sc-btn"></a>',
+      fade: true,
+      asNavFor: '#sliderTabs-{{ section.id }}-nav',
+      autoplay:true,
+      autoplaySpeed:2500,
+      adaptiveHeight: true
+      });
+
+    $('#sliderTabs-{{ section.id }}-nav').not('.slick-initialized').slick({
+      slidesToShow: {{ section.blocks.size }},
+      slidesToShow: 6,
+      slidesToScroll: 1,
+      asNavFor: '#sliderTabs-{{ section.id }}-slider',
+      dots: false,
+      focusOnSelect: true,
+      autoplay:true,
+      autoplaySpeed:2500,
+      adaptiveHeight: true,
+      responsive: [
+      {
+      breakpoint: 1024,
+      settings: {
+      slidesToShow: {{ section.blocks.size }},
+      slidesToScroll: 1,
+      infinite: true,
+      dots: false
+      }
+      }
+      ]
+      });
+  });
+</script>
+
+{% schema %}
+{
+"name": "Slider with tabs",
+"class": "index-section home-slider-with-tabs",
+"max_blocks": 4,
+"settings": [
+{
+"type": "checkbox",
+"id": "full",
+"label": "Show Full width"
+},
+{
+"type": "checkbox",
+"id": "spacing_both_ends",
+"label": "Enable Right & Left Spacing (Works only on Fullwidth)",
+"default": false
+},
+{
+"type": "text",
+"id": "padding",
+"label": "Style value (Padding)",
+"default":"0,0",
+"info":"Top(px),Bottom(px)"
+},
+{
+"type": "text",
+"id": "margin",
+"label": "Style value (Margin)",
+"default":"0,0",
+"info":"Top(px),Bottom(px)"
+},
+{
+"type": "checkbox",
+"id": "show_background_image",
+"label": "Enable Background image"
+},
+{
+"type": "image_picker",
+"id": "background_image",
+"label": "Background image",
+"info": "Size: 1920x1280"
+},
+{
+"type": "select",
+"id": "background_style",
+"label": "Background Style",
+"default": "none",
+"options": [
+{
+"value": "fixed",
+"label": "Fixed"
+},
+{
+"value": "parallax",
+"label": "Parallax"
+},
+{
+"value": "none",
+"label": "None"
+}
+]
+},
+{
+"type": "select",
+"id": "background_size",
+"label": "Background Size",
+"info": "This will not apply for parallax",
+"default": "auto",
+"options": [
+{
+"value": "auto",
+"label": "Auto"
+},
+{
+"value": "cover",
+"label": "Cover"
+},
+{
+"value": "contain",
+"label": "Contain"
+},
+{
+"value": "repeat",
+"label": "Repeat"
+}
+]
+},
+{
+"type": "checkbox",
+"id": "enable_overlay",
+"label": "Enable Background Color (Used as Background Image Overlay Color too)"
+},
+{
+"type": "color",
+"id": "background_color",
+"label":"Background color"
+},
+{
+"type": "text",
+"id": "overlay_transparency",
+"label": "Overlay Transparency (0.01 to 1)",
+"default": "0.5"
+},
+{
+"type": "text",
+"id": "section_heading",
+"label": "Main Heading",
+"default": "Home slider with tabs"
+},
+{
+"type": "text",
+"id": "section_sub_heading",
+"label": "Sub Heading",
+"default": "Sub Heading"
+},
+{
+"type": "text",
+"id": "section_description",
+"label": "Description",
+"default": "Use this text to share the information which you like!."
+},
+{
+"type": "text",
+"id": "section_button_text",
+"label": "Link text"
+},
+{
+"type": "url",
+"id": "section_button_link",
+"label": "Link URL"
+},
+{
+"type": "header",
+"content": "Section Color settings"
+},
+{
+"type": "color",
+"id": "section_heading_color",
+"label": "Heading color"
+},
+{
+"type": "color",
+"id": "section_sub_heading_color",
+"label": "Sub heading color"
+},
+{
+"type": "color",
+"id": "section_description_color",
+"label": "Description color"
+},
+{
+"type": "color",
+"id": "section_button_bg_color",
+"label": "Button bg color"
+},
+{
+"type": "color",
+"id": "section_button_text_color",
+"label": "Button text color"
+},
+{
+"type": "color",
+"id": "section_button_hover_bg_color",
+"label": "Button hover bg color"
+},
+{
+"type": "color",
+"id": "section_button_hover_text_color",
+"label": "Button hover text color"
+},
+{
+"type": "select",
+"id": "heading_position",
+"label": "Heading Position",
+"options": [
+{
+"value": "text-center",
+"label": "Center"
+},
+{
+"value": "text-start",
+"label": "Left"
+},
+{
+"value": "text-end",
+"label": "Right"
+}
+]
+},
+{
+"type": "select",
+"id": "animation_effect_section",
+"label": "Animation Effect",
+"options": [
+{
+"value": "none",
+"label": "none"
+},
+{
+"value": "fadeIn",
+"label": "FadeIn"
+},
+{
+"value": "fadeInDown",
+"label": "Fade In Down"
+},
+{
+"value": "fadeInUp",
+"label": "Fade In Up"
+},
+{
+"value": "fadeInLeft",
+"label": "Fade In Left"
+},
+{
+"value": "fadeInRight",
+"label": "Fade In Right"
+},
+{
+"value": "zoomIn",
+"label": "Zoom In"
+},
+{
+"value": "zoomInDown",
+"label": "Zoom In Down"
+},
+{
+"value": "zoomInLeft",
+"label": "Zoom In Left"
+},
+{
+"value": "zoomInRight",
+"label": "Zoom In Right"
+},
+{
+"value": "zoomInUp",
+"label": "zoom In Up"
+},
+{
+"value": "slideInDown",
+"label": "Slide In Down"
+},
+{
+"value": "slideInLeft",
+"label": "Slide In Left"
+},
+{
+"value": "slideInRight",
+"label": "Slide In Right"
+},
+{
+"value": "slideInUp",
+"label": "Slide In Up"
+}
+],
+"default": "none"
+},
+{
+"type": "header",
+"content": "Slider Color settings"
+},
+{
+"type": "color",
+"id": "slider_progress_title_color",
+"label": "Slider Progress Title color"
+},
+{
+"type": "color",
+"id": "slider_progress_bar_color",
+"label": "Slider Progress Bar color"
+},
+{
+"type": "color",
+"id": "slider_progress_bar_bg_color",
+"label": "Slider Progress Bar Bg color"
+},
+{
+"type" : "checkbox",
+"id" : "disable_arrows",
+"label" : "Disable Navigation Arrows",
+"default": true
+},
+{
+"type": "header",
+"content": "Slide Image Height"
+},
+{
+"type": "range",
+"id": "slider_height",
+"label": "Desktop",
+"min": 400,
+"max": 1200,
+"step": 10,
+"default": 850,
+"unit": "px"
+},
+{
+"type": "range",
+"id": "slider_height_lap",
+"label": "Laptop",
+"min": 400,
+"max": 1200,
+"step": 10,
+"default": 700,
+"unit": "px"
+},
+{
+"type": "range",
+"id": "slider_height_tab",
+"label": "Tablet",
+"min": 400,
+"max": 1200,
+"step": 10,
+"default": 600,
+"unit": "px"
+},
+{
+"type": "range",
+"id": "slider_height_mobile",
+"label": "Mobile",
+"min": 300,
+"max": 1200,
+"step": 10,
+"default": 350,
+"unit": "px"
+},
+{
+"type": "header",
+"content": "Custom class"
+},
+{
+"type": "text",
+"id": "custom_class_name",
+"label": "Add your custom class name here"
+}
+],
+"blocks": [
+{
+"type": "Image",
+"name":"Slider Tab",
+"settings": [
+{
+"type": "image_picker",
+"id": "image",
+"label": "Desktop Slider Image"
+},
+{
+"type": "image_picker",
+"id": "mobile_image",
+"label": "Mobile Slider Image",
+"info": "768x900"
+},
+{
+"type": "checkbox",
+"id": "show_image",
+"label": "Show image",
+"default": false
+},
+{
+"type" : "checkbox",
+"id" : "show_content",
+"label" : "Show content",
+"default": false
+},
+{
+"type": "select",
+"id": "content_position",
+"label": "Content Position",
+"default": "center",
+"options": [
+{
+"value": "top-left",
+"label": "Top Left"
+},
+{
+"value": "top-center",
+"label": "Top Center"
+},
+{
+"value": "top-right",
+"label": "Top Right"
+},
+{
+"value": "center-left",
+"label": "Center left"
+},
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "center-right",
+"label": "Center right"
+},
+{
+"value": "bottom-left",
+"label": "Bottom left"
+},
+{
+"value": "bottom-center",
+"label": "Bottom center"
+},
+{
+"value": "bottom-right",
+"label": "Bottom right"
+}
+]
+},
+{
+"type": "select",
+"id": "text_alignment",
+"label": "Test Alignment",
+"default": "left",
+"options": [
+{
+"value": "left",
+"label": "Left"
+},
+{
+"value": "right",
+"label": "Right"
+},
+{
+"value": "center",
+"label": "Center"
+}
+]
+},
+{
+"type": "text",
+"id": "tab",
+"label": "Tab",
+"default": "Title"
+},
+{
+"type": "text",
+"id": "main_title",
+"label": "Main Heading",
+"default": "Main Heading"
+},
+{
+"type": "text",
+"id": "main_title_size",
+"label": "Main Heading Font Size",
+"default": "50"
+},
+{
+"type": "text",
+"id": "sub_title",
+"label": "Sub Heading",
+"default": "Sub Heading"
+},
+{
+"type": "text",
+"id": "sub_title_size",
+"label": "Sub Heading Font Size",
+"default": "30"
+},
+{
+"type": "textarea",
+"id": "text",
+"label": "Description",
+"default": "Description"
+},
+{
+"type": "text",
+"id": "text_size",
+"label": "Description Font Size",
+"default": "16"
+},
+{
+"type": "text",
+"id": "link_text",
+"label": "Link Text",
+"default": "Shop Now"
+},
+{
+"type": "url",
+"id": "link",
+"label": "Link"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Slider with tabs",
+"category": "Slider"
+}
+]
+}
+{% endschema %}

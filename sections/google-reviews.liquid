@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Slider with Swiper</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+  
+        #card-container {
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+          
+        }
+      .swiper-wrapper {
+    min-width: 100%; /* Set a minimum width to prevent excessive compression */
+    box-sizing: content-box; /* Ensure the width includes padding and border, but not margin */
+}
+
+        .swiper-container {
+            width: calc(100% - 20px);
+            position: relative;
+            margin: 0 auto;
+padding: 10px 0px;
+        }
+
+@keyframes upAndDown {
+  0%, 100% {
+    transform: translateY(0); /* Original position */
+  }
+  25% {
+    transform: translateY(-4px);
+  }
+ 50% {
+    transform: translateY(0px);
+  }
+ 75% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes downAndUp {
+  0%, 100% {
+    transform: translateY(0); /* Original position */
+  }
+  25% {
+    transform: translateY(4px);
+  }
+ 50% {
+    transform: translateY(0px);
+  }
+ 75% {
+    transform: translateY(-4px);
+  }
+}
+
+.swiper-slide:nth-child(odd) {
+  animation: upAndDown 4s infinite linear;
+}
+
+.swiper-slide:nth-child(even) {
+  animation: downAndUp 4s infinite linear;
+}
+
+
+.swiper-slide {
+  max-width: 280px;
+  height: 230px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid rgb(239, 239, 243);
+  border-radius: 5px;
+  padding: 11px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+
+
+        .rating {
+            font-size: 32px;
+            color: #f7d131;
+            margin-top: 10px;
+line-height: 20px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+            justify-content: space-between;
+          line-height: 22px;
+        }
+.name{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+      
+
+        .swiper-button-prev, .swiper-button-next {
+            color: white;
+            font-size: 15px!important;
+            background-color: #333;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 0 10px;
+          top: 42%!important;
+        }
+
+        @media (max-width: 767px) {
+            .swiper-button-prev, .swiper-button-next {
+                display: none;
+            }
+        }
+
+        .swiper-pagination {
+            position: relative;
+            top: auto;
+            left: auto;
+            right: auto;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+.swiper-pagination-bullet {
+    width: 2.5rem;
+    height: 0.5rem;
+    background-color: #0d437d;
+    margin: 0 5px;
+    border-radius: 0px;
+    cursor: pointer;
+    margin: 0 var(--swiper-pagination-bullet-horizontal-gap,0px)!important;
+}
+
+        .swiper-pagination-bullet-active {
+            width: 3rem;
+background-image: linear-gradient(45deg, #1cbcc3, #4abf8f 80%);
+            border-radius: 4px;
+        }
+      .swiper-button-next:after,.swiper-button-prev:after {
+    font-family: swiper-icons;
+    font-size: 15px;
+    text-transform: none!important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1
+}
+
+    </style>
+
+
+
+
+
+
+<div class="container">
+    <div id="card-container">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="rating">★★★★★</div>
+                    <div class="description">"I much prefer them over liquid detergent because they are easy to store, clean to use and I love that you can rip the sheets if you want to change the amount you are using."</div>
+                  <div class = "name"> <font style = "color: #13152f!important; font-weight: bold;">Davina K</font> <img src="https://cdn3.emoji.gg/emojis/9796-verified.png" width="20px" height="20px" alt="Verified"> <font style = "font-size: 12px; color: #13152f;" >Verified</font></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="rating">★★★★★</div>
+                    <div class="description">"I'm impressed so far with the cleaning power, as well as the convenience. Of course limited packaging waste is a big win, too!"</div>
+                   <div class = "name"> <font style = "color: #13152f!important; font-weight: bold;">Aliza</font> <img src="https://cdn3.emoji.gg/emojis/9796-verified.png" width="20px" height="20px" alt="Verified"> <font style = "font-size: 13px; color: #13152f;" >Verified</font></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="rating">★★★★★</div>
+                    <div class="description">Very simple detergent, does the job just as good, small pacakging, great product"</div>
+                    <div class = "name""> <font style = "color: #13152f!important; font-weight: bold;">Jayna H</font> <img src="https://cdn3.emoji.gg/emojis/9796-verified.png" width="20px" height="20px" alt="Verified"> <font style = "font-size: 13px; color: #13152f;" >Verified</font></div>
+                </div>
+<div class="swiper-slide">
+    <div class="rating">
+        <span style="color: #f7d131;">★</span><span style="color: #f7d131;">★</span><span style="color: #f7d131;">★</span><span style="color: #f7d131;">★</span><span style="color: #DDDDDD;">★</span>
+    </div>
+    <div class="description" style = "margin-top:10px">
+  "Yes very happy with the product. I bought it to use when travelling in our caravan. Light and convenient. Tested it on clothes at home and seems to work very well."
+  </div>
+  <div class = "name"> <font style = "color: #13152f!important; font-weight: bold;">Ally</font> <img src="https://cdn3.emoji.gg/emojis/9796-verified.png" width="20px" height="20px" alt="Verified"> <font style = "font-size: 13px; color: #13152f;" >Verified</font></div>
+</div>
+              
+                <div class="swiper-slide">
+                    <div class="rating">★★★★★</div>
+                    <div class="description">"
+  i used to get rashes before using these sheets, well not anymore, thank you so much!
+  "</div>
+                  <div class = "name" > <font style = "color: #13152f!important; font-weight: bold;">Mehul G</font> <img src="https://cdn3.emoji.gg/emojis/9796-verified.png" width="20px" height="20px" alt="Verified"> <font style = "font-size: 13px; color: #13152f;" >Verified</font></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="rating">★★★★★</div>
+                    <div class="description">"
+  Easy to order, easy to use and great washing results !
+  "</div>
+                  <div class = "name"> <font style = "color: #13152f!important; font-weight: bold;">Noah D</font> <img src="https://cdn3.emoji.gg/emojis/9796-verified.png" width="20px" height="20px" alt="Verified"> <font style = "font-size: 13px; color: #13152f;" >Verified</font></div>
+                </div>
+<div class="swiper-slide">
+    <div class="rating">
+        <span style="color: #f7d131;">★</span><span style="color: #f7d131;">★</span><span style="color: #f7d131;">★</span><span style="color: #f7d131;">★</span><span style="background-image: linear-gradient(to right, #f7d131 50%, #dddddd 50%);
+    -webkit-background-clip: text !important;
+    -moz-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;">★</span>
+    </div>
+    <div class="description">It has completely stopped my skin irritation, i never knew how harmful my liquid detergent was</div>
+  <div class = "name"> <font style = "color: #13152f!important; font-weight: bold;">Ada T</font> <img src="https://cdn3.emoji.gg/emojis/9796-verified.png" width="20px" height="20px" alt="Verified"> <font style = "font-size: 13px; color: #13152f;" >Verified</font></div>
+</div>
+
+<div class="swiper-slide">
+    <div class="rating">
+        <span style="color: #f7d131;">★</span><span style="color: #f7d131;">★</span><span style="color: #f7d131;">★</span><span style="color: #f7d131;">★</span><span style="color: #DDDDDD;">★</span>
+    </div>
+    <div class="description">My shelves are now free for my other cleaning supplies, one neat tidy cupboard for all my supplies thanks to your compact detergent</div>
+  <div class = "name"> <font style = "color: #13152f!important; font-weight: bold;">Martha</font> <img src="https://cdn3.emoji.gg/emojis/9796-verified.png" width="20px" height="20px" alt="Verified"> <font style = "font-size: 13px; color: #13152f;" >Verified</font></div>
+</div>
+            </div> 
+            <!-- Add Navigation Arrows -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</div>
+
+  
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 'auto',
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 10000, // Autoplay every 10 seconds
+                    disableOnInteraction: false, // Allow manual navigation without stopping autoplay
+                },
+                breakpoints: {
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                    1300: {
+                        slidesPerView: 4,
+                    },
+                },
+            });
+        });
+    </script>
+
+
+</body>
+</html>

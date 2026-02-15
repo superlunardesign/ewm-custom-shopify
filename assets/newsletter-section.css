@@ -1,0 +1,70 @@
+.newsletter__wrapper {
+  padding-right: calc(4rem / var(--font-body-scale));
+  padding-left: calc(4rem / var(--font-body-scale));
+}
+
+/* @media screen and (min-width: 750px) {
+  .newsletter__wrapper {
+    padding-right: 9rem;
+    padding-left: 9rem;
+  }
+} */
+
+.newsletter__wrapper > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.newsletter__wrapper > * + * {
+  margin-top: 2rem;
+}
+
+.newsletter__wrapper > * + .newsletter-form {
+  margin-top: 3rem;
+}
+
+.newsletter__subheading {
+  max-width: 70rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newsletter__wrapper .newsletter-form__field-wrapper {
+  max-width: 75rem;
+}
+
+.newsletter-form__field-wrapper .newsletter-form__message {
+  margin-top: 1.5rem;
+}
+
+.newsletter__button {
+  margin-top: 3rem;
+  width: fit-content;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter__button {
+    flex-shrink: 0;
+    margin: 0 0 0 1rem;
+  }
+}
+.newsletter .newletter_wrapper-block .field__input {
+    background: var(--gradient-base-background-1); margin: 0;
+    border: 1px solid var(--gradient-base-accent-2); transition: all 300ms linear;
+}
+
+/*custom css file*/
+.newsletter .newsletter__wrapper .newsletter__wrapper-left h2.h1{ font-size: 2.8rem; margin: 0 0 10px; font-weight: 700; letter-spacing: normal;text-transform: math-auto; line-height: normal;}
+.newsletter .newsletter__wrapper .newsletter__wrapper-left .newsletter__subheading.rte p{font-size: 1.6rem; font-weight: 400; letter-spacing: normal; color: var(--color-base-accent-4);line-height: 20px;}
+.newsletter .newsletter__wrapper .newsletter__wrapper-right{margin-top: 50px;}
+.newsletter .newletter_wrapper-block .field__input, .newsletter .newsletter-form__field-wrapper .newsletter-form__button{height: 5rem;}
+.newsletter .newsletter__wrapper .field .newsletter-form__button.field__button{font-size: 1.6rem;font-weight: 400;overflow: visible;background: var(--gradient-base-accent-2);width: auto; padding: 0 25px; margin: 0;transition: all 300ms linear; line-height: 20px; color: var(--gradient-base-accent-1); text-transform: capitalize; letter-spacing: normal;}
+.newsletter .newsletter__wrapper .field .newsletter-form__button.field__button:hover{background: var(--gradient-base-background-3);}
+.newsletter .newletter_wrapper-block .field__input:focus{border: 1px solid var(--gradient-base-background-3);}
+.newsletter .newsletter__wrapper .field .newsletter-form__button .button-icon{margin: 0 10px;}
+
+@media screen and (max-width: 480px) {
+  .newsletter .newsletter__wrapper .newsletter__wrapper-right {
+    margin-top: 15px;
+}
+}

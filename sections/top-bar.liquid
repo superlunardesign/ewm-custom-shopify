@@ -1,0 +1,332 @@
+{% unless section.settings.disable_topbar %}
+      <section class="dt-sc-header-top-bar  {% if section.settings.disable_topbar_mobile %} hide-mobile {% endif %} color-{{ section.settings.top_bar_color_scheme }} gradient">
+        <div class="{% if section.settings.page_full_width %} page-full-width {% else %} page-width {% endif %} {% if section.settings.page_full_width_spacing %} page-full-width_spacing {% endif %}">  
+          <div class="row">
+            <div class="dt-sc-flex-space-between">
+              {% if section.settings.header_mail != empty or section.settings.header_phone != empty   %}
+              <ul class="dt-sc-list-inline header-contact">
+                {% if section.settings.header_mail != empty %}
+                <li><a href="mailto:{{ section.settings.header_mail }}" class="link link--text">{%- render 'icon-mail' -%}<span>{{ section.settings.header_mail }}</span></a>
+                  {% endif %}
+                  {% if section.settings.header_phone != empty %}
+                <li><a href="tel:{{ section.settings.header_phone }}" class="link link--text">{%- render 'icon-phone' -%} <span>{{ section.settings.header_phone }}</span></a> </li>
+                {% endif %}
+              </ul>
+              {% endif %}
+              {%- if section.settings.text  != blank -%}
+              <ul class="top-bar-content">
+               <li> <p class="top-bar-text">{{ section.settings.text }}</p> </li> 
+              {%- if section.settings.link  != blank -%}  
+               <li> <a class="top-bar-link link link--text" href="{{section.settings.link}}">{{ section.settings.link_text }}</a></li>
+              {%- endif -%} 
+              </ul> 
+              {%- endif -%} 
+              {%- if section.settings.show_social -%}
+                <ul class="topbar_list-social list-unstyled list-social" role="list">
+                  {%- if settings.social_twitter_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_twitter_link }}" class="link list-social__link" >
+                      {%- render 'icon-twitter' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_facebook_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_facebook_link }}" class="link list-social__link" >
+                      {%- render 'icon-facebook' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_pinterest_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_pinterest_link }}" class="link list-social__link" >
+                      {%- render 'icon-pinterest' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_instagram_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_instagram_link }}" class="link list-social__link" >
+                      {%- render 'icon-instagram' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_tiktok_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_tiktok_link }}" class="link list-social__link" >
+                      {%- render 'icon-tiktok' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_tumblr_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_tumblr_link }}" class="link list-social__link" >
+                      {%- render 'icon-tumblr' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_snapchat_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_snapchat_link }}" class="link list-social__link" >
+                      {%- render 'icon-snapchat' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_youtube_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_youtube_link }}" class="link list-social__link" >
+                      {%- render 'icon-youtube' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                  {%- if settings.social_vimeo_link != blank -%}
+                  <li class="list-social__item">
+                    <a href="{{ settings.social_vimeo_link }}" class="link list-social__link" >
+                      {%- render 'icon-vimeo' -%}
+                      <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+                    </a>
+                  </li>
+                  {%- endif -%}
+                </ul>
+                {%- endif -%}
+                 {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <noscript>
+            {%- form 'localization', id: 'HeaderCountryFormNoScript', class: 'localization-form' -%}
+              <div class="localization-form__select">
+                <h2 class="visually-hidden" id="FooterCountryLabelNoScript">{{ 'localization.country_label' | t }}</h2>
+                <select class="localization-selector link" name="country_code" aria-labelledby="FooterCountryLabelNoScript">
+                  {%- for country in localization.available_countries -%}
+                    <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                      {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                    </option>
+                  {%- endfor -%}
+                </select>
+                {% render 'icon-caret' %}
+              </div>
+              <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
+            {%- endform -%}
+          </noscript>
+          <localization-form>
+            {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
+              <div class="no-js-hidden">
+                <h2 class="caption-large text-body visually-hidden" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                <div class="disclosure">
+                  <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterCountryList" aria-describedby="FooterCountryLabel">
+                    {% assign nameFlagUp = localization.country.iso_code | downcase %}
+                    {{ localization.country.iso_code }} <span class="flag-icon flag-icon-{{ nameFlagUp }}"></span>
+                    {% render 'icon-caret' %}
+                  </button>
+                  <div class="disclosure__list-wrapper" hidden>
+                    <ul id="FooterCountryList" role="list" class="disclosure__list list-unstyled">
+                      {%- for country in localization.available_countries -%}
+                        {% assign nameFlag = country.iso_code | downcase %}
+
+                        <li class="disclosure__item" tabindex="-1">
+                          <a class="link link--text disclosure__link caption-large{% if country.iso_code == localization.country.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
+                            {{ country.iso_code }} <span class="localization-form__currency flag-icon flag-icon-{{ nameFlag }}"></span>
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                </div>
+                <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <noscript>
+            {%- form 'localization', id: 'HeaderLanguageFormNoScript', class: 'localization-form' -%}
+              <div class="localization-form__select">
+                <h2 class="visually-hidden" id="FooterLanguageLabelNoScript">{{ 'localization.language_label' | t }}</h2>
+                <select class="localization-selector link" name="locale_code" aria-labelledby="FooterLanguageLabelNoScript">
+                  {%- for language in localization.available_languages -%}
+                    <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                      {{ language.endonym_name | capitalize }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+                {% render 'icon-caret' %}
+              </div>
+              <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
+            {%- endform -%}
+          </noscript>
+
+          <localization-form>
+            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+              <div class="no-js-hidden">
+                <h2 class="caption-large text-body" id="FooterLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                <div class="disclosure">
+                  <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterLanguageList" aria-describedby="FooterLanguageLabel">
+                    {{ localization.language.endonym_name | capitalize }}
+                    {% render 'icon-caret' %}
+                  </button>
+                  <div class="disclosure__list-wrapper" hidden>
+                    <ul id="FooterLanguageList" role="list" class="disclosure__list list-unstyled">
+                      {%- for language in localization.available_languages -%}
+                        <li class="disclosure__item" tabindex="-1">
+                          <a class="link link--text disclosure__link caption-large{% if language.iso_code == localization.language.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#" hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %} data-value="{{ language.iso_code }}">
+                            {{ language.endonym_name | capitalize }}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                </div>
+                <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+            </div>
+        </div>
+    </div>
+   </section>
+   {% endunless %}
+
+{%- style -%}
+  .dt-sc-header-top-bar{padding-top:5px;padding-bottom:5px;}
+  .dt-sc-header-top-bar  svg{width:1.6rem;height:1.6rem;margin-right: 5px;}
+  .dt-sc-header-top-bar ul{list-style:none;margin:0;padding:0; display:flex;} 
+  .dt-sc-header-top-bar a{text-decoration:none;display: flex;align-items: center;}
+  .dt-sc-header-top-bar .dt-sc-flex-space-between{display: flex;justify-content: space-between;align-items:center;flex-wrap: wrap;}
+  .dt-sc-header-top-bar .header-contact,
+  .dt-sc-header-top-bar .top-bar-content{display: flex;justify-content: space-between;align-items:center;} 
+  .dt-sc-header-top-bar .header-contact li:not(:last-child){margin-right:20px}
+  .dt-sc-header-top-bar .top-bar-content a.top-bar-link.link {text-decoration: underline;}
+  .dt-sc-header-top-bar .top-bar-content .top-bar-text{margin:0;}
+  .dt-sc-header-top-bar .list-social__link{padding:0 0.6rem;}
+  .dt-sc-header-top-bar .disclosure__link{color:var(--gradient-base-accent-1);}
+  .dt-sc-header-top-bar .disclosure .localization-form__select{padding-top: 0;margin: 0!important; padding-bottom: 0;}
+  .dt-sc-header-top-bar .localization-form{padding:0!important;margin:0!important;}
+ @media screen and (max-width: 749px) {
+  {% if section.settings.disable_topbar_mobile %}
+    .dt-sc-header-top-bar{display:none;}
+  {% endif %}
+ }
+  {%- endstyle -%}
+   
+{% schema %}
+ {
+  "name": "t:sections.top-bar.name",
+  "settings":[
+     {
+      "type":"checkbox",
+      "id":"page_full_width",
+       "default": false,
+      "label": "t:sections.all.page_full_width.label"
+    },
+    {
+      "type":"checkbox",
+      "id":"page_full_width_spacing",
+       "default": false,
+      "label": "t:sections.all.page_full_width_spacing.label"
+    }, 
+    {
+      "type": "select",
+      "id": "top_bar_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+  {
+  "type": "checkbox",
+  "id": "disable_topbar",
+  "label": "t:sections.top-bar.settings.disable_topbar.label",
+  "default": false
+  },
+  {
+  "type": "checkbox",
+  "id": "disable_topbar_mobile",
+  "label": "t:sections.top-bar.settings.disable_topbar_mobile.label",
+  "default": false
+  },
+  {
+  "type": "text",
+  "id": "header_mail",
+  "label": "t:sections.top-bar.settings.header_mail.label",
+  "default": "sample@somedomain.com"
+  },
+  {
+  "type": "text",
+  "id": "header_phone",
+  "label": "t:sections.top-bar.settings.header_phone.label",
+  "default": "9876543210"
+  },
+  {
+  "type": "text",
+  "id": "text",
+  "label": "t:sections.top-bar.settings.text.label"
+  },  
+  {
+  "type": "text",
+  "id": "link_text",
+  "label": "t:sections.top-bar.settings.link_text.label"
+  },  
+  {
+  "type": "url",
+  "id": "link",
+  "label": "t:sections.top-bar.settings.link.label"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_social",
+    "default": false,
+    "label": "t:sections.top-bar.settings.show_social.label"
+  },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__3.content",
+      "info": "t:sections.top-bar.settings.header__4.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.top-bar.settings.enable_country_selector.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__5.content",
+      "info": "t:sections.top-bar.settings.header__6.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.top-bar.settings.enable_language_selector.label"
+    }   
+ ] 
+ }
+{% endschema %}

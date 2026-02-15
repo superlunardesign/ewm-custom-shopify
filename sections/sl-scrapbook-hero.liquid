@@ -1,0 +1,631 @@
+{% comment %}
+  Responsive Scrapbook Style Hero by SL Co.
+  Asymmetric grid layout with decorative corner images and centered content
+{% endcomment %}
+
+<style>
+#shopify-section-{{ section.id }}{
+background-color: {{ section.settings.background_color }};}
+
+  #shopify-section-{{ section.id }} .wrapper {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 20px;
+    width: 100vw;
+    height: auto;
+    max-width: 1440px;
+    margin: auto;
+    
+  }
+
+  #shopify-section-{{ section.id }} .box1 {
+    grid-column: 1;
+    grid-row: 1;
+    {% if section.settings.top_left_image != blank %}
+      background-image: url('{{ section.settings.top_left_image | image_url: width: 400 }}');
+    {% else %}
+      background-color: #f0f0f0;
+    {% endif %}
+    width: 10vw;
+    height: 150px;
+    background-position: {{ section.settings.corner_image_position_x }}% {{ section.settings.corner_image_position_y }}%;
+    background-size: cover;
+    {% if section.settings.corner_image_border_radius > 0 %}
+      border-radius: {{ section.settings.corner_image_border_radius }}px;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .box2 {
+    grid-column-start: 3;
+    grid-column-end: 6;
+    grid-row: 1;
+    text-align: center;
+    align-self: flex-end;
+    padding: 5%;
+    align-content: center;
+    margin-top: -15%;
+  }
+
+  #shopify-section-{{ section.id }} .box2 h4 {
+    color: {{ section.settings.subheading_color }};
+    font-size: {{ section.settings.subheading_size }}px;
+    letter-spacing: {{ section.settings.subheading_letter_spacing }}px;
+    font-weight: {{ section.settings.subheading_weight }};
+  }
+
+  #shopify-section-{{ section.id }} .box3 {
+    grid-column: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    {% if section.settings.center_image != blank %}
+      background-image: url('{{ section.settings.center_image | image_url: width: 800 }}');
+    {% else %}
+      background-color: #f0f0f0;
+    {% endif %}
+    width: 20vw;
+    height: auto;
+    background-position: {{ section.settings.center_image_position_x }}% {{ section.settings.center_image_position_y }}%;
+    background-size: cover;
+    {% if section.settings.center_image_border_radius > 0 %}
+      border-radius: {{ section.settings.center_image_border_radius }}px;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .box4 {
+    grid-column-start: 2;
+    grid-column-end: 7;
+    grid-row-start: 3;
+    grid-row-end: 5;
+    text-align: center;
+    align-self: flex-start;
+    padding: 5%;
+    align-content: center;
+    margin-top: 10%;
+  }
+
+  #shopify-section-{{ section.id }} .box4 h2 {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    line-height: {{ section.settings.heading_line_height }};
+    margin-bottom: 30px;
+  }
+
+  #shopify-section-{{ section.id }} .box5 {
+    grid-column: 7;
+    grid-row: 4;
+    {% if section.settings.bottom_right_image != blank %}
+      background-image: url('{{ section.settings.bottom_right_image | image_url: width: 400 }}');
+    {% else %}
+      background-color: #f0f0f0;
+    {% endif %}
+    width: 10vw;
+    height: 150px;
+    background-position: {{ section.settings.corner_image_position_x }}% {{ section.settings.corner_image_position_y }}%;
+    background-size: cover;
+    {% if section.settings.corner_image_border_radius > 0 %}
+      border-radius: {{ section.settings.corner_image_border_radius }}px;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .custom-button {
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    padding: 1% 4%;
+    text-decoration: none;
+    font-size: {{ section.settings.button_font_size }}px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    {% if section.settings.button_border_radius > 0 %}
+      border-radius: {{ section.settings.button_border_radius }}px;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .custom-button:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text_color }};
+  }
+
+  /* Animation */
+  {% if section.settings.enable_animation %}
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    #shopify-section-{{ section.id }} .box1,
+    #shopify-section-{{ section.id }} .box5 {
+      animation: scaleIn {{ section.settings.animation_duration }}ms ease-out;
+      animation-delay: {{ section.settings.animation_delay }}ms;
+      animation-fill-mode: both;
+    }
+
+    #shopify-section-{{ section.id }} .box2 {
+      animation: fadeInUp {{ section.settings.animation_duration }}ms ease-out;
+      animation-delay: calc({{ section.settings.animation_delay }}ms + 100ms);
+      animation-fill-mode: both;
+    }
+
+    #shopify-section-{{ section.id }} .box3 {
+      animation: scaleIn {{ section.settings.animation_duration }}ms ease-out;
+      animation-delay: calc({{ section.settings.animation_delay }}ms + 200ms);
+      animation-fill-mode: both;
+    }
+
+    #shopify-section-{{ section.id }} .box4 {
+      animation: fadeInUp {{ section.settings.animation_duration }}ms ease-out;
+      animation-delay: calc({{ section.settings.animation_delay }}ms + 300ms);
+      animation-fill-mode: both;
+    }
+  {% endif %}
+
+  /* Tablet Layout */
+  @media (max-width: 1100px) {
+    #shopify-section-{{ section.id }} .wrapper {
+      height: auto;
+    }
+
+    #shopify-section-{{ section.id }} .box3 {
+      width: 30vw;
+    }
+
+    #shopify-section-{{ section.id }} .box4 {
+      grid-column-start: 2;
+      grid-column-end: 7;
+      grid-row-start: 3;
+      grid-row-end: 5;
+      text-align: center;
+      align-self: flex-end;
+      padding: 5%;
+      align-content: center;
+    }
+
+    #shopify-section-{{ section.id }} .box4 h2 {
+      font-size: {{ section.settings.tablet_heading_size }}px;
+    }
+  }
+
+  /* Mobile Layout */
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .wrapper {
+      height: {{ section.settings.mobile_section_height }}vh;
+      padding: 10% 0%;
+    }
+
+    #shopify-section-{{ section.id }} .box1 {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .box2 {
+      grid-column-start: 2;
+      grid-column-end: 7;
+    }
+
+    #shopify-section-{{ section.id }} .box2 h4 {
+      font-size: {{ section.settings.mobile_subheading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .box3 {
+      width: 60vw;
+      height: 40vh;
+    }
+
+    #shopify-section-{{ section.id }} .box4 {
+      grid-column-start: 1;
+      grid-column-end: 8;
+      margin-top: 10%;
+    }
+
+    #shopify-section-{{ section.id }} .box4 h2 {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .box5 {
+      display: none;
+    }
+  }
+
+  
+</style>
+
+<div class="wrapper">
+  <div class="box1">&nbsp;</div>
+  
+  <div class="box2">
+    {% if section.settings.subheading != blank %}
+      <h4>{{ section.settings.subheading }}</h4>
+    {% endif %}
+  </div>
+  
+  <div class="box3">&nbsp;</div>
+  
+  <div class="box4">
+    {% if section.settings.heading != blank %}
+      <h2>{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.show_button and section.settings.button_text != blank %}
+      <a class="custom-button" href="{{ section.settings.button_link }}">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+  
+  <div class="box5">&nbsp;</div>
+</div>
+
+{% if section.settings.enable_animation %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('#shopify-section-{{ section.id }}');
+    const items = section.querySelectorAll('.box1','.box2','.box3','.box4','.box5');
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const grid = entry.target;
+          const items = grid.querySelectorAll('.box1','.box2','.box3','.box4','.box5');
+          items.forEach(function(item, index) {
+            setTimeout(function() {
+              item.style.opacity = '1';
+            }, index * 100);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    observer.observe(section.querySelector('.box1','.box2','.box3','.box4','.box5'));
+  });
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Scrapbook Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "WYOMING BASED WEDDING & ELOPEMENT PHOTOGRAPHER"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "YOUR LOVE STORY ISN'T LIKE ANYONE ELSE'S. YOUR PHOTOS SHOULDN'T BE EITHER."
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_left_image",
+      "label": "Top Left Decorative Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "center_image",
+      "label": "Center Main Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_right_image",
+      "label": "Bottom Right Decorative Image"
+    },
+    {
+      "type": "range",
+      "id": "corner_image_position_x",
+      "label": "Corner Images Horizontal Position",
+      "info": "Adjust focal point for corner images",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "corner_image_position_y",
+      "label": "Corner Images Vertical Position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "center_image_position_x",
+      "label": "Center Image Horizontal Position",
+      "info": "Adjust focal point for center image",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "center_image_position_y",
+      "label": "Center Image Vertical Position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "corner_image_border_radius",
+      "label": "Corner Images Border Radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "center_image_border_radius",
+      "label": "Center Image Border Radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Work With Us →"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button Background",
+      "default": "#5f9ea0"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button Hover Background",
+      "default": "#4a7c80"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button Border Radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors & Typography"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "select",
+      "id": "subheading_weight",
+      "label": "Subheading Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "subheading_letter_spacing",
+      "label": "Subheading Letter Spacing",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "heading_line_height",
+      "label": "Heading Line Height",
+      "options": [
+        { "value": "1.2", "label": "Tight" },
+        { "value": "1.4", "label": "Normal" },
+        { "value": "1.6", "label": "Relaxed" }
+      ],
+      "default": "1.4"
+    },
+    {
+      "type": "header",
+      "content": "Layout Sizes"
+    },
+
+    {
+      "type": "range",
+      "id": "mobile_section_height",
+      "label": "Section Height (Mobile)",
+      "min": 60,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "tablet_heading_size",
+      "label": "Tablet Heading Size",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile Heading Size",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_subheading_size",
+      "label": "Mobile Subheading Size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable Animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation Duration (ms)",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation Start Delay (ms)",
+      "min": 0,
+      "max": 1000,
+      "step": 100,
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrapbook Hero",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

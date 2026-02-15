@@ -1,0 +1,320 @@
+{{ 'section-number-counter.css' | asset_url | stylesheet_tag }}
+{%- liquid
+
+  case section.settings.grid-column
+  when '1'
+  when '2'
+  assign column = 'two-column'
+  when '3'
+  assign column = 'three-column'
+  when '4'
+  assign column = 'four-column'
+  when '5'
+  assign column = 'five-column'
+  when '6'
+  assign column = 'six-column'
+  else
+  assign column = 'three-column'
+  endcase
+  
+ %}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+<script src="{{ 'inview.js' | asset_url }}" defer></script>
+<script src="{{ 'number-counter.js' | asset_url }}" defer></script>
+<div
+  data-section-id="{{ section.id }}"
+  class="number-counter color-{{ section.settings.color_scheme }} gradient{% if section.settings.title == blank %} no-heading{% endif %} {{ section.settings.custom_class_name }} ">
+  <div class="{% if section.settings.page_full_width %} page-full-width {% else %} page-width {% endif %} {% if section.settings.page_full_width_spacing %} page-full-width_spacing {% endif %}section-{{ section.id }}-padding isolate">
+    <div class="row inview-{{ section.id }}-initialized">
+      <div class="number-counter-wrapper">
+       {%- unless section.settings.title == blank -%}
+      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin content-align--{{ section.settings.column_alignment }}">
+         {%- if section.settings.sub_heading != blank -%}  
+         <h6 class="sub-heading">{{ section.settings.sub_heading | escape }}</h6>
+         {%- endif -%} 
+         {%- if section.settings.title != blank -%}  
+          <h2 class="title {{ section.settings.heading_size }}">
+            {{ section.settings.title | escape }}
+          </h2>
+          {%- endif -%} 
+          {%- if section.settings.description != blank -%}  
+          <p class="description">{{ section.settings.description }}</p>
+          {%- endif -%}   
+          {%- if section.settings.button_label != blank -%}
+            <a {% if section.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.button_link }}"{% endif %} class="button{% if section.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}">{{ section.settings.button_label | escape }}</a>
+          {%- endif -%}
+          </div>
+      {%- endunless -%}
+        <div class="number-counter-section grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop{% if show_mobile_slider %} slider slider--mobile grid--peek{% endif %}">
+          {% for block in section.blocks %}
+            {% if block.type == 'icon' %}
+              <div class="number-counter-block column-alignment-{{ block.settings.column_alignment }}">
+                {% if block.settings.image != blank %}
+                  <div class="number-counter-icon">
+                    {%- capture sizes -%}(min-width: 990px) {% if section.blocks.size <= 2 %}710px{% else %}550px{% endif %}, (min-width: 750px) {% if section.blocks.size == 1 %}710px{% else %}550px{% endif %}, calc(100vw - 30px){%- endcapture -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 275
+                      | image_tag:
+                        loading: 'lazy',
+                        width: section.settings.image.width,
+                        height: section.settings.image.height,
+                        sizes: sizes,
+                        widths: '275, 550, 710, 1420',
+                        class: 'support-block-card__image',
+                        alt: section.settings.image.alt
+                      | escape
+                    }}
+                  </div>
+                {% endif %}
+                {% if block.settings.value != blank or block.settings.value_text != blank %}
+                  <h3>
+                    <span class="number-counter-value" data-value="{{ block.settings.value }}"></span
+                    ><span>{{ block.settings.value_text }}</span>
+                  </h3>
+                {% endif %}
+                {% if block.settings.title != blank %}
+                  <h5 class="number-counter-title">{{ block.settings.title }}</h5>
+                {% endif %}
+                {% if block.settings.text != blank %}
+                  <p class="number-counter-description">{{ block.settings.text }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+  "name": "t:sections.number-counter.name",
+  "class": "section",
+  "tag": "section",
+  "settings": [
+    {
+      "type":"checkbox",
+      "id":"page_full_width",
+       "default": false,
+      "label": "t:sections.all.page_full_width.label"
+    },
+    {
+      "type":"checkbox",
+      "id":"page_full_width_spacing",
+       "default": false,
+      "label": "t:sections.all.page_full_width_spacing.label"
+    },
+      {
+      "type": "text",
+      "id": "title",
+      "default": "Number Counter",
+      "label": "t:sections.all.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "t:sections.all.sub_heading.label"
+    },
+     {
+      "type": "text",
+      "id": "description",
+      "label": "t:sections.all.description.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Button label",
+      "label": "t:sections.all.button_label.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.all.button_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary",
+      "default": false,
+      "label": "t:sections.all.button_style_secondary.label"
+      },
+    {
+      "type": "select",
+      "id": "column_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.number-counter.settings.column_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.number-counter.settings.column_alignment.options__2.label"
+        }
+      ],
+      "default": "left",
+      "label": "t:sections.number-counter.settings.column_alignment.label"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.number-counter.settings.columns_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    },
+    {
+    "type": "header",
+    "content": "t:sections.number-counter.settings.custom_class_heading.content"
+    },
+    {
+    "type": "text",
+    "id": "custom_class_name",
+    "label": "t:sections.number-counter.settings.custom_class_name.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon",
+      "name": "t:sections.number-counter.blocks.icon.name",
+      "settings": [
+      {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.number-counter.blocks.icon.settings.image.label"
+      },
+      {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.number-counter.blocks.icon.settings.title.label",
+      "default": "Title"
+      },
+      {
+      "type": "text",
+      "id": "text",
+      "label": "t:sections.number-counter.blocks.icon.settings.text.label",
+      "default": "Lorem ipsum dolor sit amet"
+      },
+      {
+      "type": "text",
+      "id": "value",
+      "label":"t:sections.number-counter.blocks.icon.settings.value.label",
+      "default": "50"
+      },
+      {
+      "type": "text",
+      "id": "value_text",
+      "label": "t:sections.number-counter.blocks.icon.settings.value_text.label",
+      "default": "K"
+      },
+      {
+      "type": "select",
+      "id": "column_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.number-counter.blocks.icon.settings.column_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.number-counter.blocks.icon.settings.column_alignment.options__2.label"
+        }
+      ],
+      "default": "left",
+      "label": "t:sections.number-counter.blocks.icon.settings.column_alignment.label"
+    } 
+    ]
+  }
+  ],
+    "presets": [
+    {
+      "name": "t:sections.number-counter.presets.name"
+    }
+  ]
+}
+{% endschema %}

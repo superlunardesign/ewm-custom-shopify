@@ -1,0 +1,435 @@
+<!-- how-it-works.liquid section -->
+
+{%- comment -%}
+Section settings schema at bottom of file
+{%- endcomment -%}
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .how-it-works-{{ section.id }} {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: #333;
+    background: {{ section.settings.background_color | default: '#ffffff' }};
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .how-it-works-{{ section.id }} .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .how-it-works-{{ section.id }} .section-title {
+    font-size: 40px;
+    color: {{ section.settings.header_color | default: '#8b7ba8' }};
+    margin-bottom: 20px;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  .how-it-works-{{ section.id }} .section-subtitle {
+    font-size: 30px;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .how-it-works-{{ section.id }} .steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
+    margin-top: 60px;
+  }
+
+  .how-it-works-{{ section.id }} .step {
+    text-align: center;
+    padding: 40px 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(139, 123, 168, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .how-it-works-{{ section.id }} .step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(139, 123, 168, 0.15);
+  }
+
+  .how-it-works-{{ section.id }} .step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#8b7ba8' }}, {{ section.settings.accent_color | default: '#8b7ba8' | color_lighten: 20 }});
+  }
+
+  .how-it-works-{{ section.id }} .step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, {{ section.settings.accent_color | default: '#8b7ba8' }}, {{ section.settings.accent_color | default: '#8b7ba8' | color_lighten: 20 }});
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 25px;
+    position: relative;
+  }
+
+  .how-it-works-{{ section.id }} .step-icon {
+    width: 80px;
+    height: 80px;
+    background: #f8f6f4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    font-size: 2rem;
+    color: {{ section.settings.accent_color | default: '#8b7ba8' }};
+    border: 2px solid #e8e2f0;
+  }
+
+  .how-it-works-{{ section.id }} .step-title {
+    font-size: 40;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+
+  .how-it-works-{{ section.id }} .step-description {
+    color: #666;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  .how-it-works-{{ section.id }} .cta-section {
+    text-align: center;
+    margin-top: 60px;
+    padding: 50px 30px;
+    background: {{ section.settings.cta_background_color | default: 'linear-gradient(135deg, #8b7ba8, #a394c2)' }};
+    border-radius: 15px;
+    color: {{ section.settings.cta_text_color | default: 'white' }};
+  }
+
+  .how-it-works-{{ section.id }} .cta-title {
+    font-size: 40px;
+    margin-bottom: 15px;
+    font-weight: 300;
+    color: {{ section.settings.cta_heading_color }}
+  }
+
+  .how-it-works-{{ section.id }} .cta-subtitle {
+    font-size: 18px;
+    margin-bottom: 30px;
+    opacity: 0.9;
+  }
+
+  .how-it-works-{{ section.id }} .cta-button {
+    background: {{ section.settings.cta_button_color | default: 'white' }};
+    color: {{ section.settings.cta_button_text_color | default: '#8b7ba8' }};
+    padding: 15px 40px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .how-it-works-{{ section.id }} .cta-button:hover {
+    background: #f8f6f4;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  @media (max-width: 768px) {
+    .how-it-works-{{ section.id }} .section-title {
+      font-size: 2rem;
+    }
+    
+    .how-it-works-{{ section.id }} .steps-container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    
+    .how-it-works-{{ section.id }} .step {
+      padding: 30px 20px;
+    }
+    
+    .how-it-works-{{ section.id }} {
+      padding: 60px 15px;
+    }
+  }
+
+  .how-it-works-{{ section.id }} .connector {
+    display: none;
+  }
+
+  @media (min-width: 992px) {
+    .how-it-works-{{ section.id }} .connector {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: -25px;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, {{ section.settings.accent_color | default: '#8b7ba8' }}, transparent);
+      transform: translateY(-50%);
+    }
+    
+    .how-it-works-{{ section.id }} .step:last-child .connector {
+      display: none;
+    }
+    
+    .how-it-works-{{ section.id }} .steps-container {
+      grid-template-columns: repeat(3, 1fr);
+      position: relative;
+    }
+    
+    .how-it-works-{{ section.id }} .step {
+      position: relative;
+    }
+  }
+</style>
+
+<section class="how-it-works-{{ section.id }}">
+  {% if section.settings.show_header %}
+    <div class="section-header">
+      <h2 class="section-title">{{ section.settings.header_title | default: 'How It Works' }}</h2>
+      {% if section.settings.header_subtitle != blank %}
+        <p class="section-subtitle">{{ section.settings.header_subtitle }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="steps-container">
+    {% for block in section.blocks %}
+      {% if block.type == 'step' %}
+        <div class="step" {{ block.shopify_attributes }}>
+          
+          <div class="step-number">{{ forloop.index }}</div>
+          
+          {% if block.settings.step_title != blank %}
+            <h3 class="step-title">{{ block.settings.step_title }}</h3>
+          {% endif %}
+          
+          {% if block.settings.step_description != blank %}
+            <p class="step-description">{{ block.settings.step_description }}</p>
+          {% endif %}
+          
+        
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if section.settings.show_cta %}
+    <div class="cta-section">
+      {% if section.settings.cta_title != blank %}
+        <h3 class="cta-title">{{ section.settings.cta_title }}</h3>
+      {% endif %}
+      
+      {% if section.settings.cta_subtitle != blank %}
+        <p class="cta-subtitle">{{ section.settings.cta_subtitle }}</p>
+      {% endif %}
+      
+      {% if section.settings.cta_button_text != blank and section.settings.cta_button_url != blank %}
+        <a href="{{ section.settings.cta_button_url }}" class="cta-button">
+          {{ section.settings.cta_button_text }}
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "How It Works",
+  "tag": "section",
+  "class": "section-how-it-works",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show section header",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "header_title",
+      "label": "Header title",
+      "default": "How It Works"
+    },
+    {
+      "type": "textarea",
+      "id": "header_subtitle",
+      "label": "Header subtitle",
+      "default": "Experience our proven 4-step approach to achieving healthy, radiant skin. Each step is carefully designed to work in harmony with your skin's natural processes."
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Header text color",
+      "default": "#8b7ba8"
+    },
+    {
+      "type": "header",
+      "content": "Design Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#faf9f7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#8b7ba8"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show call to action",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA title",
+      "default": "Ready to Begin Your Journey?"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_subtitle",
+      "label": "CTA subtitle",
+      "default": "Book your complimentary skin consultation today and discover the difference personalized care can make."
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA button text",
+      "default": "Book Consultation"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_url",
+      "label": "CTA button URL"
+    },
+    {
+      "type": "color",
+      "id": "cta_background_color",
+      "label": "CTA background color",
+      "default": "#8b7ba8"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "cta_button_color",
+      "label": "CTA button color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "cta_button_text_color",
+      "label": "CTA button text color",
+      "default": "#8b7ba8"
+    },
+     {
+      "type": "color",
+      "id": "cta_heading_color",
+      "label": "CTA heading color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_title",
+          "label": "Step title",
+          "default": "Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "step_description",
+          "label": "Step description",
+          "default": "Describe this step in your process here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "step_title": "Skin Analysis",
+            "step_description": "Complete our comprehensive skin assessment to understand your unique skin type, concerns, and goals. Our expert analysis forms the foundation of your personalized treatment plan."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_title": "Custom Treatment",
+            "step_description": "Receive a tailored facial treatment using our premium products and advanced techniques. Each session is customized to address your specific skin needs and concerns."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_title": "Home Care Routine",
+            "step_description": "Follow your personalized at-home skincare routine with our carefully curated products. We'll guide you through the perfect regimen to maintain and enhance your results."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_title": "Track Progress",
+            "step_description": "Monitor your skin's transformation with regular check-ins and adjustments to your treatment plan. Watch as your skin becomes healthier and more radiant over time."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

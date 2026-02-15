@@ -1,0 +1,397 @@
+<!-- Auto-Scroll Image Carousel Section -->
+<div class="image-carousel-section">
+  <div class="container">
+    {% if section.settings.section_title != blank %}
+      <h2 class="section-title">{{ section.settings.section_title }}</h2>
+    {% endif %}
+
+    <div class="image-carousel-wrapper">
+      <div class="image-carousel" id="imageCarousel">
+        {% for block in section.blocks %}
+          <div class="image-slide" {{ block.shopify_attributes }}>
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | image_url: width: 800 }}"
+                   alt="{{ block.settings.image.alt | default: block.settings.caption | escape }}"
+                   loading="lazy">
+            {% else %}
+              <div class="image-placeholder">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="60" height="60" fill="#f0f0f0"/>
+                  <path d="M20 25L30 35L40 25" stroke="#ccc" stroke-width="2"/>
+                  <circle cx="25" cy="22" r="3" fill="#ccc"/>
+                </svg>
+              </div>
+            {% endif %}
+
+            {% if block.settings.caption != blank %}
+              <p class="image-caption">{{ block.settings.caption }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.image-carousel-section {
+  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
+}
+
+.container {
+  max-width: {{ section.settings.container_width }}px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: {{ section.settings.title_size }}px;
+  margin-bottom: 40px;
+  color: {{ section.settings.title_color }};
+  font-weight: 400;
+}
+
+.image-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.image-carousel {
+  display: flex;
+  gap: {{ section.settings.gap }}px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 10px 0;
+}
+
+.image-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.image-slide {
+  flex: 0 0 {{ section.settings.image_size }}px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.image-slide img {
+  width: {{ section.settings.image_size }}px;
+  height: {{ section.settings.image_size }}px;
+  object-fit: cover;
+  border-radius: {{ section.settings.border_radius }}px;
+  transition: transform 0.3s ease;
+}
+
+.image-slide:hover img {
+  transform: scale({{ section.settings.hover_scale }});
+}
+
+.image-placeholder {
+  width: {{ section.settings.image_size }}px;
+  height: {{ section.settings.image_size }}px;
+  background: #f8f9fa;
+  border-radius: {{ section.settings.border_radius }}px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-caption {
+  font-size: {{ section.settings.caption_size }}px;
+  color: {{ section.settings.caption_color }};
+  text-align: center;
+  margin: 0;
+  max-width: {{ section.settings.image_size }}px;
+}
+
+@media (max-width: 768px) {
+  .image-slide {
+    flex: 0 0 {{ section.settings.mobile_image_size }}px;
+  }
+
+  .image-slide img,
+  .image-placeholder {
+    width: {{ section.settings.mobile_image_size }}px;
+    height: {{ section.settings.mobile_image_size }}px;
+  }
+
+  .image-caption {
+    max-width: {{ section.settings.mobile_image_size }}px;
+    font-size: {{ section.settings.caption_size | minus: 2 }}px;
+  }
+
+  .section-title {
+    font-size: {{ section.settings.title_size | minus: 8 }}px;
+  }
+}
+</style>
+
+<script>
+// Auto-scroll system for image carousel
+const ImageCarouselAutoScroll = (function() {
+  let animationFrameId = null;
+  let isAutoScrollEnabled = {{ section.settings.auto_scroll | json }};
+  let autoScrollSpeed = {{ section.settings.auto_scroll_speed | default: 0.5 | json }};
+  let isHovered = false;
+  let carousel = null;
+
+  function init() {
+    carousel = document.getElementById('imageCarousel');
+    if (!carousel) return;
+
+    // Pause on hover
+    carousel.addEventListener('mouseenter', () => { isHovered = true; });
+    carousel.addEventListener('mouseleave', () => { isHovered = false; });
+
+    // Start auto-scroll if enabled
+    if (isAutoScrollEnabled) {
+      startAutoScroll();
+    }
+  }
+
+  function startAutoScroll() {
+    if (!carousel || animationFrameId) return;
+
+    function animate() {
+      if (!isHovered) {
+        carousel.scrollLeft += autoScrollSpeed;
+
+        // Loop back to start when reaching the end
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        if (carousel.scrollLeft >= maxScroll) {
+          carousel.scrollLeft = 0;
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    animationFrameId = requestAnimationFrame(animate);
+  }
+
+  return { init: init };
+})();
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+  ImageCarouselAutoScroll.init();
+});
+</script>
+
+{% schema %}
+{
+  "name": "Image Carousel",
+  "tag": "section",
+  "class": "image-carousel-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Gallery"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container max width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "default": 1400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "range",
+      "id": "image_size",
+      "label": "Image size (desktop)",
+      "min": 150,
+      "max": 500,
+      "step": 10,
+      "default": 280,
+      "unit": "px",
+      "info": "Images are always 1:1 ratio (square)"
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_size",
+      "label": "Image size (mobile)",
+      "min": 120,
+      "max": 400,
+      "step": 10,
+      "default": 250,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between images",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "hover_scale",
+      "label": "Hover scale effect",
+      "min": 1,
+      "max": 1.2,
+      "step": 0.1,
+      "default": 1.1
+    },
+    {
+      "type": "header",
+      "content": "Caption Settings"
+    },
+    {
+      "type": "range",
+      "id": "caption_size",
+      "label": "Caption font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Auto-Scroll Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_scroll",
+      "label": "Enable auto-scroll",
+      "default": true,
+      "info": "Smoothly scrolls images continuously. Pauses on hover."
+    },
+    {
+      "type": "range",
+      "id": "auto_scroll_speed",
+      "label": "Auto-scroll speed",
+      "min": 0.2,
+      "max": 3,
+      "step": 0.1,
+      "default": 0.5,
+      "info": "Speed in pixels per frame (0.2 = very slow, 3 = fast)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "carousel_image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended: Square images (1:1 ratio) for best results"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption (optional)",
+          "info": "Text displayed below the image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Carousel",
+      "blocks": [
+        {
+          "type": "carousel_image"
+        },
+        {
+          "type": "carousel_image"
+        },
+        {
+          "type": "carousel_image"
+        },
+        {
+          "type": "carousel_image"
+        },
+        {
+          "type": "carousel_image"
+        },
+        {
+          "type": "carousel_image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

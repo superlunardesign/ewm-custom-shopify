@@ -1,0 +1,811 @@
+{% comment %}
+  Flexible Value Props Section
+  Dynamically adjusts layout based on number of value props
+  Supports background image with opacity control
+  Supports Font Awesome icons or custom image uploads
+  
+  IMPORTANT: Add this to your theme.liquid <head> if using Font Awesome icons:
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endcomment %}
+
+{% comment %} Include Font Awesome if icons are shown and any block uses it {% endcomment %}
+{% if section.settings.show_icons %}
+  {% assign uses_fontawesome = false %}
+  {% for block in section.blocks %}
+    {% if block.settings.icon_type == 'fontawesome' %}
+      {% assign uses_fontawesome = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if uses_fontawesome %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  {% endif %}
+{% endif %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    position: relative;
+    background-color: {{ section.settings.section_background }};
+    padding: {{ section.settings.section_padding }}px 0;
+    overflow: hidden;
+  }
+
+  /* Background Image with Opacity */
+  {% if section.settings.background_image != blank %}
+    #shopify-section-{{ section.id }}::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}');
+      background-size: {{ section.settings.background_size }};
+      background-position: {{ section.settings.background_position_x }}% {{ section.settings.background_position_y }}%;
+      background-repeat: no-repeat;
+      opacity: {{ section.settings.background_opacity | divided_by: 100.0 }};
+      z-index: 0;
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .content-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+.icon-element--img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+  /* Header Section */
+  #shopify-section-{{ section.id }} .section-header {
+    text-align: center;
+    margin-bottom: {{ section.settings.header_spacing }}px;
+  }
+
+  #shopify-section-{{ section.id }} .section-header h2 {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    margin-bottom: 15px;
+    text-transform: {{ section.settings.heading_transform }};
+  }
+
+  #shopify-section-{{ section.id }} .section-header h4 {
+    color: {{ section.settings.subheading_color }};
+    font-size: {{ section.settings.subheading_size }}px;
+    font-weight: {{ section.settings.subheading_weight }};
+    text-transform: {{ section.settings.subheading_transform }};
+  }
+
+  /* Value Props Grid */
+  #shopify-section-{{ section.id }} .value-props-grid {
+    display: grid;
+    gap: {{ section.settings.grid_gap }}px;
+    justify-content: center;
+    align-items: start;
+    margin: auto;
+  }
+
+  /* Dynamic grid based on number of items */
+  #shopify-section-{{ section.id }} .value-props-grid {
+    grid-template-columns: repeat({{section.settings.grid_columns}}, minmax(200px, 1fr));
+  }
+
+  /* Individual Value Prop Item */
+  #shopify-section-{{ section.id }} .value-prop-item {
+    text-align: {{ section.settings.text_alignment }};
+    padding: {{ section.settings.item_padding }}px;
+    background-color: {{ section.settings.item_background }};
+    {% if section.settings.item_border_radius > 0 %}
+      border-radius: {{ section.settings.item_border_radius }}px;
+    {% endif %}
+    {% if section.settings.item_shadow %}
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    {% endif %}
+    transition: transform 0.3s ease;
+   
+  }
+
+  {% if section.settings.item_hover_effect %}
+    #shopify-section-{{ section.id }} .value-prop-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+  {% endif %}
+
+  /* Icon styling for both Font Awesome and images */
+  #shopify-section-{{ section.id }} .value-prop-item .icon-element {
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  /* Font Awesome icon specific styling */
+  #shopify-section-{{ section.id }} .value-prop-item i.icon-element {
+    font-size: {{ section.settings.icon_size }}px;
+    color: {{ section.settings.icon_color }};
+    line-height: 1;
+    width: auto;
+    height: auto;
+    margin: 0 auto 15px;
+  }
+  
+  /* Image icon specific styling */
+  #shopify-section-{{ section.id }} .value-prop-item img.icon-element {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    object-fit: contain;
+    margin-bottom: 15px;
+  }
+
+  #shopify-section-{{ section.id }} .value-prop-item h3 {
+    color: {{ section.settings.prop_heading_color }};
+    font-size: {{ section.settings.prop_heading_size }}px;
+    font-weight: {{ section.settings.prop_heading_weight }};
+    margin-bottom: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .value-prop-item p {
+    color: {{ section.settings.prop_text_color }};
+    font-size: {{ section.settings.prop_text_size }}px;
+    line-height: 1.6;
+  }
+
+  /* Animations */
+  {% if section.settings.enable_animation %}
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #shopify-section-{{ section.id }} .value-prop-item {
+      opacity: 0;
+      animation: fadeInUp {{ section.settings.animation_duration }}ms ease-out forwards;
+      animation-play-state: paused;
+    }
+
+    {% for i in (0..5) %}
+      {% assign stagger = i | times: 100 %}
+      {% assign delay = section.settings.animation_delay | plus: stagger %}
+      #shopify-section-{{ section.id }} .value-prop-item:nth-child({{ i | plus: 1 }}) {
+        animation-delay: {{ delay }}ms;
+      }
+    {% endfor %}
+  {% endif %}
+
+  /* Tablet Layout */
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .value-props-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      max-width: 700px;
+    }
+
+    #shopify-section-{{ section.id }} .value-prop-item:nth-child(4) {
+      margin-left: 0;
+    }
+  }
+
+  /* Mobile Layout */
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .content-wrapper {
+      padding: 0 15px;
+    }
+
+    #shopify-section-{{ section.id }} .section-header h2 {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .section-header h4 {
+      font-size: {{ section.settings.mobile_subheading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .value-props-grid {
+      grid-template-columns: 1fr !important;
+      max-width: 400px;
+    }
+
+    #shopify-section-{{ section.id }} .value-prop-item {
+      padding: {{ section.settings.mobile_item_padding }}px;
+    }
+
+    #shopify-section-{{ section.id }} .value-prop-item h3 {
+      font-size: {{ section.settings.mobile_prop_heading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .value-prop-item p {
+      font-size: {{ section.settings.mobile_prop_text_size }}px;
+      {% if section.settings.text_alignment == 'center' %}
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      {% endif %}
+    }
+
+    /* Mobile icon sizing */
+    #shopify-section-{{ section.id }} .value-prop-item i.icon-element {
+      font-size: {{ section.settings.mobile_icon_size }}px;
+    }
+    
+    #shopify-section-{{ section.id }} .value-prop-item img.icon-element {
+      width: {{ section.settings.mobile_icon_size }}px;
+      height: {{ section.settings.mobile_icon_size }}px;
+    }
+  }
+</style>
+
+<div class="content-wrapper">
+  {% if section.settings.main_heading != blank or section.settings.main_subheading != blank %}
+    <div class="section-header">
+      {% if section.settings.main_heading != blank %}
+        <h2>{{ section.settings.main_heading }}</h2>
+      {% endif %}
+      {% if section.settings.main_subheading != blank %}
+        <h4>{{ section.settings.main_subheading }}</h4>
+      {% endif %}
+    </div>
+  {% endif %}
+
+ <div class="value-props-grid">
+    {% for block in section.blocks %}
+      <div class="value-prop-item" {{ block.shopify_attributes }}>
+        {% comment %} Icon Display Logic - Only show if show_icons is true {% endcomment %}
+        {% if section.settings.show_icons %}
+          {% if block.settings.icon_type == 'fontawesome' and block.settings.icon_class != blank %}
+            <i class="{{ block.settings.icon_class }} icon-element"></i>
+          {% elsif block.settings.icon_type == 'custom' and block.settings.icon != blank %}
+            <div class="icon-element icon-element--img" style="background-image: url('{{ block.settings.icon | image_url: width: 600 }}');"></div>
+          {% elsif block.settings.icon != blank %}
+            {% comment %} Fallback for existing blocks using old image-only method {% endcomment %}
+            <div class="icon-element icon-element--img" style="background-image: url('{{ block.settings.icon | image_url: width: 600 }}');"></div>
+          {% endif %}
+        {% endif %}
+        
+        {% if block.settings.heading != blank %}
+          <h3>{{ block.settings.heading }}</h3>
+        {% endif %}
+        {% if block.settings.text != blank %}
+          <p>{{ block.settings.text }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% if section.settings.enable_animation %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('#shopify-section-{{ section.id }}');
+    const grid = section.querySelector('.value-props-grid');
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const items = entry.target.querySelectorAll('.value-prop-item');
+          items.forEach(function(item) {
+            item.style.animationPlayState = 'running';
+            item.style.opacity = ''; // Remove opacity override
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    if (grid) {
+      observer.observe(grid);
+    }
+  });
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Flexible Value Props",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Don't Go To Just Anybody"
+    },
+    {
+      "type": "text",
+      "id": "main_subheading",
+      "label": "Subheading",
+      "default": "WE MIND OUR WAX"
+    },
+    {
+      "type": "header",
+      "content": "Grid Columns"
+    },
+    {
+      "type": "range",
+      "id": "grid_columns",
+      "label": "Adjust the number of columns to fit your content",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity",
+      "label": "Background Image Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "background_size",
+      "label": "Background Size",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" },
+        { "value": "100% 100%", "label": "Stretch" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "background_position_x",
+      "label": "Background Horizontal Position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "background_position_y",
+      "label": "Background Vertical Position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section Padding",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum Width",
+      "min": 900,
+      "max": 1600,
+      "step": 50,
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Space Between Items",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header Bottom Spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Typography - Header"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "default": 42
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "select",
+      "id": "heading_transform",
+      "label": "Heading Text Transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "UPPERCASE" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading Size",
+      "min": 14,
+      "max": 36,
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "subheading_weight",
+      "label": "Subheading Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "subheading_transform",
+      "label": "Subheading Text Transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "UPPERCASE" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "header",
+      "content": "Typography - Value Props"
+    },
+    {
+      "type": "color",
+      "id": "prop_heading_color",
+      "label": "Value Prop Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "prop_heading_size",
+      "label": "Value Prop Heading Size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "default": 22
+    },
+    {
+      "type": "select",
+      "id": "prop_heading_weight",
+      "label": "Value Prop Heading Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "prop_text_color",
+      "label": "Value Prop Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "prop_text_size",
+      "label": "Value Prop Text Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Item Styling"
+    },
+    {
+      "type": "color",
+      "id": "item_background",
+      "label": "Item Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "range",
+      "id": "item_padding",
+      "label": "Item Padding",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "item_border_radius",
+      "label": "Item Border Radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "item_shadow",
+      "label": "Add Shadow to Items",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "item_hover_effect",
+      "label": "Enable Hover Effect",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icons",
+      "label": "Show Icons",
+      "default": true,
+      "info": "Toggle to show or hide all icons in this section"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Size",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Font Awesome Icon Color",
+      "default": "#000000",
+      "info": "Color for Font Awesome icons (doesn't affect uploaded images)"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile Heading Size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "mobile_subheading_size",
+      "label": "Mobile Subheading Size",
+      "min": 12,
+      "max": 28,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_prop_heading_size",
+      "label": "Mobile Prop Heading Size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_prop_text_size",
+      "label": "Mobile Prop Text Size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "mobile_icon_size",
+      "label": "Mobile Icon Size",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "mobile_item_padding",
+      "label": "Mobile Item Padding",
+      "min": 0,
+      "max": 30,
+      "step": 5,
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable Animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation Duration (ms)",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation Start Delay (ms)",
+      "min": 0,
+      "max": 500,
+      "step": 50,
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value_prop",
+      "name": "Value Proposition",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "options": [
+            { "value": "fontawesome", "label": "Font Awesome Icon" },
+            { "value": "custom", "label": "Custom Image" }
+          ],
+          "default": "fontawesome"
+        },
+        {
+          "type": "text",
+          "id": "icon_class",
+          "label": "Font Awesome Icon Class",
+          "default": "fas fa-star",
+          "info": "Enter Font Awesome class (e.g., 'fas fa-star', 'far fa-heart'). Browse icons at fontawesome.com/icons"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Custom Icon Image",
+          "info": "Upload custom icon if not using Font Awesome"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "We use the best ingredients"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Not all wax is the same! We choose the finest ingredients to ensure you have the best experience."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Flexible Value Props",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-star",
+            "heading": "Premium Quality",
+            "text": "We use only the finest ingredients and materials to ensure the best experience."
+          }
+        },
+        {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-shield-alt",
+            "heading": "Safe & Secure",
+            "text": "Your safety and comfort are our top priorities with every service."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

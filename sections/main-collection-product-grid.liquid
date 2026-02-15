@@ -1,0 +1,2253 @@
+<!--TO DEACTIVATE GLOBO SMART PRODUCT FILTER DISPLAY
+1. REMOVE THE FOLLOWING FROM THEME.LIQUID:
+  {%- capture productTemplate -%}{% render 'globo.filter.product', themeTranslation: shop.metafields.globoFilter.themeTranslation.value[request.locale.iso_code] %}{%- endcapture -%}{%- unless productTemplate contains 'Liquid error' -%}<script id="gspfProduct" type="template/html">{{- productTemplate | replace: "script>", "scripttag>" -}}</script>{%- endunless -%}
+2. PASTE THIS ENTIRE CODE FILE IN: main-collection-product-grid.liquid
+3. ENSURE BOTH EXCLUSION FIELDS FOR SUBSCRIBE & SAVE and COLLAPSED VARIANTS INCLUDE "merch" 
+4. TOGGLE OFF SMART PRODUCT FILTER IN APPS ON DEFAULT COLLECTION PAGE & CHARACTER PAGES
+5. STYLE BUTTONS & BACKGROUNDS IN THEME EDITOR
+-->
+
+
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+<link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- style -%}
+  /* Section Padding */
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Product Grid */
+  #SLCollection-{{ section.id }} .sl-product-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+    gap: {{ section.settings.grid_gap_mobile }}px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Reset Dawn's grid__item styles that interfere with our grid */
+  #SLCollection-{{ section.id }} .sl-product-grid .grid__item {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    #SLCollection-{{ section.id }} .sl-product-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+      gap: {{ section.settings.grid_gap }}px;
+    }
+  }
+
+  /* Product Card (regular layout) */
+  #SLCollection-{{ section.id }} .sl-product-card {
+    background: {{ section.settings.card_background }};
+    border-radius: {{ section.settings.card_border_radius }}px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+  }
+
+  /* Card Wrapper - flex column to push buttons to bottom */
+  #SLCollection-{{ section.id }} .sl-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* Card grows to fill space, pushing buttons to bottom */
+  #SLCollection-{{ section.id }} .sl-card-wrapper .sl-product-card {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: auto;
+  }
+
+  /* Image container inside card-wrapper */
+  #SLCollection-{{ section.id }} .sl-card-wrapper .sl-product-image {
+    flex-shrink: 0;
+  }
+
+  /* Fixed height for title/price area to accommodate 2-line titles */
+  #SLCollection-{{ section.id }} .sl-card-wrapper .sl-product-info {
+    min-height: 85px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Button container (outside card) */
+  #SLCollection-{{ section.id }} .sl-card-wrapper .sl-outside-button {
+    padding: 8px 0 0 0;
+    margin-top: auto;
+  }
+
+  #SLCollection-{{ section.id }} .sl-card-wrapper .sl-outside-button .sl-add-to-cart-btn {
+    width: 100%;
+    background: {{ section.settings.atc_button_background }};
+    color: {{ section.settings.atc_button_text }};
+    border: {{ section.settings.atc_button_border_width }}px solid {{ section.settings.atc_button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+  }
+
+  /* Variants container (outside card) */
+  #SLCollection-{{ section.id }} .sl-card-wrapper .sl-outside-variants {
+    min-height: {{ section.settings.variant_area_min_height }}px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 0 0 0;
+  }
+
+  #SLCollection-{{ section.id }} .sl-card-wrapper .sl-outside-variants .sl-variant-options {
+    margin-bottom: 0;
+  }
+
+  /* Variants inside card (regular layout) */
+  #SLCollection-{{ section.id }} .sl-card-variants {
+    padding: 0 15px 0;
+  }
+
+  #SLCollection-{{ section.id }} .sl-card-variants .sl-variant-options {
+    margin-bottom: 0;
+  }
+
+  /* AJAX Loading Overlay */
+  #SLCollection-{{ section.id }} .sl-ajax-loading {
+    position: relative;
+    min-height: 200px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-ajax-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  #SLCollection-{{ section.id }} .sl-ajax-loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: {{ section.settings.pagination_active_color }};
+    border-radius: 50%;
+    animation: sl-spin 0.6s linear infinite;
+    z-index: 11;
+  }
+
+  @keyframes sl-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Status Badges */
+  #SLCollection-{{ section.id }} .sl-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    z-index: 2;
+    letter-spacing: 0.5px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-badge--sale {
+    background: {{ section.settings.sale_badge_color }};
+    color: #ffffff;
+  }
+
+  #SLCollection-{{ section.id }} .sl-badge--soldout {
+    background: {{ section.settings.soldout_badge_color }};
+    color: #ffffff;
+  }
+
+  #SLCollection-{{ section.id }} .sl-badge--tag {
+    background: {{ section.settings.tag_badge_color }};
+    color: #ffffff;
+  }
+
+  #SLCollection-{{ section.id }} .sl-badges {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  #SLCollection-{{ section.id }} .sl-badges .sl-badge {
+    position: static;
+  }
+
+  /* Product Image */
+  #SLCollection-{{ section.id }} .sl-product-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: {{ section.settings.image_ratio }};
+    overflow: hidden;
+    background: {{ section.settings.image_background }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-product-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #SLCollection-{{ section.id }} .sl-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: {{ section.settings.image_fit }};
+    object-position: center bottom;
+    transition: transform 0.3s ease;
+  }
+
+  #SLCollection-{{ section.id }} .sl-product-card:hover .sl-product-image img {
+    transform: scale(1.05);
+  }
+
+  /* Star Rating */
+  #SLCollection-{{ section.id }} .sl-star-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0 0 4px 0;
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  #SLCollection-{{ section.id }} .sl-star-rating .jdgm-prev-badge {
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-star-rating .jdgm-prev-badge[data-average-rating="0.00"] {
+    display: none !important;
+  }
+
+  #SLCollection-{{ section.id }} .sl-star-rating .jdgm-star {
+    color: {{ section.settings.star_rating_color }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-star-rating .jdgm-prev-badge__text {
+    color: {{ section.settings.title_color }};
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  /* Product Info */
+  #SLCollection-{{ section.id }} .sl-product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  #SLCollection-{{ section.id }} .sl-product-title {
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: 400;
+    font-family: var(--font-family-body);
+    text-transform:capitalize !important;
+    margin: 0 0 5px 0;
+    color: {{ section.settings.title_color }};
+    line-height: 1.3;
+    min-height:45px;
+  }
+
+    #SLCollection-{{ section.id }} .sl-product-vendor a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #SLCollection-{{ section.id }} .sl-product-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #SLCollection-{{ section.id }} .sl-product-title a:hover {
+    opacity: 0.8;
+  }
+
+  /* Price */
+  #SLCollection-{{ section.id }} .sl-product-price {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-price-current {
+    font-size: {{ section.settings.price_font_size }}px;
+    color: {{ section.settings.price_color }};
+    font-weight: 500;
+  }
+
+  #SLCollection-{{ section.id }} .sl-price-compare {
+    font-size: {{ section.settings.price_font_size }}px;
+    color: {{ section.settings.compare_price_color }};
+    text-decoration: line-through;
+  }
+
+  /* Variant Options */
+  #SLCollection-{{ section.id }} .sl-variant-options {
+    margin-bottom: 15px;
+    min-height: {{ section.settings.variant_area_min_height }}px;
+  }
+
+  /* Spacer for products without variants to maintain consistent card height */
+  #SLCollection-{{ section.id }} .sl-variant-spacer {
+    min-height: {{ section.settings.variant_area_min_height }}px;
+    margin-bottom: 15px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-option-group {
+    margin-bottom: 8px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-option-values {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  /* Size Buttons */
+  #SLCollection-{{ section.id }} .sl-size-btn {
+    padding: 4px 12px;
+    border: {{ section.settings.variant_border_width }}px solid {{ section.settings.variant_border_color }};
+    background: {{ section.settings.variant_background }};
+    color: {{ section.settings.variant_text_color }};
+    border-radius: {{ section.settings.variant_border_radius }}px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  #SLCollection-{{ section.id }} .sl-size-btn:hover {
+    border-color: {{ section.settings.variant_hover_border }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-size-btn[data-selected="true"] {
+    background: {{ section.settings.variant_selected_background }};
+    color: {{ section.settings.variant_selected_text }};
+    border-color: {{ section.settings.variant_selected_border }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-size-btn[data-unavailable="true"] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    position: relative;
+  }
+
+  #SLCollection-{{ section.id }} .sl-size-btn[data-unavailable="true"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: currentColor;
+    transform: rotate(-15deg);
+  }
+
+  /* Color Swatches */
+  #SLCollection-{{ section.id }} .sl-color-swatch {
+    width: {{ section.settings.swatch_size }}px;
+    height: {{ section.settings.swatch_size }}px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+  }
+
+  #SLCollection-{{ section.id }} .sl-color-swatch:hover {
+    transform: scale(1.1);
+  }
+
+  #SLCollection-{{ section.id }} .sl-color-swatch[data-selected="true"] {
+    border-color: {{ section.settings.swatch_selected_border }};
+    box-shadow: 0 0 0 2px {{ section.settings.swatch_selected_border }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-color-swatch[data-unavailable="true"] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* More Options Link */
+  #SLCollection-{{ section.id }} .sl-more-options {
+    font-size: 12px;
+    color: {{ section.settings.variant_text_color }};
+    text-decoration: none;
+    opacity: 0.8;
+    padding: 4px 8px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-more-options:hover {
+    text-decoration: underline;
+    opacity: 1;
+  }
+
+  /* Action Buttons */
+  #SLCollection-{{ section.id }} .sl-product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  #SLCollection-{{ section.id }} .sl-add-to-cart-btn {
+    width: 100%;
+    padding: 12px 16px;
+    background: {{ section.settings.atc_button_background }};
+    color: {{ section.settings.atc_button_text }};
+    border: {{ section.settings.atc_button_border_width }}px solid {{ section.settings.atc_button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+  }
+
+  #SLCollection-{{ section.id }} .sl-add-to-cart-btn:hover {
+    opacity: 0.9;
+  }
+
+  #SLCollection-{{ section.id }} .sl-add-to-cart-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  #SLCollection-{{ section.id }} .sl-subscribe-btn {
+    width: 100%;
+    padding: 12px 16px;
+    background: {{ section.settings.subscribe_button_background }};
+    color: {{ section.settings.subscribe_button_text }};
+    border: {{ section.settings.subscribe_button_border_width }}px solid {{ section.settings.subscribe_button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+  }
+
+  #SLCollection-{{ section.id }} .sl-subscribe-btn:hover {
+    opacity: 0.9;
+  }
+
+  /* Promo Card */
+  #SLCollection-{{ section.id }} .sl-promo-card {
+    background: {{ section.settings.promo_background }};
+    border-radius: {{ section.settings.card_border_radius }}px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+    min-height: 100%;
+  }
+
+  #SLCollection-{{ section.id }} .sl-promo-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-promo-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    color: {{ section.settings.promo_text_color }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-promo-text {
+    font-size: 14px;
+    color: {{ section.settings.promo_text_color }};
+    margin: 0 0 20px 0;
+    opacity: 0.9;
+  }
+
+  #SLCollection-{{ section.id }} .sl-promo-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: {{ section.settings.promo_button_background }};
+    color: {{ section.settings.promo_button_text }};
+    text-decoration: none;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s ease;
+  }
+
+  #SLCollection-{{ section.id }} .sl-promo-btn:hover {
+    opacity: 0.9;
+  }
+
+  /* Mobile Adjustments */
+  @media screen and (max-width: 749px) {
+    #SLCollection-{{ section.id }} .sl-product-info {
+      padding: 12px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-product-title {
+min-height:40px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-product-title {
+      font-size: {{ section.settings.title_font_size | minus: 2 }}px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-promo-card {
+      padding: 20px 15px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-promo-title {
+      font-size: 20px;
+    }
+  }
+
+  /* ========== Filter & Sort Bar ========== */
+  #SLCollection-{{ section.id }} .sl-filter-sort-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+
+  #SLCollection-{{ section.id }} .sl-filter-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+    letter-spacing: 0.3px;
+    font-family: var(--font-body-family);
+  }
+
+  #SLCollection-{{ section.id }} .sl-tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-tag-btn {
+    padding: 8px 22px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: 1.5px solid {{ section.settings.filter_tag_border_color }};
+    background: transparent;
+    color: {{ section.settings.filter_tag_text_color }};
+    font-family: var(--font-body-family);
+    white-space: nowrap;
+  }
+
+  #SLCollection-{{ section.id }} .sl-tag-btn:hover {
+    border-color: {{ section.settings.filter_tag_active_bg }};
+    color: {{ section.settings.filter_tag_active_bg }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-tag-btn--active {
+    background: {{ section.settings.filter_tag_active_bg }};
+    color: {{ section.settings.filter_tag_active_text }};
+    border-color: {{ section.settings.filter_tag_active_bg }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-tag-btn--active:hover {
+    opacity: 0.9;
+    color: {{ section.settings.filter_tag_active_text }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-sort-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-sort-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+    font-family: var(--font-body-family);
+  }
+
+  #SLCollection-{{ section.id }} .sl-sort-select {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    color: {{ section.settings.title_color }};
+    font-family: var(--font-body-family);
+    padding: 4px 24px 4px 4px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    background-size: 14px;
+  }
+
+  #SLCollection-{{ section.id }} .sl-sort-select:focus {
+    outline: none;
+  }
+
+  /* Mobile Controls */
+  #SLCollection-{{ section.id }} .sl-mobile-controls {
+    display: none;
+  }
+
+  #SLCollection-{{ section.id }} .sl-mobile-active-tags {
+    display: none;
+  }
+
+  #SLCollection-{{ section.id }} .sl-mobile-tag-drawer {
+    display: none;
+  }
+
+  #SLCollection-{{ section.id }} .sl-mobile-sort-drawer {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    #SLCollection-{{ section.id }} .sl-filter-section {
+      display: none;
+    }
+
+    #SLCollection-{{ section.id }} .sl-sort-wrapper.sl-sort-desktop {
+      display: none;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 12px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-filter-btn,
+    #SLCollection-{{ section.id }} .sl-mobile-sort-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      font-size: 13px;
+      font-weight: 500;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: {{ section.settings.title_color }};
+      font-family: var(--font-body-family);
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-filter-btn svg,
+    #SLCollection-{{ section.id }} .sl-mobile-sort-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-active-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-active-tags:empty {
+      display: none;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-tag-drawer {
+      display: none;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px 0;
+      width: 100%;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-tag-drawer.sl-drawer-open {
+      display: flex;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-sort-drawer {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      padding: 8px 0;
+      width: 100%;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-sort-drawer.sl-drawer-open {
+      display: flex;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-sort-option {
+      display: block;
+      padding: 10px 0;
+      font-size: 14px;
+      color: {{ section.settings.title_color }};
+      text-decoration: none;
+      font-family: var(--font-body-family);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-sort-option.sl-sort-active {
+      font-weight: 600;
+    }
+
+    #SLCollection-{{ section.id }} .sl-filter-sort-bar {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+
+  /* ========== Custom Pagination ========== */
+  #SLCollection-{{ section.id }} .sl-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 40px;
+    padding: 20px 0;
+  }
+
+  #SLCollection-{{ section.id }} .sl-pagination a,
+  #SLCollection-{{ section.id }} .sl-pagination span {
+    text-decoration: none;
+    font-size: 15px;
+    font-family: var(--font-body-family);
+    color: {{ section.settings.title_color }};
+    transition: opacity 0.2s ease;
+  }
+
+  #SLCollection-{{ section.id }} .sl-page-num {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  #SLCollection-{{ section.id }} a.sl-page-num:hover {
+    opacity: 0.7;
+  }
+
+  #SLCollection-{{ section.id }} .sl-pagination span.sl-page-current {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: {{ section.settings.pagination_active_color }};
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  #SLCollection-{{ section.id }} .sl-page-arrow {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    border-radius: 50%;
+  }
+
+  #SLCollection-{{ section.id }} a.sl-page-arrow:hover {
+    opacity: 0.7;
+  }
+
+  #SLCollection-{{ section.id }} .sl-page-arrow--disabled {
+    opacity: 0.25;
+    cursor: default;
+  }
+
+  #SLCollection-{{ section.id }} .sl-page-ellipsis {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding" id="SLCollection-{{ section.id }}">
+  {%- if section.settings.enable_tag_filtering or section.settings.enable_sorting -%}
+    {%- assign current_sort_by = collection.sort_by | default: collection.default_sort_by -%}
+    {%- capture sort_param -%}{%- if current_sort_by != blank and current_sort_by != collection.default_sort_by -%}?sort_by={{ current_sort_by }}{%- endif -%}{%- endcapture -%}
+    {%- assign sort_param = sort_param | strip -%}
+
+    <div class="page-width">
+      <div class="sl-filter-sort-bar">
+        {%- if section.settings.enable_tag_filtering -%}
+          {%- comment -%} Desktop: Filter label + tag pills {%- endcomment -%}
+          <div class="sl-filter-section">
+            <div class="sl-filter-label">{{ section.settings.filter_label }}</div>
+            <div class="sl-tag-filters">
+              {%- assign filter_tags = section.settings.filter_tags | split: ',' -%}
+              {%- for tag in filter_tags -%}
+                {%- assign clean_tag = tag | strip -%}
+                {%- if clean_tag != blank -%}
+                  {%- assign is_active = false -%}
+                  {%- assign clean_tag_handle = clean_tag | handleize -%}
+                  {%- for current_tag in current_tags -%}
+                    {%- assign current_tag_handle = current_tag | handleize -%}
+                    {%- if current_tag_handle == clean_tag_handle -%}
+                      {%- assign is_active = true -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if is_active -%}
+                    <a href="{{ collection.url }}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }}</a>
+                  {%- else -%}
+                    <a href="{{ collection.url }}/{{ clean_tag_handle }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Desktop: Sort dropdown {%- endcomment -%}
+        {%- if section.settings.enable_sorting -%}
+          <div class="sl-sort-wrapper sl-sort-desktop">
+            <label for="sl-sort-{{ section.id }}" class="sl-sort-label">Sort:</label>
+            <select id="sl-sort-{{ section.id }}" class="sl-sort-select" data-sort-select>
+              <option value="manual" {% if current_sort_by == 'manual' %}selected{% endif %}>Featured</option>
+              <option value="best-selling" {% if current_sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+              <option value="title-ascending" {% if current_sort_by == 'title-ascending' %}selected{% endif %}>A–Z</option>
+              <option value="title-descending" {% if current_sort_by == 'title-descending' %}selected{% endif %}>Z–A</option>
+              <option value="price-ascending" {% if current_sort_by == 'price-ascending' %}selected{% endif %}>Price (Low to High)</option>
+              <option value="price-descending" {% if current_sort_by == 'price-descending' %}selected{% endif %}>Price (High to Low)</option>
+              <option value="created-ascending" {% if current_sort_by == 'created-ascending' %}selected{% endif %}>Oldest</option>
+              <option value="created-descending" {% if current_sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+            </select>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Mobile: Compact filter + sort buttons {%- endcomment -%}
+        <div class="sl-mobile-controls">
+          {%- if section.settings.enable_tag_filtering -%}
+            <button type="button" class="sl-mobile-filter-btn" data-mobile-filter-toggle>
+              {{ section.settings.filter_label }}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            </button>
+          {%- endif -%}
+          {%- if section.settings.enable_sorting -%}
+            <button type="button" class="sl-mobile-sort-btn" data-mobile-sort-toggle>
+              Sort
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </button>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Mobile: Tag drawer (hidden by default) {%- endcomment -%}
+        {%- if section.settings.enable_tag_filtering -%}
+          <div class="sl-mobile-tag-drawer" data-mobile-tag-drawer>
+            {%- for tag in filter_tags -%}
+              {%- assign clean_tag = tag | strip -%}
+              {%- if clean_tag != blank -%}
+                {%- assign is_active = false -%}
+                {%- assign clean_tag_handle = clean_tag | handleize -%}
+                {%- for current_tag in current_tags -%}
+                  {%- assign current_tag_handle = current_tag | handleize -%}
+                  {%- if current_tag_handle == clean_tag_handle -%}
+                    {%- assign is_active = true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if is_active -%}
+                  <a href="{{ collection.url }}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }} ✕</a>
+                {%- else -%}
+                  <a href="{{ collection.url }}/{{ clean_tag_handle }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Mobile: Sort drawer (hidden by default) {%- endcomment -%}
+        {%- if section.settings.enable_sorting -%}
+          <div class="sl-mobile-sort-drawer" data-mobile-sort-drawer>
+            {%- assign sort_options = 'manual:Featured,best-selling:Best Selling,title-ascending:A–Z,title-descending:Z–A,price-ascending:Price (Low to High),price-descending:Price (High to Low),created-ascending:Oldest,created-descending:Newest' | split: ',' -%}
+            {%- for opt in sort_options -%}
+              {%- assign opt_parts = opt | split: ':' -%}
+              {%- assign opt_value = opt_parts[0] -%}
+              {%- assign opt_label = opt_parts[1] -%}
+              <a href="{{ collection.url }}{% if current_tags.size > 0 %}/{{ current_tags | join: '+' }}{% endif %}?sort_by={{ opt_value }}"
+                 class="sl-mobile-sort-option {% if current_sort_by == opt_value %}sl-sort-active{% endif %}">
+                {{ opt_label }}
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Mobile: Active tag pills (always visible) {%- endcomment -%}
+      <div class="sl-mobile-active-tags">
+        {%- for current_tag in current_tags -%}
+          <a href="{{ collection.url }}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ current_tag }} ✕</a>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- elsif section.settings.enable_filtering -%}
+    {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+    <div class="page-width" id="main-collection-filters" data-id="{{ section.id }}">
+      {% render 'facets', results: collection, enable_filtering: section.settings.enable_filtering, enable_sorting: section.settings.enable_sorting, collapse_on_larger_devices: section.settings.collapse_on_larger_devices %}
+    </div>
+  {%- endif -%}
+
+  <div id="ProductGridContainer">
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      {%- if collection.products.size == 0 -%}
+        <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
+          <div class="loading-overlay gradient"></div>
+          <div class="title-wrapper center">
+            <h2 class="title title--primary"> 
+              {{ 'sections.collection_template.empty' | t }}<br>
+              {{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url, class: "underlined-link link" }}
+            </h2>
+          </div>
+        </div>
+      {%- else -%}
+        <div class="collection page-width">
+          <div class="loading-overlay gradient"></div>
+
+          <ul class="sl-product-grid" id="product-grid" data-id="{{ section.id }}">
+            {%- assign product_index = 0 -%}
+            {%- for product in collection.products -%}
+              {%- assign product_index = product_index | plus: 1 -%}
+
+              {%- comment -%} Check if a promo card should appear at this position {%- endcomment -%}
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'promo_card' and block.settings.position == product_index -%}
+                  <li class="grid__item" {{ block.shopify_attributes }}>
+                    <div class="sl-promo-card">
+                      {%- if block.settings.image != blank -%}
+                        <img src="{{ block.settings.image | img_url: '400x400' }}"
+                             alt="{{ block.settings.title | escape }}"
+                             loading="lazy"
+                            height=""
+                          width="">
+                      {%- endif -%}
+                      {%- if block.settings.title != blank -%}
+                        <h3 class="sl-promo-title">{{ block.settings.title }}</h3>
+                      {%- endif -%}
+                      {%- if block.settings.text != blank -%}
+                        <p class="sl-promo-text">{{ block.settings.text }}</p>
+                      {%- endif -%}
+                      {%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
+                        <a href="{{ block.settings.button_link }}" class="sl-promo-btn">
+                          {{ block.settings.button_text }}
+                        </a>
+                      {%- endif -%}
+                    </div>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- liquid
+                comment
+                  Check if this collection uses compact layout
+                endcomment
+                assign is_compact_layout = false
+                if section.settings.compact_layout_collections != blank
+                  assign compact_handles = section.settings.compact_layout_collections | split: ','
+                  for handle in compact_handles
+                    assign clean_handle = handle | strip | downcase
+                    if collection.handle == clean_handle
+                      assign is_compact_layout = true
+                      break
+                    endif
+                  endfor
+                endif
+              -%}
+
+              <li class="grid__item">
+                {%- if is_compact_layout -%}
+                  {%- comment -%} COMPACT LAYOUT - Card contains only image/title/price {%- endcomment -%}
+                  <div class="sl-card-wrapper" data-product-id="{{ product.id }}">
+                    <div class="sl-product-card">
+                      <div class="sl-product-image">
+                        <div class="sl-badges">
+                          {%- if product.available == false -%}
+                            <span class="sl-badge sl-badge--soldout">{{ section.settings.soldout_text }}</span>
+                          {%- elsif product.compare_at_price > product.price -%}
+                            <span class="sl-badge sl-badge--sale">{{ section.settings.sale_text }}</span>
+                          {%- endif -%}
+                          {%- assign badge_tags_list = section.settings.badge_tags | split: ',' -%}
+                          {%- for badge_tag in badge_tags_list -%}
+                            {%- assign clean_badge_tag = badge_tag | strip -%}
+                            {%- if clean_badge_tag != blank and product.tags contains clean_badge_tag -%}
+                              <span class="sl-badge sl-badge--tag">{{ clean_badge_tag }}</span>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
+                        <a href="{{ product.url }}">
+                          {%- if product.featured_image -%}
+                            <img src="{{ product.featured_image | img_url: '600x600' }}"
+                                 alt="{{ product.featured_image.alt | escape }}"
+                                 loading="{% if product_index <= 4 %}eager{% else %}lazy{% endif %}"
+                                 width="600"
+                                 height="600">
+                          {%- else -%}
+                            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                          {%- endif -%}
+                        </a>
+                      </div>
+
+                      <div class="sl-product-info">
+                         <h5 class="sl-product-vendor" style="margin:0px;font-size:10px;font-family:var(--font-body-family)">
+                          {{ product.vendor}}
+                        </h5>
+                        <h3 class="sl-product-title">
+                          <a href="{{ product.url }}">{{ product.title }}</a>
+                        </h3>
+                        {%- if section.settings.show_star_rating -%}
+                          <div class="sl-star-rating">
+                            <span class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}">
+                              {{ product.metafields.judgeme.badge }}
+                            </span>
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+
+                    {%- comment -%} Row 2: Button {%- endcomment -%}
+                    <div class="sl-outside-button">
+                      {%- if section.settings.show_add_to_cart -%}
+                        {%- if product.available -%}
+                          <button type="button"
+                                  class="sl-add-to-cart-btn"
+                                  data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+                            <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
+                          </button>
+                        {%- else -%}
+                          <button type="button" class="sl-add-to-cart-btn" disabled>
+                            {{ section.settings.soldout_button_text }} |
+                          </button>
+                        {%- endif -%}
+                      {%- endif -%}
+                    </div>
+
+                    {%- comment -%} Row 3: Variants (always present for uniform spacing) {%- endcomment -%}
+                    <div class="sl-outside-variants">
+                      {%- if section.settings.show_variants and product.has_only_default_variant == false -%}
+                        <div class="sl-variant-options">
+                          <script type="application/json" class="sl-variant-data">
+                            {{ product.variants | json }}
+                          </script>
+                          {%- for option in product.options_with_values -%}
+                            {%- assign option_name_lower = option.name | downcase -%}
+                            {%- assign is_color = false -%}
+                            {%- if option_name_lower contains 'color' or option_name_lower contains 'colour' -%}
+                              {%- assign is_color = true -%}
+                            {%- endif -%}
+                            <div class="sl-option-group" data-option-type="{% if is_color %}color{% else %}size{% endif %}">
+                              <div class="sl-option-values">
+                                {%- assign max_visible = section.settings.max_visible_variants -%}
+                                {%- assign total_values = option.values.size -%}
+                                {%- assign remaining = total_values | minus: max_visible -%}
+                                {%- for value in option.values -%}
+                                  {%- if is_color -%}
+                                    <button type="button"
+                                            class="sl-color-swatch"
+                                            data-option-position="{{ option.position }}"
+                                            data-option-value="{{ value | escape }}"
+                                            style="background-color:{%- assign matching_color = product.metafields.shopify.color-pattern.value | where: "label", value | first -%}
+{{ matching_color.color }}
+;"
+                                            title="{{ value }}"
+                                            {% if forloop.first %}data-selected="true"{% endif %}>
+                                    </button>
+                                    <p>
+
+
+</p>
+                                  {%- else -%}
+                                    {%- if forloop.index <= max_visible -%}
+                                      <button type="button"
+                                              class="sl-size-btn"
+                                              data-option-position="{{ option.position }}"
+                                              data-option-value="{{ value | escape }}"
+                                              {% if forloop.first %}data-selected="true"{% endif %}>
+                                        {{ value }}
+                                      </button>
+                                    {%- endif -%}
+                                  {%- endif -%}
+                                {%- endfor -%}
+                                {%- if remaining > 0 and is_color == false -%}
+                                  <a href="{{ product.url }}" class="sl-more-options">+{{ remaining }} More</a>
+                                {%- endif -%}
+                              </div>
+                            </div>
+                          {%- endfor -%}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {%- else -%}
+                  {%- comment -%} REGULAR LAYOUT - Card with actions outside {%- endcomment -%}
+                  <div class="sl-card-wrapper" data-product-id="{{ product.id }}">
+                    <div class="sl-product-card">
+                      <div class="sl-product-image">
+                        <div class="sl-badges">
+                          {%- if product.available == false -%}
+                            <span class="sl-badge sl-badge--soldout">{{ section.settings.soldout_text }}</span>
+                          {%- elsif product.compare_at_price > product.price -%}
+                            <span class="sl-badge sl-badge--sale">{{ section.settings.sale_text }}</span>
+                          {%- endif -%}
+                          {%- assign badge_tags_list = section.settings.badge_tags | split: ',' -%}
+                          {%- for badge_tag in badge_tags_list -%}
+                            {%- assign clean_badge_tag = badge_tag | strip -%}
+                            {%- if clean_badge_tag != blank and product.tags contains clean_badge_tag -%}
+                              <span class="sl-badge sl-badge--tag">{{ clean_badge_tag }}</span>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
+                        <a href="{{ product.url }}">
+                          {%- if product.featured_image -%}
+                            <img src="{{ product.featured_image | img_url: '600x600' }}"
+                                 alt="{{ product.featured_image.alt | escape }}"
+                                 loading="{% if product_index <= 4 %}eager{% else %}lazy{% endif %}"
+                                 width="600"
+                                 height="600">
+                          {%- else -%}
+                            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                          {%- endif -%}
+                        </a>
+                      </div>
+
+                      <div class="sl-product-info">
+                        <h5 class="sl-product-vendor" style="margin:0px;font-size:10px;font-family:var(--font-body-family)">
+                          {{ product.vendor }}
+                        </h5>
+                        <h3 class="sl-product-title">
+                          <a href="{{ product.url }}">{{ product.title }}</a>
+                        </h3>
+                        {%- if section.settings.show_star_rating -%}
+                          <div class="sl-star-rating">
+                            <span class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}">
+                              {{ product.metafields.judgeme.badge }}
+                            </span>
+                          </div>
+                        {%- endif -%}
+                      </div>
+
+                      {%- comment -%} Variants (inside card) {%- endcomment -%}
+                      <div class="sl-card-variants">
+                      {%- if section.settings.show_variants and product.has_only_default_variant == false -%}
+                      <div class="sl-variant-options">
+                        <script type="application/json" class="sl-variant-data">
+                          {{ product.variants | json }}
+                        </script>
+
+                        {%- for option in product.options_with_values -%}
+                          {%- assign option_name_lower = option.name | downcase -%}
+                          {%- assign is_color = false -%}
+                          {%- if option_name_lower contains 'color' or option_name_lower contains 'colour' -%}
+                            {%- assign is_color = true -%}
+                          {%- endif -%}
+
+                          <div class="sl-option-group" data-option-type="{% if is_color %}color{% else %}size{% endif %}">
+                            <div class="sl-option-values">
+                              {%- assign max_visible = section.settings.max_visible_variants -%}
+                              {%- assign total_values = option.values.size -%}
+                              {%- assign remaining = total_values | minus: max_visible -%}
+
+                              {%- for value in option.values -%}
+                                {%- if is_color -%}
+                                  <button type="button"
+                                          class="sl-color-swatch"
+                                          data-option-position="{{ option.position }}"
+                                          data-option-value="{{ value | escape }}"
+                                          style="background-color: {{ value | handleize }};"
+                                          title="{{ value }}"
+                                          {% if forloop.first %}data-selected="true"{% endif %}>
+                                  </button>
+                                {%- else -%}
+                                  {%- if forloop.index <= max_visible -%}
+                                    <button type="button"
+                                            class="sl-size-btn"
+                                            data-option-position="{{ option.position }}"
+                                            data-option-value="{{ value | escape }}"
+                                            {% if forloop.first %}data-selected="true"{% endif %}>
+                                      {{ value }}
+                                    </button>
+                                  {%- endif -%}
+                                {%- endif -%}
+                              {%- endfor -%}
+
+                              {%- if remaining > 0 and is_color == false -%}
+                                <a href="{{ product.url }}" class="sl-more-options">+{{ remaining }} More</a>
+                              {%- endif -%}
+                            </div>
+                          </div>
+                        {%- endfor -%}
+                      </div>
+                      {%- endif -%}
+                      </div>
+                    </div>
+
+                    {%- comment -%} Action Buttons (outside card) {%- endcomment -%}
+                    <div class="sl-outside-button">
+                      {%- if section.settings.show_add_to_cart -%}
+                          {%- if product.available -%}
+                            <button type="button"
+                                    class="sl-add-to-cart-btn"
+                                    data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+                              <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
+                            </button>
+                          {%- else -%}
+                            <button type="button" class="sl-add-to-cart-btn" disabled>
+                              {{ section.settings.soldout_button_text }}
+                            </button>
+                          {%- endif -%}
+                        {%- endif -%}
+
+                        {%- liquid
+                          assign show_subscribe_btn = false
+                          if section.settings.show_subscribe and product.available
+                            assign show_subscribe_btn = true
+                            if section.settings.subscribe_exclude_collections != blank
+                              assign excluded_handles = section.settings.subscribe_exclude_collections | split: ','
+                              for handle in excluded_handles
+                                assign clean_handle = handle | strip | downcase
+                                if collection.handle == clean_handle
+                                  assign show_subscribe_btn = false
+                                  break
+                                endif
+                              endfor
+                            endif
+                          endif
+                        -%}
+                        {%- if show_subscribe_btn -%}
+                          <a href="{{ product.url }}?subscribe=true"
+                             class="sl-subscribe-btn"
+                             data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+                            {{ section.settings.subscribe_text }}
+                          </a>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="sl-pagination" aria-label="Pagination">
+              {%- if paginate.previous -%}
+                <a href="{{ paginate.previous.url }}" class="sl-page-arrow" aria-label="Previous page">&lsaquo;</a>
+              {%- else -%}
+                <span class="sl-page-arrow sl-page-arrow--disabled" aria-hidden="true">&lsaquo;</span>
+              {%- endif -%}
+
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <a href="{{ part.url }}" class="sl-page-num">{{ part.title }}</a>
+                {%- elsif part.title == '&hellip;' -%}
+                  <span class="sl-page-ellipsis">&hellip;</span>
+                {%- else -%}
+                  <span class="sl-page-current" aria-current="page">{{ part.title }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- if paginate.next -%}
+                <a href="{{ paginate.next.url }}" class="sl-page-arrow" aria-label="Next page">&rsaquo;</a>
+              {%- else -%}
+                <span class="sl-page-arrow sl-page-arrow--disabled" aria-hidden="true">&rsaquo;</span>
+              {%- endif -%}
+            </nav>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+<script>
+(function() {
+  const sectionId = '{{ section.id }}';
+
+  /* ===== AJAX Section Rendering ===== */
+  function renderSection(url, doPushState) {
+    if (doPushState === undefined) doPushState = true;
+    const sectionEl = document.getElementById('SLCollection-' + sectionId);
+    if (!sectionEl) return;
+
+    var grid = sectionEl.querySelector('#ProductGridContainer');
+    if (grid) grid.classList.add('sl-ajax-loading');
+
+    var fetchUrl = new URL(url, window.location.origin);
+    fetchUrl.searchParams.set('section_id', sectionId);
+
+    fetch(fetchUrl.toString())
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, 'text/html');
+        var newSection = doc.getElementById('SLCollection-' + sectionId);
+        if (newSection) {
+          sectionEl.innerHTML = newSection.innerHTML;
+        }
+
+        if (doPushState) {
+          var cleanUrl = new URL(url, window.location.origin);
+          cleanUrl.searchParams.delete('section_id');
+          history.pushState({ slSection: true }, '', cleanUrl.toString());
+        }
+
+        initAll();
+
+        sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      })
+      .catch(function(err) {
+        console.error('Error loading section:', err);
+        window.location.href = url;
+      });
+  }
+
+  /* ===== Bind Filter Tag Links (AJAX) ===== */
+  function bindFilterLinks(sectionEl) {
+    sectionEl.querySelectorAll('.sl-tag-btn').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        renderSection(this.href);
+      });
+    });
+  }
+
+  /* ===== Bind Sort Select (AJAX) ===== */
+  function bindSortSelect(sectionEl) {
+    var sortSelect = sectionEl.querySelector('[data-sort-select]');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function() {
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort_by', this.value);
+        renderSection(url.toString());
+      });
+    }
+  }
+
+  /* ===== Bind Mobile Controls ===== */
+  function bindMobileControls(sectionEl) {
+    var filterToggle = sectionEl.querySelector('[data-mobile-filter-toggle]');
+    var tagDrawer = sectionEl.querySelector('[data-mobile-tag-drawer]');
+    var sortToggle = sectionEl.querySelector('[data-mobile-sort-toggle]');
+    var sortDrawer = sectionEl.querySelector('[data-mobile-sort-drawer]');
+
+    if (filterToggle && tagDrawer) {
+      filterToggle.addEventListener('click', function() {
+        tagDrawer.classList.toggle('sl-drawer-open');
+        if (sortDrawer) sortDrawer.classList.remove('sl-drawer-open');
+      });
+    }
+
+    if (sortToggle && sortDrawer) {
+      sortToggle.addEventListener('click', function() {
+        sortDrawer.classList.toggle('sl-drawer-open');
+        if (tagDrawer) tagDrawer.classList.remove('sl-drawer-open');
+      });
+    }
+
+    sectionEl.querySelectorAll('.sl-mobile-sort-option').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        renderSection(this.href);
+      });
+    });
+  }
+
+  /* ===== Bind Pagination Links (AJAX) ===== */
+  function bindPaginationLinks(sectionEl) {
+    sectionEl.querySelectorAll('.sl-pagination a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        renderSection(this.href);
+      });
+    });
+  }
+
+  /* ===== Mark Unavailable Variants ===== */
+  function initVariants(sectionEl) {
+    sectionEl.querySelectorAll('[data-product-id]').forEach(function(productContainer) {
+      var variantDataScript = productContainer.querySelector('.sl-variant-data');
+      if (!variantDataScript) return;
+
+      try {
+        var variants = JSON.parse(variantDataScript.textContent);
+
+        productContainer.querySelectorAll('.sl-size-btn, .sl-color-swatch').forEach(function(btn) {
+          var optionPosition = parseInt(btn.getAttribute('data-option-position'));
+          var optionValue = btn.getAttribute('data-option-value');
+
+          var hasAvailableVariant = variants.some(function(variant) {
+            var optionKey = 'option' + optionPosition;
+            return variant[optionKey] === optionValue && variant.available;
+          });
+
+          if (!hasAvailableVariant) {
+            btn.setAttribute('data-unavailable', 'true');
+          }
+        });
+      } catch (error) {
+        console.error('Error checking variant availability:', error);
+      }
+    });
+  }
+
+  /* ===== Bind Variant Selection ===== */
+  function bindVariantSelection(sectionEl) {
+    sectionEl.querySelectorAll('.sl-size-btn, .sl-color-swatch').forEach(function(button) {
+      button.addEventListener('click', function() {
+        if (this.getAttribute('data-unavailable') === 'true') return;
+
+        var optionGroup = this.closest('.sl-option-group');
+        var productContainer = this.closest('[data-product-id]');
+        var addToCartBtn = productContainer.querySelector('.sl-add-to-cart-btn');
+        var subscribeBtn = productContainer.querySelector('.sl-subscribe-btn');
+        var clickedBtn = this;
+
+        optionGroup.querySelectorAll('.sl-size-btn, .sl-color-swatch').forEach(function(btn) {
+          btn.removeAttribute('data-selected');
+        });
+
+        clickedBtn.setAttribute('data-selected', 'true');
+
+        var variantDataScript = productContainer.querySelector('.sl-variant-data');
+        if (!variantDataScript) return;
+
+        try {
+          var variants = JSON.parse(variantDataScript.textContent);
+
+          var selectedOptions = {};
+          productContainer.querySelectorAll('.sl-size-btn[data-selected="true"], .sl-color-swatch[data-selected="true"]').forEach(function(selectedBtn) {
+            var position = selectedBtn.getAttribute('data-option-position');
+            var value = selectedBtn.getAttribute('data-option-value');
+            if (position && value) {
+              selectedOptions['option' + position] = value;
+            }
+          });
+
+          var matchingVariant = variants.find(function(variant) {
+            return Object.keys(selectedOptions).every(function(key) { return variant[key] === selectedOptions[key]; }) && variant.available;
+          });
+
+          if (!matchingVariant) {
+            var clickedPosition = clickedBtn.getAttribute('data-option-position');
+            var clickedValue = clickedBtn.getAttribute('data-option-value');
+            var optionKey = 'option' + clickedPosition;
+
+            matchingVariant = variants.find(function(variant) {
+              return variant[optionKey] === clickedValue && variant.available;
+            });
+          }
+
+          if (matchingVariant) {
+            if (addToCartBtn) {
+              addToCartBtn.setAttribute('data-variant-id', matchingVariant.id);
+            }
+
+            if (subscribeBtn) {
+              var baseUrl = subscribeBtn.href.split('?')[0];
+              subscribeBtn.href = baseUrl + '?variant=' + matchingVariant.id + '&subscribe=true';
+              subscribeBtn.setAttribute('data-variant-id', matchingVariant.id);
+            }
+
+            var priceElement = productContainer.querySelector('[data-product-price]');
+            if (priceElement) {
+              priceElement.textContent = Shopify.formatMoney ? Shopify.formatMoney(matchingVariant.price) : '$' + (matchingVariant.price / 100).toFixed(2);
+            }
+
+            var comparePriceElement = productContainer.querySelector('.sl-price-compare');
+            if (comparePriceElement && matchingVariant.compare_at_price) {
+              comparePriceElement.textContent = Shopify.formatMoney ? Shopify.formatMoney(matchingVariant.compare_at_price) : '$' + (matchingVariant.compare_at_price / 100).toFixed(2);
+              comparePriceElement.style.display = 'inline';
+            } else if (comparePriceElement) {
+              comparePriceElement.style.display = 'none';
+            }
+
+            if (matchingVariant.featured_image && clickedBtn.classList.contains('sl-color-swatch')) {
+              var productImage = productContainer.querySelector('.sl-product-image img');
+              if (productImage) {
+                var newImageUrl = matchingVariant.featured_image.src;
+                newImageUrl = newImageUrl.replace(/(_\d+x\d+)?(\.[^.]+)$/, '_600x600$2');
+                productImage.src = newImageUrl;
+                productImage.srcset = newImageUrl + ' 600w';
+                productImage.alt = matchingVariant.featured_image.alt || matchingVariant.name;
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Error selecting variant:', error);
+        }
+      });
+    });
+  }
+
+  /* ===== Bind Add to Cart ===== */
+  function bindAddToCart(sectionEl) {
+    sectionEl.querySelectorAll('.sl-add-to-cart-btn').forEach(function(button) {
+      button.addEventListener('click', function() {
+        var variantId = this.getAttribute('data-variant-id');
+
+        if (!variantId) {
+          alert('Please select a variant');
+          return;
+        }
+
+        var originalContent = this.innerHTML;
+        this.innerHTML = 'Adding...';
+        this.disabled = true;
+
+        var cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+        var formData = new FormData();
+        formData.append('id', variantId);
+        formData.append('quantity', '1');
+
+        if (cart) {
+          try {
+            var sectionsToRender = cart.getSectionsToRender().map(function(s) { return s.id; });
+            formData.append('sections', sectionsToRender);
+            formData.append('sections_url', window.location.pathname);
+            cart.setActiveElement(document.activeElement);
+          } catch (e) {
+            console.log('Cart sections error:', e);
+          }
+        }
+
+        var btn = this;
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' },
+          body: formData
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(response) {
+          if (response.status) {
+            throw new Error(response.description || 'Error adding to cart');
+          }
+
+          btn.innerHTML = 'Added!';
+
+          if (!cart) {
+            window.location = '/cart';
+            return;
+          }
+
+          if (cart.classList.contains('is-empty')) {
+            cart.classList.remove('is-empty');
+          }
+
+          cart.renderContents(response);
+
+          setTimeout(function() {
+            btn.innerHTML = originalContent;
+            btn.disabled = false;
+          }, 1500);
+        })
+        .catch(function(error) {
+          console.error('Error adding to cart:', error);
+          btn.innerHTML = originalContent;
+          btn.disabled = false;
+          alert('Error: ' + error.message);
+        });
+      });
+    });
+  }
+
+  /* ===== Initialize All Interactions ===== */
+  function initAll() {
+    var sectionEl = document.getElementById('SLCollection-' + sectionId);
+    if (!sectionEl) return;
+
+    bindFilterLinks(sectionEl);
+    bindSortSelect(sectionEl);
+    bindMobileControls(sectionEl);
+    bindPaginationLinks(sectionEl);
+    initVariants(sectionEl);
+    bindVariantSelection(sectionEl);
+    bindAddToCart(sectionEl);
+  }
+
+  /* ===== Browser Back/Forward ===== */
+  window.addEventListener('popstate', function() {
+    renderSection(window.location.href, false);
+  });
+
+  /* ===== Initial Setup ===== */
+  initAll();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SL Collection Grid",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 16,
+      "label": "Products per page"
+    },
+    {
+      "type": "text",
+      "id": "compact_layout_collections",
+      "label": "Compact layout collections",
+      "info": "Comma-separated handles. Cards show only image/title/price, button below card.",
+       "default": "merch"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Columns (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2,
+      "label": "Columns (mobile)"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "default": 20,
+      "unit": "px",
+      "label": "Grid gap (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap_mobile",
+      "min": 10,
+      "max": 30,
+      "step": 5,
+      "default": 15,
+      "unit": "px",
+      "label": "Grid gap (mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Card Styling"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#2a2a2a"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "default": 8,
+      "unit": "px",
+      "label": "Card border radius"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "1/1", "label": "Square (1:1)" },
+        { "value": "3/4", "label": "Portrait (3:4)" },
+        { "value": "4/3", "label": "Landscape (4:3)" },
+        { "value": "16/9", "label": "Wide (16:9)" }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "color",
+      "id": "image_background",
+      "label": "Image background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "header",
+      "content": "Product Info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_star_rating",
+      "label": "Show Judge.me star ratings",
+      "info": "Displays star ratings on product cards (requires Judge.me app)",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "star_rating_color",
+      "label": "Star rating color",
+      "default": "#FFD700"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px",
+      "label": "Title font size"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "price_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "unit": "px",
+      "label": "Price font size"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Compare price color",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "Badges"
+    },
+    {
+      "type": "text",
+      "id": "sale_text",
+      "label": "Sale badge text",
+      "default": "Sale"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_color",
+      "label": "Sale badge color",
+      "default": "#722F37"
+    },
+    {
+      "type": "text",
+      "id": "soldout_text",
+      "label": "Sold out badge text",
+      "default": "Sold Out"
+    },
+    {
+      "type": "color",
+      "id": "soldout_badge_color",
+      "label": "Sold out badge color",
+      "default": "#666666"
+    },
+    {
+      "type": "textarea",
+      "id": "badge_tags",
+      "label": "Tags to show as badges",
+      "info": "Comma-separated. Products with these tags show a badge on the card image.",
+      "default": "ACNE SAFE"
+    },
+    {
+      "type": "color",
+      "id": "tag_badge_color",
+      "label": "Tag badge color",
+      "default": "#8C9B6D"
+    },
+    {
+      "type": "header",
+      "content": "Variant Options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variants",
+      "label": "Show variant options",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "max_visible_variants",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Max visible size options"
+    },
+    {
+      "type": "range",
+      "id": "variant_area_min_height",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "px",
+      "label": "Variant area min height",
+      "info": "Helps maintain equal card heights"
+    },
+    {
+      "type": "range",
+      "id": "swatch_size",
+      "min": 18,
+      "max": 32,
+      "step": 2,
+      "default": 24,
+      "unit": "px",
+      "label": "Color swatch size"
+    },
+    {
+      "type": "color",
+      "id": "swatch_selected_border",
+      "label": "Selected swatch border",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "variant_background",
+      "label": "Size button background",
+      "default": "#3a3a3a"
+    },
+    {
+      "type": "color",
+      "id": "variant_text_color",
+      "label": "Size button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "variant_border_color",
+      "label": "Size button border",
+      "default": "#3a3a3a"
+    },
+    {
+      "type": "range",
+      "id": "variant_border_width",
+      "min": 0,
+      "max": 2,
+      "step": 1,
+      "default": 0,
+      "unit": "px",
+      "label": "Size button border width"
+    },
+    {
+      "type": "range",
+      "id": "variant_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "default": 16,
+      "unit": "px",
+      "label": "Size button border radius"
+    },
+    {
+      "type": "color",
+      "id": "variant_hover_border",
+      "label": "Size button hover border",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "variant_selected_background",
+      "label": "Selected button background",
+      "default": "#4a4a4a"
+    },
+    {
+      "type": "color",
+      "id": "variant_selected_text",
+      "label": "Selected button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "variant_selected_border",
+      "label": "Selected button border",
+      "default": "#4a4a4a"
+    },
+    {
+      "type": "header",
+      "content": "Add to Cart Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_add_to_cart",
+      "label": "Show Add to Cart button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_text",
+      "label": "Add to cart text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "soldout_button_text",
+      "label": "Sold out button text",
+      "default": "Sold Out"
+    },
+    {
+      "type": "color",
+      "id": "atc_button_background",
+      "label": "Button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "atc_button_text",
+      "label": "Button text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "atc_button_border_color",
+      "label": "Button border color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "atc_button_border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": "px",
+      "label": "Button border width"
+    },
+    {
+      "type": "header",
+      "content": "Subscribe Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subscribe",
+      "label": "Show Subscribe & Save button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "subscribe_text",
+      "label": "Subscribe button text",
+      "default": "Subscribe & Save"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_exclude_collections",
+      "label": "Hide on collections (handles)",
+      "info": "Comma-separated collection handles, e.g. merch, accessories",
+      "default": "merch"
+    },
+    {
+      "type": "color",
+      "id": "subscribe_button_background",
+      "label": "Button background",
+      "default": "#722F37"
+    },
+    {
+      "type": "color",
+      "id": "subscribe_button_text",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subscribe_button_border_color",
+      "label": "Button border color",
+      "default": "#722F37"
+    },
+    {
+      "type": "range",
+      "id": "subscribe_button_border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": "px",
+      "label": "Button border width"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "default": 0,
+      "unit": "px",
+      "label": "Button border radius (both)"
+    },
+    {
+      "type": "header",
+      "content": "Promo Card Styling"
+    },
+    {
+      "type": "color",
+      "id": "promo_background",
+      "label": "Promo card background",
+      "default": "#722F37"
+    },
+    {
+      "type": "color",
+      "id": "promo_text_color",
+      "label": "Promo text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "promo_button_background",
+      "label": "Promo button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "promo_button_text",
+      "label": "Promo button text",
+      "default": "#722F37"
+    },
+    {
+      "type": "header",
+      "content": "Tag Filtering & Sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_tag_filtering",
+      "default": true,
+      "label": "Enable tag filter bar",
+      "info": "Shows tag-based pill filters above the grid"
+    },
+    {
+      "type": "text",
+      "id": "filter_label",
+      "label": "Filter bar label",
+      "default": "Filter For Your Skin"
+    },
+    {
+      "type": "textarea",
+      "id": "filter_tags",
+      "label": "Filter tags",
+      "info": "Comma-separated tags to show as filter pills",
+      "default": "Acne Safe, Anti-Aging, SPF, Sensitive Skin, Body Care"
+    },
+    {
+      "type": "color",
+      "id": "filter_tag_border_color",
+      "label": "Filter tag border",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "filter_tag_text_color",
+      "label": "Filter tag text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "filter_tag_active_bg",
+      "label": "Active filter background",
+      "default": "#8C9B6D"
+    },
+    {
+      "type": "color",
+      "id": "filter_tag_active_text",
+      "label": "Active filter text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "Enable sorting"
+    },
+    {
+      "type": "color",
+      "id": "pagination_active_color",
+      "label": "Pagination active page color",
+      "default": "#8C9B6D"
+    },
+    {
+      "type": "header",
+      "content": "Shopify Facets (Fallback)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": false,
+      "label": "Enable Shopify facet filtering",
+      "info": "Used when tag filtering is disabled"
+    },
+    {
+      "type": "checkbox",
+      "id": "collapse_on_larger_devices",
+      "default": false,
+      "label": "Collapse facets on desktop"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promo_card",
+      "name": "Promo Card",
+      "settings": [
+        {
+          "type": "range",
+          "id": "position",
+          "min": 1,
+          "max": 20,
+          "step": 1,
+          "default": 3,
+          "label": "Position in grid",
+          "info": "Insert promo card before this product number"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Special Offer"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Save 15% on your first subscription order"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

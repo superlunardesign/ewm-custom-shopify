@@ -1,0 +1,576 @@
+{% comment %}
+  Responsive Split Section - Simplified Version
+  Essential customization options only
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} .wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100vw;
+    max-width: 1440px;
+    margin: auto;
+    {% if section.settings.auto_height_desktop %}
+      height: auto;
+    {% else %}
+      height: {{ section.settings.section_height_desktop }}vw;
+    {% endif %}
+    padding: {{ section.settings.wrapper_padding }}%;
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .box1 {
+    grid-column: {% if section.settings.swap_horizontal %}2{% else %}1{% endif %};
+    grid-row: 1;
+    {% if section.settings.image != blank %}
+      background-image: url('{{ section.settings.image | image_url: width: 1500 }}');
+    {% endif %}
+    height: auto;
+    {% if section.settings.auto_height_desktop %}
+      min-height: 400px;
+    {% endif %}
+    background-position: {{ section.settings.image_position_x }}% {{ section.settings.image_position_y }}%;
+    background-size: cover;
+  }
+
+  #shopify-section-{{ section.id }} .box2 {
+    grid-column: {% if section.settings.swap_horizontal %}1{% else %}2{% endif %};
+    grid-row: 1;
+    padding: 5%;
+    align-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .box2 h2 {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
+    margin-bottom: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .box2 h4 {
+    color: {{ section.settings.subheading_color }};
+    font-size: {{ section.settings.subheading_size }}px;
+    margin-bottom: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .box2 p {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.text_size }}px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  #shopify-section-{{ section.id }} .custom-button {
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    padding: 2% 3%;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    {% if section.settings.button_border_radius > 0 %}
+      border-radius: {{ section.settings.button_border_radius }}px;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .custom-button:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text_color }};
+  }
+
+  /* Tablet Layout */
+  @media (max-width: 1100px) {
+    #shopify-section-{{ section.id }} .wrapper {
+      grid-template-columns: repeat(3, 1fr);
+      {% if section.settings.auto_height_tablet %}
+        height: auto;
+      {% else %}
+        height: {{ section.settings.section_height_tablet }}vw;
+      {% endif %}
+      padding: {{ section.settings.wrapper_padding_tablet }}%;
+    }
+    
+    #shopify-section-{{ section.id }} .box1 {
+      {% if section.settings.swap_horizontal %}
+        grid-column-start: 3;
+        grid-column-end: 4;
+      {% else %}
+        grid-column-start: 1;
+        grid-column-end: 2;
+      {% endif %}
+      width: 33vw;
+      {% if section.settings.auto_height_tablet %}
+        min-height: 300px;
+      {% endif %}
+    }
+    
+    #shopify-section-{{ section.id }} .box2 {
+      {% if section.settings.swap_horizontal %}
+        grid-column-start: 1;
+        grid-column-end: 3;
+      {% else %}
+        grid-column-start: 2;
+        grid-column-end: 4;
+      {% endif %}
+      grid-row: 1;
+    }
+  }
+
+  /* Mobile Layout */
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .wrapper {
+      grid-template-columns: 1fr;
+      height: auto;
+      padding: {{ section.settings.wrapper_padding_mobile }}%;
+    }
+    
+    #shopify-section-{{ section.id }} .box1 {
+      grid-column: 1;
+      grid-row: 1;
+      width: 100%;
+      height: 40vh;
+    }
+    
+    #shopify-section-{{ section.id }} .box2 {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    #shopify-section-{{ section.id }} .box2 h2 {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .box2 h4 {
+      font-size: {{ section.settings.mobile_subheading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .box2 p {
+      font-size: {{ section.settings.mobile_text_size }}px;
+    }
+  }
+
+  /* Animation Keyframes */
+  @keyframes floatIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Apply animations when enabled */
+  {% if section.settings.enable_animation %}
+    #shopify-section-{{ section.id }} .box2 {
+      animation: floatIn {{ section.settings.animation_duration }}ms ease-out;
+      animation-delay: {{ section.settings.animation_delay }}ms;
+      animation-fill-mode: both;
+    }
+  {% endif %}
+</style>
+
+<div class="wrapper">
+  {% if section.settings.swap_horizontal %}
+    <div class="box2">
+      {% if section.settings.heading != blank %}
+        <h2>{{ section.settings.heading }}</h2>
+      {% endif %}
+      
+      {% if section.settings.subheading != blank %}
+        <h4>{{ section.settings.subheading }}</h4>
+      {% endif %}
+      
+      {% if section.settings.text != blank %}
+        <p>{{ section.settings.text | newline_to_br }}</p>
+      {% endif %}
+      
+      {% if section.settings.text2 != blank %}
+        <p>{{ section.settings.text2 | newline_to_br }}</p>
+      {% endif %}
+      
+      {% if section.settings.show_button and section.settings.button_text != blank %}
+        <br><br>
+        <a class="custom-button" href="{{ section.settings.button_link }}">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+    <div class="box1">&nbsp;</div>
+  {% else %}
+    <div class="box1">&nbsp;</div>
+    <div class="box2">
+      {% if section.settings.heading != blank %}
+        <h2>{{ section.settings.heading }}</h2>
+      {% endif %}
+      
+      {% if section.settings.subheading != blank %}
+        <h4>{{ section.settings.subheading }}</h4>
+      {% endif %}
+ 
+      {% if section.settings.text != blank %}
+        <p>{{ section.settings.text | newline_to_br }}</p>
+      {% endif %}
+      
+      {% if section.settings.text2 != blank %}
+        <p>{{ section.settings.text2 | newline_to_br }}</p>
+      {% endif %}
+      
+      {% if section.settings.show_button and section.settings.button_text != blank %}
+        <br><br>
+        <a class="custom-button" href="{{ section.settings.button_link }}">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+{% if section.settings.enable_animation %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('#shopify-section-{{ section.id }}');
+    const valueProps = section.querySelectorAll('.box2');
+    
+    // Reset animations initially
+    valueProps.forEach(function(elem) {
+      elem.style.animationPlayState = 'paused';
+    });
+    
+    // Create intersection observer
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          // Trigger animations for all value props
+          valueProps.forEach(function(elem) {
+            elem.style.animationPlayState = 'running';
+          });
+          // Unobserve after triggering
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Observe the section
+    observer.observe(section);
+  });
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Split Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "swap_horizontal",
+      "label": "Swap Image and Content Position",
+      "info": "Move image to right side and content to left side",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_height_desktop",
+      "label": "Auto Height - Desktop",
+      "info": "Check for automatic height based on content",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "section_height_desktop",
+      "label": "Desktop Section Height",
+      "info": "Only applies when Auto Height is unchecked",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "vw",
+      "default": 35
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_height_tablet",
+      "label": "Auto Height - Tablet",
+      "info": "Check for automatic height on tablet",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "section_height_tablet",
+      "label": "Tablet Section Height",
+      "info": "Only applies when Auto Height is unchecked",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "vw",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "wrapper_padding",
+      "label": "Desktop Wrapper Padding",
+      "info": "Padding around the entire section",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "wrapper_padding_tablet",
+      "label": "Tablet Wrapper Padding",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "%",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "wrapper_padding_mobile",
+      "label": "Mobile Wrapper Padding",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "%",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "image_position_x",
+      "label": "Image Horizontal Position",
+      "info": "Adjust left/right focal point (0% = left, 50% = center, 100% = right)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_position_y",
+      "label": "Image Vertical Position",
+      "info": "Adjust up/down focal point (0% = top, 50% = center, 100% = bottom)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Animation Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable Float-in Animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation Duration (ms)",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation Start Delay (ms)",
+      "min": 0,
+      "max": 1000,
+      "step": 100,
+      "default": 200
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Finally, Marketing That Gets the Nuance of What You Do"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Your Marketing Partner Who Sees Patterns Others Miss"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "First Paragraph",
+      "default": "Teacher turned industry insider who discovered the wedding world during my own divorce—a clarifying moment that revealed how misunderstood this industry really is. My ADHD isn't a quirk; it's my superpower. I spot cultural shifts before they happen, capture moments in real-time (goodbye, irrelevant content calendars), and become so embedded in your brand that you'll forget I'm not actually on your team."
+    },
+    {
+      "type": "textarea",
+      "id": "text2",
+      "label": "Second Paragraph",
+      "default": "The result?\nYou focus on creating magic.\nI make sure the right people see it."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Font Sizes - Desktop"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading Size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Font Sizes - Mobile"
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile Heading Size",
+      "min": 18,
+      "max": 40,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_subheading_size",
+      "label": "Mobile Subheading Size",
+      "min": 14,
+      "max": 30,
+      "step": 2,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "label": "Mobile Text Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Work With Us →"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button Background",
+      "default": "#5f9ea0"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button Hover Background",
+      "default": "#4a7c80"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button Border Radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

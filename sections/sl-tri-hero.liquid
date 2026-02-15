@@ -1,0 +1,155 @@
+{% comment %} Tri Banner Section {% endcomment %}
+<section id="{{ section.id }}" class="banner">
+  <style>
+    /* Core Styles */
+    #{{ section.id }} .banner {
+      display: flex;
+      flex-wrap: wrap;
+      height: auto;
+
+
+    }
+    @media (min-width:801px){
+      #{{ section.id }} .banner{
+      height:70vh;}
+    }
+    #{{ section.id }} .banner-left {
+      flex: 0 0 58%;
+      background: url('{{ section.settings.left_image | img_url: '600x400' }}') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      margin:1%;
+      border-radius:12px;
+      color: var(--color-foreground);
+    }
+    #{{ section.id }} .banner-right {
+      flex: 0 0 40%;
+      display: flex;
+      flex-direction: column;
+      align-items:center;
+    }
+    #{{ section.id }} .small-cell {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-blend-mode: darken;
+      padding: 1rem;
+      color: var(--color-foreground);
+      border-radius:12px;
+      margin:2.65%;
+      width:100%;
+    }
+
+    /* Typography */
+    #{{ section.id }} .headline {
+      font-size: clamp(30px, 5vw, 48px);
+      margin-bottom: 0.5em;
+      max-width: 80%;
+      margin:auto;
+      
+    }
+    #{{ section.id }} .body-text {
+      font-size: clamp(16px, 2.5vw, 20px);
+      margin-bottom: 1em;
+      max-width: 80%;
+      margin:auto;
+      justify-self:center;
+    }
+    #{{ section.id }} .small-heading {
+      font-size: clamp(18px, 4vw, 32px);
+      margin-bottom: 0.5em;
+           justify-self:center;
+    }
+
+
+    /* Button styling uses Dawn defaults */
+    @media (max-width: 1000px) {
+      #{{ section.id }} .banner { flex-direction: column; height:auto;}
+      #{{ section.id }} .banner-left, #{{ section.id }} .banner-right, #{{ section.id }} .small-cell {
+        flex: none;
+        width: 100%;
+        text-align: -webkit-center;
+      }
+
+      #{{ section.id }}{
+      align-content: center, -webkit-center;
+    }
+      .small-cell{
+      margin: 1% auto !important;
+    padding:10% 0% !important;}
+
+    .banner-left{
+    padding: 20% 0% !important;
+  margin: auto!important;
+  margin-bottom: 1% !important;
+}
+  .banner-right{ align-items: center!important;
+}
+    
+
+    .banner{
+    margin: 2%!important;
+  height:auto !important; 
+}
+  }
+
+  </style>
+
+  <div class="banner">
+    <div class="banner-left">
+      <div>
+        <h1 class="headline">{{ section.settings.left_headline }}</h1>
+        <p class="body-text">{{ section.settings.left_body }}</p>
+        <a href="{{ section.settings.left_button_link }}" class="button">{{ section.settings.left_button_text }}</a>
+      </div>
+    </div>
+
+    <div class="banner-right">
+      <div class="small-cell" style="background-image: url('{{ section.settings.top_right_image | img_url: '600x400' }}');">
+        <div>
+          <h2 class="small-heading">{{ section.settings.top_right_heading }}</h2>
+          <a href="{{ section.settings.top_right_button_link }}" class="button">{{ section.settings.top_right_button_text }}</a>
+        </div>
+      </div>
+      <div class="small-cell" style="background-image: url('{{ section.settings.bottom_right_image | img_url: '600x400' }}');">
+        <div>
+          <h2 class="small-heading">{{ section.settings.bottom_right_heading }}</h2>
+          <a href="{{ section.settings.bottom_right_button_link }}" class="button">{{ section.settings.bottom_right_button_text }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% schema %}
+  {
+    "name": "Tri Banner",
+    "settings": [
+      { "type": "image_picker", "id": "left_image", "label": "Left Background Image" },
+      { "type": "text", "id": "left_headline", "label": "Left Headline", "default": "Your Main Headline Here" },
+      { "type": "textarea", "id": "left_body", "label": "Left Body Text", "default": "Some engaging sub-text goes here to hook your visitor and explain your offer." },
+      { "type": "text", "id": "left_button_text", "label": "Left Button Text", "default": "Learn More" },
+      { "type": "url", "id": "left_button_link", "label": "Left Button Link" },
+
+      { "type": "image_picker", "id": "top_right_image", "label": "Top Right Background Image" },
+      { "type": "text", "id": "top_right_heading", "label": "Top Right Heading", "default": "Feature One" },
+      { "type": "text", "id": "top_right_button_text", "label": "Top Right Button Text", "default": "Explore" },
+      { "type": "url", "id": "top_right_button_link", "label": "Top Right Button Link" },
+
+      { "type": "image_picker", "id": "bottom_right_image", "label": "Bottom Right Background Image" },
+      { "type": "text", "id": "bottom_right_heading", "label": "Bottom Right Heading", "default": "Feature Two" },
+      { "type": "text", "id": "bottom_right_button_text", "label": "Bottom Right Button Text", "default": "Discover" },
+      { "type": "url", "id": "bottom_right_button_link", "label": "Bottom Right Button Link" }
+    ],
+    "presets": [
+      { "name": "Tri Banner", "category": "Custom" }
+    ]
+  }
+  {% endschema %}
+</section>

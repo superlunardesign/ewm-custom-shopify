@@ -1,0 +1,200 @@
+{% comment %}
+  Product Highlights Display
+  Shows highlighted features with Font Awesome icons
+  Uses metafield: custom.product_highlights2
+{% endcomment %}
+
+
+TEST
+
+{% if product.metafields.custom.product_highlights2 %}
+  <div class="product-highlights-wrapper">
+    <div class="highlights-container">
+      <h3 class="highlights-title">{{ 'Highlights' }}</h3>
+      <div class="highlights-grid">
+        {% for highlight in product.metafields.custom.product_highlights2.value %}
+          <div class="highlight-item">
+            <span class="highlight-icon">
+              {% case highlight %}
+                {% when 'Safe on Sensitive Skin' %}
+                  <i class="fas fa-smile"></i>
+                {% when 'Can be Used Daily' %}
+                  <i class="fas fa-calendar-check"></i>
+                {% when 'Dermatologist Tested' %}
+                  <i class="fas fa-user-md"></i>
+                {% when 'Cruelty Free' %}
+                  <i class="fas fa-paw"></i>
+                {% when 'Organic' %}
+                  <i class="fas fa-leaf"></i>
+                {% when 'Vegan' %}
+                  <i class="fas fa-seedling"></i>
+                {% when 'Fragrance Free' %}
+                  <i class="fas fa-spray-can"></i>
+                {% when 'Hypoallergenic' %}
+                  <i class="fas fa-shield-alt"></i>
+                {% when 'Paraben Free' %}
+                  <i class="fas fa-ban"></i>
+                {% when 'Sulfate Free' %}
+                  <i class="fas fa-tint-slash"></i>
+                {% when 'Clinically Tested' %}
+                  <i class="fas fa-flask"></i>
+                {% when 'pH Balanced' %}
+                  <i class="fas fa-balance-scale"></i>
+                {% else %}
+                  <i class="fas fa-check"></i>
+              {% endcase %}
+            </span>
+            <span class="highlight-text">{{ highlight }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<style>
+  .product-highlights-wrapper {
+    margin: 2rem 0;
+    padding: 0;
+  }
+
+  .highlights-container {
+    width: 100%;
+  }
+
+  .highlights-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--gradient-base-text, #1a1a1a);
+    letter-spacing: -0.02em;
+  }
+
+  .highlights-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .highlight-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px 10px 10px;
+    background: #f5f5f5;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    color: var(--gradient-base-text, #333);
+    transition: all 0.2s ease;
+    font-family: var(--font-body-family);
+  }
+
+  .highlight-item:hover {
+    background: #efefef;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .highlight-icon {
+    width: 36px;
+    height: 36px;
+    background: #c8e6c9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .highlight-icon i {
+    font-size: 16px;
+    color: #2e7d32;
+  }
+
+  .highlight-text {
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+  }
+
+  /* Color variations for different highlight types */
+  .highlight-item:has(.fa-smile) .highlight-icon {
+    background: #e3f2fd;
+  }
+  .highlight-item:has(.fa-smile) .highlight-icon i {
+    color: #1976d2;
+  }
+
+  .highlight-item:has(.fa-calendar-check) .highlight-icon {
+    background: #f3e5f5;
+  }
+  .highlight-item:has(.fa-calendar-check) .highlight-icon i {
+    color: #7b1fa2;
+  }
+
+  .highlight-item:has(.fa-user-md) .highlight-icon {
+    background: #e8f5e9;
+  }
+  .highlight-item:has(.fa-user-md) .highlight-icon i {
+    color: #388e3c;
+  }
+
+  .highlight-item:has(.fa-paw) .highlight-icon {
+    background: #fff3e0;
+  }
+  .highlight-item:has(.fa-paw) .highlight-icon i {
+    color: #f57c00;
+  }
+
+  .highlight-item:has(.fa-leaf) .highlight-icon,
+  .highlight-item:has(.fa-seedling) .highlight-icon {
+    background: #c8e6c9;
+  }
+  .highlight-item:has(.fa-leaf) .highlight-icon i,
+  .highlight-item:has(.fa-seedling) .highlight-icon i {
+    color: #2e7d32;
+  }
+
+  /* Mobile responsive */
+  @media only screen and (max-width: 767px) {
+    .highlights-title {
+      font-size: 1.5rem;
+    }
+    
+    .highlights-grid {
+      gap: 8px;
+    }
+    
+    .highlight-item {
+      font-size: 0.875rem;
+      padding: 8px 14px 8px 8px;
+    }
+    
+    .highlight-icon {
+      width: 32px;
+      height: 32px;
+    }
+    
+    .highlight-icon i {
+      font-size: 14px;
+    }
+  }
+
+  @media only screen and (max-width: 576px) {
+    .highlight-item {
+      font-size: 0.8rem;
+      padding: 6px 12px 6px 6px;
+    }
+    
+    .highlight-icon {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .highlight-icon i {
+      font-size: 12px;
+    }
+  }
+</style>

@@ -1,0 +1,403 @@
+{% assign main_current_variant = product.selected_or_first_available_variant %}
+{%- assign buy_together_metafields = product.metafields.my_fields.buy_together | split: ',' -%}
+{% if buy_together_metafields != blank %}
+  <div class="product-attributes fbt">
+    <div class="fbt-wrapper">
+      <!--
+        <div  class="fbt-product" id="dT_fbt-product-{{ main_current_variant.id }}" data-fbt-product-id="{{ main_current_variant.id }}" data-fbt-product-handle="{{ product.handle }}">
+                  {% assign featured_media = main_current_variant.featured_media %}
+                  <div class="product-fbt__media"  data-fb-media-id="{{ featured_media.id }}">
+                  {{ featured_media | image_url: width: 250 | image_tag }}
+                  </div>
+        <div class="fbt-product__meta">
+                  <select name="selectVariant" class="selectVariant selectVariant0">
+                  {% for variant in product.variants %}
+                  <option value="{{ variant.id }}" data-option-price="{{ variant.price | money }}"
+                  {% if variant == main_current_variant %}selected="selected"{% endif %}>
+                  {{ variant.title }} - {{ variant.price | money }}
+                  </option>
+                  {% endfor %}
+                  </select>
+            
+                <span data-decrease>-</span>
+                <input data-value type="text"  id="quantity0" name="v-quantity" class="v-qty" value="1" />
+                <span data-increase>+</span>
+        </div>
+            </div>
+      -->
+      {% for bt_handle in buy_together_metafields %}
+        {% assign bt_array = bt_handle | strip %}
+        {%- assign pro = all_products[bt_array] -%}
+        <div
+          class="fbt-product"
+          id="dT_fbt-product-{{ pro.id }}"
+          data-fbt-product-id="{{ pro.id }}"
+          data-fbt-product-handle="{{ pro.handle }}"
+        >
+          {%- assign current_variant = pro.selected_or_first_available_variant -%}
+          {%- assign featured_media = current_variant.featured_media -%}
+          <div class="product-fbt__media" data-fb-media-id="{{ featured_media.id }}">
+            {{ featured_media | image_url: width: 250 | image_tag }}
+          </div>
+          <div class="fbt-product__meta">
+            <select name="selectVariant" class="selectVariant selectVariant{{ forloop.index }} d-none">
+              {%- for variant in pro.variants -%}
+                <option
+                  value="{{ variant.id }}"
+                  data-option-price="{{ variant.price | money }}"
+                  {% if variant == current_variant %}
+                    selected="selected"
+                  {% endif %}
+                >
+                  {{ variant.title }} - {{ variant.price | money }}
+                </option>
+              {%- endfor -%}
+            </select>
+
+        <ul class="custom-select">
+          <li class="init li-unselected">Select  {% render 'icon-caret' %} </li>
+         {%- for variant in pro.variants -%}
+                <li
+                  data-option-value="{{ variant.id }}"
+                  data-option-price="{{ variant.price | money }}"
+                  {% if variant == current_variant %}
+                    class="active"
+                  {% endif %}
+                >
+                  {{ variant.title }} - {{ variant.price | money }}
+                </li>
+              {%- endfor -%}
+        </ul>
+
+        
+            <div class="qty-controls">
+              <span data-decrease></span>
+              <input data-value type="text" id="quantity{{ forloop.index }}" name="v-quantity" class="v-qty" value="1">
+              <span data-increase></span>
+            </div>
+          </div>
+          </div>
+      {%- endfor -%}
+
+    </div>
+
+    <input type="hidden" id="fbt-hidden-qty" name="fbt-hidden-qty" value="1,1">
+    <input
+      type="hidden"
+      id="fbt-hidden-values"
+      name="fbt-hidden-values"
+      value="{%- for bt_handle in buy_together_metafields -%}{%- assign bt_array = bt_handle | strip -%}{%- assign pro = all_products[bt_array] -%}{{- pro.selected_or_first_available_variant.id -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}"
+    >
+    <input type="button" value="{{ 'products.product.bought_together' | t }}" id="add-frequently-bought" class="button" disabled>
+  </div>
+  <script type="text/javascript">
+      $(function() {
+    	$('[data-decrease]').click(decrease);
+    	$('[data-increase]').click(increase);
+    	$('[data-value]').change(valueChange);
+    });
+
+    function decrease() {
+    	var value = $(this).parent().find('[data-value]').val();
+    	if(value > 1) {
+    		value--;
+    		$(this).parent().find('[data-value]').val(value);
+    	}
+    }
+
+    function increase() {
+    	var value = $(this).parent().find('[data-value]').val();
+    	if(value < 100) {
+    		value++;
+    		$(this).parent().find('[data-value]').val(value);
+    	}
+    }
+
+    function valueChange() {
+    	var value = $(this).val();
+    	if(value == undefined || isNaN(value) == true || value <= 0) {
+    		$(this).val(1);
+    	} else if(value >= 101) {
+    		$(this).val(100);
+    	}
+    }
+
+      var variantArray = [];
+      var qtyArray = [];
+
+      variantArray =  $('#fbt-hidden-values').val();
+      qtyArray =  $('#fbt-hidden-qty').val();
+
+
+
+      $('.fbt-wrapper .fbt-product').each(function( index ) {
+        
+          $(this).find("select.selectVariant").change(function(){
+           variantArray = "";
+            var VariantIDs = [];
+            $.each($(".selectVariant option:selected"), function(){
+              VariantIDs.push($(this).val());
+            });
+            $('#fbt-hidden-values').val('');
+            $('#fbt-hidden-values').val(VariantIDs.join(","));
+            VariantIDs = "";
+            variantArray =  $('#fbt-hidden-values').val();
+        });
+
+     });
+
+
+      $('#add-frequently-bought').on('click', function()  {
+        var VariantQty = $("input[name='v-quantity']").map(function() {
+        return this.value;
+    }).get();
+        $('#fbt-hidden-qty').val(VariantQty);
+        qtyArray =  $('#fbt-hidden-qty').val();
+       addAllItems(variantArray, qtyArray);
+       });
+
+
+
+      function addAllItems(array, qtyArray){
+        Shopify.queue = [];
+        var quantity = 1 ;
+        var newArray = '';
+        var qArray = '';
+        newArray = array.split(',');
+        qArray = qtyArray.split(',');
+        for (var i = 0; i < newArray.length; i++) {
+          product = newArray[i]
+          qty = qArray[i]
+          Shopify.queue.push({
+            variantId: product,
+            quanity: qty,
+          });
+        }
+
+
+        Shopify.moveAlong = function() {
+          if (Shopify.queue.length) {
+            var request = Shopify.queue.shift();
+            var data = 'id='+ request.variantId + '&quantity='+request.quanity;
+            console.log(data);
+            $.ajax({
+              type: 'POST',
+              url: '/cart/add.js',
+              dataType: 'json',
+              data: data,
+              success: function(res){
+                Shopify.moveAlong();
+               // quantity += 1;
+              },
+              error: function(){
+                if (Shopify.queue.length){
+                  Shopify.moveAlong();
+                } else {
+                  //$('.product-form__buttons .product-form__submit').trigger('click');
+                }
+              }
+            });
+          }
+          else {
+            //quantity += 1;
+            addToCartOk(quantity);
+          }
+        };
+        Shopify.moveAlong();
+      };
+
+      function addToCartOk(quantity){
+        $('.product-form__buttons .product-form__s').trigger('click');
+      }
+ 
+  </script>
+{% endif %}
+
+<style>
+    .product-attributes.fbt { display: block; border: 1px solid var(--gradient-base-accent-1); padding: 10px;}
+    .product-attributes.fbt .fbt-wrapper { display: flex; flex-direction: column; margin:0; padding: 0; justify-content: flex-start; }
+    .product-attributes.fbt .fbt-wrapper .select2  {display:none;}
+    .product-attributes.fbt .fbt-wrapper .fbt-product {
+      margin: 10px;
+      text-align: center;
+      color: var(--gradient-base-accent-1);
+      display: grid;
+      grid-template-columns: 100px 1fr;
+          gap: 15px;
+      background-color: var(--gradient-base-accent-2);
+      padding: 15px;
+    }
+    .product-attributes.fbt .fbt-wrapper .fbt-product .price { padding:10px; }
+    .product-attributes.fbt .fbt-wrapper .fbt-product img { aspect-ratio: 1/1; object-fit: contain; height:100%;}
+    .product-attributes.fbt #add-frequently-bought {
+      margin: 10px auto;
+      text-align: center;
+      display: block;
+  /*     background: var(--gradient-base-background-2);
+      color: var(--gradient-base-accent-2); */
+      border: var(--buttons-radius);
+  /*     padding: 15px; */
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .product-attributes.fbt .qty-controls{ height:40px; border: 1px solid var(--gradient-base-accent-1); display:flex;  width: 160px;}
+    .product-attributes.fbt .qty-controls span {
+      cursor: pointer;
+      flex: 1 1 auto;
+      position:relative;
+      width: 40px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s linear;
+    }
+    .product-attributes.fbt .qty-controls span:hover {background-color: var(--gradient-base-background-1); color: var(--gradient-base-accent-1);}
+    .product-attributes.fbt .qty-controls .v-qty{
+      width: 60px;
+      text-align: center;
+      border-width: 0 1px
+    }
+    .product-attributes.fbt .fbt-product__meta {     
+      align-items: center;
+    display: grid;
+/*     grid-template-columns: auto auto; */
+    gap: 15px; }
+    .product-attributes.fbt .fbt-product__meta .selectVariant { background-color: var(--gradient-base-background-1); padding: 10px; outline: none; wdith:160px;  border: none; box-shadow: none; }
+    .product-attributes.fbt .qty-controls span[data-increase]:before,
+    .product-attributes.fbt .qty-controls span[data-increase]:after,
+    .product-attributes.fbt .qty-controls span[data-decrease]:before {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 1px;
+      background-color: currentColor;
+      left:0;
+      right:0;
+      margin: auto;
+  }
+    .product-attributes.fbt .qty-controls span[data-increase]:after{
+      transform: rotate(90deg);
+  }
+    @media only screen and (max-width: 520px) {
+      .product-attributes.fbt .fbt-product__meta {
+        grid: none;
+  /*       margin: auto; */
+      }
+    }
+    @media only screen and (max-width: 430px) {
+    .product-attributes.fbt .fbt-wrapper .fbt-product{
+      grid-template-columns:unset;
+    }
+    .product-attributes.fbt .fbt-product__meta{margin:auto;}
+    }
+    @media only screen and (min-width: 751px) and (max-width: 991px) {
+      .product-attributes.fbt .fbt-product__meta {
+        grid: none;
+        margin: auto;
+      }
+    }
+    @media only screen and (min-width: 1201px) and (max-width: 1420px) {
+      .product-attributes.fbt .fbt-product__meta {
+        grid: none;
+        margin: auto;
+      }
+    }
+  ul.custom-select {
+    list-style: none;
+    background: var(--gradient-base-background-1);
+    padding: 10px;
+    z-index:3;
+}
+    .product-attributes.fbt .fbt-product__meta .selectVariant{display:none;}
+    span[data-decrease]:before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 1px;
+    background-color: currentColor;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+    span[data-increase]:before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 1px;
+    background-color: currentColor;
+    left: 0;
+    right: 0;
+    margin: auto;
+    }
+    span[data-increase]:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 1px;
+    background-color: currentColor;
+    left: 0;
+    right: 0;
+    margin: auto;
+    }
+    span[data-decrease] {
+    cursor: pointer;
+    flex: 1 1 auto;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s linear;
+}
+    span[data-increase]{
+      cursor: pointer;
+    flex: 1 1 auto;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s linear;
+    }
+     span[data-increase]:after {
+    transform: rotate(90deg);
+     }
+ul.custom-select { 
+    background: white;
+    list-style: none;
+    height: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    line-height: 1;
+    border: 1px solid black;
+    width: 160px;
+}
+/* ul.custom-select li { 
+  padding: 19px 20px; z-index: 2;
+} */
+ul.custom-select.open li:not(.init) {
+  display:block;
+}
+ul.custom-select li:not(.init) { 
+    float: left;
+    padding: 10px;
+    width: 100%;
+    display: none;
+    background: #000;
+    color: #fff;
+    position: relative;
+    left: 4px;
+}
+  ul.custom-select svg {
+    margin-left: 5px;
+    width: 10px;
+    height: auto;
+}
+ul.custom-select li:not(.init):hover, ul.custom-select li.selected:not(.init) { background: var(--gradient-base-background-2);  }
+li.init { cursor: pointer; }
+
+</style>

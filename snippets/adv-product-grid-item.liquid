@@ -1,0 +1,70 @@
+{% if template contains 'product' %}
+{% assign grid_item_width = '' %}
+{% endif %}
+{% unless current_collection == blank %}
+{% assign current_collection = collection %}
+{% endunless %}
+{% assign on_sale = false %}
+{% assign sale_text = 'products.product.sale' | t %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+{% assign sold_out = true %}
+{% assign sold_out_text = 'products.product.sold_out' | t %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %} 
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+{% assign productURL =  product.url | within: collection | append: '?view=quickview'  %}
+{% assign productURL =  "/products/" | append: product.handle | append: '?view=quickview'  %}
+{% capture product_form_config %}
+{
+"money_format": {{ shop.money_format | json }},
+"enable_history": true,
+"currency_switcher_enabled": {{ settings.display_currency | json }},
+"sold_out": {{ "products.product.sold_out" | t | json }},
+"button": {{ 'products.product.add_to_cart' | t | json }},
+"unavailable": {{ 'products.product.unavailable' | t | json }}
+}
+{% endcapture %}
+{% assign productVariantSize = product.variants | size %}   
+{% assign imageSize = 'master' %}
+
+{% assign secondWord = product.handle  %}
+<li class="{{ swiperSlideClass }} {% if firstWord == secondWord %}active {% endif %} grid-item product-grid-item {% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %} {{carousel}}" id="product-{{ product.id }}">
+  <div class="products">
+    <div class="product-container">  
+      
+      <a href="{{ product.url | within: collection }}" class="grid-link product-group">                   
+        <div class="image_group">
+          <div class="ImageOverlayCa"></div>       
+           <img
+                srcset="{%- if product.featured_image.src.width >= 165 -%}{{ product.featured_image.src | image_url: width: 165 }} 165w,{%- endif -%}
+                  {%- if product.featured_media.width >= 360 -%}{{ product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+                  {%- if product.featured_media.width >= 533 -%}{{ product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+                  {%- if product.featured_media.width >= 720 -%}{{ product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+                  {%- if product.featured_media.width >= 940 -%}{{ product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+                  {%- if product.featured_media.width >= 1066 -%}{{ product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+                  {{ product.featured_media | image_url }} {{ product.featured_media.width }}w"
+                src="{{ product.featured_media | image_url: width: 533 }}"
+                sizes="(min-width: {{ settings.container_width }}px) {{ settings.container_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+                alt="{{ product.featured_media.alt | escape }}"
+                class="featured-image teaser lazyload"
+                loading="lazy"
+                width="{{ product.featured_media.width }}"
+                height="{{ product.featured_media.height }}"
+              >
+          
+        </div>
+      </a>
+    </div>
+
+    <div class="product-detail {{ settings.item_aignment}}">
+      <h5  class="grid-link__title"><a href="{{ product.url | within: collection }}">    
+      {{product.title}}
+        </a></h5>      
+    </div>
+  </div>  
+</li>

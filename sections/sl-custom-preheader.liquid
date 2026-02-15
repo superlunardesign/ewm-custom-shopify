@@ -1,0 +1,481 @@
+{%- style -%}
+  .sl-preheader {
+    background-color: {{ section.settings.bg_color }};
+    {%- if section.settings.show_border -%}
+      border-bottom: 1px solid {{ section.settings.border_color }};
+    {%- endif -%}
+  }
+
+  .sl-preheader__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: {{ section.settings.padding_vertical }}px 0;
+    font-family: var(--font-body-family);
+    font-size: {{ section.settings.font_size }}px;
+    line-height: 1;
+  }
+
+  .sl-preheader__left,
+  .sl-preheader__right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .sl-preheader a,
+  .sl-preheader button {
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .sl-preheader a:hover,
+  .sl-preheader button:hover {
+    opacity: 0.7;
+  }
+
+  .sl-preheader__account-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .sl-preheader__account-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .sl-preheader__cta {
+    font-weight: 500;
+  }
+
+  .sl-preheader__icon-btn {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    color: {{ section.settings.text_color }};
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+  }
+
+  .sl-preheader__icon-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .sl-preheader__cart-count {
+    font-size: 9px;
+    font-weight: 600;
+    background: {{ section.settings.text_color }};
+    color: {{ section.settings.bg_color }};
+    border-radius: 50%;
+    min-width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    line-height: 1;
+  }
+
+  /* Search dropdown overlay */
+  .sl-preheader__search-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 500;
+  }
+
+  .sl-preheader__search-overlay.is-open {
+    display: block;
+  }
+
+  .sl-preheader__search-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+  }
+
+  .sl-preheader__search-form {
+    display: flex;
+    align-items: center;
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+  }
+
+  .sl-preheader__search-form input[type="search"] {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+    border: none;
+    font-size: 15px;
+    font-family: var(--font-body-family);
+    outline: none;
+    background: transparent;
+    -webkit-appearance: none;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
+
+  .sl-preheader__search-form button[type="submit"] {
+    background: none;
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    color: #333;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .sl-preheader__search-form button[type="submit"] svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .sl-preheader__search-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 4px;
+    display: flex;
+    z-index: 1;
+  }
+
+  .sl-preheader__search-close svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Mobile: hide CTA text and extra links */
+  @media screen and (max-width: 749px) {
+    .sl-preheader__hide-mobile {
+      display: none !important;
+    }
+  }
+{%- endstyle -%}
+
+<div class="sl-preheader" id="SLPreheader-{{ section.id }}">
+  <div class="page-width">
+    <div class="sl-preheader__inner">
+      <div class="sl-preheader__left">
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="sl-preheader__account-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            {%- if customer -%}
+              {{ 'customer.account_fallback' | t }}
+            {%- else -%}
+              {{ section.settings.login_text }}
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.link_1_text != blank -%}
+          <a href="{{ section.settings.link_1_url }}" class="sl-preheader__hide-mobile">{{ section.settings.link_1_text }}</a>
+        {%- endif -%}
+
+        {%- if section.settings.link_2_text != blank -%}
+          <a href="{{ section.settings.link_2_url }}" class="sl-preheader__hide-mobile">{{ section.settings.link_2_text }}</a>
+        {%- endif -%}
+      </div>
+
+      <div class="sl-preheader__right">
+        {%- if section.settings.cta_text != blank -%}
+          <a href="{{ section.settings.cta_url }}" class="sl-preheader__cta sl-preheader__hide-mobile">{{ section.settings.cta_text }}</a>
+        {%- endif -%}
+
+        {%- comment -%} Search: opens a dropdown search form {%- endcomment -%}
+        <button type="button" class="sl-preheader__icon-btn" data-sl-search-open aria-label="{{ 'general.search.search' | t }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+
+        {%- comment -%} Cart: opens cart drawer or falls back to /cart {%- endcomment -%}
+        <button type="button" class="sl-preheader__icon-btn" data-sl-cart-open aria-label="{{ 'templates.cart.cart' | t }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+            <path d="M3 6h18"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="sl-preheader__cart-count" data-sl-cart-count {% if cart.item_count == 0 %}style="display:none"{% endif %}>{{ cart.item_count }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- comment -%} Search overlay (hidden by default, toggled by JS) {%- endcomment -%}
+<div class="sl-preheader__search-overlay" id="SLSearchOverlay" aria-hidden="true">
+  <div class="sl-preheader__search-box">
+    <form action="{{ routes.search_url }}" method="get" class="sl-preheader__search-form" role="search">
+      <input
+        type="search"
+        name="q"
+        placeholder="{{ 'general.search.search' | t }}..."
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+      >
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" aria-label="{{ 'general.search.search' | t }}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+    </form>
+    <button type="button" class="sl-preheader__search-close" data-sl-search-close aria-label="{{ 'accessibility.close' | t }}">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var searchOverlay = document.getElementById('SLSearchOverlay');
+    var searchInput = searchOverlay ? searchOverlay.querySelector('input[type="search"]') : null;
+
+    /* Open search */
+    document.querySelectorAll('[data-sl-search-open]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (searchOverlay) {
+          searchOverlay.classList.add('is-open');
+          searchOverlay.setAttribute('aria-hidden', 'false');
+          if (searchInput) searchInput.focus();
+        }
+      });
+    });
+
+    /* Close search — close button */
+    document.querySelectorAll('[data-sl-search-close]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (searchOverlay) {
+          searchOverlay.classList.remove('is-open');
+          searchOverlay.setAttribute('aria-hidden', 'true');
+        }
+      });
+    });
+
+    /* Close search — clicking the overlay background */
+    if (searchOverlay) {
+      searchOverlay.addEventListener('click', function(e) {
+        if (e.target === searchOverlay) {
+          searchOverlay.classList.remove('is-open');
+          searchOverlay.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
+
+    /* Close search — Escape key */
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && searchOverlay && searchOverlay.classList.contains('is-open')) {
+        searchOverlay.classList.remove('is-open');
+        searchOverlay.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    /* Keep cart-count bubble in sync after AJAX add-to-cart */
+    function updateCartBubble() {
+      fetch('/cart.js', { credentials: 'same-origin' })
+        .then(function(r) { return r.json(); })
+        .then(function(cart) {
+          /* Update preheader cart count elements */
+          document.querySelectorAll('[data-sl-cart-count]').forEach(function(el) {
+            el.style.display = cart.item_count > 0 ? '' : 'none';
+            var countSpan = el.querySelector('span[aria-hidden]');
+            if (countSpan) {
+              countSpan.textContent = cart.item_count;
+            } else if (!el.classList.contains('cart-count-bubble')) {
+              el.textContent = cart.item_count;
+            }
+          });
+          /* Update header cart-count-bubble elements */
+          document.querySelectorAll('.cart-count-bubble').forEach(function(el) {
+            el.style.display = cart.item_count > 0 ? '' : 'none';
+            var countSpan = el.querySelector('span[aria-hidden]');
+            if (countSpan) countSpan.textContent = cart.item_count;
+          });
+        })
+        .catch(function() {});
+    }
+
+    /* Listen for Dawn's cart update events */
+    ['cart:refresh', 'cart:updated'].forEach(function(evt) {
+      document.documentElement.addEventListener(evt, updateCartBubble);
+    });
+
+    /* Intercept fetch to /cart/add.js and /cart/change.js to update bubble */
+    var _origFetch = window.fetch;
+    window.fetch = function() {
+      var url = arguments[0];
+      if (typeof url === 'string' && (url.indexOf('/cart/add') !== -1 || url.indexOf('/cart/change') !== -1 || url.indexOf('/cart/update') !== -1 || url.indexOf('/cart/clear') !== -1)) {
+        return _origFetch.apply(this, arguments).then(function(response) {
+          setTimeout(updateCartBubble, 300);
+          return response;
+        });
+      }
+      return _origFetch.apply(this, arguments);
+    };
+
+    /* Cart: click the theme's original cart icon to trigger its cart drawer/notification */
+    document.querySelectorAll('[data-sl-cart-open]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        /* Primary: click the theme's #cart-icon-bubble (cart-drawer.js intercepts this) */
+        var cartIcon = document.getElementById('cart-icon-bubble');
+        if (cartIcon) {
+          cartIcon.style.pointerEvents = 'auto';
+          cartIcon.click();
+          cartIcon.style.pointerEvents = '';
+          return;
+        }
+        /* Fallback: try opening cart-drawer details directly */
+        var cartDrawer = document.querySelector('cart-drawer');
+        if (cartDrawer) {
+          var details = cartDrawer.querySelector('details');
+          if (details) {
+            details.setAttribute('open', '');
+            return;
+          }
+        }
+        /* Last resort: navigate to cart page */
+        window.location.href = '{{ routes.cart_url }}';
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SL Preheader",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f7f7f5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "default": true,
+      "label": "Show bottom border"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "default": 13,
+      "unit": "px",
+      "label": "Font size"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "default": 10,
+      "unit": "px",
+      "label": "Vertical padding"
+    },
+    {
+      "type": "header",
+      "content": "Left links"
+    },
+    {
+      "type": "text",
+      "id": "login_text",
+      "label": "Login text",
+      "default": "Log In"
+    },
+    {
+      "type": "text",
+      "id": "link_1_text",
+      "label": "Link 1 text",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_2_text",
+      "label": "Link 2 text"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "header",
+      "content": "Right CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Book A Spa Service"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ]
+}
+{% endschema %}

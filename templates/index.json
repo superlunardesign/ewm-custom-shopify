@@ -1,0 +1,573 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "tri_banner_LUhYAg": {
+      "type": "sl-tri-hero",
+      "custom_css": [
+        "h1 {color: white;}",
+        "h2 {color: white;}",
+        "p {color: white;}",
+        "a {color: white; text-decoration: underline;}",
+        "a:hover {text-decoration: underline;}"
+      ],
+      "name": "Tri Banner",
+      "settings": {
+        "left_image": "shopify://shop_images/BrandingPhotography-C_Mae-5763.jpg",
+        "left_headline": "Creating Healthy Skin Together.",
+        "left_body": "Exceptional Customized Facials, Personalized Acne Treatments, & Brazilian Waxing in McHenry, IL",
+        "left_button_text": "NEW GUESTS",
+        "left_button_link": "",
+        "top_right_image": "shopify://shop_images/BrandingPhotography-C_Mae-6127.jpg",
+        "top_right_heading": "Brazilian Wax",
+        "top_right_button_text": "Book Appointment",
+        "top_right_button_link": "shopify://pages/brazilian-wax-mchenry",
+        "bottom_right_image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5081.jpg",
+        "bottom_right_heading": "Skincare Products",
+        "bottom_right_button_text": "Shop all",
+        "bottom_right_button_link": ""
+      }
+    },
+    "product_listing_RWTrNz": {
+      "type": "sl-product-carousel",
+      "custom_css": [],
+      "name": "Product Carousel",
+      "settings": {
+        "section_title": "Explore Our Acne Safe Skincare",
+        "collection": "acne",
+        "products_limit": 10,
+        "show_ratings": true,
+        "rating_metafield_namespace": "reviews",
+        "rating_metafield_key": "rating",
+        "review_count_metafield_key": "count",
+        "show_variant_options": true,
+        "auto_scroll": true,
+        "auto_scroll_speed": 0.5,
+        "new_product_tag": "new",
+        "editors_pick_tag": "editors-pick",
+        "new_badge_text": "NEW",
+        "sale_badge_text": "SALE",
+        "out_of_stock_badge_text": "OUT OF STOCK",
+        "editors_pick_badge_text": "Shannon's Pick",
+        "add_to_cart_text": "ADD TO BAG",
+        "out_of_stock_button_text": "OUT OF STOCK",
+        "new_badge_color": "#1a1a1a",
+        "sale_badge_color": "#845e9c",
+        "editors_pick_badge_color": "#8c9b6d",
+        "out_of_stock_badge_color": "#999999",
+        "button_color": "#dae2c7",
+        "button_text_color": "#845e9c"
+      }
+    },
+    "scrolling_offers_YAxCQz": {
+      "type": "scrolling-offers",
+      "blocks": {
+        "service_fC3UpV": {
+          "type": "service",
+          "settings": {
+            "service_name": "Anti-Aging Facials"
+          }
+        },
+        "service_TUWWEx": {
+          "type": "service",
+          "settings": {
+            "service_name": "Acne Facials"
+          }
+        },
+        "service_We6x3b": {
+          "type": "service",
+          "settings": {
+            "service_name": "Facials for Sensitive Skin"
+          }
+        },
+        "service_qVK9xq": {
+          "type": "service",
+          "settings": {
+            "service_name": "Brazilian Waxing"
+          }
+        },
+        "service_LRgmQN": {
+          "type": "service",
+          "settings": {
+            "service_name": "Red Light Therapy"
+          }
+        }
+      },
+      "block_order": [
+        "service_fC3UpV",
+        "service_TUWWEx",
+        "service_We6x3b",
+        "service_qVK9xq",
+        "service_LRgmQN"
+      ],
+      "custom_css": [
+        "h2 {color: white;}"
+      ],
+      "name": "Scrolling Offers",
+      "settings": {
+        "static_text": "WE OFFER",
+        "background_color": "#8c9b6d",
+        "text_color": "#ffffff",
+        "scroll_speed": 2
+      }
+    },
+    "skin_concern_LUXc4Q": {
+      "type": "skin-concern",
+      "blocks": {
+        "concern_service_CefUAw": {
+          "type": "concern_service",
+          "settings": {
+            "concern_title": "Acne & Breakouts",
+            "concern_desc": "Persistent pimples, redness, and inflammation.",
+            "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5763_68f2e944-5a74-4573-854d-76c7d6cab26b.jpg",
+            "service_title": "Clear Skin Facial",
+            "service_desc": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
+            "service_link": ""
+          }
+        },
+        "concern_service_99kPhU": {
+          "type": "concern_service",
+          "settings": {
+            "concern_title": "Acne & Breakouts",
+            "concern_desc": "Persistent pimples, redness, and inflammation.",
+            "service_image": "shopify://shop_images/Merry_Whatever.jpg",
+            "service_title": "Clear Skin Facial",
+            "service_desc": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
+            "service_link": ""
+          }
+        },
+        "concern_service_HkpQYM": {
+          "type": "concern_service",
+          "settings": {
+            "concern_title": "Acne & Breakouts",
+            "concern_desc": "Persistent pimples, redness, and inflammation.",
+            "service_title": "Clear Skin Facial",
+            "service_desc": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
+            "service_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "concern_service_CefUAw",
+        "concern_service_99kPhU",
+        "concern_service_HkpQYM"
+      ],
+      "custom_css": [
+        "p {color: black; text-align: center; margin: auto;}"
+      ],
+      "name": "Skin Concern Timeline",
+      "settings": {
+        "section_subheading": "Not sure where to start?",
+        "section_heading": "Match Your Skin Concern to the Perfect Treatment"
+      }
+    },
+    "how_it_works_jcAQM4": {
+      "type": "how-it-works",
+      "blocks": {
+        "step_DETmKR": {
+          "type": "step",
+          "settings": {
+            "step_title": "Book Appointment",
+            "step_description": "Schedule your appointment online.\nChoose from in person or virtual and feel free to join our waitlist for a chance at a sooner appointment."
+          }
+        },
+        "step_G8tBBF": {
+          "type": "step",
+          "settings": {
+            "step_title": "Arrive to Your Session",
+            "step_description": "Please arrive makeup free if possible. \nArrive ready to relax, come with questions (if any), and ready to get educated about your skin!\nWe can’t wait to meet you!"
+          }
+        },
+        "step_hhN46J": {
+          "type": "step",
+          "settings": {
+            "step_title": "Home Care Routine",
+            "step_description": "Follow your personalized at-home skincare routine with our carefully curated products. We'll guide you through the perfect regimen to maintain and enhance your results."
+          }
+        }
+      },
+      "block_order": [
+        "step_DETmKR",
+        "step_G8tBBF",
+        "step_hhN46J"
+      ],
+      "custom_css": [
+        "p {line-height: 1.2em;}"
+      ],
+      "name": "How It Works",
+      "settings": {
+        "show_header": true,
+        "header_title": "How It Works",
+        "header_subtitle": "Experience our proven approach to achieving healthy, radiant skin. Each step is carefully designed to work in harmony with your skin's natural processes.",
+        "header_color": "#8c9b6d",
+        "background_color": "#faf9f7",
+        "accent_color": "#8c9b6d",
+        "show_cta": true,
+        "cta_title": "Ready to Begin Your Journey?",
+        "cta_subtitle": "Book your complimentary skin consultation today and discover the difference personalized care can make.",
+        "cta_button_text": "Book Appointment",
+        "cta_button_url": "https://ke18jq-r4.myshopify.com/",
+        "cta_background_color": "#8c9b6d",
+        "cta_text_color": "#ffffff",
+        "cta_button_color": "#ffffff",
+        "cta_button_text_color": "#8b7ba8",
+        "cta_heading_color": "#ffffff"
+      }
+    },
+    "testimonials_carousel_UfLK7R": {
+      "type": "testimonials-carousel",
+      "blocks": {
+        "testimonial_e7tzDr": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident."
+          }
+        },
+        "testimonial_ijnj99": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Amazing results! My skin has never looked better. The personalized approach really makes a difference."
+          }
+        },
+        "testimonial_pjJaJw": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Professional, knowledgeable, and caring. I trust her completely with my skincare routine."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_e7tzDr",
+        "testimonial_ijnj99",
+        "testimonial_pjJaJw"
+      ],
+      "custom_css": [
+        ".testimonials-section {padding: 0%;}"
+      ],
+      "name": "Testimonials Carousel",
+      "settings": {
+        "section_title": "Client Results",
+        "title_color": "#8c9b6d"
+      }
+    },
+    "team_876xbc": {
+      "type": "team",
+      "blocks": {
+        "team_member_n8Rkin": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5312.jpg",
+            "name": "Shannon",
+            "title": "FOUNDER | LICENSED ESTHETICIAN | CERTIFIED ACNE EXPERT",
+            "bio": "Shannon knows what it’s like to feel defeated by her skin. \n\nAs a teen, she dealt with painful breakouts, only to face red, flaky, reactive skin as an adult. After years of trial and error, she found herself frustrated and out of options.\n\nThat experience led her to become a Licensed Esthetician in 2021. \n\nHer goal is to help others feel confident in their skin by focusing on what it really needs, not trends or quick fixes.\n\nShannon brings education, empathy, and real-life experience to every treatment. She meets clients where they are and helps them build healthy, balanced skin with personalized support.",
+            "book_text": "BOOK WITH SHANNON",
+            "book_url": "https://booking.mangomint.com/314399"
+          }
+        },
+        "team_member_BxtzQj": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5682.jpg",
+            "name": "Yanelli",
+            "title": "Licensed Esthetician | Certified Acne Expert",
+            "bio": "Yanelli’s passion for skincare started at a young age. She graduated from Esthetics School in 2021 and has been dedicated ever since to helping others feel confident, informed, and excited about their skin.\n\nShe loves carving out time for self-care and believes that taking care of your skin is not just about how it looks, but how it makes you feel. For Yanelli, there is nothing better than feeling confident in your own skin and helping others feel the same way.\n\nIn the treatment room, Yanelli brings a fun, uplifting energy. She is passionate about creating an environment where clients can learn about their skin, build healthy habits, and enjoy the process of transformation. Whether it is your first facial or brazilian wax, she is here to support you every step of the way.\n\nYanelli’s availability:\nMonday & Tuesday 1–8 | Wednesday & Thursday 9–4 | Select Saturdays 9–1",
+            "book_text": "BOOK WITH SHANNON",
+            "book_url": ""
+          }
+        },
+        "team_member_ti8aCD": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5894.jpg",
+            "name": "Autumn",
+            "title": "Licensed Esthetician",
+            "bio": "Autumn is a licensed esthetician with a warm, calming presence and a deep love for skincare. Inspired by her grandmother’s beauty business and her own journey with acne and skin sensitivity, Autumn found her calling in helping others feel seen, supported, and confident in their skin.\n\nShe’s especially passionate about chemical peels and brow waxing, two treatments she believes deliver powerful and visible results. Whether you’re struggling with breakouts or simply need a space to unwind, Autumn brings a grounded, gentle energy to every service.\n\nShe’s found that this work has helped her grow in ways she never expected. Her goal is simple: to offer each client a little peace, a little glow, and a whole lot of care.\n\nAutumn’s availability:\nTuesday 9-4 | Wednesday 12-7 | Thursday 12-7 | Friday 9-4 | Select Saturdays 9–1",
+            "book_text": "BOOK WITH SHANNON",
+            "book_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "team_member_n8Rkin",
+        "team_member_BxtzQj",
+        "team_member_ti8aCD"
+      ],
+      "name": "Team Carousel",
+      "settings": {
+        "section_heading": "Meet your esthetic team"
+      }
+    },
+    "product_listing_LnM7g7": {
+      "type": "sl-product-carousel",
+      "custom_css": [
+        ".product-content {margin-bottom: 10px;}"
+      ],
+      "name": "Product Carousel",
+      "settings": {
+        "section_title": "Shop the Team's Favorites",
+        "collection": "anti-aging",
+        "products_limit": 10,
+        "show_ratings": true,
+        "rating_metafield_namespace": "reviews",
+        "rating_metafield_key": "rating",
+        "review_count_metafield_key": "count",
+        "show_variant_options": true,
+        "auto_scroll": true,
+        "auto_scroll_speed": 0.5,
+        "new_product_tag": "new",
+        "editors_pick_tag": "editors-pick",
+        "new_badge_text": "NEW",
+        "sale_badge_text": "SALE",
+        "out_of_stock_badge_text": "OUT OF STOCK",
+        "editors_pick_badge_text": "Shannon's Pick",
+        "add_to_cart_text": "ADD TO BAG",
+        "out_of_stock_button_text": "OUT OF STOCK",
+        "new_badge_color": "#1a1a1a",
+        "sale_badge_color": "#845e9c",
+        "editors_pick_badge_color": "#8c9b6d",
+        "out_of_stock_badge_color": "#999999",
+        "button_color": "#dae2c7",
+        "button_text_color": "#845e9c"
+      }
+    },
+    "rich_text_aVEX7P": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_WAfcgK": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ready to Change Your Skin?",
+            "heading_size": "h1"
+          }
+        },
+        "text_GH6ydn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Book an appointment below and choose one of our lovely team members to start your journey with us.</p>"
+          }
+        },
+        "button_xEEf9D": {
+          "type": "button",
+          "settings": {
+            "button_label": "Book YOUR APPOINTMENT",
+            "button_link": "",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_WAfcgK",
+        "text_GH6ydn",
+        "button_xEEf9D"
+      ],
+      "custom_css": [],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "before_and_afters_JwW8En": {
+      "type": "before-and-afters",
+      "blocks": {
+        "carousel_image_NKzgRQ": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/Emma_O.png",
+            "caption": ""
+          }
+        },
+        "carousel_image_MkLMpg": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/Andrea_Butler_1.png",
+            "caption": ""
+          }
+        },
+        "carousel_image_xAPytd": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/km_facial.jpg",
+            "caption": ""
+          }
+        },
+        "carousel_image_JeCMXq": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/Anne_1.png",
+            "caption": ""
+          }
+        },
+        "carousel_image_Gz9BtJ": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/al_virtual_ab.jpg",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "carousel_image_NKzgRQ",
+        "carousel_image_MkLMpg",
+        "carousel_image_xAPytd",
+        "carousel_image_JeCMXq",
+        "carousel_image_Gz9BtJ"
+      ],
+      "name": "Image Carousel",
+      "settings": {
+        "section_title": "Client Results",
+        "title_size": 32,
+        "title_color": "#333333",
+        "container_width": 1400,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "background_color": "#dae2c7",
+        "image_size": 280,
+        "mobile_image_size": 250,
+        "gap": 20,
+        "border_radius": 8,
+        "hover_scale": 1.1,
+        "caption_size": 14,
+        "caption_color": "#666666",
+        "auto_scroll": true,
+        "auto_scroll_speed": 0.5
+      }
+    },
+    "sl_split_section_zayKCQ": {
+      "type": "sl-split-section",
+      "name": "Split Section",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5763_68f2e944-5a74-4573-854d-76c7d6cab26b.jpg",
+        "swap_horizontal": false,
+        "section_height_desktop": 40,
+        "section_height_tablet": 50,
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 300,
+        "heading": "'Tis the Season",
+        "subheading": "HOLIDAY SCENTS YOU WON'T WANT TO MISS",
+        "text": "Select your favorite seasonal scents to perfect your cozy holiday home vibes. Feel the nostalgia with scents that smell like home.",
+        "text2": "",
+        "heading_color": "#000000",
+        "subheading_color": "#333333",
+        "text_color": "#666666",
+        "heading_size": 40,
+        "subheading_size": 24,
+        "text_size": 16,
+        "mobile_heading_size": 24,
+        "mobile_subheading_size": 18,
+        "mobile_text_size": 14,
+        "show_button": false,
+        "button_text": "Shop Now →",
+        "button_link": "shopify://collections",
+        "button_background": "#8c9b6d",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#8c9b6d",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 0
+      }
+    },
+    "sl_split_section_mePA7W": {
+      "type": "sl-split-section",
+      "name": "Split Section",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5763_68f2e944-5a74-4573-854d-76c7d6cab26b.jpg",
+        "swap_horizontal": true,
+        "section_height_desktop": 40,
+        "section_height_tablet": 50,
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "heading": "'Tis the Season",
+        "subheading": "HOLIDAY SCENTS YOU WON'T WANT TO MISS",
+        "text": "Select your favorite seasonal scents to perfect your cozy holiday home vibes. Feel the nostalgia with scents that smell like home.",
+        "text2": "",
+        "heading_color": "#000000",
+        "subheading_color": "#333333",
+        "text_color": "#666666",
+        "heading_size": 40,
+        "subheading_size": 24,
+        "text_size": 16,
+        "mobile_heading_size": 24,
+        "mobile_subheading_size": 18,
+        "mobile_text_size": 14,
+        "show_button": true,
+        "button_text": "Shop Now →",
+        "button_link": "shopify://collections",
+        "button_background": "#8c9b6d",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#8c9b6d",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 0
+      }
+    },
+    "sl_value_props_ggpxpf": {
+      "type": "sl-value-props",
+      "name": "Value Props Section",
+      "settings": {
+        "main_heading": "OUR APPROACH",
+        "main_subheading": "CUSTOMIZED CARE FOR YOUR SKIN",
+        "corner_image_top": "shopify://shop_images/BrandingPhotography-C_Mae-6127.jpg",
+        "corner_image_bottom": "shopify://shop_images/BrandingPhotography-C_Mae-5763.jpg",
+        "corner_image_position_x": 50,
+        "corner_image_position_y": 50,
+        "prop1_heading": "CONSULT",
+        "prop1_text": "Before almost any skincare service we require a consultation because all skin is unique and we want to adapt a plan specifically for yours.",
+        "prop2_heading": "Deep Integration",
+        "prop2_text": "Learn your business inside-out—from your signature approach to food safety standards if needed. No disruption to your workflow.",
+        "prop3_heading": "Deep Integration",
+        "prop3_text": "Learn your business inside-out—from your signature approach to food safety standards if needed. No disruption to your workflow.",
+        "prop4_heading": "Deep Integration",
+        "prop4_text": "Learn your business inside-out—from your signature approach to food safety standards if needed. No disruption to your workflow.",
+        "section_background": "#dae2c7",
+        "prop_background": "rgba(0,0,0,0)",
+        "prop_border_radius": 0,
+        "heading_color": "#8c9b6d",
+        "subheading_color": "#845e9c",
+        "prop_heading_color": "#8c9b6d",
+        "prop_text_color": "#666666",
+        "section_height": 500,
+        "heading_size": 32,
+        "subheading_size": 20,
+        "prop_heading_size": 24,
+        "prop_text_size": 14,
+        "icon_size": 64,
+        "mobile_heading_size": 24,
+        "mobile_subheading_size": 16,
+        "mobile_prop_heading_size": 18,
+        "mobile_prop_text_size": 13,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200
+      }
+    }
+  },
+  "order": [
+    "tri_banner_LUhYAg",
+    "product_listing_RWTrNz",
+    "scrolling_offers_YAxCQz",
+    "skin_concern_LUXc4Q",
+    "how_it_works_jcAQM4",
+    "testimonials_carousel_UfLK7R",
+    "team_876xbc",
+    "product_listing_LnM7g7",
+    "rich_text_aVEX7P",
+    "before_and_afters_JwW8En",
+    "sl_split_section_zayKCQ",
+    "sl_split_section_mePA7W",
+    "sl_value_props_ggpxpf"
+  ]
+}

@@ -1,0 +1,858 @@
+{% comment %}
+  Hero Section with Video/Photo Background
+  Supports video and image backgrounds with opacity overlay
+  Flexible content blocks for heading, subheading, body text, and buttons
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    height: {{ section.settings.desktop_height }}vh;
+    min-height: {{ section.settings.min_height }}px;
+    overflow: hidden;
+    display: flex;
+    align-items: {{ section.settings.vertical_alignment }};
+    justify-content: center;
+    background-color: {{ section.settings.overlay_color }};
+  }
+
+  /* Background Media Container */
+  #shopify-section-{{ section.id }} .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: {{ section.settings.media_opacity | times: 0.01 }};
+  }
+
+  /* Video Background */
+  #shopify-section-{{ section.id }} .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+  }
+
+  /* Image Background */
+  #shopify-section-{{ section.id }} .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.image_position }};
+  }
+
+  /* Content Container */
+  #shopify-section-{{ section.id }} .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: {{ section.settings.content_width }}px;
+    width: 100%;
+    padding: 0 20px;
+    text-align: {{ section.settings.text_alignment }};
+  }
+
+  /* Content Blocks Spacing */
+  #shopify-section-{{ section.id }} .content-block {
+    margin-bottom: {{ section.settings.block_spacing }}px;
+  }
+
+  #shopify-section-{{ section.id }} .content-block:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Typography Styles */
+  #shopify-section-{{ section.id }} .hero-subheading {
+    color: {{ section.settings.subheading_color }};
+    font-size: {{ section.settings.subheading_size }}px;
+    font-weight: {{ section.settings.subheading_weight }};
+    text-transform: {{ section.settings.subheading_transform }};
+    letter-spacing: {{ section.settings.subheading_spacing }}px;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .hero-heading {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    line-height: {{ section.settings.heading_line_height }};
+    text-transform: {{ section.settings.heading_transform }};
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .hero-body {
+    color: {{ section.settings.body_color }};
+    font-size: {{ section.settings.body_size }}px;
+    line-height: {{ section.settings.body_line_height }};
+    max-width: {{ section.settings.body_max_width }}px;
+    margin: 0 auto;
+  }
+
+  /* Button Styles - Simplified like Scrapbook */
+  #shopify-section-{{ section.id }} .hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: {{ section.settings.text_alignment }};
+    flex-wrap: wrap;
+  }
+
+  #shopify-section-{{ section.id }} .hero-button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    {% if section.settings.button_border_radius > 0 %}
+      border-radius: {{ section.settings.button_border_radius }}px;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .hero-button.primary {
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    border: 2px solid {{ section.settings.button_background }};
+  }
+
+  #shopify-section-{{ section.id }} .hero-button.primary:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text_color }};
+    border-color: {{ section.settings.button_hover_background }};
+  }
+
+  #shopify-section-{{ section.id }} .hero-button.secondary {
+    background-color: transparent;
+    color: {{ section.settings.button_text_color }};
+    border: 2px solid {{ section.settings.button_text_color }};
+  }
+
+  #shopify-section-{{ section.id }} .hero-button.secondary:hover {
+    background-color: {{ section.settings.button_text_color }};
+    color: {{ section.settings.overlay_color }};
+    border-color: {{ section.settings.button_text_color }};
+  }
+
+  /* Animation */
+  {% if section.settings.enable_animation %}
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #shopify-section-{{ section.id }} .content-block {
+      opacity: 0;
+      animation: fadeInUp {{ section.settings.animation_duration }}ms ease-out forwards;
+    }
+
+    {% for i in (1..6) %}
+      #shopify-section-{{ section.id }} .content-block:nth-child({{ i }}) {
+        animation-delay: {{ section.settings.animation_delay | times: i }}ms;
+      }
+    {% endfor %}
+  {% endif %}
+
+  /* Parallax Effect */
+  {% if section.settings.enable_parallax %}
+    #shopify-section-{{ section.id }} .hero-background {
+      transform: translateY(0);
+      will-change: transform;
+    }
+  {% endif %}
+
+  /* Mobile Styles */
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} {
+      height: {{ section.settings.mobile_height }}vh;
+      min-height: {{ section.settings.mobile_min_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .hero-content {
+      padding: 0 15px;
+      text-align: {{ section.settings.mobile_text_alignment }};
+    }
+
+    #shopify-section-{{ section.id }} .hero-subheading {
+      font-size: {{ section.settings.mobile_subheading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .hero-heading {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .hero-body {
+      font-size: {{ section.settings.mobile_body_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .hero-button {
+      font-size: 13px;
+      padding: 8px 16px;
+    }
+
+    #shopify-section-{{ section.id }} .hero-buttons {
+      justify-content: {{ section.settings.mobile_text_alignment }};
+    }
+
+    #shopify-section-{{ section.id }} .hero-image {
+      object-position: {{ section.settings.mobile_image_position }};
+    }
+  }
+
+  /* Tablet Styles */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .hero-heading {
+      font-size: {{ section.settings.heading_size | times: 0.8 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .hero-body {
+      font-size: {{ section.settings.body_size | times: 0.9 }}px;
+    }
+  }
+</style>
+
+<div class="hero-background">
+  {% if section.settings.background_type == 'video' and section.settings.background_video != blank %}
+    <video class="hero-video" 
+           autoplay 
+           loop 
+           muted 
+           playsinline
+           {% if section.settings.video_poster != blank %}
+             poster="{{ section.settings.video_poster | image_url: width: 1920 }}"
+           {% endif %}>
+      <source src="{{ section.settings.background_video }}" type="video/mp4">
+      {% if section.settings.video_poster != blank %}
+        <img src="{{ section.settings.video_poster | image_url: width: 1920 }}" alt="">
+      {% endif %}
+    </video>
+  {% elsif section.settings.background_image != blank %}
+    <img class="hero-image" 
+         src="{{ section.settings.background_image | image_url: width: 1920 }}" 
+         alt="{{ section.settings.background_image.alt }}"
+         loading="eager">
+  {% endif %}
+</div>
+
+<div class="hero-content">
+  {% for block in section.blocks %}
+    <div class="content-block" {{ block.shopify_attributes }}>
+      {% case block.type %}
+        {% when 'subheading' %}
+          {% if block.settings.text != blank %}
+            <p class="hero-subheading">{{ block.settings.text }}</p>
+          {% endif %}
+
+        {% when 'heading' %}
+          {% if block.settings.text != blank %}
+            <h1 class="hero-heading">{{ block.settings.text }}</h1>
+          {% endif %}
+
+        {% when 'body' %}
+          {% if block.settings.text != blank %}
+            <div class="hero-body">
+              {{ block.settings.text }}
+            </div>
+          {% endif %}
+
+        {% when 'buttons' %}
+          <div class="hero-buttons">
+            {% if block.settings.button_1_text != blank %}
+              <a href="{{ block.settings.button_1_link }}" 
+                 class="hero-button primary">
+                {{ block.settings.button_1_text }}
+              </a>
+            {% endif %}
+            {% if block.settings.button_2_text != blank %}
+              <a href="{{ block.settings.button_2_link }}" 
+                 class="hero-button secondary">
+                {{ block.settings.button_2_text }}
+              </a>
+            {% endif %}
+          </div>
+      {% endcase %}
+    </div>
+  {% endfor %}
+</div>
+
+{% if section.settings.enable_parallax %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const heroBackground = document.querySelector('#shopify-section-{{ section.id }} .hero-background');
+    const parallaxSpeed = {{ section.settings.parallax_speed }};
+    
+    function updateParallax() {
+      const scrolled = window.pageYOffset;
+      const yPos = -(scrolled * parallaxSpeed / 100);
+      heroBackground.style.transform = `translateY(${yPos}px)`;
+    }
+    
+    if (window.innerWidth > 768) {
+      window.addEventListener('scroll', updateParallax);
+    }
+    
+    window.addEventListener('resize', function() {
+      if (window.innerWidth <= 768) {
+        window.removeEventListener('scroll', updateParallax);
+        heroBackground.style.transform = 'translateY(0)';
+      } else {
+        window.addEventListener('scroll', updateParallax);
+      }
+    });
+  });
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Media"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background Type",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "background_video",
+      "label": "Background Video URL",
+      "info": "Upload video to Files and paste URL here. MP4 format recommended."
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Video Poster Image",
+      "info": "Shows while video loads"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position (Desktop)",
+      "options": [
+        { "value": "center center", "label": "Center" },
+        { "value": "center top", "label": "Top" },
+        { "value": "center bottom", "label": "Bottom" },
+        { "value": "left center", "label": "Left" },
+        { "value": "right center", "label": "Right" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_position",
+      "label": "Image Position (Mobile)",
+      "options": [
+        { "value": "center center", "label": "Center" },
+        { "value": "center top", "label": "Top" },
+        { "value": "center bottom", "label": "Bottom" },
+        { "value": "left center", "label": "Left" },
+        { "value": "right center", "label": "Right" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Background Color",
+      "default": "#000000",
+      "info": "Shows behind the image/video"
+    },
+    {
+      "type": "range",
+      "id": "media_opacity",
+      "label": "Image/Video Opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 60,
+      "info": "Lower values show more background color"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop Height (vh)",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum Height (px)",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile Height (vh)",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "mobile_min_height",
+      "label": "Mobile Min Height (px)",
+      "min": 300,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment (Desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Text Alignment (Mobile)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content Max Width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "default": 1000
+    },
+    {
+      "type": "range",
+      "id": "block_spacing",
+      "label": "Space Between Blocks",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Typography - Subheading"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading Size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_subheading_size",
+      "label": "Mobile Subheading Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "subheading_weight",
+      "label": "Subheading Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "select",
+      "id": "subheading_transform",
+      "label": "Subheading Transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "UPPERCASE" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "subheading_spacing",
+      "label": "Letter Spacing",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Typography - Heading"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "min": 30,
+      "max": 80,
+      "step": 2,
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "label": "Mobile Heading Size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading Weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "300"
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height",
+      "label": "Heading Line Height",
+      "min": 0.8,
+      "max": 1.5,
+      "step": 0.1,
+      "default": 1.1
+    },
+    {
+      "type": "select",
+      "id": "heading_transform",
+      "label": "Heading Transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "UPPERCASE" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Typography - Body"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body Text Size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_body_size",
+      "label": "Mobile Body Size",
+      "min": 14,
+      "max": 18,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "body_line_height",
+      "label": "Body Line Height",
+      "min": 1.2,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.6
+    },
+    {
+      "type": "range",
+      "id": "body_max_width",
+      "label": "Body Text Max Width",
+      "min": 400,
+      "max": 900,
+      "step": 50,
+      "unit": "px",
+      "default": 700
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button Background",
+      "default": "#4a7c59"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button Hover Background",
+      "default": "#3a5c49"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button Border Radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable Animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation Duration",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "unit": "ms",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation Stagger Delay",
+      "min": 50,
+      "max": 300,
+      "step": 50,
+      "unit": "ms",
+      "default": 150
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "label": "Enable Parallax Effect",
+      "default": false,
+      "info": "Desktop only"
+    },
+    {
+      "type": "range",
+      "id": "parallax_speed",
+      "label": "Parallax Speed",
+      "min": 10,
+      "max": 50,
+      "step": 10,
+      "default": 30,
+      "info": "Lower = slower parallax"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Subheading Text",
+          "default": "SPA FACIAL TREATMENTS AVAILABLE IN MCHENRY, IL"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Heading Text",
+          "default": "You are here to discover what your skin craves & gain education on how to reach your skin goals."
+        }
+      ]
+    },
+    {
+      "type": "body",
+      "name": "Body Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body Text",
+          "default": "<p>Lorem ipsum dolor sit amet consectetur. Cursus at lectus venenatis mi mi neque in.</p>"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_1_text",
+          "label": "Primary Button Text",
+          "default": "SEE ALL SERVICES"
+        },
+        {
+          "type": "url",
+          "id": "button_1_link",
+          "label": "Primary Button Link"
+        },
+        {
+          "type": "text",
+          "id": "button_2_text",
+          "label": "Secondary Button Text (Optional)"
+        },
+        {
+          "type": "url",
+          "id": "button_2_link",
+          "label": "Secondary Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "subheading",
+          "settings": {
+            "text": "WELCOME TO OUR STUDIO"
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "text": "Transform Your Skin with Professional Care"
+          }
+        },
+        {
+          "type": "body",
+          "settings": {
+            "text": "<p>Experience the difference of personalized treatments designed for your unique skin needs.</p>"
+          }
+        },
+        {
+          "type": "buttons",
+          "settings": {
+            "button_1_text": "BOOK NOW",
+            "button_1_link": "#",
+            "button_2_text": "LEARN MORE",
+            "button_2_link": "#"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
