@@ -147,7 +147,7 @@
 
 {% if _ml == 'carousel' %}
 /* ====================  MOBILE CAROUSEL  ==================== */
-@media (max-width: 989px) {
+@media (max-width: 749px) {
   /* Carousel: each slide ~82%, next peeks from right */
   .main-product-template .product__media-list {
     scroll-snap-type: x mandatory;
@@ -230,8 +230,8 @@
     display: none !important;
   }
 }
-/* Desktop: full-width slides, no carousel peek */
-@media (min-width: 990px) {
+/* Tablet + Desktop: full-width slides, no carousel peek */
+@media (min-width: 750px) {
   .main-product-template .product__media-list { padding: 0 !important; margin: 0 !important; }
   .main-product-template .product__media-list .slider__slide {
     width: 100% !important; min-width: 100% !important;
@@ -419,8 +419,8 @@
 }
 
 {% if _ml == 'carousel' %}
-/* Carousel mode: ensure thumbnails stay hidden on mobile (overrides display:block above) */
-@media (max-width: 989px) {
+/* Carousel mode: ensure thumbnails stay hidden on phone (overrides display:block above) */
+@media (max-width: 749px) {
   .main-product-template .thumbnail-slider,
   .main-product-template .thumbnail-slider.slider-vertical { display: none !important; }
 }
@@ -485,6 +485,9 @@ dtx-wishlist.is-wishlisted .sl-pdp-heart-btn svg { fill: #c44; stroke: #c44; }
   writing-mode: horizontal-tb !important; word-break: normal; hyphens: auto;
 }
 .main-product-template .product__info-container { max-width: 520px; }
+@media (min-width: 750px) and (max-width: 989px) {
+  .main-product-template .product__info-container { max-width: 620px; margin-left: auto; margin-right: auto; }
+}
 .main-product-template #price-{{ section.id }} .price--large { line-height: 1.15; }
 .main-product-template .installment.caption-large { margin-top: 6px; opacity: .85; }
 .main-product-template .product-attributes .product-label,
@@ -1926,28 +1929,15 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                     {% render 'social-proof-sales', block: block %}
 
                   {%- when 'rating' -%}
-                    {%- liquid
-                      assign sl_star_rating = 0
-                      assign sl_review_count = 0
-                      if product.metafields.reviews.rating.value != blank
-                        assign sl_star_rating = product.metafields.reviews.rating.value.rating | floor
-                        assign sl_review_count = product.metafields.reviews.rating_count | default: 0
-                      elsif product.metafields.judgeme.rating != blank
-                        assign jm_rating = product.metafields.judgeme.rating | split: 'data-average-rating="' | last | split: '"' | first | plus: 0
-                        assign sl_star_rating = jm_rating | floor
-                        assign sl_review_count = product.metafields.judgeme.rating | split: 'data-number-of-reviews="' | last | split: '"' | first | plus: 0
-                      endif
-                    -%}
-                    <div class="sl-pdp-rating" {{ block.shopify_attributes }} role="img" aria-label="{{ sl_star_rating }} out of 5 stars based on {{ sl_review_count }} reviews">
-                      <span class="sl-pdp-rating__stars" aria-hidden="true">
-                        {%- for i in (1..5) -%}{%- if i <= sl_star_rating -%}★{%- else -%}☆{%- endif -%}{%- endfor -%}
-                      </span>
-                      {%- if sl_review_count > 0 -%}
-                        <span class="sl-pdp-rating__count">({{ sl_review_count }}) reviews</span>
-                      {%- else -%}
-                        <span class="sl-pdp-rating__count">No reviews yet</span>
-                      {%- endif -%}
-                    </div>
+                    {%- if product.metafields.reviews.rating.value != blank -%}
+                      {%- assign star_rating = product.metafields.reviews.rating.value.rating | floor -%}
+                      <div class="sl-pdp-rating" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}">
+                        <span class="sl-pdp-rating__stars" aria-hidden="true">
+                          {%- for i in (1..5) -%}{%- if i <= star_rating -%}★{%- else -%}☆{%- endif -%}{%- endfor -%}
+                        </span>
+                        <span class="sl-pdp-rating__count">({{ product.metafields.reviews.rating_count }}) reviews</span>
+                      </div>
+                    {%- endif -%}
 
                   {%- when 'description' -%}
                     {% if section.settings.tab_position == 'right' %}
