@@ -379,8 +379,7 @@
                   </span>
                   {%- endunless -%}
                 </div>
-
-                {%- comment -%} Star rating — below title {%- endcomment -%}
+                {%- comment -%} Star rating {%- endcomment -%}
                 {%- if section.settings.show_rating and rec_product.metafields.reviews.rating.value != blank -%}
                   {%- assign rec_rating = rec_product.metafields.reviews.rating.value.rating | floor -%}
                   {%- assign rec_count = rec_product.metafields.reviews.rating_count | default: 0 -%}

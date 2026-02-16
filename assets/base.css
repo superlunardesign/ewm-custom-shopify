@@ -3282,7 +3282,7 @@ details-disclosure > details {
 }
 /* product page thumbnail slick slider height issue when click color variant */
 .height_fix {
-  height: 350px !important;
+  height: auto !important;
 }
 
 /* Advanced product tagging*/
