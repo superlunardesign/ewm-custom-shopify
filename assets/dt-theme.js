@@ -137,7 +137,6 @@ $('input:radio[name="Color"]').click(function() {
   const cvariant = $(this).val();  
   $('input:radio[name="Color"]').next('.swatch-element').removeClass('clicked');
   $(this).next('.swatch-element').addClass('clicked');
-  $('.slick-list').addClass('height_fix');
   $('.thumbnail-list__item').each(function() {
       const variant_val = $(this).find('img').attr("alt");
       if (cvariant == variant_val) {
