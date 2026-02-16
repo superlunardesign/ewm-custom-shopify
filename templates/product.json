@@ -155,7 +155,7 @@
         "p {line-height: 1.5em; color: black;}",
         ".price {color: black;}",
         ".jdgm-star {font-size: small; letter-spacing: -0.1em;}",
-        ".jdgm-widget{margin-top: -4%;}"
+        ".jdgm-widget {margin-top: -4%;}"
       ],
       "settings": {
         "page_full_width": false,
