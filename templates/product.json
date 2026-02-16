@@ -154,7 +154,7 @@
       "custom_css": [
         "p {line-height: 1.5em; color: black;}",
         ".price {color: black;}",
-        ".jdgm-star {font-size: small; letter-spacing: -0.5em;}"
+        ".jdgm-star {font-size: small; letter-spacing: -0.1em;}"
       ],
       "settings": {
         "page_full_width": false,
