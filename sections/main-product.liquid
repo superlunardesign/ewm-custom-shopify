@@ -336,6 +336,11 @@
   max-height: 600px;
   padding: 0 !important;
 }
+/* Align slick-list thumbnails to the bottom of the main image */
+.main-product-template .thumbnail-slider .slick-list {
+  display: flex !important;
+  align-items: flex-end !important;
+}
 @media (max-width: 989px) {
   .main-product-template .product__media-gallery { flex-direction: column !important; }
   .main-product-template .product__media-gallery > slider-component:first-of-type,
