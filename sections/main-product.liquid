@@ -1926,28 +1926,15 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                     {% render 'social-proof-sales', block: block %}
 
                   {%- when 'rating' -%}
-                    {%- liquid
-                      assign sl_star_rating = 0
-                      assign sl_review_count = 0
-                      if product.metafields.reviews.rating.value != blank
-                        assign sl_star_rating = product.metafields.reviews.rating.value.rating | floor
-                        assign sl_review_count = product.metafields.reviews.rating_count | default: 0
-                      elsif product.metafields.judgeme.rating != blank
-                        assign jm_rating = product.metafields.judgeme.rating | split: 'data-average-rating="' | last | split: '"' | first | plus: 0
-                        assign sl_star_rating = jm_rating | floor
-                        assign sl_review_count = product.metafields.judgeme.rating | split: 'data-number-of-reviews="' | last | split: '"' | first | plus: 0
-                      endif
-                    -%}
-                    <div class="sl-pdp-rating" {{ block.shopify_attributes }} role="img" aria-label="{{ sl_star_rating }} out of 5 stars based on {{ sl_review_count }} reviews">
-                      <span class="sl-pdp-rating__stars" aria-hidden="true">
-                        {%- for i in (1..5) -%}{%- if i <= sl_star_rating -%}★{%- else -%}☆{%- endif -%}{%- endfor -%}
-                      </span>
-                      {%- if sl_review_count > 0 -%}
-                        <span class="sl-pdp-rating__count">({{ sl_review_count }}) reviews</span>
-                      {%- else -%}
-                        <span class="sl-pdp-rating__count">No reviews yet</span>
-                      {%- endif -%}
-                    </div>
+                    {%- if product.metafields.reviews.rating.value != blank -%}
+                      {%- assign star_rating = product.metafields.reviews.rating.value.rating | floor -%}
+                      <div class="sl-pdp-rating" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}">
+                        <span class="sl-pdp-rating__stars" aria-hidden="true">
+                          {%- for i in (1..5) -%}{%- if i <= star_rating -%}★{%- else -%}☆{%- endif -%}{%- endfor -%}
+                        </span>
+                        <span class="sl-pdp-rating__count">({{ product.metafields.reviews.rating_count }}) reviews</span>
+                      </div>
+                    {%- endif -%}
 
                   {%- when 'description' -%}
                     {% if section.settings.tab_position == 'right' %}
