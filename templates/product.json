@@ -189,7 +189,7 @@
         "show_adv_product": true,
         "choose_label": "Choose style",
         "details_open_default": false,
-        "ingredients_open_default": false
+        "ingredients_open_default": true
       }
     },
     "sl_how_to_use_fDRQVt": {
