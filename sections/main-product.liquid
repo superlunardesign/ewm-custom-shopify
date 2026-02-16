@@ -147,7 +147,7 @@
 
 {% if _ml == 'carousel' %}
 /* ====================  MOBILE CAROUSEL  ==================== */
-@media (max-width: 989px) {
+@media (max-width: 749px) {
   /* Carousel: each slide ~82%, next peeks from right */
   .main-product-template .product__media-list {
     scroll-snap-type: x mandatory;
@@ -230,8 +230,8 @@
     display: none !important;
   }
 }
-/* Desktop: full-width slides, no carousel peek */
-@media (min-width: 990px) {
+/* Tablet + Desktop: full-width slides, no carousel peek */
+@media (min-width: 750px) {
   .main-product-template .product__media-list { padding: 0 !important; margin: 0 !important; }
   .main-product-template .product__media-list .slider__slide {
     width: 100% !important; min-width: 100% !important;
@@ -419,8 +419,8 @@
 }
 
 {% if _ml == 'carousel' %}
-/* Carousel mode: ensure thumbnails stay hidden on mobile (overrides display:block above) */
-@media (max-width: 989px) {
+/* Carousel mode: ensure thumbnails stay hidden on phone (overrides display:block above) */
+@media (max-width: 749px) {
   .main-product-template .thumbnail-slider,
   .main-product-template .thumbnail-slider.slider-vertical { display: none !important; }
 }
@@ -485,6 +485,9 @@ dtx-wishlist.is-wishlisted .sl-pdp-heart-btn svg { fill: #c44; stroke: #c44; }
   writing-mode: horizontal-tb !important; word-break: normal; hyphens: auto;
 }
 .main-product-template .product__info-container { max-width: 520px; }
+@media (min-width: 750px) and (max-width: 989px) {
+  .main-product-template .product__info-container { max-width: 620px; margin-left: auto; margin-right: auto; }
+}
 .main-product-template #price-{{ section.id }} .price--large { line-height: 1.15; }
 .main-product-template .installment.caption-large { margin-top: 6px; opacity: .85; }
 .main-product-template .product-attributes .product-label,
