@@ -551,6 +551,7 @@
         "service_item_zittUh",
         "service_item_6V4KRF"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "Facial Treatments",
       "settings": {
@@ -612,6 +613,7 @@
       "block_order": [
         "text_LXTg8h"
       ],
+      "disabled": true,
       "name": "Marquee",
       "settings": {
         "colorBackground": "#8c9b6d",
@@ -629,22 +631,22 @@
           "type": "service_item",
           "name": "Lip Mask",
           "settings": {
-            "service_name": "Extended Neck Peel",
+            "service_name": "Pre-Peel Treatment & Consultation",
             "add_line": false,
             "service_extra": "",
-            "service_price": "50",
+            "service_price": "125",
             "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p>Extend your peel down to your neck to reduce fine lines, wrinkles, and sun damage.</p>"
+            "service_description": "<p>Curious about chemical peels but unsure where to begin? This service is the perfect starting point for first-timers!</p><ul><li>Peel Consultation — A one-on-one assessment to evaluate your skin's unique needs and determine the best approach for your goals</li><li>Pre-Peel Treatment — A customized skin treatment to leave you glowing and help us determine if peels are the right choice for you</li><li>Personalized Homecare Guidance — Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan</li></ul>"
           }
         },
         "service_item_gidiKJ": {
           "type": "service_item",
           "name": "Hand Treatment",
           "settings": {
-            "service_name": "Extended Neck & Chest Peel",
+            "service_name": "Pre-Peel Treatment & Consultation",
             "add_line": false,
             "service_extra": "",
             "service_price": "100",
