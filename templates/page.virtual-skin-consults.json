@@ -15,27 +15,27 @@
         "subheading_j3pddP": {
           "type": "subheading",
           "settings": {
-            "text": "Professional Chemical Peels in McHenry, IL"
+            "text": "Virtual Skin Consultations | Online Skincare Expert"
           }
         },
         "heading_44AWxR": {
           "type": "heading",
           "settings": {
-            "text": "Chemical Peels That <i>Lighten, Brighten & Tighten</i> Your Skin"
+            "text": "Need Help With Your Skin <i> But Can't Make It In?<i></i></i>"
           }
         },
         "body_XHcgH4": {
           "type": "body",
           "settings": {
-            "text": "<p>Incredible results for dark spots, fine lines & wrinkles</p><p>Experience the transformative power of <strong>custom PCA chemical peels</strong> — professionally blended for your unique skin goals with <strong>zero downtime</strong>.</p>"
+            "text": "<p><em>Expert skincare advice and personalized treatment plans from the comfort of your home </em></p><p>Virtual skin consultations are the <strong>ideal solution</strong> for busy individuals like you who want expert skincare advice and personalized treatment plans from the comfort of your own home. Don't let time or distance hold you back from achieving your skincare goals.</p>"
           }
         },
         "buttons_DbHrRi": {
           "type": "buttons",
           "settings": {
-            "button_1_text": "BOOK YOUR CHEMICAL PEEL",
+            "button_1_text": "BOOK YOUR VIRTUAL CONSULTATION",
             "button_1_link": "https://booking.mangomint.com/314399",
-            "button_2_text": "VIEW ALL TREATMENTS",
+            "button_2_text": "",
             "button_2_link": "#services"
           }
         }
@@ -141,7 +141,7 @@
       ],
       "name": "Image Carousel",
       "settings": {
-        "section_title": "Before & After Chemical Peel Series",
+        "section_title": "Client Results",
         "title_size": 32,
         "title_color": "#333333",
         "container_width": 1400,
@@ -167,7 +167,7 @@
           "settings": {
             "icon_type": "fontawesome",
             "icon_class": "fas fa-braille",
-            "heading": "Dark Spots Won't Budge",
+            "heading": "Personalized Expert Advice",
             "text": "You've tried every brightening serum, vitamin C product, and dark spot corrector on the market. Those stubborn sun spots, melasma patches, and post-acne marks still stare back at you in the mirror every morning."
           }
         },
@@ -176,7 +176,7 @@
           "settings": {
             "icon_type": "fontawesome",
             "icon_class": "fas fa-lines-leaning",
-            "heading": "Fine Lines Are Multiplying",
+            "heading": "Products Shipped to You",
             "text": "What started as a few expression lines around your eyes and forehead has quietly spread. Your skincare routine isn't keeping up, and you're noticing new wrinkles appearing faster than you can address them."
           }
         },
@@ -185,50 +185,20 @@
           "settings": {
             "icon_type": "fontawesome",
             "icon_class": "fas fa-ghost",
-            "heading": "Traditional Peels Scare You",
+            "heading": "Complimentary Follow-Up",
             "text": "You've heard horror stories about chemical peels gone wrong — redness, flaking, hiding at home for a week. You want results, but not at the cost of your daily life and social calendar."
-          }
-        },
-        "value_prop_7GCkLt": {
-          "type": "value_prop",
-          "settings": {
-            "icon_type": "fontawesome",
-            "icon_class": "fas fa-face-tired",
-            "heading": "Your Skin Looks Dull & Tired",
-            "text": "No matter how much sleep you get or water you drink, your complexion just looks lifeless. That healthy, radiant glow you used to have seems like a distant memory."
-          }
-        },
-        "value_prop_NeebM7": {
-          "type": "value_prop",
-          "settings": {
-            "icon_type": "fontawesome",
-            "icon_class": "fas fa-xmark",
-            "heading": "One-Size-Fits-All Doesn't Work",
-            "text": "You've wasted money on generic treatments that promised the world but delivered nothing. Your skin is unique, and cookie-cutter solutions just don't address your specific concerns."
-          }
-        },
-        "value_prop_7WxYrr": {
-          "type": "value_prop",
-          "settings": {
-            "icon_type": "fontawesome",
-            "icon_class": "fas fa-camera",
-            "heading": "Photos Make You Cringe",
-            "text": "Natural sunlight, flash photography, and video calls reveal every imperfection. You've become an expert at finding the best angles and filters, but you'd rather just love your skin as-is."
           }
         }
       },
       "block_order": [
         "value_prop_i7yChD",
         "value_prop_TXi4QK",
-        "value_prop_jgmTj3",
-        "value_prop_7GCkLt",
-        "value_prop_NeebM7",
-        "value_prop_7WxYrr"
+        "value_prop_jgmTj3"
       ],
       "name": "Flexible Value Props",
       "settings": {
-        "main_heading": "Ready for a Skin Transformation, But...",
-        "main_subheading": "",
+        "main_heading": "Our Virtual Sessions Offer the <i>Same Level of Expertise <i>as an In-Person Visit</i></i>",
+        "main_subheading": "You receive the best possible care for your specific skincare concerns — no matter where you are. Don't let time or distance hold you back from achieving your skincare goals. Experience the convenience and effectiveness of virtual skincare consultations.",
         "grid_columns": 3,
         "background_opacity": 20,
         "background_size": "cover",
@@ -247,7 +217,7 @@
         "subheading_color": "#333333",
         "subheading_size": 20,
         "subheading_weight": "400",
-        "subheading_transform": "uppercase",
+        "subheading_transform": "none",
         "prop_heading_color": "#000000",
         "prop_heading_size": 22,
         "prop_heading_weight": "600",
@@ -270,6 +240,128 @@
         "enable_animation": false,
         "animation_duration": 600,
         "animation_delay": 300
+      }
+    },
+    "sl_marquee_RR7r88": {
+      "type": "sl-marquee",
+      "blocks": {
+        "text_KJbWLQ": {
+          "type": "text",
+          "settings": {
+            "new_text": "CUSTOMIZED FOR YOU"
+          }
+        },
+        "text_7Wr66g": {
+          "type": "text",
+          "settings": {
+            "new_text": "FIRMER SKIN"
+          }
+        },
+        "text_EjamFt": {
+          "type": "text",
+          "settings": {
+            "new_text": "ZERO DOWNTIME"
+          }
+        }
+      },
+      "block_order": [
+        "text_KJbWLQ",
+        "text_7Wr66g",
+        "text_EjamFt"
+      ],
+      "name": "Marquee",
+      "settings": {
+        "colorBackground": "#846599",
+        "colorText": "#ffffff",
+        "link": "",
+        "marquee_height": 46,
+        "font_size": 18,
+        "marquee_speed": 21
+      }
+    },
+    "sl_services_menu_EnDQbw": {
+      "type": "sl-services-menu",
+      "blocks": {
+        "service_item_kwrQqf": {
+          "type": "service_item",
+          "name": "Lip Mask",
+          "settings": {
+            "service_name": "Virtual Skin Consultation",
+            "add_line": false,
+            "service_extra": "For any skin concern that is not acne related",
+            "service_price": "50 / 30 min",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "Book Virtual Skin Consultation",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p>This is for any skin concern that is not acne related.</p><p><strong>If You Struggle With:</strong> Dry skin, Oily or combo skin, Aging skin & more — this is the choice for you!</p><p><strong>What's Included:</strong></p><ul><li>✦ Virtual visit via Zoom</li><li>✦ Deep dive into your skin</li><li>✦ Great skin education just for you</li><li>✦ All your skincare questions answered</li><li>✦ Products shipped directly to you with detailed instructions</li><li>✦ Complimentary virtual follow-up</li></ul>"
+          }
+        },
+        "service_item_gidiKJ": {
+          "type": "service_item",
+          "name": "Hand Treatment",
+          "settings": {
+            "service_name": "Virtual Acne Bootcamp Consultation",
+            "add_line": false,
+            "service_extra": "Meet via Zoom with Shannon — Certified Acne Expert",
+            "service_price": "65 / 45 min",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "Book Virtual Acne Consultation",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p>Meet via Zoom with Shannon — Certified Acne Expert — to work towards clear, healthier skin!</p><p><strong>We Will Discuss & Educate On:</strong> What acne is, Your specific acne and skin type, Lifestyle factors impacting your acne, Food factors & so much more</p><p><strong>What's Included:</strong></p><ul><li>✦ Virtual visit via Zoom</li><li>✦ Customized skincare routine created for you</li><li>✦ Products shipped directly to you</li><li>✦ Resources to help you on your journey</li><li>✦ Complimentary virtual follow-up</li></ul><p><strong>Good to know:</strong> This is a great option for those local who cannot make it in & for clients worldwide.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "service_item_kwrQqf",
+        "service_item_gidiKJ"
+      ],
+      "name": "SERVICES",
+      "settings": {
+        "enable_anchor": true,
+        "anchor_id": "services",
+        "anchor_offset": 80,
+        "section_title": "Our Virtual Skincare Services",
+        "background_color": "#ffffff",
+        "section_padding": 40,
+        "max_width": 1000,
+        "item_padding": 20,
+        "header_color": "#000000",
+        "header_size": 24,
+        "header_weight": "400",
+        "header_text_transform": "uppercase",
+        "header_margin": 30,
+        "service_name_color": "#000000",
+        "service_name_size": 18,
+        "service_name_weight": "400",
+        "price_color": "#000000",
+        "price_size": 18,
+        "price_weight": "400",
+        "dot_color": "#cccccc",
+        "border_color": "#eeeeee",
+        "button_background": "#8c9b6d",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#3a5c49",
+        "button_hover_text_color": "#ffffff",
+        "button_padding_x": 20,
+        "button_padding_y": 10,
+        "button_font_size": 14,
+        "button_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_border_radius": 0,
+        "toggle_color": "#666666",
+        "toggle_hover_color": "#000000",
+        "toggle_size": 14,
+        "description_color": "#333333",
+        "description_size": 14,
+        "mobile_header_size": 20,
+        "mobile_service_name_size": 16,
+        "mobile_price_size": 16,
+        "mobile_button_size": 13,
+        "mobile_button_padding_x": 16,
+        "mobile_button_padding_y": 8,
+        "mobile_description_size": 13
       }
     },
     "sl_split_section_YNApNE": {
@@ -474,128 +566,6 @@
         "padding_top": 16,
         "padding_bottom": 16,
         "custom_class_name": ""
-      }
-    },
-    "sl_marquee_RR7r88": {
-      "type": "sl-marquee",
-      "blocks": {
-        "text_KJbWLQ": {
-          "type": "text",
-          "settings": {
-            "new_text": "CUSTOMIZED FOR YOU"
-          }
-        },
-        "text_7Wr66g": {
-          "type": "text",
-          "settings": {
-            "new_text": "FIRMER SKIN"
-          }
-        },
-        "text_EjamFt": {
-          "type": "text",
-          "settings": {
-            "new_text": "ZERO DOWNTIME"
-          }
-        }
-      },
-      "block_order": [
-        "text_KJbWLQ",
-        "text_7Wr66g",
-        "text_EjamFt"
-      ],
-      "name": "Marquee",
-      "settings": {
-        "colorBackground": "#846599",
-        "colorText": "#ffffff",
-        "link": "",
-        "marquee_height": 46,
-        "font_size": 18,
-        "marquee_speed": 21
-      }
-    },
-    "sl_services_menu_EnDQbw": {
-      "type": "sl-services-menu",
-      "blocks": {
-        "service_item_kwrQqf": {
-          "type": "service_item",
-          "name": "Lip Mask",
-          "settings": {
-            "service_name": "Pre-Peel Treatment & Consultation",
-            "add_line": false,
-            "service_extra": "",
-            "service_price": "125",
-            "is_complimentary": false,
-            "show_button": true,
-            "button_text": "Book Now",
-            "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p>Curious about chemical peels but unsure where to begin? This service is the perfect starting point for first-timers!</p><ul><li>Peel Consultation — A one-on-one assessment to evaluate your skin's unique needs and determine the best approach for your goals</li><li>Pre-Peel Treatment — A customized skin treatment to leave you glowing and help us determine if peels are the right choice for you</li><li>Personalized Homecare Guidance — Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan</li></ul>"
-          }
-        },
-        "service_item_gidiKJ": {
-          "type": "service_item",
-          "name": "Hand Treatment",
-          "settings": {
-            "service_name": "Custom PCA Chemical Peel",
-            "add_line": false,
-            "service_extra": "",
-            "service_price": "125",
-            "is_complimentary": false,
-            "show_button": true,
-            "button_text": "Book Now",
-            "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p>No two complexions are the same, and neither are our no-downtime chemical peels. Each PCA peel is custom blended for your skin goals.</p><ul><li>Lighten, brighten & tighten your skin</li><li>Smooth fine lines and wrinkles</li><li>Fade sun damage and dark spots</li><li>Refresh the overall look of your skin with zero downtime<br/>Recommended as a series of 3 or 6 treatments every 3 to 4 weeks.</li></ul>"
-          }
-        }
-      },
-      "block_order": [
-        "service_item_kwrQqf",
-        "service_item_gidiKJ"
-      ],
-      "name": "SERVICES",
-      "settings": {
-        "enable_anchor": true,
-        "anchor_id": "services",
-        "anchor_offset": 80,
-        "section_title": "Our Chemical Peel Services",
-        "background_color": "#ffffff",
-        "section_padding": 40,
-        "max_width": 1000,
-        "item_padding": 20,
-        "header_color": "#000000",
-        "header_size": 24,
-        "header_weight": "400",
-        "header_text_transform": "uppercase",
-        "header_margin": 30,
-        "service_name_color": "#000000",
-        "service_name_size": 18,
-        "service_name_weight": "400",
-        "price_color": "#000000",
-        "price_size": 18,
-        "price_weight": "400",
-        "dot_color": "#cccccc",
-        "border_color": "#eeeeee",
-        "button_background": "#8c9b6d",
-        "button_text_color": "#ffffff",
-        "button_hover_background": "#3a5c49",
-        "button_hover_text_color": "#ffffff",
-        "button_padding_x": 20,
-        "button_padding_y": 10,
-        "button_font_size": 14,
-        "button_weight": "500",
-        "button_text_transform": "uppercase",
-        "button_border_radius": 0,
-        "toggle_color": "#666666",
-        "toggle_hover_color": "#000000",
-        "toggle_size": 14,
-        "description_color": "#333333",
-        "description_size": 14,
-        "mobile_header_size": 20,
-        "mobile_service_name_size": 16,
-        "mobile_price_size": 16,
-        "mobile_button_size": 13,
-        "mobile_button_padding_x": 16,
-        "mobile_button_padding_y": 8,
-        "mobile_description_size": 13
       }
     },
     "sl_marquee_wGAN4T": {
@@ -1250,11 +1220,11 @@
     "sl_full_image_hero_ChMHiX",
     "before_and_afters_QTJapz",
     "sl_flexible_list_yEnKh7",
+    "sl_marquee_RR7r88",
+    "sl_services_menu_EnDQbw",
     "sl_split_section_YNApNE",
     "sl_flexible_list_YRpKeG",
     "image_with_text_waPRjx",
-    "sl_marquee_RR7r88",
-    "sl_services_menu_EnDQbw",
     "sl_marquee_wGAN4T",
     "sl_services_menu_tPA8Ja",
     "image_banner_rVqRFn",
