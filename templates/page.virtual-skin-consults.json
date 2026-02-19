@@ -919,18 +919,18 @@
         "grid_gap": 30,
         "header_spacing": 50,
         "text_alignment": "center",
-        "heading_color": "#1a1a1a",
+        "heading_color": "#ffffff",
         "heading_size": 42,
         "heading_weight": "600",
         "heading_transform": "none",
-        "subheading_color": "#1a1a1a",
+        "subheading_color": "#ffffff",
         "subheading_size": 20,
         "subheading_weight": "400",
         "subheading_transform": "uppercase",
-        "prop_heading_color": "#1a1a1a",
+        "prop_heading_color": "#ffffff",
         "prop_heading_size": 22,
         "prop_heading_weight": "600",
-        "prop_text_color": "#1a1a1a",
+        "prop_text_color": "#ffffff",
         "prop_text_size": 15,
         "item_background": "rgba(0,0,0,0)",
         "item_padding": 20,
@@ -939,7 +939,7 @@
         "item_hover_effect": false,
         "show_icons": true,
         "icon_size": 15,
-        "icon_color": "#1a1a1a",
+        "icon_color": "#ffffff",
         "mobile_heading_size": 32,
         "mobile_subheading_size": 16,
         "mobile_prop_heading_size": 18,
@@ -954,12 +954,36 @@
     "testimonials_carousel_kK49RM": {
       "type": "testimonials-carousel",
       "blocks": {
+        "testimonial_BDXyXe": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I've tried estheticians all over the county. Nobody takes the time to really understand your skin like they do here. The pre-peel consultation alone was worth it — I finally understand what my skin actually needs.",
+            "author_name": "Rachel D.",
+            "author_title": "Crystal Lake, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_kjfaGz": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I've spent a fortune on high-end serums and treatments that never delivered. These chemical peels have done more for my skin in 3 months than years of expensive products. My only regret is not starting sooner.",
+            "author_name": "Lisa B.",
+            "author_title": "McHenry, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
         "testimonial_LWteyz": {
           "type": "testimonial",
           "settings": {
-            "testimonial_text": "Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
+            "testimonial_text": "After years of trying every brightening product on the market, I finally found something that works. Just three PCA peels and my melasma is visibly lighter. I only wish I'd found Esthetics with Me sooner!",
+            "author_name": "Jennifer M.",
+            "author_title": "McHenry, IL",
             "show_rating": true,
             "rating": 5,
             "show_date": false,
@@ -969,9 +993,9 @@
         "testimonial_WXDiQD": {
           "type": "testimonial",
           "settings": {
-            "testimonial_text": "Amazing results! My skin has never looked better. The personalized approach really makes a difference.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
+            "testimonial_text": "I was so nervous about getting a chemical peel because I couldn't afford to hide at home. She was right — I walked out glowing and went straight to dinner with friends. No redness, no peeling, just compliments!",
+            "author_name": "Sarah K.",
+            "author_title": "Crystal Lake, IL",
             "show_rating": true,
             "rating": 5,
             "show_date": false,
@@ -981,9 +1005,21 @@
         "testimonial_r6Eapb": {
           "type": "testimonial",
           "settings": {
-            "testimonial_text": "Professional, knowledgeable, and caring. I trust her completely with my skincare routine.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
+            "testimonial_text": "I started the 6-peel series for my fine lines and sun damage. By the fourth treatment, people started asking if I'd done something. The texture of my skin has completely transformed.",
+            "author_name": "Michelle T.",
+            "author_title": "Woodstock, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_Geifn6": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I'd had chemical peels before at other spas, but they were always the same generic treatment. The custom-blended peel here actually addressed MY concerns. The difference in results is night and day.",
+            "author_name": "Amanda R.",
+            "author_title": "Lake in the Hills, IL",
             "show_rating": true,
             "rating": 5,
             "show_date": false,
@@ -992,17 +1028,20 @@
         }
       },
       "block_order": [
+        "testimonial_BDXyXe",
+        "testimonial_kjfaGz",
         "testimonial_LWteyz",
         "testimonial_WXDiQD",
-        "testimonial_r6Eapb"
+        "testimonial_r6Eapb",
+        "testimonial_Geifn6"
       ],
       "custom_css": [
         "a {}"
       ],
       "name": "Testimonials Carousel",
       "settings": {
-        "section_title": "Client Results",
-        "section_subtitle": "Real reviews from real people",
+        "section_title": "TESTIMONIALS",
+        "section_subtitle": "Real Results from Real McHenry Clients",
         "section_background": "#faf9f7",
         "section_padding": 60,
         "heading_color": "#000000",
