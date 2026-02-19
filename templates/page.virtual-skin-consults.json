@@ -457,6 +457,7 @@
         "text_dgrenH",
         "button_McChTa"
       ],
+      "disabled": true,
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
         "page_full_width": true,
@@ -680,7 +681,7 @@
         "enable_anchor": false,
         "anchor_id": "services",
         "anchor_offset": 80,
-        "section_title": "Enhancements",
+        "section_title": "Our Chemical Peel Services",
         "background_color": "#ffffff",
         "section_padding": 40,
         "max_width": 1000,
