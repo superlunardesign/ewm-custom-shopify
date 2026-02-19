@@ -521,7 +521,7 @@
         "item_padding": 25,
         "border_color": "#ffffff",
         "toggle_color": "#ffffff",
-        "toggle_hover_color": "#000000",
+        "toggle_hover_color": "#ffffff",
         "mobile_header_size": 26,
         "mobile_subheader_size": 16,
         "mobile_question_size": 18,
