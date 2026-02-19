@@ -49,7 +49,7 @@
       "name": "Hero Section",
       "settings": {
         "background_type": "image",
-        "background_image": "shopify://shop_images/BrandingPhotography-C_Mae-5388.jpg",
+        "background_image": "shopify://shop_images/BrandingPhotography-C_Mae-5513.jpg",
         "background_video": "",
         "image_position": "center center",
         "mobile_image_position": "center center",
@@ -276,7 +276,7 @@
       "type": "sl-split-section",
       "name": "Split Section",
       "settings": {
-        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5554.jpg",
+        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5261.jpg",
         "swap_horizontal": false,
         "auto_height_desktop": true,
         "section_height_desktop": 40,
@@ -384,7 +384,7 @@
         "main_heading": "What Your Skin Will Love About PCA Chemical Peels",
         "main_subheading": "Our chemical peel treatments in McHenry deliver transformation you can see and feel — here's what you can expect:",
         "grid_columns": 3,
-        "background_image": "shopify://shop_images/BrandingPhotography-C_Mae-5524.jpg",
+        "background_image": "shopify://shop_images/BrandingPhotography-C_Mae-5625.jpg",
         "background_opacity": 35,
         "background_size": "cover",
         "background_position_x": 50,
