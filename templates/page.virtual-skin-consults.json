@@ -513,52 +513,50 @@
         "marquee_speed": 21
       }
     },
-    "sl_services_menu_tPA8Ja": {
+    "sl_services_menu_EnDQbw": {
       "type": "sl-services-menu",
       "blocks": {
-        "service_item_zittUh": {
+        "service_item_kwrQqf": {
           "type": "service_item",
-          "name": "Mini Refresh Facial",
+          "name": "Lip Mask",
           "settings": {
             "service_name": "Pre-Peel Treatment & Consultation",
-            "add_line": true,
+            "add_line": false,
             "service_extra": "",
             "service_price": "125",
             "is_complimentary": false,
             "show_button": true,
-            "button_text": "BOOK NOW",
+            "button_text": "Book Your Chemical Peel Now",
             "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p><strong>Curious about peels but unsure where to begin? This service is the perfect starting point for first-timers!</strong></p><p>What’s Included:</p><p><strong>• Peel Consultation:</strong></p><p>A one-on-one assessment to evaluate your skin’s unique needs.</p><p><strong>• Pre-Peel Treatment:</strong></p><p>A customized skin treatment to leave you glowing and determine if peels are the right choice for you.</p><p><strong>• Personalized Homecare Guidance:</strong></p><p>Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan.</p>"
+            "service_description": "<p>Curious about chemical peels but unsure where to begin? This service is the perfect starting point for first-timers!</p><ul><li>Peel Consultation — A one-on-one assessment to evaluate your skin's unique needs and determine the best approach for your goals</li><li>Pre-Peel Treatment — A customized skin treatment to leave you glowing and help us determine if peels are the right choice for you</li><li>Personalized Homecare Guidance — Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan</li></ul>"
           }
         },
-        "service_item_6V4KRF": {
+        "service_item_gidiKJ": {
           "type": "service_item",
-          "name": "Customized Facial",
+          "name": "Hand Treatment",
           "settings": {
             "service_name": "Custom PCA Chemical Peel",
-            "add_line": true,
+            "add_line": false,
             "service_extra": "",
             "service_price": "125",
             "is_complimentary": false,
             "show_button": true,
-            "button_text": "BOOK NOW",
+            "button_text": "Book Your Chemical Peel Now",
             "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p><strong>No two complexions are the same</strong>, and neither are our <em>no down time</em> peels. </p><p>Each PCA chemical peel is <strong>custom blended </strong>for your skin goals.</p><p></p><p><strong>PCA Peels help to: </strong></p><p>• Lighten, brighten, & tighten </p><p>• Smooth fine lines and wrinkles </p><p>• Fade sun damage </p><p>• Refresh the overall look of your skin with no downtime </p><p></p><p>Recommended as a series of 3 or 6 treatments every 3 to 4 weeks. </p><p></p><p>+ 50 to add treatment to neck </p><p>+ 100 to add treatment to neck & décolleté</p>"
+            "service_description": "<p>No two complexions are the same, and neither are our no-downtime chemical peels. Each PCA peel is custom blended for your skin goals.</p><ul><li>Lighten, brighten & tighten your skin</li><li>Smooth fine lines and wrinkles</li><li>Fade sun damage and dark spots</li><li>Refresh the overall look of your skin with zero downtime<br/>Recommended as a series of 3 or 6 treatments every 3 to 4 weeks.</li></ul>"
           }
         }
       },
       "block_order": [
-        "service_item_zittUh",
-        "service_item_6V4KRF"
+        "service_item_kwrQqf",
+        "service_item_gidiKJ"
       ],
-      "disabled": true,
-      "custom_css": [],
-      "name": "Facial Treatments",
+      "name": "SERVICES",
       "settings": {
-        "enable_anchor": true,
+        "enable_anchor": false,
         "anchor_id": "services",
         "anchor_offset": 80,
-        "section_title": "CHEMICAL PEEL TREATMENTS",
+        "section_title": "Our Chemical Peel Services",
         "background_color": "#ffffff",
         "section_padding": 40,
         "max_width": 1000,
@@ -606,14 +604,14 @@
         "text_LXTg8h": {
           "type": "text",
           "settings": {
-            "new_text": "ADD ONS"
+            "new_text": "ENHANCEMENTS"
           }
         }
       },
       "block_order": [
         "text_LXTg8h"
       ],
-      "disabled": true,
+      "custom_css": [],
       "name": "Marquee",
       "settings": {
         "colorBackground": "#8c9b6d",
@@ -624,66 +622,67 @@
         "marquee_speed": 21
       }
     },
-    "sl_services_menu_EnDQbw": {
+    "sl_services_menu_tPA8Ja": {
       "type": "sl-services-menu",
       "blocks": {
-        "service_item_kwrQqf": {
+        "service_item_zittUh": {
           "type": "service_item",
-          "name": "Lip Mask",
+          "name": "Mini Refresh Facial",
           "settings": {
-            "service_name": "Pre-Peel Treatment & Consultation",
-            "add_line": false,
+            "service_name": "Don't Neglect Your Neck! (Include neck)",
+            "add_line": true,
             "service_extra": "",
-            "service_price": "125",
+            "service_price": "50 | Include neck",
             "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p>Curious about chemical peels but unsure where to begin? This service is the perfect starting point for first-timers!</p><ul><li>Peel Consultation — A one-on-one assessment to evaluate your skin's unique needs and determine the best approach for your goals</li><li>Pre-Peel Treatment — A customized skin treatment to leave you glowing and help us determine if peels are the right choice for you</li><li>Personalized Homecare Guidance — Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan</li></ul>"
+            "service_description": "<p><strong>Curious about peels but unsure where to begin? This service is the perfect starting point for first-timers!</strong></p><p>What’s Included:</p><p><strong>• Peel Consultation:</strong></p><p>A one-on-one assessment to evaluate your skin’s unique needs.</p><p><strong>• Pre-Peel Treatment:</strong></p><p>A customized skin treatment to leave you glowing and determine if peels are the right choice for you.</p><p><strong>• Personalized Homecare Guidance:</strong></p><p>Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan.</p>"
           }
         },
-        "service_item_gidiKJ": {
+        "service_item_VzAK6V": {
           "type": "service_item",
-          "name": "Hand Treatment",
+          "name": "Mini Refresh Facial",
           "settings": {
-            "service_name": "Pre-Peel Treatment & Consultation",
-            "add_line": false,
+            "service_name": "Don't Neglect Your Neck! (Include neck & chest)",
+            "add_line": true,
             "service_extra": "",
-            "service_price": "100",
+            "service_price": "100 | Include neck & chest",
             "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p>Extend your peel down to your neck <strong>and chest</strong> to reduce fine lines, wrinkles, and sun damage.</p>"
+            "service_description": "<p><strong>Curious about peels but unsure where to begin? This service is the perfect starting point for first-timers!</strong></p><p>What’s Included:</p><p><strong>• Peel Consultation:</strong></p><p>A one-on-one assessment to evaluate your skin’s unique needs.</p><p><strong>• Pre-Peel Treatment:</strong></p><p>A customized skin treatment to leave you glowing and determine if peels are the right choice for you.</p><p><strong>• Personalized Homecare Guidance:</strong></p><p>Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan.</p>"
           }
         },
-        "service_item_hEWycF": {
+        "service_item_6V4KRF": {
           "type": "service_item",
-          "name": "Skin Reviver",
+          "name": "Customized Facial",
           "settings": {
             "service_name": "Red Light Therapy",
             "add_line": true,
-            "service_extra": "+30 mins",
-            "service_price": "50",
+            "service_extra": "",
+            "service_price": "50 | 30 min",
             "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p>Red light therapy wavelengths penetrate deeply and provides cells with energy to restore. </p><p><strong>Red Light Therapy is beneficial for:</strong></p><ul><li>Fine Line & Wrinkle Reduction</li><li>Inflammation / Circulation</li></ul>"
+            "service_description": "<p>Red light therapy wavelengths penetrate deeply and provide cells with energy to restore. Beneficial for fine line & wrinkle reduction, inflammation, circulation & acne.<br/></p>"
           }
         }
       },
       "block_order": [
-        "service_item_kwrQqf",
-        "service_item_gidiKJ",
-        "service_item_hEWycF"
+        "service_item_zittUh",
+        "service_item_VzAK6V",
+        "service_item_6V4KRF"
       ],
+      "custom_css": [],
       "name": "ENHANCEMENTS",
       "settings": {
-        "enable_anchor": false,
+        "enable_anchor": true,
         "anchor_id": "services",
         "anchor_offset": 80,
-        "section_title": "Our Chemical Peel Services",
+        "section_title": "Enhance Your Chemical Peel Treatment",
         "background_color": "#ffffff",
         "section_padding": 40,
         "max_width": 1000,
@@ -727,6 +726,7 @@
     },
     "image_banner_rVqRFn": {
       "type": "image-banner",
+      "disabled": true,
       "custom_css": [
         "* {height: 200px;}"
       ],
@@ -756,8 +756,8 @@
           "settings": {
             "icon_type": "fontawesome",
             "icon_class": "fas fa-soap",
-            "heading": "Arrive With Clean Skin",
-            "text": "Please arrive with clean, makeup-free skin so we can start your treatment right away."
+            "heading": "Book Your Appointment",
+            "text": "Schedule your chemical peel consultation or treatment online — choose a time that works for your schedule."
           }
         },
         "value_prop_YbcJUy": {
@@ -765,8 +765,8 @@
           "settings": {
             "icon_type": "fontawesome",
             "icon_class": "fas fa-pencil",
-            "heading": "Fill Out the Proper Materials",
-            "text": "Complete the proper waiver(s) before your arrival to save time. Access Waiver below."
+            "heading": "Relax & Transform",
+            "text": "Arrive with clean skin, fill out your waiver, and let us customize the perfect peel for your unique skin goals."
           }
         },
         "value_prop_iC4wmh": {
@@ -774,8 +774,8 @@
           "settings": {
             "icon_type": "fontawesome",
             "icon_class": "fas fa-star",
-            "heading": "Plan for No Makeup",
-            "text": "No makeup should be applied after your service for the rest of the day. You may wear makeup the next day."
+            "heading": "Glow & Go",
+            "text": "Walk out with brighter, tighter, more luminous skin — ready to continue your day with zero downtime."
           }
         }
       },
@@ -787,7 +787,7 @@
       "custom_css": [],
       "name": "Flexible Value Props",
       "settings": {
-        "main_heading": "How to Prepare for Your Chemical Peel",
+        "main_heading": "Your Path to Glowing Skin is Simple",
         "main_subheading": "",
         "grid_columns": 3,
         "background_opacity": 20,
@@ -838,7 +838,7 @@
         "heading_FV8nUL": {
           "type": "heading",
           "settings": {
-            "heading": "Fill out The Proper Waiver Before Arrival",
+            "heading": "",
             "heading_size": "h2"
           }
         },
@@ -855,6 +855,7 @@
         "heading_FV8nUL",
         "button_d4ViGp"
       ],
+      "disabled": true,
       "custom_css": [
         "* {background-color: #f7f4ed;}",
         "a {background-color: white; opacity: 100%;}"
@@ -865,6 +866,89 @@
         "full_width": true,
         "padding_top": 40,
         "padding_bottom": 52
+      }
+    },
+    "sl_flexible_list_iNMAdB": {
+      "type": "sl-flexible-list",
+      "blocks": {
+        "value_prop_aW7U8B": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "custom",
+            "icon_class": "fas fa-braille",
+            "heading": "Arrive With Clean Skin",
+            "text": "Please arrive with clean, makeup-free skin so we can start your treatment right away."
+          }
+        },
+        "value_prop_HDUt84": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "custom",
+            "icon_class": "fas fa-lines-leaning",
+            "heading": "Fill Out Your Waiver",
+            "text": "Complete the proper waiver(s) before your arrival to save time."
+          }
+        },
+        "value_prop_QRnxyB": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "custom",
+            "icon_class": "fas fa-ghost",
+            "heading": "Plan for No Makeup",
+            "text": "No makeup should be applied after your service for the rest of the day. You may wear makeup the next day."
+          }
+        }
+      },
+      "block_order": [
+        "value_prop_aW7U8B",
+        "value_prop_HDUt84",
+        "value_prop_QRnxyB"
+      ],
+      "name": "Flexible Value Props",
+      "settings": {
+        "main_heading": "How to Prepare for Your Chemical Peel",
+        "main_subheading": "",
+        "grid_columns": 3,
+        "background_opacity": 20,
+        "background_size": "cover",
+        "background_position_x": 50,
+        "background_position_y": 50,
+        "section_background": "#845e9c",
+        "section_padding": 60,
+        "max_width": 1200,
+        "grid_gap": 30,
+        "header_spacing": 50,
+        "text_alignment": "center",
+        "heading_color": "#1a1a1a",
+        "heading_size": 42,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#1a1a1a",
+        "subheading_size": 20,
+        "subheading_weight": "400",
+        "subheading_transform": "uppercase",
+        "prop_heading_color": "#1a1a1a",
+        "prop_heading_size": 22,
+        "prop_heading_weight": "600",
+        "prop_text_color": "#1a1a1a",
+        "prop_text_size": 15,
+        "item_background": "rgba(0,0,0,0)",
+        "item_padding": 20,
+        "item_border_radius": 0,
+        "item_shadow": false,
+        "item_hover_effect": false,
+        "show_icons": false,
+        "icon_size": 15,
+        "icon_color": "#1a1a1a",
+        "mobile_heading_size": 32,
+        "mobile_subheading_size": 16,
+        "mobile_prop_heading_size": 18,
+        "mobile_prop_text_size": 16,
+        "mobile_icon_size": 20,
+        "mobile_item_padding": 15,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "animation_delay": 300
       }
     },
     "testimonials_carousel_kK49RM": {
@@ -995,33 +1079,34 @@
         "faq_item_qjMHfp": {
           "type": "faq_item",
           "settings": {
-            "question": "Will I actually peel after a chemical peel?",
-            "answer": "<p>With our PCA chemical peels, most clients experience little to no visible peeling. You may notice some light flaking that's easily managed with moisturizer, but nothing that would keep you from going about your normal life. These are truly \"no downtime\" peels — you can return to work, social events, and daily activities immediately.</p>"
+            "question": "Will I actually peel and have downtime after my treatment?",
+            "answer": "<p>With our PCA chemical peels, most clients experience little to no visible peeling. You may notice some light flaking that's easily managed with moisturizer, but nothing that would keep you from going about your normal life. These are truly no downtime peels — you can return to work, social events, and daily activities immediately.</p>"
           }
         },
         "faq_item_PzXEKn": {
           "type": "faq_item",
           "settings": {
-            "question": "How many chemical peel treatments will I need?",
-            "answer": "<p>While you'll see some improvement after your very first chemical peel, optimal results come from a series of treatments. We typically recommend 3-6 peels spaced 3-4 weeks apart, depending on your skin goals. During your consultation, we'll create a personalized treatment plan that fits your needs and budget.</p>"
+            "question": "How many treatments will I need to see results?",
+            "answer": "<p>While you'll see some improvement after your very first chemical peel, optimal results come from a series of treatments. We typically recommend 3 to 6 peels spaced 3 to 4 weeks apart, depending on your skin goals. During your consultation, we'll create a personalized treatment plan that fits your needs and budget.</p>"
           }
         },
         "faq_item_GmWhMf": {
           "type": "faq_item",
           "settings": {
-            "question": "Is a chemical peel painful?",
+            "question": "Do chemical peels hurt?",
             "answer": "<p>Our PCA chemical peels are designed to be gentle yet effective. Most clients describe the sensation as a mild tingling or warmth during application. Any sensation subsides quickly, and many clients find the treatment surprisingly relaxing. If you have sensitive skin, we'll adjust your peel formula accordingly.</p>"
           }
         },
         "faq_item_PGh67J": {
           "type": "faq_item",
           "settings": {
-            "question": "Are chemical peels safe for all skin types?",
+            "question": "Are chemical peels safe for my skin type and tone?",
             "answer": "<p>Yes! One of the biggest advantages of PCA chemical peels is that they can be customized for virtually any skin type, tone, and concern. Whether you have dry, oily, sensitive, or combination skin — and regardless of your skin tone — we'll blend a peel that's perfect for you. That's why we offer the Pre-Peel Consultation for first-timers.</p>"
           }
         },
         "faq_item_XkqtLR": {
           "type": "faq_item",
+          "disabled": true,
           "settings": {
             "question": "When will I see results from my chemical peel?",
             "answer": "<p>You'll notice an immediate glow after your first chemical peel treatment. Over the following days, your skin will continue to improve as cell turnover accelerates. For concerns like dark spots, fine lines, and texture issues, visible improvement typically continues for 2-4 weeks after each treatment, with cumulative benefits building over your peel series.</p>"
@@ -1029,6 +1114,7 @@
         },
         "faq_item_P6KPXe": {
           "type": "faq_item",
+          "disabled": true,
           "settings": {
             "question": "What's the difference between professional chemical peels and drugstore peels?",
             "answer": "<p>Professional PCA chemical peels use higher concentrations of active ingredients that simply aren't available over the counter. More importantly, we custom-blend each peel for your specific skin — combining different acids and ingredients to target your unique concerns. Drugstore peels are one-size-fits-all; ours are one-of-a-kind, just like your skin.</p>"
@@ -1106,6 +1192,7 @@
         "heading_EYhdqr",
         "button_8HwHHg"
       ],
+      "disabled": true,
       "custom_css": [
         "* {background-color: #846599;}",
         "h2 {color: white;}",
@@ -1128,12 +1215,13 @@
     "sl_flexible_list_YRpKeG",
     "image_with_text_waPRjx",
     "sl_marquee_RR7r88",
-    "sl_services_menu_tPA8Ja",
-    "sl_marquee_wGAN4T",
     "sl_services_menu_EnDQbw",
+    "sl_marquee_wGAN4T",
+    "sl_services_menu_tPA8Ja",
     "image_banner_rVqRFn",
     "sl_flexible_list_mMk3PN",
     "rich_text_UbVpyD",
+    "sl_flexible_list_iNMAdB",
     "testimonials_carousel_kK49RM",
     "main",
     "sl_custom_faq_r7Q6ht",
