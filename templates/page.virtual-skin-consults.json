@@ -526,7 +526,7 @@
             "service_price": "125",
             "is_complimentary": false,
             "show_button": true,
-            "button_text": "Book Your Chemical Peel Now",
+            "button_text": "Book Now",
             "button_link": "https://booking.mangomint.com/314399",
             "service_description": "<p>Curious about chemical peels but unsure where to begin? This service is the perfect starting point for first-timers!</p><ul><li>Peel Consultation — A one-on-one assessment to evaluate your skin's unique needs and determine the best approach for your goals</li><li>Pre-Peel Treatment — A customized skin treatment to leave you glowing and help us determine if peels are the right choice for you</li><li>Personalized Homecare Guidance — Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan</li></ul>"
           }
@@ -541,7 +541,7 @@
             "service_price": "125",
             "is_complimentary": false,
             "show_button": true,
-            "button_text": "Book Your Chemical Peel Now",
+            "button_text": "Book Now",
             "button_link": "https://booking.mangomint.com/314399",
             "service_description": "<p>No two complexions are the same, and neither are our no-downtime chemical peels. Each PCA peel is custom blended for your skin goals.</p><ul><li>Lighten, brighten & tighten your skin</li><li>Smooth fine lines and wrinkles</li><li>Fade sun damage and dark spots</li><li>Refresh the overall look of your skin with zero downtime<br/>Recommended as a series of 3 or 6 treatments every 3 to 4 weeks.</li></ul>"
           }
@@ -553,7 +553,7 @@
       ],
       "name": "SERVICES",
       "settings": {
-        "enable_anchor": false,
+        "enable_anchor": true,
         "anchor_id": "services",
         "anchor_offset": 80,
         "section_title": "Our Chemical Peel Services",
@@ -679,7 +679,7 @@
       "custom_css": [],
       "name": "ENHANCEMENTS",
       "settings": {
-        "enable_anchor": true,
+        "enable_anchor": false,
         "anchor_id": "services",
         "anchor_offset": 80,
         "section_title": "Enhance Your Chemical Peel Treatment",
@@ -755,7 +755,7 @@
           "type": "value_prop",
           "settings": {
             "icon_type": "fontawesome",
-            "icon_class": "fas fa-soap",
+            "icon_class": "fas fa-calendar-alt",
             "heading": "Book Your Appointment",
             "text": "Schedule your chemical peel consultation or treatment online — choose a time that works for your schedule."
           }
@@ -764,7 +764,7 @@
           "type": "value_prop",
           "settings": {
             "icon_type": "fontawesome",
-            "icon_class": "fas fa-pencil",
+            "icon_class": "fas fa-spa",
             "heading": "Relax & Transform",
             "text": "Arrive with clean skin, fill out your waiver, and let us customize the perfect peel for your unique skin goals."
           }
@@ -874,8 +874,8 @@
         "value_prop_aW7U8B": {
           "type": "value_prop",
           "settings": {
-            "icon_type": "custom",
-            "icon_class": "fas fa-braille",
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-droplet",
             "heading": "Arrive With Clean Skin",
             "text": "Please arrive with clean, makeup-free skin so we can start your treatment right away."
           }
@@ -883,8 +883,8 @@
         "value_prop_HDUt84": {
           "type": "value_prop",
           "settings": {
-            "icon_type": "custom",
-            "icon_class": "fas fa-lines-leaning",
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-clipboard",
             "heading": "Fill Out Your Waiver",
             "text": "Complete the proper waiver(s) before your arrival to save time."
           }
@@ -892,8 +892,8 @@
         "value_prop_QRnxyB": {
           "type": "value_prop",
           "settings": {
-            "icon_type": "custom",
-            "icon_class": "fas fa-ghost",
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-face-smile",
             "heading": "Plan for No Makeup",
             "text": "No makeup should be applied after your service for the rest of the day. You may wear makeup the next day."
           }
@@ -937,7 +937,7 @@
         "item_border_radius": 0,
         "item_shadow": false,
         "item_hover_effect": false,
-        "show_icons": false,
+        "show_icons": true,
         "icon_size": 15,
         "icon_color": "#1a1a1a",
         "mobile_heading_size": 32,
