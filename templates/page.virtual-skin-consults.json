@@ -197,7 +197,7 @@
       ],
       "name": "Flexible Value Props",
       "settings": {
-        "main_heading": "Our Virtual Sessions Offer the <i>Same Level of Expertise <i>as an In-Person Visit</i></i>",
+        "main_heading": "Our Virtual Sessions Offer the Same Level of Expertise as an In-Person Visit",
         "main_subheading": "You receive the best possible care for your specific skincare concerns — no matter where you are. Don't let time or distance hold you back from achieving your skincare goals. Experience the convenience and effectiveness of virtual skincare consultations.",
         "grid_columns": 3,
         "background_opacity": 20,
@@ -364,8 +364,326 @@
         "mobile_description_size": 13
       }
     },
+    "how_it_works_PQ9iL8": {
+      "type": "how-it-works",
+      "blocks": {
+        "step_949nXc": {
+          "type": "step",
+          "settings": {
+            "step_title": "Book Your Session",
+            "step_description": "Choose your virtual consultation type and select a time that works for you. You'll receive a Zoom link via email."
+          }
+        },
+        "step_pWtJWG": {
+          "type": "step",
+          "settings": {
+            "step_title": "Meet & Learn",
+            "step_description": "We'll do a deep dive into your skin, answer all your questions, and educate you on how the skin functions."
+          }
+        },
+        "step_FyHNXM": {
+          "type": "step",
+          "settings": {
+            "step_title": "Get Your Products",
+            "step_description": "Products selected based on your skin goals will be shipped directly to you with detailed instructions."
+          }
+        }
+      },
+      "block_order": [
+        "step_949nXc",
+        "step_pWtJWG",
+        "step_FyHNXM"
+      ],
+      "custom_css": [
+        "p {line-height: 1.2em;}"
+      ],
+      "name": "How It Works",
+      "settings": {
+        "show_header": true,
+        "header_title": "How Virtual Consultations Work",
+        "header_subtitle": "",
+        "header_color": "#8c9b6d",
+        "background_color": "#faf9f7",
+        "accent_color": "#8c9b6d",
+        "show_cta": false,
+        "cta_title": "Ready to Begin Your Journey?",
+        "cta_subtitle": "Book your complimentary skin consultation today and discover the difference personalized care can make.",
+        "cta_button_text": "Book Appointment",
+        "cta_button_url": "https://ke18jq-r4.myshopify.com/",
+        "cta_background_color": "#8c9b6d",
+        "cta_text_color": "#ffffff",
+        "cta_button_color": "#ffffff",
+        "cta_button_text_color": "#8b7ba8",
+        "cta_heading_color": "#ffffff"
+      }
+    },
+    "sl_custom_faq_r7Q6ht": {
+      "type": "sl-custom-faq",
+      "blocks": {
+        "faq_item_knxa63": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What do I need for my virtual appointment?",
+            "answer": "<p>All you need is a device with Zoom (computer, tablet, or phone), good lighting so we can see your skin clearly, and a quiet space where we can talk. We'll send you the Zoom link before your appointment.</p>"
+          }
+        },
+        "faq_item_qjMHfp": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do virtual skin consultations work?",
+            "answer": "<p>We meet via Zoom for your scheduled appointment time. We'll do a deep dive into your skin, go over all your skincare questions, and educate you on how the skin functions. After your consultation, products selected based on your skin goals will be shipped directly to you with detailed instructions. A complimentary virtual follow-up will be booked at your appointment.</p>"
+          }
+        },
+        "faq_item_PzXEKn": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Which consultation should I book?",
+            "answer": "<p>If your primary concern is acne, book the Virtual Acne Bootcamp Consultation ($65/45 min). For all other skin concerns — dry skin, oily or combo skin, aging skin, and more — the Virtual Skin Consultation ($50/30 min) is the right choice for you.</p>"
+          }
+        },
+        "faq_item_GmWhMf": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do I need to purchase products?",
+            "answer": "<p>Products are recommended based on your specific skin goals and are shipped directly to you. While purchasing products isn't technically required, using the right products is essential to seeing results. We'll never recommend anything you don't need.</p>"
+          }
+        },
+        "faq_item_PGh67J": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's included in the follow-up?",
+            "answer": "<p>A complimentary virtual follow-up is booked at your initial appointment. This gives us a chance to check in on your progress, see how your skin is responding to your new routine, answer any questions that have come up, and make adjustments as needed.</p>"
+          }
+        },
+        "faq_item_XkqtLR": {
+          "type": "faq_item",
+          "disabled": true,
+          "settings": {
+            "question": "When will I see results from my chemical peel?",
+            "answer": "<p>You'll notice an immediate glow after your first chemical peel treatment. Over the following days, your skin will continue to improve as cell turnover accelerates. For concerns like dark spots, fine lines, and texture issues, visible improvement typically continues for 2-4 weeks after each treatment, with cumulative benefits building over your peel series.</p>"
+          }
+        },
+        "faq_item_P6KPXe": {
+          "type": "faq_item",
+          "disabled": true,
+          "settings": {
+            "question": "What's the difference between professional chemical peels and drugstore peels?",
+            "answer": "<p>Professional PCA chemical peels use higher concentrations of active ingredients that simply aren't available over the counter. More importantly, we custom-blend each peel for your specific skin — combining different acids and ingredients to target your unique concerns. Drugstore peels are one-size-fits-all; ours are one-of-a-kind, just like your skin.</p>"
+          }
+        },
+        "faq_item_RJtP6A": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I do virtual if I live near McHenry?",
+            "answer": "<p>Absolutely! Virtual consultations are a great option for those local who cannot make it in — whether it's due to a busy schedule, transportation, or simply preferring the convenience of meeting from home.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_knxa63",
+        "faq_item_qjMHfp",
+        "faq_item_PzXEKn",
+        "faq_item_GmWhMf",
+        "faq_item_PGh67J",
+        "faq_item_XkqtLR",
+        "faq_item_P6KPXe",
+        "faq_item_RJtP6A"
+      ],
+      "name": "FAQ Section",
+      "settings": {
+        "enable_anchor": false,
+        "anchor_id": "faq",
+        "anchor_offset": 80,
+        "section_title": "Questions About Virtual Consultations",
+        "section_subtitle": "Find answers to common questions",
+        "header_alignment": "center",
+        "background_color": "#e2e8d6",
+        "section_padding": 40,
+        "max_width": 900,
+        "show_toggle_button": true,
+        "default_open": false,
+        "allow_multiple": true,
+        "header_color": "#000000",
+        "header_size": 32,
+        "header_weight": "600",
+        "header_text_transform": "none",
+        "header_margin": 40,
+        "subheader_color": "#666666",
+        "subheader_size": 16,
+        "question_color": "#000000",
+        "question_size": 18,
+        "question_weight": "500",
+        "answer_color": "#333333",
+        "answer_size": 16,
+        "item_padding": 25,
+        "border_color": "#846599",
+        "toggle_color": "#666666",
+        "toggle_hover_color": "#000000",
+        "mobile_header_size": 26,
+        "mobile_subheader_size": 16,
+        "mobile_question_size": 18,
+        "mobile_answer_size": 16,
+        "mobile_item_padding": 20,
+        "enable_animation": false,
+        "animation_duration": 500,
+        "animation_delay": 50
+      }
+    },
+    "testimonials_carousel_kK49RM": {
+      "type": "testimonials-carousel",
+      "blocks": {
+        "testimonial_BDXyXe": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I've tried estheticians all over the county. Nobody takes the time to really understand your skin like they do here. The pre-peel consultation alone was worth it — I finally understand what my skin actually needs.",
+            "author_name": "Rachel D.",
+            "author_title": "Crystal Lake, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_kjfaGz": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I've spent a fortune on high-end serums and treatments that never delivered. These chemical peels have done more for my skin in 3 months than years of expensive products. My only regret is not starting sooner.",
+            "author_name": "Lisa B.",
+            "author_title": "McHenry, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_LWteyz": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "After years of trying every brightening product on the market, I finally found something that works. Just three PCA peels and my melasma is visibly lighter. I only wish I'd found Esthetics with Me sooner!",
+            "author_name": "Jennifer M.",
+            "author_title": "McHenry, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_WXDiQD": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I was so nervous about getting a chemical peel because I couldn't afford to hide at home. She was right — I walked out glowing and went straight to dinner with friends. No redness, no peeling, just compliments!",
+            "author_name": "Sarah K.",
+            "author_title": "Crystal Lake, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_r6Eapb": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I started the 6-peel series for my fine lines and sun damage. By the fourth treatment, people started asking if I'd done something. The texture of my skin has completely transformed.",
+            "author_name": "Michelle T.",
+            "author_title": "Woodstock, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_Geifn6": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I'd had chemical peels before at other spas, but they were always the same generic treatment. The custom-blended peel here actually addressed MY concerns. The difference in results is night and day.",
+            "author_name": "Amanda R.",
+            "author_title": "Lake in the Hills, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_BDXyXe",
+        "testimonial_kjfaGz",
+        "testimonial_LWteyz",
+        "testimonial_WXDiQD",
+        "testimonial_r6Eapb",
+        "testimonial_Geifn6"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "a {}"
+      ],
+      "name": "Testimonials Carousel",
+      "settings": {
+        "section_title": "TESTIMONIALS",
+        "section_subtitle": "Real Results from Real McHenry Clients",
+        "section_background": "#ffffff",
+        "section_padding": 60,
+        "heading_color": "#000000",
+        "heading_size": 36,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#666666",
+        "header_spacing": 40,
+        "scroll_speed": 30,
+        "scroll_direction": "left",
+        "pause_on_hover": true,
+        "disable_auto_scroll_mobile": true,
+        "enable_fade": true,
+        "fade_width": 10,
+        "testimonial_width": 350,
+        "tablet_testimonial_width": 300,
+        "mobile_testimonial_width": 280,
+        "testimonial_gap": 30,
+        "card_background": "#ffffff",
+        "card_padding": 30,
+        "mobile_card_padding": 20,
+        "card_radius": 12,
+        "card_shadow": true,
+        "shadow_x": 0,
+        "shadow_y": 2,
+        "shadow_blur": 10,
+        "shadow_spread": 0,
+        "shadow_color": "#0000001a",
+        "card_border": false,
+        "border_width": 1,
+        "border_color": "#e0e0e0",
+        "card_hover_effect": true,
+        "show_quotes": true,
+        "quote_color": "#cccccc",
+        "italic_text": false,
+        "text_color": "#333333",
+        "text_size": 16,
+        "mobile_text_size": 15,
+        "star_size": 18,
+        "star_color": "#ffc107",
+        "empty_star_color": "#e0e0e0",
+        "show_divider": true,
+        "divider_color": "#eeeeee",
+        "avatar_size": 45,
+        "avatar_radius": 50,
+        "show_placeholder_avatar": true,
+        "placeholder_avatar_bg": "#e0e0e0",
+        "placeholder_avatar_text": "#666666",
+        "author_color": "#000000",
+        "author_size": 16,
+        "mobile_author_size": 14,
+        "title_color": "#000000",
+        "title_size": 14,
+        "date_color": "#999999",
+        "mobile_heading_size": 28,
+        "show_scroll_indicators": false,
+        "indicator_color": "#000000",
+        "indicator_bg": "#cccccc"
+      }
+    },
     "sl_split_section_YNApNE": {
       "type": "sl-split-section",
+      "disabled": true,
       "name": "Split Section",
       "settings": {
         "image": "shopify://shop_images/BrandingPhotography-C_Mae-5261.jpg",
@@ -471,10 +789,11 @@
         "value_prop_wcHUXK",
         "value_prop_YRQ4QP"
       ],
+      "disabled": true,
       "name": "Flexible Value Props",
       "settings": {
-        "main_heading": "What Your Skin Will Love About PCA Chemical Peels",
-        "main_subheading": "Our chemical peel treatments in McHenry deliver transformation you can see and feel — here's what you can expect:",
+        "main_heading": "Ready to Achieve Your Skincare Goals?",
+        "main_subheading": "Don't let time or distance hold you back. Book your virtual skin consultation today and experience the convenience and effectiveness of expert skincare advice from anywhere.",
         "grid_columns": 3,
         "background_image": "shopify://shop_images/BrandingPhotography-C_Mae-5625.jpg",
         "background_opacity": 35,
@@ -517,6 +836,31 @@
         "enable_animation": false,
         "animation_duration": 600,
         "animation_delay": 100
+      }
+    },
+    "how_it_works_HqcDEd": {
+      "type": "how-it-works",
+      "custom_css": [
+        "p {line-height: 1.2em;}"
+      ],
+      "name": "How It Works",
+      "settings": {
+        "show_header": true,
+        "header_title": "Ready to Achieve Your Skincare Goals?",
+        "header_subtitle": "Don't let time or distance hold you back. Book your virtual skin consultation today and experience the convenience and effectiveness of expert skincare advice from anywhere.",
+        "header_color": "#8c9b6d",
+        "background_color": "#faf9f7",
+        "accent_color": "#8c9b6d",
+        "show_cta": true,
+        "cta_title": "Book Your Virtual Appointment",
+        "cta_subtitle": "Expert skincare advice, personalized treatment plans, and products shipped directly to you.",
+        "cta_button_text": "Book Virtual now",
+        "cta_button_url": "https://ke18jq-r4.myshopify.com/",
+        "cta_background_color": "#8c9b6d",
+        "cta_text_color": "#ffffff",
+        "cta_button_color": "#ffffff",
+        "cta_button_text_color": "#8b7ba8",
+        "cta_heading_color": "#ffffff"
       }
     },
     "image_with_text_waPRjx": {
@@ -581,6 +925,7 @@
       "block_order": [
         "text_LXTg8h"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "Marquee",
       "settings": {
@@ -646,6 +991,7 @@
         "service_item_VzAK6V",
         "service_item_6V4KRF"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "ENHANCEMENTS",
       "settings": {
@@ -754,6 +1100,7 @@
         "value_prop_YbcJUy",
         "value_prop_iC4wmh"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "Flexible Value Props",
       "settings": {
@@ -838,240 +1185,6 @@
         "padding_bottom": 52
       }
     },
-    "sl_flexible_list_iNMAdB": {
-      "type": "sl-flexible-list",
-      "blocks": {
-        "value_prop_aW7U8B": {
-          "type": "value_prop",
-          "settings": {
-            "icon_type": "fontawesome",
-            "icon_class": "fas fa-droplet",
-            "heading": "Arrive With Clean Skin",
-            "text": "Please arrive with clean, makeup-free skin so we can start your treatment right away."
-          }
-        },
-        "value_prop_HDUt84": {
-          "type": "value_prop",
-          "settings": {
-            "icon_type": "fontawesome",
-            "icon_class": "fas fa-clipboard",
-            "heading": "Fill Out Your Waiver",
-            "text": "Complete the proper waiver(s) before your arrival to save time."
-          }
-        },
-        "value_prop_QRnxyB": {
-          "type": "value_prop",
-          "settings": {
-            "icon_type": "fontawesome",
-            "icon_class": "fas fa-face-smile",
-            "heading": "Plan for No Makeup",
-            "text": "No makeup should be applied after your service for the rest of the day. You may wear makeup the next day."
-          }
-        }
-      },
-      "block_order": [
-        "value_prop_aW7U8B",
-        "value_prop_HDUt84",
-        "value_prop_QRnxyB"
-      ],
-      "name": "Flexible Value Props",
-      "settings": {
-        "main_heading": "How to Prepare for Your Chemical Peel",
-        "main_subheading": "",
-        "grid_columns": 3,
-        "background_opacity": 20,
-        "background_size": "cover",
-        "background_position_x": 50,
-        "background_position_y": 50,
-        "section_background": "#845e9c",
-        "section_padding": 60,
-        "max_width": 1200,
-        "grid_gap": 30,
-        "header_spacing": 50,
-        "text_alignment": "center",
-        "heading_color": "#ffffff",
-        "heading_size": 42,
-        "heading_weight": "600",
-        "heading_transform": "none",
-        "subheading_color": "#ffffff",
-        "subheading_size": 20,
-        "subheading_weight": "400",
-        "subheading_transform": "uppercase",
-        "prop_heading_color": "#ffffff",
-        "prop_heading_size": 22,
-        "prop_heading_weight": "600",
-        "prop_text_color": "#ffffff",
-        "prop_text_size": 15,
-        "item_background": "rgba(0,0,0,0)",
-        "item_padding": 20,
-        "item_border_radius": 0,
-        "item_shadow": false,
-        "item_hover_effect": false,
-        "show_icons": true,
-        "icon_size": 15,
-        "icon_color": "#ffffff",
-        "mobile_heading_size": 32,
-        "mobile_subheading_size": 16,
-        "mobile_prop_heading_size": 18,
-        "mobile_prop_text_size": 16,
-        "mobile_icon_size": 20,
-        "mobile_item_padding": 15,
-        "enable_animation": false,
-        "animation_duration": 600,
-        "animation_delay": 300
-      }
-    },
-    "testimonials_carousel_kK49RM": {
-      "type": "testimonials-carousel",
-      "blocks": {
-        "testimonial_BDXyXe": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "I've tried estheticians all over the county. Nobody takes the time to really understand your skin like they do here. The pre-peel consultation alone was worth it — I finally understand what my skin actually needs.",
-            "author_name": "Rachel D.",
-            "author_title": "Crystal Lake, IL",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_kjfaGz": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "I've spent a fortune on high-end serums and treatments that never delivered. These chemical peels have done more for my skin in 3 months than years of expensive products. My only regret is not starting sooner.",
-            "author_name": "Lisa B.",
-            "author_title": "McHenry, IL",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_LWteyz": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "After years of trying every brightening product on the market, I finally found something that works. Just three PCA peels and my melasma is visibly lighter. I only wish I'd found Esthetics with Me sooner!",
-            "author_name": "Jennifer M.",
-            "author_title": "McHenry, IL",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_WXDiQD": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "I was so nervous about getting a chemical peel because I couldn't afford to hide at home. She was right — I walked out glowing and went straight to dinner with friends. No redness, no peeling, just compliments!",
-            "author_name": "Sarah K.",
-            "author_title": "Crystal Lake, IL",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_r6Eapb": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "I started the 6-peel series for my fine lines and sun damage. By the fourth treatment, people started asking if I'd done something. The texture of my skin has completely transformed.",
-            "author_name": "Michelle T.",
-            "author_title": "Woodstock, IL",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_Geifn6": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "I'd had chemical peels before at other spas, but they were always the same generic treatment. The custom-blended peel here actually addressed MY concerns. The difference in results is night and day.",
-            "author_name": "Amanda R.",
-            "author_title": "Lake in the Hills, IL",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_BDXyXe",
-        "testimonial_kjfaGz",
-        "testimonial_LWteyz",
-        "testimonial_WXDiQD",
-        "testimonial_r6Eapb",
-        "testimonial_Geifn6"
-      ],
-      "custom_css": [
-        "a {}"
-      ],
-      "name": "Testimonials Carousel",
-      "settings": {
-        "section_title": "TESTIMONIALS",
-        "section_subtitle": "Real Results from Real McHenry Clients",
-        "section_background": "#faf9f7",
-        "section_padding": 60,
-        "heading_color": "#000000",
-        "heading_size": 36,
-        "heading_weight": "600",
-        "heading_transform": "none",
-        "subheading_color": "#666666",
-        "header_spacing": 40,
-        "scroll_speed": 30,
-        "scroll_direction": "left",
-        "pause_on_hover": true,
-        "disable_auto_scroll_mobile": true,
-        "enable_fade": true,
-        "fade_width": 10,
-        "testimonial_width": 350,
-        "tablet_testimonial_width": 300,
-        "mobile_testimonial_width": 280,
-        "testimonial_gap": 30,
-        "card_background": "#ffffff",
-        "card_padding": 30,
-        "mobile_card_padding": 20,
-        "card_radius": 12,
-        "card_shadow": true,
-        "shadow_x": 0,
-        "shadow_y": 2,
-        "shadow_blur": 10,
-        "shadow_spread": 0,
-        "shadow_color": "#0000001a",
-        "card_border": false,
-        "border_width": 1,
-        "border_color": "#e0e0e0",
-        "card_hover_effect": true,
-        "show_quotes": true,
-        "quote_color": "#cccccc",
-        "italic_text": false,
-        "text_color": "#333333",
-        "text_size": 16,
-        "mobile_text_size": 15,
-        "star_size": 18,
-        "star_color": "#ffc107",
-        "empty_star_color": "#e0e0e0",
-        "show_divider": true,
-        "divider_color": "#eeeeee",
-        "avatar_size": 45,
-        "avatar_radius": 50,
-        "show_placeholder_avatar": true,
-        "placeholder_avatar_bg": "#e0e0e0",
-        "placeholder_avatar_text": "#666666",
-        "author_color": "#000000",
-        "author_size": 16,
-        "mobile_author_size": 14,
-        "title_color": "#000000",
-        "title_size": 14,
-        "date_color": "#999999",
-        "mobile_heading_size": 28,
-        "show_scroll_indicators": false,
-        "indicator_color": "#000000",
-        "indicator_bg": "#cccccc"
-      }
-    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -1080,102 +1193,6 @@
         "page_full_width_spacing": false,
         "padding_top": 100,
         "padding_bottom": 40
-      }
-    },
-    "sl_custom_faq_r7Q6ht": {
-      "type": "sl-custom-faq",
-      "blocks": {
-        "faq_item_qjMHfp": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Will I actually peel and have downtime after my treatment?",
-            "answer": "<p>With our PCA chemical peels, most clients experience little to no visible peeling. You may notice some light flaking that's easily managed with moisturizer, but nothing that would keep you from going about your normal life. These are truly no downtime peels — you can return to work, social events, and daily activities immediately.</p>"
-          }
-        },
-        "faq_item_PzXEKn": {
-          "type": "faq_item",
-          "settings": {
-            "question": "How many treatments will I need to see results?",
-            "answer": "<p>While you'll see some improvement after your very first chemical peel, optimal results come from a series of treatments. We typically recommend 3 to 6 peels spaced 3 to 4 weeks apart, depending on your skin goals. During your consultation, we'll create a personalized treatment plan that fits your needs and budget.</p>"
-          }
-        },
-        "faq_item_GmWhMf": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Do chemical peels hurt?",
-            "answer": "<p>Our PCA chemical peels are designed to be gentle yet effective. Most clients describe the sensation as a mild tingling or warmth during application. Any sensation subsides quickly, and many clients find the treatment surprisingly relaxing. If you have sensitive skin, we'll adjust your peel formula accordingly.</p>"
-          }
-        },
-        "faq_item_PGh67J": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Are chemical peels safe for my skin type and tone?",
-            "answer": "<p>Yes! One of the biggest advantages of PCA chemical peels is that they can be customized for virtually any skin type, tone, and concern. Whether you have dry, oily, sensitive, or combination skin — and regardless of your skin tone — we'll blend a peel that's perfect for you. That's why we offer the Pre-Peel Consultation for first-timers.</p>"
-          }
-        },
-        "faq_item_XkqtLR": {
-          "type": "faq_item",
-          "disabled": true,
-          "settings": {
-            "question": "When will I see results from my chemical peel?",
-            "answer": "<p>You'll notice an immediate glow after your first chemical peel treatment. Over the following days, your skin will continue to improve as cell turnover accelerates. For concerns like dark spots, fine lines, and texture issues, visible improvement typically continues for 2-4 weeks after each treatment, with cumulative benefits building over your peel series.</p>"
-          }
-        },
-        "faq_item_P6KPXe": {
-          "type": "faq_item",
-          "disabled": true,
-          "settings": {
-            "question": "What's the difference between professional chemical peels and drugstore peels?",
-            "answer": "<p>Professional PCA chemical peels use higher concentrations of active ingredients that simply aren't available over the counter. More importantly, we custom-blend each peel for your specific skin — combining different acids and ingredients to target your unique concerns. Drugstore peels are one-size-fits-all; ours are one-of-a-kind, just like your skin.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "faq_item_qjMHfp",
-        "faq_item_PzXEKn",
-        "faq_item_GmWhMf",
-        "faq_item_PGh67J",
-        "faq_item_XkqtLR",
-        "faq_item_P6KPXe"
-      ],
-      "name": "FAQ Section",
-      "settings": {
-        "enable_anchor": false,
-        "anchor_id": "faq",
-        "anchor_offset": 80,
-        "section_title": "Frequently Asked Questions",
-        "section_subtitle": "Find answers to common questions",
-        "header_alignment": "center",
-        "background_color": "#e2e8d6",
-        "section_padding": 40,
-        "max_width": 900,
-        "show_toggle_button": true,
-        "default_open": false,
-        "allow_multiple": true,
-        "header_color": "#000000",
-        "header_size": 32,
-        "header_weight": "600",
-        "header_text_transform": "none",
-        "header_margin": 40,
-        "subheader_color": "#666666",
-        "subheader_size": 16,
-        "question_color": "#000000",
-        "question_size": 18,
-        "question_weight": "500",
-        "answer_color": "#333333",
-        "answer_size": 16,
-        "item_padding": 25,
-        "border_color": "#846599",
-        "toggle_color": "#666666",
-        "toggle_hover_color": "#000000",
-        "mobile_header_size": 26,
-        "mobile_subheader_size": 16,
-        "mobile_question_size": 18,
-        "mobile_answer_size": 16,
-        "mobile_item_padding": 20,
-        "enable_animation": false,
-        "animation_duration": 500,
-        "animation_delay": 50
       }
     },
     "rich_text_VYn8ag": {
@@ -1222,18 +1239,19 @@
     "sl_flexible_list_yEnKh7",
     "sl_marquee_RR7r88",
     "sl_services_menu_EnDQbw",
+    "how_it_works_PQ9iL8",
+    "sl_custom_faq_r7Q6ht",
+    "testimonials_carousel_kK49RM",
     "sl_split_section_YNApNE",
     "sl_flexible_list_YRpKeG",
+    "how_it_works_HqcDEd",
     "image_with_text_waPRjx",
     "sl_marquee_wGAN4T",
     "sl_services_menu_tPA8Ja",
     "image_banner_rVqRFn",
     "sl_flexible_list_mMk3PN",
     "rich_text_UbVpyD",
-    "sl_flexible_list_iNMAdB",
-    "testimonials_carousel_kK49RM",
     "main",
-    "sl_custom_faq_r7Q6ht",
     "rich_text_VYn8ag"
   ]
 }
