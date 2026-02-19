@@ -178,7 +178,7 @@
             "icon_type": "custom",
             "icon_class": "fas fa-box",
             "icon": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5084.jpg",
-            "heading": "Products Shipped to You",
+            "heading": "<i>Products Shipped to You<i></i></i>",
             "text": "What started as a few expression lines around your eyes and forehead has quietly spread. Your skincare routine isn't keeping up, and you're noticing new wrinkles appearing faster than you can address them."
           }
         },
@@ -188,7 +188,7 @@
             "icon_type": "custom",
             "icon_class": "fas fa-check-circle",
             "icon": "shopify://shop_images/BrandingPhotography-C_Mae-5625.jpg",
-            "heading": "Complimentary Follow-Up",
+            "heading": "<i>Complimentary Follow-Up<i></i></i>",
             "text": "You've heard horror stories about chemical peels gone wrong — redness, flaking, hiding at home for a week. You want results, but not at the cost of your daily life and social calendar."
           }
         }
@@ -207,24 +207,24 @@
         "background_size": "cover",
         "background_position_x": 50,
         "background_position_y": 50,
-        "section_background": "#e2e8d6",
+        "section_background": "#8c9b6d",
         "section_padding": 60,
         "max_width": 1200,
         "grid_gap": 30,
         "header_spacing": 50,
         "text_alignment": "center",
-        "heading_color": "#000000",
+        "heading_color": "#f7f7f7",
         "heading_size": 42,
         "heading_weight": "600",
         "heading_transform": "none",
-        "subheading_color": "#333333",
+        "subheading_color": "#ffffff",
         "subheading_size": 20,
         "subheading_weight": "400",
         "subheading_transform": "none",
-        "prop_heading_color": "#000000",
+        "prop_heading_color": "#ffffff",
         "prop_heading_size": 22,
         "prop_heading_weight": "600",
-        "prop_text_color": "#666666",
+        "prop_text_color": "#ffffff",
         "prop_text_size": 15,
         "item_background": "rgba(0,0,0,0)",
         "item_padding": 20,
@@ -251,19 +251,19 @@
         "text_KJbWLQ": {
           "type": "text",
           "settings": {
-            "new_text": "CUSTOMIZED FOR YOU"
+            "new_text": "EXPERT ADVICE"
           }
         },
         "text_7Wr66g": {
           "type": "text",
           "settings": {
-            "new_text": "FIRMER SKIN"
+            "new_text": "SHIPPING"
           }
         },
         "text_EjamFt": {
           "type": "text",
           "settings": {
-            "new_text": "ZERO DOWNTIME"
+            "new_text": "FOLLOW UPS"
           }
         }
       },
@@ -274,7 +274,7 @@
       ],
       "name": "Marquee",
       "settings": {
-        "colorBackground": "#846599",
+        "colorBackground": "#8b7ba8",
         "colorText": "#ffffff",
         "link": "",
         "marquee_height": 46,
@@ -500,26 +500,26 @@
         "section_title": "Questions About Virtual Consultations",
         "section_subtitle": "Find answers to common questions",
         "header_alignment": "center",
-        "background_color": "#e2e8d6",
+        "background_color": "#8b7ba8",
         "section_padding": 40,
         "max_width": 900,
         "show_toggle_button": true,
         "default_open": false,
         "allow_multiple": true,
-        "header_color": "#000000",
+        "header_color": "#ffffff",
         "header_size": 32,
         "header_weight": "600",
         "header_text_transform": "none",
         "header_margin": 40,
-        "subheader_color": "#666666",
+        "subheader_color": "#ffffff",
         "subheader_size": 16,
-        "question_color": "#000000",
+        "question_color": "#ffffff",
         "question_size": 18,
         "question_weight": "500",
-        "answer_color": "#333333",
+        "answer_color": "#ffffff",
         "answer_size": 16,
         "item_padding": 25,
-        "border_color": "#846599",
+        "border_color": "#ffffff",
         "toggle_color": "#666666",
         "toggle_hover_color": "#000000",
         "mobile_header_size": 26,
