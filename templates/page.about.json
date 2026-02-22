@@ -1,1 +1,71 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"page_full_width":false,"page_full_width_spacing":false,"padding_top":100,"padding_bottom":40}},"5e2c2ad9-0267-4571-b190-0d9c1438368f":{"type":"about-grid-list","blocks":{"f63dabe9-58f3-4240-9a35-1137d2da4944":{"type":"text","settings":{"block_image":"shopify:\/\/shop_images\/abou-10.jpg","show_content":true,"block_title":"The Handcrafted Soap","enable_title_link":true,"block_sub_title":"","block_description":"Quisque volutpat mattis eros. Nullam malesuada erat ut ki diaml ka dhuddu pochu turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequate. Etiam pretium varius quam in aliquam. Curabitur malesuada elit sed enim placerat, vitae interdum erat cursus. Morbi laoreet sapien id scelerisque dapibus. Aliquam erat volutpat. Nunc pulvinar tempus dui in tristique. Aliquam sem fringilla ut morbi tincidunt. Risus nec feugiat in fermentum posuere urna nec tincidunt. Urna et pharetra pharetra massa massa ultricies mi quis. Sapien pellentesque habitant morbi tristique senectus. Nam aliquam sem et tortor consequat.<blockquote>Nullam malesuada erat ut ki diaml ka dhuddu pochu turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Morbi in sem quis dui placerat ornare. Tortor dignissim convallis aenean et tortor. Ac tincidunt vitae semper quis lectus nulla at volutpat diam.<\/blockquote>","show_border_button":false,"block_button_text":"","block_button_link":"","image1_text":"","image2_text":"","image3_text":"","block_color_scheme":"background-1","desktop_content_alignment":"left"}}},"block_order":["f63dabe9-58f3-4240-9a35-1137d2da4944"],"settings":{"page_full_width":false,"page_full_width_spacing":false,"title":"","heading_size":"h1","subtitle":"","text_style":"caption-with-letter-spacing","text_size":"medium","column_alignment":"left","background_style":"primary","banner_style":"list","button_label":"Button label","button_link":"","color_scheme":"background-1","grid-align":"reverse","padding_top":36,"padding_bottom":76,"custom_class_name":""}},"f79ef494-3a96-4ed9-b2e0-1d001bc4b235":{"type":"abt-support-block","blocks":{"template--17754362741029__f79ef494-3a96-4ed9-b2e0-1d001bc4b235-1676620482437fdf2b-0":{"type":"column","settings":{"icon":"fa fa-pagelines","title":"Go Organic","text":"<p>Aliquam sit amet cursus mauris. Sed vitae mattis ipsum.<\/p>","link_label":"","link":""}},"template--17754362741029__f79ef494-3a96-4ed9-b2e0-1d001bc4b235-1676620482437fdf2b-1":{"type":"column","settings":{"icon":"fa fa-tint","title":"Soft Skin Feel","text":"<p>Ged vestibulum nulla elementum auctor tincidunt. Aliquam sit amet<\/p>","link_label":"","link":""}},"template--17754362741029__f79ef494-3a96-4ed9-b2e0-1d001bc4b235-1676620482437fdf2b-2":{"type":"column","settings":{"icon":"fa fa-heart","title":"Love your Skin","text":"<p>Vestibulum enim nulla, sollicitudin ac hendrerit nec, tempor quis nisl.<\/p>","link_label":"","link":""}},"d8aec75b-cea7-4f34-a60e-9c73c0fbc278":{"type":"column","settings":{"icon":"fa fa-user","title":"PH Balanced","text":"<p>Elementum auctor tincidunt. Sed vestibulum nulla  Aliquam sit amet<\/p>","link_label":"","link":""}},"715d01d3-f30d-4d2e-ba5f-795368dc2e8e":{"type":"column","settings":{"icon":"fa fa-empire","title":"Freshness Explored","text":"<p>Sollicitudin ac hendrerit nec, tempor quis nisl. Sed vestibulum<\/p>","link_label":"","link":""}},"705a9a65-f779-48b3-8a2d-e629ba371d61":{"type":"column","settings":{"icon":"fa fa-magic","title":"Best Fragrance","text":"<p>Sed vestibulum nulla elementum auctor tincidunt. Aliquam sit amet<\/p>","link_label":"","link":""}}},"block_order":["template--17754362741029__f79ef494-3a96-4ed9-b2e0-1d001bc4b235-1676620482437fdf2b-0","template--17754362741029__f79ef494-3a96-4ed9-b2e0-1d001bc4b235-1676620482437fdf2b-1","template--17754362741029__f79ef494-3a96-4ed9-b2e0-1d001bc4b235-1676620482437fdf2b-2","d8aec75b-cea7-4f34-a60e-9c73c0fbc278","715d01d3-f30d-4d2e-ba5f-795368dc2e8e","705a9a65-f779-48b3-8a2d-e629ba371d61"],"settings":{"page_full_width":false,"page_full_width_spacing":false,"enable_image_bg":true,"image_bg":"shopify:\/\/shop_images\/abou-par.jpg","title":"feel the difference..","heading_size":"h2","sub_heading":"","description":"","button_label":"","button_link":"","button_style_secondary":false,"column_alignment":"center","columns_desktop":2,"background_style":"none","color_scheme":"accent-2","block_style":"list__item","block_column_alignment":"left","icon_outer_size":"80","icon_size":"70","image_radius":"","block_color_scheme":"accent-2","vertical_position":"veritcal_center","padding_top":90,"padding_bottom":90,"swiper_enable":true,"desktop_column":4,"tablet_column":2,"mobile_column":1,"swiper_pagination":true,"swiper_navigation":false,"auto_play":0,"swipe_on_mobile":false,"custom_class_name":"custom-about-support-block"}},"be531e3e-7ce3-477e-a94c-0e0d57a992d1":{"type":"grid-banner","blocks":{"c21e8df4-d6a6-4711-ad9d-ee1c1ccde264":{"type":"text","settings":{"block_image":"shopify:\/\/shop_images\/abo-2.jpg","block_image_duplicate":"shopify:\/\/shop_images\/pattern-leaf_1_4fc15e95-9d59-4699-81a3-1ef37caff1ba.png","show_content":true,"block_title":"A natural soap for your natural beauty","enable_title_link":true,"block_sub_title":"","block_description":"Sed vestibulum nulla elementum auctor tincidunt. Aliquam sit amet cursus mauris. Sed vitae mattis ipsum. Vestibulum enim nulla, sollicitudin ac hendrerit nec, tempor quis nisl","block_button_text":"","block_button_link":"","desktop_content_alignment":"left"}},"36fe870a-b59d-450e-b984-9b42b0065ae0":{"type":"text","settings":{"block_image":"shopify:\/\/shop_images\/abo-3.jpg","block_image_duplicate":"shopify:\/\/shop_images\/pattern-leaf_1_4fc15e95-9d59-4699-81a3-1ef37caff1ba.png","show_content":true,"block_title":"A legacy of cleanliness and hygiene","enable_title_link":true,"block_sub_title":"","block_description":"Aliquam sit amet cursus mauris. Sed vitae mattis ipsum. Vestibulum enim nulla, sollicitudin ac hendrerit nec, tempor quis nisl. Sed vestibulum nulla elementum auctor tincidunt.","block_button_text":"","block_button_link":"","desktop_content_alignment":"left"}}},"block_order":["c21e8df4-d6a6-4711-ad9d-ee1c1ccde264","36fe870a-b59d-450e-b984-9b42b0065ae0"],"settings":{"page_full_width":false,"page_full_width_spacing":false,"title":"","heading_size":"h1","sub_heading":"","description":"","button_label":"","button_link":"","button_style_secondary":false,"column_alignment":"left","background_style":"primary","banner_style":"list","grid-column":"1","color_scheme":"background-1","padding_top":112,"padding_bottom":84,"custom_class_name":"custom-about-grid-banner","swiper_enable":false,"desktop_column":4,"tablet_column":3,"mobile_column":1,"centered_slide":false,"swiper_pagination":false,"swiper_navigation":false,"auto_play":0}},"50b21200-9f87-4aa1-8a31-b2a05471cb65":{"type":"abt-testimonial","blocks":{"template--17754362741029__50b21200-9f87-4aa1-8a31-b2a05471cb65-1676630119988bcc0c-0":{"type":"text","settings":{"image":"shopify:\/\/shop_images\/abo-8.jpg","author":"Laurie Shaw","job_title":"Beautician","quote":"<p>Girem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.<\/p>","link_label":"","link":"","star":"5"}},"template--17754362741029__50b21200-9f87-4aa1-8a31-b2a05471cb65-1676630119988bcc0c-1":{"type":"text","settings":{"image":"shopify:\/\/shop_images\/abo-9.jpg","author":"Soniya Gillesbe","job_title":"Therapist","quote":"<p>Simply dummy lorem Ipsum is  text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.<\/p>","link_label":"","link":"","star":"3"}},"template--17754362741029__50b21200-9f87-4aa1-8a31-b2a05471cb65-1676630119988bcc0c-2":{"type":"text","settings":{"image":"shopify:\/\/shop_images\/abo-8.jpg","author":"Laurie Shaw","job_title":"Beautician","quote":"<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.<\/p>","link_label":"","link":"","star":"3"}},"8993364e-29d7-44da-83f3-24f7fec96e20":{"type":"text","settings":{"image":"shopify:\/\/shop_images\/abo-11.jpg","author":"Melvin Powell","job_title":"Skin care Specialist","quote":"<p>Girem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.<\/p>","link_label":"","link":"","star":"4.5"}}},"block_order":["template--17754362741029__50b21200-9f87-4aa1-8a31-b2a05471cb65-1676630119988bcc0c-0","template--17754362741029__50b21200-9f87-4aa1-8a31-b2a05471cb65-1676630119988bcc0c-1","template--17754362741029__50b21200-9f87-4aa1-8a31-b2a05471cb65-1676630119988bcc0c-2","8993364e-29d7-44da-83f3-24f7fec96e20"],"settings":{"page_full_width":false,"page_full_width_spacing":false,"title":"Testimonials","heading_size":"h1","sub_heading":"Thus Spoke our Customers","description":"","button_label":"","button_link":"","button_style_secondary":false,"column_alignment":"center","color_scheme":"background-2","testimonial_text_alignment":"left","padding_top":92,"padding_bottom":92,"custom_class_name":"","desktop_column":2,"tablet_column":1,"mobile_column":1,"centered_slide":false,"swiper_pagination":true,"swiper_navigation":false,"auto_play":0}},"1a049f7e-0ea0-4f14-bbac-0d50b4fca93c":{"type":"inner-page-team-section","blocks":{"b526cff5-237a-42e9-b4b0-850b1564c1c3":{"type":"text","settings":{"block_image":"shopify:\/\/shop_images\/team-4.jpg","show_content":true,"block_title":"fredan casey","block_sub_title":"","block_description":"CEO","block_button_text":"","block_button_link":"","desktop_content_alignment":"center"}},"8b5711c2-54ae-47fc-ae63-13aa4c75dec2":{"type":"text","settings":{"block_image":"shopify:\/\/shop_images\/team-1.jpg","show_content":true,"block_title":"jaffi dixon","block_sub_title":"","block_description":"production manager","block_button_text":"","block_button_link":"","desktop_content_alignment":"center"}},"bd204dab-8995-4f7f-b66d-79a926207a80":{"type":"text","settings":{"block_image":"shopify:\/\/shop_images\/team-3.jpg","show_content":true,"block_title":"sam richards","block_sub_title":"","block_description":"quality analyst","block_button_text":"","block_button_link":"","desktop_content_alignment":"center"}},"6bea967f-71bc-42eb-871e-b9bdbc1fedea":{"type":"text","settings":{"block_image":"shopify:\/\/shop_images\/team-2.jpg","show_content":true,"block_title":"olivia bowers","block_sub_title":"","block_description":"sales executive","block_button_text":"","block_button_link":"","desktop_content_alignment":"center"}}},"block_order":["b526cff5-237a-42e9-b4b0-850b1564c1c3","8b5711c2-54ae-47fc-ae63-13aa4c75dec2","bd204dab-8995-4f7f-b66d-79a926207a80","6bea967f-71bc-42eb-871e-b9bdbc1fedea"],"settings":{"page_full_width":false,"page_full_width_spacing":false,"title":"Our team","heading_size":"h1","sub_heading":"","description":"The people worked hard through","button_label":"","button_link":"","button_style_secondary":false,"column_alignment":"center","background_style":"primary","team-section":"4","color_scheme":"background-1","padding_top":92,"padding_bottom":36,"custom_class_name":"","swiper_enable":true,"desktop_column":4,"tablet_column":3,"mobile_column":1,"centered_slide":false,"swiper_pagination":false,"swiper_navigation":true,"auto_play":0}}},"order":["main","5e2c2ad9-0267-4571-b190-0d9c1438368f","f79ef494-3a96-4ed9-b2e0-1d001bc4b235","be531e3e-7ce3-477e-a94c-0e0d57a992d1","50b21200-9f87-4aa1-8a31-b2a05471cb65","1a049f7e-0ea0-4f14-bbac-0d50b4fca93c"]}
+{
+  "sections": {
+    "hero": {
+      "type": "sl-full-image-hero",
+      "settings": {}
+    },
+    "rich_text": {
+      "type": "rich-text",
+      "disabled": false,
+      "settings": {}
+    },
+    "value_props": {
+      "type": "sl-value-props",
+      "disabled": true,
+      "settings": {}
+    },
+    "image_with_text": {
+      "type": "sl-image-with-text",
+      "disabled": true,
+      "settings": {}
+    },
+    "split_section": {
+      "type": "sl-split-section",
+      "disabled": true,
+      "settings": {}
+    },
+    "marquee": {
+      "type": "sl-marquee",
+      "disabled": true,
+      "settings": {}
+    },
+    "team_carousel": {
+      "type": "team",
+      "disabled": true,
+      "settings": {}
+    },
+    "product_carousel": {
+      "type": "sl-product-carousel",
+      "disabled": true,
+      "settings": {}
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {}
+    },
+    "faq": {
+      "type": "sl-custom-faq",
+      "disabled": true,
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "rich_text",
+    "value_props",
+    "image_with_text",
+    "split_section",
+    "marquee",
+    "team_carousel",
+    "product_carousel",
+    "featured_collection",
+    "faq",
+    "newsletter"
+  ]
+}
