@@ -90,6 +90,7 @@
   max-width: {{ section.settings.body_max_width }}px;
   margin: 0 auto;
   padding: {{ section.settings.body_padding_top_mobile }}px 20px {{ section.settings.body_padding_bottom_mobile }}px;
+  text-align: {{ section.settings.body_text_align }};
 }
 @media (min-width: 750px) {
   #SLLegal-{{ section.id }} .sl-legal-body {
@@ -448,11 +449,22 @@
       "type": "range",
       "id": "body_max_width",
       "min": 600,
-      "max": 1200,
+      "max": 1400,
       "step": 50,
-      "default": 800,
+      "default": 1000,
       "unit": "px",
       "label": "Content max width"
+    },
+    {
+      "type": "select",
+      "id": "body_text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
     },
     {
       "type": "color",
