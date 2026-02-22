@@ -1,1 +1,1260 @@
-{"sections":{"sl_full_image_hero_ChMHiX":{"type":"sl-full-image-hero","blocks":{"subheading_j3pddP":{"type":"subheading","settings":{"text":"Professional Chemical Peels in McHenry, IL"}},"heading_44AWxR":{"type":"heading","settings":{"text":"Chemical Peels That <i>Lighten, Brighten & Tighten<\/i> Your Skin"}},"body_XHcgH4":{"type":"body","settings":{"text":"<p>Incredible results for dark spots, fine lines & wrinkles<\/p><p>Experience the transformative power of <strong>custom PCA chemical peels<\/strong> — professionally blended for your unique skin goals with <strong>zero downtime<\/strong>.<\/p>"}},"buttons_DbHrRi":{"type":"buttons","settings":{"button_1_text":"BOOK YOUR CHEMICAL PEEL","button_1_link":"https:\/\/booking.mangomint.com\/314399","button_2_text":"VIEW ALL TREATMENTS","button_2_link":"#services"}}},"block_order":["subheading_j3pddP","heading_44AWxR","body_XHcgH4","buttons_DbHrRi"],"name":"Hero Section","settings":{"background_type":"image","background_image":"shopify:\/\/shop_images\/BrandingPhotography-C_Mae-5388.jpg","background_video":"","image_position":"center center","mobile_image_position":"center center","overlay_color":"#000000","media_opacity":60,"desktop_height":80,"min_height":600,"mobile_height":70,"mobile_min_height":500,"vertical_alignment":"center","text_alignment":"center","mobile_text_alignment":"center","content_width":1000,"block_spacing":25,"subheading_color":"#ffffff","subheading_size":18,"mobile_subheading_size":14,"subheading_weight":"500","subheading_transform":"uppercase","subheading_spacing":2,"heading_color":"#ffffff","heading_size":56,"mobile_heading_size":36,"heading_weight":"300","heading_line_height":1.1,"heading_transform":"none","body_color":"#ffffff","body_size":18,"mobile_body_size":16,"body_line_height":1.6,"body_max_width":700,"button_background":"#8c9b6d","button_text_color":"#ffffff","button_hover_background":"#3a5c49","button_hover_text_color":"#ffffff","button_border_radius":0,"enable_animation":true,"animation_duration":800,"animation_delay":150,"enable_parallax":false,"parallax_speed":30}},"before_and_afters_QTJapz":{"type":"before-and-afters","blocks":{"carousel_image_7xj9Gd":{"type":"carousel_image","settings":{"image":"shopify:\/\/shop_images\/Sharon-_1.webp","caption":""}},"carousel_image_XLQwmg":{"type":"carousel_image","settings":{"image":"shopify:\/\/shop_images\/Laurie-Thompson-_1.webp","caption":""}},"carousel_image_Krxz86":{"type":"carousel_image","settings":{"image":"shopify:\/\/shop_images\/ashley-acne-bootcamp_1.webp","caption":""}},"carousel_image_pcQQh6":{"type":"carousel_image","settings":{"image":"shopify:\/\/shop_images\/Anne--1-_1.webp","caption":""}},"carousel_image_7HHwLh":{"type":"carousel_image","settings":{"image":"shopify:\/\/shop_images\/ml-acne-bootcamp_1.webp","caption":""}}},"block_order":["carousel_image_7xj9Gd","carousel_image_XLQwmg","carousel_image_Krxz86","carousel_image_pcQQh6","carousel_image_7HHwLh"],"name":"Image Carousel","settings":{"section_title":"Chemical Peel Results","title_size":32,"title_color":"#333333","container_width":1400,"padding_top":40,"padding_bottom":40,"background_color":"#ffffff","image_size":280,"mobile_image_size":250,"gap":20,"border_radius":8,"hover_scale":1.1,"caption_size":14,"caption_color":"#666666","auto_scroll":true,"auto_scroll_speed":0.5}},"sl_flexible_list_yEnKh7":{"type":"sl-flexible-list","blocks":{"value_prop_i7yChD":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-braille","heading":"Dark Spots Won't Budge","text":"You've tried every serum, product, and corrector on the market. Those stubborn sun spots, melasma patches, and post-acne marks still stare back at you in the mirror every morning."}},"value_prop_TXi4QK":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-lines-leaning","heading":"Fine Lines Are Multiplying","text":"What started as a few expression lines around your eyes and forehead has quietly spread. Your skincare routine isn't keeping up, and you're noticing new wrinkles appearing faster than you can address them."}},"value_prop_jgmTj3":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-ghost","heading":"Traditional Peels Scare You","text":"You've heard horror stories about chemical peels gone wrong — redness, flaking, hiding at home for a week. You want results, but not at the cost of your daily life and social calendar."}},"value_prop_7GCkLt":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-face-tired","heading":"Your Skin Looks Dull & Tired","text":"No matter how much sleep you get or water you drink, your complexion just looks... lifeless. That healthy, radiant glow you used to have seems like a distant memory."}},"value_prop_NeebM7":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-xmark","heading":"One-Size-Fits-All Doesn't Work","text":"You've wasted money on generic treatments that promised the world but delivered nothing. Your skin is unique, and cookie-cutter solutions just don't address your specific concerns."}},"value_prop_7WxYrr":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-camera","heading":"You Hide from Photos","text":"Natural sunlight, flash photography, and video calls reveal every imperfection. You've become an expert at finding the best angles and filters, but you'd rather just love your skin as-is."}}},"block_order":["value_prop_i7yChD","value_prop_TXi4QK","value_prop_jgmTj3","value_prop_7GCkLt","value_prop_NeebM7","value_prop_7WxYrr"],"name":"Flexible Value Props","settings":{"main_heading":"Ready for a Skin Transformation, But...","main_subheading":"","grid_columns":3,"background_opacity":20,"background_size":"cover","background_position_x":50,"background_position_y":50,"section_background":"#e2e8d6","section_padding":60,"max_width":1200,"grid_gap":30,"header_spacing":50,"text_alignment":"center","heading_color":"#000000","heading_size":42,"heading_weight":"600","heading_transform":"none","subheading_color":"#333333","subheading_size":20,"subheading_weight":"400","subheading_transform":"uppercase","prop_heading_color":"#000000","prop_heading_size":22,"prop_heading_weight":"600","prop_text_color":"#666666","prop_text_size":15,"item_background":"rgba(0,0,0,0)","item_padding":20,"item_border_radius":0,"item_shadow":false,"item_hover_effect":false,"show_icons":true,"icon_size":15,"icon_color":"#3a5c49","mobile_heading_size":32,"mobile_subheading_size":16,"mobile_prop_heading_size":18,"mobile_prop_text_size":16,"mobile_icon_size":20,"mobile_item_padding":15,"enable_animation":false,"animation_duration":600,"animation_delay":300}},"sl_split_section_YNApNE":{"type":"sl-split-section","name":"Split Section","settings":{"image":"shopify:\/\/shop_images\/BrandingPhotography-C_Mae-5554.jpg","swap_horizontal":false,"auto_height_desktop":true,"section_height_desktop":40,"auto_height_tablet":true,"section_height_tablet":50,"wrapper_padding":3,"wrapper_padding_tablet":3,"wrapper_padding_mobile":3,"image_position_x":50,"image_position_y":65,"enable_animation":true,"animation_duration":600,"animation_delay":200,"heading":"Finally — Chemical Peels in McHenry That Actually Work","subheading":"At Esthetics with Me, we specialize in custom-blended PCA chemical peels that deliver real, visible results without disrupting your life.","text":"Unlike one-size-fits-all treatments, every peel is formulated specifically for YOUR skin type, concerns, and goals.Our professional-grade PCA peels work by gently accelerating cell turnover, revealing the fresh, luminous skin hiding beneath the surface. Dark spots fade, fine lines soften, and that healthy glow you've been missing? It comes back.The best part? No downtime. You'll walk out of your chemical peel appointment in McHenry ready to continue your day — no hiding, no peeling, no social distancing from your own reflection.","text2":"Licensed Esthetician | PCA Certified | McHenry's Trusted Skincare Expert","heading_color":"#000000","subheading_color":"#333333","text_color":"#666666","heading_size":32,"subheading_size":24,"text_size":16,"mobile_heading_size":24,"mobile_subheading_size":18,"mobile_text_size":14,"show_button":true,"button_text":"See Our Chemical Peel Options ↓","button_link":"#treatments","button_background":"#846599","button_text_color":"#ffffff","button_hover_background":"#594268","button_hover_text_color":"#ffffff","button_border_radius":0}},"sl_flexible_list_YRpKeG":{"type":"sl-flexible-list","blocks":{"value_prop_FbCUjw":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-star","heading":"Visibly Brighter Complexion","text":"Dull, tired skin transforms into a luminous, healthy glow. Our chemical peels remove the buildup that's been dimming your natural radiance, revealing fresh skin that catches the light beautifully."}},"value_prop_wUr4UK":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-shield-alt","heading":"Faded Dark Spots & Discoloration","text":"Sun damage, melasma, and post-acne marks don't stand a chance. Targeted acids work to break up pigmentation and even out your skin tone, giving you the clear complexion you deserve."}},"value_prop_V4iHwF":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-star","heading":"Softened Fine Lines & Wrinkles","text":"Chemical peels stimulate collagen production while smoothing surface texture. The result? Those pesky lines and wrinkles become less noticeable with each treatment."}}},"block_order":["value_prop_FbCUjw","value_prop_wUr4UK","value_prop_V4iHwF"],"name":"Flexible Value Props","settings":{"main_heading":"What Your Skin Will Love About PCA Chemical Peels","main_subheading":"","grid_columns":3,"background_image":"shopify:\/\/shop_images\/BrandingPhotography-C_Mae-5524.jpg","background_opacity":35,"background_size":"cover","background_position_x":50,"background_position_y":50,"section_background":"#1a1a1a","section_padding":60,"max_width":1200,"grid_gap":30,"header_spacing":50,"text_alignment":"center","heading_color":"#ffffff","heading_size":42,"heading_weight":"600","heading_transform":"none","subheading_color":"#ffffff","subheading_size":20,"subheading_weight":"400","subheading_transform":"uppercase","prop_heading_color":"#ffffff","prop_heading_size":22,"prop_heading_weight":"600","prop_text_color":"#ffffff","prop_text_size":15,"item_background":"rgba(0,0,0,0)","item_padding":20,"item_border_radius":0,"item_shadow":false,"item_hover_effect":false,"show_icons":false,"icon_size":15,"icon_color":"#000000","mobile_heading_size":32,"mobile_subheading_size":16,"mobile_prop_heading_size":18,"mobile_prop_text_size":14,"mobile_icon_size":15,"mobile_item_padding":15,"enable_animation":false,"animation_duration":600,"animation_delay":100}},"image_with_text_waPRjx":{"type":"image-with-text","blocks":{"heading_3UDAka":{"type":"heading","settings":{"heading":"\"They are the best of the best - hands down\"","heading_size":"h1"}},"text_dgrenH":{"type":"text","settings":{"text":"<p>I went to Esthetics With Me to work on my fine lines and wrinkles. After just a few weeks of sessions together I look noticibly younger and get compliments on my skin all the time. They have a customer for life.<\/p>","text_style":"body"}},"button_McChTa":{"type":"button","settings":{"button_label":"SEE ALL TREATMENTS","button_link":""}}},"block_order":["heading_3UDAka","text_dgrenH","button_McChTa"],"name":"t:sections.image-with-text.presets.name","settings":{"page_full_width":true,"page_full_width_spacing":false,"image":"shopify:\/\/shop_images\/km_facial.jpg","height":"adapt","desktop_image_width":"medium","layout":"image_first","desktop_content_position":"top","desktop_content_alignment":"left","content_layout":"overlap","color_scheme":"accent-2","mobile_content_alignment":"left","padding_top":16,"padding_bottom":16,"custom_class_name":""}},"sl_marquee_RR7r88":{"type":"sl-marquee","blocks":{"text_KJbWLQ":{"type":"text","settings":{"new_text":"CUSTOMIZED FOR YOU"}},"text_7Wr66g":{"type":"text","settings":{"new_text":"FIRMER SKIN"}},"text_EjamFt":{"type":"text","settings":{"new_text":"ZERO DOWNTIME"}}},"block_order":["text_KJbWLQ","text_7Wr66g","text_EjamFt"],"name":"Marquee","settings":{"colorBackground":"#846599","colorText":"#ffffff","link":"","marquee_height":46,"font_size":18,"marquee_speed":21}},"sl_services_menu_tPA8Ja":{"type":"sl-services-menu","blocks":{"service_item_zittUh":{"type":"service_item","name":"Mini Refresh Facial","settings":{"service_name":"Pre-Peel Treatment & Consultation","add_line":true,"service_extra":"","service_price":"125","show_button":true,"button_text":"BOOK NOW","button_link":"https:\/\/booking.mangomint.com\/314399","service_description":"<p><strong>Curious about peels but unsure where to begin? This service is the perfect starting point for first-timers!<\/strong><\/p><p>What’s Included:<\/p><p><strong>• Peel Consultation:<\/strong><\/p><p>A one-on-one assessment to evaluate your skin’s unique needs.<\/p><p><strong>• Pre-Peel Treatment:<\/strong><\/p><p>A customized skin treatment to leave you glowing and determine if peels are the right choice for you.<\/p><p><strong>• Personalized Homecare Guidance:<\/strong><\/p><p>Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan.<\/p>"}},"service_item_6V4KRF":{"type":"service_item","name":"Customized Facial","settings":{"service_name":"Custom PCA Chemical Peel","add_line":true,"service_extra":"","service_price":"125","show_button":true,"button_text":"BOOK NOW","button_link":"https:\/\/booking.mangomint.com\/314399","service_description":"<p><strong>No two complexions are the same<\/strong>, and neither are our <em>no down time<\/em> peels. <\/p><p>Each PCA chemical peel is <strong>custom blended <\/strong>for your skin goals.<\/p><p><\/p><p><strong>PCA Peels help to: <\/strong><\/p><p>• Lighten, brighten, & tighten <\/p><p>• Smooth fine lines and wrinkles <\/p><p>• Fade sun damage <\/p><p>• Refresh the overall look of your skin with no downtime <\/p><p><\/p><p>Recommended as a series of 3 or 6 treatments every 3 to 4 weeks. <\/p><p><\/p><p>+ 50 to add treatment to neck <\/p><p>+ 100 to add treatment to neck & décolleté<\/p>"}}},"block_order":["service_item_zittUh","service_item_6V4KRF"],"custom_css":[],"name":"Facial Treatments","settings":{"enable_anchor":true,"anchor_id":"services","anchor_offset":80,"section_title":"CHEMICAL PEEL TREATMENTS","background_color":"#ffffff","section_padding":40,"max_width":1000,"item_padding":20,"header_color":"#000000","header_size":24,"header_weight":"400","header_text_transform":"uppercase","header_margin":30,"service_name_color":"#000000","service_name_size":18,"service_name_weight":"400","price_color":"#000000","price_size":18,"price_weight":"400","dot_color":"#cccccc","border_color":"#eeeeee","button_background":"#8c9b6d","button_text_color":"#ffffff","button_hover_background":"#3a5c49","button_hover_text_color":"#ffffff","button_padding_x":20,"button_padding_y":10,"button_font_size":14,"button_weight":"500","button_text_transform":"uppercase","button_border_radius":0,"toggle_color":"#666666","toggle_hover_color":"#000000","toggle_size":14,"description_color":"#333333","description_size":14,"mobile_header_size":20,"mobile_service_name_size":16,"mobile_price_size":16,"mobile_button_size":13,"mobile_button_padding_x":16,"mobile_button_padding_y":8,"mobile_description_size":13}},"sl_marquee_wGAN4T":{"type":"sl-marquee","blocks":{"text_LXTg8h":{"type":"text","settings":{"new_text":"ADD ONS"}}},"block_order":["text_LXTg8h"],"name":"Marquee","settings":{"colorBackground":"#8c9b6d","colorText":"#ffffff","link":"","marquee_height":46,"font_size":18,"marquee_speed":21}},"sl_services_menu_EnDQbw":{"type":"sl-services-menu","blocks":{"service_item_kwrQqf":{"type":"service_item","name":"Lip Mask","settings":{"service_name":"Extended Neck Peel","add_line":false,"service_extra":"","service_price":"50","show_button":true,"button_text":"BOOK NOW","button_link":"https:\/\/booking.mangomint.com\/314399","service_description":"<p>Extend your peel down to your neck to reduce fine lines, wrinkles, and sun damage.<\/p>"}},"service_item_gidiKJ":{"type":"service_item","name":"Hand Treatment","settings":{"service_name":"Extended Neck & Chest Peel","add_line":false,"service_extra":"","service_price":"100","show_button":true,"button_text":"BOOK NOW","button_link":"https:\/\/booking.mangomint.com\/314399","service_description":"<p>Extend your peel down to your neck <strong>and chest<\/strong> to reduce fine lines, wrinkles, and sun damage.<\/p>"}},"service_item_hEWycF":{"type":"service_item","name":"Skin Reviver","settings":{"service_name":"Red Light Therapy","add_line":true,"service_extra":"+30 mins","service_price":"50","show_button":true,"button_text":"BOOK NOW","button_link":"https:\/\/booking.mangomint.com\/314399","service_description":"<p>Red light therapy wavelengths penetrate deeply and provides cells with energy to restore. <\/p><p><strong>Red Light Therapy is beneficial for:<\/strong><\/p><ul><li>Fine Line & Wrinkle Reduction<\/li><li>Inflammation \/ Circulation<\/li><\/ul>"}}},"block_order":["service_item_kwrQqf","service_item_gidiKJ","service_item_hEWycF"],"name":"ENHANCEMENTS","settings":{"enable_anchor":false,"anchor_id":"services","anchor_offset":80,"section_title":"Enhancements","background_color":"#ffffff","section_padding":40,"max_width":1000,"item_padding":20,"header_color":"#000000","header_size":24,"header_weight":"400","header_text_transform":"uppercase","header_margin":30,"service_name_color":"#000000","service_name_size":18,"service_name_weight":"400","price_color":"#000000","price_size":18,"price_weight":"400","dot_color":"#cccccc","border_color":"#eeeeee","button_background":"#8c9b6d","button_text_color":"#ffffff","button_hover_background":"#3a5c49","button_hover_text_color":"#ffffff","button_padding_x":20,"button_padding_y":10,"button_font_size":14,"button_weight":"500","button_text_transform":"uppercase","button_border_radius":0,"toggle_color":"#666666","toggle_hover_color":"#000000","toggle_size":14,"description_color":"#333333","description_size":14,"mobile_header_size":20,"mobile_service_name_size":16,"mobile_price_size":16,"mobile_button_size":13,"mobile_button_padding_x":16,"mobile_button_padding_y":8,"mobile_description_size":13}},"image_banner_rVqRFn":{"type":"image-banner","custom_css":["* {height: 200px;}"],"name":"t:sections.image-banner.presets.name","settings":{"page_full_width":true,"page_full_width_spacing":false,"image":"shopify:\/\/shop_images\/BrandingPhotography-C_Mae-5644.jpg","image_overlay_opacity":0,"image_height":"medium","adapt_height_first_image":false,"desktop_content_position":"middle-center","show_text_box":false,"desktop_content_alignment":"center","color_scheme":"background-1","mobile_content_alignment":"center","stack_images_on_mobile":true,"show_text_below":false,"custom_class_name":""}},"sl_flexible_list_mMk3PN":{"type":"sl-flexible-list","blocks":{"value_prop_8CJTR7":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-soap","heading":"Arrive With Clean Skin","text":"Please arrive with clean, makeup-free skin so we can start your treatment right away."}},"value_prop_YbcJUy":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-pencil","heading":"Fill Out the Proper Materials","text":"Complete the proper waiver(s) before your arrival to save time. Access Waiver below."}},"value_prop_iC4wmh":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-star","heading":"Plan for No Makeup","text":"No makeup should be applied after your service for the rest of the day. You may wear makeup the next day."}}},"block_order":["value_prop_8CJTR7","value_prop_YbcJUy","value_prop_iC4wmh"],"custom_css":[],"name":"Flexible Value Props","settings":{"main_heading":"How to Prepare for Your Chemical Peel","main_subheading":"","grid_columns":3,"background_opacity":20,"background_size":"cover","background_position_x":50,"background_position_y":50,"section_background":"#f7f4ed","section_padding":60,"max_width":1200,"grid_gap":30,"header_spacing":50,"text_alignment":"center","heading_color":"#000000","heading_size":42,"heading_weight":"600","heading_transform":"none","subheading_color":"#333333","subheading_size":20,"subheading_weight":"400","subheading_transform":"uppercase","prop_heading_color":"#000000","prop_heading_size":22,"prop_heading_weight":"600","prop_text_color":"#666666","prop_text_size":15,"item_background":"rgba(0,0,0,0)","item_padding":20,"item_border_radius":0,"item_shadow":false,"item_hover_effect":false,"show_icons":true,"icon_size":15,"icon_color":"#000000","mobile_heading_size":32,"mobile_subheading_size":16,"mobile_prop_heading_size":18,"mobile_prop_text_size":14,"mobile_icon_size":15,"mobile_item_padding":15,"enable_animation":false,"animation_duration":600,"animation_delay":100}},"rich_text_UbVpyD":{"type":"rich-text","blocks":{"heading_FV8nUL":{"type":"heading","settings":{"heading":"Fill out The Proper Waiver Before Arrival","heading_size":"h2"}},"button_d4ViGp":{"type":"button","settings":{"button_label":"CHEMICAL PEELS WAIVER","button_link":"https:\/\/form.jotform.com\/220544223473146","button_style_secondary":false}}},"block_order":["heading_FV8nUL","button_d4ViGp"],"custom_css":["* {background-color: #f7f4ed;}","a {background-color: white; opacity: 100%;}"],"name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"background-1","full_width":true,"padding_top":40,"padding_bottom":52}},"testimonials_carousel_kK49RM":{"type":"testimonials-carousel","blocks":{"testimonial_LWteyz":{"type":"testimonial","settings":{"testimonial_text":"Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident.","author_name":"Sarah Johnson","author_title":"Verified Buyer","show_rating":true,"rating":5,"show_date":false,"testimonial_date":"October 2024"}},"testimonial_WXDiQD":{"type":"testimonial","settings":{"testimonial_text":"Amazing results! My skin has never looked better. The personalized approach really makes a difference.","author_name":"Sarah Johnson","author_title":"Verified Buyer","show_rating":true,"rating":5,"show_date":false,"testimonial_date":"October 2024"}},"testimonial_r6Eapb":{"type":"testimonial","settings":{"testimonial_text":"Professional, knowledgeable, and caring. I trust her completely with my skincare routine.","author_name":"Sarah Johnson","author_title":"Verified Buyer","show_rating":true,"rating":5,"show_date":false,"testimonial_date":"October 2024"}}},"block_order":["testimonial_LWteyz","testimonial_WXDiQD","testimonial_r6Eapb"],"custom_css":["a {}"],"name":"Testimonials Carousel","settings":{"section_title":"Client Results","section_subtitle":"Real reviews from real people","section_background":"#faf9f7","section_padding":60,"heading_color":"#000000","heading_size":36,"heading_weight":"600","heading_transform":"none","subheading_color":"#666666","header_spacing":40,"scroll_speed":30,"scroll_direction":"left","pause_on_hover":true,"disable_auto_scroll_mobile":true,"enable_fade":true,"fade_width":10,"testimonial_width":350,"tablet_testimonial_width":300,"mobile_testimonial_width":280,"testimonial_gap":30,"card_background":"#ffffff","card_padding":30,"mobile_card_padding":20,"card_radius":12,"card_shadow":true,"shadow_x":0,"shadow_y":2,"shadow_blur":10,"shadow_spread":0,"shadow_color":"#0000001a","card_border":false,"border_width":1,"border_color":"#e0e0e0","card_hover_effect":true,"show_quotes":true,"quote_color":"#cccccc","italic_text":false,"text_color":"#333333","text_size":16,"mobile_text_size":15,"star_size":18,"star_color":"#ffc107","empty_star_color":"#e0e0e0","show_divider":true,"divider_color":"#eeeeee","avatar_size":45,"avatar_radius":50,"show_placeholder_avatar":true,"placeholder_avatar_bg":"#e0e0e0","placeholder_avatar_text":"#666666","author_color":"#000000","author_size":16,"mobile_author_size":14,"title_color":"#000000","title_size":14,"date_color":"#999999","mobile_heading_size":28,"show_scroll_indicators":false,"indicator_color":"#000000","indicator_bg":"#cccccc"}},"main":{"type":"main-page","disabled":true,"settings":{"page_full_width":false,"page_full_width_spacing":false,"padding_top":100,"padding_bottom":40}},"sl_custom_faq_r7Q6ht":{"type":"sl-custom-faq","blocks":{"faq_item_qjMHfp":{"type":"faq_item","settings":{"question":"Will I actually peel after a chemical peel?","answer":"<p>With our PCA chemical peels, most clients experience little to no visible peeling. You may notice some light flaking that's easily managed with moisturizer, but nothing that would keep you from going about your normal life. These are truly \"no downtime\" peels — you can return to work, social events, and daily activities immediately.<\/p>"}},"faq_item_PzXEKn":{"type":"faq_item","settings":{"question":"How many chemical peel treatments will I need?","answer":"<p>While you'll see some improvement after your very first chemical peel, optimal results come from a series of treatments. We typically recommend 3-6 peels spaced 3-4 weeks apart, depending on your skin goals. During your consultation, we'll create a personalized treatment plan that fits your needs and budget.<\/p>"}},"faq_item_GmWhMf":{"type":"faq_item","settings":{"question":"Is a chemical peel painful?","answer":"<p>Our PCA chemical peels are designed to be gentle yet effective. Most clients describe the sensation as a mild tingling or warmth during application. Any sensation subsides quickly, and many clients find the treatment surprisingly relaxing. If you have sensitive skin, we'll adjust your peel formula accordingly.<\/p>"}},"faq_item_PGh67J":{"type":"faq_item","settings":{"question":"Are chemical peels safe for all skin types?","answer":"<p>Yes! One of the biggest advantages of PCA chemical peels is that they can be customized for virtually any skin type, tone, and concern. Whether you have dry, oily, sensitive, or combination skin — and regardless of your skin tone — we'll blend a peel that's perfect for you. That's why we offer the Pre-Peel Consultation for first-timers.<\/p>"}},"faq_item_XkqtLR":{"type":"faq_item","settings":{"question":"When will I see results from my chemical peel?","answer":"<p>You'll notice an immediate glow after your first chemical peel treatment. Over the following days, your skin will continue to improve as cell turnover accelerates. For concerns like dark spots, fine lines, and texture issues, visible improvement typically continues for 2-4 weeks after each treatment, with cumulative benefits building over your peel series.<\/p>"}},"faq_item_P6KPXe":{"type":"faq_item","settings":{"question":"What's the difference between professional chemical peels and drugstore peels?","answer":"<p>Professional PCA chemical peels use higher concentrations of active ingredients that simply aren't available over the counter. More importantly, we custom-blend each peel for your specific skin — combining different acids and ingredients to target your unique concerns. Drugstore peels are one-size-fits-all; ours are one-of-a-kind, just like your skin.<\/p>"}}},"block_order":["faq_item_qjMHfp","faq_item_PzXEKn","faq_item_GmWhMf","faq_item_PGh67J","faq_item_XkqtLR","faq_item_P6KPXe"],"name":"FAQ Section","settings":{"enable_anchor":false,"anchor_id":"faq","anchor_offset":80,"section_title":"Frequently Asked Questions","section_subtitle":"Find answers to common questions","header_alignment":"center","background_color":"#e2e8d6","section_padding":40,"max_width":900,"show_toggle_button":true,"default_open":false,"allow_multiple":true,"header_color":"#000000","header_size":32,"header_weight":"600","header_text_transform":"none","header_margin":40,"subheader_color":"#666666","subheader_size":16,"question_color":"#000000","question_size":18,"question_weight":"500","answer_color":"#333333","answer_size":16,"item_padding":25,"border_color":"#846599","toggle_color":"#666666","toggle_hover_color":"#000000","mobile_header_size":26,"mobile_subheader_size":16,"mobile_question_size":18,"mobile_answer_size":16,"mobile_item_padding":20,"enable_animation":false,"animation_duration":500,"animation_delay":50}},"rich_text_VYn8ag":{"type":"rich-text","blocks":{"heading_EYhdqr":{"type":"heading","settings":{"heading":"Ready to Lighten, Brighten, & Tighten Your Skin?","heading_size":"h2"}},"button_8HwHHg":{"type":"button","settings":{"button_label":"Book Your Chemical Peel Here","button_link":"https:\/\/form.jotform.com\/220544223473146","button_style_secondary":false}}},"block_order":["heading_EYhdqr","button_8HwHHg"],"custom_css":["* {background-color: #846599;}","h2 {color: white;}","a {background-color: white; opacity: 100%;}"],"name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"inverse","full_width":true,"padding_top":40,"padding_bottom":52}}},"order":["sl_full_image_hero_ChMHiX","before_and_afters_QTJapz","sl_flexible_list_yEnKh7","sl_split_section_YNApNE","sl_flexible_list_YRpKeG","image_with_text_waPRjx","sl_marquee_RR7r88","sl_services_menu_tPA8Ja","sl_marquee_wGAN4T","sl_services_menu_EnDQbw","image_banner_rVqRFn","sl_flexible_list_mMk3PN","rich_text_UbVpyD","testimonials_carousel_kK49RM","main","sl_custom_faq_r7Q6ht","rich_text_VYn8ag"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "sl_full_image_hero_ChMHiX": {
+      "type": "sl-full-image-hero",
+      "blocks": {
+        "subheading_j3pddP": {
+          "type": "subheading",
+          "settings": {
+            "text": "Virtual Skin Consultations | Online Skincare Expert"
+          }
+        },
+        "heading_44AWxR": {
+          "type": "heading",
+          "settings": {
+            "text": "Need Help With Your Skin <i> But Can't Make It In?<i></i></i>"
+          }
+        },
+        "body_XHcgH4": {
+          "type": "body",
+          "settings": {
+            "text": "<p><em>Expert skincare advice and personalized treatment plans from the comfort of your home </em></p><p>Virtual skin consultations are the <strong>ideal solution</strong> for busy individuals like you who want expert skincare advice and personalized treatment plans from the comfort of your own home. Don't let time or distance hold you back from achieving your skincare goals.</p>"
+          }
+        },
+        "buttons_DbHrRi": {
+          "type": "buttons",
+          "settings": {
+            "button_1_text": "BOOK YOUR VIRTUAL CONSULTATION",
+            "button_1_link": "https://booking.mangomint.com/314399",
+            "button_2_text": "",
+            "button_2_link": "#services"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_j3pddP",
+        "heading_44AWxR",
+        "body_XHcgH4",
+        "buttons_DbHrRi"
+      ],
+      "name": "Hero Section",
+      "settings": {
+        "background_type": "image",
+        "background_image": "shopify://shop_images/BrandingPhotography-C_Mae-5513.jpg",
+        "background_video": "",
+        "image_position": "center center",
+        "mobile_image_position": "center center",
+        "overlay_color": "#000000",
+        "media_opacity": 60,
+        "desktop_height": 80,
+        "min_height": 600,
+        "mobile_height": 70,
+        "mobile_min_height": 500,
+        "vertical_alignment": "center",
+        "text_alignment": "center",
+        "mobile_text_alignment": "center",
+        "content_width": 1000,
+        "block_spacing": 25,
+        "subheading_color": "#ffffff",
+        "subheading_size": 18,
+        "mobile_subheading_size": 14,
+        "subheading_weight": "500",
+        "subheading_transform": "uppercase",
+        "subheading_spacing": 2,
+        "heading_color": "#ffffff",
+        "heading_size": 56,
+        "mobile_heading_size": 36,
+        "heading_weight": "300",
+        "heading_line_height": 1.1,
+        "heading_transform": "none",
+        "body_color": "#ffffff",
+        "body_size": 18,
+        "mobile_body_size": 16,
+        "body_line_height": 1.6,
+        "body_max_width": 700,
+        "button_background": "#8c9b6d",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#3a5c49",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 0,
+        "enable_animation": true,
+        "animation_duration": 800,
+        "animation_delay": 150,
+        "enable_parallax": false,
+        "parallax_speed": 30
+      }
+    },
+    "before_and_afters_QTJapz": {
+      "type": "before-and-afters",
+      "blocks": {
+        "carousel_image_7xj9Gd": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/Sharon-_1.webp",
+            "caption": ""
+          }
+        },
+        "carousel_image_XLQwmg": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/Laurie-Thompson-_1.webp",
+            "caption": ""
+          }
+        },
+        "carousel_image_Krxz86": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/ashley-acne-bootcamp_1.webp",
+            "caption": ""
+          }
+        },
+        "carousel_image_pcQQh6": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/Anne--1-_1.webp",
+            "caption": ""
+          }
+        },
+        "carousel_image_7HHwLh": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/ml-acne-bootcamp_1.webp",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "carousel_image_7xj9Gd",
+        "carousel_image_XLQwmg",
+        "carousel_image_Krxz86",
+        "carousel_image_pcQQh6",
+        "carousel_image_7HHwLh"
+      ],
+      "name": "Image Carousel",
+      "settings": {
+        "section_title": "Client Results",
+        "title_size": 32,
+        "title_color": "#333333",
+        "container_width": 1400,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "background_color": "#ffffff",
+        "image_size": 280,
+        "mobile_image_size": 250,
+        "gap": 20,
+        "border_radius": 8,
+        "hover_scale": 1.1,
+        "caption_size": 14,
+        "caption_color": "#666666",
+        "auto_scroll": true,
+        "auto_scroll_speed": 0.5
+      }
+    },
+    "sl_flexible_list_yEnKh7": {
+      "type": "sl-flexible-list",
+      "blocks": {
+        "value_prop_i7yChD": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "custom",
+            "icon_class": "fas fa-user-tie",
+            "icon": "shopify://shop_images/BrandingPhotography-C_Mae-5980.jpg",
+            "heading": "Personalized Expert Advice",
+            "text": "A deep dive into your skin concerns with education tailored just for you. We go over all your skincare questions and educate you on how the skin functions."
+          }
+        },
+        "value_prop_TXi4QK": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "custom",
+            "icon_class": "fas fa-box",
+            "icon": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5084.jpg",
+            "heading": "Products Shipped to You",
+            "text": "Products selected based on your skin goals will be shipped directly to you with detailed instructions. No guessing, no searching — just what your skin needs."
+          }
+        },
+        "value_prop_jgmTj3": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "custom",
+            "icon_class": "fas fa-check-circle",
+            "icon": "shopify://shop_images/BrandingPhotography-C_Mae-5625.jpg",
+            "heading": "Complimentary Follow-Up",
+            "text": "A complimentary virtual follow-up will be booked at your appointment to ensure your routine is working and make any needed adjustments."
+          }
+        }
+      },
+      "block_order": [
+        "value_prop_i7yChD",
+        "value_prop_TXi4QK",
+        "value_prop_jgmTj3"
+      ],
+      "name": "Flexible Value Props",
+      "settings": {
+        "main_heading": "Our Virtual Sessions Offer the Same Level of Expertise as an In-Person Visit",
+        "main_subheading": "You receive the best possible care for your specific skincare concerns — no matter where you are. Don't let time or distance hold you back from achieving your skincare goals. Experience the convenience and effectiveness of virtual skincare consultations.",
+        "grid_columns": 3,
+        "background_opacity": 20,
+        "background_size": "cover",
+        "background_position_x": 50,
+        "background_position_y": 50,
+        "section_background": "#8c9b6d",
+        "section_padding": 60,
+        "max_width": 1200,
+        "grid_gap": 30,
+        "header_spacing": 50,
+        "text_alignment": "center",
+        "heading_color": "#f7f7f7",
+        "heading_size": 42,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#ffffff",
+        "subheading_size": 20,
+        "subheading_weight": "400",
+        "subheading_transform": "none",
+        "prop_heading_color": "#ffffff",
+        "prop_heading_size": 22,
+        "prop_heading_weight": "600",
+        "prop_text_color": "#ffffff",
+        "prop_text_size": 15,
+        "item_background": "rgba(0,0,0,0)",
+        "item_padding": 20,
+        "item_border_radius": 0,
+        "item_shadow": false,
+        "item_hover_effect": false,
+        "show_icons": true,
+        "icon_size": 15,
+        "icon_color": "#3a5c49",
+        "mobile_heading_size": 32,
+        "mobile_subheading_size": 16,
+        "mobile_prop_heading_size": 18,
+        "mobile_prop_text_size": 16,
+        "mobile_icon_size": 20,
+        "mobile_item_padding": 15,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "animation_delay": 300
+      }
+    },
+    "sl_marquee_RR7r88": {
+      "type": "sl-marquee",
+      "blocks": {
+        "text_KJbWLQ": {
+          "type": "text",
+          "settings": {
+            "new_text": "EXPERT ADVICE"
+          }
+        },
+        "text_7Wr66g": {
+          "type": "text",
+          "settings": {
+            "new_text": "SHIPPING"
+          }
+        },
+        "text_EjamFt": {
+          "type": "text",
+          "settings": {
+            "new_text": "FOLLOW UPS"
+          }
+        }
+      },
+      "block_order": [
+        "text_KJbWLQ",
+        "text_7Wr66g",
+        "text_EjamFt"
+      ],
+      "name": "Marquee",
+      "settings": {
+        "colorBackground": "#8b7ba8",
+        "colorText": "#ffffff",
+        "link": "",
+        "marquee_height": 46,
+        "font_size": 18,
+        "marquee_speed": 21
+      }
+    },
+    "sl_services_menu_EnDQbw": {
+      "type": "sl-services-menu",
+      "blocks": {
+        "service_item_kwrQqf": {
+          "type": "service_item",
+          "name": "Lip Mask",
+          "settings": {
+            "service_name": "Virtual Skin Consultation",
+            "add_line": false,
+            "service_extra": "For any skin concern that is not acne related",
+            "service_price": "50 / 30 min",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "Book Virtual Skin Consultation",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p>This is for any skin concern that is not acne related.</p><p><strong>If You Struggle With:</strong> Dry skin, Oily or combo skin, Aging skin & more — this is the choice for you!</p><p><strong>What's Included:</strong></p><p>✦ Virtual visit via Zoom</p><p>✦ Deep dive into your skin</p><p>✦ Great skin education just for you</p><p>✦ All your skincare questions answered</p><p>✦ Products shipped directly to you with detailed instructions</p><p>✦ Complimentary virtual follow-up</p>"
+          }
+        },
+        "service_item_gidiKJ": {
+          "type": "service_item",
+          "name": "Hand Treatment",
+          "settings": {
+            "service_name": "Virtual Acne Bootcamp Consultation",
+            "add_line": false,
+            "service_extra": "Meet via Zoom with Shannon — Certified Acne Expert",
+            "service_price": "65 / 45 min",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "Book Virtual Acne Consultation",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p>Meet via Zoom with Shannon — Certified Acne Expert — to work towards clear, healthier skin!</p><p><strong>We Will Discuss & Educate On:</strong> What acne is, Your specific acne and skin type, Lifestyle factors impacting your acne, Food factors & so much more</p><p><strong>What's Included:</strong></p><p>✦ Virtual visit via Zoom</p><p>✦ Customized skincare routine created for you</p><p>✦ Products shipped directly to you</p><p>✦ Resources to help you on your journey</p><p>✦ Complimentary virtual follow-up</p><p><strong>Good to know:</strong> This is a great option for those local who cannot make it in & for clients worldwide.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "service_item_kwrQqf",
+        "service_item_gidiKJ"
+      ],
+      "name": "SERVICES",
+      "settings": {
+        "enable_anchor": true,
+        "anchor_id": "services",
+        "anchor_offset": 80,
+        "section_title": "Our Virtual Skincare Services",
+        "background_color": "#ffffff",
+        "section_padding": 40,
+        "max_width": 1000,
+        "item_padding": 20,
+        "header_color": "#000000",
+        "header_size": 24,
+        "header_weight": "400",
+        "header_text_transform": "uppercase",
+        "header_margin": 30,
+        "service_name_color": "#000000",
+        "service_name_size": 18,
+        "service_name_weight": "400",
+        "price_color": "#000000",
+        "price_size": 18,
+        "price_weight": "400",
+        "dot_color": "#cccccc",
+        "border_color": "#eeeeee",
+        "button_background": "#8c9b6d",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#3a5c49",
+        "button_hover_text_color": "#ffffff",
+        "button_padding_x": 20,
+        "button_padding_y": 10,
+        "button_font_size": 14,
+        "button_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_border_radius": 0,
+        "toggle_color": "#666666",
+        "toggle_hover_color": "#000000",
+        "toggle_size": 14,
+        "description_color": "#333333",
+        "description_size": 14,
+        "mobile_header_size": 20,
+        "mobile_service_name_size": 16,
+        "mobile_price_size": 16,
+        "mobile_button_size": 13,
+        "mobile_button_padding_x": 16,
+        "mobile_button_padding_y": 8,
+        "mobile_description_size": 13
+      }
+    },
+    "how_it_works_PQ9iL8": {
+      "type": "how-it-works",
+      "blocks": {
+        "step_949nXc": {
+          "type": "step",
+          "settings": {
+            "step_title": "Book Your Session",
+            "step_description": "Choose your virtual consultation type and select a time that works for you. You'll receive a Zoom link via email."
+          }
+        },
+        "step_pWtJWG": {
+          "type": "step",
+          "settings": {
+            "step_title": "Meet & Learn",
+            "step_description": "We'll do a deep dive into your skin, answer all your questions, and educate you on how the skin functions."
+          }
+        },
+        "step_FyHNXM": {
+          "type": "step",
+          "settings": {
+            "step_title": "Get Your Products",
+            "step_description": "Products selected based on your skin goals will be shipped directly to you with detailed instructions."
+          }
+        }
+      },
+      "block_order": [
+        "step_949nXc",
+        "step_pWtJWG",
+        "step_FyHNXM"
+      ],
+      "custom_css": [
+        "p {line-height: 1.2em;}"
+      ],
+      "name": "How It Works",
+      "settings": {
+        "show_header": true,
+        "header_title": "How Virtual Consultations Work",
+        "header_subtitle": "",
+        "header_color": "#8c9b6d",
+        "background_color": "#faf9f7",
+        "accent_color": "#8c9b6d",
+        "show_cta": false,
+        "cta_title": "Ready to Begin Your Journey?",
+        "cta_subtitle": "Book your complimentary skin consultation today and discover the difference personalized care can make.",
+        "cta_button_text": "Book Appointment",
+        "cta_button_url": "https://ke18jq-r4.myshopify.com/",
+        "cta_background_color": "#8c9b6d",
+        "cta_text_color": "#ffffff",
+        "cta_button_color": "#ffffff",
+        "cta_button_text_color": "#8b7ba8",
+        "cta_heading_color": "#ffffff"
+      }
+    },
+    "sl_custom_faq_r7Q6ht": {
+      "type": "sl-custom-faq",
+      "blocks": {
+        "faq_item_knxa63": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What do I need for my virtual appointment?",
+            "answer": "<p>All you need is a device with Zoom (computer, tablet, or phone), good lighting so we can see your skin clearly, and a quiet space where we can talk. We'll send you the Zoom link before your appointment.</p>"
+          }
+        },
+        "faq_item_qjMHfp": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do virtual skin consultations work?",
+            "answer": "<p>We meet via Zoom for your scheduled appointment time. We'll do a deep dive into your skin, go over all your skincare questions, and educate you on how the skin functions. After your consultation, products selected based on your skin goals will be shipped directly to you with detailed instructions. A complimentary virtual follow-up will be booked at your appointment.</p>"
+          }
+        },
+        "faq_item_PzXEKn": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Which consultation should I book?",
+            "answer": "<p>If your primary concern is acne, book the Virtual Acne Bootcamp Consultation ($65/45 min). For all other skin concerns — dry skin, oily or combo skin, aging skin, and more — the Virtual Skin Consultation ($50/30 min) is the right choice for you.</p>"
+          }
+        },
+        "faq_item_GmWhMf": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do I need to purchase products?",
+            "answer": "<p>Products are recommended based on your specific skin goals and are shipped directly to you. While purchasing products isn't technically required, using the right products is essential to seeing results. We'll never recommend anything you don't need.</p>"
+          }
+        },
+        "faq_item_PGh67J": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's included in the follow-up?",
+            "answer": "<p>A complimentary virtual follow-up is booked at your initial appointment. This gives us a chance to check in on your progress, see how your skin is responding to your new routine, answer any questions that have come up, and make adjustments as needed.</p>"
+          }
+        },
+        "faq_item_XkqtLR": {
+          "type": "faq_item",
+          "disabled": true,
+          "settings": {
+            "question": "When will I see results from my chemical peel?",
+            "answer": "<p>You'll notice an immediate glow after your first chemical peel treatment. Over the following days, your skin will continue to improve as cell turnover accelerates. For concerns like dark spots, fine lines, and texture issues, visible improvement typically continues for 2-4 weeks after each treatment, with cumulative benefits building over your peel series.</p>"
+          }
+        },
+        "faq_item_P6KPXe": {
+          "type": "faq_item",
+          "disabled": true,
+          "settings": {
+            "question": "What's the difference between professional chemical peels and drugstore peels?",
+            "answer": "<p>Professional PCA chemical peels use higher concentrations of active ingredients that simply aren't available over the counter. More importantly, we custom-blend each peel for your specific skin — combining different acids and ingredients to target your unique concerns. Drugstore peels are one-size-fits-all; ours are one-of-a-kind, just like your skin.</p>"
+          }
+        },
+        "faq_item_RJtP6A": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I do virtual if I live near McHenry?",
+            "answer": "<p>Absolutely! Virtual consultations are a great option for those local who cannot make it in — whether it's due to a busy schedule, transportation, or simply preferring the convenience of meeting from home.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_knxa63",
+        "faq_item_qjMHfp",
+        "faq_item_PzXEKn",
+        "faq_item_GmWhMf",
+        "faq_item_PGh67J",
+        "faq_item_XkqtLR",
+        "faq_item_P6KPXe",
+        "faq_item_RJtP6A"
+      ],
+      "name": "FAQ Section",
+      "settings": {
+        "enable_anchor": false,
+        "anchor_id": "faq",
+        "anchor_offset": 80,
+        "section_title": "Questions About Virtual Consultations",
+        "section_subtitle": "Find answers to common questions",
+        "header_alignment": "center",
+        "background_color": "#8b7ba8",
+        "section_padding": 40,
+        "max_width": 900,
+        "show_toggle_button": true,
+        "default_open": false,
+        "allow_multiple": true,
+        "header_color": "#ffffff",
+        "header_size": 32,
+        "header_weight": "600",
+        "header_text_transform": "none",
+        "header_margin": 40,
+        "subheader_color": "#ffffff",
+        "subheader_size": 16,
+        "question_color": "#ffffff",
+        "question_size": 18,
+        "question_weight": "500",
+        "answer_color": "#ffffff",
+        "answer_size": 16,
+        "item_padding": 25,
+        "border_color": "#ffffff",
+        "toggle_color": "#ffffff",
+        "toggle_hover_color": "#ffffff",
+        "mobile_header_size": 26,
+        "mobile_subheader_size": 16,
+        "mobile_question_size": 18,
+        "mobile_answer_size": 16,
+        "mobile_item_padding": 20,
+        "enable_animation": false,
+        "animation_duration": 500,
+        "animation_delay": 50
+      }
+    },
+    "testimonials_carousel_kK49RM": {
+      "type": "testimonials-carousel",
+      "blocks": {
+        "testimonial_BDXyXe": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I've tried estheticians all over the county. Nobody takes the time to really understand your skin like they do here. The pre-peel consultation alone was worth it — I finally understand what my skin actually needs.",
+            "author_name": "Rachel D.",
+            "author_title": "Crystal Lake, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_kjfaGz": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I've spent a fortune on high-end serums and treatments that never delivered. These chemical peels have done more for my skin in 3 months than years of expensive products. My only regret is not starting sooner.",
+            "author_name": "Lisa B.",
+            "author_title": "McHenry, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_LWteyz": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "After years of trying every brightening product on the market, I finally found something that works. Just three PCA peels and my melasma is visibly lighter. I only wish I'd found Esthetics with Me sooner!",
+            "author_name": "Jennifer M.",
+            "author_title": "McHenry, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_WXDiQD": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I was so nervous about getting a chemical peel because I couldn't afford to hide at home. She was right — I walked out glowing and went straight to dinner with friends. No redness, no peeling, just compliments!",
+            "author_name": "Sarah K.",
+            "author_title": "Crystal Lake, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_r6Eapb": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I started the 6-peel series for my fine lines and sun damage. By the fourth treatment, people started asking if I'd done something. The texture of my skin has completely transformed.",
+            "author_name": "Michelle T.",
+            "author_title": "Woodstock, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_Geifn6": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "I'd had chemical peels before at other spas, but they were always the same generic treatment. The custom-blended peel here actually addressed MY concerns. The difference in results is night and day.",
+            "author_name": "Amanda R.",
+            "author_title": "Lake in the Hills, IL",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_BDXyXe",
+        "testimonial_kjfaGz",
+        "testimonial_LWteyz",
+        "testimonial_WXDiQD",
+        "testimonial_r6Eapb",
+        "testimonial_Geifn6"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "a {}"
+      ],
+      "name": "Testimonials Carousel",
+      "settings": {
+        "section_title": "TESTIMONIALS",
+        "section_subtitle": "Real Results from Real McHenry Clients",
+        "section_background": "#ffffff",
+        "section_padding": 60,
+        "heading_color": "#000000",
+        "heading_size": 36,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#666666",
+        "header_spacing": 40,
+        "scroll_speed": 30,
+        "scroll_direction": "left",
+        "pause_on_hover": true,
+        "disable_auto_scroll_mobile": true,
+        "enable_fade": true,
+        "fade_width": 10,
+        "testimonial_width": 350,
+        "tablet_testimonial_width": 300,
+        "mobile_testimonial_width": 280,
+        "testimonial_gap": 30,
+        "card_background": "#ffffff",
+        "card_padding": 30,
+        "mobile_card_padding": 20,
+        "card_radius": 12,
+        "card_shadow": true,
+        "shadow_x": 0,
+        "shadow_y": 2,
+        "shadow_blur": 10,
+        "shadow_spread": 0,
+        "shadow_color": "#0000001a",
+        "card_border": false,
+        "border_width": 1,
+        "border_color": "#e0e0e0",
+        "card_hover_effect": true,
+        "show_quotes": true,
+        "quote_color": "#cccccc",
+        "italic_text": false,
+        "text_color": "#333333",
+        "text_size": 16,
+        "mobile_text_size": 15,
+        "star_size": 18,
+        "star_color": "#ffc107",
+        "empty_star_color": "#e0e0e0",
+        "show_divider": true,
+        "divider_color": "#eeeeee",
+        "avatar_size": 45,
+        "avatar_radius": 50,
+        "show_placeholder_avatar": true,
+        "placeholder_avatar_bg": "#e0e0e0",
+        "placeholder_avatar_text": "#666666",
+        "author_color": "#000000",
+        "author_size": 16,
+        "mobile_author_size": 14,
+        "title_color": "#000000",
+        "title_size": 14,
+        "date_color": "#999999",
+        "mobile_heading_size": 28,
+        "show_scroll_indicators": false,
+        "indicator_color": "#000000",
+        "indicator_bg": "#cccccc"
+      }
+    },
+    "sl_split_section_YNApNE": {
+      "type": "sl-split-section",
+      "disabled": true,
+      "name": "Split Section",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5261.jpg",
+        "swap_horizontal": false,
+        "auto_height_desktop": true,
+        "section_height_desktop": 40,
+        "auto_height_tablet": true,
+        "section_height_tablet": 50,
+        "wrapper_padding": 3,
+        "wrapper_padding_tablet": 3,
+        "wrapper_padding_mobile": 3,
+        "image_position_x": 50,
+        "image_position_y": 65,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "heading": "Finally — Chemical Peels in McHenry That Actually Work",
+        "subheading": "At Esthetics with Me, we specialize in custom-blended PCA chemical peels that deliver real, visible results without disrupting your life. Unlike one-size-fits-all treatments, every peel is formulated specifically for YOUR skin type, concerns, and goals.",
+        "text": "Our professional-grade PCA peels work by gently accelerating cell turnover, revealing the fresh, luminous skin hiding beneath the surface. Dark spots fade, fine lines soften, and that healthy glow you've been missing? It comes back.\n\nThe best part? No downtime. You'll walk out of your chemical peel appointment in McHenry ready to continue your day — no hiding, no peeling, no social distancing from your own reflection.",
+        "text2": "Licensed Esthetician | PCA Certified | McHenry's Trusted Skincare Expert",
+        "heading_color": "#000000",
+        "subheading_color": "#333333",
+        "text_color": "#666666",
+        "heading_size": 32,
+        "subheading_size": 24,
+        "text_size": 16,
+        "mobile_heading_size": 24,
+        "mobile_subheading_size": 18,
+        "mobile_text_size": 14,
+        "show_button": true,
+        "button_text": "Book Your Chemical Peel Now↓",
+        "button_link": "#treatments",
+        "button_background": "#846599",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#594268",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 0
+      }
+    },
+    "sl_flexible_list_YRpKeG": {
+      "type": "sl-flexible-list",
+      "blocks": {
+        "value_prop_FbCUjw": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-star",
+            "heading": "Visibly Brighter Complexion",
+            "text": "Dull, tired skin transforms into a luminous, healthy glow. Our chemical peels remove the buildup that's been dimming your natural radiance, revealing fresh skin that catches the light beautifully."
+          }
+        },
+        "value_prop_wUr4UK": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-shield-alt",
+            "heading": "Faded Dark Spots & Discoloration",
+            "text": "Sun damage, melasma, and post-acne marks don't stand a chance. Targeted acids work to break up pigmentation and even out your skin tone, giving you the clear complexion you deserve."
+          }
+        },
+        "value_prop_V4iHwF": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-star",
+            "heading": "Softened Fine Lines & Wrinkles",
+            "text": "Chemical peels stimulate collagen production while smoothing surface texture. The result? Those pesky lines and wrinkles become less noticeable with each treatment."
+          }
+        },
+        "value_prop_Bkh6Qf": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-star",
+            "heading": "Tighter, Firmer Skin",
+            "text": "As your skin renews itself after each peel, you'll notice improved elasticity and firmness. That lifted look isn't just in your head — it's real cellular renewal at work."
+          }
+        },
+        "value_prop_wcHUXK": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-star",
+            "heading": "Zero Downtime, Zero Drama",
+            "text": "Walk into your appointment, walk out glowing. Our PCA chemical peels in McHenry are designed for real life — no peeling, no hiding, no canceling plans. Just results."
+          }
+        },
+        "value_prop_YRQ4QP": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-star",
+            "heading": "Customized Just For You",
+            "text": "Your skin is unique, and your peel should be too. We blend each treatment specifically for your skin type, concerns, and goals — never a generic, off-the-shelf approach."
+          }
+        }
+      },
+      "block_order": [
+        "value_prop_FbCUjw",
+        "value_prop_wUr4UK",
+        "value_prop_V4iHwF",
+        "value_prop_Bkh6Qf",
+        "value_prop_wcHUXK",
+        "value_prop_YRQ4QP"
+      ],
+      "disabled": true,
+      "name": "Flexible Value Props",
+      "settings": {
+        "main_heading": "Ready to Achieve Your Skincare Goals?",
+        "main_subheading": "Don't let time or distance hold you back. Book your virtual skin consultation today and experience the convenience and effectiveness of expert skincare advice from anywhere.",
+        "grid_columns": 3,
+        "background_image": "shopify://shop_images/BrandingPhotography-C_Mae-5625.jpg",
+        "background_opacity": 35,
+        "background_size": "cover",
+        "background_position_x": 50,
+        "background_position_y": 50,
+        "section_background": "#1a1a1a",
+        "section_padding": 60,
+        "max_width": 1200,
+        "grid_gap": 30,
+        "header_spacing": 50,
+        "text_alignment": "center",
+        "heading_color": "#ffffff",
+        "heading_size": 42,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#ffffff",
+        "subheading_size": 20,
+        "subheading_weight": "400",
+        "subheading_transform": "none",
+        "prop_heading_color": "#ffffff",
+        "prop_heading_size": 22,
+        "prop_heading_weight": "600",
+        "prop_text_color": "#ffffff",
+        "prop_text_size": 15,
+        "item_background": "rgba(0,0,0,0)",
+        "item_padding": 20,
+        "item_border_radius": 0,
+        "item_shadow": false,
+        "item_hover_effect": false,
+        "show_icons": false,
+        "icon_size": 15,
+        "icon_color": "#000000",
+        "mobile_heading_size": 32,
+        "mobile_subheading_size": 16,
+        "mobile_prop_heading_size": 18,
+        "mobile_prop_text_size": 14,
+        "mobile_icon_size": 15,
+        "mobile_item_padding": 15,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "animation_delay": 100
+      }
+    },
+    "how_it_works_HqcDEd": {
+      "type": "how-it-works",
+      "custom_css": [
+        "p {line-height: 1.2em;}"
+      ],
+      "name": "How It Works",
+      "settings": {
+        "show_header": true,
+        "header_title": "Ready to Achieve Your Skincare Goals?",
+        "header_subtitle": "Don't let time or distance hold you back. Book your virtual skin consultation today and experience the convenience and effectiveness of expert skincare advice from anywhere.",
+        "header_color": "#8c9b6d",
+        "background_color": "#faf9f7",
+        "accent_color": "#8c9b6d",
+        "show_cta": true,
+        "cta_title": "Book Your Virtual Appointment",
+        "cta_subtitle": "Expert skincare advice, personalized treatment plans, and products shipped directly to you.",
+        "cta_button_text": "Book Virtual now",
+        "cta_button_url": "https://ke18jq-r4.myshopify.com/",
+        "cta_background_color": "#8c9b6d",
+        "cta_text_color": "#ffffff",
+        "cta_button_color": "#ffffff",
+        "cta_button_text_color": "#8c9b6d",
+        "cta_heading_color": "#ffffff"
+      }
+    },
+    "image_with_text_waPRjx": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_3UDAka": {
+          "type": "heading",
+          "settings": {
+            "heading": "\"They are the best of the best - hands down\"",
+            "heading_size": "h1"
+          }
+        },
+        "text_dgrenH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>I went to Esthetics With Me to work on my fine lines and wrinkles. After just a few weeks of sessions together I look noticibly younger and get compliments on my skin all the time. They have a customer for life.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_McChTa": {
+          "type": "button",
+          "settings": {
+            "button_label": "SEE ALL TREATMENTS",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_3UDAka",
+        "text_dgrenH",
+        "button_McChTa"
+      ],
+      "disabled": true,
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "page_full_width": true,
+        "page_full_width_spacing": false,
+        "image": "shopify://shop_images/km_facial.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "overlap",
+        "color_scheme": "accent-2",
+        "mobile_content_alignment": "left",
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "custom_class_name": ""
+      }
+    },
+    "sl_marquee_wGAN4T": {
+      "type": "sl-marquee",
+      "blocks": {
+        "text_LXTg8h": {
+          "type": "text",
+          "settings": {
+            "new_text": "ENHANCEMENTS"
+          }
+        }
+      },
+      "block_order": [
+        "text_LXTg8h"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "Marquee",
+      "settings": {
+        "colorBackground": "#8c9b6d",
+        "colorText": "#ffffff",
+        "link": "",
+        "marquee_height": 46,
+        "font_size": 18,
+        "marquee_speed": 21
+      }
+    },
+    "sl_services_menu_tPA8Ja": {
+      "type": "sl-services-menu",
+      "blocks": {
+        "service_item_zittUh": {
+          "type": "service_item",
+          "name": "Mini Refresh Facial",
+          "settings": {
+            "service_name": "Don't Neglect Your Neck! (Include neck)",
+            "add_line": true,
+            "service_extra": "",
+            "service_price": "50 | Include neck",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "BOOK NOW",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p><strong>Curious about peels but unsure where to begin? This service is the perfect starting point for first-timers!</strong></p><p>What’s Included:</p><p><strong>• Peel Consultation:</strong></p><p>A one-on-one assessment to evaluate your skin’s unique needs.</p><p><strong>• Pre-Peel Treatment:</strong></p><p>A customized skin treatment to leave you glowing and determine if peels are the right choice for you.</p><p><strong>• Personalized Homecare Guidance:</strong></p><p>Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan.</p>"
+          }
+        },
+        "service_item_VzAK6V": {
+          "type": "service_item",
+          "name": "Mini Refresh Facial",
+          "settings": {
+            "service_name": "Don't Neglect Your Neck! (Include neck & chest)",
+            "add_line": true,
+            "service_extra": "",
+            "service_price": "100 | Include neck & chest",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "BOOK NOW",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p><strong>Curious about peels but unsure where to begin? This service is the perfect starting point for first-timers!</strong></p><p>What’s Included:</p><p><strong>• Peel Consultation:</strong></p><p>A one-on-one assessment to evaluate your skin’s unique needs.</p><p><strong>• Pre-Peel Treatment:</strong></p><p>A customized skin treatment to leave you glowing and determine if peels are the right choice for you.</p><p><strong>• Personalized Homecare Guidance:</strong></p><p>Expert recommendations for prepping your skin, ensuring optimal results with your peel treatment plan.</p>"
+          }
+        },
+        "service_item_6V4KRF": {
+          "type": "service_item",
+          "name": "Customized Facial",
+          "settings": {
+            "service_name": "Red Light Therapy",
+            "add_line": true,
+            "service_extra": "",
+            "service_price": "50 | 30 min",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "BOOK NOW",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p>Red light therapy wavelengths penetrate deeply and provide cells with energy to restore. Beneficial for fine line & wrinkle reduction, inflammation, circulation & acne.<br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "service_item_zittUh",
+        "service_item_VzAK6V",
+        "service_item_6V4KRF"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "ENHANCEMENTS",
+      "settings": {
+        "enable_anchor": false,
+        "anchor_id": "services",
+        "anchor_offset": 80,
+        "section_title": "Enhance Your Chemical Peel Treatment",
+        "background_color": "#ffffff",
+        "section_padding": 40,
+        "max_width": 1000,
+        "item_padding": 20,
+        "header_color": "#000000",
+        "header_size": 24,
+        "header_weight": "400",
+        "header_text_transform": "uppercase",
+        "header_margin": 30,
+        "service_name_color": "#000000",
+        "service_name_size": 18,
+        "service_name_weight": "400",
+        "price_color": "#000000",
+        "price_size": 18,
+        "price_weight": "400",
+        "dot_color": "#cccccc",
+        "border_color": "#eeeeee",
+        "button_background": "#8c9b6d",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#3a5c49",
+        "button_hover_text_color": "#ffffff",
+        "button_padding_x": 20,
+        "button_padding_y": 10,
+        "button_font_size": 14,
+        "button_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_border_radius": 0,
+        "toggle_color": "#666666",
+        "toggle_hover_color": "#000000",
+        "toggle_size": 14,
+        "description_color": "#333333",
+        "description_size": 14,
+        "mobile_header_size": 20,
+        "mobile_service_name_size": 16,
+        "mobile_price_size": 16,
+        "mobile_button_size": 13,
+        "mobile_button_padding_x": 16,
+        "mobile_button_padding_y": 8,
+        "mobile_description_size": 13
+      }
+    },
+    "image_banner_rVqRFn": {
+      "type": "image-banner",
+      "disabled": true,
+      "custom_css": [
+        "* {height: 200px;}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "page_full_width": true,
+        "page_full_width_spacing": false,
+        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5644.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false,
+        "custom_class_name": ""
+      }
+    },
+    "sl_flexible_list_mMk3PN": {
+      "type": "sl-flexible-list",
+      "blocks": {
+        "value_prop_8CJTR7": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-calendar-alt",
+            "heading": "Book Your Appointment",
+            "text": "Schedule your chemical peel consultation or treatment online — choose a time that works for your schedule."
+          }
+        },
+        "value_prop_YbcJUy": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-spa",
+            "heading": "Relax & Transform",
+            "text": "Arrive with clean skin, fill out your waiver, and let us customize the perfect peel for your unique skin goals."
+          }
+        },
+        "value_prop_iC4wmh": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-star",
+            "heading": "Glow & Go",
+            "text": "Walk out with brighter, tighter, more luminous skin — ready to continue your day with zero downtime."
+          }
+        }
+      },
+      "block_order": [
+        "value_prop_8CJTR7",
+        "value_prop_YbcJUy",
+        "value_prop_iC4wmh"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "Flexible Value Props",
+      "settings": {
+        "main_heading": "Your Path to Glowing Skin is Simple",
+        "main_subheading": "",
+        "grid_columns": 3,
+        "background_opacity": 20,
+        "background_size": "cover",
+        "background_position_x": 50,
+        "background_position_y": 50,
+        "section_background": "#f7f4ed",
+        "section_padding": 60,
+        "max_width": 1200,
+        "grid_gap": 30,
+        "header_spacing": 50,
+        "text_alignment": "center",
+        "heading_color": "#000000",
+        "heading_size": 42,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#333333",
+        "subheading_size": 20,
+        "subheading_weight": "400",
+        "subheading_transform": "uppercase",
+        "prop_heading_color": "#000000",
+        "prop_heading_size": 22,
+        "prop_heading_weight": "600",
+        "prop_text_color": "#666666",
+        "prop_text_size": 15,
+        "item_background": "rgba(0,0,0,0)",
+        "item_padding": 20,
+        "item_border_radius": 0,
+        "item_shadow": false,
+        "item_hover_effect": false,
+        "show_icons": true,
+        "icon_size": 15,
+        "icon_color": "#000000",
+        "mobile_heading_size": 32,
+        "mobile_subheading_size": 16,
+        "mobile_prop_heading_size": 18,
+        "mobile_prop_text_size": 14,
+        "mobile_icon_size": 15,
+        "mobile_item_padding": 15,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "animation_delay": 100
+      }
+    },
+    "rich_text_UbVpyD": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_FV8nUL": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h2"
+          }
+        },
+        "button_d4ViGp": {
+          "type": "button",
+          "settings": {
+            "button_label": "CHEMICAL PEELS WAIVER",
+            "button_link": "https://form.jotform.com/220544223473146",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_FV8nUL",
+        "button_d4ViGp"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "* {background-color: #f7f4ed;}",
+        "a {background-color: white; opacity: 100%;}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "page_full_width": false,
+        "page_full_width_spacing": false,
+        "padding_top": 100,
+        "padding_bottom": 40
+      }
+    },
+    "rich_text_VYn8ag": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EYhdqr": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ready to Lighten, Brighten, & Tighten Your Skin?",
+            "heading_size": "h2"
+          }
+        },
+        "button_8HwHHg": {
+          "type": "button",
+          "settings": {
+            "button_label": "Book Your Chemical Peel Here",
+            "button_link": "https://form.jotform.com/220544223473146",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_EYhdqr",
+        "button_8HwHHg"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "* {background-color: #846599;}",
+        "h2 {color: white;}",
+        "a {background-color: white; opacity: 100%;}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "inverse",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "sl_full_image_hero_ChMHiX",
+    "before_and_afters_QTJapz",
+    "sl_flexible_list_yEnKh7",
+    "sl_marquee_RR7r88",
+    "sl_services_menu_EnDQbw",
+    "how_it_works_PQ9iL8",
+    "sl_custom_faq_r7Q6ht",
+    "testimonials_carousel_kK49RM",
+    "sl_split_section_YNApNE",
+    "sl_flexible_list_YRpKeG",
+    "how_it_works_HqcDEd",
+    "image_with_text_waPRjx",
+    "sl_marquee_wGAN4T",
+    "sl_services_menu_tPA8Ja",
+    "image_banner_rVqRFn",
+    "sl_flexible_list_mMk3PN",
+    "rich_text_UbVpyD",
+    "main",
+    "rich_text_VYn8ag"
+  ]
+}

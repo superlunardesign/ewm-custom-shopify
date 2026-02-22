@@ -154,7 +154,8 @@
       "custom_css": [
         "p {line-height: 1.5em; color: black;}",
         ".price {color: black;}",
-        ".jdgm-star {font-size: small; letter-spacing: -0.5em;}"
+        ".jdgm-star {font-size: small; letter-spacing: -0.1em;}",
+        ".jdgm-widget {margin-top: -4%;}"
       ],
       "settings": {
         "page_full_width": false,
@@ -189,7 +190,7 @@
         "show_adv_product": true,
         "choose_label": "Choose style",
         "details_open_default": false,
-        "ingredients_open_default": false
+        "ingredients_open_default": true
       }
     },
     "sl_how_to_use_fDRQVt": {
@@ -210,7 +211,7 @@
         "body_size_mobile": 14,
         "body_color": "#444444",
         "text_padding": 40,
-        "padding_top": 40,
+        "padding_top": 36,
         "padding_bottom": 40,
         "padding_top_mobile": 28,
         "padding_bottom_mobile": 28

@@ -1,15 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "legal_page": {
       "type": "sl-legal-page",
       "settings": {
-        "show_breadcrumbs": true,
+        "show_breadcrumbs": false,
         "breadcrumb_1_label": "Legal",
+        "breadcrumb_1_url": "",
         "breadcrumb_2_label": "Policies",
+        "breadcrumb_2_url": "",
+        "breadcrumb_current": "",
+        "breadcrumb_bg_color": "#f5f5f5",
+        "breadcrumb_text_color": "#333333",
+        "breadcrumb_font_size": 13,
         "show_banner": true,
         "body_max_width": 1000
       }
     }
   },
-  "order": ["legal_page"]
+  "order": [
+    "legal_page"
+  ]
 }

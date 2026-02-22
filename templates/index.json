@@ -227,19 +227,37 @@
         "testimonial_e7tzDr": {
           "type": "testimonial",
           "settings": {
-            "testimonial_text": "Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident."
+            "testimonial_text": "Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
           }
         },
         "testimonial_ijnj99": {
           "type": "testimonial",
           "settings": {
-            "testimonial_text": "Amazing results! My skin has never looked better. The personalized approach really makes a difference."
+            "testimonial_text": "Amazing results! My skin has never looked better. The personalized approach really makes a difference.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
           }
         },
         "testimonial_pjJaJw": {
           "type": "testimonial",
           "settings": {
-            "testimonial_text": "Professional, knowledgeable, and caring. I trust her completely with my skincare routine."
+            "testimonial_text": "Professional, knowledgeable, and caring. I trust her completely with my skincare routine.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
           }
         }
       },
@@ -254,7 +272,65 @@
       "name": "Testimonials Carousel",
       "settings": {
         "section_title": "Client Results",
-        "title_color": "#8c9b6d"
+        "section_subtitle": "Real reviews from real people",
+        "section_background": "#f8f8f8",
+        "section_padding": 60,
+        "heading_color": "#000000",
+        "heading_size": 36,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#666666",
+        "header_spacing": 40,
+        "scroll_speed": 30,
+        "scroll_direction": "left",
+        "pause_on_hover": true,
+        "disable_auto_scroll_mobile": true,
+        "enable_fade": true,
+        "fade_width": 10,
+        "testimonial_width": 350,
+        "tablet_testimonial_width": 300,
+        "mobile_testimonial_width": 280,
+        "testimonial_gap": 30,
+        "card_background": "#ffffff",
+        "card_padding": 30,
+        "mobile_card_padding": 20,
+        "card_radius": 12,
+        "card_shadow": true,
+        "shadow_x": 0,
+        "shadow_y": 2,
+        "shadow_blur": 10,
+        "shadow_spread": 0,
+        "shadow_color": "#0000001a",
+        "card_border": false,
+        "border_width": 1,
+        "border_color": "#e0e0e0",
+        "card_hover_effect": true,
+        "show_quotes": true,
+        "quote_color": "#cccccc",
+        "italic_text": false,
+        "text_color": "#333333",
+        "text_size": 16,
+        "mobile_text_size": 15,
+        "star_size": 18,
+        "star_color": "#ffc107",
+        "empty_star_color": "#e0e0e0",
+        "show_divider": true,
+        "divider_color": "#eeeeee",
+        "avatar_size": 45,
+        "avatar_radius": 50,
+        "show_placeholder_avatar": true,
+        "placeholder_avatar_bg": "#e0e0e0",
+        "placeholder_avatar_text": "#666666",
+        "author_color": "#000000",
+        "author_size": 16,
+        "mobile_author_size": 14,
+        "title_color": "#8c9b6d",
+        "title_size": 14,
+        "date_color": "#999999",
+        "mobile_heading_size": 28,
+        "show_scroll_indicators": false,
+        "indicator_color": "#000000",
+        "indicator_bg": "#cccccc"
       }
     },
     "team_876xbc": {
@@ -448,8 +524,13 @@
       "settings": {
         "image": "shopify://shop_images/BrandingPhotography-C_Mae-5763_68f2e944-5a74-4573-854d-76c7d6cab26b.jpg",
         "swap_horizontal": false,
+        "auto_height_desktop": false,
         "section_height_desktop": 40,
+        "auto_height_tablet": false,
         "section_height_tablet": 50,
+        "wrapper_padding": 0,
+        "wrapper_padding_tablet": 2,
+        "wrapper_padding_mobile": 3,
         "image_position_x": 50,
         "image_position_y": 50,
         "enable_animation": true,
@@ -484,8 +565,13 @@
       "settings": {
         "image": "shopify://shop_images/BrandingPhotography-C_Mae-5763_68f2e944-5a74-4573-854d-76c7d6cab26b.jpg",
         "swap_horizontal": true,
+        "auto_height_desktop": false,
         "section_height_desktop": 40,
+        "auto_height_tablet": false,
         "section_height_tablet": 50,
+        "wrapper_padding": 0,
+        "wrapper_padding_tablet": 2,
+        "wrapper_padding_mobile": 3,
         "image_position_x": 50,
         "image_position_y": 50,
         "enable_animation": true,
