@@ -48,6 +48,34 @@
       },
       "header": {
         "type": "header",
+        "blocks": {
+          "promo_image_QJ3chb": {
+            "type": "promo_image",
+            "settings": {
+              "mega_1": "Services",
+              "image_1": "shopify://shop_images/BrandingPhotography-C_Mae-5388.jpg",
+              "title_1": "Shop Post-Treatment Skin Care ->",
+              "link_1": "shopify://collections/skincare",
+              "image_2": "shopify://shop_images/BrandingPhotography-C_Mae-6099.jpg",
+              "title_2": "Book a Brazilian ->",
+              "button_2": "EXPLORE ALL WAXING SERVICES",
+              "link_2": "shopify://pages/brazilian-wax-mchenry"
+            }
+          },
+          "promo_image_bmNmht": {
+            "type": "promo_image",
+            "settings": {
+              "mega_1": "Shop Skincare",
+              "title_1": "",
+              "link_1": "",
+              "image_2": "shopify://shop_images/Andrea-Butler_2.webp",
+              "title_2": "Learn About Acne Bootcamp ->",
+              "button_2": "NOW AVAILABLE VIRTUALLY",
+              "link_2": "shopify://pages/acne-bootcamp"
+            }
+          }
+        },
+        "block_order": ["promo_image_QJ3chb", "promo_image_bmNmht"],
         "settings": {
           "page_full_width": false,
           "page_full_width_spacing": false,

@@ -1091,14 +1091,45 @@ min-height:40px;
           </div>
         {%- endif -%}
 
-        {%- comment -%} Mobile: sort button {%- endcomment -%}
-        {%- if section.settings.enable_sorting -%}
-          <div class="sl-mobile-controls">
+        {%- comment -%} Mobile: Compact filter + sort buttons {%- endcomment -%}
+        <div class="sl-mobile-controls">
+          <button type="button" class="sl-mobile-filter-btn" data-mobile-filter-toggle>
+            {{ section.settings.collection_filter_label }}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </button>
+          {%- if section.settings.enable_sorting -%}
             <button type="button" class="sl-mobile-sort-btn" data-mobile-sort-toggle>
               Sort
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
             </button>
-          </div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Mobile: Category drawer (hidden by default) {%- endcomment -%}
+        <div class="sl-mobile-tag-drawer" data-mobile-tag-drawer>
+          {%- for linked_col in collections -%}
+            {%- assign is_excluded = false -%}
+            {%- if section.settings.collection_filter_exclude != blank -%}
+              {%- assign excluded_handles = section.settings.collection_filter_exclude | split: ',' -%}
+              {%- for excluded in excluded_handles -%}
+                {%- assign clean_excluded = excluded | strip | handleize -%}
+                {%- if linked_col.handle == clean_excluded -%}
+                  {%- assign is_excluded = true -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            {%- unless is_excluded -%}
+              <a href="{{ linked_col.url }}{{ col_sort_param }}"
+                 class="sl-tag-btn {% if collection.handle == linked_col.handle %}sl-tag-btn--active{% endif %}">
+                {{ linked_col.title }}
+              </a>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+
+        {%- comment -%} Mobile: Sort drawer (hidden by default) {%- endcomment -%}
+        {%- if section.settings.enable_sorting -%}
           <div class="sl-mobile-sort-drawer" data-mobile-sort-drawer>
             {%- assign sort_options = 'manual:Featured,best-selling:Best Selling,title-ascending:A–Z,title-descending:Z–A,price-ascending:Price (Low to High),price-descending:Price (High to Low),created-ascending:Oldest,created-descending:Newest' | split: ',' -%}
             {%- for opt in sort_options -%}
