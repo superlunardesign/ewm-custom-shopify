@@ -1,1 +1,125 @@
-{"sections":{"banner":{"type":"main-collection-banner","custom_css":[".sl-banner-content {margin: auto;}"],"settings":{"show_breadcrumbs":true,"breadcrumb_bg_color":"#f5f5f5","breadcrumb_text_color":"#333333","breadcrumb_font_size":13,"banner_height":250,"banner_height_mobile":200,"background_color":"#1a1a1a","image_opacity":40,"show_title":true,"show_description":true,"text_color":"#ffffff","content_position":"center","text_max_width":1100,"title_size":36,"title_size_mobile":28,"title_weight":"400","description_size":15,"description_size_mobile":14,"use_page_width":false,"padding_top":0,"padding_bottom":0,"padding_horizontal":80,"padding_top_mobile":24,"padding_bottom_mobile":24,"padding_horizontal_mobile":20}},"product-grid":{"type":"main-collection-product-grid","settings":{"products_per_page":16,"compact_layout_collections":"","columns_desktop":4,"columns_mobile":2,"grid_gap":20,"grid_gap_mobile":15,"card_background":"#f5f5f5","card_border_radius":8,"image_ratio":"1\/1","image_fit":"cover","image_background":"#f5f5f5","show_star_rating":true,"star_rating_color":"#8c9b6d","title_font_size":16,"title_color":"#1a1a1a","price_font_size":15,"price_color":"#1a1a1a","compare_price_color":"#999999","sale_text":"Sale","sale_badge_color":"#8c9b6d","soldout_text":"Sold Out","soldout_badge_color":"#666666","badge_tags":"ACNE SAFE","tag_badge_color":"#816197","show_variants":true,"max_visible_variants":3,"variant_area_min_height":0,"swatch_size":24,"swatch_selected_border":"#ffffff","variant_background":"#ffffff","variant_text_color":"#1a1a1a","variant_border_color":"#3a3a3a","variant_border_width":1,"variant_border_radius":16,"variant_hover_border":"#555555","variant_selected_background":"#8c9b6d","variant_selected_text":"#ffffff","variant_selected_border":"#4a4a4a","show_add_to_cart":true,"add_to_cart_text":"Add to Cart","soldout_button_text":"Sold Out","atc_button_background":"#8c9b6d","atc_button_text":"#ffffff","atc_button_border_color":"#ffffff","atc_button_border_width":0,"show_subscribe":true,"subscribe_text":"Subscribe & Save","subscribe_exclude_collections":"","subscribe_button_background":"#ffffff","subscribe_button_text":"#ffffff","subscribe_button_border_color":"#8c9b6d","subscribe_button_border_width":0,"button_border_radius":0,"promo_background":"#722f37","promo_text_color":"#ffffff","promo_button_background":"#ffffff","promo_button_text":"#722f37","enable_tag_filtering":true,"filter_label":"Filter For Your Skin","filter_tags":"Acne Safe, Anti-Aging, SPF, Sensitive Skin, Body Care","filter_tag_border_color":"#999999","filter_tag_text_color":"#333333","filter_tag_active_bg":"#8c9b6d","filter_tag_active_text":"#ffffff","enable_sorting":true,"pagination_active_color":"#8c9b6d","enable_filtering":true,"collapse_on_larger_devices":false,"padding_top":20,"padding_bottom":0}}},"order":["banner","product-grid"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "custom_css": [
+        ".sl-banner-content {margin: auto;}"
+      ],
+      "settings": {
+        "show_breadcrumbs": true,
+        "breadcrumb_bg_color": "#f5f5f5",
+        "breadcrumb_text_color": "#333333",
+        "breadcrumb_font_size": 13,
+        "banner_height": 250,
+        "banner_height_mobile": 200,
+        "background_color": "#1a1a1a",
+        "image_opacity": 40,
+        "show_title": true,
+        "show_description": true,
+        "text_color": "#ffffff",
+        "content_position": "center",
+        "text_max_width": 1100,
+        "title_size": 36,
+        "title_size_mobile": 28,
+        "title_weight": "400",
+        "description_size": 15,
+        "description_size_mobile": 14,
+        "use_page_width": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 80,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24,
+        "padding_horizontal_mobile": 20
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "compact_layout_collections": "",
+        "columns_desktop": 4,
+        "columns_mobile": 2,
+        "grid_gap": 20,
+        "grid_gap_mobile": 15,
+        "card_background": "#f5f5f5",
+        "card_border_radius": 8,
+        "image_ratio": "1/1",
+        "image_fit": "cover",
+        "image_background": "#f5f5f5",
+        "show_star_rating": true,
+        "star_rating_color": "#8c9b6d",
+        "title_font_size": 16,
+        "title_color": "#1a1a1a",
+        "price_font_size": 15,
+        "price_color": "#1a1a1a",
+        "compare_price_color": "#999999",
+        "sale_text": "Sale",
+        "sale_badge_color": "#8c9b6d",
+        "soldout_text": "Sold Out",
+        "soldout_badge_color": "#666666",
+        "badge_tags": "ACNE SAFE",
+        "tag_badge_color": "#816197",
+        "show_variants": true,
+        "max_visible_variants": 3,
+        "variant_area_min_height": 0,
+        "swatch_size": 24,
+        "swatch_selected_border": "#ffffff",
+        "variant_background": "#ffffff",
+        "variant_text_color": "#1a1a1a",
+        "variant_border_color": "#3a3a3a",
+        "variant_border_width": 1,
+        "variant_border_radius": 16,
+        "variant_hover_border": "#555555",
+        "variant_selected_background": "#8c9b6d",
+        "variant_selected_text": "#ffffff",
+        "variant_selected_border": "#4a4a4a",
+        "show_add_to_cart": true,
+        "add_to_cart_text": "Add to Cart",
+        "soldout_button_text": "Sold Out",
+        "atc_button_background": "#8c9b6d",
+        "atc_button_text": "#ffffff",
+        "atc_button_border_color": "#ffffff",
+        "atc_button_border_width": 0,
+        "show_subscribe": true,
+        "subscribe_text": "Subscribe & Save",
+        "subscribe_exclude_collections": "",
+        "subscribe_button_background": "#ffffff",
+        "subscribe_button_text": "#ffffff",
+        "subscribe_button_border_color": "#8c9b6d",
+        "subscribe_button_border_width": 0,
+        "button_border_radius": 0,
+        "promo_background": "#722f37",
+        "promo_text_color": "#ffffff",
+        "promo_button_background": "#ffffff",
+        "promo_button_text": "#722f37",
+        "enable_tag_filtering": false,
+        "filter_label": "Filter For Your Skin",
+        "filter_tags": "Acne Safe, Anti-Aging, SPF, Sensitive Skin, Body Care",
+        "filter_tag_border_color": "#999999",
+        "filter_tag_text_color": "#333333",
+        "filter_tag_active_bg": "#8c9b6d",
+        "filter_tag_active_text": "#ffffff",
+        "enable_sorting": true,
+        "pagination_active_color": "#8c9b6d",
+        "enable_filtering": true,
+        "collapse_on_larger_devices": false,
+        "padding_top": 20,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid"
+  ]
+}
