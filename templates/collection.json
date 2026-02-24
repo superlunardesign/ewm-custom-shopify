@@ -46,6 +46,7 @@
       "type": "main-collection-product-grid",
       "settings": {
         "products_per_page": 16,
+        "pagination_type": "paginated",
         "compact_layout_collections": "{{ collection.title }}",
         "columns_desktop": 4,
         "columns_tablet": 3,
@@ -114,7 +115,7 @@
         "pagination_active_color": "#8c9b6d",
         "enable_collection_filtering": true,
         "collection_filter_label": "Categories",
-        "collection_filter_handles": "acne safe skincare, body care, candles",
+        "collection_filter_exclude": "frontpage",
         "show_out_of_stock": true,
         "padding_top": 20,
         "padding_bottom": 0
