@@ -50,8 +50,14 @@
 
   @media screen and (min-width: 750px) {
     #SLCollection-{{ section.id }} .sl-product-grid {
-      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+      grid-template-columns: repeat({{ section.settings.columns_tablet }}, 1fr);
       gap: {{ section.settings.grid_gap }}px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #SLCollection-{{ section.id }} .sl-product-grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
     }
   }
 
@@ -263,7 +269,12 @@
     color: {{ section.settings.star_rating_color }};
   }
 
+  /* Hide default "X review(s)" text, show "(X)" from data attribute instead */
   #SLCollection-{{ section.id }} .sl-star-rating .jdgm-prev-badge__text {
+    display: none !important;
+  }
+  #SLCollection-{{ section.id }} .sl-star-rating .jdgm-prev-badge::after {
+    content: "(" attr(data-number-of-reviews) ")";
     color: {{ section.settings.title_color }};
     font-size: 12px;
     opacity: 0.8;
@@ -835,7 +846,7 @@ min-height:40px;
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding" id="SLCollection-{{ section.id }}">
-  {%- if section.settings.enable_tag_filtering or section.settings.enable_sorting -%}
+  {%- if section.settings.enable_tag_filtering -%}
     {%- assign current_sort_by = collection.sort_by | default: collection.default_sort_by -%}
     {%- capture sort_param -%}{%- if current_sort_by != blank and current_sort_by != collection.default_sort_by -%}?sort_by={{ current_sort_by }}{%- endif -%}{%- endcapture -%}
     {%- assign sort_param = sort_param | strip -%}
@@ -951,7 +962,7 @@ min-height:40px;
         {%- endfor -%}
       </div>
     </div>
-  {%- elsif section.settings.enable_filtering -%}
+  {%- elsif section.settings.enable_filtering or section.settings.enable_sorting -%}
     {{ 'component-facets.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
     <div class="page-width" id="main-collection-filters" data-id="{{ section.id }}">
@@ -1676,6 +1687,15 @@ min-height:40px;
       "step": 1,
       "default": 4,
       "label": "Columns (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "label": "Columns (tablet)"
     },
     {
       "type": "range",
