@@ -129,43 +129,37 @@
           "padding_vertical": 12
         }
       },
-      "footer": {
-        "type": "footer",
-        "blocks": {
-          "footer-0": {
-            "type": "link_list",
-            "settings": {
-              "heading": "Quick links",
-              "menu": "footer",
-              "alignment": "center",
-              "list_style": "vertical"
-            }
-          },
-          "footer-1": {
-            "type": "text",
-            "settings": {
-              "heading": "Heading",
-              "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>",
-              "subtext_duplicate": "<p>Share contact information, store details, and brand content with your customers.</p>",
-              "alignment": "center"
-            }
-          }
-        },
-        "block_order": [
-          "footer-0",
-          "footer-1"
-        ],
+      "sl-custom-footer": {
+        "type": "sl-custom-footer",
         "settings": {
-          "page_full_width": false,
-          "page_full_width_spacing": false,
-          "color_scheme": "background-1",
-          "show_social": true,
+          "bg_color": "#8c9b6d",
+          "text_color": "#ffffff",
+          "heading_color": "#ffffff",
+          "heading_border_color": "#c5c8a0",
+          "bottom_bar_bg_color": "#7a8960",
+          "logo_width": 120,
+          "newsletter_heading": "Sign up for sales & specials",
+          "newsletter_placeholder": "Email address",
+          "menu_1_heading": "SPA SERVICES",
+          "menu_1": "footer-spa-services",
+          "menu_2_heading": "SKINCARE SHOP",
+          "menu_2": "footer-skincare-shop",
+          "menu_3_heading": "LEGAL",
+          "menu_3": "footer-legal",
+          "contact_heading": "CONTACT",
+          "contact_link_text": "Contact Us",
+          "address": "5405 W Elm St. Suite M\nMcHenry, IL 60050",
+          "text_phone_label": "Text us:",
+          "text_phone": "815-332-0918",
+          "text_phone_note": "We're often with clients and can't answer calls, but we'll reply to your text as soon as we can.",
+          "call_phone_label": "Call or leave voicemail:",
+          "call_phone": "815-332-0918",
           "payment_enable": true,
-          "footer_default": false,
-          "border_right": true,
+          "credit_text": "Brand & Site",
+          "credit_link_text": "by Superlunar Design Co.",
           "margin_top": 0,
-          "padding_top": 36,
-          "padding_bottom": 36
+          "padding_top": 48,
+          "padding_bottom": 48
         }
       },
       "suggested-products": {

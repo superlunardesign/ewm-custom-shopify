@@ -735,10 +735,35 @@ min-height:40px;
       gap: 8px;
       padding: 12px 0;
       width: 100%;
+      position: relative;
     }
 
     #SLCollection-{{ section.id }} .sl-mobile-tag-drawer.sl-drawer-open {
       display: flex;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-drawer-close {
+      position: absolute;
+      top: 8px;
+      right: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: {{ section.settings.title_color }};
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.6;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-drawer-close:hover {
+      opacity: 1;
+    }
+
+    #SLCollection-{{ section.id }} .sl-mobile-drawer-close svg {
+      width: 18px;
+      height: 18px;
     }
 
     #SLCollection-{{ section.id }} .sl-mobile-sort-drawer {
@@ -999,6 +1024,9 @@ min-height:40px;
         {%- comment -%} Mobile: Tag drawer (hidden by default) {%- endcomment -%}
         {%- if section.settings.enable_tag_filtering -%}
           <div class="sl-mobile-tag-drawer" data-mobile-tag-drawer>
+            <button type="button" class="sl-mobile-drawer-close" data-mobile-drawer-close aria-label="Close filters">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
             {%- for tag in filter_tags -%}
               {%- assign clean_tag = tag | strip -%}
               {%- if clean_tag != blank -%}
@@ -1107,6 +1135,9 @@ min-height:40px;
 
         {%- comment -%} Mobile: Category drawer (hidden by default) {%- endcomment -%}
         <div class="sl-mobile-tag-drawer" data-mobile-tag-drawer>
+          <button type="button" class="sl-mobile-drawer-close" data-mobile-drawer-close aria-label="Close filters">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
           {%- for linked_col in collections -%}
             {%- assign is_excluded = false -%}
             {%- if section.settings.collection_filter_exclude != blank -%}
@@ -1663,6 +1694,13 @@ min-height:40px;
         if (tagDrawer) tagDrawer.classList.remove('sl-drawer-open');
       });
     }
+
+    sectionEl.querySelectorAll('[data-mobile-drawer-close]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var drawer = this.closest('.sl-mobile-tag-drawer, .sl-mobile-sort-drawer');
+        if (drawer) drawer.classList.remove('sl-drawer-open');
+      });
+    });
 
     sectionEl.querySelectorAll('.sl-mobile-sort-option').forEach(function(link) {
       link.addEventListener('click', function(e) {
