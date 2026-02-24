@@ -844,6 +844,22 @@ min-height:40px;
     justify-content: center;
   }
 
+  /* Infinite Scroll */
+  #SLCollection-{{ section.id }} .sl-infinite-sentinel {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  #SLCollection-{{ section.id }} .sl-infinite-spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: {{ section.settings.pagination_active_color }};
+    border-radius: 50%;
+    animation: sl-spin 0.6s linear infinite;
+  }
+
   /* Hide out-of-stock toggle */
   #SLCollection-{{ section.id }} .sl-oos-toggle {
     display: flex;
@@ -1492,29 +1508,39 @@ min-height:40px;
           </ul>
 
           {%- if paginate.pages > 1 -%}
-            <nav class="sl-pagination" aria-label="Pagination">
-              {%- if paginate.previous -%}
-                <a href="{{ paginate.previous.url }}" class="sl-page-arrow" aria-label="Previous page">&lsaquo;</a>
-              {%- else -%}
-                <span class="sl-page-arrow sl-page-arrow--disabled" aria-hidden="true">&lsaquo;</span>
-              {%- endif -%}
-
-              {%- for part in paginate.parts -%}
-                {%- if part.is_link -%}
-                  <a href="{{ part.url }}" class="sl-page-num">{{ part.title }}</a>
-                {%- elsif part.title == '&hellip;' -%}
-                  <span class="sl-page-ellipsis">&hellip;</span>
-                {%- else -%}
-                  <span class="sl-page-current" aria-current="page">{{ part.title }}</span>
-                {%- endif -%}
-              {%- endfor -%}
-
+            {%- if section.settings.pagination_type == 'infinite' -%}
+              {%- comment -%} Infinite scroll sentinel {%- endcomment -%}
               {%- if paginate.next -%}
-                <a href="{{ paginate.next.url }}" class="sl-page-arrow" aria-label="Next page">&rsaquo;</a>
-              {%- else -%}
-                <span class="sl-page-arrow sl-page-arrow--disabled" aria-hidden="true">&rsaquo;</span>
+                <div class="sl-infinite-sentinel" data-next-url="{{ paginate.next.url }}">
+                  <div class="sl-infinite-spinner"></div>
+                </div>
               {%- endif -%}
-            </nav>
+            {%- else -%}
+              {%- comment -%} Standard pagination {%- endcomment -%}
+              <nav class="sl-pagination" aria-label="Pagination">
+                {%- if paginate.previous -%}
+                  <a href="{{ paginate.previous.url }}" class="sl-page-arrow" aria-label="Previous page">&lsaquo;</a>
+                {%- else -%}
+                  <span class="sl-page-arrow sl-page-arrow--disabled" aria-hidden="true">&lsaquo;</span>
+                {%- endif -%}
+
+                {%- for part in paginate.parts -%}
+                  {%- if part.is_link -%}
+                    <a href="{{ part.url }}" class="sl-page-num">{{ part.title }}</a>
+                  {%- elsif part.title == '&hellip;' -%}
+                    <span class="sl-page-ellipsis">&hellip;</span>
+                  {%- else -%}
+                    <span class="sl-page-current" aria-current="page">{{ part.title }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- if paginate.next -%}
+                  <a href="{{ paginate.next.url }}" class="sl-page-arrow" aria-label="Next page">&rsaquo;</a>
+                {%- else -%}
+                  <span class="sl-page-arrow sl-page-arrow--disabled" aria-hidden="true">&rsaquo;</span>
+                {%- endif -%}
+              </nav>
+            {%- endif -%}
           {%- endif -%}
         </div>
       {%- endif -%}
@@ -1826,6 +1852,85 @@ min-height:40px;
     bindVariantSelection(sectionEl);
     bindAddToCart(sectionEl);
     initOosToggle(sectionEl);
+    initInfiniteScroll(sectionEl);
+  }
+
+  /* ===== Infinite Scroll ===== */
+  var infiniteScrollObserver = null;
+  var infiniteScrollLoading = false;
+
+  function initInfiniteScroll(sectionEl) {
+    if (infiniteScrollObserver) {
+      infiniteScrollObserver.disconnect();
+      infiniteScrollObserver = null;
+    }
+
+    var sentinel = sectionEl.querySelector('.sl-infinite-sentinel');
+    if (!sentinel) return;
+
+    infiniteScrollObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !infiniteScrollLoading) {
+          loadNextPage(sectionEl, sentinel);
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    infiniteScrollObserver.observe(sentinel);
+  }
+
+  function loadNextPage(sectionEl, sentinel) {
+    var nextUrl = sentinel.getAttribute('data-next-url');
+    if (!nextUrl) return;
+
+    infiniteScrollLoading = true;
+
+    var fetchUrl = new URL(nextUrl, window.location.origin);
+    fetchUrl.searchParams.set('section_id', sectionId);
+
+    fetch(fetchUrl.toString())
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, 'text/html');
+        var newSection = doc.getElementById('SLCollection-' + sectionId);
+        if (!newSection) return;
+
+        var newGrid = newSection.querySelector('#product-grid');
+        var currentGrid = sectionEl.querySelector('#product-grid');
+        if (newGrid && currentGrid) {
+          var newItems = newGrid.querySelectorAll('.grid__item');
+          newItems.forEach(function(item) {
+            currentGrid.appendChild(item);
+          });
+        }
+
+        var newSentinel = newSection.querySelector('.sl-infinite-sentinel');
+        if (newSentinel) {
+          sentinel.setAttribute('data-next-url', newSentinel.getAttribute('data-next-url'));
+        } else {
+          sentinel.remove();
+          if (infiniteScrollObserver) {
+            infiniteScrollObserver.disconnect();
+            infiniteScrollObserver = null;
+          }
+        }
+
+        initVariants(sectionEl);
+        bindVariantSelection(sectionEl);
+        bindAddToCart(sectionEl);
+        initOosToggle(sectionEl);
+
+        var cleanUrl = new URL(nextUrl, window.location.origin);
+        cleanUrl.searchParams.delete('section_id');
+        history.replaceState(null, '', cleanUrl.toString());
+
+        infiniteScrollLoading = false;
+      })
+      .catch(function(err) {
+        console.error('Infinite scroll error:', err);
+        infiniteScrollLoading = false;
+      });
   }
 
   /* ===== Browser Back/Forward ===== */
@@ -1872,6 +1977,17 @@ min-height:40px;
       "step": 4,
       "default": 16,
       "label": "Products per page"
+    },
+    {
+      "type": "select",
+      "id": "pagination_type",
+      "label": "Pagination type",
+      "options": [
+        { "value": "paginated", "label": "Numbered pages" },
+        { "value": "infinite", "label": "Infinite scroll" }
+      ],
+      "default": "paginated",
+      "info": "Numbered pages shows page numbers. Infinite scroll auto-loads more products as you scroll down."
     },
     {
       "type": "text",
