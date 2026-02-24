@@ -1,108 +1,191 @@
-{% if section.settings.display_back_in_stock %}
-<div class="notify-block dT_ProdNotify" data-section-type="notify"  id="notify-block-{{section.id}}" {% if product.variants[0].available %} style="display:none" {% endif %}>
-    <div id="sold-out">
-    {% form 'contact' %}
-    {% if form.posted_successfully? %}
-    <p class="accent-text"> {{ section.settings.notify_text }}</p>
-    {% else %}
-      
-    <a id="notify-me" href="#">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-       <circle class="hand-tap-2" cx="89.43" cy="69.55" r="29.61"/>
-       <circle class="hand-tap-1" cx="89.43" cy="69.55" r="19.46"/>
-       <path class="hand-double" d="M139.93,107.76l-41.12-6.93V70.28A9.25,9.25,0,0,0,89.56,61h0a9.25,9.25,0,0,0-9.25,9.25v57.36L71,116.85c-3.61-3.61-8.44-3.89-13.08,0,0,0-7.24,5.84-3.83,9.25l34,34h42.63a9.25,9.25,0,0,0,9.07-7.43l6.82-34.09A9.28,9.28,0,0,0,139.93,107.76Z"/>
-     </svg>
-      <strong>{{ 'products.notify.text1' | t }}</strong></a>
-      <p class="notify-text">{{ 'products.notify.text2' | t }} {{ product.title }} {{ 'products.notify.text3' | t }}.</p>
-    {% endif %}
-    {% if form.errors %}
-    <div class="error feedback accent-text">
-      <p>{{ section.settings.notify_error }}</p>
-    </div>
-    {% endif %}
-    {% unless form.posted_successfully? %}
-    <div id="notify-me-wrapper" class="clearfix" style="display:none">
-      {% if customer %}
-      <input type="hidden" name="contact[email]" value="{{ customer.email }}" />
-      {% else %}
-      <input required="required" type="email" name="contact[email]" placeholder="your@email.com" class="styled-input{% if form.errors contains 'email' %} error{% endif %}" value="{{ contact.fields.email }}" />
-      {% endif %}
-      <input type="hidden" name="contact[body]" value="Please notify me when {{ product.title | escape }} becomes available." />
-      <input class="dt-sc-btn styled-submit" type="submit" value="Send" />
-    </div>
-    {% endunless %}
-    {% endform %}
-  </div>
+{%- comment -%}
+  SL Notify Me form — back-in-stock notification.
+  Shows when the product (first variant) is unavailable.
+  - Logged-in customers: single "Notify Me" button (email auto-filled).
+  - Guests: first name + email fields + submit.
+  - ?notify=true in URL auto-scrolls to this form.
+{%- endcomment -%}
+
+{%- unless product.available -%}
+<div class="sl-notify-form" id="sl-notify-form">
+  {% form 'contact' %}
+    {%- if form.posted_successfully? -%}
+      <div class="sl-notify-success">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p>We'll notify you when this product is back in stock!</p>
+      </div>
+    {%- else -%}
+      <div class="sl-notify-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span>Notify Me When Available</span>
+      </div>
+
+      {%- if form.errors -%}
+        <div class="sl-notify-error">
+          <p>Something went wrong. Please try again.</p>
+        </div>
+      {%- endif -%}
+
+      <input type="hidden" name="contact[body]" value="Please notify me when {{ product.title | escape }} ({{ product.handle }}) becomes available.">
+      <input type="hidden" name="contact[tags]" value="back-in-stock, {{ product.handle }}">
+
+      {%- if customer -%}
+        {%- comment -%} Logged-in: auto-fill everything, just show button {%- endcomment -%}
+        <input type="hidden" name="contact[first_name]" value="{{ customer.first_name }}">
+        <input type="hidden" name="contact[email]" value="{{ customer.email }}">
+        <button type="submit" class="sl-notify-submit sl-notify-submit--full">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Notify Me
+        </button>
+      {%- else -%}
+        {%- comment -%} Guest: show first name + email fields {%- endcomment -%}
+        <div class="sl-notify-fields">
+          <input
+            type="text"
+            name="contact[first_name]"
+            placeholder="First name"
+            class="sl-notify-input"
+            required
+          >
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="Email address"
+            class="sl-notify-input{% if form.errors contains 'email' %} sl-notify-input--error{% endif %}"
+            value="{{ contact.fields.email }}"
+            required
+          >
+        </div>
+        <button type="submit" class="sl-notify-submit">
+          Notify Me
+        </button>
+      {%- endif -%}
+    {%- endif -%}
+  {% endform %}
 </div>
-{% endif %}
+{%- endunless -%}
+
 <style>
-  .hand-tap-2,
-  .hand-tap-1{
-    fill: transparent;
-	stroke: rgb(var(--color-link));
-	stroke-width: 3px;
-	stroke-linecap: round;
-	stroke-linejoin: round;
+  .sl-notify-form {
+    margin-top: 16px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fafafa;
   }
-  .hand-tap-2{
-    opacity: .25;
-  }
-  .hand-tap-1{
-    opacity: .5;
-  }
-  .hand-double{
-	fill: #fff;
-	stroke: rgb(var(--color-link));
-	stroke-width: 3px;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-}
-.hand-double {
-	animation: tap-double 1.25s ease-out backwards;
-	animation-iteration-count:infinite;
-}
 
-.hand-tap-2,
-.hand-tap-1 {
-	animation: tap-circle 1.25s ease-out backwards;
-	animation-iteration-count:infinite;
-}  
-  .hand-tap-2 {
-	animation-delay: 0.2s;
-}
+  .sl-notify-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading-family);
+    font-size: 16px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 14px;
+  }
 
-@keyframes tap-double {
-	0% {
-		transform: rotateX(0deg);
-	}
-	10% {
-		transform: rotateX(12.5deg);
-	}
-	25% {
-		transform: rotateX(25deg);
-	}
-	35% {
-		transform: rotateX(10deg);
-	}
-	50% {
-		transform: rotateX(25deg);
-	}
-}
-  @keyframes tap-circle {
-	0% {
-		transform: scale(0);
-		opacity: 0;
-	}
-	75% {
-		transform: scale(1.05);
-		opacity: .6;
-	}
-	80% {
-		transform: scale(1);
-		opacity: .5;
-	}
-}
-  #notify-me svg{display:inline-block;width:40px;height:40px;}
-  #notify-me{color:rgb(var(--color-link)); display: flex;align-items: center;}
-  #sold-out p.notify-text {margin: 0px;}
+  .sl-notify-header svg {
+    flex-shrink: 0;
+  }
+
+  .sl-notify-success {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2e7d32;
+    font-size: 15px;
+  }
+  .sl-notify-success p { margin: 0; }
+  .sl-notify-success svg { flex-shrink: 0; }
+
+  .sl-notify-error {
+    color: #c62828;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .sl-notify-error p { margin: 0; }
+
+  .sl-notify-fields {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 480px) {
+    .sl-notify-fields {
+      flex-direction: column;
+    }
+  }
+
+  .sl-notify-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: var(--font-body-family);
+    background: #fff;
+    color: #1a1a1a;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .sl-notify-input:focus {
+    border-color: #8C9B6D;
+  }
+  .sl-notify-input--error {
+    border-color: #c62828;
+  }
+
+  .sl-notify-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 12px 20px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: var(--font-body-family);
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .sl-notify-submit:hover {
+    opacity: 0.85;
+  }
+  .sl-notify-submit--full {
+    margin-top: 0;
+  }
+
+  /* Auto-scroll highlight when coming from collection bell icon */
+  .sl-notify-form--highlight {
+    animation: sl-notify-pulse 1.5s ease-out;
+  }
+  @keyframes sl-notify-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(140, 155, 109, 0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(140, 155, 109, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(140, 155, 109, 0); }
+  }
 </style>
+
+<script>
+  (function() {
+    /* Auto-scroll when ?notify=true is in URL */
+    if (window.location.search.indexOf('notify=true') !== -1) {
+      var notifyForm = document.getElementById('sl-notify-form');
+      if (notifyForm) {
+        setTimeout(function() {
+          notifyForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          notifyForm.classList.add('sl-notify-form--highlight');
+          /* Focus first input for guests */
+          var firstInput = notifyForm.querySelector('.sl-notify-input');
+          if (firstInput) firstInput.focus();
+        }, 500);
+      }
+    }
+  })();
+</script>

@@ -843,7 +843,73 @@ min-height:40px;
     align-items: center;
     justify-content: center;
   }
+
+  /* Hide out-of-stock toggle */
+  #SLCollection-{{ section.id }} .sl-oos-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-family: var(--font-body-family);
+    color: {{ section.settings.filter_tag_text_color }};
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  #SLCollection-{{ section.id }} .sl-oos-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: {{ section.settings.filter_tag_active_bg }};
+    cursor: pointer;
+    margin: 0;
+  }
+  #SLCollection-{{ section.id }} .sl-oos-toggle label {
+    cursor: pointer;
+    user-select: none;
+  }
+  #SLCollection-{{ section.id }} .grid__item[data-oos="true"].sl-oos-hidden {
+    display: none !important;
+  }
+
+  /* Notify bell icon on collection cards */
+  #SLCollection-{{ section.id }} .sl-notify-bell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-decoration: none;
+    font-size: 12px;
+    font-family: var(--font-body-family);
+    color: {{ section.settings.atc_button_text }};
+    background: {{ section.settings.atc_button_background }};
+    border: {{ section.settings.atc_button_border_width }}px solid {{ section.settings.atc_button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    padding: 8px 16px;
+    width: 100%;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  #SLCollection-{{ section.id }} .sl-notify-bell:hover { opacity: 1; }
+  #SLCollection-{{ section.id }} .sl-notify-bell svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  #SLCollection-{{ section.id }} .sl-notify-bell--subscribed {
+    opacity: 1;
+  }
 {%- endstyle -%}
+
+{%- comment -%} Count out-of-stock products for frontend toggle {%- endcomment -%}
+{%- assign oos_count = 0 -%}
+{%- if section.settings.show_out_of_stock -%}
+  {%- for product in collection.products -%}
+    {%- unless product.available -%}
+      {%- assign oos_count = oos_count | plus: 1 -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endif -%}
 
 <div class="section-{{ section.id }}-padding" id="SLCollection-{{ section.id }}">
   {%- if section.settings.enable_tag_filtering -%}
@@ -878,6 +944,13 @@ min-height:40px;
                 {%- endif -%}
               {%- endfor -%}
             </div>
+          </div>
+        {%- endif -%}
+
+        {%- if oos_count > 0 -%}
+          <div class="sl-oos-toggle">
+            <input type="checkbox" id="sl-oos-toggle-{{ section.id }}" data-oos-toggle>
+            <label for="sl-oos-toggle-{{ section.id }}">Hide out of stock</label>
           </div>
         {%- endif -%}
 
@@ -962,11 +1035,76 @@ min-height:40px;
         {%- endfor -%}
       </div>
     </div>
-  {%- elsif section.settings.enable_filtering or section.settings.enable_sorting -%}
-    {{ 'component-facets.css' | asset_url | stylesheet_tag }}
-    <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
-    <div class="page-width" id="main-collection-filters" data-id="{{ section.id }}">
-      {% render 'facets', results: collection, enable_filtering: section.settings.enable_filtering, enable_sorting: section.settings.enable_sorting, collapse_on_larger_devices: section.settings.collapse_on_larger_devices %}
+  {%- elsif section.settings.enable_collection_filtering and section.settings.collection_filter_handles != blank -%}
+    {%- assign current_sort_by = collection.sort_by | default: collection.default_sort_by -%}
+    {%- capture col_sort_param -%}{%- if current_sort_by != blank and current_sort_by != collection.default_sort_by -%}?sort_by={{ current_sort_by }}{%- endif -%}{%- endcapture -%}
+    {%- assign col_sort_param = col_sort_param | strip -%}
+    <div class="page-width">
+      <div class="sl-filter-sort-bar">
+        <div class="sl-filter-section">
+          <div class="sl-filter-label">{{ section.settings.collection_filter_label }}</div>
+          <div class="sl-tag-filters">
+            {%- assign col_handles = section.settings.collection_filter_handles | split: ',' -%}
+            {%- for handle_raw in col_handles -%}
+              {%- assign col_handle = handle_raw | strip | handleize -%}
+              {%- if col_handle != blank -%}
+                {%- assign linked_col = collections[col_handle] -%}
+                {%- if linked_col != blank -%}
+                  <a href="{{ linked_col.url }}{{ col_sort_param }}"
+                     class="sl-tag-btn {% if collection.handle == col_handle %}sl-tag-btn--active{% endif %}">
+                    {{ linked_col.title }}
+                  </a>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+
+        {%- if section.settings.enable_sorting -%}
+          <div class="sl-sort-wrapper sl-sort-desktop">
+            <label for="sl-col-sort-{{ section.id }}" class="sl-sort-label">Sort:</label>
+            <select id="sl-col-sort-{{ section.id }}" class="sl-sort-select" data-sort-select>
+              <option value="manual" {% if current_sort_by == 'manual' %}selected{% endif %}>Featured</option>
+              <option value="best-selling" {% if current_sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+              <option value="title-ascending" {% if current_sort_by == 'title-ascending' %}selected{% endif %}>A–Z</option>
+              <option value="title-descending" {% if current_sort_by == 'title-descending' %}selected{% endif %}>Z–A</option>
+              <option value="price-ascending" {% if current_sort_by == 'price-ascending' %}selected{% endif %}>Price (Low to High)</option>
+              <option value="price-descending" {% if current_sort_by == 'price-descending' %}selected{% endif %}>Price (High to Low)</option>
+              <option value="created-ascending" {% if current_sort_by == 'created-ascending' %}selected{% endif %}>Oldest</option>
+              <option value="created-descending" {% if current_sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+            </select>
+          </div>
+        {%- endif -%}
+
+        {%- if oos_count > 0 -%}
+          <div class="sl-oos-toggle">
+            <input type="checkbox" id="sl-oos-toggle-col-{{ section.id }}" data-oos-toggle>
+            <label for="sl-oos-toggle-col-{{ section.id }}">Hide out of stock</label>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Mobile: sort button {%- endcomment -%}
+        {%- if section.settings.enable_sorting -%}
+          <div class="sl-mobile-controls">
+            <button type="button" class="sl-mobile-sort-btn" data-mobile-sort-toggle>
+              Sort
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </button>
+          </div>
+          <div class="sl-mobile-sort-drawer" data-mobile-sort-drawer>
+            {%- assign sort_options = 'manual:Featured,best-selling:Best Selling,title-ascending:A–Z,title-descending:Z–A,price-ascending:Price (Low to High),price-descending:Price (High to Low),created-ascending:Oldest,created-descending:Newest' | split: ',' -%}
+            {%- for opt in sort_options -%}
+              {%- assign opt_parts = opt | split: ':' -%}
+              {%- assign opt_value = opt_parts[0] -%}
+              {%- assign opt_label = opt_parts[1] -%}
+              <a href="{{ collection.url }}?sort_by={{ opt_value }}"
+                 class="sl-mobile-sort-option {% if current_sort_by == opt_value %}sl-sort-active{% endif %}">
+                {{ opt_label }}
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
     </div>
   {%- endif -%}
 
@@ -989,6 +1127,10 @@ min-height:40px;
           <ul class="sl-product-grid" id="product-grid" data-id="{{ section.id }}">
             {%- assign product_index = 0 -%}
             {%- for product in collection.products -%}
+              {%- comment -%} Skip out-of-stock when backend toggle is off {%- endcomment -%}
+              {%- unless section.settings.show_out_of_stock or product.available -%}
+                {%- continue -%}
+              {%- endunless -%}
               {%- assign product_index = product_index | plus: 1 -%}
 
               {%- comment -%} Check if a promo card should appear at this position {%- endcomment -%}
@@ -1027,7 +1169,7 @@ min-height:40px;
                 if section.settings.compact_layout_collections != blank
                   assign compact_handles = section.settings.compact_layout_collections | split: ','
                   for handle in compact_handles
-                    assign clean_handle = handle | strip | downcase
+                    assign clean_handle = handle | strip | handleize
                     if collection.handle == clean_handle
                       assign is_compact_layout = true
                       break
@@ -1036,7 +1178,7 @@ min-height:40px;
                 endif
               -%}
 
-              <li class="grid__item">
+              <li class="grid__item"{% unless product.available %} data-oos="true"{% endunless %}>
                 {%- if is_compact_layout -%}
                   {%- comment -%} COMPACT LAYOUT - Card contains only image/title/price {%- endcomment -%}
                   <div class="sl-card-wrapper" data-product-id="{{ product.id }}">
@@ -1096,9 +1238,10 @@ min-height:40px;
                             <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
                           </button>
                         {%- else -%}
-                          <button type="button" class="sl-add-to-cart-btn" disabled>
-                            {{ section.settings.soldout_button_text }} |
-                          </button>
+                          <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if customer %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                            Notify Me
+                          </a>
                         {%- endif -%}
                       {%- endif -%}
                     </div>
@@ -1272,9 +1415,10 @@ min-height:40px;
                               <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
                             </button>
                           {%- else -%}
-                            <button type="button" class="sl-add-to-cart-btn" disabled>
-                              {{ section.settings.soldout_button_text }}
-                            </button>
+                            <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if customer %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                              Notify Me
+                            </a>
                           {%- endif -%}
                         {%- endif -%}
 
@@ -1285,7 +1429,7 @@ min-height:40px;
                             if section.settings.subscribe_exclude_collections != blank
                               assign excluded_handles = section.settings.subscribe_exclude_collections | split: ','
                               for handle in excluded_handles
-                                assign clean_handle = handle | strip | downcase
+                                assign clean_handle = handle | strip | handleize
                                 if collection.handle == clean_handle
                                   assign show_subscribe_btn = false
                                   break
@@ -1649,8 +1793,25 @@ min-height:40px;
     renderSection(window.location.href, false);
   });
 
+  /* ===== Hide Out-of-Stock Toggle ===== */
+  function initOosToggle(sectionEl) {
+    var toggle = sectionEl.querySelector('[data-oos-toggle]');
+    if (!toggle) return;
+    toggle.addEventListener('change', function() {
+      var items = sectionEl.querySelectorAll('.grid__item[data-oos="true"]');
+      items.forEach(function(item) {
+        if (toggle.checked) {
+          item.classList.add('sl-oos-hidden');
+        } else {
+          item.classList.remove('sl-oos-hidden');
+        }
+      });
+    });
+  }
+
   /* ===== Initial Setup ===== */
   initAll();
+  initOosToggle(document.getElementById('SLCollection-{{ section.id }}'));
 })();
 </script>
 
@@ -2183,20 +2344,37 @@ min-height:40px;
     },
     {
       "type": "header",
-      "content": "Shopify Facets (Fallback)"
+      "content": "Collection Filter Pills"
     },
     {
       "type": "checkbox",
-      "id": "enable_filtering",
+      "id": "enable_collection_filtering",
       "default": false,
-      "label": "Enable Shopify facet filtering",
-      "info": "Used when tag filtering is disabled"
+      "label": "Enable collection link pills",
+      "info": "Shows collection links as pill buttons (used when tag filtering is disabled)"
+    },
+    {
+      "type": "text",
+      "id": "collection_filter_label",
+      "label": "Filter label",
+      "default": "Categories"
+    },
+    {
+      "type": "textarea",
+      "id": "collection_filter_handles",
+      "label": "Collection handles",
+      "info": "Comma-separated collection handles or titles. Active collection is highlighted automatically."
+    },
+    {
+      "type": "header",
+      "content": "Out of Stock"
     },
     {
       "type": "checkbox",
-      "id": "collapse_on_larger_devices",
-      "default": false,
-      "label": "Collapse facets on desktop"
+      "id": "show_out_of_stock",
+      "label": "Show out-of-stock products",
+      "info": "When enabled, sold-out products appear in the grid with a Notify Me bell icon. When disabled, they are hidden entirely.",
+      "default": true
     },
     {
       "type": "header",
