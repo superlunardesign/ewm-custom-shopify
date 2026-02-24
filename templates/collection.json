@@ -46,8 +46,9 @@
       "type": "main-collection-product-grid",
       "settings": {
         "products_per_page": 16,
-        "compact_layout_collections": "{{ collection.title }}",
+        "compact_layout_collections": "",
         "columns_desktop": 4,
+        "columns_tablet": 3,
         "columns_mobile": 2,
         "grid_gap": 20,
         "grid_gap_mobile": 15,
@@ -111,8 +112,10 @@
         "filter_tag_active_text": "#ffffff",
         "enable_sorting": true,
         "pagination_active_color": "#8c9b6d",
-        "enable_filtering": true,
-        "collapse_on_larger_devices": false,
+        "enable_collection_filtering": false,
+        "collection_filter_label": "Categories",
+        "collection_filter_handles": "",
+        "show_out_of_stock": true,
         "padding_top": 20,
         "padding_bottom": 0
       }
