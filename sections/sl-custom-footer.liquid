@@ -71,11 +71,16 @@
 
   @media screen and (max-width: 749px) {
     .sl-footer__brand {
-      align-items: center;
       text-align: center;
     }
 
+    .sl-footer__brand .sl-footer__logo,
+    .sl-footer__brand .sl-footer__newsletter-heading {
+      align-self: center;
+    }
+
     .sl-footer__newsletter-form {
+      align-self: stretch;
       width: 100%;
     }
   }
