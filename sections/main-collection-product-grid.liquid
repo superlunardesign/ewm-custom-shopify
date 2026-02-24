@@ -129,6 +129,15 @@
     margin-bottom: 0;
   }
 
+  /* Variants inside card (regular layout) */
+  #SLCollection-{{ section.id }} .sl-card-variants {
+    padding: 0 15px 0;
+  }
+
+  #SLCollection-{{ section.id }} .sl-card-variants .sl-variant-options {
+    margin-bottom: 0;
+  }
+
   /* AJAX Loading Overlay */
   #SLCollection-{{ section.id }} .sl-ajax-loading {
     position: relative;
@@ -1341,6 +1350,61 @@ min-height:40px;
                         {%- endif -%}
                       </div>
 
+                      {%- comment -%} Variants INSIDE card (when variants_outside_card is off) {%- endcomment -%}
+                      {%- unless section.settings.variants_outside_card -%}
+                        <div class="sl-card-variants">
+                        {%- if section.settings.show_variants and product.has_only_default_variant == false -%}
+                        <div class="sl-variant-options">
+                          <script type="application/json" class="sl-variant-data">
+                            {{ product.variants | json }}
+                          </script>
+
+                          {%- for option in product.options_with_values -%}
+                            {%- assign option_name_lower = option.name | downcase -%}
+                            {%- assign is_color = false -%}
+                            {%- if option_name_lower contains 'color' or option_name_lower contains 'colour' -%}
+                              {%- assign is_color = true -%}
+                            {%- endif -%}
+
+                            <div class="sl-option-group" data-option-type="{% if is_color %}color{% else %}size{% endif %}">
+                              <div class="sl-option-values">
+                                {%- assign max_visible = section.settings.max_visible_variants -%}
+                                {%- assign total_values = option.values.size -%}
+                                {%- assign remaining = total_values | minus: max_visible -%}
+
+                                {%- for value in option.values -%}
+                                  {%- if is_color -%}
+                                    <button type="button"
+                                            class="sl-color-swatch"
+                                            data-option-position="{{ option.position }}"
+                                            data-option-value="{{ value | escape }}"
+                                            style="background-color: {{ value | handleize }};"
+                                            title="{{ value }}"
+                                            {% if forloop.first %}data-selected="true"{% endif %}>
+                                    </button>
+                                  {%- else -%}
+                                    {%- if forloop.index <= max_visible -%}
+                                      <button type="button"
+                                              class="sl-size-btn"
+                                              data-option-position="{{ option.position }}"
+                                              data-option-value="{{ value | escape }}"
+                                              {% if forloop.first %}data-selected="true"{% endif %}>
+                                        {{ value }}
+                                      </button>
+                                    {%- endif -%}
+                                  {%- endif -%}
+                                {%- endfor -%}
+
+                                {%- if remaining > 0 and is_color == false -%}
+                                  <a href="{{ product.url }}" class="sl-more-options">+{{ remaining }} More</a>
+                                {%- endif -%}
+                              </div>
+                            </div>
+                          {%- endfor -%}
+                        </div>
+                        {%- endif -%}
+                        </div>
+                      {%- endunless -%}
                     </div>
 
                     {%- comment -%} Action Buttons (outside card) {%- endcomment -%}
@@ -1385,59 +1449,61 @@ min-height:40px;
                       {%- endif -%}
                     </div>
 
-                    {%- comment -%} Variants (outside card) {%- endcomment -%}
-                    <div class="sl-outside-variants">
-                      {%- if section.settings.show_variants and product.has_only_default_variant == false -%}
-                      <div class="sl-variant-options">
-                        <script type="application/json" class="sl-variant-data">
-                          {{ product.variants | json }}
-                        </script>
+                    {%- comment -%} Variants OUTSIDE card (when variants_outside_card is on) {%- endcomment -%}
+                    {%- if section.settings.variants_outside_card -%}
+                      <div class="sl-outside-variants">
+                        {%- if section.settings.show_variants and product.has_only_default_variant == false -%}
+                        <div class="sl-variant-options">
+                          <script type="application/json" class="sl-variant-data">
+                            {{ product.variants | json }}
+                          </script>
 
-                        {%- for option in product.options_with_values -%}
-                          {%- assign option_name_lower = option.name | downcase -%}
-                          {%- assign is_color = false -%}
-                          {%- if option_name_lower contains 'color' or option_name_lower contains 'colour' -%}
-                            {%- assign is_color = true -%}
-                          {%- endif -%}
+                          {%- for option in product.options_with_values -%}
+                            {%- assign option_name_lower = option.name | downcase -%}
+                            {%- assign is_color = false -%}
+                            {%- if option_name_lower contains 'color' or option_name_lower contains 'colour' -%}
+                              {%- assign is_color = true -%}
+                            {%- endif -%}
 
-                          <div class="sl-option-group" data-option-type="{% if is_color %}color{% else %}size{% endif %}">
-                            <div class="sl-option-values">
-                              {%- assign max_visible = section.settings.max_visible_variants -%}
-                              {%- assign total_values = option.values.size -%}
-                              {%- assign remaining = total_values | minus: max_visible -%}
+                            <div class="sl-option-group" data-option-type="{% if is_color %}color{% else %}size{% endif %}">
+                              <div class="sl-option-values">
+                                {%- assign max_visible = section.settings.max_visible_variants -%}
+                                {%- assign total_values = option.values.size -%}
+                                {%- assign remaining = total_values | minus: max_visible -%}
 
-                              {%- for value in option.values -%}
-                                {%- if is_color -%}
-                                  <button type="button"
-                                          class="sl-color-swatch"
-                                          data-option-position="{{ option.position }}"
-                                          data-option-value="{{ value | escape }}"
-                                          style="background-color: {{ value | handleize }};"
-                                          title="{{ value }}"
-                                          {% if forloop.first %}data-selected="true"{% endif %}>
-                                  </button>
-                                {%- else -%}
-                                  {%- if forloop.index <= max_visible -%}
+                                {%- for value in option.values -%}
+                                  {%- if is_color -%}
                                     <button type="button"
-                                            class="sl-size-btn"
+                                            class="sl-color-swatch"
                                             data-option-position="{{ option.position }}"
                                             data-option-value="{{ value | escape }}"
+                                            style="background-color: {{ value | handleize }};"
+                                            title="{{ value }}"
                                             {% if forloop.first %}data-selected="true"{% endif %}>
-                                      {{ value }}
                                     </button>
+                                  {%- else -%}
+                                    {%- if forloop.index <= max_visible -%}
+                                      <button type="button"
+                                              class="sl-size-btn"
+                                              data-option-position="{{ option.position }}"
+                                              data-option-value="{{ value | escape }}"
+                                              {% if forloop.first %}data-selected="true"{% endif %}>
+                                        {{ value }}
+                                      </button>
+                                    {%- endif -%}
                                   {%- endif -%}
-                                {%- endif -%}
-                              {%- endfor -%}
+                                {%- endfor -%}
 
-                              {%- if remaining > 0 and is_color == false -%}
-                                <a href="{{ product.url }}" class="sl-more-options">+{{ remaining }} More</a>
-                              {%- endif -%}
+                                {%- if remaining > 0 and is_color == false -%}
+                                  <a href="{{ product.url }}" class="sl-more-options">+{{ remaining }} More</a>
+                                {%- endif -%}
+                              </div>
                             </div>
-                          </div>
-                        {%- endfor -%}
+                          {%- endfor -%}
+                        </div>
+                        {%- endif -%}
                       </div>
-                      {%- endif -%}
-                    </div>
+                    {%- endif -%}
                   </div>
                 {%- endif -%}
               </li>
@@ -2036,6 +2102,13 @@ min-height:40px;
       "id": "show_variants",
       "label": "Show variant options",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "variants_outside_card",
+      "label": "Show variants outside card",
+      "info": "When on, variant pills appear below the button (outside the card background). When off, they sit inside the card. Compact layout collections always show variants outside.",
+      "default": false
     },
     {
       "type": "range",
