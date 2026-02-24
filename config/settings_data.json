@@ -48,34 +48,6 @@
       },
       "header": {
         "type": "header",
-        "blocks": {
-          "promo_image_QJ3chb": {
-            "type": "promo_image",
-            "settings": {
-              "mega_1": "Services",
-              "image_1": "shopify://shop_images/BrandingPhotography-C_Mae-5388.jpg",
-              "title_1": "Shop Post-Treatment Skin Care ->",
-              "link_1": "shopify://collections/skincare",
-              "image_2": "shopify://shop_images/BrandingPhotography-C_Mae-6099.jpg",
-              "title_2": "Book a Brazilian ->",
-              "button_2": "EXPLORE ALL WAXING SERVICES",
-              "link_2": "shopify://pages/brazilian-wax-mchenry"
-            }
-          },
-          "promo_image_bmNmht": {
-            "type": "promo_image",
-            "settings": {
-              "mega_1": "Shop Skincare",
-              "title_1": "",
-              "link_1": "",
-              "image_2": "shopify://shop_images/Andrea-Butler_2.webp",
-              "title_2": "Learn About Acne Bootcamp ->",
-              "button_2": "NOW AVAILABLE VIRTUALLY",
-              "link_2": "shopify://pages/acne-bootcamp"
-            }
-          }
-        },
-        "block_order": ["promo_image_QJ3chb", "promo_image_bmNmht"],
         "settings": {
           "page_full_width": false,
           "page_full_width_spacing": false,
@@ -137,17 +109,19 @@
           "heading_color": "#ffffff",
           "heading_border_color": "#c5c8a0",
           "bottom_bar_bg_color": "#7a8960",
-          "logo_width": 120,
+          "logo": "shopify://shop_images/Monogram-White.svg",
+          "logo_width": 200,
           "newsletter_heading": "Sign up for sales & specials",
           "newsletter_placeholder": "Email address",
           "menu_1_heading": "SPA SERVICES",
-          "menu_1": "footer-spa-services",
+          "menu_1": "spa-services",
           "menu_2_heading": "SKINCARE SHOP",
-          "menu_2": "footer-skincare-shop",
+          "menu_2": "shop-skincare",
           "menu_3_heading": "LEGAL",
-          "menu_3": "footer-legal",
+          "menu_3": "legal",
           "contact_heading": "CONTACT",
           "contact_link_text": "Contact Us",
+          "contact_link_url": "",
           "address": "5405 W Elm St. Suite M\nMcHenry, IL 60050",
           "text_phone_label": "Text us:",
           "text_phone": "815-332-0918",
@@ -157,6 +131,7 @@
           "payment_enable": true,
           "credit_text": "Brand & Site",
           "credit_link_text": "by Superlunar Design Co.",
+          "credit_link_url": "",
           "margin_top": 0,
           "padding_top": 48,
           "padding_bottom": 48
@@ -192,6 +167,45 @@
           "cookie_modal_delay": "5000",
           "block_text_align": "text-center",
           "enable_social_icon": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick links",
+              "menu": "footer",
+              "alignment": "center",
+              "list_style": "vertical"
+            }
+          },
+          "footer-1": {
+            "type": "text",
+            "settings": {
+              "heading": "Heading",
+              "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>",
+              "subtext_duplicate": "<p>Share contact information, store details, and brand content with your customers.</p>",
+              "alignment": "center"
+            }
+          }
+        },
+        "block_order": [
+          "footer-0",
+          "footer-1"
+        ],
+        "settings": {
+          "page_full_width": false,
+          "page_full_width_spacing": false,
+          "color_scheme": "background-1",
+          "show_social": true,
+          "payment_enable": true,
+          "footer_default": false,
+          "border_right": true,
+          "margin_top": 0,
+          "padding_top": 36,
+          "padding_bottom": 36
         }
       }
     },
