@@ -129,15 +129,6 @@
     margin-bottom: 0;
   }
 
-  /* Variants inside card (regular layout) */
-  #SLCollection-{{ section.id }} .sl-card-variants {
-    padding: 0 15px 0;
-  }
-
-  #SLCollection-{{ section.id }} .sl-card-variants .sl-variant-options {
-    margin-bottom: 0;
-  }
-
   /* AJAX Loading Overlay */
   #SLCollection-{{ section.id }} .sl-ajax-loading {
     position: relative;
@@ -1350,8 +1341,52 @@ min-height:40px;
                         {%- endif -%}
                       </div>
 
-                      {%- comment -%} Variants (inside card) {%- endcomment -%}
-                      <div class="sl-card-variants">
+                    </div>
+
+                    {%- comment -%} Action Buttons (outside card) {%- endcomment -%}
+                    <div class="sl-outside-button">
+                      {%- if section.settings.show_add_to_cart -%}
+                          {%- if product.available -%}
+                            <button type="button"
+                                    class="sl-add-to-cart-btn"
+                                    data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+                              <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
+                            </button>
+                          {%- else -%}
+                            <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if customer %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                              Notify Me
+                            </a>
+                          {%- endif -%}
+                        {%- endif -%}
+
+                        {%- liquid
+                          assign show_subscribe_btn = false
+                          if section.settings.show_subscribe and product.available
+                            assign show_subscribe_btn = true
+                            if section.settings.subscribe_exclude_collections != blank
+                              assign excluded_handles = section.settings.subscribe_exclude_collections | split: ','
+                              for handle in excluded_handles
+                                assign clean_handle = handle | strip | handleize
+                                if collection.handle == clean_handle
+                                  assign show_subscribe_btn = false
+                                  break
+                                endif
+                              endfor
+                            endif
+                          endif
+                        -%}
+                        {%- if show_subscribe_btn -%}
+                          <a href="{{ product.url }}?subscribe=true"
+                             class="sl-subscribe-btn"
+                             data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+                            {{ section.settings.subscribe_text }}
+                          </a>
+                      {%- endif -%}
+                    </div>
+
+                    {%- comment -%} Variants (outside card) {%- endcomment -%}
+                    <div class="sl-outside-variants">
                       {%- if section.settings.show_variants and product.has_only_default_variant == false -%}
                       <div class="sl-variant-options">
                         <script type="application/json" class="sl-variant-data">
@@ -1401,49 +1436,6 @@ min-height:40px;
                           </div>
                         {%- endfor -%}
                       </div>
-                      {%- endif -%}
-                      </div>
-                    </div>
-
-                    {%- comment -%} Action Buttons (outside card) {%- endcomment -%}
-                    <div class="sl-outside-button">
-                      {%- if section.settings.show_add_to_cart -%}
-                          {%- if product.available -%}
-                            <button type="button"
-                                    class="sl-add-to-cart-btn"
-                                    data-variant-id="{{ product.selected_or_first_available_variant.id }}">
-                              <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
-                            </button>
-                          {%- else -%}
-                            <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if customer %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                              Notify Me
-                            </a>
-                          {%- endif -%}
-                        {%- endif -%}
-
-                        {%- liquid
-                          assign show_subscribe_btn = false
-                          if section.settings.show_subscribe and product.available
-                            assign show_subscribe_btn = true
-                            if section.settings.subscribe_exclude_collections != blank
-                              assign excluded_handles = section.settings.subscribe_exclude_collections | split: ','
-                              for handle in excluded_handles
-                                assign clean_handle = handle | strip | handleize
-                                if collection.handle == clean_handle
-                                  assign show_subscribe_btn = false
-                                  break
-                                endif
-                              endfor
-                            endif
-                          endif
-                        -%}
-                        {%- if show_subscribe_btn -%}
-                          <a href="{{ product.url }}?subscribe=true"
-                             class="sl-subscribe-btn"
-                             data-variant-id="{{ product.selected_or_first_available_variant.id }}">
-                            {{ section.settings.subscribe_text }}
-                          </a>
                       {%- endif -%}
                     </div>
                   </div>
