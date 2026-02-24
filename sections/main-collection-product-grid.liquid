@@ -1225,6 +1225,12 @@ min-height:40px;
                             </span>
                           </div>
                         {%- endif -%}
+                        <div class="sl-product-price">
+                          <span class="sl-price-current" data-product-price>{{ product.price | money }}</span>
+                          {%- if product.compare_at_price > product.price -%}
+                            <span class="sl-price-compare">{{ product.compare_at_price | money }}</span>
+                          {%- endif -%}
+                        </div>
                       </div>
                     </div>
 
@@ -1240,7 +1246,7 @@ min-height:40px;
                         {%- else -%}
                           <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if customer %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                            Notify Me
+                            {{ section.settings.soldout_button_text }}
                           </a>
                         {%- endif -%}
                       {%- endif -%}
@@ -1348,11 +1354,16 @@ min-height:40px;
                             </span>
                           </div>
                         {%- endif -%}
+                        <div class="sl-product-price">
+                          <span class="sl-price-current" data-product-price>{{ product.price | money }}</span>
+                          {%- if product.compare_at_price > product.price -%}
+                            <span class="sl-price-compare">{{ product.compare_at_price | money }}</span>
+                          {%- endif -%}
+                        </div>
                       </div>
 
-                      {%- comment -%} Variants INSIDE card (when variants_outside_card is off) {%- endcomment -%}
-                      {%- unless section.settings.variants_outside_card -%}
-                        <div class="sl-card-variants">
+                      {%- comment -%} Variants inside card (regular layout) {%- endcomment -%}
+                      <div class="sl-card-variants">
                         {%- if section.settings.show_variants and product.has_only_default_variant == false -%}
                         <div class="sl-variant-options">
                           <script type="application/json" class="sl-variant-data">
@@ -1403,8 +1414,7 @@ min-height:40px;
                           {%- endfor -%}
                         </div>
                         {%- endif -%}
-                        </div>
-                      {%- endunless -%}
+                      </div>
                     </div>
 
                     {%- comment -%} Action Buttons (outside card) {%- endcomment -%}
@@ -1449,61 +1459,6 @@ min-height:40px;
                       {%- endif -%}
                     </div>
 
-                    {%- comment -%} Variants OUTSIDE card (when variants_outside_card is on) {%- endcomment -%}
-                    {%- if section.settings.variants_outside_card -%}
-                      <div class="sl-outside-variants">
-                        {%- if section.settings.show_variants and product.has_only_default_variant == false -%}
-                        <div class="sl-variant-options">
-                          <script type="application/json" class="sl-variant-data">
-                            {{ product.variants | json }}
-                          </script>
-
-                          {%- for option in product.options_with_values -%}
-                            {%- assign option_name_lower = option.name | downcase -%}
-                            {%- assign is_color = false -%}
-                            {%- if option_name_lower contains 'color' or option_name_lower contains 'colour' -%}
-                              {%- assign is_color = true -%}
-                            {%- endif -%}
-
-                            <div class="sl-option-group" data-option-type="{% if is_color %}color{% else %}size{% endif %}">
-                              <div class="sl-option-values">
-                                {%- assign max_visible = section.settings.max_visible_variants -%}
-                                {%- assign total_values = option.values.size -%}
-                                {%- assign remaining = total_values | minus: max_visible -%}
-
-                                {%- for value in option.values -%}
-                                  {%- if is_color -%}
-                                    <button type="button"
-                                            class="sl-color-swatch"
-                                            data-option-position="{{ option.position }}"
-                                            data-option-value="{{ value | escape }}"
-                                            style="background-color: {{ value | handleize }};"
-                                            title="{{ value }}"
-                                            {% if forloop.first %}data-selected="true"{% endif %}>
-                                    </button>
-                                  {%- else -%}
-                                    {%- if forloop.index <= max_visible -%}
-                                      <button type="button"
-                                              class="sl-size-btn"
-                                              data-option-position="{{ option.position }}"
-                                              data-option-value="{{ value | escape }}"
-                                              {% if forloop.first %}data-selected="true"{% endif %}>
-                                        {{ value }}
-                                      </button>
-                                    {%- endif -%}
-                                  {%- endif -%}
-                                {%- endfor -%}
-
-                                {%- if remaining > 0 and is_color == false -%}
-                                  <a href="{{ product.url }}" class="sl-more-options">+{{ remaining }} More</a>
-                                {%- endif -%}
-                              </div>
-                            </div>
-                          {%- endfor -%}
-                        </div>
-                        {%- endif -%}
-                      </div>
-                    {%- endif -%}
                   </div>
                 {%- endif -%}
               </li>
@@ -2104,13 +2059,6 @@ min-height:40px;
       "default": true
     },
     {
-      "type": "checkbox",
-      "id": "variants_outside_card",
-      "label": "Show variants outside card",
-      "info": "When on, variant pills appear below the button (outside the card background). When off, they sit inside the card. Compact layout collections always show variants outside.",
-      "default": false
-    },
-    {
       "type": "range",
       "id": "max_visible_variants",
       "min": 2,
@@ -2228,7 +2176,8 @@ min-height:40px;
       "type": "text",
       "id": "soldout_button_text",
       "label": "Sold out button text",
-      "default": "Sold Out"
+      "info": "Text shown on the notify bell for out-of-stock products",
+      "default": "Notify Me"
     },
     {
       "type": "color",
