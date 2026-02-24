@@ -46,7 +46,7 @@
       "type": "main-collection-product-grid",
       "settings": {
         "products_per_page": 16,
-        "compact_layout_collections": "",
+        "compact_layout_collections": "{{ collection.title }}",
         "columns_desktop": 4,
         "columns_mobile": 2,
         "grid_gap": 20,
