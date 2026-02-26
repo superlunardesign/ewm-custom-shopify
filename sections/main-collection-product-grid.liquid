@@ -18,9 +18,12 @@
 
 {%- style -%}
   {%- comment -%} Subgrid row counts for cross-card alignment {%- endcomment -%}
-  {%- assign subgrid_info_rows = 3 -%}
+  {%- assign subgrid_info_rows = 2 -%}
   {%- if section.settings.show_star_rating -%}
-    {%- assign subgrid_info_rows = 4 -%}
+    {%- assign subgrid_info_rows = subgrid_info_rows | plus: 1 -%}
+  {%- endif -%}
+  {%- if section.settings.price_position == 'card' or section.settings.price_position == 'both' -%}
+    {%- assign subgrid_info_rows = subgrid_info_rows | plus: 1 -%}
   {%- endif -%}
   {%- assign subgrid_card_compact = subgrid_info_rows | plus: 1 -%}
   {%- assign subgrid_card_regular = subgrid_info_rows | plus: 2 -%}
@@ -1331,12 +1334,14 @@ min-height:40px;
                             </span>
                           </div>
                         {%- endif -%}
+                        {%- if section.settings.price_position == 'card' or section.settings.price_position == 'both' -%}
                         <div class="sl-product-price">
                           <span class="sl-price-current" data-product-price>{{ product.price | money }}</span>
                           {%- if product.compare_at_price > product.price -%}
                             <span class="sl-price-compare">{{ product.compare_at_price | money }}</span>
                           {%- endif -%}
                         </div>
+                        {%- endif -%}
                       </div>
                     </div>
 
@@ -1346,8 +1351,13 @@ min-height:40px;
                         {%- if product.available -%}
                           <button type="button"
                                   class="sl-add-to-cart-btn"
-                                  data-variant-id="{{ product.selected_or_first_available_variant.id }}">
-                            <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
+                                  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                                  {% if section.settings.price_position == 'card' %}style="text-align:center"{% endif %}>
+                            {%- if section.settings.price_position == 'card' -%}
+                              {{ section.settings.add_to_cart_text }}
+                            {%- else -%}
+                              <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
+                            {%- endif -%}
                           </button>
                         {%- else -%}
                           <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
@@ -1484,12 +1494,14 @@ min-height:40px;
                             </span>
                           </div>
                         {%- endif -%}
+                        {%- if section.settings.price_position == 'card' or section.settings.price_position == 'both' -%}
                         <div class="sl-product-price">
                           <span class="sl-price-current" data-product-price>{{ product.price | money }}</span>
                           {%- if product.compare_at_price > product.price -%}
                             <span class="sl-price-compare">{{ product.compare_at_price | money }}</span>
                           {%- endif -%}
                         </div>
+                        {%- endif -%}
                       </div>
 
                       {%- comment -%} Variants inside card (regular layout) {%- endcomment -%}
@@ -1553,8 +1565,13 @@ min-height:40px;
                           {%- if product.available -%}
                             <button type="button"
                                     class="sl-add-to-cart-btn"
-                                    data-variant-id="{{ product.selected_or_first_available_variant.id }}">
-                              <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
+                                    data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                                    {% if section.settings.price_position == 'card' %}style="text-align:center"{% endif %}>
+                              {%- if section.settings.price_position == 'card' -%}
+                                {{ section.settings.add_to_cart_text }}
+                              {%- else -%}
+                                <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
+                              {%- endif -%}
                             </button>
                           {%- else -%}
                             <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
@@ -1832,10 +1849,10 @@ min-height:40px;
               subscribeBtn.setAttribute('data-variant-id', matchingVariant.id);
             }
 
-            var priceElement = productContainer.querySelector('[data-product-price]');
-            if (priceElement) {
-              priceElement.textContent = Shopify.formatMoney ? Shopify.formatMoney(matchingVariant.price) : '$' + (matchingVariant.price / 100).toFixed(2);
-            }
+            var priceElements = productContainer.querySelectorAll('[data-product-price]');
+            priceElements.forEach(function(el) {
+              el.textContent = Shopify.formatMoney ? Shopify.formatMoney(matchingVariant.price) : '$' + (matchingVariant.price / 100).toFixed(2);
+            });
 
             var comparePriceElement = productContainer.querySelector('.sl-price-compare');
             if (comparePriceElement && matchingVariant.compare_at_price) {
@@ -2222,6 +2239,17 @@ min-height:40px;
       "id": "title_color",
       "label": "Title color",
       "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "price_position",
+      "label": "Price display",
+      "options": [
+        { "value": "card", "label": "In card (above reviews)" },
+        { "value": "button", "label": "In button" },
+        { "value": "both", "label": "Both" }
+      ],
+      "default": "button"
     },
     {
       "type": "range",
