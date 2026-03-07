@@ -1157,16 +1157,23 @@ min-height:40px;
 <div class="section-{{ section.id }}-padding" id="SLCollection-{{ section.id }}">
   {%- liquid
     comment
-      Category bubbles are driven by a Shopify navigation menu.
-      They show on any collection page when:
-        1. enable_category_bubbles is ON in theme settings
-        2. The referenced menu exists and has links
-      The menu handle is set in the "Category Bubbles" section settings.
+      Category bubbles auto-populate from child collections.
+      A child collection has its parent_collection metafield set to the
+      current collection. We loop all store collections and count
+      the ones pointing here — if any exist, we show bubbles.
     endcomment
-    assign category_menu = linklists[section.settings.category_menu]
     assign show_category_bubbles = false
-    if section.settings.enable_category_bubbles and category_menu != blank and category_menu.links.size > 0
-      assign show_category_bubbles = true
+    assign child_count = 0
+    if section.settings.enable_category_bubbles
+      for col in collections
+        assign parent_ref = col.metafields.custom.parent_collection.value
+        if parent_ref != blank and parent_ref.handle == collection.handle
+          assign child_count = child_count | plus: 1
+        endif
+      endfor
+      if child_count > 0
+        assign show_category_bubbles = true
+      endif
     endif
 
     assign current_sort_by = collection.sort_by | default: collection.default_sort_by
@@ -1179,7 +1186,7 @@ min-height:40px;
     assign sort_param = sort_param | strip
   -%}
 
-  {%- comment -%} ===== Category Bubbles (menu-driven) ===== {%- endcomment -%}
+  {%- comment -%} ===== Category Bubbles (auto from parent_collection metafield) ===== {%- endcomment -%}
   {%- if show_category_bubbles -%}
     <div class="page-width">
       <div class="sl-category-bubbles">
@@ -1224,18 +1231,22 @@ min-height:40px;
           </button>
 
           <div class="sl-category-track" data-bubble-track>
-            {%- for link in category_menu.links -%}
-              {%- assign linked_col = link.object -%}
-              <a href="{{ link.url }}" class="sl-category-item">
-                <div class="sl-category-bubble">
-                  {%- if linked_col != blank and linked_col.metafields.custom.category_icon != blank -%}
-                    <img src="{{ linked_col.metafields.custom.category_icon | image_url: width: 120 }}" alt="{{ link.title | escape }}" loading="lazy" width="60" height="60">
-                  {%- else -%}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
-                  {%- endif -%}
-                </div>
-                <span class="sl-category-label">{{ link.title }}</span>
-              </a>
+            {%- for col in collections -%}
+              {%- assign parent_ref = col.metafields.custom.parent_collection.value -%}
+              {%- if parent_ref != blank and parent_ref.handle == collection.handle -%}
+                <a href="{{ col.url }}" class="sl-category-item">
+                  <div class="sl-category-bubble">
+                    {%- if col.metafields.custom.category_icon != blank -%}
+                      <img src="{{ col.metafields.custom.category_icon | image_url: width: 120 }}" alt="{{ col.title | escape }}" loading="lazy" width="60" height="60">
+                    {%- elsif col.image != blank -%}
+                      <img src="{{ col.image | image_url: width: 120 }}" alt="{{ col.title | escape }}" loading="lazy" width="60" height="60">
+                    {%- else -%}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                    {%- endif -%}
+                  </div>
+                  <span class="sl-category-label">{{ col.title }}</span>
+                </a>
+              {%- endif -%}
             {%- endfor -%}
           </div>
 
@@ -2878,21 +2889,14 @@ min-height:40px;
     },
     {
       "type": "header",
-      "content": "Category Bubbles (Parent Collections)"
+      "content": "Category Bubbles"
     },
     {
       "type": "checkbox",
       "id": "enable_category_bubbles",
       "default": true,
       "label": "Enable category bubbles",
-      "info": "Toggle category bubble navigation on or off for parent collections"
-    },
-    {
-      "type": "text",
-      "id": "category_menu",
-      "label": "Category menu handle",
-      "info": "Handle of a Shopify navigation menu whose links become category bubbles. Collections without a parent_collection metafield will show these bubbles.",
-      "default": "collection-categories"
+      "info": "Auto-shows child collections as bubbles. A child collection is any collection with its parent_collection metafield set to the current collection."
     },
     {
       "type": "text",
