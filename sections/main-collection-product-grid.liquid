@@ -1261,7 +1261,7 @@ min-height:40px;
                 <a href="{{ col.url }}" class="sl-category-item">
                   <div class="sl-category-bubble">
                     {%- if col.metafields.custom.category_bubble_icon != blank -%}
-                      <div class="sl-bubble-icon" data-svg-src="{{ col.metafields.custom.category_bubble_icon.value | image_url }}"></div>
+                      <div class="sl-bubble-icon" data-inline-svg>{{ col.metafields.custom.category_bubble_icon | metafield_tag }}</div>
                     {%- else -%}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
                     {%- endif -%}
@@ -2411,10 +2411,10 @@ min-height:40px;
 
   /* ===== Inline SVG Injection ===== */
   (function inlineSvgIcons() {
-    sectionEl.querySelectorAll('[data-svg-src]').forEach(function(el) {
-      var url = el.getAttribute('data-svg-src');
-      if (!url) return;
-      fetch(url)
+    sectionEl.querySelectorAll('[data-inline-svg]').forEach(function(wrapper) {
+      var img = wrapper.querySelector('img');
+      if (!img || !img.src) return;
+      fetch(img.src)
         .then(function(res) { return res.text(); })
         .then(function(svgText) {
           var parser = new DOMParser();
@@ -2423,9 +2423,10 @@ min-height:40px;
           if (!svg) return;
           svg.removeAttribute('width');
           svg.removeAttribute('height');
-          el.innerHTML = '';
-          el.appendChild(svg);
-        });
+          wrapper.innerHTML = '';
+          wrapper.appendChild(svg);
+        })
+        .catch(function() {});
     });
   })();
 
