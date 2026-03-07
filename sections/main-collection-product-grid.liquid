@@ -728,20 +728,12 @@ min-height:40px;
     transition: all 0.25s ease;
   }
 
-  /* Fallback inline SVG: colored via settings */
   #SLCollection-{{ section.id }} .sl-category-bubble svg {
     width: 50%;
     height: 50%;
     color: {{ section.settings.bubble_icon_color }};
     fill: none;
     stroke: {{ section.settings.bubble_icon_color }};
-  }
-
-  /* Uploaded SVG file via metafield_tag: renders as-is with its own colors */
-  #SLCollection-{{ section.id }} .sl-category-bubble img {
-    width: 50%;
-    height: 50%;
-    object-fit: contain;
   }
 
   #SLCollection-{{ section.id }} .sl-category-item:hover .sl-category-bubble svg {
@@ -1257,7 +1249,7 @@ min-height:40px;
                 <a href="{{ col.url }}" class="sl-category-item">
                   <div class="sl-category-bubble">
                     {%- if col.metafields.custom.category_bubble_icon != blank -%}
-                      {{ col.metafields.custom.category_bubble_icon | metafield_tag }}
+                      {{ col.metafields.custom.category_bubble_icon.value }}
                     {%- else -%}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
                     {%- endif -%}
