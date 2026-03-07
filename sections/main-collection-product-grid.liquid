@@ -1509,7 +1509,7 @@ min-height:40px;
               Only show if collection has a promo_image metafield.
             endcomment
             assign mf_promo_image = collection.metafields.custom.inline_promo_card
-            assign mf_promo_link = collection.metafields.custom.promo_card_link | default: '#'
+            assign mf_promo_link = collection.metafields.custom.promo_card_link.value.url | default: '#'
             assign mf_promo_alt = collection.title | append: ' promo'
             assign mf_promo_position = section.settings.columns_desktop | times: 3
             assign mf_promo_inserted = false
