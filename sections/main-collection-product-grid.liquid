@@ -1157,23 +1157,16 @@ min-height:40px;
 <div class="section-{{ section.id }}-padding" id="SLCollection-{{ section.id }}">
   {%- liquid
     comment
-      Detect parent vs child collection.
-      Child  = has parent_collection metafield filled.
-      Parent = does NOT have parent_collection filled AND a matching
-               category menu exists (handle from section setting).
-      Category bubbles are driven by a Shopify navigation menu so
-      the store owner can control order and which collections show.
+      Category bubbles are driven by a Shopify navigation menu.
+      They show on any collection page when:
+        1. enable_category_bubbles is ON in theme settings
+        2. The referenced menu exists and has links
+      The menu handle is set in the "Category Bubbles" section settings.
     endcomment
-    assign is_child_collection = false
-    assign is_parent_collection = false
-    assign parent_ref = collection.metafields.custom.parent_collection.value
-    if parent_ref != blank
-      assign is_child_collection = true
-    endif
-
     assign category_menu = linklists[section.settings.category_menu]
-    if is_child_collection == false and category_menu != blank and category_menu.links.size > 0
-      assign is_parent_collection = true
+    assign show_category_bubbles = false
+    if section.settings.enable_category_bubbles and category_menu != blank and category_menu.links.size > 0
+      assign show_category_bubbles = true
     endif
 
     assign current_sort_by = collection.sort_by | default: collection.default_sort_by
@@ -1186,8 +1179,8 @@ min-height:40px;
     assign sort_param = sort_param | strip
   -%}
 
-  {%- comment -%} ===== Category Bubbles (parent collections only) ===== {%- endcomment -%}
-  {%- if is_parent_collection and section.settings.enable_category_bubbles -%}
+  {%- comment -%} ===== Category Bubbles (menu-driven) ===== {%- endcomment -%}
+  {%- if show_category_bubbles -%}
     <div class="page-width">
       <div class="sl-category-bubbles">
         <div class="sl-filter-sort-bar" style="margin-bottom:16px">
@@ -1336,62 +1329,34 @@ min-height:40px;
       </div>
     </div>
 
-  {%- elsif section.settings.enable_tag_filtering or section.settings.enable_collection_filtering -%}
-    {%- comment -%} ===== Child / Standalone Collections: Tag or Collection filters ===== {%- endcomment -%}
+  {%- elsif section.settings.enable_tag_filtering -%}
+    {%- comment -%} ===== Tag Filtering (standalone, no bubbles) ===== {%- endcomment -%}
     <div class="page-width">
       <div class="sl-filter-sort-bar">
-        {%- if section.settings.enable_tag_filtering -%}
-          {%- comment -%} Child collections: tags open by default {%- endcomment -%}
-          <div class="sl-filter-section">
-            <div class="sl-filter-label">{{ section.settings.filter_label }}</div>
-            <div class="sl-tag-filters">
-              {%- assign filter_tags = section.settings.filter_tags | split: ',' -%}
-              {%- for tag in filter_tags -%}
-                {%- assign clean_tag = tag | strip -%}
-                {%- if clean_tag != blank -%}
-                  {%- assign is_active = false -%}
-                  {%- assign clean_tag_handle = clean_tag | handleize -%}
-                  {%- for current_tag in current_tags -%}
-                    {%- assign current_tag_handle = current_tag | handleize -%}
+        <div class="sl-filter-section">
+          <div class="sl-filter-label">{{ section.settings.filter_label }}</div>
+          <div class="sl-tag-filters">
+            {%- assign filter_tags = section.settings.filter_tags | split: ',' -%}
+            {%- for tag in filter_tags -%}
+              {%- assign clean_tag = tag | strip -%}
+              {%- if clean_tag != blank -%}
+                {%- assign is_active = false -%}
+                {%- assign clean_tag_handle = clean_tag | handleize -%}
+                {%- for current_tag in current_tags -%}
+                  {%- assign current_tag_handle = current_tag | handleize -%}
                   {%- if current_tag_handle == clean_tag_handle -%}
-                      {%- assign is_active = true -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-                  {%- if is_active -%}
-                    <a href="{{ collection.url }}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }}</a>
-                  {%- else -%}
-                    <a href="{{ collection.url }}/{{ clean_tag_handle }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+                    {%- assign is_active = true -%}
                   {%- endif -%}
+                {%- endfor -%}
+                {%- if is_active -%}
+                  <a href="{{ collection.url }}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }}</a>
+                {%- else -%}
+                  <a href="{{ collection.url }}/{{ clean_tag_handle }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
                 {%- endif -%}
-              {%- endfor -%}
-            </div>
+              {%- endif -%}
+            {%- endfor -%}
           </div>
-        {%- elsif section.settings.enable_collection_filtering -%}
-          <div class="sl-filter-section">
-            <div class="sl-filter-label">{{ section.settings.collection_filter_label }}</div>
-            <div class="sl-tag-filters">
-              {%- for linked_col in collections -%}
-                {%- assign is_excluded = false -%}
-                {%- if section.settings.collection_filter_exclude != blank -%}
-                  {%- assign excluded_handles = section.settings.collection_filter_exclude | split: ',' -%}
-                  {%- for excluded in excluded_handles -%}
-                    {%- assign excluded_handle = excluded | strip | handleize -%}
-                    {%- if linked_col.handle == excluded_handle -%}
-                      {%- assign is_excluded = true -%}
-                      {%- break -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-                {%- endif -%}
-                {%- unless is_excluded -%}
-                  <a href="{{ linked_col.url }}{{ sort_param }}"
-                     class="sl-tag-btn {% if collection.handle == linked_col.handle %}sl-tag-btn--active{% endif %}">
-                    {{ linked_col.title }}
-                  </a>
-                {%- endunless -%}
-              {%- endfor -%}
-            </div>
-          </div>
-        {%- endif -%}
+        </div>
 
         {%- if section.settings.enable_sorting -%}
           <div class="sl-sort-wrapper sl-sort-desktop">
@@ -1411,17 +1376,10 @@ min-height:40px;
 
         {%- comment -%} Mobile controls {%- endcomment -%}
         <div class="sl-mobile-controls">
-          {%- if section.settings.enable_tag_filtering -%}
-            <button type="button" class="sl-mobile-filter-btn" data-mobile-filter-toggle>
-              {{ section.settings.filter_label }}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-            </button>
-          {%- elsif section.settings.enable_collection_filtering -%}
-            <button type="button" class="sl-mobile-filter-btn" data-mobile-filter-toggle>
-              {{ section.settings.collection_filter_label }}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-            </button>
-          {%- endif -%}
+          <button type="button" class="sl-mobile-filter-btn" data-mobile-filter-toggle>
+            {{ section.settings.filter_label }}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </button>
           {%- if section.settings.enable_sorting -%}
             <button type="button" class="sl-mobile-sort-btn" data-mobile-sort-toggle>
               Sort
@@ -1430,58 +1388,31 @@ min-height:40px;
           {%- endif -%}
         </div>
 
-        {%- comment -%} Mobile drawers {%- endcomment -%}
-        {%- if section.settings.enable_tag_filtering -%}
-          <div class="sl-mobile-tag-drawer" data-mobile-tag-drawer>
-            <button type="button" class="sl-mobile-drawer-close" data-mobile-drawer-close aria-label="Close filters">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-            {%- assign filter_tags = section.settings.filter_tags | split: ',' -%}
-            {%- for tag in filter_tags -%}
-              {%- assign clean_tag = tag | strip -%}
-              {%- if clean_tag != blank -%}
-                {%- assign is_active = false -%}
-                {%- assign clean_tag_handle = clean_tag | handleize -%}
-                {%- for current_tag in current_tags -%}
-                  {%- assign current_tag_handle = current_tag | handleize -%}
-                  {%- if current_tag_handle == clean_tag_handle -%}
-                    {%- assign is_active = true -%}
-                  {%- endif -%}
-                {%- endfor -%}
-                {%- if is_active -%}
-                  <a href="{{ collection.url }}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }} ✕</a>
-                {%- else -%}
-                  <a href="{{ collection.url }}/{{ clean_tag_handle }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+        {%- comment -%} Mobile tag drawer {%- endcomment -%}
+        <div class="sl-mobile-tag-drawer" data-mobile-tag-drawer>
+          <button type="button" class="sl-mobile-drawer-close" data-mobile-drawer-close aria-label="Close filters">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+          {%- assign filter_tags = section.settings.filter_tags | split: ',' -%}
+          {%- for tag in filter_tags -%}
+            {%- assign clean_tag = tag | strip -%}
+            {%- if clean_tag != blank -%}
+              {%- assign is_active = false -%}
+              {%- assign clean_tag_handle = clean_tag | handleize -%}
+              {%- for current_tag in current_tags -%}
+                {%- assign current_tag_handle = current_tag | handleize -%}
+                {%- if current_tag_handle == clean_tag_handle -%}
+                  {%- assign is_active = true -%}
                 {%- endif -%}
+              {%- endfor -%}
+              {%- if is_active -%}
+                <a href="{{ collection.url }}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }} ✕</a>
+              {%- else -%}
+                <a href="{{ collection.url }}/{{ clean_tag_handle }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
               {%- endif -%}
-            {%- endfor -%}
-          </div>
-        {%- elsif section.settings.enable_collection_filtering -%}
-          <div class="sl-mobile-tag-drawer" data-mobile-tag-drawer>
-            <button type="button" class="sl-mobile-drawer-close" data-mobile-drawer-close aria-label="Close filters">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-            {%- for linked_col in collections -%}
-              {%- assign is_excluded = false -%}
-              {%- if section.settings.collection_filter_exclude != blank -%}
-                {%- assign excluded_handles = section.settings.collection_filter_exclude | split: ',' -%}
-                {%- for excluded in excluded_handles -%}
-                  {%- assign excluded_handle = excluded | strip | handleize -%}
-                  {%- if linked_col.handle == excluded_handle -%}
-                    {%- assign is_excluded = true -%}
-                    {%- break -%}
-                  {%- endif -%}
-                {%- endfor -%}
-              {%- endif -%}
-              {%- unless is_excluded -%}
-                <a href="{{ linked_col.url }}{{ sort_param }}"
-                   class="sl-tag-btn {% if collection.handle == linked_col.handle %}sl-tag-btn--active{% endif %}">
-                  {{ linked_col.title }}
-                </a>
-              {%- endunless -%}
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
 
         {%- if section.settings.enable_sorting -%}
           <div class="sl-mobile-sort-drawer" data-mobile-sort-drawer>
@@ -3100,29 +3031,6 @@ min-height:40px;
       "id": "pagination_active_color",
       "label": "Pagination active page color",
       "default": "#8C9B6D"
-    },
-    {
-      "type": "header",
-      "content": "Collection Filter Pills"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_collection_filtering",
-      "default": false,
-      "label": "Enable collection link pills",
-      "info": "Auto-pulls all store collections as pill buttons. Use exclusion list to hide specific ones."
-    },
-    {
-      "type": "text",
-      "id": "collection_filter_label",
-      "label": "Filter label",
-      "default": "Categories"
-    },
-    {
-      "type": "textarea",
-      "id": "collection_filter_exclude",
-      "label": "Exclude collections (handles)",
-      "info": "Comma-separated collection handles to hide from the pills. All other collections show automatically."
     },
     {
       "type": "header",
