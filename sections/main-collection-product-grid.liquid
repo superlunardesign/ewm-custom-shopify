@@ -1375,7 +1375,8 @@ min-height:40px;
                 {%- if section.settings.collection_filter_exclude != blank -%}
                   {%- assign excluded_handles = section.settings.collection_filter_exclude | split: ',' -%}
                   {%- for excluded in excluded_handles -%}
-                    {%- if linked_col.handle == (excluded | strip | handleize) -%}
+                    {%- assign excluded_handle = excluded | strip | handleize -%}
+                    {%- if linked_col.handle == excluded_handle -%}
                       {%- assign is_excluded = true -%}
                       {%- break -%}
                     {%- endif -%}
@@ -1465,7 +1466,8 @@ min-height:40px;
               {%- if section.settings.collection_filter_exclude != blank -%}
                 {%- assign excluded_handles = section.settings.collection_filter_exclude | split: ',' -%}
                 {%- for excluded in excluded_handles -%}
-                  {%- if linked_col.handle == (excluded | strip | handleize) -%}
+                  {%- assign excluded_handle = excluded | strip | handleize -%}
+                  {%- if linked_col.handle == excluded_handle -%}
                     {%- assign is_excluded = true -%}
                     {%- break -%}
                   {%- endif -%}
