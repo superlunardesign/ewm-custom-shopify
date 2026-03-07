@@ -1267,7 +1267,8 @@ min-height:40px;
                     {%- assign is_active = false -%}
                     {%- assign clean_tag_handle = clean_tag | handleize -%}
                     {%- for current_tag in current_tags -%}
-                      {%- if current_tag | handleize == clean_tag_handle -%}
+                      {%- assign current_tag_handle = current_tag | handleize -%}
+                      {%- if current_tag_handle == clean_tag_handle -%}
                         {%- assign is_active = true -%}
                       {%- endif -%}
                     {%- endfor -%}
@@ -1296,7 +1297,8 @@ min-height:40px;
                 {%- assign is_active = false -%}
                 {%- assign clean_tag_handle = clean_tag | handleize -%}
                 {%- for current_tag in current_tags -%}
-                  {%- if current_tag | handleize == clean_tag_handle -%}
+                  {%- assign current_tag_handle = current_tag | handleize -%}
+                  {%- if current_tag_handle == clean_tag_handle -%}
                     {%- assign is_active = true -%}
                   {%- endif -%}
                 {%- endfor -%}
@@ -1350,7 +1352,8 @@ min-height:40px;
                   {%- assign is_active = false -%}
                   {%- assign clean_tag_handle = clean_tag | handleize -%}
                   {%- for current_tag in current_tags -%}
-                    {%- if current_tag | handleize == clean_tag_handle -%}
+                    {%- assign current_tag_handle = current_tag | handleize -%}
+                  {%- if current_tag_handle == clean_tag_handle -%}
                       {%- assign is_active = true -%}
                     {%- endif -%}
                   {%- endfor -%}
@@ -1439,7 +1442,8 @@ min-height:40px;
                 {%- assign is_active = false -%}
                 {%- assign clean_tag_handle = clean_tag | handleize -%}
                 {%- for current_tag in current_tags -%}
-                  {%- if current_tag | handleize == clean_tag_handle -%}
+                  {%- assign current_tag_handle = current_tag | handleize -%}
+                  {%- if current_tag_handle == clean_tag_handle -%}
                     {%- assign is_active = true -%}
                   {%- endif -%}
                 {%- endfor -%}
