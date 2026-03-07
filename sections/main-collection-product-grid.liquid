@@ -2426,7 +2426,8 @@ min-height:40px;
           svg.removeAttribute('width');
           svg.removeAttribute('height');
           svg.querySelectorAll('path, circle, line, polyline, polygon, rect, ellipse').forEach(function(el) {
-            if (el.hasAttribute('stroke')) el.setAttribute('stroke', 'currentColor');
+            el.removeAttribute('stroke');
+            el.removeAttribute('fill');
           });
           wrapper.innerHTML = '';
           wrapper.appendChild(svg);
