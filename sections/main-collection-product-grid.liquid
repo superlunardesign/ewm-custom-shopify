@@ -1251,10 +1251,9 @@ min-height:40px;
               {%- if parent_ref != blank and parent_ref.handle == collection.handle -%}
                 <a href="{{ col.url }}" class="sl-category-item">
                   <div class="sl-category-bubble">
-                    {%- if col.metafields.custom.category_icon != blank -%}
-                      <img src="{{ col.metafields.custom.category_icon | image_url: width: 120 }}" alt="{{ col.title | escape }}" loading="lazy" width="60" height="60">
-                    {%- elsif col.image != blank -%}
-                      <img src="{{ col.image | image_url: width: 120 }}" alt="{{ col.title | escape }}" loading="lazy" width="60" height="60">
+                    {%- assign bubble_icon = col.metafields.custom.category_bubble_icon.value -%}
+                    {%- if bubble_icon != blank -%}
+                      <img src="{{ bubble_icon.url }}" alt="{{ col.title | escape }}" loading="lazy" width="60" height="60">
                     {%- else -%}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
                     {%- endif -%}
