@@ -1509,9 +1509,9 @@ min-height:40px;
               Position = desktop columns * 3 (e.g. 4 cols = position 12).
               Only show if collection has a promo_image metafield.
             endcomment
-            assign mf_promo_image = collection.metafields.custom.promo_image
-            assign mf_promo_link = collection.metafields.custom.promo_link | default: '#'
-            assign mf_promo_alt = collection.metafields.custom.promo_alt | default: 'Promotional image'
+            assign mf_promo_image = collection.metafields.custom.inline_promo_card
+            assign mf_promo_link = collection.metafields.custom.promo_card_link | default: '#'
+            assign mf_promo_alt = collection.title | append: ' promo'
             assign mf_promo_position = section.settings.columns_desktop | times: 3
             assign mf_promo_inserted = false
           -%}
@@ -2874,7 +2874,7 @@ min-height:40px;
       "id": "enable_metafield_promo",
       "default": true,
       "label": "Enable metafield promo card",
-      "info": "Shows a full-height promo image in the grid if the collection has a custom.promo_image metafield filled"
+      "info": "Shows a promo card in the grid if the collection has a custom.inline_promo_card metafield filled"
     },
     {
       "type": "header",
