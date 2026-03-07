@@ -118,7 +118,7 @@
         "bubble_hover_icon": "#2e3520",
         "bubble_label_color": "#333333",
         "bubble_label_size": 13,
-        "enable_tag_filtering": false,
+        "enable_tag_filtering": true,
         "filter_label": "Filter For Your Skin",
         "filter_tags": "Acne Safe, Anti-Aging, SPF, Sensitive Skin, Body Care",
         "filter_tag_border_color": "#999999",
