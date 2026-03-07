@@ -732,7 +732,6 @@ min-height:40px;
     width: 50%;
     height: 50%;
     color: {{ section.settings.bubble_icon_color }};
-    stroke: {{ section.settings.bubble_icon_color }};
   }
 
   #SLCollection-{{ section.id }} .sl-bubble-icon {
@@ -750,7 +749,6 @@ min-height:40px;
 
   #SLCollection-{{ section.id }} .sl-category-item:hover .sl-category-bubble svg {
     color: {{ section.settings.bubble_hover_icon }};
-    stroke: {{ section.settings.bubble_hover_icon }};
   }
 
   #SLCollection-{{ section.id }} .sl-category-item:hover .sl-category-bubble {
@@ -2426,8 +2424,12 @@ min-height:40px;
           svg.removeAttribute('width');
           svg.removeAttribute('height');
           svg.querySelectorAll('path, circle, line, polyline, polygon, rect, ellipse').forEach(function(el) {
-            el.removeAttribute('stroke');
-            el.removeAttribute('fill');
+            if (el.hasAttribute('stroke') && el.getAttribute('stroke') !== 'none') {
+              el.setAttribute('stroke', 'currentColor');
+            }
+            if (el.hasAttribute('fill') && el.getAttribute('fill') !== 'none') {
+              el.setAttribute('fill', 'currentColor');
+            }
           });
           wrapper.innerHTML = '';
           wrapper.appendChild(svg);
