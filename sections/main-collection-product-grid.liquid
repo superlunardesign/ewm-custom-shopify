@@ -1166,11 +1166,18 @@ min-height:40px;
   }
 {%- endstyle -%}
 
-{%- comment -%} Count out-of-stock products for frontend toggle {%- endcomment -%}
+{%- comment -%} Count out-of-stock products for frontend toggle (inventory-based) {%- endcomment -%}
 {%- assign oos_count = 0 -%}
 {%- if section.settings.show_out_of_stock -%}
   {%- for product in collection.products -%}
-    {%- unless product.available -%}
+    {%- assign _p_in_stock = false -%}
+    {%- for variant in product.variants -%}
+      {%- if variant.inventory_management == blank or variant.inventory_policy == 'continue' or variant.inventory_quantity > 0 -%}
+        {%- assign _p_in_stock = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- unless _p_in_stock -%}
       {%- assign oos_count = oos_count | plus: 1 -%}
     {%- endunless -%}
   {%- endfor -%}
@@ -1524,8 +1531,17 @@ min-height:40px;
           <ul class="sl-product-grid{% if grid_is_compact %} sl-product-grid--compact{% endif %}" id="product-grid" data-id="{{ section.id }}">
             {%- assign product_index = 0 -%}
             {%- for product in collection.products -%}
+              {%- comment -%} Inventory-based stock check: a product is in stock only if at least one variant has quantity > 0, continues selling, or doesn't track inventory {%- endcomment -%}
+              {%- assign product_in_stock = false -%}
+              {%- for variant in product.variants -%}
+                {%- if variant.inventory_management == blank or variant.inventory_policy == 'continue' or variant.inventory_quantity > 0 -%}
+                  {%- assign product_in_stock = true -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+
               {%- comment -%} Skip out-of-stock when backend toggle is off {%- endcomment -%}
-              {%- unless section.settings.show_out_of_stock or product.available -%}
+              {%- unless section.settings.show_out_of_stock or product_in_stock -%}
                 {%- continue -%}
               {%- endunless -%}
               {%- assign product_index = product_index | plus: 1 -%}
@@ -1594,18 +1610,18 @@ min-height:40px;
                 endif
               -%}
 
-              <li class="grid__item"{% unless product.available %} data-oos="true"{% endunless %}>
+              <li class="grid__item"{% unless product_in_stock %} data-oos="true"{% endunless %}>
                 {%- if is_compact_layout -%}
                   {%- comment -%} COMPACT LAYOUT - Card contains only image/title/price {%- endcomment -%}
                   <div class="sl-card-wrapper" data-product-id="{{ product.id }}">
                     <div class="sl-product-card">
                       <div class="sl-product-image">
                         <div class="sl-badges">
-                          {%- if product.available == false -%}
+                          {%- unless product_in_stock -%}
                             <span class="sl-badge sl-badge--soldout">{{ section.settings.soldout_text }}</span>
                           {%- elsif product.compare_at_price > product.price -%}
                             <span class="sl-badge sl-badge--sale">{{ section.settings.sale_text }}</span>
-                          {%- endif -%}
+                          {%- endunless -%}
                           {%- assign badge_tags_list = section.settings.badge_tags | split: ',' -%}
                           {%- for badge_tag in badge_tags_list -%}
                             {%- assign clean_badge_tag = badge_tag | strip -%}
@@ -1655,7 +1671,7 @@ min-height:40px;
                     {%- comment -%} Row 2: Button {%- endcomment -%}
                     <div class="sl-outside-button">
                       {%- if section.settings.show_add_to_cart -%}
-                        {%- if product.available -%}
+                        {%- if product_in_stock -%}
                           <button type="button"
                                   class="sl-add-to-cart-btn"
                                   data-variant-id="{{ product.selected_or_first_available_variant.id }}"
@@ -1676,7 +1692,7 @@ min-height:40px;
 
                       {%- liquid
                         assign show_subscribe_btn = false
-                        if section.settings.show_subscribe and product.available
+                        if section.settings.show_subscribe and product_in_stock
                           assign show_subscribe_btn = true
                           if section.settings.subscribe_exclude_collections != blank
                             assign excluded_handles = section.settings.subscribe_exclude_collections | split: ','
@@ -1761,11 +1777,11 @@ min-height:40px;
                     <div class="sl-product-card">
                       <div class="sl-product-image">
                         <div class="sl-badges">
-                          {%- if product.available == false -%}
+                          {%- unless product_in_stock -%}
                             <span class="sl-badge sl-badge--soldout">{{ section.settings.soldout_text }}</span>
                           {%- elsif product.compare_at_price > product.price -%}
                             <span class="sl-badge sl-badge--sale">{{ section.settings.sale_text }}</span>
-                          {%- endif -%}
+                          {%- endunless -%}
                           {%- assign badge_tags_list = section.settings.badge_tags | split: ',' -%}
                           {%- for badge_tag in badge_tags_list -%}
                             {%- assign clean_badge_tag = badge_tag | strip -%}
@@ -1869,7 +1885,7 @@ min-height:40px;
                     {%- comment -%} Action Buttons (outside card) {%- endcomment -%}
                     <div class="sl-outside-button">
                       {%- if section.settings.show_add_to_cart -%}
-                          {%- if product.available -%}
+                          {%- if product_in_stock -%}
                             <button type="button"
                                     class="sl-add-to-cart-btn"
                                     data-variant-id="{{ product.selected_or_first_available_variant.id }}"
@@ -1890,7 +1906,7 @@ min-height:40px;
 
                         {%- liquid
                           assign show_subscribe_btn = false
-                          if section.settings.show_subscribe and product.available
+                          if section.settings.show_subscribe and product_in_stock
                             assign show_subscribe_btn = true
                             if section.settings.subscribe_exclude_collections != blank
                               assign excluded_handles = section.settings.subscribe_exclude_collections | split: ','
