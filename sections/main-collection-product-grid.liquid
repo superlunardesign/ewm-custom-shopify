@@ -2272,6 +2272,7 @@ min-height:40px;
     bindAddToCart(sectionEl);
     initOosToggle(sectionEl);
     initInfiniteScroll(sectionEl);
+    inlineSvgIcons();
   }
 
   /* ===== Infinite Scroll ===== */
@@ -2408,10 +2409,11 @@ min-height:40px;
   })();
 
   /* ===== Inline SVG Injection ===== */
-  (function inlineSvgIcons() {
+  function inlineSvgIcons() {
     var sectionEl = document.getElementById('SLCollection-' + sectionId);
     if (!sectionEl) return;
     sectionEl.querySelectorAll('[data-inline-svg]').forEach(function(wrapper) {
+      if (wrapper.querySelector('svg')) return; // already injected
       var img = wrapper.querySelector('img');
       if (!img || !img.src) return;
       fetch(img.src)
@@ -2474,7 +2476,8 @@ min-height:40px;
         })
         .catch(function() {});
     });
-  })();
+  }
+  inlineSvgIcons();
 
 })();
 </script>
