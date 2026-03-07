@@ -556,6 +556,28 @@
     opacity: 0.9;
   }
 
+  /* Metafield Promo Card - image-only, fills entire row height */
+  #SLCollection-{{ section.id }} .sl-metafield-promo {
+    grid-row: 1 / -1;
+    display: block;
+    border-radius: {{ section.settings.card_border_radius }}px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #SLCollection-{{ section.id }} .sl-metafield-promo a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #SLCollection-{{ section.id }} .sl-metafield-promo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   /* Mobile Adjustments */
   @media screen and (max-width: 749px) {
     #SLCollection-{{ section.id }} .sl-product-info {
@@ -1136,18 +1158,22 @@ min-height:40px;
   {%- liquid
     comment
       Detect parent vs child collection.
-      Parent = has child_collections metafield (list of collection references).
-      Child  = has parent_collection metafield.
+      Child  = has parent_collection metafield filled.
+      Parent = does NOT have parent_collection filled AND a matching
+               category menu exists (handle from section setting).
+      Category bubbles are driven by a Shopify navigation menu so
+      the store owner can control order and which collections show.
     endcomment
-    assign is_parent_collection = false
     assign is_child_collection = false
-    assign child_collections = collection.metafields.custom.child_collections.value
-    if child_collections != blank and child_collections.size > 0
-      assign is_parent_collection = true
-    endif
+    assign is_parent_collection = false
     assign parent_ref = collection.metafields.custom.parent_collection.value
     if parent_ref != blank
       assign is_child_collection = true
+    endif
+
+    assign category_menu = linklists[section.settings.category_menu]
+    if is_child_collection == false and category_menu != blank and category_menu.links.size > 0
+      assign is_parent_collection = true
     endif
 
     assign current_sort_by = collection.sort_by | default: collection.default_sort_by
@@ -1205,17 +1231,17 @@ min-height:40px;
           </button>
 
           <div class="sl-category-track" data-bubble-track>
-            {%- for child_col in child_collections -%}
-              <a href="{{ child_col.url }}" class="sl-category-item">
+            {%- for link in category_menu.links -%}
+              {%- assign linked_col = link.object -%}
+              <a href="{{ link.url }}" class="sl-category-item">
                 <div class="sl-category-bubble">
-                  {%- assign icon = child_col.metafields.custom.category_icon -%}
-                  {%- if icon != blank -%}
-                    <img src="{{ icon | image_url: width: 120 }}" alt="{{ child_col.title | escape }}" loading="lazy" width="60" height="60">
+                  {%- if linked_col != blank and linked_col.metafields.custom.category_icon != blank -%}
+                    <img src="{{ linked_col.metafields.custom.category_icon | image_url: width: 120 }}" alt="{{ link.title | escape }}" loading="lazy" width="60" height="60">
                   {%- else -%}
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
                   {%- endif -%}
                 </div>
-                <span class="sl-category-label">{{ child_col.title }}</span>
+                <span class="sl-category-label">{{ link.title }}</span>
               </a>
             {%- endfor -%}
           </div>
@@ -1515,6 +1541,18 @@ min-height:40px;
               endfor
             endif
           -%}
+          {%- liquid
+            comment
+              Metafield promo card: insert as last item in row 3.
+              Position = desktop columns * 3 (e.g. 4 cols = position 12).
+              Only show if collection has a promo_image metafield.
+            endcomment
+            assign mf_promo_image = collection.metafields.custom.promo_image
+            assign mf_promo_link = collection.metafields.custom.promo_link | default: '#'
+            assign mf_promo_alt = collection.metafields.custom.promo_alt | default: 'Promotional image'
+            assign mf_promo_position = section.settings.columns_desktop | times: 3
+            assign mf_promo_inserted = false
+          -%}
           <ul class="sl-product-grid{% if grid_is_compact %} sl-product-grid--compact{% endif %}" id="product-grid" data-id="{{ section.id }}">
             {%- assign product_index = 0 -%}
             {%- for product in collection.products -%}
@@ -1524,7 +1562,23 @@ min-height:40px;
               {%- endunless -%}
               {%- assign product_index = product_index | plus: 1 -%}
 
-              {%- comment -%} Check if a promo card should appear at this position {%- endcomment -%}
+              {%- comment -%} Metafield promo card at last slot of row 3 {%- endcomment -%}
+              {%- if mf_promo_image != blank and mf_promo_inserted == false and product_index == mf_promo_position -%}
+                {%- assign mf_promo_inserted = true -%}
+                <li class="grid__item">
+                  <div class="sl-metafield-promo">
+                    <a href="{{ mf_promo_link }}">
+                      <img src="{{ mf_promo_image | image_url: width: 800 }}"
+                           alt="{{ mf_promo_alt | escape }}"
+                           loading="lazy"
+                           width="800"
+                           height="1000">
+                    </a>
+                  </div>
+                </li>
+              {%- endif -%}
+
+              {%- comment -%} Check if a block promo card should appear at this position {%- endcomment -%}
               {%- for block in section.blocks -%}
                 {%- if block.type == 'promo_card' and block.settings.position == product_index -%}
                   <li class="grid__item" {{ block.shopify_attributes }}>
@@ -2877,6 +2931,13 @@ min-height:40px;
     {
       "type": "header",
       "content": "Category Bubbles (Parent Collections)"
+    },
+    {
+      "type": "text",
+      "id": "category_menu",
+      "label": "Category menu handle",
+      "info": "Handle of a Shopify navigation menu whose links become category bubbles. Collections without a parent_collection metafield will show these bubbles.",
+      "default": "collection-categories"
     },
     {
       "type": "text",
