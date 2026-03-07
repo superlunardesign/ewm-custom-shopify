@@ -503,25 +503,40 @@
     opacity: 0.9;
   }
 
-  /* Promo Card - spans all subgrid rows */
+  /* Promo Card - fills entire product card slot like the example photo.
+     Background image covers the full card; text + button overlay on top. */
   #SLCollection-{{ section.id }} .sl-promo-card {
     grid-row: 1 / -1;
-    background: {{ section.settings.promo_background }};
     border-radius: {{ section.settings.card_border_radius }}px;
     overflow: hidden;
+    position: relative;
+    min-height: 100%;
+  }
+
+  #SLCollection-{{ section.id }} .sl-promo-card .sl-promo-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Fallback background color when no image is set */
+  #SLCollection-{{ section.id }} .sl-promo-card--no-img {
+    background: {{ section.settings.promo_background }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-promo-card .sl-promo-content {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 30px 20px;
-    min-height: 100%;
-  }
-
-  #SLCollection-{{ section.id }} .sl-promo-card img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 15px;
+    height: 100%;
   }
 
   #SLCollection-{{ section.id }} .sl-promo-title {
@@ -592,7 +607,7 @@ min-height:40px;
       font-size: {{ section.settings.title_font_size | minus: 2 }}px;
     }
 
-    #SLCollection-{{ section.id }} .sl-promo-card {
+    #SLCollection-{{ section.id }} .sl-promo-card .sl-promo-content {
       padding: 20px 15px;
     }
 
@@ -1530,25 +1545,28 @@ min-height:40px;
               {%- for block in section.blocks -%}
                 {%- if block.type == 'promo_card' and block.settings.position == product_index -%}
                   <li class="grid__item" {{ block.shopify_attributes }}>
-                    <div class="sl-promo-card">
+                    <div class="sl-promo-card{% unless block.settings.image != blank %} sl-promo-card--no-img{% endunless %}">
                       {%- if block.settings.image != blank -%}
-                        <img src="{{ block.settings.image | img_url: '400x400' }}"
+                        <img class="sl-promo-bg"
+                             src="{{ block.settings.image | image_url: width: 800 }}"
                              alt="{{ block.settings.title | escape }}"
                              loading="lazy"
-                            height=""
-                          width="">
+                             width="800"
+                             height="{{ 800 | divided_by: block.settings.image.aspect_ratio | round }}">
                       {%- endif -%}
-                      {%- if block.settings.title != blank -%}
-                        <h3 class="sl-promo-title">{{ block.settings.title }}</h3>
-                      {%- endif -%}
-                      {%- if block.settings.text != blank -%}
-                        <p class="sl-promo-text">{{ block.settings.text }}</p>
-                      {%- endif -%}
-                      {%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
-                        <a href="{{ block.settings.button_link }}" class="sl-promo-btn">
-                          {{ block.settings.button_text }}
-                        </a>
-                      {%- endif -%}
+                      <div class="sl-promo-content">
+                        {%- if block.settings.title != blank -%}
+                          <h3 class="sl-promo-title">{{ block.settings.title }}</h3>
+                        {%- endif -%}
+                        {%- if block.settings.text != blank -%}
+                          <p class="sl-promo-text">{{ block.settings.text }}</p>
+                        {%- endif -%}
+                        {%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
+                          <a href="{{ block.settings.button_link }}" class="sl-promo-btn">
+                            {{ block.settings.button_text }}
+                          </a>
+                        {%- endif -%}
+                      </div>
                     </div>
                   </li>
                 {%- endif -%}
