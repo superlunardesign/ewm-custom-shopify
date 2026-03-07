@@ -2423,23 +2423,52 @@ min-height:40px;
           if (!svg) return;
           svg.removeAttribute('width');
           svg.removeAttribute('height');
-          // Remove embedded stylesheets and defs styles so class-based colors don't override
-          svg.querySelectorAll('style').forEach(function(s) { s.remove(); });
+
+          // Temporarily add SVG to DOM so computed styles resolve class-based rules
+          var temp = document.createElement('div');
+          temp.style.position = 'absolute';
+          temp.style.visibility = 'hidden';
+          temp.style.pointerEvents = 'none';
+          temp.appendChild(svg);
+          document.body.appendChild(temp);
+
           svg.querySelectorAll('path, circle, line, polyline, polygon, rect, ellipse').forEach(function(el) {
+            var computed = window.getComputedStyle(el);
+            var computedFill = computed.fill;
+            var computedStroke = computed.stroke;
+
+            // Determine if element uses stroke (any non-none stroke)
+            var usesStroke = computedStroke && computedStroke !== 'none';
+            // Determine if element uses fill (any non-none fill)
+            var usesFill = computedFill && computedFill !== 'none';
+
+            // Preserve stroke-width and other stroke properties from computed style
+            if (usesStroke) {
+              var sw = computed.strokeWidth;
+              var slc = computed.strokeLinecap;
+              var slj = computed.strokeLinejoin;
+              if (sw) el.setAttribute('stroke-width', sw);
+              if (slc && slc !== 'butt') el.setAttribute('stroke-linecap', slc);
+              if (slj && slj !== 'miter') el.setAttribute('stroke-linejoin', slj);
+            }
+
+            // Remove class so embedded styles no longer apply
             el.removeAttribute('class');
-            var hasStroke = el.hasAttribute('stroke') && el.getAttribute('stroke') !== 'none';
-            var hasFill = el.hasAttribute('fill') && el.getAttribute('fill') !== 'none';
-            if (hasStroke) {
+
+            // Set fill and stroke as inline attributes
+            if (usesFill) {
+              el.setAttribute('fill', 'currentColor');
+            } else {
+              el.setAttribute('fill', 'none');
+            }
+            if (usesStroke) {
               el.setAttribute('stroke', 'currentColor');
             }
-            if (hasFill) {
-              el.setAttribute('fill', 'currentColor');
-            }
-            // If element had neither stroke nor fill attribute, it defaults to fill — set it
-            if (!hasStroke && !hasFill && el.getAttribute('fill') !== 'none') {
-              el.setAttribute('fill', 'currentColor');
-            }
           });
+
+          // Remove temp container and embedded styles
+          document.body.removeChild(temp);
+          svg.querySelectorAll('style').forEach(function(s) { s.remove(); });
           wrapper.innerHTML = '';
           wrapper.appendChild(svg);
         })
