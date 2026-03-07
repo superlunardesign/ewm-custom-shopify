@@ -2423,11 +2423,20 @@ min-height:40px;
           if (!svg) return;
           svg.removeAttribute('width');
           svg.removeAttribute('height');
+          // Remove embedded stylesheets and defs styles so class-based colors don't override
+          svg.querySelectorAll('style').forEach(function(s) { s.remove(); });
           svg.querySelectorAll('path, circle, line, polyline, polygon, rect, ellipse').forEach(function(el) {
-            if (el.hasAttribute('stroke') && el.getAttribute('stroke') !== 'none') {
+            el.removeAttribute('class');
+            var hasStroke = el.hasAttribute('stroke') && el.getAttribute('stroke') !== 'none';
+            var hasFill = el.hasAttribute('fill') && el.getAttribute('fill') !== 'none';
+            if (hasStroke) {
               el.setAttribute('stroke', 'currentColor');
             }
-            if (el.hasAttribute('fill') && el.getAttribute('fill') !== 'none') {
+            if (hasFill) {
+              el.setAttribute('fill', 'currentColor');
+            }
+            // If element had neither stroke nor fill attribute, it defaults to fill — set it
+            if (!hasStroke && !hasFill && el.getAttribute('fill') !== 'none') {
               el.setAttribute('fill', 'currentColor');
             }
           });
