@@ -1831,7 +1831,7 @@ min-height:40px;
                     </div>
 
                     {%- comment -%} Row 3: Variants (outside card for compact layout) {%- endcomment -%}
-                    {%- if section.settings.show_variants and product.has_only_default_variant == false -%}
+                    {%- if section.settings.show_variants and product.has_only_default_variant == false and product_in_stock -%}
                     <div class="sl-outside-variants">
                         <div class="sl-variant-options">
                           <script type="application/json" class="sl-variant-data">
@@ -1947,7 +1947,7 @@ min-height:40px;
                       </div>
 
                       {%- comment -%} Variants inside card (regular layout) {%- endcomment -%}
-                      {%- if section.settings.show_variants and product.has_only_default_variant == false -%}
+                      {%- if section.settings.show_variants and product.has_only_default_variant == false and product_in_stock -%}
                       <div class="sl-card-variants">
                         <div class="sl-variant-options">
                           <script type="application/json" class="sl-variant-data">
