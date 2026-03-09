@@ -127,7 +127,7 @@
         "enable_sorting": true,
         "pagination_active_color": "#8c9b6d",
         "show_out_of_stock": true,
-        "soldout_button_text": "OUT OF STOCK",
+        "soldout_button_text": "SOLD OUT",
         "oos_button_background": "#e0e0e0",
         "oos_button_text": "#727272",
         "oos_button_border_color": "#121212",
