@@ -40,6 +40,7 @@
 <style>
   .sl-bis-settings {
     max-width: 600px;
+    margin: 0 auto;
   }
   .sl-bis-page-title {
     letter-spacing: normal;
@@ -331,26 +332,31 @@
           return;
         }
 
+        /* Only show out-of-stock products */
+        var oosProducts = products.filter(function(p) { return !p.available; });
+        if (oosProducts.length === 0) {
+          resultsEl.innerHTML = '<div class="sl-bis-search-no-results">No out-of-stock products found</div>';
+          return;
+        }
+
         var currentList = getList();
         var currentHandles = currentList.map(function(p) { return p.handle; });
         var html = '';
 
-        products.forEach(function(p) {
+        oosProducts.forEach(function(p) {
           var isAdded = currentHandles.indexOf(p.handle) !== -1;
           var imgSrc = p.image || p.featured_image && p.featured_image.url || '';
-          var isAvailable = p.available;
 
           html += '<div class="sl-bis-search-result' + (isAdded ? ' sl-bis-search-result--added' : '') + '"' +
             ' data-handle="' + p.handle + '"' +
             ' data-title="' + escapeAttr(p.title) + '"' +
             ' data-image="' + escapeAttr(imgSrc) + '"' +
-            ' data-url="' + escapeAttr(p.url) + '"' +
-            ' data-available="' + (isAvailable ? 'true' : 'false') + '">' +
+            ' data-url="' + escapeAttr(p.url) + '">' +
             (imgSrc ? '<img src="' + imgSrc + '" alt="" loading="lazy">' : '') +
             '<div class="sl-bis-search-result-info">' +
               '<div class="sl-bis-search-result-title">' + escapeHtml(p.title) + '</div>' +
-              '<div class="sl-bis-search-result-status' + (!isAvailable ? ' sl-bis-search-result-status--oos' : '') + '">' +
-                (isAdded ? 'Already on your list' : (!isAvailable ? 'Out of stock' : 'In stock')) +
+              '<div class="sl-bis-search-result-status sl-bis-search-result-status--oos">' +
+                (isAdded ? 'Already on your list' : 'Out of stock') +
               '</div>' +
             '</div>' +
           '</div>';
