@@ -2793,20 +2793,21 @@ min-height:40px;
   }
   .sl-notify-popin__card {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1000;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.18);
-    padding: 20px;
-    width: 340px;
+    padding: 28px;
+    width: 400px;
     max-width: calc(100vw - 40px);
-    animation: sl-popin-slide 0.25s ease-out;
+    animation: sl-popin-drop 0.3s ease-out;
   }
-  @keyframes sl-popin-slide {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes sl-popin-drop {
+    from { opacity: 0; transform: translate(-50%, -60%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
   }
   .sl-notify-popin__close {
     position: absolute;
@@ -2948,12 +2949,20 @@ min-height:40px;
 
   @media screen and (max-width: 749px) {
     .sl-notify-popin__card {
+      top: auto;
       bottom: 0;
-      right: 0;
       left: 0;
+      right: 0;
+      transform: none;
       width: 100%;
       max-width: 100%;
       border-radius: 10px 10px 0 0;
+      padding: 20px;
+      animation: sl-popin-slide-up 0.3s ease-out;
+    }
+    @keyframes sl-popin-slide-up {
+      from { opacity: 0; transform: translateY(100%); }
+      to { opacity: 1; transform: translateY(0); }
     }
   }
 </style>
@@ -2975,7 +2984,7 @@ min-height:40px;
   var emailInput  = document.getElementById('sl-popin-email');
 
   var currentHandle = '';
-  var custId = {{ customer.id | default: 'null' | json }};
+  var custId = {% if customer %}{{ customer.id | json }}{% else %}null{% endif %};
   var custEmail = {{ customer.email | default: '' | json }};
   var custName = {{ customer.first_name | default: '' | json }};
   var storageKey = custId ? 'sl_bis_' + custId : null;
@@ -3055,7 +3064,37 @@ min-height:40px;
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
 
-      /* Find a contact form authenticity token from the page */
+      /* Save to localStorage IMMEDIATELY (optimistic) */
+      var bells = document.querySelectorAll('.sl-notify-bell--standalone[data-notify-handle="' + currentHandle + '"]');
+      var productUrl = '/products/' + currentHandle;
+      bells.forEach(function(b) {
+        productUrl = b.getAttribute('data-notify-url') || productUrl;
+      });
+
+      if (storageKey) {
+        var list = getList();
+        if (!list.some(function(p) { return p.handle === currentHandle; })) {
+          list.push({
+            handle: currentHandle,
+            title: titleEl.textContent,
+            image: imageEl.src,
+            url: productUrl,
+            addedAt: new Date().toISOString()
+          });
+          saveList(list);
+        }
+      }
+
+      /* Update ALL matching bell visual states immediately */
+      bells.forEach(function(b) {
+        b.classList.add('sl-notify-bell--subscribed');
+      });
+
+      /* Show success in the pop-in immediately */
+      bodyEl.style.display = 'none';
+      successEl.style.display = '';
+
+      /* Submit contact form in background for Shopify Flow to process */
       var tokenEl = document.querySelector('form input[name="authenticity_token"]');
       var token = tokenEl ? tokenEl.value : '';
 
@@ -3071,40 +3110,8 @@ min-height:40px;
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData.toString()
-      })
-      .then(function() {
-        /* Save to localStorage (works for both logged-in and guests) */
-        var bells = document.querySelectorAll('.sl-notify-bell--standalone[data-notify-handle="' + currentHandle + '"]');
-        var productUrl = '/products/' + currentHandle;
-        bells.forEach(function(b) {
-          productUrl = b.getAttribute('data-notify-url') || productUrl;
-        });
-
-        if (storageKey) {
-          var list = getList();
-          if (!list.some(function(p) { return p.handle === currentHandle; })) {
-            list.push({
-              handle: currentHandle,
-              title: titleEl.textContent,
-              image: imageEl.src,
-              url: productUrl,
-              addedAt: new Date().toISOString()
-            });
-            saveList(list);
-          }
-        }
-
-        /* Update ALL matching bell visual states */
-        bells.forEach(function(b) {
-          b.classList.add('sl-notify-bell--subscribed');
-        });
-
-        bodyEl.style.display = 'none';
-        successEl.style.display = '';
-      })
-      .catch(function() {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Notify Me';
+      }).catch(function(err) {
+        console.warn('BIS contact form submission failed:', err);
       });
     });
   }
