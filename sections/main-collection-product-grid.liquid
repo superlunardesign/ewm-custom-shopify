@@ -1191,7 +1191,7 @@ min-height:40px;
   {%- for product in collection.products -%}
     {%- assign _p_in_stock = false -%}
     {%- for variant in product.variants -%}
-      {%- if variant.inventory_management == blank or variant.inventory_policy == 'continue' or variant.inventory_quantity > 0 -%}
+      {%- if variant.inventory_quantity > 0 -%}
         {%- assign _p_in_stock = true -%}
         {%- break -%}
       {%- endif -%}
@@ -1550,10 +1550,10 @@ min-height:40px;
           <ul class="sl-product-grid{% if grid_is_compact %} sl-product-grid--compact{% endif %}" id="product-grid" data-id="{{ section.id }}">
             {%- assign product_index = 0 -%}
             {%- for product in collection.products -%}
-              {%- comment -%} Inventory-based stock check: a product is in stock only if at least one variant has quantity > 0, continues selling, or doesn't track inventory {%- endcomment -%}
+              {%- comment -%} Check if product has any inventory at all {%- endcomment -%}
               {%- assign product_in_stock = false -%}
               {%- for variant in product.variants -%}
-                {%- if variant.inventory_management == blank or variant.inventory_policy == 'continue' or variant.inventory_quantity > 0 -%}
+                {%- if variant.inventory_quantity > 0 -%}
                   {%- assign product_in_stock = true -%}
                   {%- break -%}
                 {%- endif -%}
