@@ -6,14 +6,20 @@
   - ?notify=true in URL auto-scrolls to this form.
   - Logged-in customers who already signed up see a "signed up" banner
     with a link to their notification settings.
+  - Uses customer metafield custom.back_in_stock (List of Products) as
+    the source of truth. Contact form → Shopify Flow handles writes.
 {%- endcomment -%}
 
 {%- unless product.available -%}
-{%- comment -%} Check customer tags for server-side signed-up state {%- endcomment -%}
-{%- assign bis_tag = 'bis:' | append: product.handle -%}
-{%- assign bis_tagged = false -%}
-{%- if customer and customer.tags contains bis_tag -%}
-  {%- assign bis_tagged = true -%}
+{%- comment -%} Check customer metafield for server-side signed-up state {%- endcomment -%}
+{%- assign bis_subscribed = false -%}
+{%- if customer and customer.metafields.custom.back_in_stock.value -%}
+  {%- for bis_product in customer.metafields.custom.back_in_stock.value -%}
+    {%- if bis_product.handle == product.handle -%}
+      {%- assign bis_subscribed = true -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
 {%- endif -%}
 
 <div class="sl-notify-form" id="sl-notify-form"
@@ -26,11 +32,24 @@
      data-variant-title="{{ product.selected_or_first_available_variant.title | default: product.variants.first.title | escape }}"
      {%- if customer %}data-customer-id="{{ customer.id }}"{% endif %}
      {%- if customer %}data-customer-email="{{ customer.email | escape }}"{% endif %}
-     {%- if bis_tagged %}data-bis-tagged="true"{% endif %}>
+     {%- if customer %}data-customer-name="{{ customer.first_name | escape }}"{% endif %}
+     {%- if bis_subscribed %}data-bis-subscribed="true"{% endif %}>
 
-  {%- comment -%} "Already signed up" banner — shown via Liquid tag check or JS localStorage {%- endcomment -%}
+  {%- comment -%} Hidden contact form for Shopify Flow {%- endcomment -%}
   {%- if customer -%}
-    <div class="sl-notify-signed-up" id="sl-notify-signed-up" style="{% unless bis_tagged %}display:none;{% endunless %}">
+    {% form 'contact', id: 'sl-notify-contact-form' %}
+      <div style="display:none;">
+        <input type="hidden" name="contact[email]" value="{{ customer.email }}">
+        <input type="hidden" name="contact[first_name]" value="{{ customer.first_name }}">
+        <input type="hidden" name="contact[tags]" value="">
+        <input type="hidden" name="contact[body]" value="">
+      </div>
+    {% endform %}
+  {%- endif -%}
+
+  {%- comment -%} "Already signed up" banner {%- endcomment -%}
+  {%- if customer -%}
+    <div class="sl-notify-signed-up" id="sl-notify-signed-up" style="{% unless bis_subscribed %}display:none;{% endunless %}">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
       <div>
         <p>You're signed up to be notified when this product is back in stock.</p>
@@ -39,8 +58,8 @@
     </div>
   {%- endif -%}
 
-  {%- comment -%} Standard form — hidden when already signed up (via tag or JS) {%- endcomment -%}
-  <div id="sl-notify-form-inner" {% if bis_tagged %}style="display:none;"{% endif %}>
+  {%- comment -%} Standard form — hidden when already signed up {%- endcomment -%}
+  <div id="sl-notify-form-inner" {% if bis_subscribed %}style="display:none;"{% endif %}>
     <div id="sl-notify-success-msg" style="display:none;">
       <div class="sl-notify-success">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -238,58 +257,42 @@
 
     var handle       = container.getAttribute('data-product-handle');
     var title        = container.getAttribute('data-product-title');
-    var image        = container.getAttribute('data-product-image');
-    var url          = container.getAttribute('data-product-url');
-    var productId    = parseInt(container.getAttribute('data-product-id'));
-    var variantId    = parseInt(container.getAttribute('data-variant-id'));
-    var variantTitle = container.getAttribute('data-variant-title') || 'Default Title';
+    var productId    = container.getAttribute('data-product-id');
     var custId       = container.getAttribute('data-customer-id');
     var custEmail    = container.getAttribute('data-customer-email') || '';
-    var storageKey   = custId ? 'sl_bis_' + custId : null;
+    var custName     = container.getAttribute('data-customer-name') || '';
 
-    /* ---- localStorage helpers ---- */
-    function getList() {
-      if (!storageKey) return [];
-      try { return JSON.parse(localStorage.getItem(storageKey)) || []; }
-      catch(e) { return []; }
-    }
-    function saveList(list) {
-      if (!storageKey) return;
-      localStorage.setItem(storageKey, JSON.stringify(list));
-    }
-    function isSignedUp() {
-      return getList().some(function(p) { return p.handle === handle; });
-    }
-    function addProduct() {
-      var list = getList();
-      if (list.some(function(p) { return p.handle === handle; })) return;
-      list.push({ handle: handle, title: title, image: image, url: url, addedAt: new Date().toISOString() });
-      saveList(list);
+    /* ---- Contact form submission for Shopify Flow ---- */
+    var contactForm = document.getElementById('sl-notify-contact-form');
+    var authToken = '';
+    if (contactForm) {
+      var tokenInput = contactForm.querySelector('input[name="authenticity_token"]');
+      if (tokenInput) authToken = tokenInput.value;
     }
 
-    /* ---- REZ Back-in-Stock API ---- */
-    function subscribeViaRez(email) {
-      return fetch('/apps/rez/bis/product', {
+    function submitContactForm(action) {
+      if (!contactForm) return Promise.resolve();
+      var formData = new URLSearchParams();
+      formData.append('form_type', 'contact');
+      if (authToken) formData.append('authenticity_token', authToken);
+      formData.append('contact[email]', custEmail);
+      formData.append('contact[first_name]', custName);
+      formData.append('contact[tags]', 'back-in-stock, ' + action);
+      formData.append('contact[body]', 'product_id:' + productId + '|product_handle:' + handle + '|product_title:' + title);
+
+      return fetch('/contact#contact_form', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          variant_id: variantId,
-          variant_title: variantTitle,
-          store_id: 4307,
-          product_name: title,
-          product_id: productId,
-          locale: 'en'
-        })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString()
       });
     }
 
     /* ---- Show "already signed up" for logged-in customers ---- */
     var signedUpEl = document.getElementById('sl-notify-signed-up');
     var formInner  = document.getElementById('sl-notify-form-inner');
-    var bisTagged  = container.getAttribute('data-bis-tagged') === 'true';
+    var bisSubscribed = container.getAttribute('data-bis-subscribed') === 'true';
 
-    if (custId && (bisTagged || isSignedUp())) {
+    if (custId && bisSubscribed) {
       if (signedUpEl) signedUpEl.style.display = '';
       if (formInner) formInner.style.display = 'none';
     }
@@ -314,20 +317,18 @@
         submitBtn.textContent = 'Submitting...';
         if (errorEl) errorEl.style.display = 'none';
 
-        subscribeViaRez(email)
+        submitContactForm('bis-add')
           .then(function(res) {
-            if (!res.ok) throw new Error('REZ API error');
+            if (res && !res.ok) throw new Error('Contact form error');
             /* Success */
-            addProduct();
             if (formBody) formBody.style.display = 'none';
             if (successMsg) successMsg.style.display = '';
-            /* Update signed-up state for logged-in users */
             if (custId && signedUpEl) {
               signedUpEl.style.display = '';
             }
           })
           .catch(function(err) {
-            console.warn('REZ BIS subscription failed:', err);
+            console.warn('BIS subscription failed:', err);
             submitBtn.disabled = false;
             submitBtn.textContent = 'Notify Me';
             if (errorEl) errorEl.style.display = '';

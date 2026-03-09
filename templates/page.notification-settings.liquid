@@ -3,10 +3,8 @@
   Requires customer login — redirects guests to login page.
   Assign this template to a page called "Notification Settings" in Shopify admin.
 
-  Uses customer tags (format: bis:{product-handle}) as the server-side source of truth.
-  Requires Shopify Flow to add/remove tags on contact form submissions:
-    - Tag "back-in-stock" → add customer tag "bis:{handle}" (handle is 2nd tag)
-    - Tag "remove-back-in-stock" → remove customer tag "bis:{handle}"
+  Uses customer metafield custom.back_in_stock (List of Products) as the
+  source of truth. Contact form → Shopify Flow handles adds/removes.
 {% endcomment %}
 
 {% unless customer %}
@@ -17,29 +15,54 @@
 
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 
-{%- comment -%} Extract bis: tags from customer and output as JSON {%- endcomment -%}
-{%- assign bis_handles = '' -%}
-{%- for tag in customer.tags -%}
-  {%- if tag contains 'bis:' -%}
-    {%- assign handle = tag | remove: 'bis:' -%}
-    {%- if bis_handles != '' -%}{%- assign bis_handles = bis_handles | append: ',' -%}{%- endif -%}
-    {%- assign bis_handles = bis_handles | append: handle -%}
-  {%- endif -%}
-{%- endfor -%}
+{%- assign bis_products = customer.metafields.custom.back_in_stock.value -%}
 
 <div class="page-width" style="padding-top: 36px; padding-bottom: 60px;">
   <div class="sl-bis-settings" id="notification-settings"
        data-customer-id="{{ customer.id }}"
        data-customer-email="{{ customer.email }}"
-       data-customer-name="{{ customer.first_name }}"
-       data-bis-handles="{{ bis_handles }}">
+       data-customer-name="{{ customer.first_name }}">
 
     <h1 class="sl-bis-page-title">Back in Stock Notifications</h1>
     <p class="sl-bis-subtitle">Products you've asked to be notified about when they're back in stock.</p>
 
+    {%- comment -%} Hidden contact form for Shopify Flow {%- endcomment -%}
+    {% form 'contact', id: 'sl-bis-contact-form' %}
+      <div style="display:none;">
+        <input type="hidden" name="contact[email]" value="{{ customer.email }}">
+        <input type="hidden" name="contact[first_name]" value="{{ customer.first_name }}">
+        <input type="hidden" name="contact[tags]" value="">
+        <input type="hidden" name="contact[body]" value="">
+      </div>
+    {% endform %}
+
+    {%- comment -%} Notification list — rendered server-side from metafield {%- endcomment -%}
     <div class="sl-bis-list" id="sl-bis-list">
-      <p class="sl-bis-empty" id="sl-bis-empty">You haven't signed up for any back-in-stock notifications yet.</p>
-      <div class="sl-bis-loading" id="sl-bis-loading" style="display:none;">Loading your notifications...</div>
+      {%- if bis_products and bis_products.size > 0 -%}
+        {%- for p in bis_products -%}
+          {%- unless p.available -%}
+            <div class="sl-bis-item" data-handle="{{ p.handle }}" data-product-id="{{ p.id }}">
+              {%- if p.featured_image -%}
+                <img class="sl-bis-item-image" src="{{ p.featured_image | image_url: width: 112 }}" alt="{{ p.title | escape }}" loading="lazy">
+              {%- else -%}
+                <div class="sl-bis-item-image--placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                </div>
+              {%- endif -%}
+              <div class="sl-bis-item-info">
+                <a class="sl-bis-item-title" href="{{ p.url }}">{{ p.title }}</a>
+              </div>
+              <button type="button" class="sl-bis-remove-btn" data-handle="{{ p.handle }}" data-product-id="{{ p.id }}" data-title="{{ p.title | escape }}" aria-label="Remove {{ p.title | escape }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+      <p class="sl-bis-empty" id="sl-bis-empty"
+         {% if bis_products and bis_products.size > 0 %}style="display:none;"{% endif %}>
+        You haven't signed up for any back-in-stock notifications yet.
+      </p>
     </div>
 
     <div class="sl-bis-add-section">
@@ -90,10 +113,6 @@
     color: rgba(var(--color-foreground), 0.5);
     font-size: 1.4rem;
     font-style: italic;
-  }
-  .sl-bis-loading {
-    color: rgba(var(--color-foreground), 0.5);
-    font-size: 1.4rem;
   }
   .sl-bis-item {
     display: flex;
@@ -146,6 +165,23 @@
     color: rgba(var(--color-foreground), 0.5);
     margin-top: 2px;
   }
+
+  /* Remove button */
+  .sl-bis-remove-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: rgba(var(--color-foreground), 0.4);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .sl-bis-remove-btn:hover {
+    color: #c62828;
+    background: rgba(198, 40, 40, 0.08);
+  }
+
   /* Add / search section */
   .sl-bis-add-section h3,
   .sl-bis-browse-section h3 {
@@ -302,186 +338,87 @@
   var settingsEl = document.getElementById('notification-settings');
   if (!settingsEl) return;
 
-  var custId       = settingsEl.getAttribute('data-customer-id');
   var custEmail    = settingsEl.getAttribute('data-customer-email');
   var custName     = settingsEl.getAttribute('data-customer-name');
-  var bisHandlesRaw = settingsEl.getAttribute('data-bis-handles');
-  var storageKey   = 'sl_bis_' + custId;
   var listEl       = document.getElementById('sl-bis-list');
   var emptyEl      = document.getElementById('sl-bis-empty');
-  var loadingEl    = document.getElementById('sl-bis-loading');
   var searchInput  = document.getElementById('sl-bis-search');
   var resultsEl    = document.getElementById('sl-bis-search-results');
   var browseEl     = document.getElementById('sl-bis-browse-list');
   var debounceTimer = null;
 
-  /* ---- Tracked handles (from customer tags — server-side truth) ---- */
-  var tagHandles = bisHandlesRaw ? bisHandlesRaw.split(',').filter(Boolean) : [];
-
-  /* ---- localStorage helpers (used as client-side cache + product details) ---- */
-  function getList() {
-    try { return JSON.parse(localStorage.getItem(storageKey)) || []; }
-    catch(e) { return []; }
-  }
-  function saveList(list) {
-    localStorage.setItem(storageKey, JSON.stringify(list));
+  /* Get authenticity token from hidden contact form */
+  var contactForm = document.getElementById('sl-bis-contact-form');
+  var authToken = '';
+  if (contactForm) {
+    var tokenInput = contactForm.querySelector('input[name="authenticity_token"]');
+    if (tokenInput) authToken = tokenInput.value;
   }
 
-  /* ---- Merge tag handles with localStorage details ---- */
-  /* Tags are the source of truth for WHICH products are tracked.
-     localStorage provides product details (title, image, url). */
-  function getTrackedHandles() {
-    var localList = getList();
-    var localHandles = localList.map(function(p) { return p.handle; });
-    /* Combine: all tag handles + any localStorage handles not in tags */
-    var all = tagHandles.slice();
-    localList.forEach(function(p) {
-      if (all.indexOf(p.handle) === -1) all.push(p.handle);
-    });
-    return all;
+  /* Track handles currently in the list (from server-rendered items) */
+  var trackedHandles = [];
+  listEl.querySelectorAll('.sl-bis-item[data-handle]').forEach(function(item) {
+    trackedHandles.push(item.getAttribute('data-handle'));
+  });
+
+  function isTracked(handle) {
+    return trackedHandles.indexOf(handle) !== -1;
   }
 
-  /* ---- Subscribe via REZ Back-in-Stock API ---- */
-  function subscribeViaRez(product) {
-    return fetch('/apps/rez/bis/product', {
+  /* ---- Submit contact form via AJAX → Shopify Flow ---- */
+  function submitContactForm(action, productId, handle, title) {
+    var formData = new URLSearchParams();
+    formData.append('form_type', 'contact');
+    if (authToken) formData.append('authenticity_token', authToken);
+    formData.append('contact[email]', custEmail);
+    formData.append('contact[first_name]', custName);
+    formData.append('contact[tags]', 'back-in-stock, ' + action);
+    formData.append('contact[body]', 'product_id:' + productId + '|product_handle:' + handle + '|product_title:' + title);
+
+    return fetch('/contact#contact_form', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: custEmail,
-        variant_id: product.variantId || 0,
-        variant_title: product.variantTitle || 'Default Title',
-        store_id: 4307,
-        product_name: product.title,
-        product_id: product.productId || 0,
-        locale: 'en'
-      })
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString()
     });
   }
 
   /* ---- Add a product notification ---- */
   function addNotification(product) {
-    /* Update localStorage */
-    var list = getList();
-    if (!list.some(function(p) { return p.handle === product.handle; })) {
-      list.push(product);
-      saveList(list);
-    }
-    /* Add to local tag tracking */
-    if (tagHandles.indexOf(product.handle) === -1) {
-      tagHandles.push(product.handle);
-    }
-    /* Subscribe via REZ API */
-    subscribeViaRez(product).catch(function(err) {
-      console.warn('REZ BIS subscription failed:', err);
-    });
-    renderList();
+    if (isTracked(product.handle)) return;
+    trackedHandles.push(product.handle);
+
+    /* Append to the visible list immediately (optimistic) */
+    appendListItem(product);
+    emptyEl.style.display = 'none';
+
+    /* Submit contact form → Flow will update metafield */
+    submitContactForm('bis-add', product.productId || '', product.handle, product.title);
+
+    /* Refresh browse list to show "Added" state */
     renderBrowseList();
   }
 
-  /* ---- Check if a handle is tracked ---- */
-  function isTracked(handle) {
-    return tagHandles.indexOf(handle) !== -1 ||
-           getList().some(function(p) { return p.handle === handle; });
-  }
+  /* ---- Remove a product notification ---- */
+  function removeNotification(handle, productId, title) {
+    trackedHandles = trackedHandles.filter(function(h) { return h !== handle; });
 
-  /* ---- Fetch product details by handle ---- */
-  function fetchProductDetails(handle) {
-    return fetch('/products/' + handle + '.json')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        var p = data.product;
-        var firstVariant = p.variants && p.variants[0];
-        return {
-          handle: p.handle,
-          title: p.title,
-          image: (p.image && p.image.src) || (p.images && p.images[0] && p.images[0].src) || '',
-          url: '/products/' + p.handle,
-          productId: p.id,
-          variantId: firstVariant ? firstVariant.id : 0,
-          variantTitle: firstVariant ? firstVariant.title : 'Default Title',
-          available: p.variants ? p.variants.some(function(v) { return v.available; }) : false,
-          addedAt: new Date().toISOString()
-        };
-      });
-  }
+    /* Remove from visible list */
+    var item = listEl.querySelector('.sl-bis-item[data-handle="' + handle + '"]');
+    if (item) item.remove();
+    if (trackedHandles.length === 0) emptyEl.style.display = '';
 
-  /* ---- Remove a fulfilled notification (product back in stock) ---- */
-  function cleanUpHandle(handle) {
-    var list = getList().filter(function(p) { return p.handle !== handle; });
-    saveList(list);
-    tagHandles = tagHandles.filter(function(h) { return h !== handle; });
-  }
+    /* Submit contact form → Flow will update metafield */
+    submitContactForm('bis-remove', productId, handle, title);
 
-  /* ---- Render the tracked notification list ---- */
-  function renderList() {
-    var trackedHandles = getTrackedHandles();
-    var items = listEl.querySelectorAll('.sl-bis-item');
-    for (var i = 0; i < items.length; i++) items[i].remove();
-
-    if (trackedHandles.length === 0) {
-      emptyEl.style.display = '';
-      loadingEl.style.display = 'none';
-      return;
-    }
-    emptyEl.style.display = 'none';
-
-    var localList = getList();
-    var localMap = {};
-    localList.forEach(function(p) { localMap[p.handle] = p; });
-
-    /* Show placeholders for all items, then fetch fresh availability */
-    trackedHandles.forEach(function(handle) {
-      var placeholder = document.createElement('div');
-      placeholder.className = 'sl-bis-item';
-      placeholder.id = 'sl-bis-placeholder-' + handle;
-      var cached = localMap[handle];
-      if (cached && cached.image) {
-        placeholder.innerHTML = '<img class="sl-bis-item-image" src="' + cached.image + '" alt="" loading="lazy">' +
-          '<div class="sl-bis-item-info"><span class="sl-bis-item-title">' + escapeHtml(cached.title || handle) + '</span></div>';
-      } else {
-        placeholder.innerHTML = '<div class="sl-bis-item-image--placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>' +
-          '<div class="sl-bis-item-info"><span class="sl-bis-item-title">Loading...</span></div>';
-      }
-      listEl.appendChild(placeholder);
-
-      fetchProductDetails(handle)
-        .then(function(product) {
-          var ph = document.getElementById('sl-bis-placeholder-' + handle);
-          /* If product is back in stock, remove from list */
-          if (product.available) {
-            cleanUpHandle(handle);
-            if (ph) ph.remove();
-            /* Check if list is now empty */
-            if (getTrackedHandles().length === 0) {
-              emptyEl.style.display = '';
-            }
-            return;
-          }
-          /* Save to localStorage */
-          var list = getList();
-          if (!list.some(function(p) { return p.handle === product.handle; })) {
-            list.push(product);
-            saveList(list);
-          }
-          if (ph) ph.remove();
-          appendListItem(product);
-        })
-        .catch(function() {
-          /* If fetch fails but we have cached data, show it */
-          var ph = document.getElementById('sl-bis-placeholder-' + handle);
-          if (ph && cached) {
-            ph.remove();
-            appendListItem(cached);
-          } else if (ph) {
-            ph.querySelector('.sl-bis-item-title').textContent = handle;
-          }
-        });
-    });
+    /* Refresh browse list */
+    renderBrowseList();
   }
 
   function appendListItem(product) {
     var item = document.createElement('div');
     item.className = 'sl-bis-item';
+    item.setAttribute('data-handle', product.handle);
+    item.setAttribute('data-product-id', product.productId || '');
 
     var imageHtml;
     if (product.image) {
@@ -490,20 +427,32 @@
       imageHtml = '<div class="sl-bis-item-image--placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>';
     }
 
-    var dateStr = '';
-    if (product.addedAt) {
-      var d = new Date(product.addedAt);
-      dateStr = 'Added ' + d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
-    }
-
     item.innerHTML = imageHtml +
       '<div class="sl-bis-item-info">' +
         '<a class="sl-bis-item-title" href="' + (product.url || '#') + '">' + escapeHtml(product.title) + '</a>' +
-        (dateStr ? '<div class="sl-bis-item-date">' + dateStr + '</div>' : '') +
-      '</div>';
+      '</div>' +
+      '<button type="button" class="sl-bis-remove-btn" data-handle="' + escapeAttr(product.handle) + '" data-product-id="' + escapeAttr(product.productId || '') + '" data-title="' + escapeAttr(product.title) + '" aria-label="Remove ' + escapeAttr(product.title) + '">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+      '</button>';
 
     listEl.appendChild(item);
+    bindRemoveBtn(item.querySelector('.sl-bis-remove-btn'));
   }
+
+  /* ---- Remove button handler ---- */
+  function bindRemoveBtn(btn) {
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      removeNotification(
+        this.getAttribute('data-handle'),
+        this.getAttribute('data-product-id'),
+        this.getAttribute('data-title')
+      );
+    });
+  }
+
+  /* Bind remove buttons on server-rendered items */
+  listEl.querySelectorAll('.sl-bis-remove-btn').forEach(bindRemoveBtn);
 
   /* ---- Product search via Shopify predictive search ---- */
   function searchProducts(query) {
@@ -539,7 +488,8 @@
             ' data-handle="' + p.handle + '"' +
             ' data-title="' + escapeAttr(p.title) + '"' +
             ' data-image="' + escapeAttr(imgSrc) + '"' +
-            ' data-url="' + escapeAttr(p.url) + '">' +
+            ' data-url="' + escapeAttr(p.url) + '"' +
+            ' data-product-id="' + (p.id || '') + '">' +
             (imgSrc ? '<img src="' + imgSrc + '" alt="" loading="lazy">' : '') +
             '<div class="sl-bis-search-result-info">' +
               '<div class="sl-bis-search-result-title">' + escapeHtml(p.title) + '</div>' +
@@ -557,25 +507,15 @@
           btn.addEventListener('click', function(e) {
             e.stopPropagation();
             var row = this.closest('.sl-bis-search-result');
-            var handle = row.getAttribute('data-handle');
-            btn.disabled = true;
-            btn.textContent = 'Adding...';
-            fetchProductDetails(handle).then(function(product) {
-              addNotification(product);
-              searchInput.value = '';
-              resultsEl.classList.remove('is-open');
-            }).catch(function() {
-              /* Fallback without REZ IDs — still add to local list */
-              addNotification({
-                handle: handle,
-                title: row.getAttribute('data-title'),
-                image: row.getAttribute('data-image'),
-                url: row.getAttribute('data-url'),
-                addedAt: new Date().toISOString()
-              });
-              searchInput.value = '';
-              resultsEl.classList.remove('is-open');
+            addNotification({
+              handle: row.getAttribute('data-handle'),
+              title: row.getAttribute('data-title'),
+              image: row.getAttribute('data-image'),
+              url: row.getAttribute('data-url'),
+              productId: row.getAttribute('data-product-id')
             });
+            searchInput.value = '';
+            resultsEl.classList.remove('is-open');
           });
         });
       })
@@ -602,7 +542,6 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         var products = (data.products || []).filter(function(p) {
-          /* Check if any variant is unavailable, or product-level available is false */
           return !p.variants.every(function(v) { return v.available; });
         });
 
@@ -627,16 +566,13 @@
     allOosProducts.forEach(function(p) {
       var tracked = isTracked(p.handle);
       var imgSrc = (p.image && p.image.src) || (p.images && p.images[0] && p.images[0].src) || '';
-      var firstVariant = p.variants && p.variants[0];
 
       html += '<div class="sl-bis-browse-item' + (tracked ? ' sl-bis-browse-item--added' : '') + '"' +
         ' data-handle="' + p.handle + '"' +
         ' data-title="' + escapeAttr(p.title) + '"' +
         ' data-image="' + escapeAttr(imgSrc) + '"' +
         ' data-url="/products/' + p.handle + '"' +
-        ' data-product-id="' + p.id + '"' +
-        ' data-variant-id="' + (firstVariant ? firstVariant.id : 0) + '"' +
-        ' data-variant-title="' + escapeAttr(firstVariant ? firstVariant.title : 'Default Title') + '">' +
+        ' data-product-id="' + p.id + '">' +
         (imgSrc ? '<img src="' + imgSrc + '" alt="" loading="lazy">' : '') +
         '<div class="sl-bis-browse-item-info">' +
           '<div class="sl-bis-browse-item-title">' + escapeHtml(p.title) + '</div>' +
@@ -659,10 +595,7 @@
           title: row.getAttribute('data-title'),
           image: row.getAttribute('data-image'),
           url: row.getAttribute('data-url'),
-          productId: parseInt(row.getAttribute('data-product-id')),
-          variantId: parseInt(row.getAttribute('data-variant-id')),
-          variantTitle: row.getAttribute('data-variant-title'),
-          addedAt: new Date().toISOString()
+          productId: row.getAttribute('data-product-id')
         });
       });
     });
@@ -683,7 +616,6 @@
   }
 
   /* ---- Init ---- */
-  renderList();
   loadBrowseList();
 })();
 </script>

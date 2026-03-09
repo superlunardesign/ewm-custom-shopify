@@ -1338,6 +1338,14 @@ min-height:40px;
   }
 {%- endstyle -%}
 
+{%- comment -%} Build comma-delimited list of BIS metafield handles for bell icon checks {%- endcomment -%}
+{%- assign bis_handles_csv = ',' -%}
+{%- if customer and customer.metafields.custom.back_in_stock.value -%}
+  {%- for bis_p in customer.metafields.custom.back_in_stock.value -%}
+    {%- assign bis_handles_csv = bis_handles_csv | append: bis_p.handle | append: ',' -%}
+  {%- endfor -%}
+{%- endif -%}
+
 {%- comment -%} Count out-of-stock products for frontend toggle {%- endcomment -%}
 {%- assign oos_count = 0 -%}
 {%- if section.settings.show_out_of_stock -%}
@@ -1870,9 +1878,9 @@ min-height:40px;
                             </div>
                           </div>
                           {%- if section.settings.show_notify_bell -%}
-                            {%- assign bis_tag_check = 'bis:' | append: product.handle -%}
+                            {%- assign bis_handle_check = ',' | append: product.handle | append: ',' -%}
                             <button type="button"
-                              class="sl-notify-bell sl-notify-bell--standalone{% if customer and customer.tags contains bis_tag_check %} sl-notify-bell--subscribed{% endif %}"
+                              class="sl-notify-bell sl-notify-bell--standalone{% if customer and bis_handles_csv contains bis_handle_check %} sl-notify-bell--subscribed{% endif %}"
                               data-notify-handle="{{ product.handle }}"
                               data-notify-title="{{ product.title | escape }}"
                               data-notify-image="{{ product.featured_image | image_url: width: 200 }}"
@@ -2111,9 +2119,9 @@ min-height:40px;
                               </div>
                             </div>
                             {%- if section.settings.show_notify_bell -%}
-                              {%- assign bis_tag_check = 'bis:' | append: product.handle -%}
+                              {%- assign bis_handle_check = ',' | append: product.handle | append: ',' -%}
                               <button type="button"
-                                class="sl-notify-bell sl-notify-bell--standalone{% if customer and customer.tags contains bis_tag_check %} sl-notify-bell--subscribed{% endif %}"
+                                class="sl-notify-bell sl-notify-bell--standalone{% if customer and bis_handles_csv contains bis_handle_check %} sl-notify-bell--subscribed{% endif %}"
                                 data-notify-handle="{{ product.handle }}"
                                 data-notify-title="{{ product.title | escape }}"
                                 data-notify-image="{{ product.featured_image | image_url: width: 200 }}"
@@ -2990,28 +2998,15 @@ min-height:40px;
   var emailInput  = document.getElementById('sl-popin-email');
 
   var currentHandle = '';
+  var currentProductId = '';
   var custId = {% if customer %}{{ customer.id | json }}{% else %}null{% endif %};
   var custEmail = {{ customer.email | default: '' | json }};
   var custName = {{ customer.first_name | default: '' | json }};
-  var storageKey = custId ? 'sl_bis_' + custId : null;
-
-  /* localStorage helpers */
-  function getList() {
-    if (!storageKey) return [];
-    try { return JSON.parse(localStorage.getItem(storageKey)) || []; }
-    catch(e) { return []; }
-  }
-  function saveList(list) {
-    if (!storageKey) return;
-    localStorage.setItem(storageKey, JSON.stringify(list));
-  }
-  function isTracked(handle) {
-    return getList().some(function(p) { return p.handle === handle; });
-  }
 
   /* Open pop-in */
   function openPopin(bell) {
     currentHandle = bell.getAttribute('data-notify-handle');
+    currentProductId = bell.getAttribute('data-notify-product-id') || '';
     var title = bell.getAttribute('data-notify-title');
     var image = bell.getAttribute('data-notify-image');
 
@@ -3024,9 +3019,10 @@ min-height:40px;
     successEl.style.display = 'none';
     if (alreadyEl) alreadyEl.style.display = 'none';
     if (submitBtn) submitBtn.disabled = false;
+    if (submitBtn) submitBtn.textContent = 'Notify Me';
 
-    /* Check if already subscribed (via tag class or localStorage) */
-    var isSubscribed = bell.classList.contains('sl-notify-bell--subscribed') || (custId && isTracked(currentHandle));
+    /* Check if already subscribed (via metafield class) */
+    var isSubscribed = bell.classList.contains('sl-notify-bell--subscribed');
     if (isSubscribed && custId) {
       bodyEl.style.display = 'none';
       if (alreadyEl) alreadyEl.style.display = '';
@@ -3039,6 +3035,7 @@ min-height:40px;
   function closePopin() {
     popin.style.display = 'none';
     currentHandle = '';
+    currentProductId = '';
   }
 
   overlay.addEventListener('click', closePopin);
@@ -3056,7 +3053,22 @@ min-height:40px;
     });
   });
 
-  /* Submit notification */
+  /* Submit notification via contact form → Shopify Flow */
+  function submitContactForm(email, name, action) {
+    var formData = new URLSearchParams();
+    formData.append('form_type', 'contact');
+    formData.append('contact[email]', email);
+    formData.append('contact[first_name]', name);
+    formData.append('contact[tags]', 'back-in-stock, ' + action);
+    formData.append('contact[body]', 'product_id:' + currentProductId + '|product_handle:' + currentHandle + '|product_title:' + titleEl.textContent);
+
+    return fetch('/contact#contact_form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString()
+    });
+  }
+
   if (submitBtn) {
     submitBtn.addEventListener('click', function() {
       var email = custEmail || (emailInput && emailInput.value.trim());
@@ -3070,28 +3082,8 @@ min-height:40px;
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
 
-      /* Save to localStorage IMMEDIATELY (optimistic) */
+      /* Update ALL matching bell visual states immediately (optimistic) */
       var bells = document.querySelectorAll('.sl-notify-bell--standalone[data-notify-handle="' + currentHandle + '"]');
-      var productUrl = '/products/' + currentHandle;
-      bells.forEach(function(b) {
-        productUrl = b.getAttribute('data-notify-url') || productUrl;
-      });
-
-      if (storageKey) {
-        var list = getList();
-        if (!list.some(function(p) { return p.handle === currentHandle; })) {
-          list.push({
-            handle: currentHandle,
-            title: titleEl.textContent,
-            image: imageEl.src,
-            url: productUrl,
-            addedAt: new Date().toISOString()
-          });
-          saveList(list);
-        }
-      }
-
-      /* Update ALL matching bell visual states immediately */
       bells.forEach(function(b) {
         b.classList.add('sl-notify-bell--subscribed');
       });
@@ -3100,26 +3092,9 @@ min-height:40px;
       bodyEl.style.display = 'none';
       successEl.style.display = '';
 
-      /* Subscribe via REZ Back-in-Stock API */
-      var activeBell = document.querySelector('.sl-notify-bell--standalone[data-notify-handle="' + currentHandle + '"]');
-      var rezProductId = activeBell ? parseInt(activeBell.getAttribute('data-notify-product-id')) : 0;
-      var rezVariantId = activeBell ? parseInt(activeBell.getAttribute('data-notify-variant-id')) : 0;
-      var rezVariantTitle = activeBell ? (activeBell.getAttribute('data-notify-variant-title') || 'Default Title') : 'Default Title';
-
-      fetch('/apps/rez/bis/product', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          variant_id: rezVariantId,
-          variant_title: rezVariantTitle,
-          store_id: 4307,
-          product_name: titleEl.textContent,
-          product_id: rezProductId,
-          locale: 'en'
-        })
-      }).catch(function(err) {
-        console.warn('REZ BIS subscription failed:', err);
+      /* Submit contact form to trigger Shopify Flow → update metafield */
+      submitContactForm(email, name, 'bis-add').catch(function(err) {
+        console.warn('BIS subscription failed:', err);
       });
     });
   }
