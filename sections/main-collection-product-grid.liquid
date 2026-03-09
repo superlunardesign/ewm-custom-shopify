@@ -1250,18 +1250,11 @@ min-height:40px;
   }
 {%- endstyle -%}
 
-{%- comment -%} Count out-of-stock products for frontend toggle (inventory-based) {%- endcomment -%}
+{%- comment -%} Count out-of-stock products for frontend toggle {%- endcomment -%}
 {%- assign oos_count = 0 -%}
 {%- if section.settings.show_out_of_stock -%}
   {%- for product in collection.products -%}
-    {%- assign _p_in_stock = false -%}
-    {%- for variant in product.variants -%}
-      {%- if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' -%}
-        {%- assign _p_in_stock = true -%}
-        {%- break -%}
-      {%- endif -%}
-    {%- endfor -%}
-    {%- unless _p_in_stock -%}
+    {%- unless product.available -%}
       {%- assign oos_count = oos_count | plus: 1 -%}
     {%- endunless -%}
   {%- endfor -%}
@@ -1615,14 +1608,8 @@ min-height:40px;
           <ul class="sl-product-grid{% if grid_is_compact %} sl-product-grid--compact{% endif %}" id="product-grid" data-id="{{ section.id }}">
             {%- assign product_index = 0 -%}
             {%- for product in collection.products -%}
-              {%- comment -%} Check stock: in stock if any variant has qty > 0 or allows selling when OOS {%- endcomment -%}
-              {%- assign product_in_stock = false -%}
-              {%- for variant in product.variants -%}
-                {%- if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' -%}
-                  {%- assign product_in_stock = true -%}
-                  {%- break -%}
-                {%- endif -%}
-              {%- endfor -%}
+              {%- comment -%} Check stock: product.available accounts for inventory policy (continue selling) {%- endcomment -%}
+              {%- assign product_in_stock = product.available -%}
 
               {%- comment -%} Skip out-of-stock when backend toggle is off {%- endcomment -%}
               {%- unless section.settings.show_out_of_stock or product_in_stock -%}
