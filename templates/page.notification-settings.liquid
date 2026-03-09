@@ -399,9 +399,17 @@
           productId: p.id,
           variantId: firstVariant ? firstVariant.id : 0,
           variantTitle: firstVariant ? firstVariant.title : 'Default Title',
+          available: p.variants ? p.variants.some(function(v) { return v.available; }) : false,
           addedAt: new Date().toISOString()
         };
       });
+  }
+
+  /* ---- Remove a fulfilled notification (product back in stock) ---- */
+  function cleanUpHandle(handle) {
+    var list = getList().filter(function(p) { return p.handle !== handle; });
+    saveList(list);
+    tagHandles = tagHandles.filter(function(h) { return h !== handle; });
   }
 
   /* ---- Render the tracked notification list ---- */
@@ -421,40 +429,53 @@
     var localMap = {};
     localList.forEach(function(p) { localMap[p.handle] = p; });
 
-    /* For handles that have local details, render immediately.
-       For tag-only handles (no local details), fetch product info. */
+    /* Show placeholders for all items, then fetch fresh availability */
     trackedHandles.forEach(function(handle) {
-      if (localMap[handle]) {
-        appendListItem(localMap[handle]);
+      var placeholder = document.createElement('div');
+      placeholder.className = 'sl-bis-item';
+      placeholder.id = 'sl-bis-placeholder-' + handle;
+      var cached = localMap[handle];
+      if (cached && cached.image) {
+        placeholder.innerHTML = '<img class="sl-bis-item-image" src="' + cached.image + '" alt="" loading="lazy">' +
+          '<div class="sl-bis-item-info"><span class="sl-bis-item-title">' + escapeHtml(cached.title || handle) + '</span></div>';
       } else {
-        /* Create a placeholder and fetch details */
-        var placeholder = document.createElement('div');
-        placeholder.className = 'sl-bis-item';
-        placeholder.id = 'sl-bis-placeholder-' + handle;
         placeholder.innerHTML = '<div class="sl-bis-item-image--placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>' +
           '<div class="sl-bis-item-info"><span class="sl-bis-item-title">Loading...</span></div>';
-        listEl.appendChild(placeholder);
-
-        fetchProductDetails(handle)
-          .then(function(product) {
-            /* Save to localStorage for next time */
-            var list = getList();
-            if (!list.some(function(p) { return p.handle === product.handle; })) {
-              list.push(product);
-              saveList(list);
-            }
-            /* Replace placeholder */
-            var ph = document.getElementById('sl-bis-placeholder-' + handle);
-            if (ph) ph.remove();
-            appendListItem(product);
-          })
-          .catch(function() {
-            var ph = document.getElementById('sl-bis-placeholder-' + handle);
-            if (ph) {
-              ph.querySelector('.sl-bis-item-title').textContent = handle;
-            }
-          });
       }
+      listEl.appendChild(placeholder);
+
+      fetchProductDetails(handle)
+        .then(function(product) {
+          var ph = document.getElementById('sl-bis-placeholder-' + handle);
+          /* If product is back in stock, remove from list */
+          if (product.available) {
+            cleanUpHandle(handle);
+            if (ph) ph.remove();
+            /* Check if list is now empty */
+            if (getTrackedHandles().length === 0) {
+              emptyEl.style.display = '';
+            }
+            return;
+          }
+          /* Save to localStorage */
+          var list = getList();
+          if (!list.some(function(p) { return p.handle === product.handle; })) {
+            list.push(product);
+            saveList(list);
+          }
+          if (ph) ph.remove();
+          appendListItem(product);
+        })
+        .catch(function() {
+          /* If fetch fails but we have cached data, show it */
+          var ph = document.getElementById('sl-bis-placeholder-' + handle);
+          if (ph && cached) {
+            ph.remove();
+            appendListItem(cached);
+          } else if (ph) {
+            ph.querySelector('.sl-bis-item-title').textContent = handle;
+          }
+        });
     });
   }
 
