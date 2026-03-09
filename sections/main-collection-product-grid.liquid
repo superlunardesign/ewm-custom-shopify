@@ -1702,17 +1702,21 @@ min-height:40px;
                       <div class="sl-product-image">
                         <div class="sl-badges">
                           {%- unless product_in_stock -%}
-                            <span class="sl-badge sl-badge--soldout">{{ section.settings.soldout_text }}</span>
+                            {%- if section.settings.show_soldout_badge -%}
+                              <span class="sl-badge sl-badge--soldout">{{ section.settings.soldout_text }}</span>
+                            {%- endif -%}
                           {%- elsif product.compare_at_price > product.price -%}
                             <span class="sl-badge sl-badge--sale">{{ section.settings.sale_text }}</span>
                           {%- endunless -%}
-                          {%- assign badge_tags_list = section.settings.badge_tags | split: ',' -%}
-                          {%- for badge_tag in badge_tags_list -%}
-                            {%- assign clean_badge_tag = badge_tag | strip -%}
-                            {%- if clean_badge_tag != blank and product.tags contains clean_badge_tag -%}
-                              <span class="sl-badge sl-badge--tag">{{ clean_badge_tag }}</span>
-                            {%- endif -%}
-                          {%- endfor -%}
+                          {%- unless product_in_stock == false and section.settings.soldout_badge_priority -%}
+                            {%- assign badge_tags_list = section.settings.badge_tags | split: ',' -%}
+                            {%- for badge_tag in badge_tags_list -%}
+                              {%- assign clean_badge_tag = badge_tag | strip -%}
+                              {%- if clean_badge_tag != blank and product.tags contains clean_badge_tag -%}
+                                <span class="sl-badge sl-badge--tag">{{ clean_badge_tag }}</span>
+                              {%- endif -%}
+                            {%- endfor -%}
+                          {%- endunless -%}
                         </div>
                         <a href="{{ product.url }}">
                           {%- if product.featured_image -%}
@@ -1874,17 +1878,21 @@ min-height:40px;
                       <div class="sl-product-image">
                         <div class="sl-badges">
                           {%- unless product_in_stock -%}
-                            <span class="sl-badge sl-badge--soldout">{{ section.settings.soldout_text }}</span>
+                            {%- if section.settings.show_soldout_badge -%}
+                              <span class="sl-badge sl-badge--soldout">{{ section.settings.soldout_text }}</span>
+                            {%- endif -%}
                           {%- elsif product.compare_at_price > product.price -%}
                             <span class="sl-badge sl-badge--sale">{{ section.settings.sale_text }}</span>
                           {%- endunless -%}
-                          {%- assign badge_tags_list = section.settings.badge_tags | split: ',' -%}
-                          {%- for badge_tag in badge_tags_list -%}
-                            {%- assign clean_badge_tag = badge_tag | strip -%}
-                            {%- if clean_badge_tag != blank and product.tags contains clean_badge_tag -%}
-                              <span class="sl-badge sl-badge--tag">{{ clean_badge_tag }}</span>
-                            {%- endif -%}
-                          {%- endfor -%}
+                          {%- unless product_in_stock == false and section.settings.soldout_badge_priority -%}
+                            {%- assign badge_tags_list = section.settings.badge_tags | split: ',' -%}
+                            {%- for badge_tag in badge_tags_list -%}
+                              {%- assign clean_badge_tag = badge_tag | strip -%}
+                              {%- if clean_badge_tag != blank and product.tags contains clean_badge_tag -%}
+                                <span class="sl-badge sl-badge--tag">{{ clean_badge_tag }}</span>
+                              {%- endif -%}
+                            {%- endfor -%}
+                          {%- endunless -%}
                         </div>
                         <a href="{{ product.url }}">
                           {%- if product.featured_image -%}
@@ -2821,6 +2829,20 @@ min-height:40px;
       "id": "sale_badge_color",
       "label": "Sale badge color",
       "default": "#722F37"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_soldout_badge",
+      "label": "Show sold out badge",
+      "info": "Displays a sold out badge on the product image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "soldout_badge_priority",
+      "label": "Sold out replaces other badges",
+      "info": "When enabled, sold out products only show the sold out badge (hides tag badges like Acne Safe)",
+      "default": true
     },
     {
       "type": "text",
