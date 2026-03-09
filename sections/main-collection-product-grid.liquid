@@ -532,6 +532,39 @@
     height: 18px;
   }
 
+  #SLCollection-{{ section.id }} .sl-oos-button-row .sl-notify-bell .sl-notify-text {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price {
+      grid-template-columns: 1fr;
+    }
+
+    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-oos-btn {
+      border-radius: {{ section.settings.button_border_radius }}px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-notify-bell {
+      width: 100%;
+      flex-direction: row;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-left: {{ section.settings.notify_bell_border_width }}px solid {{ section.settings.notify_bell_border_color }};
+      border-radius: {{ section.settings.button_border_radius }}px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-notify-bell .sl-notify-text {
+      display: inline;
+      font-size: {{ section.settings.notify_text_font_size }}px;
+      color: {{ section.settings.notify_text_color }};
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+  }
+
   #SLCollection-{{ section.id }} .sl-subscribe-btn {
     width: 100%;
     padding: 12px 16px;
@@ -1734,14 +1767,19 @@ min-height:40px;
                             {%- endif -%}
                           </button>
                         {%- else -%}
-                          <div class="sl-oos-button-row">
-                            <div class="sl-oos-btn">
-                              <span>{{ section.settings.soldout_button_text }}</span>
-                              <span data-product-price>{{ product.price | money }}</span>
+                          <div class="sl-oos-button-row{% if section.settings.price_position != 'card' %} sl-oos-button-row--has-price{% endif %}">
+                            <div class="sl-oos-btn"{% if section.settings.price_position == 'card' %} style="text-align:center"{% endif %}>
+                              {%- if section.settings.price_position == 'card' -%}
+                                <span>{{ section.settings.soldout_button_text }}</span>
+                              {%- else -%}
+                                <span>{{ section.settings.soldout_button_text }}</span>
+                                <span data-product-price>{{ product.price | money }}</span>
+                              {%- endif -%}
                             </div>
                             {%- if section.settings.show_notify_bell -%}
                               <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if section.settings.notify_bell_style == 'filled' %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                                <span class="sl-notify-text">{{ section.settings.notify_text }}</span>
                               </a>
                             {%- endif -%}
                           </div>
@@ -1955,10 +1993,14 @@ min-height:40px;
                               {%- endif -%}
                             </button>
                           {%- else -%}
-                            <div class="sl-oos-button-row">
-                              <div class="sl-oos-btn">
-                                <span>{{ section.settings.soldout_button_text }}</span>
-                                <span data-product-price>{{ product.price | money }}</span>
+                            <div class="sl-oos-button-row{% if section.settings.price_position != 'card' %} sl-oos-button-row--has-price{% endif %}">
+                              <div class="sl-oos-btn"{% if section.settings.price_position == 'card' %} style="text-align:center"{% endif %}>
+                                {%- if section.settings.price_position == 'card' -%}
+                                  <span>{{ section.settings.soldout_button_text }}</span>
+                                {%- else -%}
+                                  <span>{{ section.settings.soldout_button_text }}</span>
+                                  <span data-product-price>{{ product.price | money }}</span>
+                                {%- endif -%}
                               </div>
                               {%- if section.settings.show_notify_bell -%}
                                 <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
@@ -3305,6 +3347,29 @@ min-height:40px;
       "default": 0,
       "unit": "px",
       "label": "Bell cell border width"
+    },
+    {
+      "type": "text",
+      "id": "notify_text",
+      "label": "Notify text (mobile)",
+      "info": "Text shown next to the bell on mobile when price is in button",
+      "default": "Notify Me"
+    },
+    {
+      "type": "color",
+      "id": "notify_text_color",
+      "label": "Notify text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "notify_text_font_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 12,
+      "unit": "px",
+      "label": "Notify text size"
     },
     {
       "type": "header",
