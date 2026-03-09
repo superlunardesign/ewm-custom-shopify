@@ -283,11 +283,6 @@
     gap: 4px;
   }
 
-  {%- unless section.settings.show_empty_reviews -%}
-  #SLCollection-{{ section.id }} .sl-star-rating .jdgm-prev-badge[data-average-rating="0.00"] {
-    display: none !important;
-  }
-  {%- endunless -%}
 
   #SLCollection-{{ section.id }} .sl-star-rating .jdgm-prev-badge[data-average-rating="0.00"] .jdgm-star {
     color: {{ section.settings.empty_star_color }};
