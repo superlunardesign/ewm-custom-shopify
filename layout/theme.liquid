@@ -361,6 +361,10 @@
     </script>
     <script>window.Mangomint = window.Mangomint || {}; window.Mangomint.CompanyId = 314399;</script><script src="https://booking.mangomint.com/app.js" async></script>
 
+    {%- if settings.bis_worker_url != blank -%}
+      <script>window.SL_BIS_WORKER_URL = {{ settings.bis_worker_url | json }};</script>
+    {%- endif -%}
+
   </head>
 
   <body id="{{ page_title | handle }}" class="gradient {% if settings.preloader_enable %}preloader-overflow{% endif %}">

@@ -392,6 +392,16 @@
     });
   }
 
+  /* ---- Call Worker to add/remove customer tag server-side ---- */
+  function callWorker(action, handle) {
+    if (!window.SL_BIS_WORKER_URL) return;
+    fetch(window.SL_BIS_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: action, customer_id: custId, handle: handle })
+    }).catch(function(err) { console.warn('BIS worker ' + action + ' failed:', err); });
+  }
+
   /* ---- Add a product notification ---- */
   function addNotification(product) {
     /* Update localStorage */
@@ -404,11 +414,13 @@
     if (tagHandles.indexOf(product.handle) === -1) {
       tagHandles.push(product.handle);
     }
-    /* Submit contact form for Shopify Flow to tag customer */
+    /* Submit contact form for record-keeping */
     submitContactForm(
       'back-in-stock, bis:' + product.handle,
       'Please notify me when ' + product.title + ' (' + product.handle + ') becomes available.'
     );
+    /* Add customer tag via Worker */
+    callWorker('add', product.handle);
     renderList();
     renderBrowseList();
   }
@@ -420,11 +432,13 @@
     saveList(list);
     /* Remove from local tag tracking */
     tagHandles = tagHandles.filter(function(h) { return h !== handle; });
-    /* Submit contact form for Shopify Flow to untag customer */
+    /* Submit contact form for record-keeping */
     submitContactForm(
       'remove-back-in-stock, bis:' + handle,
       'Remove back-in-stock notification for ' + handle + '.'
     );
+    /* Remove customer tag via Worker */
+    callWorker('remove', handle);
     renderList();
     renderBrowseList();
   }

@@ -290,6 +290,14 @@
       var successEl = container.querySelector('.sl-notify-success');
       if (successEl) {
         addProduct();
+        /* Call Worker to add customer tag (server-side) */
+        if (window.SL_BIS_WORKER_URL) {
+          fetch(window.SL_BIS_WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'add', customer_id: custId, handle: handle })
+          }).catch(function(err) { console.warn('BIS worker tag add failed:', err); });
+        }
       }
 
       /* Also intercept form submit to save immediately (covers JS-driven submissions) */
@@ -297,6 +305,14 @@
       if (form) {
         form.addEventListener('submit', function() {
           addProduct();
+          /* Call Worker to add customer tag (server-side) */
+          if (window.SL_BIS_WORKER_URL) {
+            fetch(window.SL_BIS_WORKER_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ action: 'add', customer_id: custId, handle: handle })
+            }).catch(function(err) { console.warn('BIS worker tag add failed:', err); });
+          }
         });
       }
     }
