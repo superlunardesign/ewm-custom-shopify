@@ -37,16 +37,6 @@
     <h1 class="sl-bis-page-title">Back in Stock Notifications</h1>
     <p class="sl-bis-subtitle">Products you've asked to be notified about when they're back in stock.</p>
 
-    {%- comment -%} Hidden contact form for AJAX submissions (provides authenticity token) {%- endcomment -%}
-    {% form 'contact', id: 'sl-bis-contact-form' %}
-      <div style="display:none;">
-        <input type="hidden" name="contact[email]" id="sl-bis-form-email" value="{{ customer.email }}">
-        <input type="hidden" name="contact[first_name]" value="{{ customer.first_name }}">
-        <input type="hidden" name="contact[tags]" id="sl-bis-form-tags" value="">
-        <input type="hidden" name="contact[body]" id="sl-bis-form-body" value="">
-      </div>
-    {% endform %}
-
     <div class="sl-bis-list" id="sl-bis-list">
       <p class="sl-bis-empty" id="sl-bis-empty">You haven't signed up for any back-in-stock notifications yet.</p>
       <div class="sl-bis-loading" id="sl-bis-loading" style="display:none;">Loading your notifications...</div>
@@ -341,14 +331,6 @@
   var browseEl     = document.getElementById('sl-bis-browse-list');
   var debounceTimer = null;
 
-  /* ---- Get the contact form's authenticity token ---- */
-  var contactForm = document.getElementById('sl-bis-contact-form');
-  var authToken = '';
-  if (contactForm) {
-    var tokenInput = contactForm.querySelector('input[name="authenticity_token"]');
-    if (tokenInput) authToken = tokenInput.value;
-  }
-
   /* ---- Tracked handles (from customer tags — server-side truth) ---- */
   var tagHandles = bisHandlesRaw ? bisHandlesRaw.split(',').filter(Boolean) : [];
 
@@ -375,20 +357,20 @@
     return all;
   }
 
-  /* ---- Submit contact form via AJAX ---- */
-  function submitContactForm(tags, body) {
-    var formData = new URLSearchParams();
-    formData.append('form_type', 'contact');
-    if (authToken) formData.append('authenticity_token', authToken);
-    formData.append('contact[email]', custEmail);
-    formData.append('contact[first_name]', custName);
-    formData.append('contact[tags]', tags);
-    formData.append('contact[body]', body);
-
-    return fetch('/contact#contact_form', {
+  /* ---- Subscribe via REZ Back-in-Stock API ---- */
+  function subscribeViaRez(product) {
+    return fetch('/apps/rez/bis/product', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData.toString()
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: custEmail,
+        variant_id: product.variantId || 0,
+        variant_title: product.variantTitle || 'Default Title',
+        store_id: 4307,
+        product_name: product.title,
+        product_id: product.productId || 0,
+        locale: 'en'
+      })
     });
   }
 
@@ -404,11 +386,10 @@
     if (tagHandles.indexOf(product.handle) === -1) {
       tagHandles.push(product.handle);
     }
-    /* Submit contact form for Shopify Flow to tag customer */
-    submitContactForm(
-      'back-in-stock, bis:' + product.handle,
-      'Please notify me when ' + product.title + ' (' + product.handle + ') becomes available.'
-    );
+    /* Subscribe via REZ API */
+    subscribeViaRez(product).catch(function(err) {
+      console.warn('REZ BIS subscription failed:', err);
+    });
     renderList();
     renderBrowseList();
   }
@@ -420,11 +401,6 @@
     saveList(list);
     /* Remove from local tag tracking */
     tagHandles = tagHandles.filter(function(h) { return h !== handle; });
-    /* Submit contact form for Shopify Flow to untag customer */
-    submitContactForm(
-      'remove-back-in-stock, bis:' + handle,
-      'Remove back-in-stock notification for ' + handle + '.'
-    );
     renderList();
     renderBrowseList();
   }
@@ -441,11 +417,15 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         var p = data.product;
+        var firstVariant = p.variants && p.variants[0];
         return {
           handle: p.handle,
           title: p.title,
           image: (p.image && p.image.src) || (p.images && p.images[0] && p.images[0].src) || '',
           url: '/products/' + p.handle,
+          productId: p.id,
+          variantId: firstVariant ? firstVariant.id : 0,
+          variantTitle: firstVariant ? firstVariant.title : 'Default Title',
           addedAt: new Date().toISOString()
         };
       });
@@ -590,15 +570,25 @@
           btn.addEventListener('click', function(e) {
             e.stopPropagation();
             var row = this.closest('.sl-bis-search-result');
-            addNotification({
-              handle: row.getAttribute('data-handle'),
-              title: row.getAttribute('data-title'),
-              image: row.getAttribute('data-image'),
-              url: row.getAttribute('data-url'),
-              addedAt: new Date().toISOString()
+            var handle = row.getAttribute('data-handle');
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+            fetchProductDetails(handle).then(function(product) {
+              addNotification(product);
+              searchInput.value = '';
+              resultsEl.classList.remove('is-open');
+            }).catch(function() {
+              /* Fallback without REZ IDs — still add to local list */
+              addNotification({
+                handle: handle,
+                title: row.getAttribute('data-title'),
+                image: row.getAttribute('data-image'),
+                url: row.getAttribute('data-url'),
+                addedAt: new Date().toISOString()
+              });
+              searchInput.value = '';
+              resultsEl.classList.remove('is-open');
             });
-            searchInput.value = '';
-            resultsEl.classList.remove('is-open');
           });
         });
       })
@@ -650,12 +640,16 @@
     allOosProducts.forEach(function(p) {
       var tracked = isTracked(p.handle);
       var imgSrc = (p.image && p.image.src) || (p.images && p.images[0] && p.images[0].src) || '';
+      var firstVariant = p.variants && p.variants[0];
 
       html += '<div class="sl-bis-browse-item' + (tracked ? ' sl-bis-browse-item--added' : '') + '"' +
         ' data-handle="' + p.handle + '"' +
         ' data-title="' + escapeAttr(p.title) + '"' +
         ' data-image="' + escapeAttr(imgSrc) + '"' +
-        ' data-url="/products/' + p.handle + '">' +
+        ' data-url="/products/' + p.handle + '"' +
+        ' data-product-id="' + p.id + '"' +
+        ' data-variant-id="' + (firstVariant ? firstVariant.id : 0) + '"' +
+        ' data-variant-title="' + escapeAttr(firstVariant ? firstVariant.title : 'Default Title') + '">' +
         (imgSrc ? '<img src="' + imgSrc + '" alt="" loading="lazy">' : '') +
         '<div class="sl-bis-browse-item-info">' +
           '<div class="sl-bis-browse-item-title">' + escapeHtml(p.title) + '</div>' +
@@ -678,6 +672,9 @@
           title: row.getAttribute('data-title'),
           image: row.getAttribute('data-image'),
           url: row.getAttribute('data-url'),
+          productId: parseInt(row.getAttribute('data-product-id')),
+          variantId: parseInt(row.getAttribute('data-variant-id')),
+          variantTitle: row.getAttribute('data-variant-title'),
           addedAt: new Date().toISOString()
         });
       });

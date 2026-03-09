@@ -361,6 +361,13 @@
     </script>
     <script>window.Mangomint = window.Mangomint || {}; window.Mangomint.CompanyId = 314399;</script><script src="https://booking.mangomint.com/app.js" async></script>
 
+    {%- comment -%} Hide REZ Notify Me app's default UI — we use our own custom bells/forms {%- endcomment -%}
+    <style>
+      .rez-button-wrapper,
+      .rez-notify-modal,
+      .rez-notify-modal-backdrop,
+      .rez-stock-notification-button { display: none !important; }
+    </style>
   </head>
 
   <body id="{{ page_title | handle }}" class="gradient {% if settings.preloader_enable %}preloader-overflow{% endif %}">
