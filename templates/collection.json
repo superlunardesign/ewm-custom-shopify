@@ -127,7 +127,7 @@
         "filter_tag_active_text": "#ffffff",
         "enable_sorting": true,
         "pagination_active_color": "#8c9b6d",
-        "show_out_of_stock": false,
+        "show_out_of_stock": true,
         "padding_top": 20,
         "padding_bottom": 0
       }
