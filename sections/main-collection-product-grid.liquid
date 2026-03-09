@@ -1306,7 +1306,7 @@ min-height:40px;
   #SLCollection-{{ section.id }} .sl-notify-bell--subscribed {
     opacity: 1;
   }
-  /* Hide the default bell SVG and show checkmark when subscribed */
+  /* Hide the default bell and show signed-up icon when subscribed */
   #SLCollection-{{ section.id }} .sl-notify-bell .sl-bell-check {
     display: none;
   }
@@ -1315,6 +1315,12 @@ min-height:40px;
   }
   #SLCollection-{{ section.id }} .sl-notify-bell--subscribed .sl-bell-check {
     display: inline-block;
+  }
+  /* Signed-up bell img sizing (matches SVG dimensions) */
+  #SLCollection-{{ section.id }} .sl-notify-bell img.sl-bell-check {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
   }
   /* Standalone bell subscribed state */
   #SLCollection-{{ section.id }} .sl-notify-bell--standalone.sl-notify-bell--subscribed {
@@ -1872,7 +1878,7 @@ min-height:40px;
                               data-notify-image="{{ product.featured_image | image_url: width: 200 }}"
                               data-notify-url="{{ product.url }}">
                               <svg class="sl-bell-default" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if section.settings.notify_bell_style == 'filled' %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                              <svg class="sl-bell-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="m9 12 2 2 4-4" stroke-width="2.5"/></svg>
+                              <img class="sl-bell-check" src="{% if section.settings.notify_bell_style == 'filled' %}{{ 'Filled-Signed-Up-Notification-Bell.svg' | asset_url }}{% else %}{{ 'Outline-Signed-Up-Notification-Bell.svg' | asset_url }}{% endif %}" alt="Signed up" loading="lazy">
                               {%- if section.settings.notify_text != blank -%}<span class="sl-notify-text sl-bell-default">{{ section.settings.notify_text }}</span>{%- endif -%}
                               <span class="sl-notify-text sl-bell-check">Signed Up</span>
                             </button>
@@ -2110,7 +2116,7 @@ min-height:40px;
                                 data-notify-image="{{ product.featured_image | image_url: width: 200 }}"
                                 data-notify-url="{{ product.url }}">
                                 <svg class="sl-bell-default" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if section.settings.notify_bell_style == 'filled' %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                                <svg class="sl-bell-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="m9 12 2 2 4-4" stroke-width="2.5"/></svg>
+                                <img class="sl-bell-check" src="{% if section.settings.notify_bell_style == 'filled' %}{{ 'Filled-Signed-Up-Notification-Bell.svg' | asset_url }}{% else %}{{ 'Outline-Signed-Up-Notification-Bell.svg' | asset_url }}{% endif %}" alt="Signed up" loading="lazy">
                                 {%- if section.settings.notify_text != blank -%}<span class="sl-notify-text sl-bell-default">{{ section.settings.notify_text }}</span>{%- endif -%}
                                 <span class="sl-notify-text sl-bell-check">Signed Up</span>
                               </button>
