@@ -511,18 +511,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: {% if section.settings.notify_text_position == 'left' %}row-reverse{% else %}row{% endif %};
-    gap: {% if section.settings.notify_text != blank %}6px{% else %}0{% endif %};
-    {% if section.settings.notify_text != blank %}
-      padding: 0 12px;
-    {% else %}
-      width: 44px;
-      padding: 0;
-    {% endif %}
+    width: 44px;
     background: {{ section.settings.notify_bell_background }};
     border: {{ section.settings.notify_bell_border_width }}px solid {{ section.settings.notify_bell_border_color }};
     border-left: none;
     border-radius: 0 {{ section.settings.button_border_radius }}px {{ section.settings.button_border_radius }}px 0;
+    padding: 0;
     transition: opacity 0.2s;
     color: {{ section.settings.notify_bell_icon_color }};
     text-decoration: none;
@@ -540,12 +534,7 @@
   }
 
   #SLCollection-{{ section.id }} .sl-oos-button-row .sl-notify-bell .sl-notify-text {
-    font-size: {{ section.settings.notify_text_font_size }}px;
-    color: {{ section.settings.notify_text_color }};
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    white-space: nowrap;
+    display: none;
   }
 
   @media screen and (max-width: 749px) {
@@ -559,9 +548,21 @@
 
     #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-notify-bell {
       width: 100%;
+      flex-direction: {% if section.settings.notify_text_position == 'left' %}row-reverse{% else %}row{% endif %};
+      justify-content: center;
+      gap: {% if section.settings.notify_text != blank %}6px{% else %}0{% endif %};
       padding: 8px 12px;
       border-left: {{ section.settings.notify_bell_border_width }}px solid {{ section.settings.notify_bell_border_color }};
       border-radius: {{ section.settings.button_border_radius }}px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-notify-bell .sl-notify-text {
+      display: inline;
+      font-size: {{ section.settings.notify_text_font_size }}px;
+      color: {{ section.settings.notify_text_color }};
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
   }
 
@@ -3375,7 +3376,7 @@ min-height:40px;
       "type": "text",
       "id": "notify_text",
       "label": "Notify bell text",
-      "info": "Text shown next to the bell icon. Leave empty to show bell only (centered).",
+      "info": "Text shown next to bell on mobile only. Leave empty to show bell only (centered).",
       "default": "Notify Me"
     },
     {
