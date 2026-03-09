@@ -156,6 +156,26 @@
     opacity: 0.8;
   }
 
+  {% if section.settings.notify_bell_ring_animation %}
+  @keyframes sl-bell-ring-{{ section.id }} {
+    0%   { transform: rotate(0deg); }
+    10%  { transform: rotate(14deg); }
+    20%  { transform: rotate(-14deg); }
+    30%  { transform: rotate(10deg); }
+    40%  { transform: rotate(-10deg); }
+    50%  { transform: rotate(6deg); }
+    60%  { transform: rotate(-6deg); }
+    70%  { transform: rotate(2deg); }
+    80%  { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  #SLCollection-{{ section.id }} .sl-notify-bell--standalone:hover svg {
+    animation: sl-bell-ring-{{ section.id }} 0.6s ease-in-out;
+    transform-origin: top center;
+  }
+  {% endif %}
+
   #SLCollection-{{ section.id }} .sl-card-wrapper .sl-outside-button > .sl-notify-bell--standalone svg {
     width: 18px;
     height: 18px;
@@ -3387,6 +3407,10 @@ min-height:40px;
       "label": "Button opacity"
     },
     {
+      "type": "header",
+      "content": "Notify Bell"
+    },
+    {
       "type": "checkbox",
       "id": "show_notify_bell",
       "label": "Show notify bell",
@@ -3408,6 +3432,12 @@ min-height:40px;
       "id": "notify_bell_icon_color",
       "label": "Bell icon color",
       "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "notify_bell_ring_animation",
+      "label": "Ring animation on hover",
+      "default": true
     },
     {
       "type": "color",
