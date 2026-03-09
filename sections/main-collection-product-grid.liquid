@@ -280,8 +280,14 @@
     gap: 4px;
   }
 
+  {%- unless section.settings.show_empty_reviews -%}
   #SLCollection-{{ section.id }} .sl-star-rating .jdgm-prev-badge[data-average-rating="0.00"] {
     display: none !important;
+  }
+  {%- endunless -%}
+
+  #SLCollection-{{ section.id }} .sl-star-rating .jdgm-prev-badge[data-average-rating="0.00"] .jdgm-star {
+    color: {{ section.settings.empty_star_color }};
   }
 
   #SLCollection-{{ section.id }} .sl-star-rating .jdgm-star {
@@ -2765,6 +2771,20 @@ min-height:40px;
       "id": "star_rating_color",
       "label": "Star rating color",
       "default": "#FFD700"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_empty_reviews",
+      "label": "Show empty reviews",
+      "info": "Display stars for products with no reviews",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "empty_star_color",
+      "label": "Empty star color",
+      "info": "Color for stars on products with no reviews",
+      "default": "#D3D3D3"
     },
     {
       "type": "range",
