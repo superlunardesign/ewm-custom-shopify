@@ -544,25 +544,14 @@
   }
 
   @media screen and (max-width: 749px) {
-    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price {
-      grid-template-columns: 1fr;
-    }
-
-    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-oos-btn {
-      border-radius: {{ section.settings.button_border_radius }}px;
-    }
-
-    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-notify-bell {
-      width: 100%;
+    #SLCollection-{{ section.id }} .sl-oos-button-row .sl-notify-bell {
       flex-direction: {% if section.settings.notify_text_position == 'left' %}row-reverse{% else %}row{% endif %};
-      justify-content: center;
       gap: {% if section.settings.notify_text != blank %}6px{% else %}0{% endif %};
-      padding: 8px 12px;
-      border-left: {{ section.settings.notify_bell_border_width }}px solid {{ section.settings.notify_bell_border_color }};
-      border-radius: {{ section.settings.button_border_radius }}px;
+      width: auto;
+      padding: 0 10px;
     }
 
-    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-notify-bell .sl-notify-text {
+    #SLCollection-{{ section.id }} .sl-oos-button-row .sl-notify-bell .sl-notify-text {
       display: inline;
       font-size: {{ section.settings.notify_text_font_size }}px;
       color: {{ section.settings.notify_text_color }};
