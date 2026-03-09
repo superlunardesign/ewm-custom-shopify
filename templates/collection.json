@@ -68,6 +68,8 @@
         "compare_price_color": "#999999",
         "sale_text": "Sale",
         "sale_badge_color": "#8c9b6d",
+        "show_soldout_badge": true,
+        "soldout_badge_priority": true,
         "soldout_text": "SOLD OUT",
         "soldout_badge_color": "#666666",
         "badge_tags": "ACNE SAFE",
@@ -139,6 +141,10 @@
         "notify_bell_background": "rgba(0,0,0,0)",
         "notify_bell_border_color": "rgba(0,0,0,0)",
         "notify_bell_border_width": 0,
+        "notify_text": "Notify Me",
+        "notify_text_position": "left",
+        "notify_text_color": "#8c9b6d",
+        "notify_text_font_size": 12,
         "padding_top": 20,
         "padding_bottom": 0
       }
