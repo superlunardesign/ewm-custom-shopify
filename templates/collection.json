@@ -138,7 +138,7 @@
         "oos_button_border_width": 0,
         "oos_button_opacity": 100,
         "show_notify_bell": true,
-        "notify_bell_style": "filled",
+        "notify_bell_style": "outline",
         "notify_bell_icon_color": "#8c9b6d",
         "notify_bell_background": "rgba(0,0,0,0)",
         "notify_bell_border_color": "rgba(0,0,0,0)",
