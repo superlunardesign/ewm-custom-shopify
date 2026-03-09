@@ -1314,7 +1314,7 @@ min-height:40px;
   {%- for product in collection.products -%}
     {%- assign _p_in_stock = false -%}
     {%- for variant in product.variants -%}
-      {%- if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' -%}
+      {%- if variant.inventory_management == nil or variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' -%}
         {%- assign _p_in_stock = true -%}
         {%- break -%}
       {%- endif -%}
@@ -1673,10 +1673,10 @@ min-height:40px;
           <ul class="sl-product-grid{% if grid_is_compact %} sl-product-grid--compact{% endif %}" id="product-grid" data-id="{{ section.id }}">
             {%- assign product_index = 0 -%}
             {%- for product in collection.products -%}
-              {%- comment -%} Check stock: in stock if any variant has qty > 0 or allows selling when OOS {%- endcomment -%}
+              {%- comment -%} Check stock: in stock if any variant has qty > 0, allows selling when OOS, or inventory is not tracked {%- endcomment -%}
               {%- assign product_in_stock = false -%}
               {%- for variant in product.variants -%}
-                {%- if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' -%}
+                {%- if variant.inventory_management == nil or variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' -%}
                   {%- assign product_in_stock = true -%}
                   {%- break -%}
                 {%- endif -%}
