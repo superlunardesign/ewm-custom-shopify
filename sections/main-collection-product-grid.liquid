@@ -588,6 +588,16 @@
     }
   }
 
+  /* Extra-small screens: tighten buttons to prevent wrapping */
+  @media screen and (max-width: 399px) {
+    #SLCollection-{{ section.id }} .sl-add-to-cart-btn,
+    #SLCollection-{{ section.id }} .sl-oos-button-row .sl-oos-btn {
+      font-size: 11px;
+      padding: 10px 10px;
+      letter-spacing: 0.25px;
+    }
+  }
+
   #SLCollection-{{ section.id }} .sl-subscribe-btn {
     width: 100%;
     padding: 12px 16px;
