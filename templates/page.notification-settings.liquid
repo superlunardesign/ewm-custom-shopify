@@ -2,6 +2,11 @@
   Notification Settings page template.
   Requires customer login — redirects guests to login page.
   Assign this template to a page called "Notification Settings" in Shopify admin.
+
+  Uses customer tags (format: bis:{product-handle}) as the server-side source of truth.
+  Requires Shopify Flow to add/remove tags on contact form submissions:
+    - Tag "back-in-stock" → add customer tag "bis:{handle}" (handle is 2nd tag)
+    - Tag "remove-back-in-stock" → remove customer tag "bis:{handle}"
 {% endcomment %}
 
 {% unless customer %}
@@ -12,13 +17,39 @@
 
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%} Extract bis: tags from customer and output as JSON {%- endcomment -%}
+{%- assign bis_handles = '' -%}
+{%- for tag in customer.tags -%}
+  {%- if tag contains 'bis:' -%}
+    {%- assign handle = tag | remove: 'bis:' -%}
+    {%- if bis_handles != '' -%}{%- assign bis_handles = bis_handles | append: ',' -%}{%- endif -%}
+    {%- assign bis_handles = bis_handles | append: handle -%}
+  {%- endif -%}
+{%- endfor -%}
+
 <div class="page-width" style="padding-top: 36px; padding-bottom: 60px;">
-  <div class="sl-bis-settings" id="notification-settings" data-customer-id="{{ customer.id }}">
+  <div class="sl-bis-settings" id="notification-settings"
+       data-customer-id="{{ customer.id }}"
+       data-customer-email="{{ customer.email }}"
+       data-customer-name="{{ customer.first_name }}"
+       data-bis-handles="{{ bis_handles }}">
+
     <h1 class="sl-bis-page-title">Back in Stock Notifications</h1>
     <p class="sl-bis-subtitle">Products you've asked to be notified about when they're back in stock.</p>
 
+    {%- comment -%} Hidden contact form for AJAX submissions (provides authenticity token) {%- endcomment -%}
+    {% form 'contact', id: 'sl-bis-contact-form' %}
+      <div style="display:none;">
+        <input type="hidden" name="contact[email]" id="sl-bis-form-email" value="{{ customer.email }}">
+        <input type="hidden" name="contact[first_name]" value="{{ customer.first_name }}">
+        <input type="hidden" name="contact[tags]" id="sl-bis-form-tags" value="">
+        <input type="hidden" name="contact[body]" id="sl-bis-form-body" value="">
+      </div>
+    {% endform %}
+
     <div class="sl-bis-list" id="sl-bis-list">
       <p class="sl-bis-empty" id="sl-bis-empty">You haven't signed up for any back-in-stock notifications yet.</p>
+      <div class="sl-bis-loading" id="sl-bis-loading" style="display:none;">Loading your notifications...</div>
     </div>
 
     <div class="sl-bis-add-section">
@@ -32,6 +63,13 @@
           autocomplete="off"
         >
         <div class="sl-bis-search-results" id="sl-bis-search-results"></div>
+      </div>
+    </div>
+
+    <div class="sl-bis-browse-section">
+      <h3>Out of Stock Products</h3>
+      <div class="sl-bis-browse-list" id="sl-bis-browse-list">
+        <div class="sl-bis-search-loading">Loading...</div>
       </div>
     </div>
   </div>
@@ -54,7 +92,7 @@
     margin-bottom: 2rem;
   }
 
-  /* Product list */
+  /* Notification list */
   .sl-bis-list {
     margin-bottom: 3rem;
   }
@@ -62,6 +100,10 @@
     color: rgba(var(--color-foreground), 0.5);
     font-size: 1.4rem;
     font-style: italic;
+  }
+  .sl-bis-loading {
+    color: rgba(var(--color-foreground), 0.5);
+    font-size: 1.4rem;
   }
   .sl-bis-item {
     display: flex;
@@ -131,7 +173,8 @@
   }
 
   /* Add / search section */
-  .sl-bis-add-section h3 {
+  .sl-bis-add-section h3,
+  .sl-bis-browse-section h3 {
     font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: normal;
@@ -139,7 +182,7 @@
   }
   .sl-bis-search-wrap {
     position: relative;
-    max-width: 400px;
+    max-width: 100%;
   }
   .sl-bis-search-input {
     width: 100%;
@@ -175,7 +218,8 @@
   .sl-bis-search-results.is-open {
     display: block;
   }
-  .sl-bis-search-result {
+  .sl-bis-search-result,
+  .sl-bis-browse-item {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -184,24 +228,29 @@
     transition: background 0.15s;
     border-bottom: 1px solid #f0f0f0;
   }
-  .sl-bis-search-result:last-child {
+  .sl-bis-search-result:last-child,
+  .sl-bis-browse-item:last-child {
     border-bottom: none;
   }
-  .sl-bis-search-result:hover {
+  .sl-bis-search-result:hover,
+  .sl-bis-browse-item:hover {
     background: #f9f9f9;
   }
-  .sl-bis-search-result img {
+  .sl-bis-search-result img,
+  .sl-bis-browse-item img {
     width: 40px;
     height: 40px;
     object-fit: cover;
     border-radius: 4px;
     flex-shrink: 0;
   }
-  .sl-bis-search-result-info {
+  .sl-bis-search-result-info,
+  .sl-bis-browse-item-info {
     flex: 1;
     min-width: 0;
   }
-  .sl-bis-search-result-title {
+  .sl-bis-search-result-title,
+  .sl-bis-browse-item-title {
     font-size: 1.4rem;
     font-weight: 500;
     letter-spacing: normal;
@@ -209,14 +258,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .sl-bis-search-result-status {
+  .sl-bis-search-result-status,
+  .sl-bis-browse-item-status {
     font-size: 1.2rem;
-    color: rgba(var(--color-foreground), 0.5);
-  }
-  .sl-bis-search-result-status--oos {
     color: #c62828;
   }
-  .sl-bis-search-result--added {
+  .sl-bis-search-result--added,
+  .sl-bis-browse-item--added {
     opacity: 0.5;
     pointer-events: none;
   }
@@ -233,10 +281,45 @@
     text-align: center;
   }
 
-  @media screen and (max-width: 989px) {
-    .sl-bis-search-wrap {
-      max-width: 100%;
-    }
+  /* Browse section */
+  .sl-bis-browse-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+  .sl-bis-browse-list {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #fff;
+  }
+  .sl-bis-browse-item {
+    padding: 10px 14px;
+  }
+
+  /* Notify add button inside browse/search results */
+  .sl-bis-add-btn {
+    flex-shrink: 0;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 1.2rem;
+    font-family: var(--font-body-family);
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .sl-bis-add-btn:hover {
+    opacity: 0.85;
+  }
+  .sl-bis-added-label {
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    color: rgba(var(--color-foreground), 0.4);
+    font-style: italic;
   }
 </style>
 
@@ -245,15 +328,31 @@
   var settingsEl = document.getElementById('notification-settings');
   if (!settingsEl) return;
 
-  var custId     = settingsEl.getAttribute('data-customer-id');
-  var storageKey = 'sl_bis_' + custId;
-  var listEl     = document.getElementById('sl-bis-list');
-  var emptyEl    = document.getElementById('sl-bis-empty');
-  var searchInput = document.getElementById('sl-bis-search');
-  var resultsEl  = document.getElementById('sl-bis-search-results');
+  var custId       = settingsEl.getAttribute('data-customer-id');
+  var custEmail    = settingsEl.getAttribute('data-customer-email');
+  var custName     = settingsEl.getAttribute('data-customer-name');
+  var bisHandlesRaw = settingsEl.getAttribute('data-bis-handles');
+  var storageKey   = 'sl_bis_' + custId;
+  var listEl       = document.getElementById('sl-bis-list');
+  var emptyEl      = document.getElementById('sl-bis-empty');
+  var loadingEl    = document.getElementById('sl-bis-loading');
+  var searchInput  = document.getElementById('sl-bis-search');
+  var resultsEl    = document.getElementById('sl-bis-search-results');
+  var browseEl     = document.getElementById('sl-bis-browse-list');
   var debounceTimer = null;
 
-  /* ---- localStorage helpers ---- */
+  /* ---- Get the contact form's authenticity token ---- */
+  var contactForm = document.getElementById('sl-bis-contact-form');
+  var authToken = '';
+  if (contactForm) {
+    var tokenInput = contactForm.querySelector('input[name="authenticity_token"]');
+    if (tokenInput) authToken = tokenInput.value;
+  }
+
+  /* ---- Tracked handles (from customer tags — server-side truth) ---- */
+  var tagHandles = bisHandlesRaw ? bisHandlesRaw.split(',').filter(Boolean) : [];
+
+  /* ---- localStorage helpers (used as client-side cache + product details) ---- */
   function getList() {
     try { return JSON.parse(localStorage.getItem(storageKey)) || []; }
     catch(e) { return []; }
@@ -262,54 +361,180 @@
     localStorage.setItem(storageKey, JSON.stringify(list));
   }
 
-  /* ---- Render the notification list ---- */
-  function renderList() {
+  /* ---- Merge tag handles with localStorage details ---- */
+  /* Tags are the source of truth for WHICH products are tracked.
+     localStorage provides product details (title, image, url). */
+  function getTrackedHandles() {
+    var localList = getList();
+    var localHandles = localList.map(function(p) { return p.handle; });
+    /* Combine: all tag handles + any localStorage handles not in tags */
+    var all = tagHandles.slice();
+    localList.forEach(function(p) {
+      if (all.indexOf(p.handle) === -1) all.push(p.handle);
+    });
+    return all;
+  }
+
+  /* ---- Submit contact form via AJAX ---- */
+  function submitContactForm(tags, body) {
+    var formData = new URLSearchParams();
+    formData.append('form_type', 'contact');
+    if (authToken) formData.append('authenticity_token', authToken);
+    formData.append('contact[email]', custEmail);
+    formData.append('contact[first_name]', custName);
+    formData.append('contact[tags]', tags);
+    formData.append('contact[body]', body);
+
+    return fetch('/contact#contact_form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString()
+    });
+  }
+
+  /* ---- Add a product notification ---- */
+  function addNotification(product) {
+    /* Update localStorage */
     var list = getList();
+    if (!list.some(function(p) { return p.handle === product.handle; })) {
+      list.push(product);
+      saveList(list);
+    }
+    /* Add to local tag tracking */
+    if (tagHandles.indexOf(product.handle) === -1) {
+      tagHandles.push(product.handle);
+    }
+    /* Submit contact form for Shopify Flow to tag customer */
+    submitContactForm(
+      'back-in-stock, ' + product.handle,
+      'Please notify me when ' + product.title + ' (' + product.handle + ') becomes available.'
+    );
+    renderList();
+    renderBrowseList();
+  }
+
+  /* ---- Remove a product notification ---- */
+  function removeNotification(handle) {
+    /* Update localStorage */
+    var list = getList().filter(function(p) { return p.handle !== handle; });
+    saveList(list);
+    /* Remove from local tag tracking */
+    tagHandles = tagHandles.filter(function(h) { return h !== handle; });
+    /* Submit contact form for Shopify Flow to untag customer */
+    submitContactForm(
+      'remove-back-in-stock, ' + handle,
+      'Remove back-in-stock notification for ' + handle + '.'
+    );
+    renderList();
+    renderBrowseList();
+  }
+
+  /* ---- Check if a handle is tracked ---- */
+  function isTracked(handle) {
+    return tagHandles.indexOf(handle) !== -1 ||
+           getList().some(function(p) { return p.handle === handle; });
+  }
+
+  /* ---- Fetch product details by handle ---- */
+  function fetchProductDetails(handle) {
+    return fetch('/products/' + handle + '.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var p = data.product;
+        return {
+          handle: p.handle,
+          title: p.title,
+          image: (p.image && p.image.src) || (p.images && p.images[0] && p.images[0].src) || '',
+          url: '/products/' + p.handle,
+          addedAt: new Date().toISOString()
+        };
+      });
+  }
+
+  /* ---- Render the tracked notification list ---- */
+  function renderList() {
+    var trackedHandles = getTrackedHandles();
     var items = listEl.querySelectorAll('.sl-bis-item');
     for (var i = 0; i < items.length; i++) items[i].remove();
 
-    if (list.length === 0) {
+    if (trackedHandles.length === 0) {
       emptyEl.style.display = '';
+      loadingEl.style.display = 'none';
       return;
     }
     emptyEl.style.display = 'none';
 
-    list.forEach(function(product) {
-      var item = document.createElement('div');
-      item.className = 'sl-bis-item';
+    var localList = getList();
+    var localMap = {};
+    localList.forEach(function(p) { localMap[p.handle] = p; });
 
-      var imageHtml;
-      if (product.image) {
-        imageHtml = '<img class="sl-bis-item-image" src="' + product.image + '" alt="' + escapeHtml(product.title) + '" loading="lazy">';
+    /* For handles that have local details, render immediately.
+       For tag-only handles (no local details), fetch product info. */
+    trackedHandles.forEach(function(handle) {
+      if (localMap[handle]) {
+        appendListItem(localMap[handle]);
       } else {
-        imageHtml = '<div class="sl-bis-item-image--placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>';
+        /* Create a placeholder and fetch details */
+        var placeholder = document.createElement('div');
+        placeholder.className = 'sl-bis-item';
+        placeholder.id = 'sl-bis-placeholder-' + handle;
+        placeholder.innerHTML = '<div class="sl-bis-item-image--placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>' +
+          '<div class="sl-bis-item-info"><span class="sl-bis-item-title">Loading...</span></div>';
+        listEl.appendChild(placeholder);
+
+        fetchProductDetails(handle)
+          .then(function(product) {
+            /* Save to localStorage for next time */
+            var list = getList();
+            if (!list.some(function(p) { return p.handle === product.handle; })) {
+              list.push(product);
+              saveList(list);
+            }
+            /* Replace placeholder */
+            var ph = document.getElementById('sl-bis-placeholder-' + handle);
+            if (ph) ph.remove();
+            appendListItem(product);
+          })
+          .catch(function() {
+            var ph = document.getElementById('sl-bis-placeholder-' + handle);
+            if (ph) {
+              ph.querySelector('.sl-bis-item-title').textContent = handle;
+            }
+          });
       }
-
-      var dateStr = '';
-      if (product.addedAt) {
-        var d = new Date(product.addedAt);
-        dateStr = 'Added ' + d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
-      }
-
-      item.innerHTML = imageHtml +
-        '<div class="sl-bis-item-info">' +
-          '<a class="sl-bis-item-title" href="' + (product.url || '#') + '">' + escapeHtml(product.title) + '</a>' +
-          (dateStr ? '<div class="sl-bis-item-date">' + dateStr + '</div>' : '') +
-        '</div>' +
-        '<button class="sl-bis-item-remove" data-handle="' + product.handle + '" title="Remove notification" aria-label="Remove notification for ' + escapeHtml(product.title) + '">' +
-          '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
-        '</button>';
-
-      listEl.appendChild(item);
     });
+  }
 
-    listEl.querySelectorAll('.sl-bis-item-remove').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var handle = this.getAttribute('data-handle');
-        var list = getList().filter(function(p) { return p.handle !== handle; });
-        saveList(list);
-        renderList();
-      });
+  function appendListItem(product) {
+    var item = document.createElement('div');
+    item.className = 'sl-bis-item';
+
+    var imageHtml;
+    if (product.image) {
+      imageHtml = '<img class="sl-bis-item-image" src="' + product.image + '" alt="' + escapeHtml(product.title) + '" loading="lazy">';
+    } else {
+      imageHtml = '<div class="sl-bis-item-image--placeholder"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>';
+    }
+
+    var dateStr = '';
+    if (product.addedAt) {
+      var d = new Date(product.addedAt);
+      dateStr = 'Added ' + d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    item.innerHTML = imageHtml +
+      '<div class="sl-bis-item-info">' +
+        '<a class="sl-bis-item-title" href="' + (product.url || '#') + '">' + escapeHtml(product.title) + '</a>' +
+        (dateStr ? '<div class="sl-bis-item-date">' + dateStr + '</div>' : '') +
+      '</div>' +
+      '<button class="sl-bis-item-remove" data-handle="' + product.handle + '" title="Remove notification" aria-label="Remove notification for ' + escapeHtml(product.title) + '">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+      '</button>';
+
+    listEl.appendChild(item);
+
+    item.querySelector('.sl-bis-item-remove').addEventListener('click', function() {
+      removeNotification(product.handle);
     });
   }
 
@@ -332,22 +557,18 @@
           return;
         }
 
-        /* Only show out-of-stock products */
         var oosProducts = products.filter(function(p) { return !p.available; });
         if (oosProducts.length === 0) {
           resultsEl.innerHTML = '<div class="sl-bis-search-no-results">No out-of-stock products found</div>';
           return;
         }
 
-        var currentList = getList();
-        var currentHandles = currentList.map(function(p) { return p.handle; });
         var html = '';
-
         oosProducts.forEach(function(p) {
-          var isAdded = currentHandles.indexOf(p.handle) !== -1;
-          var imgSrc = p.image || p.featured_image && p.featured_image.url || '';
+          var tracked = isTracked(p.handle);
+          var imgSrc = p.image || (p.featured_image && p.featured_image.url) || '';
 
-          html += '<div class="sl-bis-search-result' + (isAdded ? ' sl-bis-search-result--added' : '') + '"' +
+          html += '<div class="sl-bis-search-result' + (tracked ? ' sl-bis-search-result--added' : '') + '"' +
             ' data-handle="' + p.handle + '"' +
             ' data-title="' + escapeAttr(p.title) + '"' +
             ' data-image="' + escapeAttr(imgSrc) + '"' +
@@ -355,30 +576,27 @@
             (imgSrc ? '<img src="' + imgSrc + '" alt="" loading="lazy">' : '') +
             '<div class="sl-bis-search-result-info">' +
               '<div class="sl-bis-search-result-title">' + escapeHtml(p.title) + '</div>' +
-              '<div class="sl-bis-search-result-status sl-bis-search-result-status--oos">' +
-                (isAdded ? 'Already on your list' : 'Out of stock') +
+              '<div class="sl-bis-search-result-status">' +
+                (tracked ? 'Already on your list' : 'Out of stock') +
               '</div>' +
             '</div>' +
+            (tracked ? '<span class="sl-bis-added-label">Added</span>' : '<button class="sl-bis-add-btn">Notify Me</button>') +
           '</div>';
         });
 
         resultsEl.innerHTML = html;
 
-        resultsEl.querySelectorAll('.sl-bis-search-result:not(.sl-bis-search-result--added)').forEach(function(el) {
-          el.addEventListener('click', function() {
-            var list = getList();
-            var newProduct = {
-              handle: this.getAttribute('data-handle'),
-              title: this.getAttribute('data-title'),
-              image: this.getAttribute('data-image'),
-              url: this.getAttribute('data-url'),
+        resultsEl.querySelectorAll('.sl-bis-add-btn').forEach(function(btn) {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var row = this.closest('.sl-bis-search-result');
+            addNotification({
+              handle: row.getAttribute('data-handle'),
+              title: row.getAttribute('data-title'),
+              image: row.getAttribute('data-image'),
+              url: row.getAttribute('data-url'),
               addedAt: new Date().toISOString()
-            };
-            if (!list.some(function(p) { return p.handle === newProduct.handle; })) {
-              list.push(newProduct);
-              saveList(list);
-              renderList();
-            }
+            });
             searchInput.value = '';
             resultsEl.classList.remove('is-open');
           });
@@ -389,19 +607,86 @@
       });
   }
 
-  /* ---- Search input event handling ---- */
   searchInput.addEventListener('input', function() {
     var q = this.value.trim();
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(function() { searchProducts(q); }, 300);
   });
 
-  /* Close results on click outside */
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.sl-bis-search-wrap')) {
       resultsEl.classList.remove('is-open');
     }
   });
+
+  /* ---- Browse all out-of-stock products ---- */
+  function loadBrowseList() {
+    fetch('/collections/all/products.json?limit=250')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var products = (data.products || []).filter(function(p) {
+          /* Check if any variant is unavailable, or product-level available is false */
+          return !p.variants.every(function(v) { return v.available; });
+        });
+
+        if (products.length === 0) {
+          browseEl.innerHTML = '<div class="sl-bis-search-no-results">No out-of-stock products right now</div>';
+          return;
+        }
+
+        renderBrowseListItems(products);
+      })
+      .catch(function() {
+        browseEl.innerHTML = '<div class="sl-bis-search-no-results">Could not load products</div>';
+      });
+  }
+
+  var allOosProducts = [];
+
+  function renderBrowseListItems(products) {
+    if (products) allOosProducts = products;
+    var html = '';
+
+    allOosProducts.forEach(function(p) {
+      var tracked = isTracked(p.handle);
+      var imgSrc = (p.image && p.image.src) || (p.images && p.images[0] && p.images[0].src) || '';
+
+      html += '<div class="sl-bis-browse-item' + (tracked ? ' sl-bis-browse-item--added' : '') + '"' +
+        ' data-handle="' + p.handle + '"' +
+        ' data-title="' + escapeAttr(p.title) + '"' +
+        ' data-image="' + escapeAttr(imgSrc) + '"' +
+        ' data-url="/products/' + p.handle + '">' +
+        (imgSrc ? '<img src="' + imgSrc + '" alt="" loading="lazy">' : '') +
+        '<div class="sl-bis-browse-item-info">' +
+          '<div class="sl-bis-browse-item-title">' + escapeHtml(p.title) + '</div>' +
+          '<div class="sl-bis-browse-item-status">' +
+            (tracked ? 'On your list' : 'Out of stock') +
+          '</div>' +
+        '</div>' +
+        (tracked ? '<span class="sl-bis-added-label">Added</span>' : '<button class="sl-bis-add-btn">Notify Me</button>') +
+      '</div>';
+    });
+
+    browseEl.innerHTML = html;
+
+    browseEl.querySelectorAll('.sl-bis-add-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var row = this.closest('.sl-bis-browse-item');
+        addNotification({
+          handle: row.getAttribute('data-handle'),
+          title: row.getAttribute('data-title'),
+          image: row.getAttribute('data-image'),
+          url: row.getAttribute('data-url'),
+          addedAt: new Date().toISOString()
+        });
+      });
+    });
+  }
+
+  function renderBrowseList() {
+    if (allOosProducts.length > 0) renderBrowseListItems();
+  }
 
   /* ---- Utility ---- */
   function escapeHtml(str) {
@@ -415,5 +700,6 @@
 
   /* ---- Init ---- */
   renderList();
+  loadBrowseList();
 })();
 </script>

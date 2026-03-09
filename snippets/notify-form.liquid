@@ -9,16 +9,24 @@
 {%- endcomment -%}
 
 {%- unless product.available -%}
+{%- comment -%} Check customer tags for server-side signed-up state {%- endcomment -%}
+{%- assign bis_tag = 'bis:' | append: product.handle -%}
+{%- assign bis_tagged = false -%}
+{%- if customer and customer.tags contains bis_tag -%}
+  {%- assign bis_tagged = true -%}
+{%- endif -%}
+
 <div class="sl-notify-form" id="sl-notify-form"
      data-product-handle="{{ product.handle }}"
      data-product-title="{{ product.title | escape }}"
      data-product-image="{{ product.featured_image | image_url: width: 200 }}"
      data-product-url="{{ product.url }}"
-     {%- if customer %}data-customer-id="{{ customer.id }}"{% endif %}>
+     {%- if customer %}data-customer-id="{{ customer.id }}"{% endif %}
+     {%- if bis_tagged %}data-bis-tagged="true"{% endif %}>
 
-  {%- comment -%} "Already signed up" banner — shown via JS for logged-in customers {%- endcomment -%}
+  {%- comment -%} "Already signed up" banner — shown via Liquid tag check or JS localStorage {%- endcomment -%}
   {%- if customer -%}
-    <div class="sl-notify-signed-up" id="sl-notify-signed-up" style="display:none;">
+    <div class="sl-notify-signed-up" id="sl-notify-signed-up" style="{% unless bis_tagged %}display:none;{% endunless %}">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
       <div>
         <p>You're signed up to be notified when this product is back in stock.</p>
@@ -27,8 +35,8 @@
     </div>
   {%- endif -%}
 
-  {%- comment -%} Standard form — hidden by JS when already signed up {%- endcomment -%}
-  <div id="sl-notify-form-inner">
+  {%- comment -%} Standard form — hidden when already signed up (via tag or JS) {%- endcomment -%}
+  <div id="sl-notify-form-inner" {% if bis_tagged %}style="display:none;"{% endif %}>
     {% form 'contact' %}
       {%- if form.posted_successfully? -%}
         <div class="sl-notify-success">
@@ -254,8 +262,9 @@
     /* ---- Show "already signed up" for logged-in customers ---- */
     var signedUpEl = document.getElementById('sl-notify-signed-up');
     var formInner  = document.getElementById('sl-notify-form-inner');
+    var bisTagged  = container.getAttribute('data-bis-tagged') === 'true';
 
-    if (custId && isSignedUp()) {
+    if (custId && (bisTagged || isSignedUp())) {
       if (signedUpEl) signedUpEl.style.display = '';
       if (formInner) formInner.style.display = 'none';
     }

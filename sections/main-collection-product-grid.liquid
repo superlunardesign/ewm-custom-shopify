@@ -1840,10 +1840,16 @@ min-height:40px;
                             </div>
                           </div>
                           {%- if section.settings.show_notify_bell -%}
-                            <a href="{{ product.url }}?notify=true" class="sl-notify-bell sl-notify-bell--standalone{% if customer %} sl-notify-bell--subscribed{% endif %}">
+                            {%- assign bis_tag_check = 'bis:' | append: product.handle -%}
+                            <button type="button"
+                              class="sl-notify-bell sl-notify-bell--standalone{% if customer and customer.tags contains bis_tag_check %} sl-notify-bell--subscribed{% endif %}"
+                              data-notify-handle="{{ product.handle }}"
+                              data-notify-title="{{ product.title | escape }}"
+                              data-notify-image="{{ product.featured_image | image_url: width: 200 }}"
+                              data-notify-url="{{ product.url }}">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if section.settings.notify_bell_style == 'filled' %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                               {%- if section.settings.notify_text != blank -%}<span class="sl-notify-text">{{ section.settings.notify_text }}</span>{%- endif -%}
-                            </a>
+                            </button>
                           {%- endif -%}
                         {%- endif -%}
                       {%- endif -%}
@@ -2070,10 +2076,16 @@ min-height:40px;
                               </div>
                             </div>
                             {%- if section.settings.show_notify_bell -%}
-                              <a href="{{ product.url }}?notify=true" class="sl-notify-bell sl-notify-bell--standalone{% if customer %} sl-notify-bell--subscribed{% endif %}">
+                              {%- assign bis_tag_check = 'bis:' | append: product.handle -%}
+                              <button type="button"
+                                class="sl-notify-bell sl-notify-bell--standalone{% if customer and customer.tags contains bis_tag_check %} sl-notify-bell--subscribed{% endif %}"
+                                data-notify-handle="{{ product.handle }}"
+                                data-notify-title="{{ product.title | escape }}"
+                                data-notify-image="{{ product.featured_image | image_url: width: 200 }}"
+                                data-notify-url="{{ product.url }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if section.settings.notify_bell_style == 'filled' %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                                 {%- if section.settings.notify_text != blank -%}<span class="sl-notify-text">{{ section.settings.notify_text }}</span>{%- endif -%}
-                              </a>
+                              </button>
                             {%- endif -%}
                           {%- endif -%}
                         {%- endif -%}
@@ -2679,6 +2691,365 @@ min-height:40px;
 
 })();
 </script>
+
+{%- comment -%} Notify Me Pop-in for collection bell icons {%- endcomment -%}
+{%- if section.settings.show_notify_bell -%}
+<div class="sl-notify-popin" id="sl-notify-popin" style="display:none;">
+  <div class="sl-notify-popin__overlay"></div>
+  <div class="sl-notify-popin__card">
+    <button class="sl-notify-popin__close" aria-label="Close">&times;</button>
+    <div class="sl-notify-popin__product">
+      <img class="sl-notify-popin__image" id="sl-popin-image" src="" alt="" loading="lazy">
+      <div class="sl-notify-popin__info">
+        <p class="sl-notify-popin__title" id="sl-popin-title"></p>
+        <p class="sl-notify-popin__status">Out of stock</p>
+      </div>
+    </div>
+
+    {%- if customer -%}
+      <div class="sl-notify-popin__body" id="sl-popin-body">
+        <p>We'll email you at <strong>{{ customer.email }}</strong> when this product is back in stock.</p>
+        <button type="button" class="sl-notify-popin__submit" id="sl-popin-submit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Notify Me
+        </button>
+      </div>
+      <div class="sl-notify-popin__success" id="sl-popin-success" style="display:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div>
+          <p>You'll be notified when this product is back in stock!</p>
+          <a href="/pages/notification-settings" class="sl-notify-popin__settings-link">Manage notification settings</a>
+        </div>
+      </div>
+      <div class="sl-notify-popin__already" id="sl-popin-already" style="display:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div>
+          <p>You're already signed up for this product.</p>
+          <a href="/pages/notification-settings" class="sl-notify-popin__settings-link">Manage notification settings</a>
+        </div>
+      </div>
+    {%- else -%}
+      <div class="sl-notify-popin__body" id="sl-popin-body">
+        <p>Enter your details and we'll notify you when this product is back in stock.</p>
+        <div class="sl-notify-popin__fields">
+          <input type="text" id="sl-popin-name" class="sl-notify-popin__input" placeholder="First name" required>
+          <input type="email" id="sl-popin-email" class="sl-notify-popin__input" placeholder="Email address" required>
+        </div>
+        <button type="button" class="sl-notify-popin__submit" id="sl-popin-submit">Notify Me</button>
+      </div>
+      <div class="sl-notify-popin__success" id="sl-popin-success" style="display:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p>We'll notify you when this product is back in stock!</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .sl-notify-popin__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 999;
+  }
+  .sl-notify-popin__card {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+    padding: 20px;
+    width: 340px;
+    max-width: calc(100vw - 40px);
+    animation: sl-popin-slide 0.25s ease-out;
+  }
+  @keyframes sl-popin-slide {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .sl-notify-popin__close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: rgba(var(--color-foreground), 0.4);
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+  }
+  .sl-notify-popin__close:hover {
+    color: rgb(var(--color-foreground));
+  }
+  .sl-notify-popin__product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .sl-notify-popin__image {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #f5f5f5;
+    flex-shrink: 0;
+  }
+  .sl-notify-popin__info {
+    flex: 1;
+    min-width: 0;
+  }
+  .sl-notify-popin__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: normal;
+    margin: 0 0 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sl-notify-popin__status {
+    font-size: 1.2rem;
+    color: #c62828;
+    margin: 0;
+  }
+  .sl-notify-popin__body p {
+    font-size: 1.4rem;
+    color: rgba(var(--color-foreground), 0.7);
+    margin: 0 0 12px;
+  }
+  .sl-notify-popin__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .sl-notify-popin__input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: var(--font-body-family);
+    background: #fff;
+    color: #1a1a1a;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+  .sl-notify-popin__input:focus {
+    border-color: #8C9B6D;
+  }
+  .sl-notify-popin__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 12px 20px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: var(--font-body-family);
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .sl-notify-popin__submit:hover {
+    opacity: 0.85;
+  }
+  .sl-notify-popin__submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .sl-notify-popin__success,
+  .sl-notify-popin__already {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #2e7d32;
+    font-size: 1.4rem;
+  }
+  .sl-notify-popin__success p,
+  .sl-notify-popin__already p {
+    margin: 0 0 4px;
+    color: #2e7d32;
+  }
+  .sl-notify-popin__success svg,
+  .sl-notify-popin__already svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .sl-notify-popin__settings-link {
+    font-size: 13px;
+    color: #555;
+    text-decoration: underline;
+  }
+  .sl-notify-popin__settings-link:hover {
+    color: #1a1a1a;
+  }
+
+  @media screen and (max-width: 749px) {
+    .sl-notify-popin__card {
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100%;
+      border-radius: 10px 10px 0 0;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  var popin       = document.getElementById('sl-notify-popin');
+  if (!popin) return;
+
+  var overlay     = popin.querySelector('.sl-notify-popin__overlay');
+  var closeBtn    = popin.querySelector('.sl-notify-popin__close');
+  var imageEl     = document.getElementById('sl-popin-image');
+  var titleEl     = document.getElementById('sl-popin-title');
+  var bodyEl      = document.getElementById('sl-popin-body');
+  var successEl   = document.getElementById('sl-popin-success');
+  var alreadyEl   = document.getElementById('sl-popin-already');
+  var submitBtn   = document.getElementById('sl-popin-submit');
+  var nameInput   = document.getElementById('sl-popin-name');
+  var emailInput  = document.getElementById('sl-popin-email');
+
+  var currentHandle = '';
+  var custId = {{ customer.id | default: 'null' | json }};
+  var custEmail = {{ customer.email | default: '' | json }};
+  var custName = {{ customer.first_name | default: '' | json }};
+  var storageKey = custId ? 'sl_bis_' + custId : null;
+
+  /* localStorage helpers */
+  function getList() {
+    if (!storageKey) return [];
+    try { return JSON.parse(localStorage.getItem(storageKey)) || []; }
+    catch(e) { return []; }
+  }
+  function saveList(list) {
+    if (!storageKey) return;
+    localStorage.setItem(storageKey, JSON.stringify(list));
+  }
+  function isTracked(handle) {
+    return getList().some(function(p) { return p.handle === handle; });
+  }
+
+  /* Open pop-in */
+  function openPopin(bell) {
+    currentHandle = bell.getAttribute('data-notify-handle');
+    var title = bell.getAttribute('data-notify-title');
+    var image = bell.getAttribute('data-notify-image');
+
+    imageEl.src = image || '';
+    imageEl.alt = title;
+    titleEl.textContent = title;
+
+    /* Reset states */
+    bodyEl.style.display = '';
+    successEl.style.display = 'none';
+    if (alreadyEl) alreadyEl.style.display = 'none';
+    if (submitBtn) submitBtn.disabled = false;
+
+    /* Check if already subscribed (via tag class or localStorage) */
+    var isSubscribed = bell.classList.contains('sl-notify-bell--subscribed') || (custId && isTracked(currentHandle));
+    if (isSubscribed && custId) {
+      bodyEl.style.display = 'none';
+      if (alreadyEl) alreadyEl.style.display = '';
+    }
+
+    popin.style.display = '';
+  }
+
+  /* Close pop-in */
+  function closePopin() {
+    popin.style.display = 'none';
+    currentHandle = '';
+  }
+
+  overlay.addEventListener('click', closePopin);
+  closeBtn.addEventListener('click', closePopin);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && popin.style.display !== 'none') closePopin();
+  });
+
+  /* Attach bell click handlers */
+  document.querySelectorAll('.sl-notify-bell--standalone[data-notify-handle]').forEach(function(bell) {
+    bell.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openPopin(this);
+    });
+  });
+
+  /* Submit notification */
+  if (submitBtn) {
+    submitBtn.addEventListener('click', function() {
+      var email = custEmail || (emailInput && emailInput.value.trim());
+      var name = custName || (nameInput && nameInput.value.trim());
+
+      if (!email) {
+        if (emailInput) emailInput.style.borderColor = '#c62828';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      /* Find a contact form authenticity token from the page */
+      var tokenEl = document.querySelector('form input[name="authenticity_token"]');
+      var token = tokenEl ? tokenEl.value : '';
+
+      var formData = new URLSearchParams();
+      formData.append('form_type', 'contact');
+      if (token) formData.append('authenticity_token', token);
+      formData.append('contact[email]', email);
+      formData.append('contact[first_name]', name);
+      formData.append('contact[tags]', 'back-in-stock, ' + currentHandle);
+      formData.append('contact[body]', 'Please notify me when ' + titleEl.textContent + ' (' + currentHandle + ') becomes available.');
+
+      fetch('/contact#contact_form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString()
+      })
+      .then(function() {
+        /* Save to localStorage */
+        if (storageKey) {
+          var list = getList();
+          var bell = document.querySelector('.sl-notify-bell--standalone[data-notify-handle="' + currentHandle + '"]');
+          if (!list.some(function(p) { return p.handle === currentHandle; })) {
+            list.push({
+              handle: currentHandle,
+              title: titleEl.textContent,
+              image: imageEl.src,
+              url: bell ? bell.getAttribute('data-notify-url') : '/products/' + currentHandle,
+              addedAt: new Date().toISOString()
+            });
+            saveList(list);
+          }
+          /* Update bell visual state */
+          if (bell) bell.classList.add('sl-notify-bell--subscribed');
+        }
+        bodyEl.style.display = 'none';
+        successEl.style.display = '';
+      })
+      .catch(function() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Notify Me';
+      });
+    });
+  }
+})();
+</script>
+{%- endif -%}
 
 {% schema %}
 {
