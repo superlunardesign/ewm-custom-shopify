@@ -3103,7 +3103,7 @@ min-height:40px;
       if (token) formData.append('authenticity_token', token);
       formData.append('contact[email]', email);
       formData.append('contact[first_name]', name);
-      formData.append('contact[tags]', 'back-in-stock, ' + currentHandle);
+      formData.append('contact[tags]', 'back-in-stock, bis:' + currentHandle);
       formData.append('contact[body]', 'Please notify me when ' + titleEl.textContent + ' (' + currentHandle + ') becomes available.');
 
       fetch('/contact#contact_form', {

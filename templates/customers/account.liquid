@@ -450,7 +450,7 @@
       tagHandles.push(product.handle);
     }
     submitContactForm(
-      'back-in-stock, ' + product.handle,
+      'back-in-stock, bis:' + product.handle,
       'Please notify me when ' + product.title + ' (' + product.handle + ') becomes available.'
     );
     renderList();
@@ -462,7 +462,7 @@
     saveList(list);
     tagHandles = tagHandles.filter(function(h) { return h !== handle; });
     submitContactForm(
-      'remove-back-in-stock, ' + handle,
+      'remove-back-in-stock, bis:' + handle,
       'Remove back-in-stock notification for ' + handle + '.'
     );
     renderList();

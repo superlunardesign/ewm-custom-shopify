@@ -63,7 +63,7 @@
         {%- endif -%}
 
         <input type="hidden" name="contact[body]" value="Please notify me when {{ product.title | escape }} ({{ product.handle }}) becomes available.">
-        <input type="hidden" name="contact[tags]" value="back-in-stock, {{ product.handle }}">
+        <input type="hidden" name="contact[tags]" value="back-in-stock, bis:{{ product.handle }}">
 
         {%- if customer -%}
           {%- comment -%} Logged-in: auto-fill everything, just show button {%- endcomment -%}
