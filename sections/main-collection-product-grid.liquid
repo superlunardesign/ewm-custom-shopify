@@ -2930,104 +2930,6 @@ min-height:40px;
       "default": "Add to Cart"
     },
     {
-      "type": "text",
-      "id": "soldout_button_text",
-      "label": "Sold out button text",
-      "info": "Text shown on the button for out-of-stock products",
-      "default": "OUT OF STOCK"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_notify_bell",
-      "label": "Show notify bell on sold out products",
-      "info": "Displays a bell icon next to the sold out button",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Out of Stock Button Styling"
-    },
-    {
-      "type": "color",
-      "id": "oos_button_background",
-      "label": "OOS button background",
-      "default": "#b5ad8e"
-    },
-    {
-      "type": "color",
-      "id": "oos_button_text",
-      "label": "OOS button text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "oos_button_border_color",
-      "label": "OOS button border color",
-      "default": "#b5ad8e"
-    },
-    {
-      "type": "range",
-      "id": "oos_button_border_width",
-      "min": 0,
-      "max": 3,
-      "step": 1,
-      "default": 0,
-      "unit": "px",
-      "label": "OOS button border width"
-    },
-    {
-      "type": "range",
-      "id": "oos_button_opacity",
-      "min": 10,
-      "max": 100,
-      "step": 5,
-      "default": 50,
-      "unit": "%",
-      "label": "OOS button opacity"
-    },
-    {
-      "type": "header",
-      "content": "Notify Bell Styling"
-    },
-    {
-      "type": "select",
-      "id": "notify_bell_style",
-      "label": "Bell icon style",
-      "options": [
-        { "value": "outline", "label": "Outline" },
-        { "value": "filled", "label": "Filled" }
-      ],
-      "default": "outline"
-    },
-    {
-      "type": "color",
-      "id": "notify_bell_icon_color",
-      "label": "Bell icon color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "notify_bell_background",
-      "label": "Bell cell background",
-      "default": "#b5ad8e"
-    },
-    {
-      "type": "color",
-      "id": "notify_bell_border_color",
-      "label": "Bell cell border color",
-      "default": "#b5ad8e"
-    },
-    {
-      "type": "range",
-      "id": "notify_bell_border_width",
-      "min": 0,
-      "max": 3,
-      "step": 1,
-      "default": 0,
-      "unit": "px",
-      "label": "Bell cell border width"
-    },
-    {
       "type": "color",
       "id": "atc_button_background",
       "label": "Button background",
@@ -3312,8 +3214,97 @@ min-height:40px;
       "type": "checkbox",
       "id": "show_out_of_stock",
       "label": "Show out-of-stock products",
-      "info": "When enabled, sold-out products appear in the grid with a Notify Me bell icon. When disabled, they are hidden entirely.",
+      "info": "When enabled, sold-out products appear in the grid. When disabled, they are hidden entirely.",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "soldout_button_text",
+      "label": "Sold out button text",
+      "default": "OUT OF STOCK"
+    },
+    {
+      "type": "color",
+      "id": "oos_button_background",
+      "label": "Button background",
+      "default": "#b5ad8e"
+    },
+    {
+      "type": "color",
+      "id": "oos_button_text",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "oos_button_border_color",
+      "label": "Button border color",
+      "default": "#b5ad8e"
+    },
+    {
+      "type": "range",
+      "id": "oos_button_border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": "px",
+      "label": "Button border width"
+    },
+    {
+      "type": "range",
+      "id": "oos_button_opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 100,
+      "unit": "%",
+      "label": "Button opacity"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_notify_bell",
+      "label": "Show notify bell",
+      "info": "Displays a bell icon next to the sold out button",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "notify_bell_style",
+      "label": "Bell icon style",
+      "options": [
+        { "value": "outline", "label": "Outline" },
+        { "value": "filled", "label": "Filled" }
+      ],
+      "default": "outline"
+    },
+    {
+      "type": "color",
+      "id": "notify_bell_icon_color",
+      "label": "Bell icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "notify_bell_background",
+      "label": "Bell cell background",
+      "default": "#b5ad8e"
+    },
+    {
+      "type": "color",
+      "id": "notify_bell_border_color",
+      "label": "Bell cell border color",
+      "default": "#b5ad8e"
+    },
+    {
+      "type": "range",
+      "id": "notify_bell_border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": "px",
+      "label": "Bell cell border width"
     },
     {
       "type": "header",
