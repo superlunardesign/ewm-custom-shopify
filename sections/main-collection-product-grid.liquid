@@ -494,16 +494,16 @@
     grid-template-columns: 1fr auto;
     align-items: center;
     padding: 12px 16px;
-    background: {{ section.settings.atc_button_background }};
-    border: {{ section.settings.atc_button_border_width }}px solid {{ section.settings.atc_button_border_color }};
+    background: {{ section.settings.oos_button_background }};
+    border: {{ section.settings.oos_button_border_width }}px solid {{ section.settings.oos_button_border_color }};
     border-radius: {{ section.settings.button_border_radius }}px;
     {% if section.settings.show_notify_bell %}border-top-right-radius: 0; border-bottom-right-radius: 0;{% endif %}
     font-size: 13px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: {{ section.settings.atc_button_text }};
-    opacity: 0.5;
+    color: {{ section.settings.oos_button_text }};
+    opacity: {{ section.settings.oos_button_opacity | divided_by: 100.0 }};
     cursor: not-allowed;
   }
 
@@ -512,19 +512,19 @@
     align-items: center;
     justify-content: center;
     width: 44px;
-    background: {{ section.settings.atc_button_background }};
-    border: {{ section.settings.atc_button_border_width }}px solid {{ section.settings.atc_button_border_color }};
+    background: {{ section.settings.notify_bell_background }};
+    border: {{ section.settings.notify_bell_border_width }}px solid {{ section.settings.notify_bell_border_color }};
     border-left: none;
     border-radius: 0 {{ section.settings.button_border_radius }}px {{ section.settings.button_border_radius }}px 0;
     padding: 0;
-    opacity: 0.8;
     transition: opacity 0.2s;
-    color: {{ section.settings.atc_button_text }};
+    color: {{ section.settings.notify_bell_icon_color }};
     text-decoration: none;
+    cursor: pointer;
   }
 
   #SLCollection-{{ section.id }} .sl-oos-button-row .sl-notify-bell:hover {
-    opacity: 1;
+    opacity: 0.8;
   }
 
   #SLCollection-{{ section.id }} .sl-oos-button-row .sl-notify-bell svg {
@@ -1223,7 +1223,7 @@ min-height:40px;
   {%- for product in collection.products -%}
     {%- assign _p_in_stock = false -%}
     {%- for variant in product.variants -%}
-      {%- if variant.inventory_quantity > 0 -%}
+      {%- if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' -%}
         {%- assign _p_in_stock = true -%}
         {%- break -%}
       {%- endif -%}
@@ -1582,10 +1582,10 @@ min-height:40px;
           <ul class="sl-product-grid{% if grid_is_compact %} sl-product-grid--compact{% endif %}" id="product-grid" data-id="{{ section.id }}">
             {%- assign product_index = 0 -%}
             {%- for product in collection.products -%}
-              {%- comment -%} Check if product has any inventory at all {%- endcomment -%}
+              {%- comment -%} Check stock: in stock if any variant has qty > 0 or allows selling when OOS {%- endcomment -%}
               {%- assign product_in_stock = false -%}
               {%- for variant in product.variants -%}
-                {%- if variant.inventory_quantity > 0 -%}
+                {%- if variant.inventory_quantity > 0 or variant.inventory_policy == 'continue' -%}
                   {%- assign product_in_stock = true -%}
                   {%- break -%}
                 {%- endif -%}
@@ -1741,7 +1741,7 @@ min-height:40px;
                             </div>
                             {%- if section.settings.show_notify_bell -%}
                               <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if customer %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if section.settings.notify_bell_style == 'filled' %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                               </a>
                             {%- endif -%}
                           </div>
@@ -1962,7 +1962,7 @@ min-height:40px;
                               </div>
                               {%- if section.settings.show_notify_bell -%}
                                 <a href="{{ product.url }}?notify=true" class="sl-notify-bell{% if customer %} sl-notify-bell--subscribed{% endif %}">
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if customer %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if section.settings.notify_bell_style == 'filled' %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                                 </a>
                               {%- endif -%}
                             </div>
@@ -2942,6 +2942,90 @@ min-height:40px;
       "label": "Show notify bell on sold out products",
       "info": "Displays a bell icon next to the sold out button",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Out of Stock Button Styling"
+    },
+    {
+      "type": "color",
+      "id": "oos_button_background",
+      "label": "OOS button background",
+      "default": "#b5ad8e"
+    },
+    {
+      "type": "color",
+      "id": "oos_button_text",
+      "label": "OOS button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "oos_button_border_color",
+      "label": "OOS button border color",
+      "default": "#b5ad8e"
+    },
+    {
+      "type": "range",
+      "id": "oos_button_border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": "px",
+      "label": "OOS button border width"
+    },
+    {
+      "type": "range",
+      "id": "oos_button_opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%",
+      "label": "OOS button opacity"
+    },
+    {
+      "type": "header",
+      "content": "Notify Bell Styling"
+    },
+    {
+      "type": "select",
+      "id": "notify_bell_style",
+      "label": "Bell icon style",
+      "options": [
+        { "value": "outline", "label": "Outline" },
+        { "value": "filled", "label": "Filled" }
+      ],
+      "default": "outline"
+    },
+    {
+      "type": "color",
+      "id": "notify_bell_icon_color",
+      "label": "Bell icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "notify_bell_background",
+      "label": "Bell cell background",
+      "default": "#b5ad8e"
+    },
+    {
+      "type": "color",
+      "id": "notify_bell_border_color",
+      "label": "Bell cell border color",
+      "default": "#b5ad8e"
+    },
+    {
+      "type": "range",
+      "id": "notify_bell_border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": "px",
+      "label": "Bell cell border width"
     },
     {
       "type": "color",
