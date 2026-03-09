@@ -62,7 +62,7 @@
         "star_rating_color": "#8c9b6d",
         "title_font_size": 16,
         "title_color": "#1a1a1a",
-        "price_position": "card",
+        "price_position": "button",
         "price_font_size": 15,
         "price_color": "#1a1a1a",
         "compare_price_color": "#999999",
