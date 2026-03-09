@@ -439,16 +439,6 @@
     });
   }
 
-  /* ---- Call Worker to add/remove customer tag server-side ---- */
-  function callWorker(action, handle) {
-    if (!window.SL_BIS_WORKER_URL) return;
-    fetch(window.SL_BIS_WORKER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: action, customer_id: custId, handle: handle })
-    }).catch(function(err) { console.warn('BIS worker ' + action + ' failed:', err); });
-  }
-
   /* ---- Add a product notification ---- */
   function addNotification(product) {
     var list = getList();
@@ -463,8 +453,6 @@
       'back-in-stock, bis:' + product.handle,
       'Please notify me when ' + product.title + ' (' + product.handle + ') becomes available.'
     );
-    /* Add customer tag via Worker */
-    callWorker('add', product.handle);
     renderList();
   }
 
@@ -477,8 +465,6 @@
       'remove-back-in-stock, bis:' + handle,
       'Remove back-in-stock notification for ' + handle + '.'
     );
-    /* Remove customer tag via Worker */
-    callWorker('remove', handle);
     renderList();
   }
 

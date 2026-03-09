@@ -3094,7 +3094,7 @@ min-height:40px;
       bodyEl.style.display = 'none';
       successEl.style.display = '';
 
-      /* Submit contact form in background for record-keeping */
+      /* Submit contact form in background for Shopify Flow to process */
       var tokenEl = document.querySelector('form input[name="authenticity_token"]');
       var token = tokenEl ? tokenEl.value : '';
 
@@ -3113,17 +3113,6 @@ min-height:40px;
       }).catch(function(err) {
         console.warn('BIS contact form submission failed:', err);
       });
-
-      /* Call Worker to add customer tag (server-side) */
-      if (custId && window.SL_BIS_WORKER_URL) {
-        fetch(window.SL_BIS_WORKER_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'add', customer_id: custId, handle: currentHandle })
-        }).catch(function(err) {
-          console.warn('BIS worker tag add failed:', err);
-        });
-      }
     });
   }
 })();
