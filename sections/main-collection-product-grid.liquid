@@ -127,7 +127,7 @@
     align-self: end;
     display: grid;
     grid-template-columns: 1fr{% if section.settings.show_notify_bell %} auto{% endif %};
-    align-items: start;
+    align-items: stretch;
   }
 
   /* In-stock cards: ATC button spans full width */
@@ -552,6 +552,7 @@
       grid-template-rows: subgrid;
       grid-row: span 2;
       grid-template-columns: 1fr;
+      align-self: stretch;
     }
 
     /* Pin buttons/OOS row to subgrid row 1 */
