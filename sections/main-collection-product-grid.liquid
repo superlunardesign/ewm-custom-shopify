@@ -700,8 +700,13 @@
     display: block;
   }
 
+  /* Button price: show full on desktop, short (no .00) on mobile */
+  #SLCollection-{{ section.id }} .sl-btn-price--short { display: none; }
+
   /* Mobile Adjustments */
   @media screen and (max-width: 749px) {
+    #SLCollection-{{ section.id }} .sl-btn-price--full { display: none; }
+    #SLCollection-{{ section.id }} .sl-btn-price--short { display: inline; }
     #SLCollection-{{ section.id }} .sl-product-info {
       padding: 12px;
     }
@@ -1790,7 +1795,7 @@ min-height:40px;
                             {%- if section.settings.price_position == 'card' -%}
                               {{ section.settings.add_to_cart_text }}
                             {%- else -%}
-                              <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
+                              <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price><span class="sl-btn-price--full">{{ product.price | money }}</span><span class="sl-btn-price--short">{{ product.price | money | remove: '.00' }}</span></span>
                             {%- endif -%}
                           </button>
                         {%- else -%}
@@ -1800,7 +1805,7 @@ min-height:40px;
                                 <span>{{ section.settings.soldout_button_text }}</span>
                               {%- else -%}
                                 <span>{{ section.settings.soldout_button_text }}</span>
-                                <span data-product-price>{{ product.price | money }}</span>
+                                <span data-product-price><span class="sl-btn-price--full">{{ product.price | money }}</span><span class="sl-btn-price--short">{{ product.price | money | remove: '.00' }}</span></span>
                               {%- endif -%}
                             </div>
                           </div>
@@ -2020,7 +2025,7 @@ min-height:40px;
                               {%- if section.settings.price_position == 'card' -%}
                                 {{ section.settings.add_to_cart_text }}
                               {%- else -%}
-                                <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price>{{ product.price | money }}</span>
+                                <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price><span class="sl-btn-price--full">{{ product.price | money }}</span><span class="sl-btn-price--short">{{ product.price | money | remove: '.00' }}</span></span>
                               {%- endif -%}
                             </button>
                           {%- else -%}
@@ -2030,7 +2035,7 @@ min-height:40px;
                                   <span>{{ section.settings.soldout_button_text }}</span>
                                 {%- else -%}
                                   <span>{{ section.settings.soldout_button_text }}</span>
-                                  <span data-product-price>{{ product.price | money }}</span>
+                                  <span data-product-price><span class="sl-btn-price--full">{{ product.price | money }}</span><span class="sl-btn-price--short">{{ product.price | money | remove: '.00' }}</span></span>
                                 {%- endif -%}
                               </div>
                             </div>
@@ -2313,7 +2318,15 @@ min-height:40px;
 
             var priceElements = productContainer.querySelectorAll('[data-product-price]');
             priceElements.forEach(function(el) {
-              el.textContent = Shopify.formatMoney ? Shopify.formatMoney(matchingVariant.price) : '$' + (matchingVariant.price / 100).toFixed(2);
+              var formattedPrice = Shopify.formatMoney ? Shopify.formatMoney(matchingVariant.price) : '$' + (matchingVariant.price / 100).toFixed(2);
+              var fullEl = el.querySelector('.sl-btn-price--full');
+              var shortEl = el.querySelector('.sl-btn-price--short');
+              if (fullEl && shortEl) {
+                fullEl.textContent = formattedPrice;
+                shortEl.textContent = formattedPrice.replace('.00', '');
+              } else {
+                el.textContent = formattedPrice;
+              }
             });
 
             var comparePriceElement = productContainer.querySelector('.sl-price-compare');
