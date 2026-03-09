@@ -4,64 +4,91 @@
   - Logged-in customers: single "Notify Me" button (email auto-filled).
   - Guests: first name + email fields + submit.
   - ?notify=true in URL auto-scrolls to this form.
+  - Logged-in customers who already signed up see a "signed up" banner
+    with a link to their notification settings.
 {%- endcomment -%}
 
 {%- unless product.available -%}
-<div class="sl-notify-form" id="sl-notify-form">
-  {% form 'contact' %}
-    {%- if form.posted_successfully? -%}
-      <div class="sl-notify-success">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <p>We'll notify you when this product is back in stock!</p>
-      </div>
-    {%- else -%}
-      <div class="sl-notify-header">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-        <span>Notify Me When Available</span>
-      </div>
+<div class="sl-notify-form" id="sl-notify-form"
+     data-product-handle="{{ product.handle }}"
+     data-product-title="{{ product.title | escape }}"
+     data-product-image="{{ product.featured_image | image_url: width: 200 }}"
+     data-product-url="{{ product.url }}"
+     {%- if customer %}data-customer-id="{{ customer.id }}"{% endif %}>
 
-      {%- if form.errors -%}
-        <div class="sl-notify-error">
-          <p>Something went wrong. Please try again.</p>
+  {%- comment -%} "Already signed up" banner — shown via JS for logged-in customers {%- endcomment -%}
+  {%- if customer -%}
+    <div class="sl-notify-signed-up" id="sl-notify-signed-up" style="display:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <div>
+        <p>You're signed up to be notified when this product is back in stock.</p>
+        <a href="{{ routes.account_url }}#notification-settings" class="sl-notify-settings-link">Manage notification settings</a>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} Standard form — hidden by JS when already signed up {%- endcomment -%}
+  <div id="sl-notify-form-inner">
+    {% form 'contact' %}
+      {%- if form.posted_successfully? -%}
+        <div class="sl-notify-success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <div>
+            <p>We'll notify you when this product is back in stock!</p>
+            {%- if customer -%}
+              <a href="{{ routes.account_url }}#notification-settings" class="sl-notify-settings-link">Manage notification settings</a>
+            {%- endif -%}
+          </div>
         </div>
-      {%- endif -%}
-
-      <input type="hidden" name="contact[body]" value="Please notify me when {{ product.title | escape }} ({{ product.handle }}) becomes available.">
-      <input type="hidden" name="contact[tags]" value="back-in-stock, {{ product.handle }}">
-
-      {%- if customer -%}
-        {%- comment -%} Logged-in: auto-fill everything, just show button {%- endcomment -%}
-        <input type="hidden" name="contact[first_name]" value="{{ customer.first_name }}">
-        <input type="hidden" name="contact[email]" value="{{ customer.email }}">
-        <button type="submit" class="sl-notify-submit sl-notify-submit--full">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          Notify Me
-        </button>
       {%- else -%}
-        {%- comment -%} Guest: show first name + email fields {%- endcomment -%}
-        <div class="sl-notify-fields">
-          <input
-            type="text"
-            name="contact[first_name]"
-            placeholder="First name"
-            class="sl-notify-input"
-            required
-          >
-          <input
-            type="email"
-            name="contact[email]"
-            placeholder="Email address"
-            class="sl-notify-input{% if form.errors contains 'email' %} sl-notify-input--error{% endif %}"
-            value="{{ contact.fields.email }}"
-            required
-          >
+        <div class="sl-notify-header">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span>Notify Me When Available</span>
         </div>
-        <button type="submit" class="sl-notify-submit">
-          Notify Me
-        </button>
+
+        {%- if form.errors -%}
+          <div class="sl-notify-error">
+            <p>Something went wrong. Please try again.</p>
+          </div>
+        {%- endif -%}
+
+        <input type="hidden" name="contact[body]" value="Please notify me when {{ product.title | escape }} ({{ product.handle }}) becomes available.">
+        <input type="hidden" name="contact[tags]" value="back-in-stock, {{ product.handle }}">
+
+        {%- if customer -%}
+          {%- comment -%} Logged-in: auto-fill everything, just show button {%- endcomment -%}
+          <input type="hidden" name="contact[first_name]" value="{{ customer.first_name }}">
+          <input type="hidden" name="contact[email]" value="{{ customer.email }}">
+          <button type="submit" class="sl-notify-submit sl-notify-submit--full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            Notify Me
+          </button>
+        {%- else -%}
+          {%- comment -%} Guest: show first name + email fields {%- endcomment -%}
+          <div class="sl-notify-fields">
+            <input
+              type="text"
+              name="contact[first_name]"
+              placeholder="First name"
+              class="sl-notify-input"
+              required
+            >
+            <input
+              type="email"
+              name="contact[email]"
+              placeholder="Email address"
+              class="sl-notify-input{% if form.errors contains 'email' %} sl-notify-input--error{% endif %}"
+              value="{{ contact.fields.email }}"
+              required
+            >
+          </div>
+          <button type="submit" class="sl-notify-submit">
+            Notify Me
+          </button>
+        {%- endif -%}
       {%- endif -%}
-    {%- endif -%}
-  {% endform %}
+    {% endform %}
+  </div>
 </div>
 {%- endunless -%}
 
@@ -91,13 +118,33 @@
 
   .sl-notify-success {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     color: #2e7d32;
     font-size: 15px;
   }
   .sl-notify-success p { margin: 0; }
-  .sl-notify-success svg { flex-shrink: 0; }
+  .sl-notify-success svg { flex-shrink: 0; margin-top: 2px; }
+
+  .sl-notify-signed-up {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #2e7d32;
+    font-size: 15px;
+  }
+  .sl-notify-signed-up p { margin: 0 0 4px; }
+  .sl-notify-signed-up svg { flex-shrink: 0; margin-top: 2px; }
+
+  .sl-notify-settings-link {
+    font-size: 13px;
+    color: #555;
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+  .sl-notify-settings-link:hover {
+    color: #1a1a1a;
+  }
 
   .sl-notify-error {
     color: #c62828;
@@ -174,18 +221,70 @@
 
 <script>
   (function() {
-    /* Auto-scroll when ?notify=true is in URL */
-    if (window.location.search.indexOf('notify=true') !== -1) {
-      var notifyForm = document.getElementById('sl-notify-form');
-      if (notifyForm) {
-        setTimeout(function() {
-          notifyForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          notifyForm.classList.add('sl-notify-form--highlight');
-          /* Focus first input for guests */
-          var firstInput = notifyForm.querySelector('.sl-notify-input');
-          if (firstInput) firstInput.focus();
-        }, 500);
+    var container = document.getElementById('sl-notify-form');
+    if (!container) return;
+
+    var handle    = container.getAttribute('data-product-handle');
+    var title     = container.getAttribute('data-product-title');
+    var image     = container.getAttribute('data-product-image');
+    var url       = container.getAttribute('data-product-url');
+    var custId    = container.getAttribute('data-customer-id');
+    var storageKey = custId ? 'sl_bis_' + custId : null;
+
+    /* ---- localStorage helpers ---- */
+    function getList() {
+      if (!storageKey) return [];
+      try { return JSON.parse(localStorage.getItem(storageKey)) || []; }
+      catch(e) { return []; }
+    }
+    function saveList(list) {
+      if (!storageKey) return;
+      localStorage.setItem(storageKey, JSON.stringify(list));
+    }
+    function isSignedUp() {
+      return getList().some(function(p) { return p.handle === handle; });
+    }
+    function addProduct() {
+      var list = getList();
+      if (list.some(function(p) { return p.handle === handle; })) return;
+      list.push({ handle: handle, title: title, image: image, url: url, addedAt: new Date().toISOString() });
+      saveList(list);
+    }
+
+    /* ---- Show "already signed up" for logged-in customers ---- */
+    var signedUpEl = document.getElementById('sl-notify-signed-up');
+    var formInner  = document.getElementById('sl-notify-form-inner');
+
+    if (custId && isSignedUp()) {
+      if (signedUpEl) signedUpEl.style.display = '';
+      if (formInner) formInner.style.display = 'none';
+    }
+
+    /* ---- Save to localStorage on successful contact form submission ---- */
+    if (custId) {
+      /* After Shopify form post — the page reloads with success state */
+      var successEl = container.querySelector('.sl-notify-success');
+      if (successEl) {
+        addProduct();
       }
+
+      /* Also intercept form submit to save immediately (covers JS-driven submissions) */
+      var form = container.querySelector('form');
+      if (form) {
+        form.addEventListener('submit', function() {
+          addProduct();
+        });
+      }
+    }
+
+    /* ---- Auto-scroll when ?notify=true is in URL ---- */
+    if (window.location.search.indexOf('notify=true') !== -1) {
+      setTimeout(function() {
+        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        container.classList.add('sl-notify-form--highlight');
+        var firstInput = container.querySelector('.sl-notify-input');
+        if (firstInput) firstInput.focus();
+      }, 500);
     }
   })();
 </script>
