@@ -45,6 +45,8 @@
             <p>We'll notify you when this product is back in stock!</p>
             {%- if customer -%}
               <a href="/pages/notification-settings" class="sl-notify-settings-link">Manage notification settings</a>
+            {%- else -%}
+              <p class="sl-notify-account-cta"><a href="/account/register?return_url={{ product.url | url_encode }}">Create an account</a> to manage your notifications across devices.</p>
             {%- endif -%}
           </div>
         </div>
@@ -152,6 +154,19 @@
   }
   .sl-notify-settings-link:hover {
     color: #1a1a1a;
+  }
+  .sl-notify-account-cta {
+    font-size: 13px;
+    color: rgba(var(--color-foreground), 0.6);
+    margin: 8px 0 0;
+  }
+  .sl-notify-account-cta a {
+    color: #1a1a1a;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .sl-notify-account-cta a:hover {
+    color: #8C9B6D;
   }
 
   .sl-notify-error {
