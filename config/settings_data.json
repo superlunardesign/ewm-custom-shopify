@@ -215,6 +215,11 @@
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
         "settings": {}
+      },
+      "7800736727063894098": {
+        "type": "shopify://apps/rez-preorder-notify-me/blocks/rez/0da60196-81b6-4270-afac-c9294e1641ba",
+        "disabled": false,
+        "settings": {}
       }
     }
   }
