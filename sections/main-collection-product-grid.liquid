@@ -127,7 +127,7 @@
     align-self: end;
     display: grid;
     grid-template-columns: 1fr{% if section.settings.show_notify_bell %} auto{% endif %};
-    align-items: stretch;
+    align-items: start;
   }
 
   /* In-stock cards: ATC button spans full width */
@@ -556,7 +556,7 @@
     #SLCollection-{{ section.id }} .sl-card-wrapper .sl-outside-button > .sl-add-to-cart-btn,
     #SLCollection-{{ section.id }} .sl-card-wrapper .sl-outside-button > .sl-oos-button-row {
       grid-row: 1;
-      align-self: end;
+      align-self: start;
     }
 
     /* On mobile, OOS btn gets full border-radius (bell is separate row) */
