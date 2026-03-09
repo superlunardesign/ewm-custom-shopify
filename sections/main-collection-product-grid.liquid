@@ -127,6 +127,7 @@
     align-self: end;
     display: grid;
     grid-template-columns: 1fr{% if section.settings.show_notify_bell %} auto{% endif %};
+    gap: 0 6px;
     align-items: stretch;
   }
 
@@ -143,8 +144,7 @@
     width: 44px;
     background: {{ section.settings.notify_bell_background }};
     border: {{ section.settings.notify_bell_border_width }}px solid {{ section.settings.notify_bell_border_color }};
-    border-left: none;
-    border-radius: 0 {{ section.settings.button_border_radius }}px {{ section.settings.button_border_radius }}px 0;
+    border-radius: {{ section.settings.button_border_radius }}px;
     padding: 0;
     transition: opacity 0.2s;
     color: {{ section.settings.notify_bell_icon_color }};
@@ -530,7 +530,6 @@
     background: {{ section.settings.oos_button_background }};
     border: {{ section.settings.oos_button_border_width }}px solid {{ section.settings.oos_button_border_color }};
     border-radius: {{ section.settings.button_border_radius }}px;
-    {% if section.settings.show_notify_bell %}border-top-right-radius: 0; border-bottom-right-radius: 0;{% endif %}
     font-size: 13px;
     font-weight: 500;
     line-height: 1.4;
