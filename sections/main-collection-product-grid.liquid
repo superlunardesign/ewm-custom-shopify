@@ -124,7 +124,10 @@
   /* Button container (outside card) */
   #SLCollection-{{ section.id }} .sl-card-wrapper .sl-outside-button {
     padding: 8px 0 0 0;
-    align-self: end;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
   }
 
   #SLCollection-{{ section.id }} .sl-card-wrapper .sl-outside-button .sl-add-to-cart-btn {
@@ -544,14 +547,36 @@
   }
 
   @media screen and (max-width: 749px) {
-    #SLCollection-{{ section.id }} .sl-oos-button-row .sl-notify-bell {
-      flex-direction: {% if section.settings.notify_text_position == 'left' %}row-reverse{% else %}row{% endif %};
-      gap: {% if section.settings.notify_text != blank %}6px{% else %}0{% endif %};
-      width: auto;
-      padding: 0 10px;
+    /* Mobile: add extra subgrid row for notify-me area */
+    #SLCollection-{{ section.id }} .sl-product-grid .grid__item {
+      grid-row: span {{ subgrid_total | plus: 1 }};
     }
 
-    #SLCollection-{{ section.id }} .sl-oos-button-row .sl-notify-bell .sl-notify-text {
+    #SLCollection-{{ section.id }} .sl-card-wrapper .sl-outside-button {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 2;
+    }
+
+    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price {
+      grid-template-columns: 1fr;
+    }
+
+    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-oos-btn {
+      border-radius: {{ section.settings.button_border_radius }}px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-notify-bell {
+      width: 100%;
+      flex-direction: {% if section.settings.notify_text_position == 'left' %}row-reverse{% else %}row{% endif %};
+      justify-content: center;
+      gap: {% if section.settings.notify_text != blank %}6px{% else %}0{% endif %};
+      padding: 8px 12px;
+      border-left: {{ section.settings.notify_bell_border_width }}px solid {{ section.settings.notify_bell_border_color }};
+      border-radius: {{ section.settings.button_border_radius }}px;
+    }
+
+    #SLCollection-{{ section.id }} .sl-oos-button-row--has-price .sl-notify-bell .sl-notify-text {
       display: inline;
       font-size: {{ section.settings.notify_text_font_size }}px;
       color: {{ section.settings.notify_text_color }};
