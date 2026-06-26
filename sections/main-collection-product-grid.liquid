@@ -1552,7 +1552,8 @@ min-height:40px;
   <div id="ProductGridContainer">
     {%- liquid
       assign sl_per_page = section.settings.products_per_page
-      if section.settings.enable_metafield_promo and collection.metafields.custom.inline_promo_card != blank
+      assign mf_promo_check = collection.metafields.custom.inline_promo_card
+      if section.settings.enable_metafield_promo and mf_promo_check != blank
         assign sl_per_page = sl_per_page | minus: 1
       endif
     -%}
