@@ -1856,8 +1856,6 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                       </product-form>
                       {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
                       <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
-                      {%- comment -%} Notify Me form — auto-shows for out-of-stock products {%- endcomment -%}
-                      {% render 'notify-form', product: product %}
                     </div>
 
                   {%- when 'delivery-options' -%}
@@ -1917,9 +1915,6 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
 
                   {%- when 'Html_c' -%}
                     <div class="html-sections-product">{{ block.settings.html }}</div>
-
-                  {%- when 'notify-form' -%}
-                    {% render 'notify-form', product: product %}
 
                   {%- when 'icon_text' -%}
                     {% render 'icon_text', block: block, class: 'from-main-product' %}
@@ -3491,11 +3486,6 @@ function updateDeliveryOption(input) {
 {
 "type": "sku",
 "name": "t:sections.main-product.blocks.sku.name",
-"limit": 1
-},
-{
-"type": "notify-form",
-"name": "t:sections.main-product.blocks.notify-form.name",
 "limit": 1
 },
 {
