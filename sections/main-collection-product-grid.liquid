@@ -1371,31 +1371,11 @@ min-height:40px;
                     {%- assign is_active = false -%}
                     {%- assign clean_tag_handle = clean_tag | handleize -%}
                     {%- for current_tag in current_tags -%}
-                      {%- assign current_tag_handle = current_tag | handleize -%}
-                      {%- if current_tag_handle == clean_tag_handle -%}
+                      {%- if current_tag | handleize == clean_tag_handle -%}
                         {%- assign is_active = true -%}
                       {%- endif -%}
                     {%- endfor -%}
-                    {%- if is_active -%}
-                      {%- assign remaining_tags = '' -%}
-                      {%- for ct in current_tags -%}
-                        {%- assign ct_handle = ct | handleize -%}
-                        {%- unless ct_handle == clean_tag_handle -%}
-                          {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
-                          {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
-                        {%- endunless -%}
-                      {%- endfor -%}
-                      <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }}</a>
-                    {%- else -%}
-                      {%- assign new_tags = '' -%}
-                      {%- for ct in current_tags -%}
-                        {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
-                        {%- assign new_tags = new_tags | append: ct | handleize -%}
-                      {%- endfor -%}
-                      {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
-                      {%- assign new_tags = new_tags | append: clean_tag_handle -%}
-                      <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
-                    {%- endif -%}
+                    <button type="button" class="sl-tag-btn{% if is_active %} sl-tag-btn--active{% endif %}" data-tag-handle="{{ clean_tag_handle }}">{{ clean_tag }}</button>
                   {%- endif -%}
                 {%- endfor -%}
               </div>
@@ -1416,31 +1396,11 @@ min-height:40px;
                 {%- assign is_active = false -%}
                 {%- assign clean_tag_handle = clean_tag | handleize -%}
                 {%- for current_tag in current_tags -%}
-                  {%- assign current_tag_handle = current_tag | handleize -%}
-                  {%- if current_tag_handle == clean_tag_handle -%}
+                  {%- if current_tag | handleize == clean_tag_handle -%}
                     {%- assign is_active = true -%}
                   {%- endif -%}
                 {%- endfor -%}
-                {%- if is_active -%}
-                  {%- assign remaining_tags = '' -%}
-                  {%- for ct in current_tags -%}
-                    {%- assign ct_handle = ct | handleize -%}
-                    {%- unless ct_handle == clean_tag_handle -%}
-                      {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
-                      {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
-                    {%- endunless -%}
-                  {%- endfor -%}
-                  <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }} ✕</a>
-                {%- else -%}
-                  {%- assign new_tags = '' -%}
-                  {%- for ct in current_tags -%}
-                    {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
-                    {%- assign new_tags = new_tags | append: ct | handleize -%}
-                  {%- endfor -%}
-                  {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
-                  {%- assign new_tags = new_tags | append: clean_tag_handle -%}
-                  <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
-                {%- endif -%}
+                <button type="button" class="sl-tag-btn{% if is_active %} sl-tag-btn--active{% endif %}" data-tag-handle="{{ clean_tag_handle }}">{{ clean_tag }}{% if is_active %} ✕{% endif %}</button>
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -1465,16 +1425,7 @@ min-height:40px;
       {%- comment -%} Mobile: Active tag pills (always visible) {%- endcomment -%}
       <div class="sl-mobile-active-tags">
         {%- for current_tag in current_tags -%}
-          {%- assign remaining_tags = '' -%}
-          {%- assign current_tag_handle = current_tag | handleize -%}
-          {%- for ct in current_tags -%}
-            {%- assign ct_handle = ct | handleize -%}
-            {%- unless ct_handle == current_tag_handle -%}
-              {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
-              {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
-            {%- endunless -%}
-          {%- endfor -%}
-          <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ current_tag }} ✕</a>
+          <button type="button" class="sl-tag-btn sl-tag-btn--active" data-tag-handle="{{ current_tag | handleize }}">{{ current_tag }} ✕</button>
         {%- endfor -%}
       </div>
     </div>
@@ -1493,31 +1444,11 @@ min-height:40px;
                 {%- assign is_active = false -%}
                 {%- assign clean_tag_handle = clean_tag | handleize -%}
                 {%- for current_tag in current_tags -%}
-                  {%- assign current_tag_handle = current_tag | handleize -%}
-                  {%- if current_tag_handle == clean_tag_handle -%}
+                  {%- if current_tag | handleize == clean_tag_handle -%}
                     {%- assign is_active = true -%}
                   {%- endif -%}
                 {%- endfor -%}
-                {%- if is_active -%}
-                  {%- assign remaining_tags = '' -%}
-                  {%- for ct in current_tags -%}
-                    {%- assign ct_handle = ct | handleize -%}
-                    {%- unless ct_handle == clean_tag_handle -%}
-                      {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
-                      {%- assign remaining_tags = remaining_tags | append: ct -%}
-                    {%- endunless -%}
-                  {%- endfor -%}
-                  <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }}</a>
-                {%- else -%}
-                  {%- assign new_tags = '' -%}
-                  {%- for ct in current_tags -%}
-                    {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
-                    {%- assign new_tags = new_tags | append: ct -%}
-                  {%- endfor -%}
-                  {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
-                  {%- assign new_tags = new_tags | append: clean_tag_handle -%}
-                  <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
-                {%- endif -%}
+                <button type="button" class="sl-tag-btn{% if is_active %} sl-tag-btn--active{% endif %}" data-tag-handle="{{ clean_tag_handle }}">{{ clean_tag }}</button>
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -1565,31 +1496,11 @@ min-height:40px;
               {%- assign is_active = false -%}
               {%- assign clean_tag_handle = clean_tag | handleize -%}
               {%- for current_tag in current_tags -%}
-                {%- assign current_tag_handle = current_tag | handleize -%}
-                {%- if current_tag_handle == clean_tag_handle -%}
+                {%- if current_tag | handleize == clean_tag_handle -%}
                   {%- assign is_active = true -%}
                 {%- endif -%}
               {%- endfor -%}
-              {%- if is_active -%}
-                {%- assign remaining_tags = '' -%}
-                {%- for ct in current_tags -%}
-                  {%- assign ct_handle = ct | handleize -%}
-                  {%- unless ct_handle == clean_tag_handle -%}
-                    {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
-                    {%- assign remaining_tags = remaining_tags | append: ct -%}
-                  {%- endunless -%}
-                {%- endfor -%}
-                <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }} ✕</a>
-              {%- else -%}
-                {%- assign new_tags = '' -%}
-                {%- for ct in current_tags -%}
-                  {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
-                  {%- assign new_tags = new_tags | append: ct -%}
-                {%- endfor -%}
-                {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
-                {%- assign new_tags = new_tags | append: clean_tag_handle -%}
-                <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
-              {%- endif -%}
+              <button type="button" class="sl-tag-btn{% if is_active %} sl-tag-btn--active{% endif %}" data-tag-handle="{{ clean_tag_handle }}">{{ clean_tag }}{% if is_active %} ✕{% endif %}</button>
             {%- endif -%}
           {%- endfor -%}
         </div>
@@ -1613,16 +1524,7 @@ min-height:40px;
       {%- comment -%} Mobile: Active tag pills (always visible) {%- endcomment -%}
       <div class="sl-mobile-active-tags">
         {%- for current_tag in current_tags -%}
-          {%- assign remaining_tags = '' -%}
-          {%- assign current_tag_handle = current_tag | handleize -%}
-          {%- for ct in current_tags -%}
-            {%- assign ct_handle = ct | handleize -%}
-            {%- unless ct_handle == current_tag_handle -%}
-              {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
-              {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
-            {%- endunless -%}
-          {%- endfor -%}
-          <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ current_tag }} ✕</a>
+          <button type="button" class="sl-tag-btn sl-tag-btn--active" data-tag-handle="{{ current_tag | handleize }}">{{ current_tag }} ✕</button>
         {%- endfor -%}
       </div>
     </div>
@@ -2173,6 +2075,7 @@ min-height:40px;
 <script>
 (function() {
   const sectionId = '{{ section.id }}';
+  const collectionUrl = {{ collection.url | json }};
 
   /* ===== AJAX Section Rendering ===== */
   function renderSection(url, doPushState) {
@@ -2212,12 +2115,32 @@ min-height:40px;
       });
   }
 
-  /* ===== Bind Filter Tag Links (AJAX) ===== */
+  /* ===== Bind Filter Tag Buttons (checkbox-style toggle) ===== */
   function bindFilterLinks(sectionEl) {
-    sectionEl.querySelectorAll('.sl-tag-btn').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        renderSection(this.href);
+    sectionEl.querySelectorAll('.sl-tag-btn[data-tag-handle]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var handle = this.getAttribute('data-tag-handle');
+        var isActive = this.classList.contains('sl-tag-btn--active');
+
+        var activeBtns = sectionEl.querySelectorAll('.sl-tag-btn--active[data-tag-handle]');
+        var tags = [];
+        activeBtns.forEach(function(b) {
+          var h = b.getAttribute('data-tag-handle');
+          if (tags.indexOf(h) === -1) tags.push(h);
+        });
+
+        if (isActive) {
+          tags = tags.filter(function(t) { return t !== handle; });
+        } else {
+          if (tags.indexOf(handle) === -1) tags.push(handle);
+        }
+
+        var url = collectionUrl;
+        if (tags.length > 0) url += '/' + tags.join('+');
+        var sortParam = new URL(window.location.href).searchParams.get('sort_by');
+        if (sortParam) url += '?sort_by=' + sortParam;
+
+        renderSection(url);
       });
     });
   }
