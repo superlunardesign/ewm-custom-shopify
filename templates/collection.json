@@ -58,6 +58,7 @@
         "image_ratio": "1/1",
         "image_fit": "cover",
         "image_background": "#f5f5f5",
+        "show_hover_image": true,
         "show_star_rating": true,
         "star_rating_color": "#8c9b6d",
         "show_empty_reviews": false,
