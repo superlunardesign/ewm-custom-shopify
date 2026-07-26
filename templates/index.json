@@ -649,7 +649,7 @@
       "type": "product-recommendations",
       "name": "Product Carousel",
       "settings": {
-        "full_width": false,
+        "full_width": true,
         "desktop_columns": "5",
         "heading": "Professional Skincare, Delivered",
         "heading_alignment": "left",
