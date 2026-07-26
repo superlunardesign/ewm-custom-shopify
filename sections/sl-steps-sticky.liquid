@@ -87,24 +87,24 @@
       {% if section.settings.enable_sticky %}
         <div class="sl-hiw__card-scroll-spacer" aria-hidden="true"></div>
       {% endif %}
-    </div>
-  {% endif %}
 
-  {% if section.settings.show_button and section.settings.button_text != blank %}
-    <div class="sl-hiw__cta" style="--card-count: {{ section.blocks.size }};">
-      <a
-        {% if section.settings.button_link != blank %}
-          href="{{ section.settings.button_link }}"
-        {% endif %}
-        class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-hiw__btn-custom{% endif %}"
-      >
-        {{ section.settings.button_text | escape }}
-      </a>
-    </div>
-  {% endif %}
+      {% if section.settings.show_button and section.settings.button_text != blank %}
+        <div class="sl-hiw__cta" style="--card-count: {{ section.blocks.size }};">
+          <a
+            {% if section.settings.button_link != blank %}
+              href="{{ section.settings.button_link }}"
+            {% endif %}
+            class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-hiw__btn-custom{% endif %}"
+          >
+            {{ section.settings.button_text | escape }}
+          </a>
+        </div>
+      {% endif %}
 
-  {% if section.settings.enable_sticky %}
-    <div class="sl-hiw__hold-spacer" aria-hidden="true"></div>
+      {% if section.settings.enable_sticky %}
+        <div class="sl-hiw__hold-spacer" aria-hidden="true"></div>
+      {% endif %}
+    </div>
   {% endif %}
 
 </div>
@@ -431,10 +431,16 @@
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__cta {
-        max-width: var(--page-width, 1200px);
-        margin: 0 auto;
-        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + var(--hiw-card-h, 300px) + 2rem);
-        padding: 2rem 3rem;
+        grid-column: 1 / -1;
+        top: min(
+          calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + var(--hiw-card-h, 300px) + 2rem),
+          calc(100vh - 80px)
+        );
+        padding: 2rem 0;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__hold-spacer {
+        grid-column: 1 / -1;
       }
     {% else %}
       #shopify-section-{{ section.id }} .sl-hiw__header {
@@ -455,6 +461,7 @@
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__cta {
+        grid-column: 1 / -1;
         padding-top: 2.5rem;
       }
     {% endif %}
