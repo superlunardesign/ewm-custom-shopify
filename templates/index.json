@@ -122,6 +122,7 @@
       "settings": {
         "image": "shopify://shop_images/BrandingPhotography-C_Mae-5250.jpg",
         "image_position": "left",
+        "image_height": "medium",
         "subheading": "",
         "heading": "1:1 Therapy Sessions",
         "heading_size": "h1",
