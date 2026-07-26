@@ -94,27 +94,30 @@
 {% if section.settings.enable_sticky %}
 <script>
   (function() {
-    var el = document.getElementById('sl-hiw-{{ section.id }}');
-    if (!el) return;
-    var node = el.parentElement;
-    while (node && node !== document.body) {
-      var style = window.getComputedStyle(node);
-      if (style.overflow !== 'visible' || style.overflowY !== 'visible') {
-        node.style.overflow = 'visible';
-        node.style.overflowY = 'visible';
+    function fixOverflow() {
+      var el = document.querySelector('#shopify-section-{{ section.id }}');
+      if (!el) return;
+      while (el) {
+        el.style.overflowX = 'clip';
+        el.style.overflowY = 'visible';
+        el = el.parentElement;
       }
-      node = node.parentElement;
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fixOverflow);
+    } else {
+      fixOverflow();
+    }
+    if (Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.detail.sectionId === '{{ section.id }}') fixOverflow();
+      });
     }
   })();
 </script>
 {% endif %}
 
 <style>
-  /* ── Ensure sticky works — no overflow clipping on ancestors ── */
-  #shopify-section-{{ section.id }} {
-    overflow: visible !important;
-  }
-
   /* ── Base ── */
   #shopify-section-{{ section.id }} .sl-hiw {
     position: relative;
@@ -255,61 +258,42 @@
      MOBILE
      ═══════════════════════════════════════════ */
   @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .sl-hiw__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    #shopify-section-{{ section.id }} .sl-hiw__marquee {
+      position: relative;
+      z-index: 1;
+      padding: 1.5rem 0;
+    }
+
+    #shopify-section-{{ section.id }} .sl-hiw__marquee-item {
+      font-size: {{ section.settings.marquee_size | times: 0.35 | round: 0 }}px;
+    }
+
     {% if section.settings.enable_sticky %}
-      /* Sticky background covers viewport while scrolling */
-      #shopify-section-{{ section.id }} .sl-hiw__bg {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        margin-bottom: -100vh;
-        z-index: 0;
+      #shopify-section-{{ section.id }} {
+        overflow: visible !important;
       }
 
-      /* Marquee in flow at top */
-      #shopify-section-{{ section.id }} .sl-hiw__marquee {
-        position: relative;
-        z-index: 1;
-        padding: 1.5rem 0;
-      }
-
-      #shopify-section-{{ section.id }} .sl-hiw__marquee-item {
-        font-size: {{ section.settings.marquee_size | times: 0.35 | round: 0 }}px;
-      }
-
-      /* Cards container with scroll runway */
       #shopify-section-{{ section.id }} .sl-hiw__cards {
-        padding: 1rem 1.5rem;
-        padding-bottom: 30vh;
+        padding: 1rem 1.5rem 30vh;
       }
 
-      /* Each card sticks at staggered position */
       #shopify-section-{{ section.id }} .sl-hiw__card {
+        position: -webkit-sticky;
         position: sticky;
         top: calc(var(--hiw-sticky-top) + var(--i) * var(--hiw-peek));
         box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
       }
 
-      /* Scroll space between cards */
-      #shopify-section-{{ section.id }} .sl-hiw__card:not(:first-child) {
+      #shopify-section-{{ section.id }} .sl-hiw__card + .sl-hiw__card {
         margin-top: 65vh;
       }
     {% else %}
-      /* Non-sticky: fixed background, simple stacked cards */
-      #shopify-section-{{ section.id }} .sl-hiw__bg {
-        position: absolute;
-        inset: 0;
-      }
-
-      #shopify-section-{{ section.id }} .sl-hiw__marquee {
-        position: relative;
-        z-index: 1;
-        padding: 1.5rem 0;
-      }
-
-      #shopify-section-{{ section.id }} .sl-hiw__marquee-item {
-        font-size: {{ section.settings.marquee_size | times: 0.35 | round: 0 }}px;
-      }
-
       #shopify-section-{{ section.id }} .sl-hiw__cards {
         padding: 1rem 1.5rem 2rem;
         display: flex;
@@ -318,7 +302,6 @@
       }
     {% endif %}
 
-    /* Button area */
     #shopify-section-{{ section.id }} .sl-hiw__cta {
       padding: 2rem 1.5rem 1rem;
     }
