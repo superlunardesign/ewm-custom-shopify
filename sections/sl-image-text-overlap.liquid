@@ -4,14 +4,6 @@
 {% endcomment %}
 
 {%- style -%}
-  {% if section.settings.enable_sticky %}
-    #shopify-section-{{ section.id }} {
-      position: sticky;
-      top: 0;
-      z-index: {{ section.settings.sticky_z_index }};
-    }
-  {% endif %}
-
   #shopify-section-{{ section.id }} .sl-ito {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
@@ -176,6 +168,14 @@
 {% endif %}
 
 <style>
+  {% if section.settings.enable_sticky %}
+    #shopify-section-{{ section.id }} {
+      position: sticky !important;
+      top: 0;
+      z-index: {{ section.settings.sticky_z_index }};
+    }
+  {% endif %}
+
   /* Scrolling text */
   {% if section.settings.enable_scroll_text %}
     #shopify-section-{{ section.id }} .sl-ito {
