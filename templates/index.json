@@ -64,7 +64,9 @@
       "custom_css": [],
       "name": "Product Carousel",
       "settings": {
+        "full_width": true,
         "heading": "Explore Our Acne Safe Skincare",
+        "heading_alignment": "left",
         "heading_color": "#8c9b6d",
         "heading_font": "heading",
         "heading_size": 24,
@@ -81,8 +83,8 @@
         "card_border_radius": 8,
         "card_image_bg": "#f5f5f3",
         "section_bg": "#ffffff",
-        "atc_bg": "#8A9979",
-        "atc_text": "#FFFFFF",
+        "atc_bg": "#8a9979",
+        "atc_text": "#ffffff",
         "atc_border_width": 0,
         "atc_border_color": "#ffffff",
         "atc_radius": 0,
@@ -143,56 +145,70 @@
         "scroll_speed": 2
       }
     },
-    "image_banner_afyWYY": {
-      "type": "image-banner",
+    "sl_content_banner_FTN8R4": {
+      "type": "sl-content-banner",
       "blocks": {
-        "heading_fGPQQ8": {
+        "subheading_TkK9gk": {
+          "type": "subheading",
+          "settings": {
+            "text": "EXCEPTIONAL CUSTOMIZED FACIALS & WAXING"
+          }
+        },
+        "heading_PLGDUB": {
           "type": "heading",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h1"
+            "text": "We believe skincare should be personal, effective, and never one-size-fits-all.",
+            "size": "h0"
           }
         },
-        "text_qkggeF": {
+        "spacer_wmfVM7": {
+          "type": "spacer",
+          "settings": {
+            "height": 12
+          }
+        },
+        "text_ntQMnn": {
           "type": "text",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
+            "text": "<p>Every treatment is tailored to your unique skin. No cookie-cutter facials. No guessing. Just results.</p>"
           }
         },
-        "buttons_tQdANm": {
-          "type": "buttons",
+        "button_7mhbiK": {
+          "type": "button",
           "settings": {
-            "button_label_1": "Button label",
-            "button_link_1": "",
-            "button_style_secondary_1": false,
-            "button_label_2": "Button label",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "text": "Explore Our Services",
+            "link": "",
+            "style": "secondary",
+            "button_bg_color": "",
+            "button_text_color": "",
+            "button_border_color": ""
           }
         }
       },
       "block_order": [
-        "heading_fGPQQ8",
-        "text_qkggeF",
-        "buttons_tQdANm"
+        "subheading_TkK9gk",
+        "heading_PLGDUB",
+        "spacer_wmfVM7",
+        "text_ntQMnn",
+        "button_7mhbiK"
       ],
-      "name": "t:sections.image-banner.presets.name",
+      "name": "Content Banner",
       "settings": {
-        "page_full_width": true,
-        "page_full_width_spacing": false,
-        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5513.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "medium",
-        "adapt_height_first_image": false,
-        "desktop_content_position": "middle-center",
-        "show_text_box": true,
-        "desktop_content_alignment": "center",
-        "color_scheme": "background-1",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true,
-        "custom_class_name": ""
+        "full_width": true,
+        "content_alignment": "center",
+        "content_max_width": 800,
+        "bg_type": "image",
+        "bg_color": "#57614C",
+        "bg_image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5063.jpg",
+        "bg_video_url": "",
+        "overlay_darkness": 60,
+        "text_color": "#f0e8d8",
+        "subheading_font": "body",
+        "subheading_size": 14,
+        "subheading_weight": "500",
+        "body_font_size": 16,
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "sl_image_text_overlap_9rRV4Y": {
@@ -219,7 +235,7 @@
         "enable_scroll_text": true,
         "scroll_text": "our services",
         "scroll_font_size": 100,
-        "scroll_text_color": "#8A9979",
+        "scroll_text_color": "#8a9979",
         "scroll_text_padding": 20,
         "scroll_overlap": 70,
         "scroll_speed": 20,
@@ -564,7 +580,9 @@
       "custom_css": [],
       "name": "Product Carousel",
       "settings": {
+        "full_width": false,
         "heading": "Shop the Team's Favorites",
+        "heading_alignment": "left",
         "heading_color": "#8c9b6d",
         "heading_font": "heading",
         "heading_size": 24,
@@ -822,7 +840,7 @@
     "tri_banner_LUhYAg",
     "product_listing_RWTrNz",
     "scrolling_offers_YAxCQz",
-    "image_banner_afyWYY",
+    "sl_content_banner_FTN8R4",
     "sl_image_text_overlap_9rRV4Y",
     "sl_steps_sticky_WwKLzM",
     "skin_concern_LUXc4Q",
