@@ -1,0 +1,521 @@
+{%- style -%}
+/* =========================================================
+   SL CONTENT BANNER
+   ========================================================= */
+
+#shopify-section-{{ section.id }} {
+  overflow: visible;
+}
+
+#shopify-section-{{ section.id }} .sl-cb {
+  position: relative;
+  padding: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px 0 {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  background: {{ section.settings.bg_color | default: '#1a1a1a' }};
+  {% if section.settings.bg_type == 'image' and section.settings.bg_image != blank %}
+    background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  {% endif %}
+}
+
+@media (min-width: 750px) {
+  #shopify-section-{{ section.id }} .sl-cb {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+}
+
+/* Overlay */
+#shopify-section-{{ section.id }} .sl-cb__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, {{ section.settings.overlay_darkness | divided_by: 100.0 }});
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Video background */
+#shopify-section-{{ section.id }} .sl-cb__video {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+#shopify-section-{{ section.id }} .sl-cb__video video,
+#shopify-section-{{ section.id }} .sl-cb__video iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+/* Inner container */
+#shopify-section-{{ section.id }} .sl-cb__inner {
+  position: relative;
+  z-index: 2;
+}
+
+#shopify-section-{{ section.id }} .sl-cb__inner--full-width {
+  max-width: none;
+  padding: 0 clamp(1.5rem, 3vw, 3rem);
+}
+
+/* Content wrapper */
+#shopify-section-{{ section.id }} .sl-cb__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: {{ section.settings.content_max_width | default: 800 }}px;
+  {% case section.settings.content_alignment %}
+    {% when 'left' %}
+      align-items: flex-start;
+      text-align: left;
+      margin-right: auto;
+    {% when 'right' %}
+      align-items: flex-end;
+      text-align: right;
+      margin-left: auto;
+    {% else %}
+      align-items: center;
+      text-align: center;
+      margin: 0 auto;
+  {% endcase %}
+}
+
+/* Block: Subheading */
+#shopify-section-{{ section.id }} .sl-cb__subheading {
+  font-family: {% if section.settings.subheading_font == 'heading' %}var(--font-heading-family){% else %}var(--font-body-family){% endif %};
+  font-size: {{ section.settings.subheading_size | default: 14 }}px;
+  font-weight: {{ section.settings.subheading_weight | default: '500' }};
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: {{ section.settings.text_color | default: '#f0e8d8' }};
+  margin: 0 0 20px;
+}
+
+/* Block: Heading */
+#shopify-section-{{ section.id }} .sl-cb__heading {
+  font-family: var(--font-heading-family);
+  color: {{ section.settings.text_color | default: '#f0e8d8' }};
+  margin: 0 0 24px;
+  line-height: 1.1;
+}
+
+/* Block: Text */
+#shopify-section-{{ section.id }} .sl-cb__text {
+  font-family: var(--font-body-family);
+  font-size: {{ section.settings.body_font_size | default: 16 }}px;
+  line-height: 1.6;
+  color: {{ section.settings.text_color | default: '#f0e8d8' }};
+  margin: 0 0 24px;
+  max-width: 100%;
+}
+
+#shopify-section-{{ section.id }} .sl-cb__text p {
+  margin: 0 0 8px;
+}
+
+#shopify-section-{{ section.id }} .sl-cb__text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Block: Button */
+#shopify-section-{{ section.id }} .sl-cb__button {
+  margin-top: 8px;
+}
+
+#shopify-section-{{ section.id }} .sl-cb__button a,
+#shopify-section-{{ section.id }} .sl-cb__button span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 36px;
+  font-family: var(--font-heading-family);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Spacer block */
+#shopify-section-{{ section.id }} .sl-cb__spacer {
+  display: block;
+}
+{%- endstyle -%}
+
+<div class="sl-cb">
+  {%- if section.settings.bg_type == 'video' -%}
+    <div class="sl-cb__video">
+      {%- if section.settings.bg_video != blank -%}
+        {{ section.settings.bg_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true }}
+      {%- elsif section.settings.bg_video_url != blank -%}
+        {%- assign video_url = section.settings.bg_video_url -%}
+        {%- if video_url contains 'youtube.com' or video_url contains 'youtu.be' -%}
+          {%- if video_url contains 'youtu.be' -%}
+            {%- assign yt_id = video_url | split: 'youtu.be/' | last | split: '?' | first -%}
+          {%- else -%}
+            {%- assign yt_id = video_url | split: 'v=' | last | split: '&' | first -%}
+          {%- endif -%}
+          <iframe src="https://www.youtube.com/embed/{{ yt_id }}?autoplay=1&mute=1&loop=1&playlist={{ yt_id }}&controls=0&showinfo=0&modestbranding=1&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        {%- elsif video_url contains 'vimeo.com' -%}
+          {%- assign vimeo_id = video_url | split: 'vimeo.com/' | last | split: '?' | first -%}
+          <iframe src="https://player.vimeo.com/video/{{ vimeo_id }}?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.overlay_darkness > 0 -%}
+    <div class="sl-cb__overlay"></div>
+  {%- endif -%}
+
+  <div class="sl-cb__inner {% if section.settings.full_width %}sl-cb__inner--full-width{% else %}page-width{% endif %}">
+    <div class="sl-cb__content">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'subheading' -%}
+            {%- if block.settings.text != blank -%}
+              <p class="sl-cb__subheading" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+            {%- endif -%}
+
+          {%- when 'heading' -%}
+            {%- if block.settings.text != blank -%}
+              <h2 class="sl-cb__heading {{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+            {%- endif -%}
+
+          {%- when 'text' -%}
+            {%- if block.settings.text != blank -%}
+              <div class="sl-cb__text" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+            {%- endif -%}
+
+          {%- when 'button' -%}
+            {%- if block.settings.text != blank -%}
+              <div class="sl-cb__button" {{ block.shopify_attributes }}>
+                {%- assign btn_bg = block.settings.button_bg_color | default: 'transparent' -%}
+                {%- assign btn_text = block.settings.button_text_color | default: section.settings.text_color | default: '#f0e8d8' -%}
+                {%- assign btn_border = block.settings.button_border_color | default: btn_text -%}
+                {%- if block.settings.style == 'primary' -%}
+                  {%- assign btn_style = 'background: var(--gradient-base-accent-1); color: #fff; border: 1.5px solid var(--gradient-base-accent-1);' -%}
+                {%- elsif block.settings.style == 'secondary' -%}
+                  {%- assign btn_style = 'background: transparent; color: ' | append: btn_text | append: '; border: 1.5px solid ' | append: btn_text | append: ';' -%}
+                {%- else -%}
+                  {%- assign btn_style = 'background: ' | append: btn_bg | append: '; color: ' | append: btn_text | append: '; border: 1.5px solid ' | append: btn_border | append: ';' -%}
+                {%- endif -%}
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" style="{{ btn_style }}">{{ block.settings.text }}</a>
+                {%- else -%}
+                  <span style="{{ btn_style }}">{{ block.settings.text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+          {%- when 'spacer' -%}
+            <div class="sl-cb__spacer" style="height: {{ block.settings.height }}px;" {{ block.shopify_attributes }}></div>
+
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Content Banner",
+  "tag": "section",
+  "class": "sl-content-banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 800
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Background type",
+      "options": [
+        { "value": "color", "label": "Solid color" },
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video" }
+      ],
+      "default": "color"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#1a1612"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "video",
+      "id": "bg_video",
+      "label": "Video upload"
+    },
+    {
+      "type": "text",
+      "id": "bg_video_url",
+      "label": "Video URL",
+      "info": "YouTube or Vimeo URL. Used if no video is uploaded."
+    },
+    {
+      "type": "range",
+      "id": "overlay_darkness",
+      "label": "Overlay darkness",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 0,
+      "info": "Darken the background for better text readability."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#f0e8d8"
+    },
+    {
+      "type": "select",
+      "id": "subheading_font",
+      "label": "Subheading font",
+      "options": [
+        { "value": "body", "label": "Site body font" },
+        { "value": "heading", "label": "Site heading font" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "subheading_weight",
+      "label": "Subheading weight",
+      "options": [
+        { "value": "400", "label": "Regular (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semi-bold (600)" },
+        { "value": "700", "label": "Bold (700)" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "body_font_size",
+      "label": "Body text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Subheading text"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Your Heading Here"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Heading size",
+          "options": [
+            { "value": "h2", "label": "Small" },
+            { "value": "h1", "label": "Medium" },
+            { "value": "h0", "label": "Large" },
+            { "value": "hxl", "label": "Extra large" },
+            { "value": "hxxl", "label": "XXL" }
+          ],
+          "default": "h0"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Share your message here. This block supports rich text formatting.</p>"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Button text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Button style",
+          "options": [
+            { "value": "primary", "label": "Primary (filled)" },
+            { "value": "secondary", "label": "Secondary (outline)" },
+            { "value": "custom", "label": "Custom" }
+          ],
+          "default": "secondary"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color",
+          "label": "Button background",
+          "info": "Used with Custom style only."
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button text color",
+          "info": "Used with Custom & Secondary styles. Defaults to section text color."
+        },
+        {
+          "type": "color",
+          "id": "button_border_color",
+          "label": "Button border color",
+          "info": "Used with Custom style. Defaults to button text color."
+        }
+      ]
+    },
+    {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": [
+        {
+          "type": "range",
+          "id": "height",
+          "label": "Height",
+          "min": 4,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 20
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Banner",
+      "blocks": [
+        { "type": "subheading", "settings": { "text": "A therapy approach as ambitious as you are" } },
+        { "type": "heading", "settings": { "text": "Helping You Thrive in Life, Work, & Relationships", "size": "h0" } },
+        { "type": "spacer", "settings": { "height": 12 } },
+        { "type": "text", "settings": { "text": "<p>Share details about your approach, philosophy, or expertise here. This text area supports rich formatting for emphasis.</p>" } },
+        { "type": "button", "settings": { "text": "Explore Our Services", "style": "secondary" } }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}
