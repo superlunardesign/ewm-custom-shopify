@@ -521,6 +521,41 @@
         "padding_bottom": 36
       }
     },
+    "product_recommendations_aQkqDq": {
+      "type": "product-recommendations",
+      "name": "Product Carousel",
+      "settings": {
+        "full_width": false,
+        "desktop_columns": "5",
+        "heading": "Professional Skincare, Delivered",
+        "heading_alignment": "left",
+        "heading_color": "#8C9B6D",
+        "heading_font": "heading",
+        "heading_size": 24,
+        "heading_weight": "500",
+        "heading_transform": "uppercase",
+        "price_placement": "button",
+        "collection": "acne",
+        "fallback_collection_handle": "best-selling-skincare",
+        "products_limit": 8,
+        "auto_scroll": true,
+        "auto_scroll_speed": 0.5,
+        "show_rating": true,
+        "show_atc": true,
+        "atc_label": "Add To Cart",
+        "image_ratio": "1 / 1",
+        "card_border_radius": 8,
+        "card_image_bg": "#f5f5f3",
+        "section_bg": "#ffffff",
+        "atc_bg": "#7f9f6f",
+        "atc_text": "#ffffff",
+        "atc_border_width": 0,
+        "atc_border_color": "#ffffff",
+        "atc_radius": 0,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
     "how_it_works_jcAQM4": {
       "type": "how-it-works",
       "blocks": {
@@ -1006,6 +1041,7 @@
     "before_and_afters_KfRpJn",
     "sl_steps_sticky_WwKLzM",
     "sl_image_text_block_eXcmtF",
+    "product_recommendations_aQkqDq",
     "how_it_works_jcAQM4",
     "testimonials_carousel_UfLK7R",
     "team_876xbc",
