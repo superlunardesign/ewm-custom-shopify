@@ -1,0 +1,448 @@
+{% comment %}
+  EWM Image + Text Block
+  Side-by-side layout with image and text content, swappable positions
+{% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .sl-itb {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-itb {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% if section.settings.enable_anchor %}
+  <div id="{{ section.settings.anchor_id }}" style="position: relative; top: -{{ section.settings.scroll_offset }}px;"></div>
+{% endif %}
+
+<div class="sl-itb color-{{ section.settings.color_scheme }} gradient">
+  <div class="sl-itb__container page-width">
+    <div class="sl-itb__grid{% if section.settings.image_position == 'right' %} sl-itb__grid--reversed{% endif %}{% if section.settings.enable_animation %} sl-itb__animate{% endif %}"
+      {% if section.settings.enable_animation %}
+        data-sl-itb-animate
+        data-duration="{{ section.settings.animation_duration }}"
+        data-delay="{{ section.settings.animation_delay }}"
+      {% endif %}
+    >
+      <div class="sl-itb__media">
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1500
+            | image_tag:
+              sizes: '(min-width: 750px) 50vw, 100vw',
+              widths: '375, 550, 750, 1000, 1250, 1500',
+              class: 'sl-itb__img',
+              loading: 'lazy'
+          }}
+        {% else %}
+          <div class="sl-itb__placeholder">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="sl-itb__content">
+        {% if section.settings.subheading != blank %}
+          <p class="sl-itb__subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="sl-itb__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="sl-itb__text rte">{{ section.settings.text }}</div>
+        {% endif %}
+
+        {% if section.settings.show_button and section.settings.button_text != blank %}
+          <div class="sl-itb__button-wrap">
+            <a
+              {% if section.settings.button_link == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.button_link }}"
+              {% endif %}
+              class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% endif %}"
+            >
+              {{ section.settings.button_text | escape }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if section.settings.enable_animation %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var section = document.querySelector('#shopify-section-{{ section.id }}');
+    var target = section.querySelector('[data-sl-itb-animate]');
+    if (!target) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          target.classList.add('sl-itb__animate--visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    observer.observe(target);
+  });
+</script>
+{% endif %}
+
+<style>
+  #shopify-section-{{ section.id }} .sl-itb__container {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__media {
+    overflow: hidden;
+    border-radius: var(--DTRadius, 0);
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__placeholder {
+    background: rgb(var(--color-base-background-2));
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__placeholder .placeholder-svg {
+    width: 60%;
+    height: auto;
+    fill: currentColor;
+    opacity: 0.3;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__content {
+    padding: 1rem 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__subheading {
+    font-family: var(--font-body-family);
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: rgb(var(--color-foreground));
+    opacity: 0.65;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__text {
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: rgb(var(--color-foreground));
+    opacity: 0.8;
+    margin-bottom: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__text p {
+    margin-bottom: 1em;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__button-wrap {
+    margin-top: 0.5rem;
+  }
+
+  /* Animation */
+  #shopify-section-{{ section.id }} .sl-itb__animate {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__animate.sl-itb__animate--visible {
+    animation: slItbFloatIn {{ section.settings.animation_duration }}ms ease-out {{ section.settings.animation_delay }}ms forwards;
+  }
+
+  @keyframes slItbFloatIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Desktop */
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-itb__container {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__grid--reversed {
+      direction: rtl;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__grid--reversed > * {
+      direction: ltr;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__content {
+      padding: 2rem 0;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .sl-itb__grid {
+      gap: 6rem;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__content {
+      padding: 3rem 0;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "EWM Image + Text Block",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "info": "Image side on desktop. On mobile, image always appears above."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "Smaller uppercase text above the heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "1:1 Therapy Sessions"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" },
+        { "value": "hxl", "label": "Extra Large" },
+        { "value": "hxxl", "label": "Extra Extra Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body Text",
+      "default": "<p>Share details about your services, approach, or expertise. This text area supports rich formatting so you can add emphasis where needed.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "EXPLORE MY APPROACH"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary (Filled)" },
+        { "value": "secondary", "label": "Secondary (Outline)" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Color Scheme"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "Anchor Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_anchor",
+      "label": "Enable Anchor Link",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Use this ID to link directly to this section (e.g. #therapy-sessions)"
+    },
+    {
+      "type": "range",
+      "id": "scroll_offset",
+      "label": "Scroll Offset",
+      "info": "Adjusts landing position when scrolling to anchor",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable Float-in Animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation Duration",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "unit": "ms",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation Delay",
+      "min": 0,
+      "max": 1000,
+      "step": 100,
+      "unit": "ms",
+      "default": 200
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "EWM Image + Text Block",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
