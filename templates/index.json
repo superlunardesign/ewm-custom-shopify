@@ -680,6 +680,7 @@
         "image_position": "left",
         "desktop_height": 525,
         "mobile_image_height": 250,
+        "mobile_image_width": 75,
         "mobile_overlap": 60,
         "image_position_x": 50,
         "image_position_y": 50,
