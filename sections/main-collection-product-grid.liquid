@@ -1282,6 +1282,18 @@ min-height:40px;
       endif
     endif
 
+    assign show_tag_filters = section.settings.enable_tag_filtering
+    if show_tag_filters and section.settings.filter_exclude_collections != blank
+      assign excluded_filter_handles = section.settings.filter_exclude_collections | split: ','
+      for handle in excluded_filter_handles
+        assign clean_handle = handle | strip | handleize
+        if collection.handle == clean_handle
+          assign show_tag_filters = false
+          break
+        endif
+      endfor
+    endif
+
     assign current_sort_by = collection.sort_by | default: collection.default_sort_by
     capture sort_param
       if current_sort_by != blank and current_sort_by != collection.default_sort_by
@@ -1316,7 +1328,7 @@ min-height:40px;
 
           {%- comment -%} Mobile sort button {%- endcomment -%}
           <div class="sl-mobile-controls">
-            {%- if section.settings.enable_tag_filtering -%}
+            {%- if show_tag_filters -%}
               <button type="button" class="sl-mobile-filter-btn" data-mobile-filter-toggle>
                 {{ section.settings.filter_label }}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
@@ -1335,6 +1347,12 @@ min-height:40px;
           <button type="button" class="sl-category-arrow sl-category-arrow--prev" hidden aria-label="Scroll left" data-bubble-prev>&#8592;</button>
 
           <div class="sl-category-track" data-bubble-track>
+            <a href="/collections/all" class="sl-category-item">
+              <div class="sl-category-bubble">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              </div>
+              <span class="sl-category-label">View All</span>
+            </a>
             {%- for col in collections -%}
               {%- assign parent_ref = col.metafields.custom.parent_collection.value -%}
               {%- if parent_ref != blank and parent_ref.handle == collection.handle -%}
@@ -1356,7 +1374,7 @@ min-height:40px;
         </div>
 
         {%- comment -%} Tag filters in closed accordion for parent collections {%- endcomment -%}
-        {%- if section.settings.enable_tag_filtering -%}
+        {%- if show_tag_filters -%}
           <details class="sl-filter-accordion">
             <summary class="sl-filter-accordion__toggle">
               {{ section.settings.filter_label }}
@@ -1384,7 +1402,7 @@ min-height:40px;
         {%- endif -%}
 
         {%- comment -%} Mobile drawers {%- endcomment -%}
-        {%- if section.settings.enable_tag_filtering -%}
+        {%- if show_tag_filters -%}
           <div class="sl-mobile-tag-drawer" data-mobile-tag-drawer>
             <button type="button" class="sl-mobile-drawer-close" data-mobile-drawer-close aria-label="Close filters">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -1430,7 +1448,7 @@ min-height:40px;
       </div>
     </div>
 
-  {%- elsif section.settings.enable_tag_filtering -%}
+  {%- elsif show_tag_filters -%}
     {%- comment -%} ===== Tag Filtering (standalone, no bubbles) ===== {%- endcomment -%}
     <div class="page-width">
       <div class="sl-filter-sort-bar">
@@ -3251,6 +3269,13 @@ min-height:40px;
       "default": true,
       "label": "Enable tag filter bar",
       "info": "Shows tag-based pill filters above the grid"
+    },
+    {
+      "type": "text",
+      "id": "filter_exclude_collections",
+      "label": "Hide filters on these collections",
+      "info": "Comma-separated collection handles (e.g. candles, merch). Filters won't appear on these collections.",
+      "default": ""
     },
     {
       "type": "text",

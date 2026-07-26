@@ -125,23 +125,6 @@
   }
 {%- endstyle -%}
 
-{%- if section.settings.show_breadcrumbs -%}
-  <div class="sl-breadcrumbs" id="SLBreadcrumbs-{{ section.id }}">
-    <nav class="sl-breadcrumbs__nav page-width" aria-label="Breadcrumb">
-      <a href="/collections/all">Shop</a>
-      
-      {%- assign parent = collection.metafields.custom.parent_collection.value -%}
-{%- if parent != blank -%}
-  <span class="sl-breadcrumbs__separator">/</span>
-  <a href="{{ parent.url }}">{{ parent.title }}</a>
-{%- endif -%}
-
-      <span class="sl-breadcrumbs__separator">/</span>
-      <span aria-current="page">{{ collection.title }}</span>
-    </nav>
-  </div>
-{%- endif -%}
-
 <div id="SLBanner-{{ section.id }}">
   {%- if collection.image -%}
     <img
@@ -173,6 +156,23 @@
     </div>
   </div>
 </div>
+
+{%- if section.settings.show_breadcrumbs -%}
+  <div class="sl-breadcrumbs" id="SLBreadcrumbs-{{ section.id }}">
+    <nav class="sl-breadcrumbs__nav page-width" aria-label="Breadcrumb">
+      <a href="/collections/all">Shop All</a>
+
+      {%- assign parent = collection.metafields.custom.parent_collection.value -%}
+      {%- if parent != blank -%}
+        <span class="sl-breadcrumbs__separator">/</span>
+        <a href="{{ parent.url }}">{{ parent.title }}</a>
+      {%- endif -%}
+
+      <span class="sl-breadcrumbs__separator">/</span>
+      <span aria-current="page">{{ collection.title }}</span>
+    </nav>
+  </div>
+{%- endif -%}
 
 {% schema %}
 {

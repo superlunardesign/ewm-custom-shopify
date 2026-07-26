@@ -33,7 +33,7 @@
         "title_weight": "400",
         "description_size": 15,
         "description_size_mobile": 14,
-        "use_page_width": false,
+        "use_page_width": true,
         "padding_top": 0,
         "padding_bottom": 0,
         "padding_horizontal": 100,
@@ -123,6 +123,7 @@
         "bubble_label_color": "#333333",
         "bubble_label_size": 13,
         "enable_tag_filtering": true,
+        "filter_exclude_collections": "candles",
         "filter_label": "Filter For Your Skin",
         "filter_tags": "Acne Safe, Anti-Aging, SPF, Sensitive Skin, Body Care",
         "filter_tag_border_color": "#999999",
@@ -139,7 +140,7 @@
         "oos_button_border_width": 0,
         "oos_button_opacity": 100,
         "padding_top": 20,
-        "padding_bottom": 0
+        "padding_bottom": 36
       }
     }
   },
