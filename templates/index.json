@@ -60,34 +60,18 @@
       }
     },
     "product_listing_RWTrNz": {
-      "type": "sl-product-carousel",
+      "type": "product-recommendations",
       "custom_css": [],
       "name": "Product Carousel",
       "settings": {
-        "section_title": "Explore Our Acne Safe Skincare",
+        "heading": "Explore Our Acne Safe Skincare",
         "collection": "acne",
-        "products_limit": 10,
-        "show_ratings": true,
-        "rating_metafield_namespace": "reviews",
-        "rating_metafield_key": "rating",
-        "review_count_metafield_key": "count",
-        "show_variant_options": true,
-        "auto_scroll": true,
-        "auto_scroll_speed": 0.5,
-        "new_product_tag": "new",
-        "editors_pick_tag": "editors-pick",
-        "new_badge_text": "NEW",
-        "sale_badge_text": "SALE",
-        "out_of_stock_badge_text": "OUT OF STOCK",
-        "editors_pick_badge_text": "Shannon's Pick",
-        "add_to_cart_text": "ADD TO BAG",
-        "out_of_stock_button_text": "OUT OF STOCK",
-        "new_badge_color": "#1a1a1a",
-        "sale_badge_color": "#845e9c",
-        "editors_pick_badge_color": "#8c9b6d",
-        "out_of_stock_badge_color": "#999999",
-        "button_color": "#dae2c7",
-        "button_text_color": "#845e9c"
+        "products_limit": 8,
+        "show_rating": true,
+        "show_atc": true,
+        "atc_label": "ADD TO BAG",
+        "atc_bg": "#dae2c7",
+        "atc_text": "#845e9c"
       }
     },
     "scrolling_offers_YAxCQz": {
@@ -539,36 +523,18 @@
       }
     },
     "product_listing_LnM7g7": {
-      "type": "sl-product-carousel",
-      "custom_css": [
-        ".product-content {margin-bottom: 10px;}"
-      ],
+      "type": "product-recommendations",
+      "custom_css": [],
       "name": "Product Carousel",
       "settings": {
-        "section_title": "Shop the Team's Favorites",
+        "heading": "Shop the Team's Favorites",
         "collection": "anti-aging",
-        "products_limit": 10,
-        "show_ratings": true,
-        "rating_metafield_namespace": "reviews",
-        "rating_metafield_key": "rating",
-        "review_count_metafield_key": "count",
-        "show_variant_options": true,
-        "auto_scroll": true,
-        "auto_scroll_speed": 0.5,
-        "new_product_tag": "new",
-        "editors_pick_tag": "editors-pick",
-        "new_badge_text": "NEW",
-        "sale_badge_text": "SALE",
-        "out_of_stock_badge_text": "OUT OF STOCK",
-        "editors_pick_badge_text": "Shannon's Pick",
-        "add_to_cart_text": "ADD TO BAG",
-        "out_of_stock_button_text": "OUT OF STOCK",
-        "new_badge_color": "#1a1a1a",
-        "sale_badge_color": "#845e9c",
-        "editors_pick_badge_color": "#8c9b6d",
-        "out_of_stock_badge_color": "#999999",
-        "button_color": "#dae2c7",
-        "button_text_color": "#845e9c"
+        "products_limit": 8,
+        "show_rating": true,
+        "show_atc": true,
+        "atc_label": "ADD TO BAG",
+        "atc_bg": "#dae2c7",
+        "atc_text": "#845e9c"
       }
     },
     "rich_text_aVEX7P": {

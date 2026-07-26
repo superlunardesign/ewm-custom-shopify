@@ -322,7 +322,7 @@
 {%- if rec_products != nil and rec_products.size > 0 -%}
 <div class="sl-recs "
      id="SLRecs-{{ section.id }}"
-     {% if rec_source != 'collection' and rec_source != 'metafield' %}
+     {% if product and rec_source != 'collection' and rec_source != 'metafield' %}
        data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ products_limit }}"
      {% endif %}>
   <div class="sl-recs__inner page-width">
@@ -524,7 +524,7 @@
 
 {% schema %}
 {
-  "name": "Product Recommendations",
+  "name": "Product Carousel",
   "tag": "section",
   "class": "sl-product-recommendations",
   "settings": [
@@ -739,9 +739,8 @@
   ],
   "presets": [
     {
-      "name": "Product Recommendations"
+      "name": "Product Carousel"
     }
-  ],
-  "templates": ["product"]
+  ]
 }
 {% endschema %}
