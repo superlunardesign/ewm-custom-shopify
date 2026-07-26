@@ -20,7 +20,7 @@
       "settings": {
         "grid_layout": "side_by_side",
         "full_width": true,
-        "desktop_height": 400,
+        "desktop_height": 500,
         "gap": 2,
         "border_radius": 0,
         "hero_width": 6,
@@ -424,7 +424,7 @@
         "testimonial_qCMdCf": {
           "type": "testimonial",
           "settings": {
-            "quote": "\"Hands down the best place to get waxed. Hopefully I get to experience the facials soon because this place is seriously the best. I was nervous getting waxed as a curvy girl but Yanelli made me feel super comfortable.\"",
+            "quote": "Hands down the best place to get waxed. Hopefully I get to experience the facials soon because this place is seriously the best. I was nervous getting waxed as a curvy girl but Yanelli made me feel super comfortable.",
             "author": "Joann T."
           }
         },
@@ -432,14 +432,14 @@
           "type": "testimonial",
           "settings": {
             "quote": "As an esthetician of almost 2 decades and business owner, I am blown away by Shannon. Every detail is thought out and intentional. From the moment you schedule, to your service, to post service. She also checks in to see how things are going, and if there are any questions or any adjustments that need to be done.",
-            "author": "Sarah M."
+            "author": "Chanla C."
           }
         },
         "testimonial_K7Gw7m": {
           "type": "testimonial",
           "settings": {
-            "quote": "Professional, knowledgeable, and truly caring. I trust her completely with my skincare routine and recommend her to everyone.",
-            "author": "Jessica R."
+            "quote": "Such a great and friendly place!!! Super fast like 10-15 minutes for a brazilian and scheduling is very easy. I go to Yanelli and she is AMAZING!",
+            "author": "Dianne S."
           }
         }
       },
