@@ -417,8 +417,10 @@
       grid-row: 1;
       z-index: 1;
       padding: 3rem;
-      align-self: center;
+      align-self: stretch;
       margin-left: -{{ section.settings.overlap_amount }}px;
+      margin-top: {{ section.settings.vertical_inset }}px;
+      margin-bottom: {{ section.settings.vertical_inset }}px;
     }
 
     #shopify-section-{{ section.id }} .sl-ito__button-wrap .button {
@@ -569,6 +571,17 @@
       "step": 10,
       "unit": "px",
       "default": 80
+    },
+    {
+      "type": "range",
+      "id": "vertical_inset",
+      "label": "Vertical Inset",
+      "info": "Space above/below the content panel where the image peeks through. Set to 0 for flush edges.",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
     },
     {
       "type": "header",
