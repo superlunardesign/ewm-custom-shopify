@@ -219,6 +219,7 @@
       "name": "EWM Sticky Steps",
       "settings": {
         "bg_type": "image",
+        "bg_image": "shopify://shop_images/BrandingPhotography-C_Mae-5644.jpg",
         "bg_video_url": "",
         "bg_color": "#1a1a1a",
         "overlay_opacity": 40,
@@ -236,7 +237,7 @@
         "step_color": "#6b7c5e",
         "step_line_color": "#c4c4a0",
         "card_bg": "#f5f3ed",
-        "card_radius": 6,
+        "card_radius": 0,
         "heading_color": "#1a1a1a",
         "text_color": "#4a4a4a",
         "show_button": true,
