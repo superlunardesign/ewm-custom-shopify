@@ -4,6 +4,14 @@
 {% endcomment %}
 
 {%- style -%}
+  {% if section.settings.enable_sticky %}
+    #shopify-section-{{ section.id }} {
+      position: sticky;
+      top: 0;
+      z-index: {{ section.settings.sticky_z_index }};
+    }
+  {% endif %}
+
   #shopify-section-{{ section.id }} .sl-ito {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
@@ -753,6 +761,27 @@
       "step": 100,
       "unit": "ms",
       "default": 200
+    },
+    {
+      "type": "header",
+      "content": "Sticky Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "Make section sticky",
+      "info": "Section stays pinned while scrolling so the next section slides over it",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "sticky_z_index",
+      "label": "Stacking Order",
+      "info": "Higher = on top of other sticky sections. Earlier sections should use a lower number.",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2
     },
     {
       "type": "header",
