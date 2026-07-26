@@ -334,6 +334,37 @@
         "padding_bottom": 36
       }
     },
+    "sl_image_text_block_eXcmtF": {
+      "type": "sl-image-text-block",
+      "name": "EWM Image + Text Block",
+      "settings": {
+        "image_position": "left",
+        "desktop_height": 500,
+        "mobile_height": 300,
+        "subheading": "",
+        "heading": "1:1 Therapy Sessions",
+        "heading_size": "h1",
+        "spread_content": true,
+        "text": "<p>Share details about your services, approach, or expertise. This text area supports rich formatting so you can add emphasis where needed.</p>",
+        "show_button": true,
+        "button_text": "EXPLORE MY APPROACH",
+        "button_link": "",
+        "button_style": "primary",
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "enable_anchor": false,
+        "anchor_id": "",
+        "scroll_offset": 80,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "before_and_afters_KfRpJn": {
       "type": "before-and-afters",
       "blocks": {
@@ -1018,6 +1049,7 @@
     "scrolling_offers_YAxCQz",
     "sl_content_banner_FTN8R4",
     "sl_image_text_overlap_9rRV4Y",
+    "sl_image_text_block_eXcmtF",
     "before_and_afters_KfRpJn",
     "sl_steps_sticky_WwKLzM",
     "skin_concern_LUXc4Q",
