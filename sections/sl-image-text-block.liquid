@@ -137,13 +137,6 @@
 
   #shopify-section-{{ section.id }} .sl-itb__media {
     overflow: hidden;
-    {% if section.settings.image_height == 'small' %}
-      min-height: 300px;
-    {% elsif section.settings.image_height == 'medium' %}
-      min-height: 450px;
-    {% elsif section.settings.image_height == 'large' %}
-      min-height: 600px;
-    {% endif %}
   }
 
   #shopify-section-{{ section.id }} .sl-itb__img {
@@ -255,19 +248,10 @@
     }
   }
 
-  /* Mobile: cap image height */
+  /* Mobile */
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .sl-itb__media {
-      {% if section.settings.image_height == 'large' %}
-        height: 350px;
-      {% elsif section.settings.image_height == 'medium' %}
-        height: 300px;
-      {% elsif section.settings.image_height == 'small' %}
-        height: 250px;
-      {% else %}
-        height: 300px;
-      {% endif %}
-      min-height: auto;
+      height: {{ section.settings.mobile_height }}px;
     }
   }
 
@@ -280,6 +264,7 @@
 
     #shopify-section-{{ section.id }} .sl-itb__grid {
       grid-template-columns: 1fr 1fr;
+      grid-template-rows: {{ section.settings.desktop_height }}px;
     }
 
     #shopify-section-{{ section.id }} .sl-itb__grid--reversed {
@@ -331,18 +316,26 @@
       "info": "Image side on desktop. On mobile, image always appears above."
     },
     {
-      "type": "select",
-      "id": "image_height",
-      "label": "Image Height",
-      "options": [
-        { "value": "adapt", "label": "Match text block height" },
-        { "value": "small", "label": "Small (300px)" },
-        { "value": "medium", "label": "Medium (450px)" },
-        { "value": "large", "label": "Large (600px)" },
-        { "value": "natural", "label": "Natural (original ratio)" }
-      ],
-      "default": "adapt",
-      "info": "\"Match text block height\" crops the image to fill the text column height."
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop Height",
+      "info": "Height of the section on desktop (image crops to fit)",
+      "min": 300,
+      "max": 800,
+      "step": 25,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile Image Height",
+      "info": "Height of the image when stacked on mobile",
+      "min": 200,
+      "max": 500,
+      "step": 25,
+      "unit": "px",
+      "default": 300
     },
     {
       "type": "header",
