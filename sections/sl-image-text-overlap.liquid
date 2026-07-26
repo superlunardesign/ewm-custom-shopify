@@ -186,9 +186,12 @@
 
   #shopify-section-{{ section.id }} .sl-ito__media {
     overflow: hidden;
+    position: relative;
   }
 
   #shopify-section-{{ section.id }} .sl-ito__img {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
     height: 100%;
@@ -294,15 +297,6 @@
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .sl-ito__media {
       min-height: {{ section.settings.mobile_height }}px;
-    }
-
-    #shopify-section-{{ section.id }} .sl-ito__media .sl-ito__img {
-      position: absolute;
-      inset: 0;
-    }
-
-    #shopify-section-{{ section.id }} .sl-ito__media {
-      position: relative;
     }
 
     #shopify-section-{{ section.id }} .sl-ito__content {
