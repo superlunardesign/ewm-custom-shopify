@@ -369,6 +369,9 @@
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .sl-team__media {
       height: {{ section.settings.mobile_image_height }}px;
+      width: {{ section.settings.mobile_image_width }}%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     #shopify-section-{{ section.id }} .sl-team__content {
@@ -516,6 +519,16 @@
       "step": 25,
       "unit": "px",
       "default": 350
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_width",
+      "label": "Mobile Image Width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
     },
     {
       "type": "range",
