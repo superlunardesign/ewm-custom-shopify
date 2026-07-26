@@ -125,7 +125,7 @@
         "enable_tag_filtering": true,
         "filter_exclude_collections": "candles",
         "filter_label": "Filter For Your Skin",
-        "filter_tags": "Acne Safe, Anti-Aging, SPF, Sensitive Skin, Body Care",
+        "filter_tags": "Acne Safe, Anti-Aging, Hydrating, Sensitive Skin, Brightening, SPF",
         "filter_tag_border_color": "#999999",
         "filter_tag_text_color": "#333333",
         "filter_tag_active_bg": "#8c9b6d",
