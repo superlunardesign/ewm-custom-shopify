@@ -419,6 +419,19 @@
     "sl_skin_concern_hzeVEG": {
       "type": "sl-skin-concern",
       "blocks": {
+        "concern_RKCQYV": {
+          "type": "concern",
+          "settings": {
+            "concern_label": "Fine Lines & Wrinkles",
+            "symptoms": "Lines or wrinkles appearing around the eyes, mouth, and on the forehead.",
+            "service_subheading": "TRY OUR",
+            "service_title": "Chemical Peel",
+            "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5495.jpg",
+            "service_description": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
+            "button_text": "BOOK HERE",
+            "button_link": ""
+          }
+        },
         "concern_tQkHGG": {
           "type": "concern",
           "settings": {
@@ -470,6 +483,7 @@
         }
       },
       "block_order": [
+        "concern_RKCQYV",
         "concern_tQkHGG",
         "concern_BX8qXY",
         "concern_8AEGbt",
@@ -480,7 +494,7 @@
         "heading": "I'm experiencing...",
         "heading_size": "h1",
         "image_position": "left",
-        "desktop_height": 550,
+        "desktop_height": 400,
         "mobile_image_height": 300,
         "button_style": "primary",
         "color_scheme": "background-1",
