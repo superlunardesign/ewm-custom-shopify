@@ -57,6 +57,7 @@
     font-size: {{ section.settings.quote_size_mobile }}px;
     line-height: {{ section.settings.quote_line_height }};
     color: {{ section.settings.quote_color }};
+    text-align: {{ section.settings.text_alignment }};
     margin: 0;
     max-width: 100%;
   }
@@ -72,6 +73,7 @@
     font-size: {{ section.settings.author_size }}px;
     font-style: {{ section.settings.author_style }};
     color: {{ section.settings.author_color }};
+    text-align: {{ section.settings.text_alignment }};
     margin-top: 2rem;
     letter-spacing: 0.02em;
   }
@@ -427,6 +429,18 @@
       "max": 2.0,
       "step": 0.1,
       "default": 1.4
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" },
+        { "value": "justify", "label": "Justify" }
+      ],
+      "default": "center"
     },
     {
       "type": "color",
