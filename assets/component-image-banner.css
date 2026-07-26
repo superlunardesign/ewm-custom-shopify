@@ -554,7 +554,7 @@ h2.banner__heading span {
     letter-spacing: 0;
 } 
  .banner__buttons a.button.button--primary {
-   font-weight: 700;
+   font-weight: 600;
 }
 .banner__text.subtitle span:after {
     content: "";

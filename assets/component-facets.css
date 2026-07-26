@@ -530,14 +530,19 @@ a.active-facets__button.focused .active-facets__button-inner,
   align-items: center;
   display: flex;
   justify-content: center;
-  background: var(--gradient-base-accent-2);
+  background: transparent;
+  color: var(--gradient-base-accent-1);
+  border: 1.5px solid var(--gradient-base-accent-1);
+  border-radius: 0;
   font-weight: 600;
-  letter-spacing: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
-.mobile-facets__footer>* { transition: all 0.3s linear; background: var(--gradient-base-accent-2);font-weight: 600;letter-spacing: normal;text-transform: capitalize;  border: none;}
-.mobile-facets__clear-wrapper a.mobile-facets__clear:hover{color: var(--gradient-base-accent-3);}
+.mobile-facets__footer>* { transition: all 300ms linear; background: var(--gradient-base-accent-1); color: #ffffff; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border: 1.5px solid var(--gradient-base-accent-1); border-radius: 0;}
+.mobile-facets__clear-wrapper a.mobile-facets__clear:hover{color: #ffffff;}
+.mobile-facets__clear-wrapper:hover{background: var(--gradient-base-accent-1); color: #ffffff;}
 .mobile-facets__clear-wrapper:hover,
-.mobile-facets__footer button.button:hover{background: var(--gradient-base-background-3); color: var(--gradient-base-accent-3);}
+.mobile-facets__footer button.button:hover{background: transparent; color: var(--gradient-base-accent-1);}
 .mobile-facets {
   position: fixed;
   top: 0;

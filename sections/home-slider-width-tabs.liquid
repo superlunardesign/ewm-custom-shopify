@@ -213,11 +213,10 @@
     #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls { display: none; }
     {% endif %}
     #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls { height: 100%; position: absolute; width: 100%; top: 0; left: 0; }
-    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow { margin: 0; width: 40px; height: 40px; }
-    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow.prev-arrow:after,
-    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow.next-arrow:after { content: "" !important; display: block; background: none;  width: 12px; height: 12px; transform: rotate(45deg); position: absolute; }
-    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow.prev-arrow:after { right: 10px; border-left: 1px solid; border-bottom: 1px solid; }
-    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow.next-arrow:after { left: 10px; border-right: 1px solid; border-top: 1px solid; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow { margin: 0; width: 44px; height: 44px; background: var(--gradient-base-background-1); border-radius: 50%; box-shadow: 0 1px 4px rgba(0,0,0,0.1); border: 1px solid var(--color-border, #e5e5e5); transition: all 300ms linear; display: flex; align-items: center; justify-content: center; font-family: var(--font-body-family); font-size: 1.8rem; color: rgb(var(--color-base-text)); }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.15); background: var(--gradient-base-background-3); }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow.prev-arrow:after { content: '\2190' !important; display: block; background: none; width: auto; height: auto; transform: none; position: static; border: none; }
+    #shopify-section-{{ section.id }}.home-slider-with-tabs #sliderTabs-{{ section.id }}-ctrls .slick-arrow.next-arrow:after { content: '\2192' !important; display: block; background: none; width: auto; height: auto; transform: none; position: static; border: none; }
     @keyframes progress-horizontal { from { transform:scaleX(0) } to { transform:scaleX(1) } }
     @media only screen and (min-width: 1200px) {
       #shopify-section-{{ section.id }}.home-slider-with-tabs .dt-sc-section-wrapper { margin-top:{{ margin_top }}px; margin-bottom:{{ margin_bottom }}px;padding-top:{{ padding_top }}px; padding-bottom:{{ padding_bottom }}px; }

@@ -21,13 +21,20 @@
 #login{margin-top: 0; font-size: 3rem;letter-spacing: normal; font-weight: 700; text-transform: capitalize;}
 .customer button {
   margin: 2rem 0 2rem;
-  padding: 12px 50px;
+  padding: 14px 32px;
   transition: all 300ms linear;
-  color: var(--gradient-base-accent-1);
+  background: var(--gradient-base-accent-1);
+  color: #ffffff;
+  border: 1.5px solid var(--gradient-base-accent-1);
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-family: var(--font-heading-family);
 }
 .customer button:hover{
-  background: var(--gradient-base-accent-2);
-  color: var(--gradient-base-accent-3);
+  background: transparent;
+  color: var(--gradient-base-accent-1);
 }
 .customer ul {
   line-height: calc(1 + 0.6 / var(--font-body-scale));
@@ -701,8 +708,8 @@
 .addresses form button + button {
   margin-top: 0rem;
 }
-.addresses li > button:first-of-type, .addresses li>button+button, .addresses form button[type] { background: var(--gradient-base-background-3);}
-.addresses li > button:first-of-type:hover, .addresses li>button+button:hover, .addresses form button[type]:hover {background: var(--gradient-base-accent-2);color: var(--gradient-base-accent-3);}
+.addresses li > button:first-of-type, .addresses li>button+button, .addresses form button[type] { background: var(--gradient-base-accent-1); color: #ffffff; border: 1.5px solid var(--gradient-base-accent-1); border-radius: 0;}
+.addresses li > button:first-of-type:hover, .addresses li>button+button:hover, .addresses form button[type]:hover {background: transparent; color: var(--gradient-base-accent-1);}
 @media screen and (min-width: 750px) {
   .addresses li > button:first-of-type {
     margin-top: 3rem;

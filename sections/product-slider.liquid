@@ -157,20 +157,7 @@
     color: {{ section.settings.view_all_hover_text_color }};
   }
 
-  /* Navigation arrows */
-  #ProductSlider-{{ section.id }} .swiper-button-next,
-  #ProductSlider-{{ section.id }} .swiper-button-prev {
-    color: {{ section.settings.arrow_color }};
-    width: 40px;
-    height: 40px;
-    background: {{ section.settings.arrow_background }};
-    border-radius: 50%;
-  }
-
-  #ProductSlider-{{ section.id }} .swiper-button-next:after,
-  #ProductSlider-{{ section.id }} .swiper-button-prev:after {
-    font-size: 20px;
-  }
+  /* Navigation arrows - inherits global arrow styles from base.css */
 
   /* Pagination */
   #ProductSlider-{{ section.id }} .swiper-pagination-bullet {

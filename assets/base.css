@@ -112,8 +112,14 @@
   --color-button-text: var(--color-base-solid-button-labels);
   --color-hover-button: var(--color-base-solid-button-labels);
   --color-button-hover-text:var(--color-base-outline-button-labels);
-/*   --color-button: var(--color-background); */
   --alpha-button-background: 1;
+  background: transparent;
+  color: var(--gradient-base-accent-1);
+  border: 1.5px solid var(--gradient-base-accent-1);
+}
+.button--secondary:hover {
+  background: var(--gradient-base-accent-1);
+  color: #ffffff;
 }
 
 .color-background-2 .button--secondary,
@@ -1590,7 +1596,7 @@ button.shopify-payment-button__button--unbranded,
     --buttons-border-offset
   ); /* reduce radius edge artifacts */
   --border-opacity: calc(1 - var(--buttons-border-opacity));
-  border-radius: var(--buttons-radius-outset);
+  border-radius: 0;
   position: relative;
   transition: all var(--duration-default) linear;
 }
@@ -1618,23 +1624,23 @@ button.shopify-payment-button__button--unbranded {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border: 0;
-  padding: 0 3rem;
+  border: 1.5px solid var(--gradient-base-accent-1);
+  padding: 14px 32px;
   cursor: pointer;
   font: inherit;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   text-decoration: none;
-  color: rgb(var(--color-button-text));
-  transition: box-shadow var(--duration-short) ease;
+  color: #ffffff;
   -webkit-appearance: none;
   white-space: nowrap;
   appearance: none;
-  background-color: rgba(var(--color-button), var(--alpha-button-background));
-  transition: all 0.3s linear;
+  background: var(--gradient-base-accent-1);
+  transition: all 300ms linear;
   font-family: var(--font-heading-family);
-  font-weight: 500;
-  transition: all var(--duration-default) linear;
-  text-transform: capitalize;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 0;
 }
 .shopify-challenge__button:hover,
 .customer button:hover {
@@ -1645,11 +1651,12 @@ button.shopify-payment-button__button--unbranded {
   color: rgba(var(--color-button-hover-text));
 }
 .button{
-  padding: 10px 20px;
-  font-size: 1.6rem;
+  padding: 14px 32px;
+  font-size: 1.5rem;
   text-transform: uppercase;
-  line-height: 24px;
-  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  font-weight: 400;
   cursor: pointer;
   transition: all 300ms linear;
   white-space: nowrap;
@@ -1658,9 +1665,16 @@ button.shopify-payment-button__button--unbranded {
   justify-content: center;
   align-items: center;
   font-family: var(--font-heading-family);
+  background: var(--gradient-base-accent-1);
+  color: #ffffff;
+  border: 1.5px solid var(--gradient-base-accent-1);
+  border-radius: 0;
+  z-index: 1;
+}
+.button:hover {
   background: transparent;
   color: var(--gradient-base-accent-1);
-  z-index:1;
+  border-color: var(--gradient-base-accent-1);
 }
 
 .button:before,
@@ -1676,7 +1690,7 @@ button.shopify-payment-button__button--unbranded {
   bottom: 0;
   left: 0;
   z-index: -1;
-  border-radius: var(--buttons-radius-outset);
+  border-radius: 0;
   box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
     var(--shadow-blur-radius) rgba(var(--color-shadow), var(--shadow-opacity));
 }
@@ -1691,7 +1705,7 @@ button.shopify-payment-button__button--unbranded {
   bottom: var(--buttons-border-width);
   left: var(--buttons-border-width);
   z-index: 1;
-  border-radius: var(--buttons-radius);
+  border-radius: 0;
   box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset))
       rgba(var(--color-button-text), var(--border-opacity)),
     0 0 0 var(--buttons-border-width)
@@ -1757,9 +1771,9 @@ button.shopify-payment-button__button--unbranded {
 .button-label,
 .shopify-challenge__button,
 .customer button {
-  font-size: 1.6rem;
-  letter-spacing: normal;
-  line-height: 24px;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
 }
 
 .button--tertiary {
@@ -3427,3 +3441,72 @@ svg{width:1.6rem;height:1.6rem;}
     height:var(--placeholder-height);
 }
 a.empty_place_holder{width: 100%;}
+
+/* ========================================
+   Global Arrow / Carousel Navigation
+   Standardized: ← → in Nunito Sans,
+   circular container, faint drop shadow
+   ======================================== */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 44px !important;
+  height: 44px !important;
+  background: var(--gradient-base-background-1) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+  transition: all 300ms linear !important;
+  border: 1px solid var(--color-border, #e5e5e5) !important;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  background: var(--gradient-base-background-3) !important;
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.8rem !important;
+  font-weight: 400 !important;
+  color: rgb(var(--color-base-text)) !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+.swiper-button-prev:after {
+  content: '\2190' !important;
+}
+.swiper-button-next:after {
+  content: '\2192' !important;
+}
+.swiper-button-prev[disabled],
+.swiper-button-next[disabled],
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 0.35 !important;
+}
+.slider-button {
+  width: 44px;
+  height: 44px;
+  background: var(--gradient-base-background-1);
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: all 300ms linear;
+  border: 1px solid var(--color-border, #e5e5e5);
+  color: rgb(var(--color-base-text));
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slider-button:hover:not([disabled]) {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: var(--gradient-base-background-3);
+}
+.slider-button[disabled],
+.slider-button.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.slider-button .icon {
+  width: 20px;
+  height: 20px;
+}

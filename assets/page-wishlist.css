@@ -107,12 +107,12 @@ table.dtx-table.dtx-grid-hide {
     align-items: center;
     flex-direction: column;}
 .dtx-grid-empty.dtx-grid-show img{ margin-bottom:30px; width: 100px;}
-.wishlist .dtx-grid-empty+table td a.dt-sc-btn{background: var(--gradient-base-background-3);}
-.wishlist .dtx-grid-empty+table td a.dt-sc-btn:hover{background: var(--gradient-base-accent-2); color: var(--gradient-base-accent-3);}
+.wishlist .dtx-grid-empty+table td a.dt-sc-btn{background: var(--gradient-base-accent-1); color: #ffffff; border: 1.5px solid var(--gradient-base-accent-1); border-radius: 0; transition: all 300ms linear; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;}
+.wishlist .dtx-grid-empty+table td a.dt-sc-btn:hover{background: transparent; color: var(--gradient-base-accent-1);}
 
 @media screen and (min-width: 992px){
   .wishlist table tbody tr:nth-child(even) { background: linear-gradient(180deg,rgba(249,249,249,0.5) 0%,rgba(249,249,249,0.5) 100%);}
 }
-a.link.button.button--primary{padding: 10px 20px;font-size: 1.6rem;text-transform: uppercase;line-height: 24px;font-weight: 700;cursor: pointer;transition: all .3s linear;white-space: nowrap;appearance: none;display: inline-flex;justify-content: center;align-items: center;font-family: var(--font-heading-family);background: var(--gradient-base-background-3);color: var(--gradient-base-accent-1);z-index: 1; text-decoration: none;text-transform: capitalize;}
+a.link.button.button--primary{padding: 14px 32px;font-size: 1.5rem;text-transform: uppercase;line-height: 1.4;font-weight: 600;cursor: pointer;transition: all 300ms linear;white-space: nowrap;appearance: none;display: inline-flex;justify-content: center;align-items: center;font-family: var(--font-heading-family);background: var(--gradient-base-accent-1);color: #ffffff;border: 1.5px solid var(--gradient-base-accent-1);border-radius: 0;z-index: 1; text-decoration: none;letter-spacing: 0.08em;}
 
-a.link.button.button--primary:hover{background: var(--gradient-base-accent-2);color: var(--gradient-base-accent-3);}
+a.link.button.button--primary:hover{background: transparent;color: var(--gradient-base-accent-1);}
