@@ -345,6 +345,7 @@
       #shopify-section-{{ section.id }} .sl-hiw__cards {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
+        padding-bottom: 50vh;
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__card {
@@ -357,6 +358,7 @@
 
       #shopify-section-{{ section.id }} .sl-hiw__cta {
         top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + (var(--card-count) - 1) * var(--hiw-peek) + var(--hiw-card-h, 300px) + 1rem);
+        margin-top: 20vh;
         padding: 1.5rem;
       }
     {% else %}
@@ -609,7 +611,7 @@
       "label": "Card Peek Height (Mobile)",
       "info": "How much of each card's header peeks through when stacked on mobile",
       "min": 40,
-      "max": 80,
+      "max": 120,
       "step": 2,
       "unit": "px",
       "default": 60
