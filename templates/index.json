@@ -659,7 +659,7 @@
         "animation_duration": 600,
         "animation_delay": 200,
         "enable_sticky": true,
-        "sticky_z_index": 2,
+        "sticky_z_index": 1,
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -705,7 +705,7 @@
       "name": "EWM Image + Text Overlap",
       "settings": {
         "image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5077_54eafc9e-5c65-4184-9617-68efd56bc604.jpg",
-        "image_position": "left",
+        "image_position": "right",
         "desktop_height": 550,
         "mobile_height": 350,
         "image_fit": "cover",
