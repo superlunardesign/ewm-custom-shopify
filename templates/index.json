@@ -636,7 +636,7 @@
         "team_member_zG3GCD": {
           "type": "team_member",
           "settings": {
-            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5618_a474233d-0e58-41d5-9ee8-b78fbafe1f6a.jpg",
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5479.jpg",
             "name": "Felicia",
             "title": "Lead Licensed Esthetician | Certified Acne Expert",
             "bio": "Felicia knows how frustrating and isolating acne can feel. \n\nAfter years of dealing with breakouts, she turned her personal experience into a career focused on understanding, education, and real results. She creates a welcoming space where clients feel seen, supported, and confident in their skin.\n\nOriginally from a small town in Pennsylvania, Felicia moved to Illinois to be with her husband and is a proud mom to a little boy who lights up her world. Her go-to treat? A grande iced white chocolate mocha and a warmed-up chocolate croissant from Starbucks.\n\nFelicia is especially passionate about working with sensitive, reactive skin. Her favorite product is Quiet Wash from Hale & Hush, and she loves building customized facials that match each client’s unique needs.\n\nFelicia’s availability:\nMonday & Tuesday 10:30-6 | Wednesday - Friday 9:30–4:30 | Select Saturdays 9–1",
@@ -680,6 +680,7 @@
         "image_position": "left",
         "desktop_height": 525,
         "mobile_image_height": 250,
+        "mobile_overlap": 60,
         "image_position_x": 50,
         "image_position_y": 65,
         "image_width": 2,
