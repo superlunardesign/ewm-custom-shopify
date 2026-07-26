@@ -145,7 +145,16 @@
         "animation_duration": 600,
         "animation_delay": 200,
         "padding_top": 36,
-        "padding_bottom": 36
+        "padding_bottom": 36,
+        "overlap_above": false,
+        "overlap_amount": 60,
+        "enable_scroll_text": true,
+        "scroll_text": "MEET YOUR SKIN THERAPIST",
+        "scroll_font_size": 90,
+        "scroll_text_color": "#8A9979",
+        "scroll_text_padding": 0,
+        "scroll_overlap": 160,
+        "scroll_speed": 50
       }
     },
     "skin_concern_LUXc4Q": {
