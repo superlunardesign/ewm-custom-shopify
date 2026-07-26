@@ -396,7 +396,7 @@
       #shopify-section-{{ section.id }} .sl-hiw__card {
         align-self: start;
         top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px));
-        margin-top: calc(var(--i) * 25vh);
+        margin-top: calc(var(--i) * {{ section.settings.desktop_stagger }}vh);
         margin-bottom: 40vh;
         min-height: 280px;
       }
@@ -605,13 +605,24 @@
     {
       "type": "range",
       "id": "peek_height",
-      "label": "Card Peek Height",
-      "info": "How much of each card's header peeks through when stacked (mobile only)",
+      "label": "Card Peek Height (Mobile)",
+      "info": "How much of each card's header peeks through when stacked on mobile",
       "min": 40,
       "max": 80,
       "step": 2,
       "unit": "px",
       "default": 60
+    },
+    {
+      "type": "range",
+      "id": "desktop_stagger",
+      "label": "Card Stagger (Desktop)",
+      "info": "Vertical scroll distance between each card appearing on desktop",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "vh",
+      "default": 25
     },
     {
       "type": "range",
