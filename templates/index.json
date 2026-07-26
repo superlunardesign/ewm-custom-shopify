@@ -66,7 +66,7 @@
       "settings": {
         "full_width": true,
         "heading": "Explore Our Acne Safe Skincare",
-        "heading_alignment": "left",
+        "heading_alignment": "center",
         "heading_color": "#8c9b6d",
         "heading_font": "heading",
         "heading_size": 24,
