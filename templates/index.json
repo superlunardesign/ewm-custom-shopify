@@ -416,6 +416,69 @@
         "auto_scroll_speed": 0.5
       }
     },
+    "sl_skin_concern_hzeVEG": {
+      "type": "sl-skin-concern",
+      "blocks": {
+        "concern_BX8qXY": {
+          "type": "concern",
+          "settings": {
+            "concern_label": "Acne & Breakouts",
+            "symptoms": "Persistent pimples, redness, and inflammation.",
+            "service_subheading": "TRY OUR",
+            "service_title": "Clear Skin Facial",
+            "service_description": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
+            "button_text": "BOOK HERE",
+            "button_link": ""
+          }
+        },
+        "concern_8AEGbt": {
+          "type": "concern",
+          "settings": {
+            "concern_label": "Dryness & Dehydration",
+            "symptoms": "Tight, flaky skin that feels rough and lacks moisture.",
+            "service_subheading": "TRY OUR",
+            "service_title": "Hydra Glow Facial",
+            "service_description": "A deeply hydrating treatment that replenishes moisture with hyaluronic acid serums and nourishing masks.",
+            "button_text": "BOOK HERE",
+            "button_link": ""
+          }
+        },
+        "concern_jyT88p": {
+          "type": "concern",
+          "settings": {
+            "concern_label": "Aging & Fine Lines",
+            "symptoms": "Visible wrinkles, loss of firmness, and uneven texture.",
+            "service_subheading": "TRY OUR",
+            "service_title": "Anti-Aging Renewal",
+            "service_description": "A rejuvenating facial using peptides and retinol to smooth fine lines and restore youthful radiance.",
+            "button_text": "BOOK HERE",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "concern_BX8qXY",
+        "concern_8AEGbt",
+        "concern_jyT88p"
+      ],
+      "name": "Skin Concern Selector",
+      "settings": {
+        "heading": "I'm experiencing...",
+        "heading_size": "h1",
+        "image_position": "left",
+        "desktop_height": 550,
+        "mobile_image_height": 300,
+        "button_style": "primary",
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "select_border_color": "#c4c4a0",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "sl_steps_sticky_WwKLzM": {
       "type": "sl-steps-sticky",
       "blocks": {
@@ -1039,6 +1102,7 @@
     "sl_content_banner_FTN8R4",
     "sl_image_text_overlap_9rRV4Y",
     "before_and_afters_KfRpJn",
+    "sl_skin_concern_hzeVEG",
     "sl_steps_sticky_WwKLzM",
     "sl_image_text_block_eXcmtF",
     "product_recommendations_aQkqDq",
