@@ -120,6 +120,13 @@
     border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
     color: {{ section.settings.button_text_color }};
     font-size: {{ section.settings.button_font_size }}px;
+    {% if section.settings.button_font == 'heading' %}
+      font-family: var(--font-heading-family);
+      font-weight: var(--font-heading-weight);
+      font-style: var(--font-heading-style);
+    {% else %}
+      font-family: var(--font-body-family);
+    {% endif %}
     border-radius: {{ section.settings.button_border_radius }}px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -735,6 +742,16 @@
     },
     {
       "type": "range",
+      "id": "button_font",
+      "label": "Button font family",
+      "type": "select",
+      "options": [
+        { "value": "body", "label": "Body Font" },
+        { "value": "heading", "label": "Heading Font" }
+      ],
+      "default": "body"
+    },
+    {
       "id": "button_font_size",
       "label": "Button font size",
       "min": 12,
