@@ -106,13 +106,13 @@
         "service_LRgmQN"
       ],
       "custom_css": [
-        "h2 {color: white;}"
+        "h2 {font-size: 10rem;}"
       ],
       "name": "Scrolling Offers",
       "settings": {
         "static_text": "WE OFFER",
-        "background_color": "#8c9b6d",
-        "text_color": "#ffffff",
+        "background_color": "#FFFFFF",
+        "text_color": "#8A9979",
         "scroll_speed": 2
       }
     },
@@ -122,16 +122,22 @@
       "settings": {
         "image": "shopify://shop_images/BrandingPhotography-C_Mae-5250.jpg",
         "image_position": "left",
-        "image_height": "medium",
+        "desktop_height": 500,
+        "mobile_height": 300,
         "subheading": "",
         "heading": "1:1 Therapy Sessions",
         "heading_size": "h1",
+        "spread_content": true,
         "text": "<p>Share details about your services, approach, or expertise. This text area supports rich formatting so you can add emphasis where needed.</p>",
         "show_button": true,
         "button_text": "EXPLORE MY APPROACH",
         "button_link": "shopify://products/10-advanced-acne-med",
         "button_style": "primary",
         "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
         "enable_anchor": false,
         "anchor_id": "",
         "scroll_offset": 80,
