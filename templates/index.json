@@ -14,9 +14,7 @@
       "custom_css": [
         "h1 {color: white;}",
         "h2 {color: white;}",
-        "p {color: white;}",
-        "a {color: white; text-decoration: underline;}",
-        "a:hover {text-decoration: underline;}"
+        "p {color: white;}"
       ],
       "name": "Tri Banner",
       "settings": {
