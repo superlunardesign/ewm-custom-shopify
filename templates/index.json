@@ -223,8 +223,14 @@
         "heading_dHF7Lw": {
           "type": "heading",
           "settings": {
-            "text": "Our Service Offerings",
+            "text": "Ways We Help Your Skin Glow",
             "size": "h1"
+          }
+        },
+        "text_UDtpAP": {
+          "type": "text",
+          "settings": {
+            "text": "<p>From relaxing facials to results-driven acne programs — find the service that fits your skin goals.</p>"
           }
         },
         "service_link_niiPYi": {
@@ -290,6 +296,7 @@
       },
       "block_order": [
         "heading_dHF7Lw",
+        "text_UDtpAP",
         "service_link_niiPYi",
         "service_link_3LF8mN",
         "service_link_HNKBGM",
