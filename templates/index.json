@@ -205,8 +205,8 @@
         "bg_color": "#57614c",
         "bg_image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5063.jpg",
         "bg_video_url": "",
-        "overlay_darkness": 60,
-        "enable_animation": false,
+        "overlay_darkness": 30,
+        "enable_animation": true,
         "animation_duration": 600,
         "text_color": "#f0e8d8",
         "subheading_font": "body",
@@ -219,21 +219,28 @@
     },
     "sl_image_text_overlap_9rRV4Y": {
       "type": "sl-image-text-overlap",
+      "blocks": {
+        "service_link_niiPYi": {
+          "type": "service_link",
+          "settings": {
+            "text": "Facials & Skin Treatments",
+            "link": "shopify://pages/facial-treatments",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        }
+      },
+      "block_order": [
+        "service_link_niiPYi"
+      ],
       "name": "EWM Image + Text Overlap",
       "settings": {
         "image": "shopify://shop_images/BrandingPhotography-C_Mae-5250.jpg",
         "image_position": "left",
         "desktop_height": 550,
         "mobile_height": 350,
-        "subheading": "",
-        "heading": "Therapy Designed for Women Who Do It All",
-        "heading_size": "h1",
         "spread_content": false,
-        "text": "<p>Share details about your services, approach, or expertise. This text area supports rich formatting so you can add emphasis where needed.</p>",
-        "show_button": true,
-        "button_text": "LEARN MORE ABOUT MY APPROACH",
-        "button_link": "",
-        "button_style": "secondary",
         "color_scheme": "background-1",
         "content_background": "#f5f0eb",
         "heading_color": "#1a1a1a",
