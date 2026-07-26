@@ -102,6 +102,10 @@
   "name": "Marquee Text",
   "settings": [
     {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
       "type": "color",
       "id": "colorBackground",
       "label": "Background color",
@@ -114,9 +118,8 @@
       "default": "#fff"
     },
     {
-      "type": "url",
-      "id": "link",
-      "label": "Link"
+      "type": "header",
+      "content": "Layout"
     },
     {
       "type": "range",
@@ -125,6 +128,7 @@
       "max": 200,
       "step": 2,
       "default": 46,
+      "unit": "px",
       "label": "Marquee height"
     },
     {
@@ -134,7 +138,18 @@
       "max": 100,
       "step": 2,
       "default": 24,
+      "unit": "px",
       "label": "Font size"
+    },
+    {
+      "type": "header",
+      "content": "Behavior"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link",
+      "info": "Optional link wrapping the entire marquee"
     },
     {
       "type": "range",
@@ -143,7 +158,8 @@
       "max": 60,
       "step": 1,
       "default": 12,
-      "label": "Marquee Speed (seconds)"
+      "label": "Scroll speed",
+      "info": "Duration in seconds for one full loop — lower = faster"
     }
   ],
   "blocks": [
