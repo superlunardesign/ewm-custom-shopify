@@ -624,7 +624,7 @@
         "button_bg_color": "#8a9979",
         "button_text_color": "#ffffff",
         "padding_top": 20,
-        "padding_bottom": 0
+        "padding_bottom": 40
       }
     },
     "sl_image_text_block_eXcmtF": {
@@ -658,7 +658,7 @@
         "enable_animation": true,
         "animation_duration": 600,
         "animation_delay": 200,
-        "enable_sticky": false,
+        "enable_sticky": true,
         "sticky_z_index": 2,
         "padding_top": 36,
         "padding_bottom": 36
