@@ -57,7 +57,20 @@
       </div>
 
       <div class="sl-ito__content">
+        {% if section.settings.spread_content %}
+          <div class="sl-ito__content-top">
+        {% endif %}
+
+        {% assign opened_bottom = false %}
         {% for block in section.blocks %}
+          {% if section.settings.spread_content and opened_bottom == false %}
+            {% if block.type == 'text' or block.type == 'button' or block.type == 'service_link' %}
+              {% assign opened_bottom = true %}
+              </div>
+              <div class="sl-ito__content-bottom">
+            {% endif %}
+          {% endif %}
+
           {% case block.type %}
             {% when 'subheading' %}
               {% if block.settings.text != blank %}
@@ -105,6 +118,14 @@
               </a>
           {% endcase %}
         {% endfor %}
+
+        {% if section.settings.spread_content %}
+          {% if opened_bottom %}
+            </div>
+          {% else %}
+            </div>
+          {% endif %}
+        {% endif %}
       </div>
     </div>
   </div>
@@ -215,7 +236,8 @@
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: {{ section.settings.image_fit }};
+    object-position: {{ section.settings.image_position_x }}% {{ section.settings.image_position_y }}%;
   }
 
   #shopify-section-{{ section.id }} .sl-ito__placeholder {
@@ -244,6 +266,12 @@
     padding: 2.5rem;
     background-color: {{ section.settings.content_background }};
   }
+
+  {% if section.settings.spread_content %}
+    #shopify-section-{{ section.id }} .sl-ito__content-bottom {
+      margin-top: auto;
+    }
+  {% endif %}
 
   #shopify-section-{{ section.id }} .sl-ito__spacer {
     display: block;
@@ -375,21 +403,22 @@
     }
 
     #shopify-section-{{ section.id }} .sl-ito__grid {
-      grid-template-columns: 3fr 1fr 2fr;
+      grid-template-columns: {{ section.settings.image_width }}fr {{ section.settings.content_width }}fr;
       grid-template-rows: minmax({{ section.settings.desktop_height }}px, auto);
     }
 
     #shopify-section-{{ section.id }} .sl-ito__media {
-      grid-column: 1 / 3;
+      grid-column: 1;
       grid-row: 1;
     }
 
     #shopify-section-{{ section.id }} .sl-ito__content {
-      grid-column: 2 / 4;
+      grid-column: 2;
       grid-row: 1;
       z-index: 1;
       padding: 3rem;
-      align-self: stretch;
+      align-self: center;
+      margin-left: -{{ section.settings.overlap_amount }}px;
     }
 
     #shopify-section-{{ section.id }} .sl-ito__button-wrap .button {
@@ -400,17 +429,19 @@
 
     /* Reversed: image right, text left */
     #shopify-section-{{ section.id }} .sl-ito__grid--reversed {
-      grid-template-columns: 2fr 1fr 3fr;
+      grid-template-columns: {{ section.settings.content_width }}fr {{ section.settings.image_width }}fr;
     }
 
     #shopify-section-{{ section.id }} .sl-ito__grid--reversed .sl-ito__media {
-      grid-column: 2 / 4;
+      grid-column: 2;
       grid-row: 1;
     }
 
     #shopify-section-{{ section.id }} .sl-ito__grid--reversed .sl-ito__content {
-      grid-column: 1 / 3;
+      grid-column: 1;
       grid-row: 1;
+      margin-left: 0;
+      margin-right: -{{ section.settings.overlap_amount }}px;
     }
   }
 
@@ -453,7 +484,7 @@
       "type": "range",
       "id": "desktop_height",
       "label": "Desktop Height",
-      "info": "Height of the section on desktop (image crops to fit)",
+      "info": "Minimum height of the section on desktop",
       "min": 300,
       "max": 800,
       "step": 25,
@@ -470,6 +501,74 @@
       "step": 25,
       "unit": "px",
       "default": 350
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image Fill Mode",
+      "options": [
+        { "value": "cover", "label": "Cover (fill & crop)" },
+        { "value": "contain", "label": "Contain (fit inside)" },
+        { "value": "fill", "label": "Stretch to fill" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "image_position_x",
+      "label": "Image Focal Point (Horizontal)",
+      "info": "0% = left, 50% = center, 100% = right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_position_y",
+      "label": "Image Focal Point (Vertical)",
+      "info": "0% = top, 50% = center, 100% = bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Overlap Layout"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image Column Width",
+      "info": "Relative width of the image column",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content Column Width",
+      "info": "Relative width of the content column",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "overlap_amount",
+      "label": "Overlap Amount",
+      "info": "How far the content panel extends over the image (in px)",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
     },
     {
       "type": "header",
