@@ -49,10 +49,23 @@
       "header": {
         "type": "header",
         "blocks": {
-          "promo_image_HD6eiJ": {
+          "promo_image_p9T74k": {
             "type": "promo_image",
             "settings": {
               "mega_1": "Services",
+              "image_1": "shopify://shop_images/BrandingPhotography-C_Mae-6127.jpg",
+              "title_1": "Best Brazilian Wax in McHenry",
+              "link_1": "shopify://pages/brazilian-wax-mchenry",
+              "image_2": "shopify://shop_images/BrandingPhotography-C_Mae-6127.jpg",
+              "title_2": "Best Brazilian Wax in McHenry, IL",
+              "button_2": "Book a Wax",
+              "link_2": "shopify://pages/brazilian-wax-mchenry"
+            }
+          },
+          "promo_image_HD6eiJ": {
+            "type": "promo_image",
+            "settings": {
+              "mega_1": "Shop Skincare",
               "image_1": "shopify://shop_images/BrandingPhotography-C_Mae-5625_b9bf1da6-5bce-4dc4-999a-cab564433c4b.jpg",
               "title_1": "Join Acne Bootcamp",
               "link_1": "shopify://pages/acne-bootcamp",
@@ -64,6 +77,7 @@
           }
         },
         "block_order": [
+          "promo_image_p9T74k",
           "promo_image_HD6eiJ"
         ],
         "settings": {
