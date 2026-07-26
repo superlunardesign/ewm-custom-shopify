@@ -49,32 +49,36 @@
       </div>
 
       <div class="sl-itb__content">
-        {% if section.settings.subheading != blank %}
-          <p class="sl-itb__subheading">{{ section.settings.subheading }}</p>
-        {% endif %}
+        <div class="sl-itb__content-top">
+          {% if section.settings.subheading != blank %}
+            <p class="sl-itb__subheading">{{ section.settings.subheading }}</p>
+          {% endif %}
 
-        {% if section.settings.heading != blank %}
-          <h2 class="sl-itb__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
-        {% endif %}
+          {% if section.settings.heading != blank %}
+            <h2 class="sl-itb__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+          {% endif %}
+        </div>
 
-        {% if section.settings.text != blank %}
-          <div class="sl-itb__text rte">{{ section.settings.text }}</div>
-        {% endif %}
+        <div class="sl-itb__content-bottom">
+          {% if section.settings.text != blank %}
+            <div class="sl-itb__text rte">{{ section.settings.text }}</div>
+          {% endif %}
 
-        {% if section.settings.show_button and section.settings.button_text != blank %}
-          <div class="sl-itb__button-wrap">
-            <a
-              {% if section.settings.button_link == blank %}
-                role="link" aria-disabled="true"
-              {% else %}
-                href="{{ section.settings.button_link }}"
-              {% endif %}
-              class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% endif %}"
-            >
-              {{ section.settings.button_text | escape }}
-            </a>
-          </div>
-        {% endif %}
+          {% if section.settings.show_button and section.settings.button_text != blank %}
+            <div class="sl-itb__button-wrap">
+              <a
+                {% if section.settings.button_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.button_link }}"
+                {% endif %}
+                class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% endif %}"
+              >
+                {{ section.settings.button_text | escape }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
@@ -176,7 +180,15 @@
   }
 
   #shopify-section-{{ section.id }} .sl-itb__content {
-    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2.5rem;
+    background-color: {{ section.settings.content_background }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__content-top {
+    margin-bottom: 2rem;
   }
 
   #shopify-section-{{ section.id }} .sl-itb__subheading {
@@ -186,8 +198,7 @@
     text-transform: uppercase;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: rgb(var(--color-foreground));
-    opacity: 0.65;
+    color: {{ section.settings.subheading_color }};
   }
 
   #shopify-section-{{ section.id }} .sl-itb__heading {
@@ -195,16 +206,15 @@
     font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
     line-height: 1.15;
-    margin-bottom: 1.5rem;
-    color: rgb(var(--color-foreground));
+    margin-bottom: 0;
+    color: {{ section.settings.heading_color }};
   }
 
   #shopify-section-{{ section.id }} .sl-itb__text {
     font-family: var(--font-body-family);
     font-size: 1.6rem;
     line-height: 1.7;
-    color: rgb(var(--color-foreground));
-    opacity: 0.8;
+    color: {{ section.settings.text_color }};
     margin-bottom: 2rem;
   }
 
@@ -289,7 +299,7 @@
     }
 
     #shopify-section-{{ section.id }} .sl-itb__content {
-      padding: 2rem 0;
+      padding: 3rem;
     }
   }
 
@@ -299,7 +309,7 @@
     }
 
     #shopify-section-{{ section.id }} .sl-itb__content {
-      padding: 3rem 0;
+      padding: 4rem;
     }
   }
 </style>
@@ -414,12 +424,12 @@
     },
     {
       "type": "header",
-      "content": "Color Scheme"
+      "content": "Colors"
     },
     {
       "type": "select",
       "id": "color_scheme",
-      "label": "Color Scheme",
+      "label": "Section Background",
       "options": [
         { "value": "background-1", "label": "Background 1" },
         { "value": "background-2", "label": "Background 2" },
@@ -427,7 +437,33 @@
         { "value": "accent-2", "label": "Accent 2" },
         { "value": "inverse", "label": "Inverse" }
       ],
-      "default": "background-1"
+      "default": "background-1",
+      "info": "Background behind the entire section (image + text)"
+    },
+    {
+      "type": "color",
+      "id": "content_background",
+      "label": "Text Block Background",
+      "default": "#f5f0eb",
+      "info": "Background color of the text content panel"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body Text Color",
+      "default": "#4a4a4a"
     },
     {
       "type": "header",
