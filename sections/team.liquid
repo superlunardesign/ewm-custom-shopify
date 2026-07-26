@@ -162,13 +162,6 @@
 </script>
 
 <style>
-  {% if section.settings.enable_sticky %}
-    #shopify-section-{{ section.id }} {
-      position: sticky !important;
-      top: 0;
-    }
-  {% endif %}
-
   #shopify-section-{{ section.id }} .sl-team__container {
     max-width: var(--page-width, 1200px);
     margin: 0 auto;
@@ -444,6 +437,23 @@
   }
 </style>
 
+{% if section.settings.enable_sticky %}
+<script>
+  (function() {
+    var el = document.getElementById('shopify-section-{{ section.id }}');
+    if (!el) return;
+    var prev = el.previousElementSibling;
+    while (prev && !prev.classList.contains('shopify-section')) {
+      prev = prev.previousElementSibling;
+    }
+    if (prev) {
+      prev.style.position = 'sticky';
+      prev.style.top = '0';
+    }
+  })();
+</script>
+{% endif %}
+
 {% schema %}
 {
   "name": "Team Carousel",
@@ -659,7 +669,7 @@
       "type": "checkbox",
       "id": "enable_sticky",
       "label": "Make section sticky",
-      "info": "Section stays pinned while scrolling so the next section slides over it",
+      "info": "This section appears to slide over the section above it",
       "default": false
     },
     {
