@@ -91,6 +91,24 @@
   </div>
 </div>
 
+{% if section.settings.enable_sticky %}
+<script>
+  (function() {
+    var el = document.getElementById('sl-hiw-{{ section.id }}');
+    if (!el) return;
+    var node = el.parentElement;
+    while (node && node !== document.body) {
+      var style = window.getComputedStyle(node);
+      if (style.overflow !== 'visible' || style.overflowY !== 'visible') {
+        node.style.overflow = 'visible';
+        node.style.overflowY = 'visible';
+      }
+      node = node.parentElement;
+    }
+  })();
+</script>
+{% endif %}
+
 <style>
   /* ── Ensure sticky works — no overflow clipping on ancestors ── */
   #shopify-section-{{ section.id }} {
@@ -234,45 +252,71 @@
   }
 
   /* ═══════════════════════════════════════════
-     MOBILE: sticky stacking cards
+     MOBILE
      ═══════════════════════════════════════════ */
   @media screen and (max-width: 749px) {
-    /* Sticky background covers viewport while scrolling */
-    #shopify-section-{{ section.id }} .sl-hiw__bg {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      margin-bottom: -100vh;
-    }
+    {% if section.settings.enable_sticky %}
+      /* Sticky background covers viewport while scrolling */
+      #shopify-section-{{ section.id }} .sl-hiw__bg {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        margin-bottom: -100vh;
+        z-index: 0;
+      }
 
-    /* Marquee in flow at top */
-    #shopify-section-{{ section.id }} .sl-hiw__marquee {
-      position: relative;
-      z-index: 1;
-      padding: 1.5rem 0;
-    }
+      /* Marquee in flow at top */
+      #shopify-section-{{ section.id }} .sl-hiw__marquee {
+        position: relative;
+        z-index: 1;
+        padding: 1.5rem 0;
+      }
 
-    #shopify-section-{{ section.id }} .sl-hiw__marquee-item {
-      font-size: {{ section.settings.marquee_size | times: 0.35 | round: 0 }}px;
-    }
+      #shopify-section-{{ section.id }} .sl-hiw__marquee-item {
+        font-size: {{ section.settings.marquee_size | times: 0.35 | round: 0 }}px;
+      }
 
-    /* Cards container with scroll runway */
-    #shopify-section-{{ section.id }} .sl-hiw__cards {
-      padding: 1rem 1.5rem;
-      padding-bottom: 30vh;
-    }
+      /* Cards container with scroll runway */
+      #shopify-section-{{ section.id }} .sl-hiw__cards {
+        padding: 1rem 1.5rem;
+        padding-bottom: 30vh;
+      }
 
-    /* Each card sticks at staggered position */
-    #shopify-section-{{ section.id }} .sl-hiw__card {
-      position: sticky;
-      top: calc(var(--hiw-sticky-top) + var(--i) * var(--hiw-peek));
-      box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
-    }
+      /* Each card sticks at staggered position */
+      #shopify-section-{{ section.id }} .sl-hiw__card {
+        position: sticky;
+        top: calc(var(--hiw-sticky-top) + var(--i) * var(--hiw-peek));
+        box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
+      }
 
-    /* Scroll space between cards */
-    #shopify-section-{{ section.id }} .sl-hiw__card:not(:first-child) {
-      margin-top: 65vh;
-    }
+      /* Scroll space between cards */
+      #shopify-section-{{ section.id }} .sl-hiw__card:not(:first-child) {
+        margin-top: 65vh;
+      }
+    {% else %}
+      /* Non-sticky: fixed background, simple stacked cards */
+      #shopify-section-{{ section.id }} .sl-hiw__bg {
+        position: absolute;
+        inset: 0;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__marquee {
+        position: relative;
+        z-index: 1;
+        padding: 1.5rem 0;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__marquee-item {
+        font-size: {{ section.settings.marquee_size | times: 0.35 | round: 0 }}px;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cards {
+        padding: 1rem 1.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: {{ section.settings.card_gap }}px;
+      }
+    {% endif %}
 
     /* Button area */
     #shopify-section-{{ section.id }} .sl-hiw__cta {
@@ -420,6 +464,13 @@
     {
       "type": "header",
       "content": "Mobile Sticky Effect"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "Enable sticky scroll",
+      "info": "Cards stack on top of each other as you scroll on mobile. When off, cards display in a simple vertical list.",
+      "default": true
     },
     {
       "type": "range",

@@ -29,7 +29,6 @@
 #shopify-section-{{ section.id }} .sl-cb__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, {{ section.settings.overlay_darkness | divided_by: 100.0 }});
   pointer-events: none;
   z-index: 1;
 }
@@ -150,6 +149,26 @@
 #shopify-section-{{ section.id }} .sl-cb__spacer {
   display: block;
 }
+
+/* Fade-up animation */
+{% if section.settings.enable_animation %}
+  .js #shopify-section-{{ section.id }} .sl-cb__content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity {{ section.settings.animation_duration | default: 600 }}ms ease-out, transform {{ section.settings.animation_duration | default: 600 }}ms ease-out;
+  }
+
+  .js #shopify-section-{{ section.id }} .sl-cb__content.sl-cb--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .no-js #shopify-section-{{ section.id }} .sl-cb__content,
+  .shopify-design-mode #shopify-section-{{ section.id }} .sl-cb__content {
+    opacity: 1;
+    transform: none;
+  }
+{% endif %}
 {%- endstyle -%}
 
 <div class="sl-cb">
@@ -175,11 +194,11 @@
   {%- endif -%}
 
   {%- if section.settings.overlay_darkness > 0 -%}
-    <div class="sl-cb__overlay"></div>
+    <div class="sl-cb__overlay" style="background: {{ section.settings.overlay_color | default: '#000000' }}; opacity: {{ section.settings.overlay_darkness | divided_by: 100.0 }};"></div>
   {%- endif -%}
 
   <div class="sl-cb__inner {% if section.settings.full_width %}sl-cb__inner--full-width{% else %}page-width{% endif %}">
-    <div class="sl-cb__content">
+    <div class="sl-cb__content"{% if section.settings.enable_animation %} data-sl-cb-animate{% endif %}>
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'subheading' -%}
@@ -226,6 +245,24 @@
     </div>
   </div>
 </div>
+
+{% if section.settings.enable_animation %}
+<script>
+  (function() {
+    var targets = document.querySelectorAll('#shopify-section-{{ section.id }} [data-sl-cb-animate]');
+    if (!targets.length) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('sl-cb--visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    targets.forEach(function(t) { observer.observe(t); });
+  })();
+</script>
+{% endif %}
 
 {% schema %}
 {
@@ -302,15 +339,41 @@
       "info": "YouTube or Vimeo URL. Used if no video is uploaded."
     },
     {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
       "type": "range",
       "id": "overlay_darkness",
-      "label": "Overlay darkness",
+      "label": "Overlay opacity",
       "min": 0,
       "max": 80,
       "step": 5,
       "unit": "%",
       "default": 0,
-      "info": "Darken the background for better text readability."
+      "info": "Opacity of the overlay color over the background."
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable fade-up animation",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation duration",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "unit": "ms",
+      "default": 600
     },
     {
       "type": "header",

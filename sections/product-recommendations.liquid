@@ -106,16 +106,17 @@
   transition: transform 0.2s ease;
 }
 
-@media (max-width: 989px) {
+@media (max-width: 989px) and (min-width: 480px) {
   #shopify-section-{{ section.id }} .sl-recs__card {
-    flex: 0 0 calc(50% - 10px);
-    min-width: 160px;
+    flex: 0 0 calc(33.333% - 14px);
+    min-width: 140px;
   }
 }
 
 @media (max-width: 479px) {
   #shopify-section-{{ section.id }} .sl-recs__card {
     flex: 0 0 calc(75% - 10px);
+    min-width: 160px;
   }
 }
 
@@ -443,6 +444,28 @@
       });
     }
 
+    /* Auto-scroll */
+    {% if section.settings.auto_scroll %}
+    (function initAutoScroll(c) {
+      if (!c) return;
+      var speed = {{ section.settings.auto_scroll_speed | default: 0.5 }};
+      var paused = false;
+      var raf;
+      c.addEventListener('mouseenter', function() { paused = true; });
+      c.addEventListener('mouseleave', function() { paused = false; });
+      c.addEventListener('touchstart', function() { paused = true; }, { passive: true });
+      c.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 3000); });
+      function tick() {
+        if (!paused) {
+          c.scrollLeft += speed;
+          if (c.scrollLeft >= c.scrollWidth - c.clientWidth) c.scrollLeft = 0;
+        }
+        raf = requestAnimationFrame(tick);
+      }
+      raf = requestAnimationFrame(tick);
+    })(carousel);
+    {% endif %}
+
     /* Load recommendations via AJAX if using Shopify API */
     const dataUrl = section.getAttribute('data-url');
     if (dataUrl) {
@@ -636,6 +659,31 @@
       "max": 12,
       "step": 1,
       "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Auto-scroll"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_scroll",
+      "label": "Enable auto-scroll",
+      "default": false,
+      "info": "Continuously scrolls products. Pauses on hover and touch."
+    },
+    {
+      "type": "range",
+      "id": "auto_scroll_speed",
+      "label": "Scroll speed",
+      "min": 0.2,
+      "max": 2,
+      "step": 0.1,
+      "default": 0.5,
+      "info": "Pixels per frame (0.2 = slow, 2 = fast)"
+    },
+    {
+      "type": "header",
+      "content": "Features"
     },
     {
       "type": "checkbox",
