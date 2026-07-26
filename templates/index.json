@@ -419,32 +419,6 @@
     "sl_skin_concern_hzeVEG": {
       "type": "sl-skin-concern",
       "blocks": {
-        "concern_RKCQYV": {
-          "type": "concern",
-          "settings": {
-            "concern_label": "Fine Lines & Wrinkles",
-            "symptoms": "Lines or wrinkles appearing around the eyes, mouth, and on the forehead.",
-            "service_subheading": "TRY OUR",
-            "service_title": "Chemical Peel",
-            "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5495.jpg",
-            "service_description": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
-            "button_text": "BOOK HERE",
-            "button_link": ""
-          }
-        },
-        "concern_tQkHGG": {
-          "type": "concern",
-          "settings": {
-            "concern_label": "Acne & Breakouts",
-            "symptoms": "Persistent pimples, redness, and inflammation.",
-            "service_subheading": "TRY OUR",
-            "service_title": "Clear Skin Facial",
-            "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5434.jpg",
-            "service_description": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
-            "button_text": "BOOK HERE",
-            "button_link": ""
-          }
-        },
         "concern_BX8qXY": {
           "type": "concern",
           "settings": {
@@ -452,6 +426,7 @@
             "symptoms": "Persistent pimples, redness, and inflammation.",
             "service_subheading": "TRY OUR",
             "service_title": "Clear Skin Facial",
+            "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5625_b9bf1da6-5bce-4dc4-999a-cab564433c4b.jpg",
             "service_description": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
             "button_text": "BOOK HERE",
             "button_link": ""
@@ -464,6 +439,7 @@
             "symptoms": "Tight, flaky skin that feels rough and lacks moisture.",
             "service_subheading": "TRY OUR",
             "service_title": "Hydra Glow Facial",
+            "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5434.jpg",
             "service_description": "A deeply hydrating treatment that replenishes moisture with hyaluronic acid serums and nourishing masks.",
             "button_text": "BOOK HERE",
             "button_link": ""
@@ -476,6 +452,7 @@
             "symptoms": "Visible wrinkles, loss of firmness, and uneven texture.",
             "service_subheading": "TRY OUR",
             "service_title": "Anti-Aging Renewal",
+            "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5810.jpg",
             "service_description": "A rejuvenating facial using peptides and retinol to smooth fine lines and restore youthful radiance.",
             "button_text": "BOOK HERE",
             "button_link": ""
@@ -483,8 +460,6 @@
         }
       },
       "block_order": [
-        "concern_RKCQYV",
-        "concern_tQkHGG",
         "concern_BX8qXY",
         "concern_8AEGbt",
         "concern_jyT88p"
