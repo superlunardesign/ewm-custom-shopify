@@ -97,9 +97,11 @@
 /* =========================================================
    PRODUCT CARD — mirrors collection grid style
    ========================================================= */
+{%- assign cols = section.settings.desktop_columns | default: 4 -%}
+{%- assign gap_total = cols | minus: 1 | times: 20 -%}
 #shopify-section-{{ section.id }} .sl-recs__card {
-  flex: 0 0 calc(25% - 15px);
-  min-width: 220px;
+  flex: 0 0 calc((100% - {{ gap_total }}px) / {{ cols }});
+  min-width: 0;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -556,6 +558,18 @@
       "id": "full_width",
       "label": "Full width",
       "default": false
+    },
+    {
+      "type": "select",
+      "id": "desktop_columns",
+      "label": "Products per row (desktop)",
+      "options": [
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" },
+        { "value": "6", "label": "6" }
+      ],
+      "default": "4"
     },
     {
       "type": "text",
