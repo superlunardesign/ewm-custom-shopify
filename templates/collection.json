@@ -125,7 +125,7 @@
         "enable_tag_filtering": true,
         "filter_exclude_collections": "candles",
         "filter_label": "Filter For Your Skin",
-        "filter_tags": "Acne & Breakouts, Aging & Fine Lines, Dryness, Sensitive & Reactive, Dark Spots, Sun Protection",
+        "filter_tags": "Acne & Breakouts, Aging & Fine Lines, Dryness, Sensitive & Reactive, Dark Spots",
         "filter_tag_border_color": "#999999",
         "filter_tag_text_color": "#333333",
         "filter_tag_active_bg": "#8c9b6d",
