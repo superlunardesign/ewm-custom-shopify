@@ -1,4 +1,10 @@
 <style>
+  #shopify-section-{{ section.id }} {
+    position: relative;
+    z-index: {{ section.settings.z_index }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
   .section-{{ section.id }}.custom-marquee {
     display: flex;
     align-items: center;
@@ -6,7 +12,7 @@
     width: 100vw;
     max-width: 100%;
     overflow-x: hidden;
-    background: {{section.settings.colorBackground}}; 
+    background: {{section.settings.colorBackground}};
     color: {{section.settings.colorText}};
   }
   .section-{{ section.id }}.custom-marquee a {
@@ -23,6 +29,7 @@
   .section-{{ section.id }}.custom-marquee .content {
     margin-left: 40px;
     font-size: {{section.settings.font_size}}px;
+    line-height: {{ section.settings.line_height }};
   }
 
     .section-{{ section.id }}.custom-marquee .icon{
@@ -144,6 +151,51 @@
       "step": 1,
       "default": 12,
       "label": "Marquee Speed (seconds)"
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "min": 1.0,
+      "max": 3.0,
+      "step": 0.1,
+      "default": 1.4,
+      "label": "Text Line Height"
+    },
+    {
+      "type": "header",
+      "content": "Spacing & Layering"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "label": "Margin Top",
+      "info": "Use negative values to overlap the section above"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "label": "Margin Bottom",
+      "info": "Use negative values to overlap the section below"
+    },
+    {
+      "type": "range",
+      "id": "z_index",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 1,
+      "label": "Layer Order (z-index)",
+      "info": "Higher = in front. Set to 0 to sit behind adjacent sections."
     }
   ],
   "blocks": [
