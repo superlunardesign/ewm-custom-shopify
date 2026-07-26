@@ -1,6 +1,6 @@
 {% comment %}
   EWM Image Card Grid
-  Grid of image cards with buttons, scrolling marquee text behind
+  Grid of image cards with optional text overlay/below, buttons, scrolling marquee
 {% endcomment %}
 
 {%- style -%}
@@ -61,14 +61,61 @@
                   {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
                 </div>
               {% endif %}
+
+              {% if section.settings.text_position == 'overlay' %}
+                {% if block.settings.card_heading != blank or block.settings.card_text != blank or section.settings.show_buttons and block.settings.button_text != blank %}
+                  <div class="sl-icg__card-overlay">
+                    <div class="sl-icg__card-overlay-content">
+                      {% if block.settings.card_heading != blank %}
+                        <h3 class="sl-icg__card-title">{{ block.settings.card_heading }}</h3>
+                      {% endif %}
+                      {% if block.settings.card_text != blank %}
+                        <p class="sl-icg__card-desc">{{ block.settings.card_text }}</p>
+                      {% endif %}
+                      {% if section.settings.show_buttons and block.settings.button_text != blank %}
+                        <a
+                          {% if block.settings.button_link != blank %}href="{{ block.settings.button_link }}"{% endif %}
+                          class="sl-icg__card-btn sl-icg__card-btn--overlay"
+                          style="color: {{ section.settings.button_text_color }}; border-color: {{ section.settings.button_border_color }}; font-size: {{ section.settings.button_font_size | times: 0.1 }}rem;"
+                        >
+                          {{ block.settings.button_text | escape }}
+                        </a>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endif %}
+              {% endif %}
             </div>
 
-            {% if block.settings.button_text != blank %}
+            {% if section.settings.text_position == 'below' %}
+              {% if block.settings.card_heading != blank or block.settings.card_text != blank %}
+                <div class="sl-icg__card-text-below">
+                  {% if block.settings.card_heading != blank %}
+                    <h3 class="sl-icg__card-title sl-icg__card-title--below">{{ block.settings.card_heading }}</h3>
+                  {% endif %}
+                  {% if block.settings.card_text != blank %}
+                    <p class="sl-icg__card-desc sl-icg__card-desc--below">{{ block.settings.card_text }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if section.settings.show_buttons and block.settings.button_text != blank %}
+                <div class="sl-icg__card-action">
+                  <a
+                    {% if block.settings.button_link != blank %}href="{{ block.settings.button_link }}"{% endif %}
+                    class="sl-icg__card-btn"
+                    style="color: {{ section.settings.button_text_color }}; border-color: {{ section.settings.button_border_color }}; font-size: {{ section.settings.button_font_size | times: 0.1 }}rem;"
+                  >
+                    {{ block.settings.button_text | escape }}
+                  </a>
+                </div>
+              {% endif %}
+            {% endif %}
+
+            {% if section.settings.text_position == 'none' and section.settings.show_buttons and block.settings.button_text != blank %}
               <div class="sl-icg__card-action">
                 <a
-                  {% if block.settings.button_link != blank %}
-                    href="{{ block.settings.button_link }}"
-                  {% endif %}
+                  {% if block.settings.button_link != blank %}href="{{ block.settings.button_link }}"{% endif %}
                   class="sl-icg__card-btn"
                   style="color: {{ section.settings.button_text_color }}; border-color: {{ section.settings.button_border_color }}; font-size: {{ section.settings.button_font_size | times: 0.1 }}rem;"
                 >
@@ -188,6 +235,7 @@
   #shopify-section-{{ section.id }} .sl-icg__card-media {
     overflow: hidden;
     aspect-ratio: {{ section.settings.image_ratio }};
+    position: relative;
   }
 
   #shopify-section-{{ section.id }} .sl-icg__card-img {
@@ -213,6 +261,74 @@
     opacity: 0.3;
   }
 
+  /* ── Overlay ── */
+  #shopify-section-{{ section.id }} .sl-icg__card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+    display: flex;
+    align-items: {{ section.settings.overlay_vertical_align }};
+    justify-content: center;
+    padding: 1.5rem;
+    transition: background 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-icg__card-overlay-content {
+    text-align: {{ section.settings.overlay_text_align }};
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .sl-icg__card-title {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    font-size: {{ section.settings.card_title_size }}px;
+    line-height: 1.2;
+    color: {{ section.settings.overlay_text_color }};
+    margin: 0 0 0.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-icg__card-desc {
+    font-family: var(--font-body-family);
+    font-size: {{ section.settings.card_desc_size }}px;
+    line-height: 1.5;
+    color: {{ section.settings.overlay_text_color }};
+    margin: 0;
+  }
+
+  /* ── Text below image ── */
+  #shopify-section-{{ section.id }} .sl-icg__card-text-below {
+    padding: 1rem 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-icg__card-title--below {
+    color: {{ section.settings.heading_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-icg__card-desc--below {
+    color: {{ section.settings.card_text_below_color }};
+  }
+
+  /* ── Overlay button ── */
+  #shopify-section-{{ section.id }} .sl-icg__card-btn--overlay {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    border: 1px solid;
+    color: {{ section.settings.overlay_text_color }};
+    border-color: {{ section.settings.overlay_text_color }};
+    transition: opacity 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-icg__card-btn--overlay:hover {
+    opacity: 0.7;
+  }
+
+  /* ── Button below ── */
   #shopify-section-{{ section.id }} .sl-icg__card-action {
     margin-top: {{ section.settings.button_gap }}px;
   }
@@ -372,6 +488,98 @@
     },
     {
       "type": "header",
+      "content": "Card Text & Buttons"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Card Text Position",
+      "options": [
+        { "value": "none", "label": "No Text (Image + Button Only)" },
+        { "value": "overlay", "label": "Inside Image (Overlay)" },
+        { "value": "below", "label": "Below Image" }
+      ],
+      "default": "none",
+      "info": "Where card heading and description appear. Buttons follow the text when 'Below Image' is selected."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buttons",
+      "label": "Show Buttons",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Card Title Size",
+      "min": 14,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_desc_size",
+      "label": "Card Description Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "card_text_below_color",
+      "label": "Card Text Color (Below)",
+      "default": "#4a4a4a",
+      "info": "Only used when text position is 'Below Image'"
+    },
+    {
+      "type": "header",
+      "content": "Overlay Settings"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Darkness",
+      "info": "Only applies when text is inside the image",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Overlay Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "overlay_vertical_align",
+      "label": "Overlay Vertical Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "select",
+      "id": "overlay_text_align",
+      "label": "Overlay Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
       "content": "Buttons"
     },
     {
@@ -503,6 +711,18 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "card_heading",
+          "label": "Card Heading",
+          "info": "Optional text shown on or below the image"
+        },
+        {
+          "type": "textarea",
+          "id": "card_text",
+          "label": "Card Description",
+          "info": "Optional description text"
         },
         {
           "type": "text",

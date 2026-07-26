@@ -453,18 +453,33 @@
     }
 
     /* Auto-scroll */
-    {% if section.settings.auto_scroll %}
+    {% assign scroll_mode = section.settings.auto_scroll_mode | default: 'off' %}
+    {% if scroll_mode == 'off' and section.settings.auto_scroll %}
+      {% assign scroll_mode = 'both' %}
+    {% endif %}
+    {% if scroll_mode != 'off' %}
     (function initAutoScroll(c) {
       if (!c) return;
       var speed = {{ section.settings.auto_scroll_speed | default: 0.5 }};
+      var mode = '{{ scroll_mode }}';
       var paused = false;
       var raf;
+
+      function isAllowed() {
+        var w = window.innerWidth;
+        if (mode === 'both') return true;
+        if (mode === 'desktop') return w >= 750;
+        if (mode === 'mobile') return w < 750;
+        return false;
+      }
+
       c.addEventListener('mouseenter', function() { paused = true; });
       c.addEventListener('mouseleave', function() { paused = false; });
       c.addEventListener('touchstart', function() { paused = true; }, { passive: true });
       c.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 3000); });
+
       function tick() {
-        if (!paused) {
+        if (!paused && isAllowed()) {
           c.scrollLeft += speed;
           if (c.scrollLeft >= c.scrollWidth - c.clientWidth) c.scrollLeft = 0;
         }
@@ -685,11 +700,17 @@
       "content": "Auto-scroll"
     },
     {
-      "type": "checkbox",
-      "id": "auto_scroll",
-      "label": "Enable auto-scroll",
-      "default": false,
-      "info": "Continuously scrolls products. Pauses on hover and touch."
+      "type": "select",
+      "id": "auto_scroll_mode",
+      "label": "Auto-scroll",
+      "options": [
+        { "value": "off", "label": "Off" },
+        { "value": "both", "label": "Desktop & Mobile" },
+        { "value": "desktop", "label": "Desktop Only" },
+        { "value": "mobile", "label": "Mobile Only" }
+      ],
+      "default": "off",
+      "info": "Continuously scrolls products. Pauses on hover (desktop) and touch (mobile)."
     },
     {
       "type": "range",

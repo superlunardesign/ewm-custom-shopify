@@ -1,20 +1,23 @@
-<!-- Auto-Scroll Image Carousel Section -->
-<div class="image-carousel-section">
-  <div class="container">
+{% comment %}
+  EWM Image Carousel — auto-scrolling image gallery
+{% endcomment %}
+
+<div class="sl-imgc" id="sl-imgc-{{ section.id }}">
+  <div class="sl-imgc__container">
     {% if section.settings.section_title != blank %}
-      <h2 class="section-title">{{ section.settings.section_title }}</h2>
+      <h2 class="sl-imgc__title">{{ section.settings.section_title }}</h2>
     {% endif %}
 
-    <div class="image-carousel-wrapper">
-      <div class="image-carousel" id="imageCarousel">
+    <div class="sl-imgc__wrap">
+      <div class="sl-imgc__track">
         {% for block in section.blocks %}
-          <div class="image-slide" {{ block.shopify_attributes }}>
+          <div class="sl-imgc__slide" {{ block.shopify_attributes }}>
             {% if block.settings.image %}
               <img src="{{ block.settings.image | image_url: width: 800 }}"
                    alt="{{ block.settings.image.alt | default: block.settings.caption | escape }}"
                    loading="lazy">
             {% else %}
-              <div class="image-placeholder">
+              <div class="sl-imgc__placeholder">
                 <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="60" height="60" fill="#f0f0f0"/>
                   <path d="M20 25L30 35L40 25" stroke="#ccc" stroke-width="2"/>
@@ -24,7 +27,7 @@
             {% endif %}
 
             {% if block.settings.caption != blank %}
-              <p class="image-caption">{{ block.settings.caption }}</p>
+              <p class="sl-imgc__caption">{{ block.settings.caption }}</p>
             {% endif %}
           </div>
         {% endfor %}
@@ -34,161 +37,153 @@
 </div>
 
 <style>
-.image-carousel-section {
-  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
-  background: {{ section.settings.background_color }};
-}
-
-.container {
-  max-width: {{ section.settings.container_width }}px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.section-title {
-  text-align: center;
-  font-size: {{ section.settings.title_size }}px;
-  margin-bottom: 40px;
-  color: {{ section.settings.title_color }};
-  font-weight: 400;
-}
-
-.image-carousel-wrapper {
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.image-carousel {
-  display: flex;
-  gap: {{ section.settings.gap }}px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 10px 0;
-}
-
-.image-carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.image-slide {
-  flex: 0 0 {{ section.settings.image_size }}px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.image-slide img {
-  width: {{ section.settings.image_size }}px;
-  height: {{ section.settings.image_size }}px;
-  object-fit: cover;
-  border-radius: {{ section.settings.border_radius }}px;
-  transition: transform 0.3s ease;
-}
-
-.image-slide:hover img {
-  transform: scale({{ section.settings.hover_scale }});
-}
-
-.image-placeholder {
-  width: {{ section.settings.image_size }}px;
-  height: {{ section.settings.image_size }}px;
-  background: var(--gradient-base-background-3);
-  border-radius: {{ section.settings.border_radius }}px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-caption {
-  font-size: {{ section.settings.caption_size }}px;
-  color: {{ section.settings.caption_color }};
-  text-align: center;
-  margin: 0;
-  max-width: {{ section.settings.image_size }}px;
-}
-
-@media (max-width: 768px) {
-  .image-slide {
-    flex: 0 0 {{ section.settings.mobile_image_size }}px;
+  #shopify-section-{{ section.id }} .sl-imgc {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.background_color }};
   }
 
-  .image-slide img,
-  .image-placeholder {
-    width: {{ section.settings.mobile_image_size }}px;
-    height: {{ section.settings.mobile_image_size }}px;
+  #shopify-section-{{ section.id }} .sl-imgc__container {
+    max-width: {{ section.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
   }
 
-  .image-caption {
-    max-width: {{ section.settings.mobile_image_size }}px;
-    font-size: {{ section.settings.caption_size | minus: 2 }}px;
+  #shopify-section-{{ section.id }} .sl-imgc__title {
+    text-align: center;
+    font-size: {{ section.settings.title_size }}px;
+    margin-bottom: 40px;
+    color: {{ section.settings.title_color }};
+    font-weight: 400;
   }
 
-  .section-title {
-    font-size: {{ section.settings.title_size | minus: 8 }}px;
+  #shopify-section-{{ section.id }} .sl-imgc__wrap {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
   }
-}
+
+  #shopify-section-{{ section.id }} .sl-imgc__track {
+    display: flex;
+    gap: {{ section.settings.gap }}px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 10px 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-imgc__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .sl-imgc__slide {
+    flex: 0 0 {{ section.settings.image_size }}px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .sl-imgc__slide img {
+    width: {{ section.settings.image_size }}px;
+    height: {{ section.settings.image_size }}px;
+    object-fit: cover;
+    border-radius: {{ section.settings.border_radius }}px;
+    transition: transform 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-imgc__slide:hover img {
+    transform: scale({{ section.settings.hover_scale }});
+  }
+
+  #shopify-section-{{ section.id }} .sl-imgc__placeholder {
+    width: {{ section.settings.image_size }}px;
+    height: {{ section.settings.image_size }}px;
+    background: var(--gradient-base-background-3, #f0f0f0);
+    border-radius: {{ section.settings.border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .sl-imgc__caption {
+    font-size: {{ section.settings.caption_size }}px;
+    color: {{ section.settings.caption_color }};
+    text-align: center;
+    margin: 0;
+    max-width: {{ section.settings.image_size }}px;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .sl-imgc__slide {
+      flex: 0 0 {{ section.settings.mobile_image_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-imgc__slide img,
+    #shopify-section-{{ section.id }} .sl-imgc__placeholder {
+      width: {{ section.settings.mobile_image_size }}px;
+      height: {{ section.settings.mobile_image_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-imgc__caption {
+      max-width: {{ section.settings.mobile_image_size }}px;
+      font-size: {{ section.settings.caption_size | minus: 2 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-imgc__title {
+      font-size: {{ section.settings.title_size | minus: 8 }}px;
+    }
+  }
 </style>
 
 <script>
-// Auto-scroll system for image carousel
-const ImageCarouselAutoScroll = (function() {
-  let animationFrameId = null;
-  let isAutoScrollEnabled = {{ section.settings.auto_scroll | json }};
-  let autoScrollSpeed = {{ section.settings.auto_scroll_speed | default: 0.5 | json }};
-  let isHovered = false;
-  let carousel = null;
-
-  function init() {
-    carousel = document.getElementById('imageCarousel');
+  (function() {
+    var section = document.getElementById('sl-imgc-{{ section.id }}');
+    if (!section) return;
+    var carousel = section.querySelector('.sl-imgc__track');
     if (!carousel) return;
 
-    // Pause on hover
-    carousel.addEventListener('mouseenter', () => { isHovered = true; });
-    carousel.addEventListener('mouseleave', () => { isHovered = false; });
+    {% assign ic_mode = section.settings.auto_scroll_mode | default: 'off' %}
+    {% if ic_mode == 'off' and section.settings.auto_scroll %}
+      {% assign ic_mode = 'both' %}
+    {% endif %}
 
-    // Start auto-scroll if enabled
-    if (isAutoScrollEnabled) {
-      startAutoScroll();
+    {% if ic_mode != 'off' %}
+    var speed = {{ section.settings.auto_scroll_speed | default: 0.5 }};
+    var mode = '{{ ic_mode }}';
+    var paused = false;
+
+    function isAllowed() {
+      var w = window.innerWidth;
+      if (mode === 'both') return true;
+      if (mode === 'desktop') return w >= 750;
+      if (mode === 'mobile') return w < 750;
+      return false;
     }
-  }
 
-  function startAutoScroll() {
-    if (!carousel || animationFrameId) return;
+    carousel.addEventListener('mouseenter', function() { paused = true; });
+    carousel.addEventListener('mouseleave', function() { paused = false; });
+    carousel.addEventListener('touchstart', function() { paused = true; }, { passive: true });
+    carousel.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 3000); });
 
-    function animate() {
-      if (!isHovered) {
-        carousel.scrollLeft += autoScrollSpeed;
-
-        // Loop back to start when reaching the end
-        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-        if (carousel.scrollLeft >= maxScroll) {
+    function tick() {
+      if (!paused && isAllowed()) {
+        carousel.scrollLeft += speed;
+        if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
           carousel.scrollLeft = 0;
         }
       }
-
-      animationFrameId = requestAnimationFrame(animate);
+      requestAnimationFrame(tick);
     }
-
-    animationFrameId = requestAnimationFrame(animate);
-  }
-
-  return { init: init };
-})();
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-  ImageCarouselAutoScroll.init();
-});
+    requestAnimationFrame(tick);
+    {% endif %}
+  })();
 </script>
 
 {% schema %}
 {
   "name": "Image Carousel",
   "tag": "section",
-  "class": "image-carousel-section",
+  "class": "sl-image-carousel",
   "settings": [
     {
       "type": "text",
@@ -328,14 +323,20 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     {
       "type": "header",
-      "content": "Auto-Scroll Settings"
+      "content": "Auto-Scroll"
     },
     {
-      "type": "checkbox",
-      "id": "auto_scroll",
-      "label": "Enable auto-scroll",
-      "default": true,
-      "info": "Smoothly scrolls images continuously. Pauses on hover."
+      "type": "select",
+      "id": "auto_scroll_mode",
+      "label": "Auto-scroll",
+      "options": [
+        { "value": "off", "label": "Off" },
+        { "value": "both", "label": "Desktop & Mobile" },
+        { "value": "desktop", "label": "Desktop Only" },
+        { "value": "mobile", "label": "Mobile Only" }
+      ],
+      "default": "both",
+      "info": "Pauses on hover (desktop) and touch (mobile)."
     },
     {
       "type": "range",
@@ -345,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "max": 3,
       "step": 0.1,
       "default": 0.5,
-      "info": "Speed in pixels per frame (0.2 = very slow, 3 = fast)"
+      "info": "Pixels per frame (0.2 = very slow, 3 = fast)"
     }
   ],
   "blocks": [
@@ -372,24 +373,12 @@ document.addEventListener('DOMContentLoaded', function() {
     {
       "name": "Image Carousel",
       "blocks": [
-        {
-          "type": "carousel_image"
-        },
-        {
-          "type": "carousel_image"
-        },
-        {
-          "type": "carousel_image"
-        },
-        {
-          "type": "carousel_image"
-        },
-        {
-          "type": "carousel_image"
-        },
-        {
-          "type": "carousel_image"
-        }
+        { "type": "carousel_image" },
+        { "type": "carousel_image" },
+        { "type": "carousel_image" },
+        { "type": "carousel_image" },
+        { "type": "carousel_image" },
+        { "type": "carousel_image" }
       ]
     }
   ]

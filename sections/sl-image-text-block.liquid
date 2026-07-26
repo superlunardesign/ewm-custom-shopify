@@ -196,6 +196,8 @@
     line-height: 1.15;
     margin-bottom: 0;
     color: {{ section.settings.heading_color }};
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   #shopify-section-{{ section.id }} .sl-itb__text {
@@ -262,7 +264,7 @@
 
     #shopify-section-{{ section.id }} .sl-itb__grid {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: {{ section.settings.desktop_height }}px;
+      grid-template-rows: minmax({{ section.settings.desktop_height }}px, auto);
     }
 
     #shopify-section-{{ section.id }} .sl-itb__grid--reversed {
