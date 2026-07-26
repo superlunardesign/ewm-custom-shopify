@@ -107,14 +107,18 @@
     html, body {
       overflow-x: clip !important;
     }
+    #shopify-section-{{ section.id }} {
+      clip-path: inset(0);
+    }
+    #shopify-section-{{ section.id }} + .shopify-section {
+      position: relative;
+      z-index: 1;
+    }
   {% endif %}
 
   /* ── Section wrapper ── */
   #shopify-section-{{ section.id }} .sl-hiw {
     position: relative;
-    {% if section.settings.enable_sticky %}
-      overflow: clip;
-    {% endif %}
   }
 
   /* ── Background ── */
@@ -150,8 +154,8 @@
 
   #shopify-section-{{ section.id }} .sl-hiw__section-sub {
     font-family: var(--font-body-family);
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.6rem;
+    font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: {{ section.settings.section_subheading_color }};
@@ -216,6 +220,8 @@
     background-color: {{ section.settings.card_bg }};
     padding: 1.5rem 2rem 2rem;
     border-radius: {{ section.settings.card_radius }}px;
+    display: flex;
+    flex-direction: column;
   }
 
   #shopify-section-{{ section.id }} .sl-hiw__step-row {
@@ -239,7 +245,10 @@
   }
 
   #shopify-section-{{ section.id }} .sl-hiw__card-body {
-    padding-top: 1.5rem;
+    padding-top: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   #shopify-section-{{ section.id }} .sl-hiw__card-heading {
@@ -248,7 +257,7 @@
     font-style: var(--font-heading-style);
     font-size: 2.4rem;
     line-height: 1.2;
-    margin: 0 0 1.2rem;
+    margin: 0 0 auto;
     color: {{ section.settings.heading_color }};
   }
 
@@ -257,6 +266,7 @@
     font-size: 1.5rem;
     line-height: 1.7;
     color: {{ section.settings.text_color }};
+    padding-top: 2rem;
   }
 
   #shopify-section-{{ section.id }} .sl-hiw__card-text p {
@@ -284,22 +294,21 @@
      STICKY MODE – shared across breakpoints
      ═══════════════════════════════════════════ */
   {% if section.settings.enable_sticky %}
-    #shopify-section-{{ section.id }} .sl-hiw__header {
+    #shopify-section-{{ section.id }} .sl-hiw__bg {
       position: -webkit-sticky;
       position: sticky;
-      top: var(--hiw-sticky-top);
-    }
-
-    #shopify-section-{{ section.id }} .sl-hiw__marquee {
-      position: -webkit-sticky;
-      position: sticky;
-      top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px));
+      inset: auto;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      margin-bottom: -100vh;
     }
 
     #shopify-section-{{ section.id }} .sl-hiw__card {
       position: -webkit-sticky;
       position: sticky;
       box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
+      min-height: 250px;
     }
 
     #shopify-section-{{ section.id }} .sl-hiw__cta {
@@ -324,7 +333,7 @@
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__card {
-        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) + var(--i) * var(--hiw-peek));
+        top: calc(var(--hiw-sticky-top) + var(--i) * var(--hiw-peek));
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__card + .sl-hiw__card {
@@ -332,7 +341,7 @@
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__cta {
-        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) + var(--card-count) * var(--hiw-peek));
+        top: calc(var(--hiw-sticky-top) + (var(--card-count) - 1) * var(--hiw-peek) + var(--hiw-card-h, 300px) + 1rem);
         margin-top: 50vh;
         padding: 1.5rem;
       }
@@ -374,16 +383,17 @@
 
       #shopify-section-{{ section.id }} .sl-hiw__card {
         align-self: start;
-        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px));
+        top: var(--hiw-sticky-top);
         margin-top: calc(var(--i) * 25vh);
         margin-bottom: 40vh;
+        min-height: 280px;
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__cta {
         max-width: var(--page-width, 1200px);
         margin: 0 auto;
-        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) + var(--hiw-card-h, 300px) + 2rem);
-        padding: 2rem 3rem;
+        top: calc(var(--hiw-sticky-top) + var(--hiw-card-h, 300px) + 2rem);
+        padding: 2rem 3rem 40vh;
       }
     {% else %}
       #shopify-section-{{ section.id }} .sl-hiw__header {

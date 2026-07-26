@@ -1,0 +1,650 @@
+{% comment %}
+  EWM Skin Concern Selector
+  Interactive dropdown that reveals matching service recommendation
+{% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .sl-sc {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-sc {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="sl-sc color-{{ section.settings.color_scheme }} gradient">
+  <div class="sl-sc__container page-width">
+    <div class="sl-sc__grid{% if section.settings.image_position == 'right' %} sl-sc__grid--reversed{% endif %}">
+
+      <div class="sl-sc__media" id="sl-sc-media-{{ section.id }}">
+        {% for block in section.blocks %}
+          <div class="sl-sc__media-item{% if forloop.first %} sl-sc__media-item--active{% endif %}" data-sc-media="{{ forloop.index0 }}">
+            {% if block.settings.service_image != blank %}
+              {{
+                block.settings.service_image
+                | image_url: width: 1200
+                | image_tag:
+                  sizes: '(min-width: 750px) 50vw, 100vw',
+                  widths: '375, 550, 750, 1000, 1200',
+                  class: 'sl-sc__img',
+                  loading: 'lazy'
+              }}
+            {% else %}
+              <div class="sl-sc__placeholder">
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="sl-sc__content">
+        {% if section.settings.heading != blank %}
+          <h2 class="sl-sc__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <div class="sl-sc__select-wrap">
+            <select class="sl-sc__select" id="sl-sc-select-{{ section.id }}" aria-label="Select a skin concern">
+              {% for block in section.blocks %}
+                <option value="{{ forloop.index0 }}">{{ block.settings.concern_label }}</option>
+              {% endfor %}
+            </select>
+            <span class="sl-sc__select-arrow" aria-hidden="true">&darr;</span>
+          </div>
+        {% endif %}
+
+        <div class="sl-sc__concerns" id="sl-sc-concerns-{{ section.id }}">
+          {% for block in section.blocks %}
+            <div class="sl-sc__concern{% if forloop.first %} sl-sc__concern--active{% endif %}" data-sc-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+              {% if block.settings.symptoms != blank %}
+                <p class="sl-sc__symptoms">{{ block.settings.symptoms }}</p>
+              {% endif %}
+
+              <div class="sl-sc__service">
+                {% if block.settings.service_subheading != blank %}
+                  <p class="sl-sc__service-sub">{{ block.settings.service_subheading }}</p>
+                {% endif %}
+
+                {% if block.settings.service_title != blank %}
+                  <h3 class="sl-sc__service-title">{{ block.settings.service_title }}</h3>
+                {% endif %}
+
+                {% if block.settings.service_description != blank %}
+                  <p class="sl-sc__service-desc">{{ block.settings.service_description }}</p>
+                {% endif %}
+
+                {% if block.settings.button_text != blank %}
+                  <div class="sl-sc__button-wrap">
+                    <a
+                      {% if block.settings.button_link != blank %}href="{{ block.settings.button_link }}"{% endif %}
+                      class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% endif %}"
+                    >
+                      {{ block.settings.button_text | escape }}
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var sectionId = '{{ section.id }}';
+
+    function init() {
+      var select = document.getElementById('sl-sc-select-' + sectionId);
+      if (!select) return;
+      var concerns = document.getElementById('sl-sc-concerns-' + sectionId);
+      var mediaWrap = document.getElementById('sl-sc-media-' + sectionId);
+      if (!concerns) return;
+
+      select.addEventListener('change', function() {
+        var idx = this.value;
+        var items = concerns.querySelectorAll('[data-sc-index]');
+        var medias = mediaWrap ? mediaWrap.querySelectorAll('[data-sc-media]') : [];
+
+        items.forEach(function(el) {
+          if (el.dataset.scIndex === idx) {
+            el.classList.add('sl-sc__concern--active');
+          } else {
+            el.classList.remove('sl-sc__concern--active');
+          }
+        });
+
+        medias.forEach(function(el) {
+          if (el.dataset.scMedia === idx) {
+            el.classList.add('sl-sc__media-item--active');
+          } else {
+            el.classList.remove('sl-sc__media-item--active');
+          }
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    if (Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.detail.sectionId === sectionId) init();
+      });
+      document.addEventListener('shopify:block:select', function(e) {
+        if (e.detail.sectionId !== sectionId) return;
+        var select = document.getElementById('sl-sc-select-' + sectionId);
+        var blocks = document.querySelectorAll('#sl-sc-concerns-' + sectionId + ' [data-sc-index]');
+        var medias = document.querySelectorAll('#sl-sc-media-' + sectionId + ' [data-sc-media]');
+        blocks.forEach(function(el, i) {
+          if (el.contains(e.target) || el === e.target) {
+            el.classList.add('sl-sc__concern--active');
+            if (select) select.value = el.dataset.scIndex;
+            medias.forEach(function(m) {
+              m.classList.toggle('sl-sc__media-item--active', m.dataset.scMedia === el.dataset.scIndex);
+            });
+          } else {
+            el.classList.remove('sl-sc__concern--active');
+          }
+        });
+      });
+    }
+  })();
+</script>
+
+<style>
+  #shopify-section-{{ section.id }} .sl-sc__container {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  /* ── Image panel ── */
+  #shopify-section-{{ section.id }} .sl-sc__media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__media-item {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__media-item:first-child {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__media-item--active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__placeholder {
+    background: rgb(var(--color-base-background-2));
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__placeholder .placeholder-svg {
+    width: 60%;
+    height: auto;
+    fill: currentColor;
+    opacity: 0.3;
+  }
+
+  /* ── Content panel ── */
+  #shopify-section-{{ section.id }} .sl-sc__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2.5rem;
+    background-color: {{ section.settings.content_background }};
+  }
+
+  /* ── Section heading ── */
+  #shopify-section-{{ section.id }} .sl-sc__heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    line-height: 1.15;
+    margin: 0 0 1.5rem;
+    color: {{ section.settings.heading_color }};
+  }
+
+  /* ── Select dropdown ── */
+  #shopify-section-{{ section.id }} .sl-sc__select-wrap {
+    position: relative;
+    margin-bottom: 0.8rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    padding: 1rem 3rem 1rem 0;
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    color: {{ section.settings.heading_color }};
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid {{ section.settings.select_border_color | default: '#c4c4a0' }};
+    border-radius: 0;
+    cursor: pointer;
+    outline: none;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__select:focus {
+    border-bottom-color: {{ section.settings.heading_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__select-arrow {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.6rem;
+    color: {{ section.settings.heading_color }};
+    pointer-events: none;
+  }
+
+  /* ── Concern blocks ── */
+  #shopify-section-{{ section.id }} .sl-sc__concerns {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__concern {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__concern--active {
+    display: block;
+    animation: slScFadeIn-{{ section.id }} 0.4s ease forwards;
+  }
+
+  @keyframes slScFadeIn-{{ section.id }} {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__symptoms {
+    font-family: var(--font-body-family);
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 2.5rem;
+  }
+
+  /* ── Service recommendation ── */
+  #shopify-section-{{ section.id }} .sl-sc__service-sub {
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: {{ section.settings.subheading_color }};
+    margin: 0 0 0.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__service-title {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    line-height: 1.2;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__service-desc {
+    font-family: var(--font-body-family);
+    font-size: 1.5rem;
+    line-height: 1.7;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__button-wrap {
+    margin-top: 0.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-sc__button-wrap .button {
+    width: 100%;
+  }
+
+  /* ═════════════════════════════════
+     MOBILE
+     ═════════════════════════════════ */
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .sl-sc__media {
+      height: {{ section.settings.mobile_image_height }}px;
+    }
+  }
+
+  /* ═════════════════════════════════
+     DESKTOP
+     ═════════════════════════════════ */
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-sc__container {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+
+    #shopify-section-{{ section.id }} .sl-sc__grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: minmax({{ section.settings.desktop_height }}px, auto);
+    }
+
+    #shopify-section-{{ section.id }} .sl-sc__grid--reversed {
+      direction: rtl;
+    }
+
+    #shopify-section-{{ section.id }} .sl-sc__grid--reversed > * {
+      direction: ltr;
+    }
+
+    #shopify-section-{{ section.id }} .sl-sc__content {
+      padding: 3rem;
+    }
+
+    #shopify-section-{{ section.id }} .sl-sc__button-wrap .button {
+      width: auto;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .sl-sc__content {
+      padding: 4rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Skin Concern Selector",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "I'm experiencing..."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" },
+        { "value": "hxl", "label": "Extra Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "info": "Image side on desktop. On mobile, image always appears above."
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop Min Height",
+      "min": 400,
+      "max": 800,
+      "step": 25,
+      "unit": "px",
+      "default": 550
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "label": "Mobile Image Height",
+      "min": 200,
+      "max": 500,
+      "step": 25,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary (Filled)" },
+        { "value": "secondary", "label": "Secondary (Outline)" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Section Background",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "background-1"
+    },
+    {
+      "type": "color",
+      "id": "content_background",
+      "label": "Content Panel Background",
+      "default": "#f5f0eb"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body Text Color",
+      "default": "#4a4a4a"
+    },
+    {
+      "type": "color",
+      "id": "select_border_color",
+      "label": "Dropdown Border Color",
+      "default": "#c4c4a0"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "concern",
+      "name": "Skin Concern",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Concern"
+        },
+        {
+          "type": "text",
+          "id": "concern_label",
+          "label": "Concern Name",
+          "info": "Appears in the dropdown selector",
+          "default": "Acne & Breakouts"
+        },
+        {
+          "type": "textarea",
+          "id": "symptoms",
+          "label": "Symptoms Description",
+          "default": "Persistent pimples, redness, and inflammation."
+        },
+        {
+          "type": "header",
+          "content": "Recommended Service"
+        },
+        {
+          "type": "text",
+          "id": "service_subheading",
+          "label": "Service Subheading",
+          "default": "TRY OUR"
+        },
+        {
+          "type": "text",
+          "id": "service_title",
+          "label": "Service Title",
+          "default": "Clear Skin Facial"
+        },
+        {
+          "type": "image_picker",
+          "id": "service_image",
+          "label": "Service Image"
+        },
+        {
+          "type": "textarea",
+          "id": "service_description",
+          "label": "Service Description",
+          "default": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions."
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "BOOK HERE"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skin Concern Selector",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "concern",
+          "settings": {
+            "concern_label": "Acne & Breakouts",
+            "symptoms": "Persistent pimples, redness, and inflammation.",
+            "service_subheading": "TRY OUR",
+            "service_title": "Clear Skin Facial",
+            "service_description": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
+            "button_text": "BOOK HERE"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "concern_label": "Dryness & Dehydration",
+            "symptoms": "Tight, flaky skin that feels rough and lacks moisture.",
+            "service_subheading": "TRY OUR",
+            "service_title": "Hydra Glow Facial",
+            "service_description": "A deeply hydrating treatment that replenishes moisture with hyaluronic acid serums and nourishing masks.",
+            "button_text": "BOOK HERE"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "concern_label": "Aging & Fine Lines",
+            "symptoms": "Visible wrinkles, loss of firmness, and uneven texture.",
+            "service_subheading": "TRY OUR",
+            "service_title": "Anti-Aging Renewal",
+            "service_description": "A rejuvenating facial using peptides and retinol to smooth fine lines and restore youthful radiance.",
+            "button_text": "BOOK HERE"
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10
+}
+{% endschema %}

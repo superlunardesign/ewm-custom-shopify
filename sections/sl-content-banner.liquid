@@ -96,8 +96,8 @@
 /* Block: Subheading */
 #shopify-section-{{ section.id }} .sl-cb__subheading {
   font-family: {% if section.settings.subheading_font == 'heading' %}var(--font-heading-family){% else %}var(--font-body-family){% endif %};
-  font-size: {{ section.settings.subheading_size | default: 14 }}px;
-  font-weight: {{ section.settings.subheading_weight | default: '500' }};
+  font-size: {{ section.settings.subheading_size | default: 16 }}px;
+  font-weight: {{ section.settings.subheading_weight | default: '400' }};
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: {{ section.settings.text_color | default: '#f0e8d8' }};
@@ -399,11 +399,11 @@
       "type": "range",
       "id": "subheading_size",
       "label": "Subheading size",
-      "min": 10,
+      "min": 16,
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 14
+      "default": 16
     },
     {
       "type": "select",
@@ -415,7 +415,7 @@
         { "value": "600", "label": "Semi-bold (600)" },
         { "value": "700", "label": "Bold (700)" }
       ],
-      "default": "500"
+      "default": "400"
     },
     {
       "type": "range",
