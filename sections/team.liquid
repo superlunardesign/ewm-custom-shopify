@@ -385,7 +385,7 @@
 
     #shopify-section-{{ section.id }} .sl-team__grid {
       grid-template-columns: {{ section.settings.image_width }}fr {{ section.settings.content_width }}fr;
-      grid-template-rows: minmax({{ section.settings.desktop_height }}px, auto);
+      grid-template-rows: {{ section.settings.desktop_height }}px;
     }
 
     #shopify-section-{{ section.id }} .sl-team__media {
@@ -492,7 +492,7 @@
     {
       "type": "range",
       "id": "desktop_height",
-      "label": "Desktop Min Height",
+      "label": "Desktop Height",
       "min": 400,
       "max": 900,
       "step": 25,
