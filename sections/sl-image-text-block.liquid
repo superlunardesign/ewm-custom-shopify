@@ -67,9 +67,7 @@
           {% if section.settings.show_button and section.settings.button_text != blank %}
             <div class="sl-itb__button-wrap">
               <a
-                {% if section.settings.button_link == blank %}
-                  role="link" aria-disabled="true"
-                {% else %}
+                {% if section.settings.button_link != blank %}
                   href="{{ section.settings.button_link }}"
                 {% endif %}
                 class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% endif %}"

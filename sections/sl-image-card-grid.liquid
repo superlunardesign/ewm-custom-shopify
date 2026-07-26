@@ -66,9 +66,7 @@
             {% if block.settings.button_text != blank %}
               <div class="sl-icg__card-action">
                 <a
-                  {% if block.settings.button_link == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
+                  {% if block.settings.button_link != blank %}
                     href="{{ block.settings.button_link }}"
                   {% endif %}
                   class="sl-icg__card-btn"

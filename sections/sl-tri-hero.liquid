@@ -65,9 +65,7 @@
             {% if section.settings.left_button_text != blank %}
               <div class="sl-tri__btn-wrap">
                 <a
-                  {% if section.settings.left_button_link == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
+                  {% if section.settings.left_button_link != blank %}
                     href="{{ section.settings.left_button_link }}"
                   {% endif %}
                   class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-tri__btn-custom{% endif %}"
@@ -104,9 +102,7 @@
 
           {% if section.settings.top_right_button_text != blank %}
             <a
-              {% if section.settings.top_right_button_link == blank %}
-                role="link" aria-disabled="true"
-              {% else %}
+              {% if section.settings.top_right_button_link != blank %}
                 href="{{ section.settings.top_right_button_link }}"
               {% endif %}
               class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-tri__btn-custom{% endif %}"
@@ -141,9 +137,7 @@
 
           {% if section.settings.bottom_right_button_text != blank %}
             <a
-              {% if section.settings.bottom_right_button_link == blank %}
-                role="link" aria-disabled="true"
-              {% else %}
+              {% if section.settings.bottom_right_button_link != blank %}
                 href="{{ section.settings.bottom_right_button_link }}"
               {% endif %}
               class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-tri__btn-custom{% endif %}"
@@ -161,10 +155,16 @@
 <style>
   /* ── Base ── */
   #shopify-section-{{ section.id }} .sl-tri__container {
-    max-width: var(--page-width, 1200px);
+    {% if section.settings.full_width %}
+      max-width: 100%;
+      padding-left: {{ section.settings.gap }}px;
+      padding-right: {{ section.settings.gap }}px;
+    {% else %}
+      max-width: var(--page-width, 1200px);
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    {% endif %}
     margin: 0 auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
   }
 
   /* ── Panel shared ── */
@@ -221,7 +221,6 @@
     font-size: 1.4rem;
     line-height: 1.5;
     margin-bottom: 1rem;
-    opacity: 0.9;
   }
 
   #shopify-section-{{ section.id }} .sl-tri__heading {
@@ -238,7 +237,6 @@
     line-height: 1.7;
     margin-bottom: 1.5rem;
     max-width: 60ch;
-    opacity: 0.9;
   }
 
   #shopify-section-{{ section.id }} .sl-tri__btn-wrap {
@@ -302,10 +300,12 @@
      Hero left, cards stacked right
      ═══════════════════════════════ */
   @media screen and (min-width: 750px) {
-    #shopify-section-{{ section.id }} .sl-tri__container {
-      padding-left: 3rem;
-      padding-right: 3rem;
-    }
+    {% unless section.settings.full_width %}
+      #shopify-section-{{ section.id }} .sl-tri__container {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+    {% endunless %}
 
     #shopify-section-{{ section.id }} .sl-tri__grid {
       display: grid;
@@ -350,10 +350,12 @@
   }
 
   @media screen and (min-width: 990px) {
-    #shopify-section-{{ section.id }} .sl-tri__container {
-      padding-left: 5rem;
-      padding-right: 5rem;
-    }
+    {% unless section.settings.full_width %}
+      #shopify-section-{{ section.id }} .sl-tri__container {
+        padding-left: 5rem;
+        padding-right: 5rem;
+      }
+    {% endunless %}
 
     #shopify-section-{{ section.id }} .sl-tri__hero-content {
       padding: 4rem;
@@ -382,6 +384,13 @@
         { "value": "stacked", "label": "Hero Top + Cards Below" }
       ],
       "default": "side_by_side"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "info": "Stretch panels edge-to-edge (no page width constraint)",
+      "default": false
     },
     {
       "type": "range",

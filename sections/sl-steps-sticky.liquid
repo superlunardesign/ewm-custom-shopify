@@ -79,9 +79,7 @@
     {% if section.settings.show_button and section.settings.button_text != blank %}
       <div class="sl-hiw__cta">
         <a
-          {% if section.settings.button_link == blank %}
-            role="link" aria-disabled="true"
-          {% else %}
+          {% if section.settings.button_link != blank %}
             href="{{ section.settings.button_link }}"
           {% endif %}
           class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-hiw__btn-custom{% endif %}"
@@ -94,9 +92,15 @@
 </div>
 
 <style>
+  /* ── Ensure sticky works — no overflow clipping on ancestors ── */
+  #shopify-section-{{ section.id }} {
+    overflow: visible !important;
+  }
+
   /* ── Base ── */
   #shopify-section-{{ section.id }} .sl-hiw {
     position: relative;
+    overflow: visible;
   }
 
   /* ── Background ── */
@@ -290,21 +294,18 @@
       inset: 0;
     }
 
-    /* Marquee centered behind cards */
+    /* Marquee at top, peeking above and behind the cards */
     #shopify-section-{{ section.id }} .sl-hiw__marquee {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      transform: translateY(-50%);
+      position: relative;
       z-index: 1;
+      padding-top: 1.5rem;
     }
 
-    /* Content centered */
+    /* Content overlaps bottom of marquee text */
     #shopify-section-{{ section.id }} .sl-hiw__content {
       max-width: var(--page-width, 1200px);
-      margin: 0 auto;
-      padding: 6rem 3rem;
+      margin: -4rem auto 0;
+      padding: 0 3rem 6rem;
     }
 
     /* Card grid */
@@ -326,7 +327,7 @@
 
   @media screen and (min-width: 990px) {
     #shopify-section-{{ section.id }} .sl-hiw__content {
-      padding: 8rem 5rem;
+      padding: 0 5rem 8rem;
     }
   }
 </style>
