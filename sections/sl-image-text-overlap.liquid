@@ -57,39 +57,39 @@
       </div>
 
       <div class="sl-ito__content">
-        <div class="sl-ito__content-top">
-          {% if section.settings.subheading != blank %}
-            <p class="sl-ito__subheading">{{ section.settings.subheading }}</p>
-          {% endif %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'subheading' %}
+              {% if block.settings.text != blank %}
+                <p class="sl-ito__subheading" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+              {% endif %}
 
-          {% if section.settings.heading != blank %}
-            <h2 class="sl-ito__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
-          {% endif %}
-        </div>
+            {% when 'heading' %}
+              {% if block.settings.text != blank %}
+                <h2 class="sl-ito__heading {{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+              {% endif %}
 
-        <div class="sl-ito__content-bottom">
-          {% if section.settings.text != blank %}
-            <div class="sl-ito__text rte">{{ section.settings.text }}</div>
-          {% endif %}
+            {% when 'text' %}
+              {% if block.settings.text != blank %}
+                <div class="sl-ito__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+              {% endif %}
 
-          {% if section.settings.show_button and section.settings.button_text != blank %}
-            <div class="sl-ito__button-wrap">
-              <a
-                {% if section.settings.button_link != blank %}
-                  href="{{ section.settings.button_link }}"
-                {% endif %}
-                class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% endif %}"
-              >
-                {{ section.settings.button_text | escape }}
-              </a>
-            </div>
-          {% endif %}
-        </div>
+            {% when 'button' %}
+              {% if block.settings.text != blank %}
+                <div class="sl-ito__button-wrap" {{ block.shopify_attributes }}>
+                  <a
+                    {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
+                    class="button{% if block.settings.style == 'secondary' %} button--secondary{% endif %}"
+                  >
+                    {{ block.settings.text | escape }}
+                  </a>
+                </div>
+              {% endif %}
 
-        {% assign service_links = section.blocks | where: "type", "service_link" %}
-        {% if service_links.size > 0 %}
-          <div class="sl-ito__service-links">
-            {% for block in service_links %}
+            {% when 'spacer' %}
+              <div class="sl-ito__spacer" style="height: {{ block.settings.height }}px;" {{ block.shopify_attributes }}></div>
+
+            {% when 'service_link' %}
               <a
                 href="{{ block.settings.link | default: '#' }}"
                 class="sl-ito__service-link"
@@ -103,9 +103,8 @@
                 <span class="sl-ito__service-link-text">{{ block.settings.text }}</span>
                 <span class="sl-ito__service-link-arrow">&rarr;</span>
               </a>
-            {% endfor %}
-          </div>
-        {% endif %}
+          {% endcase %}
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -246,12 +245,8 @@
     background-color: {{ section.settings.content_background }};
   }
 
-  #shopify-section-{{ section.id }} .sl-ito__content-top {
-    {% if section.settings.spread_content %}
-      margin-bottom: 2rem;
-    {% else %}
-      margin-bottom: 1.5rem;
-    {% endif %}
+  #shopify-section-{{ section.id }} .sl-ito__spacer {
+    display: block;
   }
 
   #shopify-section-{{ section.id }} .sl-ito__subheading {
@@ -269,7 +264,7 @@
     font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
     line-height: 1.15;
-    margin-bottom: 0;
+    margin-bottom: 1.5rem;
     color: {{ section.settings.heading_color }};
   }
 
@@ -294,10 +289,6 @@
   }
 
   /* Service Links */
-  #shopify-section-{{ section.id }} .sl-ito__service-links {
-    margin-top: 1.5rem;
-  }
-
   #shopify-section-{{ section.id }} .sl-ito__service-link {
     display: flex;
     align-items: center;
@@ -486,76 +477,14 @@
     },
     {
       "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "info": "Smaller uppercase text above the heading"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Therapy Designed for Women Who Do It All"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "label": "Heading Size",
-      "options": [
-        { "value": "h2", "label": "Small" },
-        { "value": "h1", "label": "Medium" },
-        { "value": "h0", "label": "Large" },
-        { "value": "hxl", "label": "Extra Large" },
-        { "value": "hxxl", "label": "Extra Extra Large" }
-      ],
-      "default": "h1"
+      "content": "Content Layout"
     },
     {
       "type": "checkbox",
       "id": "spread_content",
       "label": "Spread content vertically",
-      "info": "Pushes heading to the top and body text + button to the bottom. When off, all content is grouped together in the center.",
+      "info": "Pushes first block to top and last block to bottom of the text area. When off, all content is grouped together in the center.",
       "default": false
-    },
-    {
-      "type": "richtext",
-      "id": "text",
-      "label": "Body Text",
-      "default": "<p>Share details about your services, approach, or expertise. This text area supports rich formatting so you can add emphasis where needed.</p>"
-    },
-    {
-      "type": "header",
-      "content": "Button"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_button",
-      "label": "Show Button",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "LEARN MORE ABOUT MY APPROACH"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button Link"
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button Style",
-      "options": [
-        { "value": "primary", "label": "Primary (Filled)" },
-        { "value": "secondary", "label": "Secondary (Outline)" }
-      ],
-      "default": "secondary"
     },
     {
       "type": "header",
@@ -744,6 +673,97 @@
   ],
   "blocks": [
     {
+      "type": "subheading",
+      "name": "Subheading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Your Heading Here"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Heading size",
+          "options": [
+            { "value": "h2", "label": "Small" },
+            { "value": "h1", "label": "Medium" },
+            { "value": "h0", "label": "Large" },
+            { "value": "hxl", "label": "Extra Large" },
+            { "value": "hxxl", "label": "Extra Extra Large" }
+          ],
+          "default": "h1"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Share details about your services, approach, or expertise.</p>"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Button text",
+          "default": "LEARN MORE"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Button style",
+          "options": [
+            { "value": "primary", "label": "Primary (Filled)" },
+            { "value": "secondary", "label": "Secondary (Outline)" }
+          ],
+          "default": "secondary"
+        }
+      ]
+    },
+    {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": [
+        {
+          "type": "range",
+          "id": "height",
+          "label": "Height",
+          "min": 4,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 20
+        }
+      ]
+    },
+    {
       "type": "service_link",
       "name": "Service Link",
       "settings": [
@@ -782,7 +802,13 @@
   "presets": [
     {
       "name": "EWM Image + Text Overlap",
-      "category": "Custom"
+      "category": "Custom",
+      "blocks": [
+        { "type": "subheading", "settings": { "text": "Our Services" } },
+        { "type": "heading", "settings": { "text": "Therapy Designed for Women Who Do It All", "size": "h1" } },
+        { "type": "text", "settings": { "text": "<p>Share details about your services, approach, or expertise. This text area supports rich formatting so you can add emphasis where needed.</p>" } },
+        { "type": "button", "settings": { "text": "LEARN MORE ABOUT MY APPROACH", "style": "secondary" } }
+      ]
     }
   ]
 }
