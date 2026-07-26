@@ -22,7 +22,6 @@
     {% if section.settings.subheading != blank %}
       <p class="sl-sc__subheading sl-sc__subheading--mobile">{{ section.settings.subheading }}</p>
     {% endif %}
-
     <div class="sl-sc__grid{% if section.settings.image_position == 'right' %} sl-sc__grid--reversed{% endif %}">
 
       <div class="sl-sc__media" id="sl-sc-media-{{ section.id }}">
@@ -50,6 +49,9 @@
       <div class="sl-sc__content">
         {% if section.settings.subheading != blank %}
           <p class="sl-sc__subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+        {% if section.settings.subline != blank %}
+          <p class="sl-sc__subline">{{ section.settings.subline }}</p>
         {% endif %}
         {% if section.settings.heading != blank %}
           <h2 class="sl-sc__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
@@ -257,10 +259,19 @@
     margin: 0 0 0.8rem;
   }
 
+  /* ── Subline ── */
+  #shopify-section-{{ section.id }} .sl-sc__subline {
+    font-family: var(--font-body-family);
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 0.5rem;
+  }
+
   #shopify-section-{{ section.id }} .sl-sc__subheading--mobile {
     display: block;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   #shopify-section-{{ section.id }} .sl-sc__content > .sl-sc__subheading {
@@ -452,6 +463,13 @@
       "label": "Subheading",
       "default": "Not sure what's right for you?",
       "info": "Appears above the heading. On mobile, shows above the image."
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Subline Text",
+      "default": "Select your skin concern below",
+      "info": "Paragraph text between the subheading and heading"
     },
     {
       "type": "text",

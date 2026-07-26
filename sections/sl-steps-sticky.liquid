@@ -351,14 +351,20 @@
     }
 
     {% if section.settings.enable_sticky %}
+      /* Dissolve the cards wrapper so all sticky elements share .sl-hiw
+         as their containing block — fixes card 3 + CTA sticking together */
       #shopify-section-{{ section.id }} .sl-hiw__cards {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        display: contents;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__card {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+        z-index: calc(20 + var(--i)) !important;
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__card-scroll-spacer {
-        height: 65vh;
-        pointer-events: none;
+        display: none;
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__card {
@@ -370,8 +376,11 @@
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__cta {
-        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + (var(--card-count) - 1) * var(--hiw-peek) + var(--hiw-card-h, 300px) + 1rem);
-        margin-top: 20vh;
+        top: min(
+          calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + (var(--card-count) - 1) * var(--hiw-peek) + var(--hiw-card-h, 300px) + 1rem),
+          calc(100dvh - 80px)
+        );
+        margin-top: 50vh;
         padding: 1.5rem;
       }
     {% else %}
