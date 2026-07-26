@@ -93,6 +93,8 @@
         "atc_border_width": 0,
         "atc_border_color": "#ffffff",
         "atc_radius": 0,
+        "button_font": "heading",
+        "button_font_size": 13,
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -416,6 +418,62 @@
         "auto_scroll_speed": 0.5
       }
     },
+    "sl_testimonial_slider_8rbkeA": {
+      "type": "sl-testimonial-slider",
+      "blocks": {
+        "testimonial_qCMdCf": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "\"Hands down the best place to get waxed. Hopefully I get to experience the facials soon because this place is seriously the best. I was nervous getting waxed as a curvy girl but Yanelli made me feel super comfortable.\"",
+            "author": "Joann T."
+          }
+        },
+        "testimonial_WUzb89": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "As an esthetician of almost 2 decades and business owner, I am blown away by Shannon. Every detail is thought out and intentional. From the moment you schedule, to your service, to post service. She also checks in to see how things are going, and if there are any questions or any adjustments that need to be done.",
+            "author": "Sarah M."
+          }
+        },
+        "testimonial_K7Gw7m": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Professional, knowledgeable, and truly caring. I trust her completely with my skincare routine and recommend her to everyone.",
+            "author": "Jessica R."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_qCMdCf",
+        "testimonial_WUzb89",
+        "testimonial_K7Gw7m"
+      ],
+      "name": "Testimonial Slider",
+      "settings": {
+        "bg_color": "#f5f0eb",
+        "content_width": 900,
+        "quote_font": "heading",
+        "quote_size": 32,
+        "quote_size_mobile": 24,
+        "quote_line_height": 1.4,
+        "quote_color": "#1a1a1a",
+        "author_size": 16,
+        "author_style": "italic",
+        "author_color": "#4a4a4a",
+        "auto_slide": true,
+        "reading_time": 8,
+        "show_arrows": true,
+        "arrow_size": 24,
+        "arrow_color": "#1a1a1a",
+        "show_dots": false,
+        "dot_size": 8,
+        "dot_color": "#1a1a1a",
+        "show_progress_bar": true,
+        "progress_bar_color": "#1a1a1a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
     "sl_skin_concern_hzeVEG": {
       "type": "sl-skin-concern",
       "blocks": {
@@ -618,6 +676,8 @@
         "atc_border_width": 0,
         "atc_border_color": "#ffffff",
         "atc_radius": 0,
+        "button_font": "heading",
+        "button_font_size": 13,
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -866,6 +926,8 @@
         "atc_border_width": 0,
         "atc_border_color": "#ffffff",
         "atc_radius": 0,
+        "button_font": "heading",
+        "button_font_size": 13,
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -1105,6 +1167,7 @@
     "sl_content_banner_FTN8R4",
     "sl_image_text_overlap_9rRV4Y",
     "before_and_afters_KfRpJn",
+    "sl_testimonial_slider_8rbkeA",
     "sl_skin_concern_hzeVEG",
     "sl_steps_sticky_WwKLzM",
     "sl_image_text_block_eXcmtF",
