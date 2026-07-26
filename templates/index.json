@@ -525,7 +525,7 @@
       ],
       "name": "Skin Concern Selector",
       "settings": {
-        "subheading": "Not sure what's right for you? <br><p style=\"text-transform:none;\">Select your skin concern below</p>",
+        "subheading": "Not sure what's right for you? <br><p style=\"text-transform:none; text-align:center\">Select your skin concern below</p>",
         "heading": "I'm experiencing...",
         "heading_size": "h1",
         "image_position": "left",
