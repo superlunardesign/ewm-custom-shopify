@@ -1531,7 +1531,7 @@ label.deal-lable.product-label { min-width: initial; margin: 0; display: inline-
 
 /*available and sub and enquiry form */
 .inventory-form__label {   margin-top: 0rem; 
-    background-color: #F3F0F8;
+    background-color: var(--gradient-base-background-3);
  /*display: flex; flex-direction: column;*/}
 /* .total-price__container{  display: flex; flex-direction: column;} */
 /* .inventory-form__label label.form__label, .sub-total p.product-label {  margin: 0;  min-width: 140px;  display: inline-block;  font-size: 2.2rem;  font-weight: 700;} */

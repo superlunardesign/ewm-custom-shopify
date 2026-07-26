@@ -92,7 +92,7 @@
     {% if section.settings.corner_image_top != blank %}
       background-image: url('{{ section.settings.corner_image_top | image_url: width: 500 }}');
     {% else %}
-      background-color: #f0f0f0;
+      background-color: var(--gradient-base-background-3);
     {% endif %}
     width: auto;
     height: 30vh;
@@ -166,7 +166,7 @@
     {% if section.settings.corner_image_bottom != blank %}
       background-image: url('{{ section.settings.corner_image_bottom | image_url: width: 500 }}');
     {% else %}
-      background-color: #f0f0f0;
+      background-color: var(--gradient-base-background-3);
     {% endif %}
     width: auto;
     height: 30vh;

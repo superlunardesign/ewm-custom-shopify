@@ -437,7 +437,7 @@ noscript .localization-selector.link {
     width: 2px;
     height: 18px;
     position: absolute;
-    background: #fff;
+    background: var(--gradient-base-background-1);
     right: -21px;
     top: 13px;
 } */
@@ -649,7 +649,7 @@ footer .banner__media.media img {  z-index:0;}
 .footer-style3 .newsletter-form__button.icon:hover svg{color:var(--gradient-base-background-2);}
 .footer-style3 .newsletter-form__button.icon:hover { border-bottom: 2px solid var(--gradient-base-background-2);}.newsletter-form__button:focus, .newsletter-form__button:hover
 .newsletter-form__button.button:focus, .newsletter-form__button.button:hover{background:var(--gradient-base-background-2);}
-.newsletter-form__button.button{background:var(var(--gradient-base-accent-1)); color:var(--gradient-base-accent-2);}
+.newsletter-form__button.button{background:var(--gradient-base-accent-1); color:var(--gradient-base-accent-2);}
 .footer-block__details-content.footer-block--newsletter li.list-social__item {
     display: inline-block;
     margin-right: 20px;

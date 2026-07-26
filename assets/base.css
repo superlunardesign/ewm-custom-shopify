@@ -567,7 +567,7 @@ blockquote {
 
 .caption-with-letter-spacing--medium {
   font-size: 1.8rem;
-  letter-spacing: 1rem;
+  letter-spacing: 0.1rem;
   color: var(--gradient-base-accent-3);
   font-weight: 600;
   font-family: var(--font-body-family);
@@ -3310,7 +3310,7 @@ details-disclosure > details {
 
 /* product page new tag section */
 .ribbon {
-    background-color: #7DE3C8;
+    background-color: var(--gradient-base-accent-1);
     transform: rotate(320deg);
     z-index: 999;
     width: 150px;
@@ -3326,7 +3326,7 @@ details-disclosure > details {
 }
 
 .ribbon:before {
-    border-color: #53dab6 #53dab6 #53dab6 transparent;
+    border-color: var(--gradient-base-accent-1) var(--gradient-base-accent-1) var(--gradient-base-accent-1) transparent;
     left: -25px;
     border-width: 17px;
 }
@@ -3342,7 +3342,7 @@ details-disclosure > details {
 }
 
 .ribbon:after {
-    border-color: #53dab6 transparent #53dab6 #53dab6;
+    border-color: var(--gradient-base-accent-1) transparent var(--gradient-base-accent-1) var(--gradient-base-accent-1);
     right: -25px;
     border-width: 17px;
 }
@@ -3416,11 +3416,11 @@ svg{width:1.6rem;height:1.6rem;}
 .card.article-card .card__heading a:before {display: none;}
 
 .empty_svg_placeholder {
-    background: #E6E6E6;
+    background: var(--gradient-base-background-3);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #bbbbbb;
+    color: var(--color-text-muted);
     font-family: sans-serif;
     font-size: 2.5rem;
   width: 100%;

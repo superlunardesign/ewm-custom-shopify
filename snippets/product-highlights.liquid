@@ -82,7 +82,7 @@ TEST
     align-items: center;
     gap: 10px;
     padding: 10px 18px 10px 10px;
-    background: #f5f5f5;
+    background: var(--gradient-base-background-3);
     border: 1px solid transparent;
     border-radius: 30px;
     font-size: 0.95rem;
@@ -92,7 +92,7 @@ TEST
   }
 
   .highlight-item:hover {
-    background: #efefef;
+    background: var(--gradient-base-accent-3);
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
@@ -100,7 +100,7 @@ TEST
   .highlight-icon {
     width: 36px;
     height: 36px;
-    background: #c8e6c9;
+    background: var(--gradient-base-accent-3);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -110,7 +110,7 @@ TEST
 
   .highlight-icon i {
     font-size: 16px;
-    color: #2e7d32;
+    color: var(--gradient-base-accent-1);
   }
 
   .highlight-text {
@@ -121,40 +121,40 @@ TEST
 
   /* Color variations for different highlight types */
   .highlight-item:has(.fa-smile) .highlight-icon {
-    background: #e3f2fd;
+    background: #e8e4ef;
   }
   .highlight-item:has(.fa-smile) .highlight-icon i {
-    color: #1976d2;
+    color: var(--color-base-accent-8);
   }
 
   .highlight-item:has(.fa-calendar-check) .highlight-icon {
-    background: #f3e5f5;
+    background: #e8e4ef;
   }
   .highlight-item:has(.fa-calendar-check) .highlight-icon i {
-    color: #7b1fa2;
+    color: var(--color-base-accent-8);
   }
 
   .highlight-item:has(.fa-user-md) .highlight-icon {
-    background: #e8f5e9;
+    background: var(--gradient-base-accent-3);
   }
   .highlight-item:has(.fa-user-md) .highlight-icon i {
-    color: #388e3c;
+    color: var(--gradient-base-accent-1);
   }
 
   .highlight-item:has(.fa-paw) .highlight-icon {
-    background: #fff3e0;
+    background: var(--gradient-base-accent-3);
   }
   .highlight-item:has(.fa-paw) .highlight-icon i {
-    color: #f57c00;
+    color: var(--gradient-base-accent-1);
   }
 
   .highlight-item:has(.fa-leaf) .highlight-icon,
   .highlight-item:has(.fa-seedling) .highlight-icon {
-    background: #c8e6c9;
+    background: var(--gradient-base-accent-3);
   }
   .highlight-item:has(.fa-leaf) .highlight-icon i,
   .highlight-item:has(.fa-seedling) .highlight-icon i {
-    color: #2e7d32;
+    color: var(--gradient-base-accent-1);
   }
 
   /* Mobile responsive */

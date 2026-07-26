@@ -24,7 +24,7 @@ background-color: {{ section.settings.background_color }};}
     {% if section.settings.top_left_image != blank %}
       background-image: url('{{ section.settings.top_left_image | image_url: width: 400 }}');
     {% else %}
-      background-color: #f0f0f0;
+      background-color: var(--gradient-base-background-3);
     {% endif %}
     width: 10vw;
     height: 150px;
@@ -60,7 +60,7 @@ background-color: {{ section.settings.background_color }};}
     {% if section.settings.center_image != blank %}
       background-image: url('{{ section.settings.center_image | image_url: width: 800 }}');
     {% else %}
-      background-color: #f0f0f0;
+      background-color: var(--gradient-base-background-3);
     {% endif %}
     width: 20vw;
     height: auto;
@@ -97,7 +97,7 @@ background-color: {{ section.settings.background_color }};}
     {% if section.settings.bottom_right_image != blank %}
       background-image: url('{{ section.settings.bottom_right_image | image_url: width: 400 }}');
     {% else %}
-      background-color: #f0f0f0;
+      background-color: var(--gradient-base-background-3);
     {% endif %}
     width: 10vw;
     height: 150px;

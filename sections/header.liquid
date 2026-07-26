@@ -301,8 +301,8 @@ margin-top:0% !important;
 @media screen and (min-width: 750px) {
   .dt-nav .sub-menu-lists {
     background: #fff;
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
   }
 }
 
@@ -469,7 +469,7 @@ margin-top:0% !important;
   list-style: none;
   margin: 0;
   padding: 0;
-  background: #fafafa;
+  background: var(--gradient-base-background-3);
 }
 
 .sl-drawer-submenu li a {
@@ -479,7 +479,7 @@ margin-top:0% !important;
   color: #333;
   text-decoration: none;
   font-family: var(--font-body-family);
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--gradient-base-background-3);
 }
 
 .sl-drawer-submenu li a:hover {
@@ -596,7 +596,7 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
   min-width: 220px;
   background: #fff;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--color-border);
   padding: 8px 0;
   opacity: 0;
   visibility: hidden;
@@ -725,7 +725,7 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
   display: block;
   font-family: var(--font-body-family);
   font-size: 13px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-top: 2px;
 }
 
@@ -734,7 +734,7 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
   display: grid;
   grid-template-columns: repeat(2, minmax(0, max-content));
   gap: 0 32px;
-  border-left: 1px solid #e5e5e5;
+  border-left: 1px solid var(--color-border);
   padding-left: 32px;
 }
 
@@ -800,7 +800,7 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
 
 /* Promo block (right) */
 .sl-mega-menu__promo {
-  border-left: 1px solid #e5e5e5;
+  border-left: 1px solid var(--color-border);
   padding-left: 32px;
 }
 
@@ -837,13 +837,13 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .sl-mega-menu__promo-subtext {
   font-family: var(--font-body-family);
   font-size: 12px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-top: 4px;
   line-height: 1.4;
 }
