@@ -19,6 +19,7 @@
       "name": "Tri Banner",
       "settings": {
         "grid_layout": "side_by_side",
+        "full_width": true,
         "desktop_height": 600,
         "gap": 0,
         "border_radius": 0,
