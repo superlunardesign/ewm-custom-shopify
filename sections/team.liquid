@@ -368,7 +368,15 @@
   /* ═══ MOBILE ═══ */
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .sl-team__media {
-      min-height: {{ section.settings.mobile_image_height }}px;
+      height: {{ section.settings.mobile_image_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-team__content {
+      position: relative;
+      z-index: 1;
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+      margin-top: -{{ section.settings.mobile_overlap }}px;
     }
 
     #shopify-section-{{ section.id }} .sl-team__bio {
@@ -503,11 +511,22 @@
       "type": "range",
       "id": "mobile_image_height",
       "label": "Mobile Image Height",
-      "min": 250,
-      "max": 600,
+      "min": 200,
+      "max": 500,
       "step": 25,
       "unit": "px",
-      "default": 400
+      "default": 350
+    },
+    {
+      "type": "range",
+      "id": "mobile_overlap",
+      "label": "Mobile Content Overlap",
+      "info": "How far the content panel pulls up over the image",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "default": 60
     },
     {
       "type": "range",
