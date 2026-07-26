@@ -28,7 +28,7 @@
         "hero_ratio": 5,
         "card_ratio": 3,
         "hide_cards_mobile": true,
-        "mobile_hero_height": 400,
+        "mobile_hero_height": 300,
         "mobile_card_height": 250,
         "hero_bg_type": "image",
         "left_image": "shopify://shop_images/BrandingPhotography-C_Mae-5763.jpg",
