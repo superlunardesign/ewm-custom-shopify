@@ -107,25 +107,20 @@
     html, body {
       overflow-x: clip !important;
     }
-    #shopify-section-{{ section.id }} {
-      position: relative;
-      z-index: 0;
-      overflow: visible !important;
-    }
-    #shopify-section-{{ section.id }} ~ .shopify-section {
-      position: relative;
-      z-index: 1;
-    }
   {% endif %}
 
+  /* ── Section wrapper ── */
   #shopify-section-{{ section.id }} .sl-hiw {
     position: relative;
-    overflow: visible;
+    {% if section.settings.enable_sticky %}
+      overflow: clip;
+    {% endif %}
   }
 
   /* ── Background ── */
   #shopify-section-{{ section.id }} .sl-hiw__bg {
-    position: relative;
+    position: absolute;
+    inset: 0;
     z-index: 0;
   }
 
@@ -286,17 +281,9 @@
   }
 
   /* ═══════════════════════════════════════════
-     STICKY MODE – shared
+     STICKY MODE – shared across breakpoints
      ═══════════════════════════════════════════ */
   {% if section.settings.enable_sticky %}
-    #shopify-section-{{ section.id }} .sl-hiw__bg {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      margin-bottom: -100vh;
-    }
-
     #shopify-section-{{ section.id }} .sl-hiw__header {
       position: -webkit-sticky;
       position: sticky;
@@ -314,6 +301,11 @@
       position: sticky;
       box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
     }
+
+    #shopify-section-{{ section.id }} .sl-hiw__cta {
+      position: -webkit-sticky;
+      position: sticky;
+    }
   {% endif %}
 
   /* ═══════════════════════════════════════════
@@ -328,7 +320,7 @@
       #shopify-section-{{ section.id }} .sl-hiw__cards {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
-        padding-bottom: 30vh;
+        padding-bottom: 60vh;
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__card {
@@ -340,18 +332,11 @@
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__cta {
-        position: -webkit-sticky;
-        position: sticky;
         top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) + var(--card-count) * var(--hiw-peek));
         margin-top: 50vh;
         padding: 1.5rem;
       }
     {% else %}
-      #shopify-section-{{ section.id }} .sl-hiw__bg {
-        position: absolute;
-        inset: 0;
-      }
-
       #shopify-section-{{ section.id }} .sl-hiw__marquee {
         padding: 1.5rem 0;
       }
@@ -382,7 +367,6 @@
         max-width: var(--page-width, 1200px);
         margin: 0 auto;
         padding: 0 3rem;
-        padding-bottom: 40vh;
         display: grid;
         grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
         gap: {{ section.settings.card_gap }}px;
@@ -392,17 +376,16 @@
         align-self: start;
         top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px));
         margin-top: calc(var(--i) * 25vh);
+        margin-bottom: 40vh;
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__cta {
-        padding-top: 2.5rem;
+        max-width: var(--page-width, 1200px);
+        margin: 0 auto;
+        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) + var(--hiw-card-h, 300px) + 2rem);
+        padding: 2rem 3rem;
       }
     {% else %}
-      #shopify-section-{{ section.id }} .sl-hiw__bg {
-        position: absolute;
-        inset: 0;
-      }
-
       #shopify-section-{{ section.id }} .sl-hiw__header {
         padding: 2rem 3rem 1rem;
       }
@@ -439,8 +422,12 @@
       if (!el) return;
       var header = el.querySelector('.sl-hiw__header');
       var marquee = el.querySelector('.sl-hiw__marquee');
+      var cards = el.querySelectorAll('.sl-hiw__card');
       el.style.setProperty('--hiw-header-h', (header ? header.offsetHeight : 0) + 'px');
       el.style.setProperty('--hiw-marquee-h', (marquee ? marquee.offsetHeight : 0) + 'px');
+      var maxH = 0;
+      cards.forEach(function(c) { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
+      el.style.setProperty('--hiw-card-h', maxH + 'px');
     }
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', measure);
@@ -564,7 +551,7 @@
     {
       "type": "select",
       "id": "columns",
-      "label": "Columns (Desktop, non-sticky)",
+      "label": "Columns (Desktop)",
       "options": [
         { "value": "2", "label": "2 Columns" },
         { "value": "3", "label": "3 Columns" },
@@ -575,7 +562,7 @@
     {
       "type": "range",
       "id": "card_gap",
-      "label": "Gap Between Cards (non-sticky)",
+      "label": "Gap Between Cards",
       "min": 0,
       "max": 40,
       "step": 4,
@@ -597,7 +584,7 @@
       "type": "range",
       "id": "peek_height",
       "label": "Card Peek Height",
-      "info": "How much of each card's header peeks through when stacked",
+      "info": "How much of each card's header peeks through when stacked (mobile only)",
       "min": 40,
       "max": 80,
       "step": 2,
