@@ -85,6 +85,27 @@
             </div>
           {% endif %}
         </div>
+
+        {% assign service_links = section.blocks | where: "type", "service_link" %}
+        {% if service_links.size > 0 %}
+          <div class="sl-ito__service-links">
+            {% for block in service_links %}
+              <a
+                href="{{ block.settings.link | default: '#' }}"
+                class="sl-ito__service-link"
+                style="
+                  --sl-link-border: {{ block.settings.border_color }};
+                  --sl-link-text: {{ block.settings.text_color }};
+                  --sl-link-arrow: {{ block.settings.arrow_color }};
+                "
+                {{ block.shopify_attributes }}
+              >
+                <span class="sl-ito__service-link-text">{{ block.settings.text }}</span>
+                <span class="sl-ito__service-link-arrow">&rarr;</span>
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -270,6 +291,47 @@
 
   #shopify-section-{{ section.id }} .sl-ito__button-wrap {
     margin-top: 0.5rem;
+  }
+
+  /* Service Links */
+  #shopify-section-{{ section.id }} .sl-ito__service-links {
+    margin-top: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__service-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--sl-link-border, #ccc);
+    background: transparent;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__service-link:last-child {
+    border-bottom: 1px solid var(--sl-link-border, #ccc);
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__service-link-text {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-size: 1.6rem;
+    color: var(--sl-link-text, #1a1a1a);
+    transition: transform 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__service-link-arrow {
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--sl-link-arrow, #1a1a1a);
+    transition: transform 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__service-link:hover .sl-ito__service-link-text,
+  #shopify-section-{{ section.id }} .sl-ito__service-link:hover .sl-ito__service-link-arrow {
+    transform: scale(1.05);
   }
 
   /* Animation */
@@ -678,6 +740,43 @@
       "step": 4,
       "unit": "px",
       "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service_link",
+      "name": "Service Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Link Text",
+          "default": "Brazilian Wax"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color",
+          "default": "#cccccc"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#1a1a1a"
+        },
+        {
+          "type": "color",
+          "id": "arrow_color",
+          "label": "Arrow Color",
+          "default": "#1a1a1a"
+        }
+      ]
     }
   ],
   "presets": [
