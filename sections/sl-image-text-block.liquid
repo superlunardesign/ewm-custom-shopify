@@ -182,13 +182,21 @@
   #shopify-section-{{ section.id }} .sl-itb__content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    {% if section.settings.spread_content %}
+      justify-content: space-between;
+    {% else %}
+      justify-content: center;
+    {% endif %}
     padding: 2.5rem;
     background-color: {{ section.settings.content_background }};
   }
 
   #shopify-section-{{ section.id }} .sl-itb__content-top {
-    margin-bottom: 2rem;
+    {% if section.settings.spread_content %}
+      margin-bottom: 2rem;
+    {% else %}
+      margin-bottom: 1.5rem;
+    {% endif %}
   }
 
   #shopify-section-{{ section.id }} .sl-itb__subheading {
@@ -384,6 +392,13 @@
         { "value": "hxxl", "label": "Extra Extra Large" }
       ],
       "default": "h1"
+    },
+    {
+      "type": "checkbox",
+      "id": "spread_content",
+      "label": "Spread content vertically",
+      "info": "Pushes heading to the top and body text + button to the bottom. When off, all content is grouped together in the center.",
+      "default": true
     },
     {
       "type": "richtext",
