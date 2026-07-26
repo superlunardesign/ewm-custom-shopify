@@ -116,6 +116,31 @@
         "scroll_speed": 2
       }
     },
+    "sl_image_text_block_P3d6y8": {
+      "type": "sl-image-text-block",
+      "name": "EWM Image + Text Block",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5250.jpg",
+        "image_position": "left",
+        "subheading": "",
+        "heading": "1:1 Therapy Sessions",
+        "heading_size": "h1",
+        "text": "<p>Share details about your services, approach, or expertise. This text area supports rich formatting so you can add emphasis where needed.</p>",
+        "show_button": true,
+        "button_text": "EXPLORE MY APPROACH",
+        "button_link": "shopify://products/10-advanced-acne-med",
+        "button_style": "primary",
+        "color_scheme": "background-1",
+        "enable_anchor": false,
+        "anchor_id": "",
+        "scroll_offset": 80,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "skin_concern_LUXc4Q": {
       "type": "skin-concern",
       "blocks": {
@@ -643,6 +668,7 @@
     "tri_banner_LUhYAg",
     "product_listing_RWTrNz",
     "scrolling_offers_YAxCQz",
+    "sl_image_text_block_P3d6y8",
     "skin_concern_LUXc4Q",
     "how_it_works_jcAQM4",
     "testimonials_carousel_UfLK7R",
