@@ -313,6 +313,13 @@
         "image_position": "left",
         "desktop_height": 550,
         "mobile_height": 350,
+        "image_fit": "cover",
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "image_width": 3,
+        "content_width": 2,
+        "overlap_amount": 80,
+        "vertical_inset": 30,
         "spread_content": false,
         "color_scheme": "background-1",
         "content_background": "#f5f0eb",
@@ -332,6 +339,8 @@
         "enable_animation": true,
         "animation_duration": 600,
         "animation_delay": 200,
+        "enable_sticky": false,
+        "sticky_z_index": 2,
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -526,6 +535,7 @@
       "name": "Skin Concern Selector",
       "settings": {
         "subheading": "Not sure what's right for you?",
+        "subline": "Select your skin concern below",
         "heading": "I'm experiencing...",
         "heading_size": "h1",
         "image_position": "left",
@@ -613,7 +623,7 @@
         "button_style": "custom",
         "button_bg_color": "#8a9979",
         "button_text_color": "#ffffff",
-        "padding_top": 0,
+        "padding_top": 20,
         "padding_bottom": 0
       }
     },
@@ -625,6 +635,9 @@
         "image_position": "left",
         "desktop_height": 400,
         "mobile_height": 200,
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "image_fit": "cover",
         "subheading": "Struggling With Acne?",
         "heading": "ENROLL IN ACNE BOOTCAMP",
         "heading_size": "h0",
@@ -645,6 +658,8 @@
         "enable_animation": true,
         "animation_duration": 600,
         "animation_delay": 200,
+        "enable_sticky": false,
+        "sticky_z_index": 2,
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -693,6 +708,13 @@
         "image_position": "left",
         "desktop_height": 550,
         "mobile_height": 350,
+        "image_fit": "cover",
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "image_width": 3,
+        "content_width": 2,
+        "overlap_amount": 80,
+        "vertical_inset": 30,
         "spread_content": true,
         "color_scheme": "background-1",
         "content_background": "#f5f0eb",
@@ -712,6 +734,8 @@
         "enable_animation": true,
         "animation_duration": 600,
         "animation_delay": 200,
+        "enable_sticky": false,
+        "sticky_z_index": 2,
         "padding_top": 36,
         "padding_bottom": 36
       }
