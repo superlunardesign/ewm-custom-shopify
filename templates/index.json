@@ -229,10 +229,65 @@
             "text_color": "#1a1a1a",
             "arrow_color": "#1a1a1a"
           }
+        },
+        "service_link_3LF8mN": {
+          "type": "service_link",
+          "settings": {
+            "text": "Brazilian Wax",
+            "link": "shopify://pages/brazilian-wax-mchenry",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        },
+        "service_link_HNKBGM": {
+          "type": "service_link",
+          "settings": {
+            "text": "Chemical Peels",
+            "link": "shopify://pages/chemical-peels-in-mchenry-il-reveal-your-best-skin-at-esthetics-with-me-esthetics-with-me",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        },
+        "service_link_mKhbA6": {
+          "type": "service_link",
+          "settings": {
+            "text": "Acne Bootcamp",
+            "link": "shopify://pages/acne-bootcamp",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        },
+        "service_link_Fa7wxz": {
+          "type": "service_link",
+          "settings": {
+            "text": "Red Light Therapy",
+            "link": "shopify://pages/red-light-therapy",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        },
+        "service_link_hdgDy9": {
+          "type": "service_link",
+          "settings": {
+            "text": "Virtual Skin Consultations",
+            "link": "shopify://pages/virtual-skin-consults",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
         }
       },
       "block_order": [
-        "service_link_niiPYi"
+        "service_link_niiPYi",
+        "service_link_3LF8mN",
+        "service_link_HNKBGM",
+        "service_link_mKhbA6",
+        "service_link_Fa7wxz",
+        "service_link_hdgDy9"
       ],
       "name": "EWM Image + Text Overlap",
       "settings": {
