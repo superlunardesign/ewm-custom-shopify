@@ -7,16 +7,12 @@
   overflow: visible;
 }
 
+{%- assign img_opacity = section.settings.overlay_darkness | divided_by: 100.0 -%}
+
 #shopify-section-{{ section.id }} .sl-cb {
   position: relative;
   padding: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px 0 {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   background: {{ section.settings.bg_color | default: '#1a1a1a' }};
-  {% if section.settings.bg_type == 'image' and section.settings.bg_image != blank %}
-    background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  {% endif %}
 }
 
 @media (min-width: 750px) {
@@ -25,12 +21,16 @@
   }
 }
 
-/* Overlay */
-#shopify-section-{{ section.id }} .sl-cb__overlay {
+/* Background image layer */
+#shopify-section-{{ section.id }} .sl-cb__bg-image {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  z-index: 1;
+  z-index: 0;
+  background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: {{ img_opacity }};
 }
 
 /* Video background */
@@ -39,6 +39,7 @@
   inset: 0;
   overflow: hidden;
   z-index: 0;
+  opacity: {{ img_opacity }};
 }
 
 #shopify-section-{{ section.id }} .sl-cb__video video,
@@ -172,7 +173,9 @@
 {%- endstyle -%}
 
 <div class="sl-cb">
-  {%- if section.settings.bg_type == 'video' -%}
+  {%- if section.settings.bg_type == 'image' and section.settings.bg_image != blank -%}
+    <div class="sl-cb__bg-image"></div>
+  {%- elsif section.settings.bg_type == 'video' -%}
     <div class="sl-cb__video">
       {%- if section.settings.bg_video != blank -%}
         {{ section.settings.bg_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true }}
@@ -191,10 +194,6 @@
         {%- endif -%}
       {%- endif -%}
     </div>
-  {%- endif -%}
-
-  {%- if section.settings.overlay_darkness > 0 -%}
-    <div class="sl-cb__overlay" style="background: {{ section.settings.overlay_color | default: '#000000' }}; opacity: {{ section.settings.overlay_darkness | divided_by: 100.0 }};"></div>
   {%- endif -%}
 
   <div class="sl-cb__inner {% if section.settings.full_width %}sl-cb__inner--full-width{% else %}page-width{% endif %}">
@@ -339,21 +338,15 @@
       "info": "YouTube or Vimeo URL. Used if no video is uploaded."
     },
     {
-      "type": "color",
-      "id": "overlay_color",
-      "label": "Overlay color",
-      "default": "#000000"
-    },
-    {
       "type": "range",
       "id": "overlay_darkness",
-      "label": "Overlay opacity",
+      "label": "Image/video opacity",
       "min": 0,
-      "max": 80,
+      "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 0,
-      "info": "Opacity of the overlay color over the background."
+      "default": 100,
+      "info": "Reduce to let the background color show through the image or video. 100% = fully visible, 0% = hidden."
     },
     {
       "type": "header",
