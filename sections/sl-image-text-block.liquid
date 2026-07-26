@@ -121,6 +121,14 @@
 {% endif %}
 
 <style>
+  {% if section.settings.overlap_above %}
+    #shopify-section-{{ section.id }} {
+      position: relative;
+      z-index: 2;
+      margin-top: -{{ section.settings.overlap_amount }}px;
+    }
+  {% endif %}
+
   #shopify-section-{{ section.id }} .sl-itb__container {
     max-width: var(--page-width, 1200px);
     margin: 0 auto;
@@ -533,6 +541,28 @@
       "step": 4,
       "unit": "px",
       "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Overlap"
+    },
+    {
+      "type": "checkbox",
+      "id": "overlap_above",
+      "label": "Overlap section above",
+      "info": "Pulls this section up so it sits on top of the section above it",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "overlap_amount",
+      "label": "Overlap Amount",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 60,
+      "info": "How far this section overlaps the one above"
     }
   ],
   "presets": [
