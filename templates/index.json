@@ -333,6 +333,88 @@
         "padding_bottom": 36
       }
     },
+    "before_and_afters_KfRpJn": {
+      "type": "before-and-afters",
+      "blocks": {
+        "carousel_image_PkLAJj": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/Andrea-Butler_2.webp",
+            "caption": ""
+          }
+        },
+        "carousel_image_LVfAyR": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/km_facial.jpg",
+            "caption": ""
+          }
+        },
+        "carousel_image_Mg94wg": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/ls-acne-bootcamp.webp",
+            "caption": ""
+          }
+        },
+        "carousel_image_wdgUKy": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled-design--34.webp",
+            "caption": ""
+          }
+        },
+        "carousel_image_iENj3R": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/Sharon-_1.webp",
+            "caption": ""
+          }
+        },
+        "carousel_image_Uy3zE3": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/ashley-acne-bootcamp_1.webp",
+            "caption": ""
+          }
+        },
+        "carousel_image_DGWLGG": {
+          "type": "carousel_image",
+          "settings": {
+            "image": "shopify://shop_images/jackson-hatfield_1.webp",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "carousel_image_PkLAJj",
+        "carousel_image_LVfAyR",
+        "carousel_image_Mg94wg",
+        "carousel_image_wdgUKy",
+        "carousel_image_iENj3R",
+        "carousel_image_Uy3zE3",
+        "carousel_image_DGWLGG"
+      ],
+      "name": "Image Carousel",
+      "settings": {
+        "section_title": "Before & After Esthetics With Me",
+        "title_size": 32,
+        "title_color": "#333333",
+        "container_width": 1400,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "background_color": "#FFFFFF",
+        "image_size": 280,
+        "mobile_image_size": 250,
+        "gap": 20,
+        "border_radius": 0,
+        "hover_scale": 1.1,
+        "caption_size": 14,
+        "caption_color": "#666666",
+        "auto_scroll": true,
+        "auto_scroll_speed": 0.5
+      }
+    },
     "sl_steps_sticky_WwKLzM": {
       "type": "sl-steps-sticky",
       "blocks": {
@@ -930,6 +1012,7 @@
     "scrolling_offers_YAxCQz",
     "sl_content_banner_FTN8R4",
     "sl_image_text_overlap_9rRV4Y",
+    "before_and_afters_KfRpJn",
     "sl_steps_sticky_WwKLzM",
     "skin_concern_LUXc4Q",
     "how_it_works_jcAQM4",
