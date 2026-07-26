@@ -48,6 +48,24 @@
       },
       "header": {
         "type": "header",
+        "blocks": {
+          "promo_image_HD6eiJ": {
+            "type": "promo_image",
+            "settings": {
+              "mega_1": "Finally, Clear Skin the Right Way",
+              "image_1": "shopify://shop_images/BrandingPhotography-C_Mae-5625_b9bf1da6-5bce-4dc4-999a-cab564433c4b.jpg",
+              "title_1": "Join Acne Bootcamp",
+              "link_1": "shopify://pages/acne-bootcamp",
+              "image_2": "shopify://shop_images/BrandingPhotography-C_Mae-5533_5ad27f44-218a-4849-8144-bd9e735e9a6d.jpg",
+              "title_2": "",
+              "button_2": "",
+              "link_2": ""
+            }
+          }
+        },
+        "block_order": [
+          "promo_image_HD6eiJ"
+        ],
         "settings": {
           "page_full_width": false,
           "page_full_width_spacing": false,
