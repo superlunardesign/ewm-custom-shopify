@@ -258,8 +258,14 @@
   color: {{ section.settings.atc_text | default: '#fff' }};
   border: {{ section.settings.atc_border_width | default: 0 }}px solid {{ section.settings.atc_border_color | default: 'transparent' }};
   border-radius: {{ section.settings.atc_radius | default: 0 }}px;
-  font-family: var(--font-heading-family);
-  font-size: 13px;
+  {% if section.settings.button_font == 'body' %}
+    font-family: var(--font-body-family);
+  {% else %}
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  {% endif %}
+  font-size: {{ section.settings.button_font_size | default: 13 }}px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -790,6 +796,26 @@
       "max": 400,
       "step": 4,
       "default": 0
+    },
+    {
+      "type": "select",
+      "id": "button_font",
+      "label": "Button font family",
+      "options": [
+        { "value": "heading", "label": "Heading Font" },
+        { "value": "body", "label": "Body Font" }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
     },
     {
       "type": "header",
