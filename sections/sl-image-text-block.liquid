@@ -131,36 +131,25 @@
   #shopify-section-{{ section.id }} .sl-itb__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
-    {% if section.settings.image_height == 'adapt' %}
-      align-items: stretch;
-    {% else %}
-      align-items: center;
-    {% endif %}
+    gap: 0;
+    align-items: stretch;
   }
 
   #shopify-section-{{ section.id }} .sl-itb__media {
     overflow: hidden;
-    border-radius: var(--DTRadius, 0);
-    {% if section.settings.image_height == 'adapt' %}
+    {% if section.settings.image_height == 'small' %}
       min-height: 300px;
-    {% elsif section.settings.image_height == 'small' %}
-      height: 300px;
     {% elsif section.settings.image_height == 'medium' %}
-      height: 450px;
+      min-height: 450px;
     {% elsif section.settings.image_height == 'large' %}
-      height: 600px;
+      min-height: 600px;
     {% endif %}
   }
 
   #shopify-section-{{ section.id }} .sl-itb__img {
     display: block;
     width: 100%;
-    {% if section.settings.image_height == 'natural' %}
-      height: auto;
-    {% else %}
-      height: 100%;
-    {% endif %}
+    height: 100%;
     object-fit: cover;
   }
 
@@ -266,12 +255,8 @@
     }
   }
 
-  /* Mobile: cap image height so it doesn't dominate the screen */
+  /* Mobile: cap image height */
   @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} .sl-itb__grid {
-      align-items: center;
-    }
-
     #shopify-section-{{ section.id }} .sl-itb__media {
       {% if section.settings.image_height == 'large' %}
         height: 350px;
@@ -279,10 +264,10 @@
         height: 300px;
       {% elsif section.settings.image_height == 'small' %}
         height: 250px;
-      {% elsif section.settings.image_height == 'adapt' %}
+      {% else %}
         height: 300px;
-        min-height: auto;
       {% endif %}
+      min-height: auto;
     }
   }
 
@@ -295,7 +280,6 @@
 
     #shopify-section-{{ section.id }} .sl-itb__grid {
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
     }
 
     #shopify-section-{{ section.id }} .sl-itb__grid--reversed {
@@ -312,10 +296,6 @@
   }
 
   @media screen and (min-width: 990px) {
-    #shopify-section-{{ section.id }} .sl-itb__grid {
-      gap: 6rem;
-    }
-
     #shopify-section-{{ section.id }} .sl-itb__content {
       padding: 4rem;
     }
