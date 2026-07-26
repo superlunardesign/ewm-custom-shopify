@@ -22,6 +22,16 @@
 {% endif %}
 
 <div class="sl-itb color-{{ section.settings.color_scheme }} gradient">
+  {% if section.settings.enable_scroll_text %}
+    <div class="sl-itb__scroll-text" aria-hidden="true">
+      <div class="sl-itb__scroll-track" style="--scroll-duration: {{ section.settings.scroll_speed }}s;">
+        {% for i in (1..10) %}
+          <span class="sl-itb__scroll-item">{{ section.settings.scroll_text }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
   <div class="sl-itb__container page-width">
     <div class="sl-itb__grid{% if section.settings.image_position == 'right' %} sl-itb__grid--reversed{% endif %}{% if section.settings.enable_animation %} sl-itb__animate{% endif %}"
       {% if section.settings.enable_animation %}
@@ -126,6 +136,49 @@
       position: relative;
       z-index: 2;
       margin-top: -{{ section.settings.overlap_amount }}px;
+    }
+  {% endif %}
+
+  /* Scrolling text behind content */
+  {% if section.settings.enable_scroll_text %}
+    #shopify-section-{{ section.id }} .sl-itb {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__scroll-text {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: {{ section.settings.scroll_text_padding }}px 0;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__scroll-track {
+      display: inline-flex;
+      animation: slItbScroll var(--scroll-duration) linear infinite;
+      white-space: nowrap;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__scroll-item {
+      font-family: var(--font-heading-family);
+      font-weight: var(--font-heading-weight);
+      font-style: var(--font-heading-style);
+      font-size: {{ section.settings.scroll_font_size }}px;
+      line-height: 1;
+      color: {{ section.settings.scroll_text_color }};
+      padding: 0 40px;
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__container {
+      position: relative;
+      z-index: 1;
+      margin-top: -{{ section.settings.scroll_overlap }}px;
+    }
+
+    @keyframes slItbScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
   {% endif %}
 
@@ -563,6 +616,70 @@
       "unit": "px",
       "default": 60,
       "info": "How far this section overlaps the one above"
+    },
+    {
+      "type": "header",
+      "content": "Scrolling Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll_text",
+      "label": "Enable Scrolling Text",
+      "info": "Adds a scrolling marquee text behind the image and text content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "scroll_text",
+      "label": "Scrolling Text",
+      "default": "MEET YOUR THERAPIST"
+    },
+    {
+      "type": "range",
+      "id": "scroll_font_size",
+      "label": "Scrolling Text Size",
+      "min": 30,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "scroll_text_color",
+      "label": "Scrolling Text Color",
+      "default": "#c4a882"
+    },
+    {
+      "type": "range",
+      "id": "scroll_text_padding",
+      "label": "Scrolling Text Vertical Padding",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "scroll_overlap",
+      "label": "Content Overlap",
+      "info": "How far the image+text content overlaps the scrolling text",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll Speed",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 20
     }
   ],
   "presets": [
