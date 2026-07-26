@@ -123,7 +123,6 @@
     #shopify-section-{{ section.id }} {
       position: sticky !important;
       top: 0;
-      z-index: {{ section.settings.sticky_z_index }};
     }
   {% endif %}
 
@@ -572,16 +571,6 @@
       "label": "Make section sticky",
       "info": "Section stays pinned while scrolling so the next section slides over it",
       "default": false
-    },
-    {
-      "type": "range",
-      "id": "sticky_z_index",
-      "label": "Stacking Order",
-      "info": "Higher = on top of other sticky sections. Earlier sections should use a lower number.",
-      "min": 1,
-      "max": 10,
-      "step": 1,
-      "default": 2
     },
     {
       "type": "header",
