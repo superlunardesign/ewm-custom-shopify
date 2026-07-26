@@ -78,7 +78,7 @@
         "collection": "acne",
         "fallback_collection_handle": "best-selling-skincare",
         "products_limit": 8,
-        "auto_scroll": false,
+        "auto_scroll": true,
         "auto_scroll_speed": 0.5,
         "show_rating": true,
         "show_atc": true,
