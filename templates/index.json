@@ -608,6 +608,98 @@
         "padding_bottom": 60
       }
     },
+    "team_rUpxjB": {
+      "type": "team",
+      "blocks": {
+        "team_member_qi4han": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/file_000000007708722fb13566846c7e5b1a.webp",
+            "name": "Clarissa",
+            "title": "LICENSED ESTHETICIAN",
+            "bio": "Clarissa has always been fascinated by the science behind skin and why different concerns show up the way they do. She began her esthetics career right after high school and quickly found her purpose in helping others understand and care for their skin.\n\nHer passion for esthetics deepened through her own personal experience. After significant sun exposure, Clarissa developed severe peeling that left her skin with a vitiligo-like appearance that lasted through the winter. Without proper education on sun protection at the time, it was an uncomfortable and isolating experience that changed the way she viewed skincare. It also reinforced just how important sunscreen and daily skin protection truly are.\n\nWhether you’re looking to treat acne, improve sun damage, or simply maintain your skin, Clarissa understands the desire for real change. She is dedicated to helping clients feel confident by giving them clear direction and guidance.\n\nClarissa’s goal is to change the way people view skincare. It’s not a luxury. It’s a necessary part of maintaining healthy, long-lasting skin.\n\nClarissa’s availability:\nMonday 9-3 | Wednesday 1-8 | Thursday 1-8 | Friday 9-4 | Select Saturdays 9–1",
+            "book_text": "BOOK WITH CLARISSA",
+            "book_url": "https://booking.mangomint.com/314399"
+          }
+        },
+        "team_member_zG3GCD": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5618_a474233d-0e58-41d5-9ee8-b78fbafe1f6a.jpg",
+            "name": "Felicia",
+            "title": "Lead Licensed Esthetician | Certified Acne Expert",
+            "bio": "Felicia knows how frustrating and isolating acne can feel. \n\nAfter years of dealing with breakouts, she turned her personal experience into a career focused on understanding, education, and real results. She creates a welcoming space where clients feel seen, supported, and confident in their skin.\n\nOriginally from a small town in Pennsylvania, Felicia moved to Illinois to be with her husband and is a proud mom to a little boy who lights up her world. Her go-to treat? A grande iced white chocolate mocha and a warmed-up chocolate croissant from Starbucks.\n\nFelicia is especially passionate about working with sensitive, reactive skin. Her favorite product is Quiet Wash from Hale & Hush, and she loves building customized facials that match each client’s unique needs.\n\nFelicia’s availability:\nMonday & Tuesday 10:30-6 | Wednesday - Friday 9:30–4:30 | Select Saturdays 9–1",
+            "book_text": "BOOK WITH FELICIA",
+            "book_url": "https://booking.mangomint.com/314399"
+          }
+        },
+        "team_member_rBzqJh": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5832.jpg",
+            "name": "Autumn",
+            "title": "Licensed Esthetician | Certified Acne Expert",
+            "bio": "Autumn is a licensed esthetician with a warm, calming presence and a deep love for skincare. Inspired by her grandmother’s beauty business and her own journey with acne and skin sensitivity, Autumn found her calling in helping others feel seen, supported, and confident in their skin.\n\nShe’s especially passionate about chemical peels and brow waxing, two treatments she believes deliver powerful and visible results. Whether you’re struggling with breakouts or simply need a space to unwind, Autumn brings a grounded, gentle energy to every service.\n\nShe’s found that this work has helped her grow in ways she never expected. Her goal is simple: to offer each client a little peace, a little glow, and a whole lot of care.\n\nAutumn’s availability:\nTuesday 9-4 | Wednesday 1-8 | Thursday 1-8 | Friday 9-4 | Select Saturdays 9–1",
+            "book_text": "BOOK WITH SHANNON",
+            "book_url": "https://booking.mangomint.com/314399"
+          }
+        },
+        "team_member_3GWQpP": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5669.jpg",
+            "name": "Yanelli",
+            "title": "Lead Licensed Esthetician | Brazilian Wax Specialist",
+            "bio": "Yanelli’s passion for skincare started at a young age. She graduated from Esthetics School in 2021 and has been dedicated ever since to helping others feel confident, informed, and excited about their skin. Yanelli is also a certified acne specialist, with experience guiding clients through long-term skin transformations.\n\nShe loves carving out time for self-care and believes that taking care of your skin is not just about how it looks, but how it makes you feel. For Yanelli, there is nothing better than feeling confident in your own skin and helping others feel the same way.\n\nIn the treatment room, Yanelli brings a fun, uplifting energy. She is passionate about creating an environment where clients can learn about their skin, build healthy habits, and enjoy the process of transformation. Whether it is your first facial or brazilian wax, she is here to support you every step of the way.\n\nYanelli’s availability:\nMonday & Tuesday 12–8 | Wednesday & Thursday 9–4 | Select Saturdays 9–1",
+            "book_text": "BOOK WITH SHANNON",
+            "book_url": "https://booking.mangomint.com/314399"
+          }
+        },
+        "team_member_9raMFb": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/BrandingPhotography-C.Mae-5943.jpg",
+            "name": "Shannon",
+            "title": "FOUNDER | LICENSED ESTHETICIAN | CERTIFIED ACNE EXPERT",
+            "bio": "Shannon knows what it's like to feel defeated by her skin.\n\nAs a teen, she dealt with painful breakouts, only to face red, flaky, reactive skin as an adult. After years of trial and error, she found herself frustrated and out of options.\n\nThat experience led her to become a Licensed Esthetician in 2021.",
+            "book_text": "BOOK WITH SHANNON",
+            "book_url": "https://booking.mangomint.com/314399"
+          }
+        }
+      },
+      "block_order": [
+        "team_member_qi4han",
+        "team_member_zG3GCD",
+        "team_member_rBzqJh",
+        "team_member_3GWQpP",
+        "team_member_9raMFb"
+      ],
+      "name": "Team Carousel",
+      "settings": {
+        "heading_size": "h0",
+        "image_position": "left",
+        "desktop_height": 625,
+        "mobile_image_height": 400,
+        "image_position_x": 50,
+        "image_position_y": 20,
+        "image_width": 3,
+        "content_width": 2,
+        "overlap_amount": 80,
+        "vertical_inset": 30,
+        "desktop_bio_max_height": 250,
+        "mobile_bio_max_height": 200,
+        "button_style": "primary",
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "select_border_color": "#ddd",
+        "enable_sticky": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "sl_steps_sticky_WwKLzM": {
       "type": "sl-steps-sticky",
       "blocks": {
@@ -908,6 +1000,7 @@
     "sl_skin_concern_hzeVEG",
     "before_and_afters_KfRpJn",
     "sl_testimonial_slider_8rbkeA",
+    "team_rUpxjB",
     "sl_steps_sticky_WwKLzM",
     "sl_image_text_block_eXcmtF",
     "product_recommendations_aQkqDq",
