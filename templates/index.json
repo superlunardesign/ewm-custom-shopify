@@ -111,8 +111,8 @@
       "name": "Scrolling Offers",
       "settings": {
         "static_text": "WE OFFER",
-        "background_color": "#FFFFFF",
-        "text_color": "#8A9979",
+        "background_color": "#ffffff",
+        "text_color": "#8a9979",
         "scroll_speed": 2
       }
     },
@@ -125,7 +125,7 @@
         "desktop_height": 500,
         "mobile_height": 300,
         "subheading": "",
-        "heading": "1:1 Therapy Sessions",
+        "heading": "1:1 Skin Therapy Sessions",
         "heading_size": "h1",
         "spread_content": true,
         "text": "<p>Share details about your services, approach, or expertise. This text area supports rich formatting so you can add emphasis where needed.</p>",
