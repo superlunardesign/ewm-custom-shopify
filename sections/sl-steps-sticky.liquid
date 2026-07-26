@@ -17,7 +17,7 @@
   }
 {%- endstyle -%}
 
-<div id="sl-hiw-{{ section.id }}" class="sl-hiw" style="--hiw-peek: {{ section.settings.peek_height }}px; --hiw-sticky-top: {{ section.settings.sticky_offset }}px;">
+<div id="sl-hiw-{{ section.id }}" class="sl-hiw" style="--hiw-peek: {{ section.settings.peek_height }}px; --hiw-sticky-top: {{ section.settings.sticky_offset }}px; --hiw-overlap: {{ section.settings.card_marquee_overlap }}px;">
 
   <div class="sl-hiw__bg" {% if section.settings.bg_type == 'color' %}style="background-color: {{ section.settings.bg_color }};"{% endif %}>
     {% if section.settings.bg_type == 'image' and section.settings.bg_image != blank %}
@@ -327,6 +327,10 @@
       position: -webkit-sticky;
       position: sticky;
     }
+
+    #shopify-section-{{ section.id }} .sl-hiw {
+      padding-bottom: {{ section.settings.sticky_hold }}vh;
+    }
   {% endif %}
 
   /* ═══════════════════════════════════════════
@@ -341,11 +345,10 @@
       #shopify-section-{{ section.id }} .sl-hiw__cards {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
-        padding-bottom: 60vh;
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__card {
-        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) + var(--i) * var(--hiw-peek));
+        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + var(--i) * var(--hiw-peek));
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__card + .sl-hiw__card {
@@ -353,8 +356,7 @@
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__cta {
-        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) + (var(--card-count) - 1) * var(--hiw-peek) + var(--hiw-card-h, 300px) + 1rem);
-        margin-top: 50vh;
+        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + (var(--card-count) - 1) * var(--hiw-peek) + var(--hiw-card-h, 300px) + 1rem);
         padding: 1.5rem;
       }
     {% else %}
@@ -395,7 +397,7 @@
 
       #shopify-section-{{ section.id }} .sl-hiw__card {
         align-self: start;
-        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px));
+        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px));
         margin-top: calc(var(--i) * {{ section.settings.desktop_stagger }}vh);
         min-height: 280px;
       }
@@ -403,7 +405,7 @@
       #shopify-section-{{ section.id }} .sl-hiw__cta {
         max-width: var(--page-width, 1200px);
         margin: 0 auto;
-        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) + var(--hiw-card-h, 300px) + 2rem);
+        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + var(--hiw-card-h, 300px) + 2rem);
         padding: 2rem 3rem;
       }
     {% else %}
@@ -622,6 +624,28 @@
       "step": 5,
       "unit": "vh",
       "default": 25
+    },
+    {
+      "type": "range",
+      "id": "card_marquee_overlap",
+      "label": "Card Overlap onto Marquee",
+      "info": "How far (in px) cards slide up over the marquee text when stuck",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "sticky_hold",
+      "label": "Hold Duration",
+      "info": "Extra scroll distance to keep everything stuck in place before the section scrolls away",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 30
     },
     {
       "type": "range",
