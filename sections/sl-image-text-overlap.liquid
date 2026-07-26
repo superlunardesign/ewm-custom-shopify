@@ -1,16 +1,16 @@
 {% comment %}
-  EWM Image + Text Block
-  Side-by-side layout with image and text content, swappable positions
+  EWM Image + Text Overlap
+  Image with overlapping text block and optional scrolling marquee text behind
 {% endcomment %}
 
 {%- style -%}
-  #shopify-section-{{ section.id }} .sl-itb {
+  #shopify-section-{{ section.id }} .sl-ito {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
-    #shopify-section-{{ section.id }} .sl-itb {
+    #shopify-section-{{ section.id }} .sl-ito {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
@@ -21,51 +21,59 @@
   <div id="{{ section.settings.anchor_id }}" style="position: relative; top: -{{ section.settings.scroll_offset }}px;"></div>
 {% endif %}
 
-<div class="sl-itb color-{{ section.settings.color_scheme }} gradient">
-  <div class="sl-itb__container page-width">
-    <div class="sl-itb__grid{% if section.settings.image_position == 'right' %} sl-itb__grid--reversed{% endif %}{% if section.settings.enable_animation %} sl-itb__animate{% endif %}"
+<div class="sl-ito color-{{ section.settings.color_scheme }} gradient">
+  {% if section.settings.enable_scroll_text %}
+    <div class="sl-ito__scroll-text" aria-hidden="true">
+      <div class="sl-ito__scroll-track" style="--scroll-duration: {{ section.settings.scroll_speed }}s;">
+        {% for i in (1..10) %}
+          <span class="sl-ito__scroll-item">{{ section.settings.scroll_text }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="sl-ito__container">
+    <div class="sl-ito__grid{% if section.settings.image_position == 'right' %} sl-ito__grid--reversed{% endif %}{% if section.settings.enable_animation %} sl-ito__animate{% endif %}"
       {% if section.settings.enable_animation %}
-        data-sl-itb-animate
-        data-duration="{{ section.settings.animation_duration }}"
-        data-delay="{{ section.settings.animation_delay }}"
+        data-sl-ito-animate
       {% endif %}
     >
-      <div class="sl-itb__media">
+      <div class="sl-ito__media">
         {% if section.settings.image != blank %}
           {{
             section.settings.image
             | image_url: width: 1500
             | image_tag:
-              sizes: '(min-width: 750px) 50vw, 100vw',
+              sizes: '(min-width: 750px) 60vw, 100vw',
               widths: '375, 550, 750, 1000, 1250, 1500',
-              class: 'sl-itb__img',
+              class: 'sl-ito__img',
               loading: 'lazy'
           }}
         {% else %}
-          <div class="sl-itb__placeholder">
+          <div class="sl-ito__placeholder">
             {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
           </div>
         {% endif %}
       </div>
 
-      <div class="sl-itb__content">
-        <div class="sl-itb__content-top">
+      <div class="sl-ito__content">
+        <div class="sl-ito__content-top">
           {% if section.settings.subheading != blank %}
-            <p class="sl-itb__subheading">{{ section.settings.subheading }}</p>
+            <p class="sl-ito__subheading">{{ section.settings.subheading }}</p>
           {% endif %}
 
           {% if section.settings.heading != blank %}
-            <h2 class="sl-itb__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+            <h2 class="sl-ito__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
           {% endif %}
         </div>
 
-        <div class="sl-itb__content-bottom">
+        <div class="sl-ito__content-bottom">
           {% if section.settings.text != blank %}
-            <div class="sl-itb__text rte">{{ section.settings.text }}</div>
+            <div class="sl-ito__text rte">{{ section.settings.text }}</div>
           {% endif %}
 
           {% if section.settings.show_button and section.settings.button_text != blank %}
-            <div class="sl-itb__button-wrap">
+            <div class="sl-ito__button-wrap">
               <a
                 {% if section.settings.button_link == blank %}
                   role="link" aria-disabled="true"
@@ -87,16 +95,16 @@
 {% if section.settings.enable_animation %}
 <script>
   (function() {
-    function initSlItbAnimation() {
+    function initSlItoAnimation() {
       var section = document.querySelector('#shopify-section-{{ section.id }}');
       if (!section) return;
-      var target = section.querySelector('[data-sl-itb-animate]');
+      var target = section.querySelector('[data-sl-ito-animate]');
       if (!target) return;
 
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
-            target.classList.add('sl-itb__animate--visible');
+            target.classList.add('sl-ito__animate--visible');
             observer.unobserve(entry.target);
           }
         });
@@ -106,14 +114,14 @@
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initSlItbAnimation);
+      document.addEventListener('DOMContentLoaded', initSlItoAnimation);
     } else {
-      initSlItbAnimation();
+      initSlItoAnimation();
     }
 
     if (Shopify && Shopify.designMode) {
       document.addEventListener('shopify:section:load', function(e) {
-        if (e.detail.sectionId === '{{ section.id }}') initSlItbAnimation();
+        if (e.detail.sectionId === '{{ section.id }}') initSlItoAnimation();
       });
     }
   })();
@@ -121,32 +129,75 @@
 {% endif %}
 
 <style>
-  #shopify-section-{{ section.id }} .sl-itb__container {
+  /* Scrolling text */
+  {% if section.settings.enable_scroll_text %}
+    #shopify-section-{{ section.id }} .sl-ito {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__scroll-text {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: {{ section.settings.scroll_text_padding }}px 0;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__scroll-track {
+      display: inline-flex;
+      animation: slItoScroll var(--scroll-duration) linear infinite;
+      white-space: nowrap;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__scroll-item {
+      font-family: var(--font-heading-family);
+      font-weight: var(--font-heading-weight);
+      font-style: var(--font-heading-style);
+      font-size: {{ section.settings.scroll_font_size }}px;
+      line-height: 1;
+      color: {{ section.settings.scroll_text_color }};
+      padding: 0 40px;
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__container {
+      margin-top: -{{ section.settings.scroll_overlap }}px;
+    }
+
+    @keyframes slItoScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .sl-ito__container {
+    position: relative;
+    z-index: 1;
     max-width: var(--page-width, 1200px);
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__grid {
+  #shopify-section-{{ section.id }} .sl-ito__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0;
-    align-items: stretch;
+    position: relative;
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__media {
+  #shopify-section-{{ section.id }} .sl-ito__media {
     overflow: hidden;
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__img {
+  #shopify-section-{{ section.id }} .sl-ito__img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__placeholder {
+  #shopify-section-{{ section.id }} .sl-ito__placeholder {
     background: rgb(var(--color-base-background-2));
     aspect-ratio: 4 / 3;
     display: flex;
@@ -154,14 +205,14 @@
     justify-content: center;
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__placeholder .placeholder-svg {
+  #shopify-section-{{ section.id }} .sl-ito__placeholder .placeholder-svg {
     width: 60%;
     height: auto;
     fill: currentColor;
     opacity: 0.3;
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__content {
+  #shopify-section-{{ section.id }} .sl-ito__content {
     display: flex;
     flex-direction: column;
     {% if section.settings.spread_content %}
@@ -173,7 +224,7 @@
     background-color: {{ section.settings.content_background }};
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__content-top {
+  #shopify-section-{{ section.id }} .sl-ito__content-top {
     {% if section.settings.spread_content %}
       margin-bottom: 2rem;
     {% else %}
@@ -181,7 +232,7 @@
     {% endif %}
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__subheading {
+  #shopify-section-{{ section.id }} .sl-ito__subheading {
     font-family: var(--font-body-family);
     font-size: 1.2rem;
     letter-spacing: 0.12em;
@@ -191,7 +242,7 @@
     color: {{ section.settings.subheading_color }};
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__heading {
+  #shopify-section-{{ section.id }} .sl-ito__heading {
     font-family: var(--font-heading-family);
     font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
@@ -200,7 +251,7 @@
     color: {{ section.settings.heading_color }};
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__text {
+  #shopify-section-{{ section.id }} .sl-ito__text {
     font-family: var(--font-body-family);
     font-size: 1.6rem;
     line-height: 1.7;
@@ -208,80 +259,93 @@
     margin-bottom: 2rem;
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__text p {
+  #shopify-section-{{ section.id }} .sl-ito__text p {
     margin-bottom: 1em;
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__text p:last-child {
+  #shopify-section-{{ section.id }} .sl-ito__text p:last-child {
     margin-bottom: 0;
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__button-wrap {
+  #shopify-section-{{ section.id }} .sl-ito__button-wrap {
     margin-top: 0.5rem;
   }
 
-  /* Animation - only hide when JS is available */
-  .js #shopify-section-{{ section.id }} .sl-itb__animate {
+  /* Animation */
+  .js #shopify-section-{{ section.id }} .sl-ito__animate {
     opacity: 0;
     transform: translateY(30px);
   }
 
-  .js #shopify-section-{{ section.id }} .sl-itb__animate.sl-itb__animate--visible {
-    animation: slItbFloatIn {{ section.settings.animation_duration }}ms ease-out {{ section.settings.animation_delay }}ms forwards;
+  .js #shopify-section-{{ section.id }} .sl-ito__animate.sl-ito__animate--visible {
+    animation: slItoFloatIn {{ section.settings.animation_duration }}ms ease-out {{ section.settings.animation_delay }}ms forwards;
   }
 
-  /* Fallback: if no .js class on html, or in theme editor, show content */
-  .no-js #shopify-section-{{ section.id }} .sl-itb__animate,
-  .shopify-design-mode #shopify-section-{{ section.id }} .sl-itb__animate {
+  .no-js #shopify-section-{{ section.id }} .sl-ito__animate,
+  .shopify-design-mode #shopify-section-{{ section.id }} .sl-ito__animate {
     opacity: 1;
     transform: none;
   }
 
-  @keyframes slItbFloatIn {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  @keyframes slItoFloatIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* Mobile */
   @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} .sl-itb__media {
+    #shopify-section-{{ section.id }} .sl-ito__media {
       height: {{ section.settings.mobile_height }}px;
     }
   }
 
   /* Desktop */
   @media screen and (min-width: 750px) {
-    #shopify-section-{{ section.id }} .sl-itb__container {
+    #shopify-section-{{ section.id }} .sl-ito__container {
       padding-left: 5rem;
       padding-right: 5rem;
     }
 
-    #shopify-section-{{ section.id }} .sl-itb__grid {
-      grid-template-columns: 1fr 1fr;
+    #shopify-section-{{ section.id }} .sl-ito__grid {
+      grid-template-columns: 3fr 1fr 2fr;
       grid-template-rows: {{ section.settings.desktop_height }}px;
     }
 
-    #shopify-section-{{ section.id }} .sl-itb__grid--reversed {
-      direction: rtl;
+    #shopify-section-{{ section.id }} .sl-ito__media {
+      grid-column: 1 / 3;
+      grid-row: 1;
     }
 
-    #shopify-section-{{ section.id }} .sl-itb__grid--reversed > * {
-      direction: ltr;
-    }
-
-    #shopify-section-{{ section.id }} .sl-itb__content {
+    #shopify-section-{{ section.id }} .sl-ito__content {
+      grid-column: 2 / 4;
+      grid-row: 1;
+      z-index: 1;
       padding: 3rem;
+      {% if section.settings.spread_content %}
+        align-self: stretch;
+      {% else %}
+        align-self: center;
+      {% endif %}
+    }
+
+    /* Reversed: image right, text left */
+    #shopify-section-{{ section.id }} .sl-ito__grid--reversed {
+      grid-template-columns: 2fr 1fr 3fr;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__grid--reversed .sl-ito__media {
+      grid-column: 2 / 4;
+      grid-row: 1;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__grid--reversed .sl-ito__content {
+      grid-column: 1 / 3;
+      grid-row: 1;
     }
   }
 
   @media screen and (min-width: 990px) {
-    #shopify-section-{{ section.id }} .sl-itb__content {
+    #shopify-section-{{ section.id }} .sl-ito__content {
       padding: 4rem;
     }
   }
@@ -289,7 +353,7 @@
 
 {% schema %}
 {
-  "name": "EWM Image + Text Block",
+  "name": "EWM Image + Text Overlap",
   "class": "section",
   "disabled_on": {
     "groups": ["header", "footer"]
@@ -324,7 +388,7 @@
       "max": 800,
       "step": 25,
       "unit": "px",
-      "default": 500
+      "default": 550
     },
     {
       "type": "range",
@@ -335,7 +399,7 @@
       "max": 500,
       "step": 25,
       "unit": "px",
-      "default": 300
+      "default": 350
     },
     {
       "type": "header",
@@ -351,7 +415,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "1:1 Therapy Sessions"
+      "default": "Therapy Designed for Women Who Do It All"
     },
     {
       "type": "select",
@@ -371,7 +435,7 @@
       "id": "spread_content",
       "label": "Spread content vertically",
       "info": "Pushes heading to the top and body text + button to the bottom. When off, all content is grouped together in the center.",
-      "default": true
+      "default": false
     },
     {
       "type": "richtext",
@@ -393,7 +457,7 @@
       "type": "text",
       "id": "button_text",
       "label": "Button Text",
-      "default": "EXPLORE MY APPROACH"
+      "default": "LEARN MORE ABOUT MY APPROACH"
     },
     {
       "type": "url",
@@ -408,7 +472,7 @@
         { "value": "primary", "label": "Primary (Filled)" },
         { "value": "secondary", "label": "Secondary (Outline)" }
       ],
-      "default": "primary"
+      "default": "secondary"
     },
     {
       "type": "header",
@@ -425,15 +489,13 @@
         { "value": "accent-2", "label": "Accent 2" },
         { "value": "inverse", "label": "Inverse" }
       ],
-      "default": "background-1",
-      "info": "Background behind the entire section (image + text)"
+      "default": "background-1"
     },
     {
       "type": "color",
       "id": "content_background",
       "label": "Text Block Background",
-      "default": "#f5f0eb",
-      "info": "Background color of the text content panel"
+      "default": "#f5f0eb"
     },
     {
       "type": "color",
@@ -455,6 +517,70 @@
     },
     {
       "type": "header",
+      "content": "Scrolling Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll_text",
+      "label": "Enable Scrolling Text",
+      "info": "Adds a scrolling marquee behind the content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "scroll_text",
+      "label": "Scrolling Text",
+      "default": "MEET YOUR THERAPIST"
+    },
+    {
+      "type": "range",
+      "id": "scroll_font_size",
+      "label": "Scrolling Text Size",
+      "min": 30,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "scroll_text_color",
+      "label": "Scrolling Text Color",
+      "default": "#c4a882"
+    },
+    {
+      "type": "range",
+      "id": "scroll_text_padding",
+      "label": "Scrolling Text Vertical Padding",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "scroll_overlap",
+      "label": "Content Overlap",
+      "info": "How far the image+text overlaps the scrolling text",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll Speed",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 20
+    },
+    {
+      "type": "header",
       "content": "Anchor Link"
     },
     {
@@ -466,14 +592,12 @@
     {
       "type": "text",
       "id": "anchor_id",
-      "label": "Anchor ID",
-      "info": "Use this ID to link directly to this section (e.g. #therapy-sessions)"
+      "label": "Anchor ID"
     },
     {
       "type": "range",
       "id": "scroll_offset",
       "label": "Scroll Offset",
-      "info": "Adjusts landing position when scrolling to anchor",
       "min": 0,
       "max": 200,
       "step": 10,
@@ -537,7 +661,7 @@
   ],
   "presets": [
     {
-      "name": "EWM Image + Text Block",
+      "name": "EWM Image + Text Overlap",
       "category": "Custom"
     }
   ]
