@@ -1467,7 +1467,7 @@ a.button.add-wishlist.button--secondary {
     font-weight: 600;
     font-family: var(--font-body-family);
     letter-spacing: 0.08em;
-    padding: 14px 32px;
+    padding: 10px 30px;
 }
 .product-form__buttons
   button.product-form__submit.button.button--full-width.button--secondary:hover,

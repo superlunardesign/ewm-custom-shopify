@@ -1625,7 +1625,7 @@ button.shopify-payment-button__button--unbranded {
   justify-content: center;
   align-items: center;
   border: 1.5px solid var(--gradient-base-accent-1);
-  padding: 14px 32px;
+  padding: 10px 30px;
   cursor: pointer;
   font: inherit;
   font-size: 1.5rem;
@@ -1651,7 +1651,7 @@ button.shopify-payment-button__button--unbranded {
   color: rgba(var(--color-button-hover-text));
 }
 .button{
-  padding: 14px 32px;
+  padding: 10px 30px;
   font-size: 1.5rem;
   text-transform: uppercase;
   line-height: 1.4;
