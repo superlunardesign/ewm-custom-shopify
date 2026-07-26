@@ -220,6 +220,13 @@
     "sl_image_text_overlap_9rRV4Y": {
       "type": "sl-image-text-overlap",
       "blocks": {
+        "heading_dHF7Lw": {
+          "type": "heading",
+          "settings": {
+            "text": "Treatments We Offer",
+            "size": "h1"
+          }
+        },
         "service_link_niiPYi": {
           "type": "service_link",
           "settings": {
@@ -282,6 +289,7 @@
         }
       },
       "block_order": [
+        "heading_dHF7Lw",
         "service_link_niiPYi",
         "service_link_3LF8mN",
         "service_link_HNKBGM",
