@@ -186,6 +186,69 @@
         "padding_bottom": 36
       }
     },
+    "sl_steps_sticky_WwKLzM": {
+      "type": "sl-steps-sticky",
+      "blocks": {
+        "step_e9mnyp": {
+          "type": "step",
+          "settings": {
+            "heading": "Book an Appointment",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        },
+        "step_AyhNjf": {
+          "type": "step",
+          "settings": {
+            "heading": "Arrive with Clean Skin",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        },
+        "step_nzNRMp": {
+          "type": "step",
+          "settings": {
+            "heading": "Enjoy your Spa Experience",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_e9mnyp",
+        "step_AyhNjf",
+        "step_nzNRMp"
+      ],
+      "name": "EWM Sticky Steps",
+      "settings": {
+        "bg_type": "image",
+        "bg_video_url": "",
+        "bg_color": "#1a1a1a",
+        "overlay_opacity": 40,
+        "columns": "3",
+        "card_gap": 16,
+        "peek_height": 58,
+        "sticky_offset": 80,
+        "enable_marquee": true,
+        "marquee_text": "HOW IT WORKS",
+        "marquee_size": 160,
+        "marquee_color": "#6b7c5e",
+        "marquee_font": "heading",
+        "marquee_speed": 60,
+        "step_prefix": "STEP",
+        "step_color": "#6b7c5e",
+        "step_line_color": "#c4c4a0",
+        "card_bg": "#f5f3ed",
+        "card_radius": 6,
+        "heading_color": "#1a1a1a",
+        "text_color": "#4a4a4a",
+        "show_button": true,
+        "button_text": "BOOK HERE",
+        "button_link": "",
+        "button_style": "custom",
+        "button_bg_color": "#8A9979",
+        "button_text_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "skin_concern_LUXc4Q": {
       "type": "skin-concern",
       "blocks": {
@@ -715,6 +778,7 @@
     "scrolling_offers_YAxCQz",
     "sl_image_text_block_P3d6y8",
     "sl_image_text_overlap_9rRV4Y",
+    "sl_steps_sticky_WwKLzM",
     "skin_concern_LUXc4Q",
     "how_it_works_jcAQM4",
     "testimonials_carousel_UfLK7R",
