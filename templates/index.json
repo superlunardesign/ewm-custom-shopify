@@ -462,7 +462,7 @@
         "card_gap": 40,
         "enable_sticky": true,
         "peek_height": 40,
-        "sticky_offset": 40,
+        "sticky_offset": 0,
         "enable_marquee": true,
         "marquee_text": "HOW IT WORKS",
         "marquee_size": 160,
