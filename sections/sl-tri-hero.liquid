@@ -299,7 +299,7 @@
         display: none;
       }
       #shopify-section-{{ section.id }} .sl-tri__hero {
-        min-height: 80vh;
+        min-height: {{ section.settings.mobile_hero_expanded }}vh;
       }
     {% endif %}
   }
@@ -487,8 +487,19 @@
       "type": "checkbox",
       "id": "hide_cards_mobile",
       "label": "Hide cards on mobile",
-      "info": "Hides the two secondary panels on mobile and expands the hero to ~80% viewport height",
+      "info": "Hides the two secondary panels on mobile and expands the hero",
       "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_hero_expanded",
+      "label": "Hero Height (Cards Hidden)",
+      "info": "Height of the hero when cards are hidden on mobile",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 80
     },
     {
       "type": "range",

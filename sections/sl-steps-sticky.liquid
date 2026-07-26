@@ -1,6 +1,6 @@
 {% comment %}
   EWM Sticky Steps
-  Step cards with sticky stacking on mobile, scrolling marquee behind
+  Step cards with sticky stacking, scrolling marquee behind
 {% endcomment %}
 
 {%- style -%}
@@ -17,7 +17,8 @@
   }
 {%- endstyle -%}
 
-<div id="sl-hiw-{{ section.id }}" class="sl-hiw">
+<div id="sl-hiw-{{ section.id }}" class="sl-hiw" style="--hiw-peek: {{ section.settings.peek_height }}px; --hiw-sticky-top: {{ section.settings.sticky_offset }}px;">
+
   <div class="sl-hiw__bg" {% if section.settings.bg_type == 'color' %}style="background-color: {{ section.settings.bg_color }};"{% endif %}>
     {% if section.settings.bg_type == 'image' and section.settings.bg_image != blank %}
       {{
@@ -43,6 +44,17 @@
     {% endunless %}
   </div>
 
+  {% if section.settings.section_subheading != blank or section.settings.section_heading != blank %}
+    <div class="sl-hiw__header">
+      {% if section.settings.section_subheading != blank %}
+        <p class="sl-hiw__section-sub">{{ section.settings.section_subheading }}</p>
+      {% endif %}
+      {% if section.settings.section_heading != blank %}
+        <h2 class="sl-hiw__section-heading {{ section.settings.section_heading_size }}">{{ section.settings.section_heading }}</h2>
+      {% endif %}
+    </div>
+  {% endif %}
+
   {% if section.settings.enable_marquee and section.settings.marquee_text != blank %}
     <div class="sl-hiw__marquee" aria-hidden="true">
       <div class="sl-hiw__marquee-track">
@@ -53,57 +65,59 @@
     </div>
   {% endif %}
 
-  <div class="sl-hiw__content">
-    {% if section.blocks.size > 0 %}
-      <div class="sl-hiw__cards" style="--hiw-peek: {{ section.settings.peek_height }}px; --hiw-sticky-top: {{ section.settings.sticky_offset }}px;">
-        {% for block in section.blocks %}
-          <div class="sl-hiw__card" style="--i: {{ forloop.index0 }}; z-index: {{ forloop.index | plus: 2 }};" {{ block.shopify_attributes }}>
-            <div class="sl-hiw__step-row">
-              <span class="sl-hiw__step-label">{{ section.settings.step_prefix }}</span>
-              <span class="sl-hiw__step-line"></span>
-              <span class="sl-hiw__step-num">{% if forloop.index < 10 %}0{{ forloop.index }}{% else %}{{ forloop.index }}{% endif %}</span>
-            </div>
-            <div class="sl-hiw__card-body">
-              {% if block.settings.heading != blank %}
-                <h3 class="sl-hiw__card-heading">{{ block.settings.heading }}</h3>
-              {% endif %}
-              {% if block.settings.text != blank %}
-                <div class="sl-hiw__card-text rte">{{ block.settings.text }}</div>
-              {% endif %}
-            </div>
+  {% if section.blocks.size > 0 %}
+    <div class="sl-hiw__cards">
+      {% for block in section.blocks %}
+        <div class="sl-hiw__card" style="--i: {{ forloop.index0 }}; z-index: {{ forloop.index | plus: 2 }};" {{ block.shopify_attributes }}>
+          <div class="sl-hiw__step-row">
+            <span class="sl-hiw__step-label">{{ section.settings.step_prefix }}</span>
+            <span class="sl-hiw__step-line"></span>
+            <span class="sl-hiw__step-num">{% if forloop.index < 10 %}0{{ forloop.index }}{% else %}{{ forloop.index }}{% endif %}</span>
           </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+          <div class="sl-hiw__card-body">
+            {% if block.settings.heading != blank %}
+              <h3 class="sl-hiw__card-heading">{{ block.settings.heading }}</h3>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <div class="sl-hiw__card-text rte">{{ block.settings.text }}</div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 
-    {% if section.settings.show_button and section.settings.button_text != blank %}
-      <div class="sl-hiw__cta">
-        <a
-          {% if section.settings.button_link != blank %}
-            href="{{ section.settings.button_link }}"
-          {% endif %}
-          class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-hiw__btn-custom{% endif %}"
-        >
-          {{ section.settings.button_text | escape }}
-        </a>
-      </div>
-    {% endif %}
-  </div>
+  {% if section.settings.show_button and section.settings.button_text != blank %}
+    <div class="sl-hiw__cta" style="--card-count: {{ section.blocks.size }};">
+      <a
+        {% if section.settings.button_link != blank %}
+          href="{{ section.settings.button_link }}"
+        {% endif %}
+        class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-hiw__btn-custom{% endif %}"
+      >
+        {{ section.settings.button_text | escape }}
+      </a>
+    </div>
+  {% endif %}
+
 </div>
 
-
 <style>
-  /* ── Fix ancestor overflow for sticky (CSS-only, no JS jank) ── */
   {% if section.settings.enable_sticky %}
     html, body {
       overflow-x: clip !important;
     }
     #shopify-section-{{ section.id }} {
+      position: relative;
+      z-index: 0;
       overflow: visible !important;
+    }
+    #shopify-section-{{ section.id }} ~ .shopify-section {
+      position: relative;
+      z-index: 1;
     }
   {% endif %}
 
-  /* ── Base ── */
   #shopify-section-{{ section.id }} .sl-hiw {
     position: relative;
     overflow: visible;
@@ -111,8 +125,8 @@
 
   /* ── Background ── */
   #shopify-section-{{ section.id }} .sl-hiw__bg {
-    z-index: 0;
     position: relative;
+    z-index: 0;
   }
 
   #shopify-section-{{ section.id }} .sl-hiw__bg-img,
@@ -131,6 +145,33 @@
     background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
   }
 
+  /* ── Section heading ── */
+  #shopify-section-{{ section.id }} .sl-hiw__header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem 1.5rem 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__section-sub {
+    font-family: var(--font-body-family);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: {{ section.settings.section_subheading_color }};
+    margin: 0 0 0.8rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__section-heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    line-height: 1.15;
+    color: {{ section.settings.section_heading_color }};
+    margin: 0;
+  }
+
   /* ── Marquee ── */
   #shopify-section-{{ section.id }} .sl-hiw__marquee {
     overflow: hidden;
@@ -138,6 +179,7 @@
     pointer-events: none;
     position: relative;
     z-index: 1;
+    padding: 0.5rem 0;
   }
 
   #shopify-section-{{ section.id }} .sl-hiw__marquee-track {
@@ -168,8 +210,8 @@
     to { transform: translateX(-50%); }
   }
 
-  /* ── Content layer ── */
-  #shopify-section-{{ section.id }} .sl-hiw__content {
+  /* ── Cards container ── */
+  #shopify-section-{{ section.id }} .sl-hiw__cards {
     position: relative;
     z-index: 2;
   }
@@ -192,7 +234,6 @@
     text-transform: uppercase;
     padding-bottom: 1rem;
     border-bottom: 1px solid {{ section.settings.step_line_color }};
-    margin-bottom: 0;
     color: {{ section.settings.step_color }};
   }
 
@@ -212,7 +253,7 @@
     font-style: var(--font-heading-style);
     font-size: 2.4rem;
     line-height: 1.2;
-    margin-bottom: 1.2rem;
+    margin: 0 0 1.2rem;
     color: {{ section.settings.heading_color }};
   }
 
@@ -224,7 +265,7 @@
   }
 
   #shopify-section-{{ section.id }} .sl-hiw__card-text p {
-    margin-bottom: 1em;
+    margin: 0 0 1em;
   }
 
   #shopify-section-{{ section.id }} .sl-hiw__card-text p:last-child {
@@ -245,7 +286,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     STICKY MODE (all devices)
+     STICKY MODE – shared
      ═══════════════════════════════════════════ */
   {% if section.settings.enable_sticky %}
     #shopify-section-{{ section.id }} .sl-hiw__bg {
@@ -254,22 +295,24 @@
       top: 0;
       height: 100vh;
       margin-bottom: -100vh;
-      z-index: 0;
     }
 
-    #shopify-section-{{ section.id }} .sl-hiw__cards {
-      padding-bottom: 30vh;
+    #shopify-section-{{ section.id }} .sl-hiw__header {
+      position: -webkit-sticky;
+      position: sticky;
+      top: var(--hiw-sticky-top);
+    }
+
+    #shopify-section-{{ section.id }} .sl-hiw__marquee {
+      position: -webkit-sticky;
+      position: sticky;
+      top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px));
     }
 
     #shopify-section-{{ section.id }} .sl-hiw__card {
       position: -webkit-sticky;
       position: sticky;
-      top: calc(var(--hiw-sticky-top) + var(--i) * var(--hiw-peek));
       box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
-    }
-
-    #shopify-section-{{ section.id }} .sl-hiw__card + .sl-hiw__card {
-      margin-top: 65vh;
     }
   {% endif %}
 
@@ -285,11 +328,32 @@
       #shopify-section-{{ section.id }} .sl-hiw__cards {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
+        padding-bottom: 30vh;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__card {
+        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) + var(--i) * var(--hiw-peek));
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__card + .sl-hiw__card {
+        margin-top: 65vh;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cta {
+        position: -webkit-sticky;
+        position: sticky;
+        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) + var(--card-count) * var(--hiw-peek));
+        margin-top: 50vh;
+        padding: 1.5rem;
       }
     {% else %}
       #shopify-section-{{ section.id }} .sl-hiw__bg {
         position: absolute;
         inset: 0;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__marquee {
+        padding: 1.5rem 0;
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__cards {
@@ -298,11 +362,11 @@
         flex-direction: column;
         gap: {{ section.settings.card_gap }}px;
       }
-    {% endif %}
 
-    #shopify-section-{{ section.id }} .sl-hiw__cta {
-      padding: 2rem 1.5rem 1rem;
-    }
+      #shopify-section-{{ section.id }} .sl-hiw__cta {
+        padding: 2rem 1.5rem 1rem;
+      }
+    {% endif %}
 
     #shopify-section-{{ section.id }} .sl-hiw__cta .button {
       width: 100%;
@@ -313,20 +377,25 @@
      DESKTOP
      ═══════════════════════════════════════════ */
   @media screen and (min-width: 750px) {
-    #shopify-section-{{ section.id }} .sl-hiw__marquee {
-      padding-top: 1.5rem;
-    }
-
-    #shopify-section-{{ section.id }} .sl-hiw__content {
-      max-width: var(--page-width, 1200px);
-      margin: -4rem auto 0;
-      padding: 0 3rem 6rem;
-    }
-
     {% if section.settings.enable_sticky %}
       #shopify-section-{{ section.id }} .sl-hiw__cards {
-        max-width: 700px;
+        max-width: var(--page-width, 1200px);
         margin: 0 auto;
+        padding: 0 3rem;
+        padding-bottom: 40vh;
+        display: grid;
+        grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+        gap: {{ section.settings.card_gap }}px;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__card {
+        align-self: start;
+        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px));
+        margin-top: calc(var(--i) * 25vh);
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cta {
+        padding-top: 2.5rem;
       }
     {% else %}
       #shopify-section-{{ section.id }} .sl-hiw__bg {
@@ -334,28 +403,59 @@
         inset: 0;
       }
 
+      #shopify-section-{{ section.id }} .sl-hiw__header {
+        padding: 2rem 3rem 1rem;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__marquee {
+        padding-top: 1.5rem;
+      }
+
       #shopify-section-{{ section.id }} .sl-hiw__cards {
+        max-width: var(--page-width, 1200px);
+        margin: 0 auto;
+        padding: 0 3rem;
         display: grid;
         grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
         gap: {{ section.settings.card_gap }}px;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cta {
+        padding-top: 2.5rem;
       }
     {% endif %}
 
     #shopify-section-{{ section.id }} .sl-hiw__card-heading {
       font-size: 2.8rem;
     }
-
-    #shopify-section-{{ section.id }} .sl-hiw__cta {
-      padding-top: 2.5rem;
-    }
-  }
-
-  @media screen and (min-width: 990px) {
-    #shopify-section-{{ section.id }} .sl-hiw__content {
-      padding: 0 5rem 8rem;
-    }
   }
 </style>
+
+{% if section.settings.enable_sticky %}
+<script>
+  (function() {
+    function measure() {
+      var el = document.getElementById('sl-hiw-{{ section.id }}');
+      if (!el) return;
+      var header = el.querySelector('.sl-hiw__header');
+      var marquee = el.querySelector('.sl-hiw__marquee');
+      el.style.setProperty('--hiw-header-h', (header ? header.offsetHeight : 0) + 'px');
+      el.style.setProperty('--hiw-marquee-h', (marquee ? marquee.offsetHeight : 0) + 'px');
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', measure);
+    } else {
+      measure();
+    }
+    window.addEventListener('resize', measure);
+    if (Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.detail.sectionId === '{{ section.id }}') setTimeout(measure, 100);
+      });
+    }
+  })();
+</script>
+{% endif %}
 
 {% schema %}
 {
@@ -419,12 +519,52 @@
     },
     {
       "type": "header",
+      "content": "Section Heading"
+    },
+    {
+      "type": "text",
+      "id": "section_subheading",
+      "label": "Subheading",
+      "info": "Small uppercase text above the heading"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading",
+      "default": "Getting started is effortless"
+    },
+    {
+      "type": "select",
+      "id": "section_heading_size",
+      "label": "Heading Size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" },
+        { "value": "hxl", "label": "Extra Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "color",
+      "id": "section_heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "section_subheading_color",
+      "label": "Subheading Color",
+      "default": "#c4c4a0"
+    },
+    {
+      "type": "header",
       "content": "Layout"
     },
     {
       "type": "select",
       "id": "columns",
-      "label": "Columns (Desktop)",
+      "label": "Columns (Desktop, non-sticky)",
       "options": [
         { "value": "2", "label": "2 Columns" },
         { "value": "3", "label": "3 Columns" },
@@ -435,7 +575,7 @@
     {
       "type": "range",
       "id": "card_gap",
-      "label": "Gap Between Cards (Desktop)",
+      "label": "Gap Between Cards (non-sticky)",
       "min": 0,
       "max": 40,
       "step": 4,
@@ -444,31 +584,31 @@
     },
     {
       "type": "header",
-      "content": "Mobile Sticky Effect"
+      "content": "Sticky Scroll Effect"
     },
     {
       "type": "checkbox",
       "id": "enable_sticky",
       "label": "Enable sticky scroll",
-      "info": "Cards stack on top of each other as you scroll on mobile. When off, cards display in a simple vertical list.",
+      "info": "Cards stack on top of each other as you scroll, on all devices. When off, cards display in a grid (desktop) or vertical list (mobile).",
       "default": true
     },
     {
       "type": "range",
       "id": "peek_height",
       "label": "Card Peek Height",
-      "info": "How much of each card peeks through when stacked",
+      "info": "How much of each card's header peeks through when stacked",
       "min": 40,
       "max": 80,
       "step": 2,
       "unit": "px",
-      "default": 58
+      "default": 60
     },
     {
       "type": "range",
       "id": "sticky_offset",
       "label": "Sticky Top Offset",
-      "info": "Distance from top of screen where first card sticks (account for your header height)",
+      "info": "Distance from top of screen where content starts sticking (account for your site header height)",
       "min": 0,
       "max": 150,
       "step": 5,
@@ -482,7 +622,7 @@
     {
       "type": "checkbox",
       "id": "enable_marquee",
-      "label": "Enable Scrolling Text Behind",
+      "label": "Enable Scrolling Text",
       "default": true
     },
     {
@@ -680,7 +820,8 @@
       "category": "Custom",
       "settings": {
         "enable_marquee": true,
-        "marquee_text": "HOW IT WORKS"
+        "marquee_text": "HOW IT WORKS",
+        "section_heading": "Getting started is effortless"
       },
       "blocks": [
         {
