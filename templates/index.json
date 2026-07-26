@@ -461,7 +461,7 @@
         "columns": "3",
         "card_gap": 40,
         "enable_sticky": true,
-        "peek_height": 40,
+        "peek_height": 80,
         "desktop_stagger": 25,
         "card_marquee_overlap": 30,
         "sticky_hold": 30,
