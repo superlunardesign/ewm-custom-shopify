@@ -82,22 +82,37 @@
 
 {% if section.settings.enable_animation %}
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var section = document.querySelector('#shopify-section-{{ section.id }}');
-    var target = section.querySelector('[data-sl-itb-animate]');
-    if (!target) return;
+  (function() {
+    function initSlItbAnimation() {
+      var section = document.querySelector('#shopify-section-{{ section.id }}');
+      if (!section) return;
+      var target = section.querySelector('[data-sl-itb-animate]');
+      if (!target) return;
 
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          target.classList.add('sl-itb__animate--visible');
-          observer.unobserve(entry.target);
-        }
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            target.classList.add('sl-itb__animate--visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(target);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSlItbAnimation);
+    } else {
+      initSlItbAnimation();
+    }
+
+    if (Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.detail.sectionId === '{{ section.id }}') initSlItbAnimation();
       });
-    }, { threshold: 0.15 });
-
-    observer.observe(target);
-  });
+    }
+  })();
 </script>
 {% endif %}
 
@@ -188,14 +203,21 @@
     margin-top: 0.5rem;
   }
 
-  /* Animation */
-  #shopify-section-{{ section.id }} .sl-itb__animate {
+  /* Animation - only hide when JS is available */
+  .js #shopify-section-{{ section.id }} .sl-itb__animate {
     opacity: 0;
     transform: translateY(30px);
   }
 
-  #shopify-section-{{ section.id }} .sl-itb__animate.sl-itb__animate--visible {
+  .js #shopify-section-{{ section.id }} .sl-itb__animate.sl-itb__animate--visible {
     animation: slItbFloatIn {{ section.settings.animation_duration }}ms ease-out {{ section.settings.animation_delay }}ms forwards;
+  }
+
+  /* Fallback: if no .js class on html, or in theme editor, show content */
+  .no-js #shopify-section-{{ section.id }} .sl-itb__animate,
+  .shopify-design-mode #shopify-section-{{ section.id }} .sl-itb__animate {
+    opacity: 1;
+    transform: none;
   }
 
   @keyframes slItbFloatIn {
