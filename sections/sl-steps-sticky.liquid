@@ -91,33 +91,18 @@
   </div>
 </div>
 
-{% if section.settings.enable_sticky %}
-<script>
-  (function() {
-    function fixOverflow() {
-      var el = document.querySelector('#shopify-section-{{ section.id }}');
-      if (!el) return;
-      while (el) {
-        el.style.overflowX = 'clip';
-        el.style.overflowY = 'visible';
-        el = el.parentElement;
-      }
-    }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', fixOverflow);
-    } else {
-      fixOverflow();
-    }
-    if (Shopify && Shopify.designMode) {
-      document.addEventListener('shopify:section:load', function(e) {
-        if (e.detail.sectionId === '{{ section.id }}') fixOverflow();
-      });
-    }
-  })();
-</script>
-{% endif %}
 
 <style>
+  /* ── Fix ancestor overflow for sticky (CSS-only, no JS jank) ── */
+  {% if section.settings.enable_sticky %}
+    html, body {
+      overflow-x: clip !important;
+    }
+    #shopify-section-{{ section.id }} {
+      overflow: visible !important;
+    }
+  {% endif %}
+
   /* ── Base ── */
   #shopify-section-{{ section.id }} .sl-hiw {
     position: relative;
@@ -127,11 +112,14 @@
   /* ── Background ── */
   #shopify-section-{{ section.id }} .sl-hiw__bg {
     z-index: 0;
+    position: relative;
   }
 
   #shopify-section-{{ section.id }} .sl-hiw__bg-img,
   #shopify-section-{{ section.id }} .sl-hiw__bg-video {
-    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -148,6 +136,8 @@
     overflow: hidden;
     white-space: nowrap;
     pointer-events: none;
+    position: relative;
+    z-index: 1;
   }
 
   #shopify-section-{{ section.id }} .sl-hiw__marquee-track {
@@ -255,45 +245,53 @@
   }
 
   /* ═══════════════════════════════════════════
-     MOBILE
+     STICKY MODE (all devices)
      ═══════════════════════════════════════════ */
-  @media screen and (max-width: 749px) {
+  {% if section.settings.enable_sticky %}
     #shopify-section-{{ section.id }} .sl-hiw__bg {
-      position: absolute;
-      inset: 0;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      margin-bottom: -100vh;
       z-index: 0;
     }
 
-    #shopify-section-{{ section.id }} .sl-hiw__marquee {
-      position: relative;
-      z-index: 1;
-      padding: 1.5rem 0;
+    #shopify-section-{{ section.id }} .sl-hiw__cards {
+      padding-bottom: 30vh;
     }
 
+    #shopify-section-{{ section.id }} .sl-hiw__card {
+      position: -webkit-sticky;
+      position: sticky;
+      top: calc(var(--hiw-sticky-top) + var(--i) * var(--hiw-peek));
+      box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
+    }
+
+    #shopify-section-{{ section.id }} .sl-hiw__card + .sl-hiw__card {
+      margin-top: 65vh;
+    }
+  {% endif %}
+
+  /* ═══════════════════════════════════════════
+     MOBILE
+     ═══════════════════════════════════════════ */
+  @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .sl-hiw__marquee-item {
       font-size: {{ section.settings.marquee_size | times: 0.35 | round: 0 }}px;
     }
 
     {% if section.settings.enable_sticky %}
-      #shopify-section-{{ section.id }} {
-        overflow: visible !important;
-      }
-
       #shopify-section-{{ section.id }} .sl-hiw__cards {
-        padding: 1rem 1.5rem 30vh;
-      }
-
-      #shopify-section-{{ section.id }} .sl-hiw__card {
-        position: -webkit-sticky;
-        position: sticky;
-        top: calc(var(--hiw-sticky-top) + var(--i) * var(--hiw-peek));
-        box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
-      }
-
-      #shopify-section-{{ section.id }} .sl-hiw__card + .sl-hiw__card {
-        margin-top: 65vh;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
       }
     {% else %}
+      #shopify-section-{{ section.id }} .sl-hiw__bg {
+        position: absolute;
+        inset: 0;
+      }
+
       #shopify-section-{{ section.id }} .sl-hiw__cards {
         padding: 1rem 1.5rem 2rem;
         display: flex;
@@ -312,41 +310,41 @@
   }
 
   /* ═══════════════════════════════════════════
-     DESKTOP: side-by-side grid
+     DESKTOP
      ═══════════════════════════════════════════ */
   @media screen and (min-width: 750px) {
-    /* Background covers full section */
-    #shopify-section-{{ section.id }} .sl-hiw__bg {
-      position: absolute;
-      inset: 0;
-    }
-
-    /* Marquee at top, peeking above and behind the cards */
     #shopify-section-{{ section.id }} .sl-hiw__marquee {
-      position: relative;
-      z-index: 1;
       padding-top: 1.5rem;
     }
 
-    /* Content overlaps bottom of marquee text */
     #shopify-section-{{ section.id }} .sl-hiw__content {
       max-width: var(--page-width, 1200px);
       margin: -4rem auto 0;
       padding: 0 3rem 6rem;
     }
 
-    /* Card grid */
-    #shopify-section-{{ section.id }} .sl-hiw__cards {
-      display: grid;
-      grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
-      gap: {{ section.settings.card_gap }}px;
-    }
+    {% if section.settings.enable_sticky %}
+      #shopify-section-{{ section.id }} .sl-hiw__cards {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+    {% else %}
+      #shopify-section-{{ section.id }} .sl-hiw__bg {
+        position: absolute;
+        inset: 0;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cards {
+        display: grid;
+        grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+        gap: {{ section.settings.card_gap }}px;
+      }
+    {% endif %}
 
     #shopify-section-{{ section.id }} .sl-hiw__card-heading {
       font-size: 2.8rem;
     }
 
-    /* Button */
     #shopify-section-{{ section.id }} .sl-hiw__cta {
       padding-top: 2.5rem;
     }
