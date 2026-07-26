@@ -419,6 +419,19 @@
     "sl_skin_concern_hzeVEG": {
       "type": "sl-skin-concern",
       "blocks": {
+        "concern_tQkHGG": {
+          "type": "concern",
+          "settings": {
+            "concern_label": "Acne & Breakouts",
+            "symptoms": "Persistent pimples, redness, and inflammation.",
+            "service_subheading": "TRY OUR",
+            "service_title": "Clear Skin Facial",
+            "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5434.jpg",
+            "service_description": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
+            "button_text": "BOOK HERE",
+            "button_link": ""
+          }
+        },
         "concern_BX8qXY": {
           "type": "concern",
           "settings": {
@@ -457,6 +470,7 @@
         }
       },
       "block_order": [
+        "concern_tQkHGG",
         "concern_BX8qXY",
         "concern_8AEGbt",
         "concern_jyT88p"
