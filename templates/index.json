@@ -455,20 +455,20 @@
           "type": "step",
           "settings": {
             "heading": "Book an Appointment",
-            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+            "text": "<p>Select the service you're interested in and click \"Book Now.\" You'll be taken to our booking page where select your booking date, time, and preferences.</p>"
           }
         },
         "step_AyhNjf": {
           "type": "step",
           "settings": {
-            "heading": "Arrive with Clean Skin",
-            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+            "heading": "Come Prepared",
+            "text": "<p>You'll receive a confirmation email with pre-appointment forms, and the optimal way to arrive at your appointment (clean skin please!).</p>"
           }
         },
         "step_nzNRMp": {
           "type": "step",
           "settings": {
-            "heading": "Enjoy your Spa Experience",
+            "heading": "Experience Skin Heaven",
             "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
           }
         }
