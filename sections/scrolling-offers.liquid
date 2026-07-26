@@ -12,7 +12,7 @@
   - service_name: Name of the service
 {% endcomment %}
 
-<section class="infinite-scroll-section" style="background-color: {{ section.settings.background_color | default: '#8b7cb6' }}; color: {{ section.settings.text_color | default: '#ffffff' }}; margin-top: {{ section.settings.margin_top }}px; margin-bottom: {{ section.settings.margin_bottom }}px; z-index: {{ section.settings.z_index }}; position: relative;">
+<section class="infinite-scroll-section" style="background-color: {{ section.settings.background_color | default: '#8b7cb6' }}; color: {{ section.settings.text_color | default: '#ffffff' }};">
   <div class="scroll-container">
     {% if section.settings.static_text != blank %}
       <p class="static-text">{{ section.settings.static_text }}</p>
@@ -46,11 +46,7 @@
   }
   
   .scroll-container {
-    {% if section.settings.full_width %}
-      max-width: 100%;
-    {% else %}
-      max-width: 1200px;
-    {% endif %}
+    max-width: 1200px;
     margin: 0 auto;
     text-align: center;
   }
@@ -77,12 +73,12 @@
     white-space: nowrap;
   }
   
-  .section-{{ section.id }} .service-item {
-    font-size: {{ section.settings.service_font_size }}px;
+  .service-item {
+    font-size: 48px;
     font-weight: 300;
     margin: 0;
     padding: 0 60px;
-    line-height: {{ section.settings.service_line_height }};
+    line-height: 1;
     white-space: nowrap;
     flex-shrink: 0;
     display: inline-block;
@@ -113,15 +109,15 @@
       margin-bottom: 15px;
     }
     
-    .section-{{ section.id }} .service-item {
-      font-size: {{ section.settings.service_font_size | times: 0.67 | round: 0 }}px;
+    .service-item {
+      font-size: 32px;
       padding: 0 40px;
     }
   }
-
+  
   @media (max-width: 480px) {
-    .section-{{ section.id }} .service-item {
-      font-size: {{ section.settings.service_font_size | times: 0.5 | round: 0 }}px;
+    .service-item {
+      font-size: 24px;
       padding: 0 30px;
     }
   }
@@ -158,13 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
       "default": "WE OFFER"
     },
     {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Full Width",
-      "info": "Removes the max-width container so the section stretches edge to edge",
-      "default": false
-    },
-    {
       "type": "color",
       "id": "background_color",
       "label": "Background Color",
@@ -185,65 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
       "step": 1,
       "default": 5,
       "info": "Lower numbers = faster scrolling"
-    },
-    {
-      "type": "header",
-      "content": "Text Size"
-    },
-    {
-      "type": "range",
-      "id": "service_font_size",
-      "label": "Service Text Size",
-      "min": 16,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "default": 48
-    },
-    {
-      "type": "range",
-      "id": "service_line_height",
-      "label": "Text Line Height",
-      "min": 1.0,
-      "max": 3.0,
-      "step": 0.1,
-      "default": 1.0
-    },
-    {
-      "type": "header",
-      "content": "Spacing & Layering"
-    },
-    {
-      "type": "range",
-      "id": "margin_top",
-      "label": "Margin Top",
-      "min": -200,
-      "max": 200,
-      "step": 5,
-      "unit": "px",
-      "default": 0,
-      "info": "Negative values overlap the section above"
-    },
-    {
-      "type": "range",
-      "id": "margin_bottom",
-      "label": "Margin Bottom",
-      "min": -200,
-      "max": 200,
-      "step": 5,
-      "unit": "px",
-      "default": 0,
-      "info": "Negative values overlap the section below"
-    },
-    {
-      "type": "range",
-      "id": "z_index",
-      "label": "Layer Order (z-index)",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "default": 1,
-      "info": "Higher = in front. Set to 0 to sit behind adjacent sections."
     }
   ],
   "blocks": [

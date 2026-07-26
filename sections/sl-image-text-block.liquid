@@ -184,7 +184,12 @@
 
   #shopify-section-{{ section.id }} .sl-itb__container {
     max-width: var(--page-width, 1200px);
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    {% unless section.settings.enable_scroll_text %}
+      margin-top: 0;
+    {% endunless %}
+    margin-bottom: 0;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
