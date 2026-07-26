@@ -689,7 +689,7 @@
         "overlap_amount": 80,
         "vertical_inset": 30,
         "desktop_bio_max_height": 250,
-        "mobile_bio_max_height": 300,
+        "mobile_bio_max_height": 200,
         "button_style": "primary",
         "color_scheme": "background-1",
         "content_background": "#f5f0eb",
