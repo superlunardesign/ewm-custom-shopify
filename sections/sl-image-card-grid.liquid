@@ -156,7 +156,7 @@
   /* ── Horizontal marquee (desktop) ── */
   #shopify-section-{{ section.id }} .sl-icg__marquee {
     position: absolute;
-    top: 50%;
+    top: calc(50% + {{ section.settings.marquee_offset_desktop | default: 0 }}px);
     left: 0;
     right: 0;
     transform: translateY(-50%);
@@ -189,7 +189,7 @@
   /* ── Vertical marquee (mobile) ── */
   #shopify-section-{{ section.id }} .sl-icg__marquee-v {
     position: absolute;
-    top: 0;
+    top: {{ section.settings.marquee_offset_mobile | default: 0 }}px;
     left: -0.5rem;
     bottom: 0;
     z-index: 1;
@@ -234,8 +234,21 @@
 
   #shopify-section-{{ section.id }} .sl-icg__card-media {
     overflow: hidden;
-    aspect-ratio: {{ section.settings.image_ratio }};
+    {% if section.settings.card_height_desktop > 0 %}
+      height: {{ section.settings.card_height_desktop }}px;
+    {% else %}
+      aspect-ratio: {{ section.settings.image_ratio }};
+    {% endif %}
     position: relative;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .sl-icg__card-media {
+      {% if section.settings.card_height_mobile > 0 %}
+        height: {{ section.settings.card_height_mobile }}px;
+        aspect-ratio: unset;
+      {% endif %}
+    }
   }
 
   #shopify-section-{{ section.id }} .sl-icg__card-img {
@@ -461,6 +474,28 @@
       "default": "3 / 4"
     },
     {
+      "type": "range",
+      "id": "card_height_desktop",
+      "label": "Card Height — Desktop",
+      "info": "Set to 0 to use aspect ratio instead",
+      "min": 0,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_height_mobile",
+      "label": "Card Height — Mobile",
+      "info": "Set to 0 to match desktop",
+      "min": 0,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
       "type": "header",
       "content": "Optional Heading"
     },
@@ -666,6 +701,28 @@
       "step": 5,
       "unit": "s",
       "default": 20
+    },
+    {
+      "type": "range",
+      "id": "marquee_offset_desktop",
+      "label": "Marquee Vertical Offset (Desktop)",
+      "info": "Shift marquee up (negative) or down (positive) from center",
+      "min": -300,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "marquee_offset_mobile",
+      "label": "Marquee Vertical Offset (Mobile)",
+      "info": "Shift vertical marquee down from top",
+      "min": -200,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "header",
