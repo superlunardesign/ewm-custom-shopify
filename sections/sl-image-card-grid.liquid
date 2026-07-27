@@ -164,9 +164,9 @@
   #shopify-section-{{ section.id }} .sl-icg__marquee {
     position: absolute;
     top: calc(50% + {{ section.settings.marquee_offset_desktop | default: 0 }}px);
-    left: -5rem;
-    right: -5rem;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
     z-index: 1;
     overflow: hidden;
     white-space: nowrap;
