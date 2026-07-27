@@ -79,6 +79,9 @@
                     {% if block.settings.description != blank %}
                       <span class="sl-rp__card-desc">{{ block.settings.description }}</span>
                     {% endif %}
+                    {% if block.settings.last_updated != blank %}
+                      <span class="sl-rp__card-updated">Updated {{ block.settings.last_updated }}</span>
+                    {% endif %}
                   </span>
                   <span class="sl-rp__card-arrow">&rarr;</span>
                 </button>
@@ -265,6 +268,14 @@
     font-weight: 400;
     color: {{ section.settings.card_desc_color }};
     line-height: 1.5;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card-updated {
+    font-family: var(--font-body-family);
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #999;
   }
 
   #shopify-section-{{ section.id }} .sl-rp__card-arrow {
@@ -711,6 +722,12 @@
           "id": "file_url",
           "label": "File URL",
           "info": "Upload your PDF in Settings > Files, then paste the link here"
+        },
+        {
+          "type": "text",
+          "id": "last_updated",
+          "label": "Last Updated",
+          "info": "Optional. e.g. 'July 2026' — shown as small gray text on the card"
         },
         {
           "type": "select",
