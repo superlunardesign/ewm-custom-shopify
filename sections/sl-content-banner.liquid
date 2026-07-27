@@ -140,15 +140,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 36px;
-  font-family: var(--font-heading-family);
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  padding: {{ section.settings.button_padding_y | default: 14 }}px {{ section.settings.button_padding_x | default: 36 }}px;
+  {% if section.settings.button_font == 'body' %}
+    font-family: var(--font-body-family);
+  {% else %}
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+  {% endif %}
+  font-size: {{ section.settings.button_font_size | default: 14 }}px;
+  font-weight: {{ section.settings.button_font_weight | default: '500' }};
+  text-transform: {{ section.settings.button_text_transform | default: 'uppercase' }};
+  letter-spacing: {{ section.settings.button_letter_spacing | default: 1 | times: 0.01 }}em;
   text-decoration: none;
   cursor: pointer;
+  border-radius: {{ section.settings.button_border_radius | default: 0 }}px;
   transition: all 0.3s ease;
+}
+
+#shopify-section-{{ section.id }} .sl-cb__button a:hover,
+#shopify-section-{{ section.id }} .sl-cb__button span:hover {
+  opacity: {{ section.settings.button_hover_opacity | default: 85 | times: 0.01 }};
 }
 
 /* Spacer block */
@@ -426,6 +437,106 @@
       "step": 1,
       "unit": "px",
       "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Button Styling"
+    },
+    {
+      "type": "select",
+      "id": "button_font",
+      "label": "Button font",
+      "options": [
+        { "value": "heading", "label": "Heading Font" },
+        { "value": "body", "label": "Body Font" }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Button font weight",
+      "options": [
+        { "value": "400", "label": "Regular (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semi-bold (600)" },
+        { "value": "700", "label": "Bold (700)" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "select",
+      "id": "button_text_transform",
+      "label": "Button text transform",
+      "options": [
+        { "value": "uppercase", "label": "Uppercase" },
+        { "value": "none", "label": "None" },
+        { "value": "capitalize", "label": "Capitalize" },
+        { "value": "lowercase", "label": "Lowercase" }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "button_letter_spacing",
+      "label": "Button letter spacing",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "unit": "px",
+      "default": 10,
+      "info": "In hundredths of an em (10 = 0.1em)"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "label": "Button vertical padding",
+      "min": 6,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "label": "Button horizontal padding",
+      "min": 12,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "button_hover_opacity",
+      "label": "Button hover opacity",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 85,
+      "info": "100% = no change on hover"
     },
     {
       "type": "header",
