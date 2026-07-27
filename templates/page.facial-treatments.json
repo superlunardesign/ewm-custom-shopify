@@ -892,42 +892,6 @@
         "padding_bottom": 36
       }
     },
-    "sl_image_text_block_KUa468": {
-      "type": "sl-image-text-block",
-      "name": "EWM Image + Text Block",
-      "settings": {
-        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5777.jpg",
-        "image_position": "left",
-        "desktop_height": 500,
-        "mobile_height": 300,
-        "image_position_x": 50,
-        "image_position_y": 50,
-        "image_fit": "cover",
-        "subheading": "",
-        "heading": "How to Prepare for Your Facial Treatment",
-        "heading_size": "h1",
-        "spread_content": true,
-        "text": "<ul><li><strong>Arrive With Clean Skin</strong></li><li><strong>Know Your Skin Goals</strong></li><li><strong>Plan for Post-Treatment</strong></li><li><strong>Fill Out The Proper Materials ↓ </strong></li></ul>",
-        "show_button": true,
-        "button_text": "BOOK A TREATMENT",
-        "button_link": "",
-        "button_style": "primary",
-        "color_scheme": "background-1",
-        "content_background": "#f5f0eb",
-        "heading_color": "#1a1a1a",
-        "subheading_color": "#6b6b6b",
-        "text_color": "#4a4a4a",
-        "enable_anchor": false,
-        "anchor_id": "",
-        "scroll_offset": 80,
-        "enable_animation": true,
-        "animation_duration": 600,
-        "animation_delay": 200,
-        "enable_sticky": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "sl_flexible_list_mMk3PN": {
       "type": "sl-flexible-list",
       "blocks": {
@@ -938,15 +902,6 @@
             "icon_class": "fas fa-soap",
             "heading": "Arrive With Clean Skin",
             "text": "Please come with clean skin if possible, or arrive a few minutes early for cleansing. Skip heavy makeup on treatment day if you can."
-          }
-        },
-        "value_prop_YbcJUy": {
-          "type": "value_prop",
-          "settings": {
-            "icon_type": "fontawesome",
-            "icon_class": "fas fa-pencil",
-            "heading": "Fill Out the Proper Materials",
-            "text": "Complete your intake form before arrival to maximize treatment time. Let us know about allergies, sensitivities, and current medications."
           }
         },
         "value_prop_iC4wmh": {
@@ -966,13 +921,22 @@
             "heading": "Plan for Post-Treatment",
             "text": "Avoid scheduling important events immediately after. Your skin may be slightly pink and will need time to absorb the benefits. No gym or heavy makeup for 24 hours."
           }
+        },
+        "value_prop_YbcJUy": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-pencil",
+            "heading": "Fill Out the Proper Materials",
+            "text": "Complete your intake form before arrival to maximize treatment time. Let us know about allergies, sensitivities, and current medications. Scroll down for the form ↓"
+          }
         }
       },
       "block_order": [
         "value_prop_8CJTR7",
-        "value_prop_YbcJUy",
         "value_prop_iC4wmh",
-        "value_prop_tyJmpV"
+        "value_prop_tyJmpV",
+        "value_prop_YbcJUy"
       ],
       "name": "Flexible Value Props",
       "settings": {
@@ -1021,6 +985,42 @@
         "animation_delay": 100
       }
     },
+    "sl_image_text_block_KUa468": {
+      "type": "sl-image-text-block",
+      "name": "EWM Image + Text Block",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5777.jpg",
+        "image_position": "left",
+        "desktop_height": 500,
+        "mobile_height": 300,
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "image_fit": "cover",
+        "subheading": "Don't forget",
+        "heading": "Fill Out The Proper Forms Before Arriving",
+        "heading_size": "h1",
+        "spread_content": true,
+        "text": "<p>Complete your intake form before arrival to maximize treatment time. Let us know about allergies, sensitivities, and current medications.</p>",
+        "show_button": true,
+        "button_text": "BOOK A TREATMENT",
+        "button_link": "",
+        "button_style": "primary",
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "enable_anchor": false,
+        "anchor_id": "",
+        "scroll_offset": 80,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "enable_sticky": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "sl_content_banner_rhVR7D": {
       "type": "sl-content-banner",
       "blocks": {
@@ -1049,42 +1049,6 @@
             "text": "<p>This ensures a smooth and efficient experience so you can settle in, relax, and start enjoying your facial treatment as soon as possible after you arrive.</p>"
           }
         },
-        "text_pjaceW": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>Know Your Skin Goals</h2>"
-          }
-        },
-        "text_hyrKRM": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Think about what bothers you most about your skin and what you'd like to achieve. The more specific you are, the better we can customize your treatment.</p>"
-          }
-        },
-        "text_V8PKXE": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>Plan For Post Treatment</h2>"
-          }
-        },
-        "text_UtmtTb": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Avoid scheduling important events immediately after. Your skin may be slightly pink and will need time to absorb the benefits. No gym or heavy makeup for 24 hours.</p>"
-          }
-        },
-        "text_PNnLnF": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>Fill Out the Proper Materials</h2>"
-          }
-        },
-        "text_VMbQ99": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Complete your intake form before arrival to maximize treatment time. Let us know about allergies, sensitivities, and current medications.</p>"
-          }
-        },
         "button_jgbDi7": {
           "type": "button",
           "settings": {
@@ -1102,16 +1066,7 @@
         "spacer_VRpA8y",
         "text_a3pETy",
         "text_Xz8MNg",
-        "text_pjaceW",
-        "text_hyrKRM",
-        "text_V8PKXE",
-        "text_UtmtTb",
-        "text_PNnLnF",
-        "text_VMbQ99",
         "button_jgbDi7"
-      ],
-      "custom_css": [
-        "h2 {color: white;}"
       ],
       "name": "Content Banner",
       "settings": {
@@ -1337,8 +1292,8 @@
     "sl_marquee_wGAN4T",
     "sl_services_menu_EnDQbw",
     "sl_image_card_grid_zanmWg",
-    "sl_image_text_block_KUa468",
     "sl_flexible_list_mMk3PN",
+    "sl_image_text_block_KUa468",
     "sl_content_banner_rhVR7D",
     "main",
     "sl_custom_faq_r7Q6ht",
