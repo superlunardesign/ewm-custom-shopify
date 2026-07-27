@@ -531,11 +531,6 @@
         "padding_top": "Top padding",
         "padding_bottom": "Bottom padding"
       },
-      "notify": {
-        "enable": "Enable back in stock",
-        "notify_text": "Notify Success Text",
-        "notify_error": "Notify Error Text"
-      },
       "colors": {
         "accent_1": {
           "label": "Accent 1"
@@ -4534,9 +4529,6 @@
         },
         "sku": {
           "name": "Sku"
-        },
-        "notify-form": {
-          "name": "Notify form"
         },
         "fbt": {
           "name": "Bought Together"

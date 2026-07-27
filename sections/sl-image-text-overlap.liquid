@@ -1,0 +1,951 @@
+{% comment %}
+  EWM Image + Text Overlap
+  Image with overlapping text block and optional scrolling marquee text behind
+{% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .sl-ito {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-ito {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% if section.settings.enable_anchor %}
+  <div id="{{ section.settings.anchor_id }}" style="position: relative; top: -{{ section.settings.scroll_offset }}px;"></div>
+{% endif %}
+
+<div class="sl-ito color-{{ section.settings.color_scheme }} gradient">
+  {% if section.settings.enable_scroll_text %}
+    <div class="sl-ito__scroll-text" aria-hidden="true">
+      <div class="sl-ito__scroll-track" style="--scroll-duration: {{ section.settings.scroll_speed }}s;">
+        {% for i in (1..10) %}
+          <span class="sl-ito__scroll-item">{{ section.settings.scroll_text }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="sl-ito__container">
+    <div class="sl-ito__grid{% if section.settings.image_position == 'right' %} sl-ito__grid--reversed{% endif %}{% if section.settings.enable_animation %} sl-ito__animate{% endif %}"
+      {% if section.settings.enable_animation %}
+        data-sl-ito-animate
+      {% endif %}
+    >
+      <div class="sl-ito__media">
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1500
+            | image_tag:
+              sizes: '(min-width: 750px) 60vw, 100vw',
+              widths: '375, 550, 750, 1000, 1250, 1500',
+              class: 'sl-ito__img',
+              loading: 'lazy'
+          }}
+        {% else %}
+          <div class="sl-ito__placeholder">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="sl-ito__content">
+        {% if section.settings.spread_content %}
+          <div class="sl-ito__content-top">
+        {% endif %}
+
+        {% assign opened_bottom = false %}
+        {% for block in section.blocks %}
+          {% if section.settings.spread_content and opened_bottom == false %}
+            {% if block.type == 'text' or block.type == 'button' or block.type == 'service_link' %}
+              {% assign opened_bottom = true %}
+              </div>
+              <div class="sl-ito__content-bottom">
+            {% endif %}
+          {% endif %}
+
+          {% case block.type %}
+            {% when 'subheading' %}
+              {% if block.settings.text != blank %}
+                <p class="sl-ito__subheading" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+              {% endif %}
+
+            {% when 'heading' %}
+              {% if block.settings.text != blank %}
+                <h2 class="sl-ito__heading {{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+              {% endif %}
+
+            {% when 'text' %}
+              {% if block.settings.text != blank %}
+                <div class="sl-ito__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+              {% endif %}
+
+            {% when 'button' %}
+              {% if block.settings.text != blank %}
+                <div class="sl-ito__button-wrap" {{ block.shopify_attributes }}>
+                  <a
+                    {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
+                    class="button{% if block.settings.style == 'secondary' %} button--secondary{% endif %}"
+                  >
+                    {{ block.settings.text | escape }}
+                  </a>
+                </div>
+              {% endif %}
+
+            {% when 'spacer' %}
+              <div class="sl-ito__spacer" style="height: {{ block.settings.height }}px;" {{ block.shopify_attributes }}></div>
+
+            {% when 'service_link' %}
+              <a
+                href="{{ block.settings.link | default: '#' }}"
+                class="sl-ito__service-link"
+                style="
+                  --sl-link-border: {{ block.settings.border_color }};
+                  --sl-link-text: {{ block.settings.text_color }};
+                  --sl-link-arrow: {{ block.settings.arrow_color }};
+                "
+                {{ block.shopify_attributes }}
+              >
+                <span class="sl-ito__service-link-text">{{ block.settings.text }}</span>
+                <span class="sl-ito__service-link-arrow">&rarr;</span>
+              </a>
+          {% endcase %}
+        {% endfor %}
+
+        {% if section.settings.spread_content %}
+          {% if opened_bottom %}
+            </div>
+          {% else %}
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if section.settings.enable_animation %}
+<script>
+  (function() {
+    function initSlItoAnimation() {
+      var section = document.querySelector('#shopify-section-{{ section.id }}');
+      if (!section) return;
+      var target = section.querySelector('[data-sl-ito-animate]');
+      if (!target) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            target.classList.add('sl-ito__animate--visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(target);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSlItoAnimation);
+    } else {
+      initSlItoAnimation();
+    }
+
+    if (Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.detail.sectionId === '{{ section.id }}') initSlItoAnimation();
+      });
+    }
+  })();
+</script>
+{% endif %}
+
+<style>
+  /* Scrolling text */
+  {% if section.settings.enable_scroll_text %}
+    #shopify-section-{{ section.id }} .sl-ito {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__scroll-text {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: {{ section.settings.scroll_text_padding }}px 0;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__scroll-track {
+      display: inline-flex;
+      animation: slItoScroll var(--scroll-duration) linear infinite;
+      white-space: nowrap;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__scroll-item {
+      font-family: var(--font-heading-family);
+      font-weight: var(--font-heading-weight);
+      font-style: var(--font-heading-style);
+      font-size: {{ section.settings.scroll_font_size }}px;
+      line-height: 1;
+      color: {{ section.settings.scroll_text_color }};
+      padding: 0 40px;
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__container {
+      margin-top: -{{ section.settings.scroll_overlap }}px;
+    }
+
+    @keyframes slItoScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .sl-ito__container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--page-width, 1200px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__media {
+    overflow: hidden;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: {{ section.settings.image_fit }};
+    object-position: {{ section.settings.image_position_x }}% {{ section.settings.image_position_y }}%;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__placeholder {
+    background: rgb(var(--color-base-background-2));
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__placeholder .placeholder-svg {
+    width: 60%;
+    height: auto;
+    fill: currentColor;
+    opacity: 0.3;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__content {
+    display: flex;
+    flex-direction: column;
+    {% if section.settings.spread_content %}
+      justify-content: space-between;
+    {% else %}
+      justify-content: center;
+    {% endif %}
+    padding: 2.5rem;
+    background-color: {{ section.settings.content_background }};
+  }
+
+  {% if section.settings.spread_content %}
+    #shopify-section-{{ section.id }} .sl-ito__content-bottom {
+      margin-top: auto;
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .sl-ito__spacer {
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__subheading {
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: {{ section.settings.subheading_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    color: {{ section.settings.heading_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__text {
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__text p {
+    margin-bottom: 1em;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__button-wrap {
+    margin-top: 0.5rem;
+  }
+
+  /* Service Links */
+  #shopify-section-{{ section.id }} .sl-ito__service-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--sl-link-border, #ccc);
+    background: transparent;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__service-link:last-child {
+    border-bottom: 1px solid var(--sl-link-border, #ccc);
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__service-link-text {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-size: 1.6rem;
+    color: var(--sl-link-text, #1a1a1a);
+    transition: transform 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__service-link-arrow {
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--sl-link-arrow, #1a1a1a);
+    transition: transform 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-ito__service-link:hover .sl-ito__service-link-text,
+  #shopify-section-{{ section.id }} .sl-ito__service-link:hover .sl-ito__service-link-arrow {
+    transform: scale(1.05);
+  }
+
+  /* Animation */
+  .js #shopify-section-{{ section.id }} .sl-ito__animate {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .js #shopify-section-{{ section.id }} .sl-ito__animate.sl-ito__animate--visible {
+    animation: slItoFloatIn {{ section.settings.animation_duration }}ms ease-out {{ section.settings.animation_delay }}ms forwards;
+  }
+
+  .no-js #shopify-section-{{ section.id }} .sl-ito__animate,
+  .shopify-design-mode #shopify-section-{{ section.id }} .sl-ito__animate {
+    opacity: 1;
+    transform: none;
+  }
+
+  @keyframes slItoFloatIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .sl-ito__media {
+      min-height: {{ section.settings.mobile_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__content {
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+      margin-top: -3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__button-wrap .button {
+      max-width: 100%;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+  }
+
+  /* Desktop */
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-ito__container {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__grid {
+      grid-template-columns: {{ section.settings.image_width }}fr {{ section.settings.content_width }}fr;
+      grid-template-rows: minmax({{ section.settings.desktop_height }}px, auto);
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__media {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__content {
+      grid-column: 2;
+      grid-row: 1;
+      z-index: 1;
+      padding: 3rem;
+      align-self: stretch;
+      margin-left: -{{ section.settings.overlap_amount }}px;
+      margin-top: {{ section.settings.vertical_inset }}px;
+      margin-bottom: {{ section.settings.vertical_inset }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__button-wrap .button {
+      max-width: 100%;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+
+    /* Reversed: image right, text left */
+    #shopify-section-{{ section.id }} .sl-ito__grid--reversed {
+      grid-template-columns: {{ section.settings.content_width }}fr {{ section.settings.image_width }}fr;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__grid--reversed .sl-ito__media {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    #shopify-section-{{ section.id }} .sl-ito__grid--reversed .sl-ito__content {
+      grid-column: 1;
+      grid-row: 1;
+      margin-left: 0;
+      margin-right: -{{ section.settings.overlap_amount }}px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .sl-ito__content {
+      padding: 4rem;
+    }
+  }
+</style>
+
+{% if section.settings.enable_sticky %}
+<script>
+  (function() {
+    var el = document.getElementById('shopify-section-{{ section.id }}');
+    if (!el) return;
+    var prev = el.previousElementSibling;
+    while (prev && !prev.classList.contains('shopify-section')) {
+      prev = prev.previousElementSibling;
+    }
+    if (prev) {
+      prev.style.position = 'sticky';
+      prev.style.top = '0';
+    }
+  })();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "EWM Image + Text Overlap",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "info": "Image side on desktop. On mobile, image always appears above."
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop Height",
+      "info": "Minimum height of the section on desktop",
+      "min": 300,
+      "max": 800,
+      "step": 25,
+      "unit": "px",
+      "default": 550
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile Image Height",
+      "info": "Height of the image when stacked on mobile",
+      "min": 200,
+      "max": 500,
+      "step": 25,
+      "unit": "px",
+      "default": 350
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image Fill Mode",
+      "options": [
+        { "value": "cover", "label": "Cover (fill & crop)" },
+        { "value": "contain", "label": "Contain (fit inside)" },
+        { "value": "fill", "label": "Stretch to fill" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "image_position_x",
+      "label": "Image Focal Point (Horizontal)",
+      "info": "0% = left, 50% = center, 100% = right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_position_y",
+      "label": "Image Focal Point (Vertical)",
+      "info": "0% = top, 50% = center, 100% = bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Overlap Layout"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image Column Width",
+      "info": "Relative width of the image column",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content Column Width",
+      "info": "Relative width of the content column",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "overlap_amount",
+      "label": "Overlap Amount",
+      "info": "How far the content panel extends over the image (in px)",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "vertical_inset",
+      "label": "Vertical Inset",
+      "info": "Space above/below the content panel where the image peeks through. Set to 0 for flush edges.",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Content Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "spread_content",
+      "label": "Spread content vertically",
+      "info": "Pushes first block to top and last block to bottom of the text area. When off, all content is grouped together in the center.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Section Background",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "background-1"
+    },
+    {
+      "type": "color",
+      "id": "content_background",
+      "label": "Text Block Background",
+      "default": "#f5f0eb"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body Text Color",
+      "default": "#4a4a4a"
+    },
+    {
+      "type": "header",
+      "content": "Scrolling Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll_text",
+      "label": "Enable Scrolling Text",
+      "info": "Adds a scrolling marquee behind the content",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "scroll_text",
+      "label": "Scrolling Text",
+      "default": "MEET YOUR ESTHETICIAN"
+    },
+    {
+      "type": "range",
+      "id": "scroll_font_size",
+      "label": "Scrolling Text Size",
+      "min": 30,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "scroll_text_color",
+      "label": "Scrolling Text Color",
+      "default": "#c4a882"
+    },
+    {
+      "type": "range",
+      "id": "scroll_text_padding",
+      "label": "Scrolling Text Vertical Padding",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "scroll_overlap",
+      "label": "Content Overlap",
+      "info": "How far the image+text overlaps the scrolling text",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll Speed",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Anchor Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_anchor",
+      "label": "Enable Anchor Link",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID"
+    },
+    {
+      "type": "range",
+      "id": "scroll_offset",
+      "label": "Scroll Offset",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable Float-in Animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation Duration",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "unit": "ms",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation Delay",
+      "min": 0,
+      "max": 1000,
+      "step": 100,
+      "unit": "ms",
+      "default": 200
+    },
+    {
+      "type": "header",
+      "content": "Sticky Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "Make section sticky",
+      "info": "This section appears to slide over the section above it. Will not work if the section above also uses sticky.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Your Heading Here"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Heading size",
+          "options": [
+            { "value": "h2", "label": "Small" },
+            { "value": "h1", "label": "Medium" },
+            { "value": "h0", "label": "Large" },
+            { "value": "hxl", "label": "Extra Large" },
+            { "value": "hxxl", "label": "Extra Extra Large" }
+          ],
+          "default": "h1"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Share details about your services, approach, or expertise.</p>"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Button text",
+          "default": "LEARN MORE"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Button style",
+          "options": [
+            { "value": "primary", "label": "Primary (Filled)" },
+            { "value": "secondary", "label": "Secondary (Outline)" }
+          ],
+          "default": "secondary"
+        }
+      ]
+    },
+    {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": [
+        {
+          "type": "range",
+          "id": "height",
+          "label": "Height",
+          "min": 4,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 20
+        }
+      ]
+    },
+    {
+      "type": "service_link",
+      "name": "Service Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Link Text",
+          "default": "Brazilian Wax"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color",
+          "default": "#cccccc"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#1a1a1a"
+        },
+        {
+          "type": "color",
+          "id": "arrow_color",
+          "label": "Arrow Color",
+          "default": "#1a1a1a"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EWM Image + Text Overlap",
+      "category": "Custom",
+      "blocks": [
+        { "type": "subheading", "settings": { "text": "Our Services" } },
+        { "type": "heading", "settings": { "text": "Skincare Designed for Women Who Do It All", "size": "h1" } },
+        { "type": "text", "settings": { "text": "<p>Share details about your services, approach, or expertise. This text area supports rich formatting so you can add emphasis where needed.</p>" } },
+        { "type": "button", "settings": { "text": "EXPLORE TREATMENTS", "style": "secondary" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

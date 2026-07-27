@@ -35,7 +35,7 @@ class CartItems extends HTMLElement {
     return [
       {
         id: 'main-cart-items',
-        section: document.getElementById('main-cart-items').dataset.id,
+        section: document.getElementById('main-cart-items')?.dataset.id,
         selector: '.js-contents',
       },
       {
@@ -50,7 +50,7 @@ class CartItems extends HTMLElement {
       },
       {
         id: 'main-cart-footer',
-        section: document.getElementById('main-cart-footer').dataset.id,
+        section: document.getElementById('main-cart-footer')?.dataset.id,
         selector: '.js-contents',
       }
     ];
@@ -99,7 +99,7 @@ class CartItems extends HTMLElement {
       }).catch(() => {
         this.querySelectorAll('.loading-overlay').forEach((overlay) => overlay.classList.add('hidden'));
         const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
-        errors.textContent = window.cartStrings.error;
+        if (errors) errors.textContent = window.cartStrings.error;
         this.disableLoading();
       });
   }
@@ -109,12 +109,14 @@ class CartItems extends HTMLElement {
       const lineItemError = document.getElementById(`Line-item-error-${line}`) || document.getElementById(`CartDrawer-LineItemError-${line}`);
       const quantityElement = document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
 
-      lineItemError
-        .querySelector('.cart-item__error-text')
-        .innerHTML = window.cartStrings.quantityError.replace(
-          '[quantity]',
-          quantityElement.value
-        );
+      if (lineItemError && quantityElement) {
+        lineItemError
+          .querySelector('.cart-item__error-text')
+          .innerHTML = window.cartStrings.quantityError.replace(
+            '[quantity]',
+            quantityElement.value
+          );
+      }
     }
 
     this.currentItemCount = itemCount;

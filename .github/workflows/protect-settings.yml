@@ -1,0 +1,74 @@
+name: Protect Theme Settings
+
+on:
+  push:
+    paths:
+      - 'config/settings_data.json'
+
+jobs:
+  validate-settings:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate critical settings not wiped
+        run: |
+          FILE="config/settings_data.json"
+          # Strip the non-standard comment header so we can parse as JSON
+          CLEAN=$(sed '/^\/\*/,/^\*\//d' "$FILE")
+          ERRORS=0
+
+          echo "=== Validating settings_data.json ==="
+
+          # Check header mega menu blocks exist
+          BLOCK_COUNT=$(echo "$CLEAN" | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          header = data.get('current', {}).get('sections', {}).get('header', {})
+          blocks = header.get('blocks', {})
+          print(len(blocks))
+          ")
+          if [ "$BLOCK_COUNT" -lt "1" ]; then
+            echo "::warning::Header mega menu blocks are MISSING (found $BLOCK_COUNT, expected at least 1). The Shopify sync may have wiped them."
+            ERRORS=$((ERRORS + 1))
+          else
+            echo "✓ Header mega menu blocks present ($BLOCK_COUNT found)"
+          fi
+
+          # Check footer section exists
+          FOOTER=$(echo "$CLEAN" | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          sections = data.get('current', {}).get('sections', {})
+          print('footer' in sections)
+          ")
+          if [ "$FOOTER" != "True" ]; then
+            echo "::warning::Footer section is MISSING from settings_data.json"
+            ERRORS=$((ERRORS + 1))
+          else
+            echo "✓ Footer section present"
+          fi
+
+          # Check announcement bar exists
+          ANNOUNCE=$(echo "$CLEAN" | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          sections = data.get('current', {}).get('sections', {})
+          print('announcement-bar' in sections)
+          ")
+          if [ "$ANNOUNCE" != "True" ]; then
+            echo "::warning::Announcement bar section is MISSING from settings_data.json"
+            ERRORS=$((ERRORS + 1))
+          else
+            echo "✓ Announcement bar present"
+          fi
+
+          if [ "$ERRORS" -gt "0" ]; then
+            echo ""
+            echo "::error::$ERRORS critical setting(s) appear to have been wiped by a Shopify sync. Review the commit before merging."
+            exit 1
+          fi
+
+          echo ""
+          echo "All critical settings validated successfully."

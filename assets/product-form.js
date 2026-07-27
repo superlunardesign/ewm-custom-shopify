@@ -233,7 +233,7 @@
 .product-image {
   width: 100%;
   height: 300px;
-  background: #f8f9fa;
+  background: var(--gradient-base-background-3);
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 15px;
@@ -269,7 +269,7 @@
 }
 
 .product-description {
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 14px;
   margin-bottom: 2px;
   line-height: 1;
@@ -297,16 +297,16 @@
 }
 
 .star {
-  color: #ddd;
+  color: var(--color-border-dark);
   font-size: 1rem;
 }
 
 .star--filled {
-  color: #ffd700;
+  color: var(--color-star-rating);
 }
 
 .review-count {
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 0.9rem;
 }
 
@@ -334,8 +334,8 @@
 
 .size-btn {
   padding: 6px 12px;
-  border: 1px solid #ddd;
-  background: white;
+  border: 1px solid var(--color-border-dark);
+  background: var(--gradient-base-background-1);
   border-radius: 4px;
   font-size: 0.8rem;
   cursor: pointer;
@@ -395,7 +395,7 @@
 }
 
 .price-compare {
-  color: #999;
+  color: var(--color-text-muted);
   text-decoration: line-through;
   font-size: 0.9rem;
 }
@@ -405,15 +405,15 @@
 }
 
 .price-range {
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: white;
-  border: 1px solid #ddd;
+  background: var(--gradient-base-background-1);
+  border: 1px solid var(--color-border-dark);
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -427,7 +427,7 @@
 }
 
 .carousel-btn:hover {
-  background: #f8f9fa;
+  background: var(--gradient-base-background-3);
   border-color: #333;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }

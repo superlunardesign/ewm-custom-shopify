@@ -204,8 +204,8 @@
 .article-template .artical-card-content .dt-sc-blog-tags a:hover{color: var(--gradient-base-accent-2);}
 .article-template .artical-card-content .fa { margin-right: 6px; color: var(--gradient-base-accent-2);}
 .article-template .artical-card-content > div:not(:last-child):after { content: '|';  padding: 0 10px; color: var(--color-base-accent-4);}
-#comments form input.button { background: var(--gradient-base-background-3); border: none; letter-spacing: normal; padding: 13px 30px; transition: all 300ms linear;float: right;}
-#comments form input.button:hover{background: var(--gradient-base-accent-2); color: var(--gradient-base-accent-3);} 
+#comments form input.button { background: var(--gradient-base-accent-1); color: #ffffff; border: 1.5px solid var(--gradient-base-accent-1); border-radius: 0; letter-spacing: 0.08em; padding: 10px 30px; transition: all 300ms linear; float: right; text-transform: uppercase; font-weight: 600; font-family: var(--font-heading-family);}
+#comments form input.button:hover{background: transparent; color: var(--gradient-base-accent-1);} 
 .article-template__comments-comment .custom-artical .fa{font-size: 1.8rem; color: var(--gradient-base-accent-2); margin: 0 8px;}
 .article-template__comments-comment .caption-with-letter-spacing{font-size: 16px;  letter-spacing: normal; line-height: normal;  text-transform: capitalize;margin: 0 5px;  font-weight: 500;}
 .article-template .article-template__comment-wrapper .artical-comment-content{display: flex;}

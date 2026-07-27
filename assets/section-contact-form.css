@@ -65,5 +65,5 @@
 .contact .field textarea.field__input:focus ~ .field__label{top: 40px;}
 .contact .field__input{padding: 12px 20px; height: 5rem; transition: all 0.3s linear; }
 .contact .contact__button{text-align: center; margin: 4rem auto auto auto;}
-.contact .contact__button button{width: 200px;color: var(--gradient-base-accent-1);  background: var(--gradient-base-background-3); border: 1px solid transparent; transition: all 300ms linear;}
-.contact .contact__button button:hover{background: var(--gradient-base-accent-2); color: var(--gradient-base-accent-3);}
+.contact .contact__button button{width: 200px; background: var(--gradient-base-accent-1); color: #ffffff; border: 1.5px solid var(--gradient-base-accent-1); border-radius: 0; transition: all 300ms linear; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; font-family: var(--font-heading-family);}
+.contact .contact__button button:hover{background: transparent; color: var(--gradient-base-accent-1);}

@@ -24,7 +24,7 @@ background-color: {{ section.settings.background_color }};}
     {% if section.settings.top_left_image != blank %}
       background-image: url('{{ section.settings.top_left_image | image_url: width: 400 }}');
     {% else %}
-      background-color: #f0f0f0;
+      background-color: var(--gradient-base-background-3);
     {% endif %}
     width: 10vw;
     height: 150px;
@@ -60,7 +60,7 @@ background-color: {{ section.settings.background_color }};}
     {% if section.settings.center_image != blank %}
       background-image: url('{{ section.settings.center_image | image_url: width: 800 }}');
     {% else %}
-      background-color: #f0f0f0;
+      background-color: var(--gradient-base-background-3);
     {% endif %}
     width: 20vw;
     height: auto;
@@ -97,7 +97,7 @@ background-color: {{ section.settings.background_color }};}
     {% if section.settings.bottom_right_image != blank %}
       background-image: url('{{ section.settings.bottom_right_image | image_url: width: 400 }}');
     {% else %}
-      background-color: #f0f0f0;
+      background-color: var(--gradient-base-background-3);
     {% endif %}
     width: 10vw;
     height: 150px;
@@ -314,13 +314,13 @@ background-color: {{ section.settings.background_color }};}
       "type": "text",
       "id": "subheading",
       "label": "Subheading",
-      "default": "WYOMING BASED WEDDING & ELOPEMENT PHOTOGRAPHER"
+      "default": "YOUR TRUSTED SKINCARE EXPERT"
     },
     {
       "type": "textarea",
       "id": "heading",
       "label": "Main Heading",
-      "default": "YOUR LOVE STORY ISN'T LIKE ANYONE ELSE'S. YOUR PHOTOS SHOULDN'T BE EITHER."
+      "default": "YOUR SKIN IS ONE OF A KIND. YOUR SKINCARE SHOULD BE TOO."
     },
     {
       "type": "header",
@@ -466,7 +466,7 @@ background-color: {{ section.settings.background_color }};}
     },
     {
       "type": "header",
-      "content": "Colors & Typography"
+      "content": "Colors"
     },
     {
       "type": "color",
@@ -487,13 +487,18 @@ background-color: {{ section.settings.background_color }};}
       "default": "#666666"
     },
     {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
       "type": "range",
       "id": "heading_size",
       "label": "Heading Size",
       "min": 20,
       "max": 50,
       "step": 2,
-      "default": 30
+      "default": 30,
+      "unit": "px"
     },
     {
       "type": "range",
@@ -502,7 +507,8 @@ background-color: {{ section.settings.background_color }};}
       "min": 12,
       "max": 24,
       "step": 1,
-      "default": 14
+      "default": 16,
+      "unit": "px"
     },
     {
       "type": "select",
@@ -537,7 +543,8 @@ background-color: {{ section.settings.background_color }};}
       "min": 0,
       "max": 5,
       "step": 0.5,
-      "default": 1
+      "default": 1,
+      "unit": "px"
     },
     {
       "type": "select",
@@ -590,7 +597,7 @@ background-color: {{ section.settings.background_color }};}
       "min": 10,
       "max": 20,
       "step": 1,
-      "default": 12
+      "default": 16
     },
     {
       "type": "header",

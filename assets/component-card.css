@@ -762,8 +762,8 @@ li.color-values-plus a {
 .card__content .variant-option-color li a:hover{border:1px solid rgba(var(--color-base-solid-button-labels));} */
 /*sidebar*/
 .custom-collection-list .collection-list .card .card__content .card__information .collection-count{font-size: 1.6rem; letter-spacing: normal; margin: 0 0 10px;} 
-.custom-collection-list .collection-list .card .card__content .card__information a.button{transition: all 300ms linear;background: var(--gradient-base-accent-2);  text-transform: capitalize;  letter-spacing: normal; font-weight: 400;}
-.custom-collection-list .collection-list .card .card__content .card__information a.button:hover{background: var(--gradient-base-background-3); color: var(--gradient-base-accent-3);}
+.custom-collection-list .collection-list .card .card__content .card__information a.button{transition: all 300ms linear; background: var(--gradient-base-accent-1); color: #ffffff; border: 1.5px solid var(--gradient-base-accent-1); border-radius: 0; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; font-family: var(--font-heading-family);}
+.custom-collection-list .collection-list .card .card__content .card__information a.button:hover{background: transparent; color: var(--gradient-base-accent-1);}
 .widget.product-sidebar-type-collection .product-list-style .quick-add {
     position: absolute;
   left:0;
@@ -808,10 +808,8 @@ li.color-values-plus a {
 
 .widget.product-sidebar-type-carousel, .widget-carousel{margin-bottom: 50px;}
 .widget.product-sidebar-type-carousel .swiper-sidebar-arrows div, .widget.product-sidebar-type-carousel .swiper-sidebar-arrows div,
-.widget-carousel .swiper-sidebar-arrows div{ display: flex; align-items: center; justify-content: center; width: 40px;height: 40px;  background: var(--gradient-base-background-3); transition: all 300ms linear; top: unset; bottom: -20px; transform: translate(-50%, -50%);}
+.widget-carousel .swiper-sidebar-arrows div{ display: flex; align-items: center; justify-content: center; transition: all 300ms linear; top: unset; bottom: -20px; transform: translate(-50%, -50%);}
 .swiper-sidebar-arrows .swiper-button-next{left: 60%;}
 .swiper-sidebar-arrows .swiper-button-prev{left: 40%;}
-.widget.product-sidebar-type-carousel .swiper-sidebar-arrows div:hover{background: var(--gradient-base-accent-2);}
-.widget.product-sidebar-type-carousel .swiper-button-next:after, .widget.product-sidebar-type-carousel .swiper-button-prev:after{font-size: 16px; color: var(--gradient-background);}
 .optional-sidebar .widget .swiper-container ul.swiper-wrapper{margin-bottom: 50px;}
 .widget.product-sidebar-type-carousel .swiper-container{position: relative;}

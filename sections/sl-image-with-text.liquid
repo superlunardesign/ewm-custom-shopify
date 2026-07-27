@@ -239,16 +239,30 @@
       "label": "t:sections.image-with-text.settings.content_layout.label"
     },
     {
-      "type": "color_scheme",
+      "type": "select",
       "id": "section_color_scheme",
       "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
+      "options": [
+        { "value": "background-1", "label": "t:sections.all.colors.background_1.label" },
+        { "value": "background-2", "label": "t:sections.all.colors.background_2.label" },
+        { "value": "accent-1", "label": "t:sections.all.colors.accent_1.label" },
+        { "value": "accent-2", "label": "t:sections.all.colors.accent_2.label" },
+        { "value": "inverse", "label": "t:sections.all.colors.inverse.label" }
+      ],
+      "default": "background-1"
     },
     {
-      "type": "color_scheme",
+      "type": "select",
       "id": "color_scheme",
       "label": "t:sections.multirow.settings.container_color_scheme.label",
-      "default": "scheme-1"
+      "options": [
+        { "value": "background-1", "label": "t:sections.all.colors.background_1.label" },
+        { "value": "background-2", "label": "t:sections.all.colors.background_2.label" },
+        { "value": "accent-1", "label": "t:sections.all.colors.accent_1.label" },
+        { "value": "accent-2", "label": "t:sections.all.colors.accent_2.label" },
+        { "value": "inverse", "label": "t:sections.all.colors.inverse.label" }
+      ],
+      "default": "background-1"
     },
     {
       "type": "header",

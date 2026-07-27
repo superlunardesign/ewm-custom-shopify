@@ -48,28 +48,32 @@
       right: 15px; 
     }
     .cookie-disclaimer .cookie-content button {
-      font-size:16px;
-      padding:{{ section.settings.button_padding}};
+      font-size: 1.5rem;
+      padding: 10px 30px;
     min-width: calc(10rem + var(--buttons-border-width) * 2);
     min-height: calc(3.5rem + var(--buttons-border-width) * 2);
-    transition: all 0.3s linear;
-      text-transform: capitalize;
-    font-weight: 400;
-    border: none;
-    background: var(--gradient-base-accent-2);
-    line-height: 1.2;
+    transition: all 300ms linear;
+      text-transform: uppercase;
+    font-weight: 600;
+    border: 1.5px solid var(--gradient-base-accent-1);
+    background: var(--gradient-base-accent-1);
+    color: #ffffff;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    border-radius: 0;
+    font-family: var(--font-body-family);
     }
     
     .cookie-disclaimer.left .cookie-content{flex-direction: column;}
     .cookie-disclaimer .cookie-content .cookie-button .button.decline-cookie:last-child{
-      background: transparent; text-decoration: underline;
+      background: transparent; color: var(--gradient-base-accent-1); border-color: var(--gradient-base-accent-1);
     }
     .cookie-disclaimer .cookie-content .button:first-child:hover{
-      background: var(--gradient-base-background-3);
-    color: var(--gradient-base-background-1);
+      background: transparent;
+    color: var(--gradient-base-accent-1);
     }
     .cookie-disclaimer .cookie-content .button:last-child:hover{
-      background: transparent; color: var(--gradient-base-accent-2);
+      background: var(--gradient-base-accent-1); color: #ffffff;
     }
     
     
@@ -85,8 +89,8 @@
 
     }
     .cookie-content .button:hover {
-    background: var(--color-icon);
-    color: var(--gradient-base-background-1);
+    background: transparent;
+    color: var(--gradient-base-accent-1);
 }
   </style>
 

@@ -1,0 +1,617 @@
+{% comment %}
+  EWM Image + Text Block
+  Side-by-side layout with image and text content, swappable positions
+{% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .sl-itb {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-itb {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% if section.settings.enable_anchor %}
+  <div id="{{ section.settings.anchor_id }}" style="position: relative; top: -{{ section.settings.scroll_offset }}px;"></div>
+{% endif %}
+
+<div class="sl-itb color-{{ section.settings.color_scheme }} gradient">
+  <div class="sl-itb__container page-width">
+    <div class="sl-itb__grid{% if section.settings.image_position == 'right' %} sl-itb__grid--reversed{% endif %}{% if section.settings.enable_animation %} sl-itb__animate{% endif %}"
+      {% if section.settings.enable_animation %}
+        data-sl-itb-animate
+        data-duration="{{ section.settings.animation_duration }}"
+        data-delay="{{ section.settings.animation_delay }}"
+      {% endif %}
+    >
+      <div class="sl-itb__media">
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1500
+            | image_tag:
+              sizes: '(min-width: 750px) 50vw, 100vw',
+              widths: '375, 550, 750, 1000, 1250, 1500',
+              class: 'sl-itb__img',
+              loading: 'lazy'
+          }}
+        {% else %}
+          <div class="sl-itb__placeholder">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="sl-itb__content">
+        <div class="sl-itb__content-top">
+          {% if section.settings.subheading != blank %}
+            <p class="sl-itb__subheading">{{ section.settings.subheading }}</p>
+          {% endif %}
+
+          {% if section.settings.heading != blank %}
+            <h2 class="sl-itb__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+          {% endif %}
+        </div>
+
+        <div class="sl-itb__content-bottom">
+          {% if section.settings.text != blank %}
+            <div class="sl-itb__text rte">{{ section.settings.text }}</div>
+          {% endif %}
+
+          {% if section.settings.show_button and section.settings.button_text != blank %}
+            <div class="sl-itb__button-wrap">
+              <a
+                {% if section.settings.button_link != blank %}
+                  href="{{ section.settings.button_link }}"
+                {% endif %}
+                class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% endif %}"
+              >
+                {{ section.settings.button_text | escape }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if section.settings.enable_animation %}
+<script>
+  (function() {
+    function initSlItbAnimation() {
+      var section = document.querySelector('#shopify-section-{{ section.id }}');
+      if (!section) return;
+      var target = section.querySelector('[data-sl-itb-animate]');
+      if (!target) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            target.classList.add('sl-itb__animate--visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(target);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSlItbAnimation);
+    } else {
+      initSlItbAnimation();
+    }
+
+    if (Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.detail.sectionId === '{{ section.id }}') initSlItbAnimation();
+      });
+    }
+  })();
+</script>
+{% endif %}
+
+<style>
+  #shopify-section-{{ section.id }} .sl-itb__container {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: {{ section.settings.image_fit | default: 'cover' }};
+    object-position: {{ section.settings.image_position_x }}% {{ section.settings.image_position_y }}%;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__placeholder {
+    background: rgb(var(--color-base-background-2));
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__placeholder .placeholder-svg {
+    width: 60%;
+    height: auto;
+    fill: currentColor;
+    opacity: 0.3;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__content {
+    display: flex;
+    flex-direction: column;
+    {% if section.settings.spread_content %}
+      justify-content: space-between;
+    {% else %}
+      justify-content: center;
+    {% endif %}
+    padding: 2.5rem;
+    background-color: {{ section.settings.content_background }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__content-top {
+    {% if section.settings.spread_content %}
+      margin-bottom: 2rem;
+    {% else %}
+      margin-bottom: 1.5rem;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__subheading {
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: {{ section.settings.subheading_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    line-height: 1.15;
+    margin-bottom: 0;
+    color: {{ section.settings.heading_color }};
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__text {
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__text p {
+    margin-bottom: 1em;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-itb__button-wrap {
+    margin-top: 0.5rem;
+  }
+
+  /* Animation - only hide when JS is available */
+  .js #shopify-section-{{ section.id }} .sl-itb__animate {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .js #shopify-section-{{ section.id }} .sl-itb__animate.sl-itb__animate--visible {
+    animation: slItbFloatIn {{ section.settings.animation_duration }}ms ease-out {{ section.settings.animation_delay }}ms forwards;
+  }
+
+  /* Fallback: if no .js class on html, or in theme editor, show content */
+  .no-js #shopify-section-{{ section.id }} .sl-itb__animate,
+  .shopify-design-mode #shopify-section-{{ section.id }} .sl-itb__animate {
+    opacity: 1;
+    transform: none;
+  }
+
+  @keyframes slItbFloatIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .sl-itb__media {
+      height: {{ section.settings.mobile_height }}px;
+    }
+  }
+
+  /* Desktop */
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-itb__container {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: minmax({{ section.settings.desktop_height }}px, auto);
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__img {
+      position: absolute;
+      inset: 0;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__media {
+      min-height: {{ section.settings.desktop_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__grid--reversed {
+      direction: rtl;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__grid--reversed > * {
+      direction: ltr;
+    }
+
+    #shopify-section-{{ section.id }} .sl-itb__content {
+      padding: 3rem;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .sl-itb__content {
+      padding: 4rem;
+    }
+  }
+</style>
+
+{% if section.settings.enable_sticky %}
+<script>
+  (function() {
+    var el = document.getElementById('shopify-section-{{ section.id }}');
+    if (!el) return;
+    var prev = el.previousElementSibling;
+    while (prev && !prev.classList.contains('shopify-section')) {
+      prev = prev.previousElementSibling;
+    }
+    if (prev) {
+      prev.style.position = 'sticky';
+      prev.style.top = '0';
+    }
+  })();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "EWM Image + Text Block",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "info": "Image side on desktop. On mobile, image always appears above."
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop Height",
+      "info": "Height of the section on desktop (image crops to fit)",
+      "min": 300,
+      "max": 800,
+      "step": 25,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile Image Height",
+      "info": "Height of the image when stacked on mobile",
+      "min": 200,
+      "max": 500,
+      "step": 25,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "image_position_x",
+      "label": "Image Focal Point (Horizontal)",
+      "info": "0% = left, 50% = center, 100% = right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_position_y",
+      "label": "Image Focal Point (Vertical)",
+      "info": "0% = top, 50% = center, 100% = bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image Fill Mode",
+      "options": [
+        { "value": "cover", "label": "Cover (fill & crop)" },
+        { "value": "contain", "label": "Contain (fit inside)" },
+        { "value": "fill", "label": "Stretch to fill" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "Smaller uppercase text above the heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Signature Facial Treatments"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" },
+        { "value": "hxl", "label": "Extra Large" },
+        { "value": "hxxl", "label": "Extra Extra Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "checkbox",
+      "id": "spread_content",
+      "label": "Spread content vertically",
+      "info": "Pushes heading to the top and body text + button to the bottom. When off, all content is grouped together in the center.",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body Text",
+      "default": "<p>Share details about your services, approach, or expertise. This text area supports rich formatting so you can add emphasis where needed.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "BOOK A TREATMENT"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary (Filled)" },
+        { "value": "secondary", "label": "Secondary (Outline)" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Section Background",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "background-1",
+      "info": "Background behind the entire section (image + text)"
+    },
+    {
+      "type": "color",
+      "id": "content_background",
+      "label": "Text Block Background",
+      "default": "#f5f0eb",
+      "info": "Background color of the text content panel"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body Text Color",
+      "default": "#4a4a4a"
+    },
+    {
+      "type": "header",
+      "content": "Anchor Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_anchor",
+      "label": "Enable Anchor Link",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Use this ID to link directly to this section (e.g. #therapy-sessions)"
+    },
+    {
+      "type": "range",
+      "id": "scroll_offset",
+      "label": "Scroll Offset",
+      "info": "Adjusts landing position when scrolling to anchor",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable Float-in Animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation Duration",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "unit": "ms",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation Delay",
+      "min": 0,
+      "max": 1000,
+      "step": 100,
+      "unit": "ms",
+      "default": 200
+    },
+    {
+      "type": "header",
+      "content": "Sticky Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "Make section sticky",
+      "info": "This section appears to slide over the section above it. Will not work if the section above also uses sticky.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "EWM Image + Text Block",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

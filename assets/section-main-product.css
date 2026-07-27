@@ -1437,15 +1437,13 @@ label.swatch-variant-image {
 } */
 
 a.button.add-wishlist.button--secondary {
-background-color:transparent;
-border: 1px solid black;
-color:black;
-border-radius:999px;
-height: 47px;
-width:47px;
-
-
-
+  background-color: transparent;
+  border: 1.5px solid var(--gradient-base-accent-1);
+  color: var(--gradient-base-accent-1);
+  border-radius: 0;
+  height: 47px;
+  width: 47px;
+  padding: 0;
 }
 @media (max-width:990px){
 
@@ -1461,21 +1459,22 @@ width:47px;
 .product-form__buttons
   button.product-form__submit.button.button--full-width.button--secondary,
 .product-form__buttons button--secondary {
-    background: var(--gradient-base-background-3);
-    color: var(--gradient-base-accent-3);
-    border: none;
-    border-radius:999px;
-    text-transform: capitalize;
-    font-weight: 700;
-    letter-spacing: normal;
-   padding: 3% 3%;
+    background: var(--gradient-base-accent-1);
+    color: #ffffff;
+    border: 1.5px solid var(--gradient-base-accent-1);
+    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: var(--font-body-family);
+    letter-spacing: 0.08em;
+    padding: 10px 30px;
 }
 .product-form__buttons
   button.product-form__submit.button.button--full-width.button--secondary:hover,
 .product-form__buttons a.button.add-wishlist.button--secondary:hover {
-  background: var(--gradient-base-accent-3);
-  color:  var(--gradient-base-background-3);
-  border: 1px solid var(--gradient-base-background-3);
+  background: transparent;
+  color: var(--gradient-base-accent-1);
+  border: 1.5px solid var(--gradient-base-accent-1);
 }
 
 /* Thumbnail slider position/layout controlled by main-product.html inline styles */
@@ -1531,7 +1530,7 @@ label.deal-lable.product-label { min-width: initial; margin: 0; display: inline-
 
 /*available and sub and enquiry form */
 .inventory-form__label {   margin-top: 0rem; 
-    background-color: #F3F0F8;
+    background-color: var(--gradient-base-background-3);
  /*display: flex; flex-direction: column;*/}
 /* .total-price__container{  display: flex; flex-direction: column;} */
 /* .inventory-form__label label.form__label, .sub-total p.product-label {  margin: 0;  min-width: 140px;  display: inline-block;  font-size: 2.2rem;  font-weight: 700;} */

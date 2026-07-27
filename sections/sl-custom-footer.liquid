@@ -1,0 +1,758 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  /* ===== SL Custom Footer ===== */
+  .sl-custom-footer {
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .sl-custom-footer {
+      margin-top: {{ section.settings.margin_top }}px;
+    }
+  }
+
+  .sl-custom-footer a {
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+  }
+
+  .sl-custom-footer a:hover {
+    opacity: 0.75;
+  }
+
+  /* Top content area */
+  .sl-footer__top {
+    padding: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px 0 {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .sl-footer__top {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* 5-column grid */
+  .sl-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px 40px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .sl-footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 36px 40px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .sl-footer__grid {
+      grid-template-columns: 1.2fr 1fr 1fr 0.8fr 1.3fr;
+      gap: 24px 32px;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .sl-footer__grid {
+      gap: 24px 48px;
+    }
+  }
+
+  /* ===== Brand / Newsletter Column ===== */
+  .sl-footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .sl-footer__brand {
+      text-align: center;
+    }
+
+    .sl-footer__brand .sl-footer__logo,
+    .sl-footer__brand .sl-footer__newsletter-heading {
+      align-self: center;
+    }
+
+    .sl-footer__newsletter-form {
+      align-self: stretch;
+      width: 100%;
+    }
+  }
+
+  .sl-footer__logo img {
+    display: block;
+    width: {{ section.settings.logo_width }}px;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .sl-footer__newsletter-heading {
+    font-family: var(--font-heading-family);
+    font-size: 15px;
+    line-height: 1.4;
+    margin: 4px 0 0;
+  }
+
+  .sl-footer__newsletter-form {
+    margin-top: 4px;
+  }
+
+  .sl-footer__newsletter-field {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid {{ section.settings.text_color }};
+    padding-bottom: 6px;
+    gap: 8px;
+  }
+
+  .sl-footer__newsletter-field input[type="email"] {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: {{ section.settings.text_color }};
+    font-family: var(--font-body-family);
+    font-size: 13px;
+    padding: 4px 0;
+  }
+
+  .sl-footer__newsletter-field input[type="email"]::placeholder {
+    color: {{ section.settings.text_color }};
+    opacity: 0.6;
+  }
+
+  .sl-footer__newsletter-field button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: {{ section.settings.text_color }};
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .sl-footer__newsletter-field button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .sl-footer__newsletter-msg {
+    font-size: 12px;
+    margin-top: 8px;
+    opacity: 0.8;
+  }
+
+  /* ===== Menu Columns ===== */
+  .sl-footer__heading {
+    font-family: var(--font-body-family);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+    padding-bottom: 10px;
+    position: relative;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .sl-footer__heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 36px;
+    height: 1px;
+    background: {{ section.settings.heading_border_color }};
+  }
+
+  .sl-footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sl-footer__links a {
+    font-size: 13px;
+    line-height: 1.8;
+    font-family: var(--font-body-family);
+  }
+
+  /* ===== Contact Column ===== */
+  .sl-footer__contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+    font-family: var(--font-body-family);
+  }
+
+  .sl-footer__contact-link {
+    display: inline-block;
+  }
+
+  .sl-footer__address {
+    white-space: pre-line;
+    line-height: 1.6;
+  }
+
+  .sl-footer__phone-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sl-footer__phone-label {
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .sl-footer__phone-number a {
+    font-size: 13px;
+  }
+
+  .sl-footer__phone-note {
+    font-size: 11px;
+    font-style: italic;
+    opacity: 0.75;
+    line-height: 1.5;
+    margin-top: 2px;
+  }
+
+  /* ===== Mobile accordion ===== */
+  .sl-footer__toggle-icon {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .sl-footer__col--menu .sl-footer__heading,
+    .sl-footer__col--contact .sl-footer__heading {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0;
+      padding-bottom: 12px;
+      border-bottom: 1px solid {{ section.settings.heading_border_color }};
+    }
+
+    .sl-footer__col--menu .sl-footer__heading::after,
+    .sl-footer__col--contact .sl-footer__heading::after {
+      display: none;
+    }
+
+    .sl-footer__toggle-icon {
+      display: block;
+      width: 12px;
+      height: 12px;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .sl-footer__col.is-open .sl-footer__toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .sl-footer__col--menu .sl-footer__links,
+    .sl-footer__col--contact .sl-footer__contact-content {
+      display: none;
+      padding-top: 10px;
+    }
+
+    .sl-footer__col--menu.is-open .sl-footer__links,
+    .sl-footer__col--contact.is-open .sl-footer__contact-content {
+      display: flex;
+    }
+  }
+
+  /* ===== Bottom Bar ===== */
+  .sl-footer__bottom {
+    background: {{ section.settings.bottom_bar_bg_color }};
+    padding: 16px 0;
+  }
+
+  .sl-footer__bottom-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    .sl-footer__bottom-inner {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
+  .sl-footer__payments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sl-footer__payments .list-payment {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sl-footer__payments .list-payment__item {
+    display: flex;
+    align-items: center;
+  }
+
+  .sl-footer__payments svg {
+    width: 38px;
+    height: 24px;
+  }
+
+  .sl-footer__copyright {
+    font-size: 12px;
+    color: {{ section.settings.text_color }};
+    opacity: 0.8;
+    white-space: nowrap;
+  }
+
+  .sl-footer__credit {
+    font-size: 12px;
+    color: {{ section.settings.text_color }};
+    opacity: 0.8;
+  }
+
+  .sl-footer__credit a {
+    font-weight: 600;
+  }
+{%- endstyle -%}
+
+<footer class="sl-custom-footer" id="sl-footer-{{ section.id }}">
+  <div class="sl-footer__top">
+    <div class="page-width">
+      <div class="sl-footer__grid">
+
+        {%- comment -%} Column 1: Brand + Newsletter {%- endcomment -%}
+        <div class="sl-footer__col sl-footer__brand">
+          {%- if section.settings.logo != blank -%}
+            <div class="sl-footer__logo">
+              <img
+                src="{{ section.settings.logo | image_url: width: 400 }}"
+                srcset="{{ section.settings.logo | image_url: width: 200 }} 1x, {{ section.settings.logo | image_url: width: 400 }} 2x"
+                alt="{{ shop.name }}"
+                width="{{ section.settings.logo_width }}"
+                height="auto"
+                loading="lazy"
+              >
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.newsletter_heading != blank -%}
+            <p class="sl-footer__newsletter-heading">{{ section.settings.newsletter_heading }}</p>
+          {%- endif -%}
+
+          {%- form 'customer', class: 'sl-footer__newsletter-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            {%- if form.errors -%}
+              <div class="sl-footer__newsletter-msg">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</div>
+            {%- endif -%}
+            {%- if form.posted_successfully? -%}
+              <div class="sl-footer__newsletter-msg">{{ 'newsletter.success' | t }}</div>
+            {%- endif -%}
+            <div class="sl-footer__newsletter-field">
+              <input
+                type="email"
+                name="contact[email]"
+                id="sl-footer-email-{{ section.id }}"
+                placeholder="{{ section.settings.newsletter_placeholder }}"
+                autocomplete="email"
+                required
+              >
+              <button type="submit" aria-label="Subscribe">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          {%- endform -%}
+        </div>
+
+        {%- comment -%} Column 2: Menu 1 {%- endcomment -%}
+        {%- if section.settings.menu_1 != blank -%}
+          <div class="sl-footer__col sl-footer__col--menu" data-sl-footer-col>
+            <h3 class="sl-footer__heading" data-sl-footer-toggle>
+              {{ section.settings.menu_1_heading }}
+              <svg class="sl-footer__toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </h3>
+            <ul class="sl-footer__links">
+              {%- for link in linklists[section.settings.menu_1].links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Column 3: Menu 2 {%- endcomment -%}
+        {%- if section.settings.menu_2 != blank -%}
+          <div class="sl-footer__col sl-footer__col--menu" data-sl-footer-col>
+            <h3 class="sl-footer__heading" data-sl-footer-toggle>
+              {{ section.settings.menu_2_heading }}
+              <svg class="sl-footer__toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </h3>
+            <ul class="sl-footer__links">
+              {%- for link in linklists[section.settings.menu_2].links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Column 4: Menu 3 {%- endcomment -%}
+        {%- if section.settings.menu_3 != blank -%}
+          <div class="sl-footer__col sl-footer__col--menu" data-sl-footer-col>
+            <h3 class="sl-footer__heading" data-sl-footer-toggle>
+              {{ section.settings.menu_3_heading }}
+              <svg class="sl-footer__toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </h3>
+            <ul class="sl-footer__links">
+              {%- for link in linklists[section.settings.menu_3].links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Column 5: Contact {%- endcomment -%}
+        <div class="sl-footer__col sl-footer__col--contact is-open" data-sl-footer-col>
+          <h3 class="sl-footer__heading" data-sl-footer-toggle>
+            {{ section.settings.contact_heading }}
+            <svg class="sl-footer__toggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </h3>
+          <div class="sl-footer__contact-content">
+            {%- if section.settings.contact_link_text != blank -%}
+              <a href="{{ section.settings.contact_link_url }}" class="sl-footer__contact-link">{{ section.settings.contact_link_text }}</a>
+            {%- endif -%}
+
+            {%- if section.settings.address != blank -%}
+              <div class="sl-footer__address">{{ section.settings.address }}</div>
+            {%- endif -%}
+
+            {%- if section.settings.text_phone != blank -%}
+              <div class="sl-footer__phone-block">
+                <span class="sl-footer__phone-label">{{ section.settings.text_phone_label }}</span>
+                <span class="sl-footer__phone-number"><a href="sms:{{ section.settings.text_phone | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}">{{ section.settings.text_phone }}</a></span>
+                {%- if section.settings.text_phone_note != blank -%}
+                  <span class="sl-footer__phone-note">{{ section.settings.text_phone_note }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.call_phone != blank -%}
+              <div class="sl-footer__phone-block">
+                <span class="sl-footer__phone-label">{{ section.settings.call_phone_label }}</span>
+                <span class="sl-footer__phone-number"><a href="tel:{{ section.settings.call_phone | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}">{{ section.settings.call_phone }}</a></span>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Bottom Bar {%- endcomment -%}
+  <div class="sl-footer__bottom">
+    <div class="page-width sl-footer__bottom-inner">
+      {%- if section.settings.payment_enable -%}
+        <div class="sl-footer__payments">
+          <ul class="list-payment" role="list">
+            {%- for type in shop.enabled_payment_types -%}
+              <li class="list-payment__item">{{ type | payment_type_svg_tag }}</li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <div class="sl-footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All Rights Reserved.
+      </div>
+
+      {%- if section.settings.credit_text != blank or section.settings.credit_link_text != blank -%}
+        <div class="sl-footer__credit">
+          {{ section.settings.credit_text }}
+          {%- if section.settings.credit_link_text != blank -%}
+            <a href="{{ section.settings.credit_link_url }}">{{ section.settings.credit_link_text }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    var footer = document.getElementById('sl-footer-{{ section.id }}');
+    if (!footer) return;
+
+    footer.querySelectorAll('[data-sl-footer-toggle]').forEach(function(toggle) {
+      toggle.addEventListener('click', function() {
+        if (window.innerWidth >= 750) return;
+        var col = this.closest('[data-sl-footer-col]');
+        if (col) col.classList.toggle('is-open');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#8c9b6d"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_border_color",
+      "label": "Heading underline color",
+      "default": "#c5c8a0"
+    },
+    {
+      "type": "color",
+      "id": "bottom_bar_bg_color",
+      "label": "Bottom bar background",
+      "default": "#7a8960"
+    },
+    {
+      "type": "header",
+      "content": "Logo & Newsletter"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 120
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Sign up for sales & specials"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Email placeholder",
+      "default": "Email address"
+    },
+    {
+      "type": "header",
+      "content": "Menu Column 1"
+    },
+    {
+      "type": "text",
+      "id": "menu_1_heading",
+      "label": "Heading",
+      "default": "SPA SERVICES"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1",
+      "label": "Menu"
+    },
+    {
+      "type": "header",
+      "content": "Menu Column 2"
+    },
+    {
+      "type": "text",
+      "id": "menu_2_heading",
+      "label": "Heading",
+      "default": "SKINCARE SHOP"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Menu"
+    },
+    {
+      "type": "header",
+      "content": "Menu Column 3"
+    },
+    {
+      "type": "text",
+      "id": "menu_3_heading",
+      "label": "Heading",
+      "default": "LEGAL"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_3",
+      "label": "Menu"
+    },
+    {
+      "type": "header",
+      "content": "Contact Column"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Heading",
+      "default": "CONTACT"
+    },
+    {
+      "type": "text",
+      "id": "contact_link_text",
+      "label": "Contact link text",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "contact_link_url",
+      "label": "Contact link URL"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address",
+      "default": "5405 W Elm St. Suite M\nMcHenry, IL 60050"
+    },
+    {
+      "type": "text",
+      "id": "text_phone_label",
+      "label": "Text phone label",
+      "default": "Text us:"
+    },
+    {
+      "type": "text",
+      "id": "text_phone",
+      "label": "Text phone number",
+      "default": "815-332-0918"
+    },
+    {
+      "type": "textarea",
+      "id": "text_phone_note",
+      "label": "Text phone note",
+      "default": "We're often with clients and can't answer calls, but we'll reply to your text as soon as we can."
+    },
+    {
+      "type": "text",
+      "id": "call_phone_label",
+      "label": "Call phone label",
+      "default": "Call or leave voicemail:"
+    },
+    {
+      "type": "text",
+      "id": "call_phone",
+      "label": "Call phone number",
+      "default": "815-332-0918"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "default": true,
+      "label": "Show payment icons"
+    },
+    {
+      "type": "text",
+      "id": "credit_text",
+      "label": "Credit prefix text",
+      "default": "Brand & Site"
+    },
+    {
+      "type": "text",
+      "id": "credit_link_text",
+      "label": "Credit link text",
+      "default": "by Superlunar Design Co."
+    },
+    {
+      "type": "url",
+      "id": "credit_link_url",
+      "label": "Credit link URL"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 48
+    }
+  ]
+}
+{% endschema %}

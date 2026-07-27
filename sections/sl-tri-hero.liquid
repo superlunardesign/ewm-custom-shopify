@@ -1,155 +1,759 @@
-{% comment %} Tri Banner Section {% endcomment %}
-<section id="{{ section.id }}" class="banner">
-  <style>
-    /* Core Styles */
-    #{{ section.id }} .banner {
-      display: flex;
-      flex-wrap: wrap;
-      height: auto;
+{% comment %}
+  EWM Tri-Split Hero
+  Hero panel with two smaller feature cards, two grid layout options
+{% endcomment %}
 
-
-    }
-    @media (min-width:801px){
-      #{{ section.id }} .banner{
-      height:70vh;}
-    }
-    #{{ section.id }} .banner-left {
-      flex: 0 0 58%;
-      background: url('{{ section.settings.left_image | img_url: '600x400' }}') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 1rem;
-      margin:1%;
-      border-radius:12px;
-      color: var(--color-foreground);
-    }
-    #{{ section.id }} .banner-right {
-      flex: 0 0 40%;
-      display: flex;
-      flex-direction: column;
-      align-items:center;
-    }
-    #{{ section.id }} .small-cell {
-      flex: 1;
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background-blend-mode: darken;
-      padding: 1rem;
-      color: var(--color-foreground);
-      border-radius:12px;
-      margin:2.65%;
-      width:100%;
-    }
-
-    /* Typography */
-    #{{ section.id }} .headline {
-      font-size: clamp(30px, 5vw, 48px);
-      margin-bottom: 0.5em;
-      max-width: 80%;
-      margin:auto;
-      
-    }
-    #{{ section.id }} .body-text {
-      font-size: clamp(16px, 2.5vw, 20px);
-      margin-bottom: 1em;
-      max-width: 80%;
-      margin:auto;
-      justify-self:center;
-    }
-    #{{ section.id }} .small-heading {
-      font-size: clamp(18px, 4vw, 32px);
-      margin-bottom: 0.5em;
-           justify-self:center;
-    }
-
-
-    /* Button styling uses Dawn defaults */
-    @media (max-width: 1000px) {
-      #{{ section.id }} .banner { flex-direction: column; height:auto;}
-      #{{ section.id }} .banner-left, #{{ section.id }} .banner-right, #{{ section.id }} .small-cell {
-        flex: none;
-        width: 100%;
-        text-align: -webkit-center;
-      }
-
-      #{{ section.id }}{
-      align-content: center, -webkit-center;
-    }
-      .small-cell{
-      margin: 1% auto !important;
-    padding:10% 0% !important;}
-
-    .banner-left{
-    padding: 20% 0% !important;
-  margin: auto!important;
-  margin-bottom: 1% !important;
-}
-  .banner-right{ align-items: center!important;
-}
-    
-
-    .banner{
-    margin: 2%!important;
-  height:auto !important; 
-}
+{%- style -%}
+  #shopify-section-{{ section.id }} .sl-tri {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
-  </style>
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-tri {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
 
-  <div class="banner">
-    <div class="banner-left">
-      <div>
-        <h1 class="headline">{{ section.settings.left_headline }}</h1>
-        <p class="body-text">{{ section.settings.left_body }}</p>
-        <a href="{{ section.settings.left_button_link }}" class="button">{{ section.settings.left_button_text }}</a>
-      </div>
-    </div>
+<div class="sl-tri">
+  <div class="sl-tri__container">
+    <div class="sl-tri__grid{% if section.settings.grid_layout == 'stacked' %} sl-tri__grid--stacked{% endif %}">
 
-    <div class="banner-right">
-      <div class="small-cell" style="background-image: url('{{ section.settings.top_right_image | img_url: '600x400' }}');">
-        <div>
-          <h2 class="small-heading">{{ section.settings.top_right_heading }}</h2>
-          <a href="{{ section.settings.top_right_button_link }}" class="button">{{ section.settings.top_right_button_text }}</a>
+      {%- comment -%} ── Hero Panel ── {%- endcomment -%}
+      <div class="sl-tri__panel sl-tri__hero">
+        <div class="sl-tri__panel-bg">
+          {% if section.settings.hero_bg_type == 'image' and section.settings.left_image != blank %}
+            {{
+              section.settings.left_image
+              | image_url: width: 1800
+              | image_tag:
+                sizes: '(min-width: 750px) 60vw, 100vw',
+                widths: '550, 750, 1000, 1400, 1800',
+                class: 'sl-tri__panel-img',
+                loading: 'eager'
+            }}
+          {% elsif section.settings.hero_bg_type == 'video' and section.settings.hero_video != blank %}
+            <video class="sl-tri__panel-video" autoplay muted loop playsinline>
+              {{ section.settings.hero_video | video_sources }}
+            </video>
+          {% elsif section.settings.hero_bg_type == 'video_url' and section.settings.hero_video_url != blank %}
+            <video class="sl-tri__panel-video" autoplay muted loop playsinline>
+              <source src="{{ section.settings.hero_video_url }}" type="video/mp4">
+            </video>
+          {% endif %}
+          <div class="sl-tri__panel-overlay" style="background: rgba(0,0,0,{{ section.settings.hero_overlay | divided_by: 100.0 }});"></div>
+        </div>
+
+        <div class="sl-tri__hero-content{% if section.settings.spread_content %} sl-tri__hero-content--spread{% endif %}" style="text-align: {{ section.settings.content_alignment }};">
+          <div class="sl-tri__hero-top">
+            {% if section.settings.left_subheading != blank %}
+              <p class="sl-tri__subheading" style="color: {{ section.settings.hero_text_color }};">{{ section.settings.left_subheading }}</p>
+            {% endif %}
+
+            {% if section.settings.left_headline != blank %}
+              <h1 class="sl-tri__heading {{ section.settings.heading_size }}" style="color: {{ section.settings.hero_text_color }};">{{ section.settings.left_headline }}</h1>
+            {% endif %}
+          </div>
+
+          <div class="sl-tri__hero-bottom">
+            {% if section.settings.left_body != blank %}
+              <div class="sl-tri__body" style="color: {{ section.settings.hero_text_color }};">{{ section.settings.left_body }}</div>
+            {% endif %}
+
+            {% if section.settings.left_button_text != blank %}
+              <div class="sl-tri__btn-wrap">
+                <a
+                  {% if section.settings.left_button_link != blank %}
+                    href="{{ section.settings.left_button_link }}"
+                  {% endif %}
+                  class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-tri__btn-custom{% endif %}"
+                >
+                  {{ section.settings.left_button_text | escape }}
+                </a>
+              </div>
+            {% endif %}
+          </div>
         </div>
       </div>
-      <div class="small-cell" style="background-image: url('{{ section.settings.bottom_right_image | img_url: '600x400' }}');">
-        <div>
-          <h2 class="small-heading">{{ section.settings.bottom_right_heading }}</h2>
-          <a href="{{ section.settings.bottom_right_button_link }}" class="button">{{ section.settings.bottom_right_button_text }}</a>
+
+      {%- comment -%} ── Card 1 ── {%- endcomment -%}
+      <div class="sl-tri__panel sl-tri__card">
+        <div class="sl-tri__panel-bg">
+          {% if section.settings.top_right_image != blank %}
+            {{
+              section.settings.top_right_image
+              | image_url: width: 1200
+              | image_tag:
+                sizes: '(min-width: 750px) 40vw, 100vw',
+                widths: '375, 550, 750, 1000, 1200',
+                class: 'sl-tri__panel-img',
+                loading: 'lazy'
+            }}
+          {% endif %}
+          <div class="sl-tri__panel-overlay" style="background: rgba(0,0,0,{{ section.settings.card_overlay | divided_by: 100.0 }});"></div>
+        </div>
+
+        <div class="sl-tri__card-content">
+          {% if section.settings.top_right_heading != blank %}
+            <h2 class="sl-tri__card-heading" style="color: {{ section.settings.card_text_color }};">{{ section.settings.top_right_heading }}</h2>
+          {% endif %}
+
+          {% if section.settings.top_right_button_text != blank %}
+            <a
+              {% if section.settings.top_right_button_link != blank %}
+                href="{{ section.settings.top_right_button_link }}"
+              {% endif %}
+              class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-tri__btn-custom{% endif %}"
+            >
+              {{ section.settings.top_right_button_text | escape }}
+            </a>
+          {% endif %}
         </div>
       </div>
+
+      {%- comment -%} ── Card 2 ── {%- endcomment -%}
+      <div class="sl-tri__panel sl-tri__card">
+        <div class="sl-tri__panel-bg">
+          {% if section.settings.bottom_right_image != blank %}
+            {{
+              section.settings.bottom_right_image
+              | image_url: width: 1200
+              | image_tag:
+                sizes: '(min-width: 750px) 40vw, 100vw',
+                widths: '375, 550, 750, 1000, 1200',
+                class: 'sl-tri__panel-img',
+                loading: 'lazy'
+            }}
+          {% endif %}
+          <div class="sl-tri__panel-overlay" style="background: rgba(0,0,0,{{ section.settings.card_overlay | divided_by: 100.0 }});"></div>
+        </div>
+
+        <div class="sl-tri__card-content">
+          {% if section.settings.bottom_right_heading != blank %}
+            <h2 class="sl-tri__card-heading" style="color: {{ section.settings.card_text_color }};">{{ section.settings.bottom_right_heading }}</h2>
+          {% endif %}
+
+          {% if section.settings.bottom_right_button_text != blank %}
+            <a
+              {% if section.settings.bottom_right_button_link != blank %}
+                href="{{ section.settings.bottom_right_button_link }}"
+              {% endif %}
+              class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-tri__btn-custom{% endif %}"
+            >
+              {{ section.settings.bottom_right_button_text | escape }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
     </div>
   </div>
+</div>
 
-  {% schema %}
-  {
-    "name": "Tri Banner",
-    "settings": [
-      { "type": "image_picker", "id": "left_image", "label": "Left Background Image" },
-      { "type": "text", "id": "left_headline", "label": "Left Headline", "default": "Your Main Headline Here" },
-      { "type": "textarea", "id": "left_body", "label": "Left Body Text", "default": "Some engaging sub-text goes here to hook your visitor and explain your offer." },
-      { "type": "text", "id": "left_button_text", "label": "Left Button Text", "default": "Learn More" },
-      { "type": "url", "id": "left_button_link", "label": "Left Button Link" },
-
-      { "type": "image_picker", "id": "top_right_image", "label": "Top Right Background Image" },
-      { "type": "text", "id": "top_right_heading", "label": "Top Right Heading", "default": "Feature One" },
-      { "type": "text", "id": "top_right_button_text", "label": "Top Right Button Text", "default": "Explore" },
-      { "type": "url", "id": "top_right_button_link", "label": "Top Right Button Link" },
-
-      { "type": "image_picker", "id": "bottom_right_image", "label": "Bottom Right Background Image" },
-      { "type": "text", "id": "bottom_right_heading", "label": "Bottom Right Heading", "default": "Feature Two" },
-      { "type": "text", "id": "bottom_right_button_text", "label": "Bottom Right Button Text", "default": "Discover" },
-      { "type": "url", "id": "bottom_right_button_link", "label": "Bottom Right Button Link" }
-    ],
-    "presets": [
-      { "name": "Tri Banner", "category": "Custom" }
-    ]
+<style>
+  /* ── Base ── */
+  #shopify-section-{{ section.id }} .sl-tri__container {
+    {% if section.settings.full_width %}
+      max-width: 100%;
+      padding-left: {{ section.settings.gap }}px;
+      padding-right: {{ section.settings.gap }}px;
+    {% else %}
+      max-width: var(--page-width, 1200px);
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    {% endif %}
+    margin: 0 auto;
   }
-  {% endschema %}
-</section>
+
+  /* ── Panel shared ── */
+  #shopify-section-{{ section.id }} .sl-tri__panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ section.settings.border_radius }}px;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__panel-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__panel-img,
+  #shopify-section-{{ section.id }} .sl-tri__panel-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__panel-overlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ── Hero content ── */
+  #shopify-section-{{ section.id }} .sl-tri__hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 2.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__hero-content--spread {
+    justify-content: space-between;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__hero-content--spread .sl-tri__hero-top {
+    margin-bottom: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__hero-content:not(.sl-tri__hero-content--spread) .sl-tri__hero-top {
+    margin-bottom: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__subheading {
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__body {
+    font-family: var(--font-body-family);
+    font-size: 1.5rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    max-width: 60ch;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__btn-wrap {
+    margin-top: 0.5rem;
+  }
+
+  /* ── Card content ── */
+  #shopify-section-{{ section.id }} .sl-tri__card-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tri__card-heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Custom button ── */
+  #shopify-section-{{ section.id }} .sl-tri__btn-custom {
+    background-color: {{ section.settings.button_bg_color }} !important;
+    color: {{ section.settings.button_text_color }} !important;
+    border-color: {{ section.settings.button_bg_color }} !important;
+  }
+
+  /* ═══════════════════════════════
+     MOBILE
+     ═══════════════════════════════ */
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .sl-tri__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: {{ section.settings.gap }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tri__hero {
+      min-height: {{ section.settings.mobile_hero_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tri__card {
+      min-height: {{ section.settings.mobile_card_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tri__hero-content {
+      padding: 2rem 1.5rem;
+    }
+
+    {% if section.settings.hide_cards_mobile %}
+      #shopify-section-{{ section.id }} .sl-tri__card {
+        display: none;
+      }
+      #shopify-section-{{ section.id }} .sl-tri__hero {
+        min-height: {{ section.settings.mobile_hero_expanded }}vh;
+      }
+    {% endif %}
+  }
+
+  /* ═══════════════════════════════
+     DESKTOP: Side-by-side (default)
+     Hero left, cards stacked right
+     ═══════════════════════════════ */
+  @media screen and (min-width: 750px) {
+    {% unless section.settings.full_width %}
+      #shopify-section-{{ section.id }} .sl-tri__container {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+    {% endunless %}
+
+    #shopify-section-{{ section.id }} .sl-tri__grid {
+      display: grid;
+      grid-template-columns: {{ section.settings.hero_width }}fr {{ section.settings.card_width }}fr;
+      grid-template-rows: 1fr 1fr;
+      gap: {{ section.settings.gap }}px;
+      height: {{ section.settings.desktop_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tri__hero {
+      grid-row: 1 / -1;
+      grid-column: 1;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tri__card {
+      grid-column: 2;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tri__hero-content {
+      padding: 3rem;
+    }
+
+    /* ── Stacked: hero top, cards bottom ── */
+    #shopify-section-{{ section.id }} .sl-tri__grid--stacked {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: {{ section.settings.hero_ratio }}fr {{ section.settings.card_ratio }}fr;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tri__grid--stacked .sl-tri__hero {
+      grid-column: 1 / -1;
+      grid-row: 1;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tri__grid--stacked .sl-tri__card {
+      grid-column: auto;
+      grid-row: 2;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tri__hero-content {
+      padding: 3.5rem;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    {% unless section.settings.full_width %}
+      #shopify-section-{{ section.id }} .sl-tri__container {
+        padding-left: 5rem;
+        padding-right: 5rem;
+      }
+    {% endunless %}
+
+    #shopify-section-{{ section.id }} .sl-tri__hero-content {
+      padding: 4rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Tri Banner",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "grid_layout",
+      "label": "Grid Layout",
+      "options": [
+        { "value": "side_by_side", "label": "Hero Left + Cards Right" },
+        { "value": "stacked", "label": "Hero Top + Cards Below" }
+      ],
+      "default": "side_by_side"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "info": "Stretch panels edge-to-edge (no page width constraint)",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Section Height (Desktop)",
+      "min": 400,
+      "max": 900,
+      "step": 25,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap Between Panels",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Panel Corner Radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Side-by-Side Proportions"
+    },
+    {
+      "type": "range",
+      "id": "hero_width",
+      "label": "Hero Width",
+      "info": "Relative width of the hero panel (vs cards)",
+      "min": 4,
+      "max": 8,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Cards Width",
+      "info": "Relative width of the cards column",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Stacked Proportions"
+    },
+    {
+      "type": "range",
+      "id": "hero_ratio",
+      "label": "Hero Height Ratio",
+      "info": "Relative height of hero row (vs cards row)",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "card_ratio",
+      "label": "Cards Height Ratio",
+      "info": "Relative height of cards row",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_cards_mobile",
+      "label": "Hide cards on mobile",
+      "info": "Hides the two secondary panels on mobile and expands the hero",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_hero_expanded",
+      "label": "Hero Height (Cards Hidden)",
+      "info": "Height of the hero when cards are hidden on mobile",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_hero_height",
+      "label": "Hero Height (Mobile)",
+      "info": "Used when cards are visible on mobile",
+      "min": 250,
+      "max": 600,
+      "step": 25,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_height",
+      "label": "Card Height (Mobile)",
+      "min": 150,
+      "max": 400,
+      "step": 25,
+      "unit": "px",
+      "default": 250
+    },
+    {
+      "type": "header",
+      "content": "Hero Panel"
+    },
+    {
+      "type": "select",
+      "id": "hero_bg_type",
+      "label": "Hero Background Type",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video (Upload)" },
+        { "value": "video_url", "label": "Video (URL)" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "video",
+      "id": "hero_video",
+      "label": "Hero Video (Upload)"
+    },
+    {
+      "type": "text",
+      "id": "hero_video_url",
+      "label": "Hero Video URL",
+      "info": "Direct link to .mp4 file"
+    },
+    {
+      "type": "range",
+      "id": "hero_overlay",
+      "label": "Hero Overlay Darkness",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 25
+    },
+    {
+      "type": "text",
+      "id": "left_subheading",
+      "label": "Subheading",
+      "info": "Smaller text above the heading"
+    },
+    {
+      "type": "text",
+      "id": "left_headline",
+      "label": "Heading",
+      "default": "Your Main Headline Here"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" },
+        { "value": "hxl", "label": "Extra Large" }
+      ],
+      "default": "h0"
+    },
+    {
+      "type": "checkbox",
+      "id": "spread_content",
+      "label": "Spread content vertically",
+      "info": "Pushes heading to the top and body text + button to the bottom",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "textarea",
+      "id": "left_body",
+      "label": "Body Text",
+      "default": "Some engaging sub-text goes here to hook your visitor and explain your offer."
+    },
+    {
+      "type": "text",
+      "id": "left_button_text",
+      "label": "Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "left_button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "hero_text_color",
+      "label": "Hero Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Card 1 (Top Right / Bottom Left)"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_right_image",
+      "label": "Card 1 Image"
+    },
+    {
+      "type": "range",
+      "id": "card_overlay",
+      "label": "Cards Overlay Darkness",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "top_right_heading",
+      "label": "Card 1 Heading",
+      "default": "Feature One"
+    },
+    {
+      "type": "text",
+      "id": "top_right_button_text",
+      "label": "Card 1 Button Text",
+      "default": "Explore"
+    },
+    {
+      "type": "url",
+      "id": "top_right_button_link",
+      "label": "Card 1 Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Card 2 (Bottom Right / Bottom Right)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_right_image",
+      "label": "Card 2 Image"
+    },
+    {
+      "type": "text",
+      "id": "bottom_right_heading",
+      "label": "Card 2 Heading",
+      "default": "Feature Two"
+    },
+    {
+      "type": "text",
+      "id": "bottom_right_button_text",
+      "label": "Card 2 Button Text",
+      "default": "Discover"
+    },
+    {
+      "type": "url",
+      "id": "bottom_right_button_link",
+      "label": "Card 2 Button Link"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary (Filled)" },
+        { "value": "secondary", "label": "Secondary (Outline)" },
+        { "value": "custom", "label": "Custom Colors" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Custom Button Background",
+      "default": "#6b7c5e",
+      "info": "Only with 'Custom Colors' style"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Custom Button Text Color",
+      "default": "#ffffff",
+      "info": "Only with 'Custom Colors' style"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tri Banner",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

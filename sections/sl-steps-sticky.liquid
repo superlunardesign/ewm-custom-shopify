@@ -1,0 +1,931 @@
+{% comment %}
+  EWM Sticky Steps v2
+  Step cards with sticky stacking, scrolling marquee behind
+{% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .sl-hiw {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-hiw {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="sl-hiw-{{ section.id }}" class="sl-hiw" style="--hiw-peek: {{ section.settings.peek_height }}px; --hiw-sticky-top: {{ section.settings.sticky_offset }}px; --hiw-overlap: {{ section.settings.card_marquee_overlap }}px;">
+
+  <div class="sl-hiw__bg" {% if section.settings.bg_type == 'color' %}style="background-color: {{ section.settings.bg_color }};"{% endif %}>
+    {% if section.settings.bg_type == 'image' and section.settings.bg_image != blank %}
+      {{
+        section.settings.bg_image
+        | image_url: width: 2000
+        | image_tag:
+          sizes: '100vw',
+          widths: '750, 1000, 1500, 2000',
+          class: 'sl-hiw__bg-img',
+          loading: 'lazy'
+      }}
+    {% elsif section.settings.bg_type == 'video' and section.settings.bg_video != blank %}
+      <video class="sl-hiw__bg-video" autoplay muted loop playsinline>
+        {{ section.settings.bg_video | video_sources }}
+      </video>
+    {% elsif section.settings.bg_type == 'video_url' and section.settings.bg_video_url != blank %}
+      <video class="sl-hiw__bg-video" autoplay muted loop playsinline>
+        <source src="{{ section.settings.bg_video_url }}" type="video/mp4">
+      </video>
+    {% endif %}
+    {% unless section.settings.bg_type == 'color' %}
+      <div class="sl-hiw__overlay"></div>
+    {% endunless %}
+  </div>
+
+  {% if section.settings.section_subheading != blank or section.settings.section_heading != blank %}
+    <div class="sl-hiw__header">
+      {% if section.settings.section_subheading != blank %}
+        <p class="sl-hiw__section-sub">{{ section.settings.section_subheading }}</p>
+      {% endif %}
+      {% if section.settings.section_heading != blank %}
+        <h2 class="sl-hiw__section-heading {{ section.settings.section_heading_size }}">{{ section.settings.section_heading }}</h2>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if section.settings.enable_marquee and section.settings.marquee_text != blank %}
+    <div class="sl-hiw__marquee" aria-hidden="true">
+      <div class="sl-hiw__marquee-track">
+        {% for i in (1..12) %}
+          <span class="sl-hiw__marquee-item">{{ section.settings.marquee_text }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size > 0 %}
+    <div class="sl-hiw__cards">
+      {% for block in section.blocks %}
+        <div class="sl-hiw__card" style="--i: {{ forloop.index0 }}; z-index: {{ forloop.index | plus: 2 }};" {{ block.shopify_attributes }}>
+          <div class="sl-hiw__step-row">
+            <span class="sl-hiw__step-label">{{ section.settings.step_prefix }}</span>
+            <span class="sl-hiw__step-line"></span>
+            <span class="sl-hiw__step-num">{% if forloop.index < 10 %}0{{ forloop.index }}{% else %}{{ forloop.index }}{% endif %}</span>
+          </div>
+          <div class="sl-hiw__card-body">
+            {% if block.settings.heading != blank %}
+              <h3 class="sl-hiw__card-heading">{{ block.settings.heading }}</h3>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <div class="sl-hiw__card-text rte">{{ block.settings.text }}</div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+      {% if section.settings.enable_sticky %}
+        <div class="sl-hiw__card-scroll-spacer" aria-hidden="true"></div>
+      {% endif %}
+
+      {% if section.settings.show_button and section.settings.button_text != blank %}
+        <div class="sl-hiw__cta" style="--card-count: {{ section.blocks.size }};">
+          <a
+            {% if section.settings.button_link != blank %}
+              href="{{ section.settings.button_link }}"
+            {% endif %}
+            class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% elsif section.settings.button_style == 'custom' %} sl-hiw__btn-custom{% endif %}"
+          >
+            {{ section.settings.button_text | escape }}
+          </a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.enable_sticky %}
+        <div class="sl-hiw__hold-spacer" aria-hidden="true"></div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+</div>
+
+<style>
+  {% if section.settings.enable_sticky %}
+    html, body {
+      overflow-x: clip !important;
+    }
+    #shopify-section-{{ section.id }} {
+      clip-path: inset(0);
+    }
+    #shopify-section-{{ section.id }} + .shopify-section {
+      position: relative;
+      z-index: 1;
+    }
+  {% endif %}
+
+  /* ── Section wrapper ── */
+  #shopify-section-{{ section.id }} .sl-hiw {
+    position: relative;
+  }
+
+  /* ── Background ── */
+  #shopify-section-{{ section.id }} .sl-hiw__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__bg-img,
+  #shopify-section-{{ section.id }} .sl-hiw__bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+  }
+
+  /* ── Section heading ── */
+  #shopify-section-{{ section.id }} .sl-hiw__header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem 1.5rem 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__section-sub {
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: {{ section.settings.section_subheading_color }};
+    margin: 0 0 0.8rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__section-heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    line-height: 1.15;
+    color: {{ section.settings.section_heading_color }};
+    margin: 0;
+  }
+
+  /* ── Marquee ── */
+  #shopify-section-{{ section.id }} .sl-hiw__marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+    padding: 0.5rem 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__marquee-track {
+    display: inline-flex;
+    animation: slHiwScroll-{{ section.id }} {{ section.settings.marquee_speed }}s linear infinite;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__marquee-item {
+    flex-shrink: 0;
+    padding-right: 0.25em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: {{ section.settings.marquee_color }};
+    font-size: {{ section.settings.marquee_size }}px;
+    {% if section.settings.marquee_font == 'heading' %}
+      font-family: var(--font-heading-family);
+      font-weight: var(--font-heading-weight);
+      font-style: var(--font-heading-style);
+    {% else %}
+      font-family: var(--font-body-family);
+    {% endif %}
+  }
+
+  @keyframes slHiwScroll-{{ section.id }} {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── Cards container ── */
+  #shopify-section-{{ section.id }} .sl-hiw__cards {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── Card styling ── */
+  #shopify-section-{{ section.id }} .sl-hiw__card {
+    background-color: {{ section.settings.card_bg }};
+    padding: 1.5rem 2rem 2rem;
+    border-radius: {{ section.settings.card_radius }}px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__step-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-body-family);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid {{ section.settings.step_line_color }};
+    color: {{ section.settings.step_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__step-line {
+    flex: 1;
+    height: 1px;
+    background: {{ section.settings.step_line_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__card-body {
+    padding-top: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__card-heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    font-size: 2.4rem;
+    line-height: 1.2;
+    margin: 0 0 auto;
+    color: {{ section.settings.heading_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__card-text {
+    font-family: var(--font-body-family);
+    font-size: 1.5rem;
+    line-height: 1.7;
+    color: {{ section.settings.text_color }};
+    padding-top: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__card-text p {
+    margin: 0 0 1em;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__card-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── CTA ── */
+  #shopify-section-{{ section.id }} .sl-hiw__cta {
+    text-align: center;
+    position: relative;
+    z-index: 20;
+  }
+
+  #shopify-section-{{ section.id }} .sl-hiw__btn-custom {
+    background-color: {{ section.settings.button_bg_color }} !important;
+    color: {{ section.settings.button_text_color }} !important;
+    border-color: {{ section.settings.button_bg_color }} !important;
+  }
+
+  /* ═══════════════════════════════════════════
+     STICKY MODE – shared across breakpoints
+     ═══════════════════════════════════════════ */
+  {% if section.settings.enable_sticky %}
+    #shopify-section-{{ section.id }} .sl-hiw__bg {
+      position: -webkit-sticky;
+      position: sticky;
+      inset: auto;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      margin-bottom: -100vh;
+    }
+
+    #shopify-section-{{ section.id }} .sl-hiw__header {
+      position: -webkit-sticky;
+      position: sticky;
+      top: var(--hiw-sticky-top);
+    }
+
+    #shopify-section-{{ section.id }} .sl-hiw__marquee {
+      position: -webkit-sticky;
+      position: sticky;
+      top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px));
+    }
+
+    #shopify-section-{{ section.id }} .sl-hiw__card {
+      position: -webkit-sticky;
+      position: sticky;
+      box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
+      min-height: 250px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-hiw__cta {
+      position: -webkit-sticky;
+      position: sticky;
+    }
+
+    #shopify-section-{{ section.id }} .sl-hiw__hold-spacer {
+      display: block;
+      height: {{ section.settings.sticky_hold }}vh;
+      pointer-events: none;
+    }
+  {% endif %}
+
+  /* ═══════════════════════════════════════════
+     MOBILE
+     ═══════════════════════════════════════════ */
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .sl-hiw__marquee-item {
+      font-size: {{ section.settings.marquee_size | times: 0.35 | round: 0 }}px;
+    }
+
+    {% if section.settings.enable_sticky %}
+      /* Dissolve the cards wrapper so all sticky elements share .sl-hiw
+         as their containing block — fixes card 3 + CTA sticking together */
+      #shopify-section-{{ section.id }} .sl-hiw__cards {
+        display: contents;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__card {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+        z-index: calc(20 + var(--i)) !important;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__card-scroll-spacer {
+        display: none;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__card {
+        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + var(--i) * var(--hiw-peek));
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__card + .sl-hiw__card {
+        margin-top: 65vh;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cta {
+        top: min(
+          calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + (var(--card-count) - 1) * var(--hiw-peek) + var(--hiw-card-h, 300px) + 1rem),
+          calc(100dvh - 80px)
+        );
+        margin-top: 50vh;
+        padding: 1.5rem;
+      }
+    {% else %}
+      #shopify-section-{{ section.id }} .sl-hiw__marquee {
+        padding: 1.5rem 0;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cards {
+        padding: 1rem 1.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: {{ section.settings.card_gap }}px;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cta {
+        padding: 2rem 1.5rem 1rem;
+      }
+    {% endif %}
+
+    #shopify-section-{{ section.id }} .sl-hiw__cta .button {
+      width: 100%;
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     DESKTOP
+     ═══════════════════════════════════════════ */
+  @media screen and (min-width: 750px) {
+    {% if section.settings.enable_sticky %}
+      #shopify-section-{{ section.id }} .sl-hiw__cards {
+        max-width: var(--page-width, 1200px);
+        margin: 0 auto;
+        padding: 0 3rem;
+        display: grid;
+        grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+        gap: {{ section.settings.card_gap }}px;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__card-scroll-spacer {
+        display: none;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__card {
+        align-self: start;
+        top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px));
+        margin-top: calc(var(--i) * {{ section.settings.desktop_stagger }}vh);
+        min-height: 280px;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cta {
+        grid-column: 1 / -1;
+        top: min(
+          calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px) + var(--hiw-card-h, 300px) + 2rem),
+          calc(100vh - 80px)
+        );
+        padding: 2rem 0;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__hold-spacer {
+        grid-column: 1 / -1;
+      }
+    {% else %}
+      #shopify-section-{{ section.id }} .sl-hiw__header {
+        padding: 2rem 3rem 1rem;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__marquee {
+        padding-top: 1.5rem;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cards {
+        max-width: var(--page-width, 1200px);
+        margin: 0 auto;
+        padding: 0 3rem;
+        display: grid;
+        grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+        gap: {{ section.settings.card_gap }}px;
+      }
+
+      #shopify-section-{{ section.id }} .sl-hiw__cta {
+        grid-column: 1 / -1;
+        padding-top: 2.5rem;
+      }
+    {% endif %}
+
+    #shopify-section-{{ section.id }} .sl-hiw__card-heading {
+      font-size: 2.8rem;
+    }
+  }
+</style>
+
+{% if section.settings.enable_sticky %}
+<script>
+  (function() {
+    function measure() {
+      var el = document.getElementById('sl-hiw-{{ section.id }}');
+      if (!el) return;
+      var header = el.querySelector('.sl-hiw__header');
+      var marquee = el.querySelector('.sl-hiw__marquee');
+      var cards = el.querySelectorAll('.sl-hiw__card');
+      el.style.setProperty('--hiw-header-h', (header ? header.offsetHeight : 0) + 'px');
+      el.style.setProperty('--hiw-marquee-h', (marquee ? marquee.offsetHeight : 0) + 'px');
+      var maxH = 0;
+      cards.forEach(function(c) { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
+      el.style.setProperty('--hiw-card-h', maxH + 'px');
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', measure);
+    } else {
+      measure();
+    }
+    window.addEventListener('resize', measure);
+    if (Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.detail.sectionId === '{{ section.id }}') setTimeout(measure, 100);
+      });
+    }
+  })();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "EWM Sticky Steps",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Background Type",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video (Upload)" },
+        { "value": "video_url", "label": "Video (URL)" },
+        { "value": "color", "label": "Solid Color" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image",
+      "info": "Used when Background Type is 'Image'"
+    },
+    {
+      "type": "video",
+      "id": "bg_video",
+      "label": "Background Video (Upload)",
+      "info": "Used when Background Type is 'Video (Upload)'"
+    },
+    {
+      "type": "text",
+      "id": "bg_video_url",
+      "label": "Background Video URL",
+      "info": "Direct link to an .mp4 file. Used when Background Type is 'Video (URL)'"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#1a1a1a",
+      "info": "Used when Background Type is 'Solid Color'"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Darkness",
+      "info": "Darkens the background image or video",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Section Heading"
+    },
+    {
+      "type": "text",
+      "id": "section_subheading",
+      "label": "Subheading",
+      "info": "Small uppercase text above the heading"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading",
+      "default": "Getting started is effortless"
+    },
+    {
+      "type": "select",
+      "id": "section_heading_size",
+      "label": "Heading Size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" },
+        { "value": "hxl", "label": "Extra Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "color",
+      "id": "section_heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "section_subheading_color",
+      "label": "Subheading Color",
+      "default": "#c4c4a0"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns (Desktop)",
+      "options": [
+        { "value": "2", "label": "2 Columns" },
+        { "value": "3", "label": "3 Columns" },
+        { "value": "4", "label": "4 Columns" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap Between Cards",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Sticky Scroll Effect"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "Enable sticky scroll",
+      "info": "Cards stack on top of each other as you scroll, on all devices. When off, cards display in a grid (desktop) or vertical list (mobile).",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "peek_height",
+      "label": "Card Peek Height (Mobile)",
+      "info": "How much of each card's header peeks through when stacked on mobile",
+      "min": 40,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "desktop_stagger",
+      "label": "Card Stagger (Desktop)",
+      "info": "Vertical scroll distance between each card appearing on desktop",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "vh",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "card_marquee_overlap",
+      "label": "Card Overlap onto Marquee",
+      "info": "How far (in px) cards slide up over the marquee text when stuck",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "sticky_hold",
+      "label": "Hold Duration",
+      "info": "Extra scroll distance to keep everything stuck in place before the section scrolls away",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "sticky_offset",
+      "label": "Sticky Top Offset",
+      "info": "Distance from top of screen where content starts sticking (account for your site header height)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Scrolling Marquee"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_marquee",
+      "label": "Enable Scrolling Text",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "marquee_text",
+      "label": "Marquee Text",
+      "default": "HOW IT WORKS"
+    },
+    {
+      "type": "range",
+      "id": "marquee_size",
+      "label": "Marquee Text Size (Desktop)",
+      "info": "Mobile size auto-scales to ~35%",
+      "min": 60,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 160
+    },
+    {
+      "type": "color",
+      "id": "marquee_color",
+      "label": "Marquee Text Color",
+      "default": "#6b7c5e"
+    },
+    {
+      "type": "select",
+      "id": "marquee_font",
+      "label": "Marquee Font",
+      "options": [
+        { "value": "heading", "label": "Heading Font" },
+        { "value": "body", "label": "Body Font" }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Marquee Speed",
+      "info": "Higher = slower",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Steps"
+    },
+    {
+      "type": "text",
+      "id": "step_prefix",
+      "label": "Step Label",
+      "default": "STEP"
+    },
+    {
+      "type": "color",
+      "id": "step_color",
+      "label": "Step Label Color",
+      "default": "#6b7c5e"
+    },
+    {
+      "type": "color",
+      "id": "step_line_color",
+      "label": "Step Separator Color",
+      "default": "#c4c4a0"
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background",
+      "default": "#f5f3ed"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card Corner Radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body Text Color",
+      "default": "#4a4a4a"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "BOOK HERE"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary (Filled)" },
+        { "value": "secondary", "label": "Secondary (Outline)" },
+        { "value": "custom", "label": "Custom Colors" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Custom Button Background",
+      "default": "#6b7c5e",
+      "info": "Only used with 'Custom Colors' button style"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Custom Button Text Color",
+      "default": "#ffffff",
+      "info": "Only used with 'Custom Colors' button style"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Book an Appointment"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Share the details for this step so your customers know what to expect.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EWM Sticky Steps",
+      "category": "Custom",
+      "settings": {
+        "enable_marquee": true,
+        "marquee_text": "HOW IT WORKS",
+        "section_heading": "Getting started is effortless"
+      },
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "heading": "Book an Appointment",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "Arrive with Clean Skin",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "Enjoy your Spa Experience",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6
+}
+{% endschema %}

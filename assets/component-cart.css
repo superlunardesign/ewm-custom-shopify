@@ -187,7 +187,7 @@ cart-items {
 }
 
 .cart__dynamic-checkout-buttons div[role='button'] {
-  border-radius: var(--buttons-radius-outset) !important;
+  border-radius: 0 !important;
 }
 
 .cart-note__label {
@@ -241,8 +241,8 @@ cart-items {
     gap: 2rem;
     margin-top:2rem;
 }
-.cart__ctas .button{ background: var(--gradient-base-accent-2); text-transform: capitalize; letter-spacing: normal; border: none; transition: all 300ms linear;line-height: 1.8;}
-.cart__ctas .button:hover{background: var(--gradient-base-background-3); color: var(--gradient-base-background-1);}
+.cart__ctas .button{ background: var(--gradient-base-accent-1); color: #ffffff; text-transform: uppercase; letter-spacing: 0.08em; border: 1.5px solid var(--gradient-base-accent-1); border-radius: 0; transition: all 300ms linear; line-height: 1.4; font-family: var(--font-body-family); font-weight: 600;}
+.cart__ctas .button:hover{background: transparent; color: var(--gradient-base-accent-1);}
 .collection .title-wrapper-with-link .title.h2{font-weight: 700;  letter-spacing: normal; margin-bottom: 0;}
 .cart-itm__details .product-option .money{font-weight: 600; font-size: 1.6rem;}
 

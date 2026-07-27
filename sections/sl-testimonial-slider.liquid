@@ -1,0 +1,639 @@
+{% comment %}
+  EWM Testimonial Slider
+  Auto-advancing quote slider with reading-time pause, hover-pause, and touch swipe
+{% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .sl-tslider {
+    position: relative;
+    background: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px 0 {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    overflow: hidden;
+  }
+
+  @media (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-tslider {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .sl-tslider__inner {
+    max-width: {{ section.settings.content_width }}px;
+    margin: 0 auto;
+    padding: 0 clamp(2rem, 8vw, 6rem);
+    position: relative;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tslider__track {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tslider__slides {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+    touch-action: pan-y pinch-zoom;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tslider__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tslider__quote {
+    {% if section.settings.quote_font == 'heading' %}
+      font-family: var(--font-heading-family);
+      font-weight: var(--font-heading-weight);
+      font-style: var(--font-heading-style);
+    {% else %}
+      font-family: var(--font-body-family);
+    {% endif %}
+    font-size: {{ section.settings.quote_size_mobile }}px;
+    line-height: {{ section.settings.quote_line_height }};
+    color: {{ section.settings.quote_color }};
+    text-align: {{ section.settings.text_alignment }};
+    margin: 0;
+    max-width: 100%;
+  }
+
+  @media (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-tslider__quote {
+      font-size: {{ section.settings.quote_size }}px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .sl-tslider__author {
+    font-family: var(--font-body-family);
+    font-size: {{ section.settings.author_size }}px;
+    font-style: {{ section.settings.author_style }};
+    color: {{ section.settings.author_color }};
+    text-align: {{ section.settings.text_alignment }};
+    margin-top: 2rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Navigation arrows */
+  #shopify-section-{{ section.id }} .sl-tslider__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 1rem;
+    color: {{ section.settings.arrow_color }};
+    font-size: {{ section.settings.arrow_size }}px;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+    z-index: 2;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tslider__nav:hover {
+    opacity: 0.6;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tslider__nav--prev {
+    left: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-tslider__nav--next {
+    right: 0;
+  }
+
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .sl-tslider__nav {
+      font-size: {{ section.settings.arrow_size | times: 0.7 | round: 0 }}px;
+      padding: 0.5rem;
+    }
+  }
+
+  /* Progress dots */
+  {% if section.settings.show_dots %}
+    #shopify-section-{{ section.id }} .sl-tslider__dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 2rem;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tslider__dot {
+      width: {{ section.settings.dot_size }}px;
+      height: {{ section.settings.dot_size }}px;
+      border-radius: 50%;
+      border: none;
+      background: {{ section.settings.dot_color }};
+      opacity: 0.3;
+      cursor: pointer;
+      padding: 0;
+      transition: opacity 0.3s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tslider__dot.active {
+      opacity: 1;
+    }
+  {% endif %}
+
+  /* Progress bar */
+  {% if section.settings.show_progress_bar %}
+    #shopify-section-{{ section.id }} .sl-tslider__progress {
+      width: 60px;
+      height: 2px;
+      background: {{ section.settings.progress_bar_color }};
+      opacity: 0.2;
+      margin: 2rem auto 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .sl-tslider__progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: {{ section.settings.progress_bar_color }};
+      opacity: 1;
+      transition: width 0.1s linear;
+    }
+  {% endif %}
+{%- endstyle -%}
+
+<div class="sl-tslider" id="sl-tslider-{{ section.id }}">
+  <div class="sl-tslider__inner">
+    {% if section.settings.show_arrows %}
+      <button class="sl-tslider__nav sl-tslider__nav--prev" aria-label="Previous testimonial" type="button">&larr;</button>
+      <button class="sl-tslider__nav sl-tslider__nav--next" aria-label="Next testimonial" type="button">&rarr;</button>
+    {% endif %}
+
+    <div class="sl-tslider__track">
+      <div class="sl-tslider__slides">
+        {% for block in section.blocks %}
+          <div class="sl-tslider__slide" {{ block.shopify_attributes }}>
+            <p class="sl-tslider__quote">
+              &ldquo;{{ block.settings.quote }}&rdquo;
+            </p>
+            {% if block.settings.author != blank %}
+              <p class="sl-tslider__author">- {{ block.settings.author }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if section.settings.show_dots and section.blocks.size > 1 %}
+      <div class="sl-tslider__dots">
+        {% for block in section.blocks %}
+          <button class="sl-tslider__dot{% if forloop.first %} active{% endif %}" type="button" aria-label="Go to testimonial {{ forloop.index }}"></button>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.show_progress_bar and section.blocks.size > 1 %}
+      <div class="sl-tslider__progress">
+        <div class="sl-tslider__progress-fill"></div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if section.blocks.size > 1 %}
+<script>
+  (function() {
+    var root = document.getElementById('sl-tslider-{{ section.id }}');
+    if (!root) return;
+
+    var slides = root.querySelector('.sl-tslider__slides');
+    var allSlides = root.querySelectorAll('.sl-tslider__slide');
+    var total = allSlides.length;
+    if (total < 2) return;
+
+    var current = 0;
+    var paused = false;
+    var autoTimer = null;
+    var progressTimer = null;
+    var progressStart = 0;
+    var progressElapsed = 0;
+
+    var readingTime = {{ section.settings.reading_time }} * 1000;
+    var dots = root.querySelectorAll('.sl-tslider__dot');
+    var progressFill = root.querySelector('.sl-tslider__progress-fill');
+
+    function goTo(index) {
+      if (index < 0) index = total - 1;
+      if (index >= total) index = 0;
+      current = index;
+      slides.style.transform = 'translateX(-' + (current * 100) + '%)';
+
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+
+      progressElapsed = 0;
+      if (progressFill) progressFill.style.width = '0%';
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    /* Auto-advance with progress tracking */
+    function startAuto() {
+      stopAuto();
+      if (!{{ section.settings.auto_slide | json }}) return;
+      progressStart = Date.now() - progressElapsed;
+      autoTimer = setTimeout(function() {
+        next();
+        progressElapsed = 0;
+        startAuto();
+      }, readingTime - progressElapsed);
+
+      if (progressFill) {
+        cancelAnimationFrame(progressTimer);
+        (function tick() {
+          if (paused) return;
+          var elapsed = Date.now() - progressStart;
+          var pct = Math.min((elapsed / readingTime) * 100, 100);
+          progressFill.style.width = pct + '%';
+          if (pct < 100) progressTimer = requestAnimationFrame(tick);
+        })();
+      }
+    }
+
+    function stopAuto() {
+      if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
+      if (progressTimer) { cancelAnimationFrame(progressTimer); progressTimer = null; }
+      progressElapsed = Date.now() - progressStart;
+    }
+
+    function pause() {
+      paused = true;
+      stopAuto();
+    }
+
+    function resume() {
+      paused = false;
+      startAuto();
+    }
+
+    /* Arrow buttons */
+    var prevBtn = root.querySelector('.sl-tslider__nav--prev');
+    var nextBtn = root.querySelector('.sl-tslider__nav--next');
+    if (prevBtn) prevBtn.addEventListener('click', function() { prev(); progressElapsed = 0; startAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { next(); progressElapsed = 0; startAuto(); });
+
+    /* Dots */
+    dots.forEach(function(dot, i) {
+      dot.addEventListener('click', function() { goTo(i); progressElapsed = 0; startAuto(); });
+    });
+
+    /* Desktop: pause on hover */
+    root.addEventListener('mouseenter', pause);
+    root.addEventListener('mouseleave', resume);
+
+    /* Touch swipe */
+    var touchStartX = 0;
+    var touchDeltaX = 0;
+    var swiping = false;
+
+    slides.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].clientX;
+      touchDeltaX = 0;
+      swiping = true;
+      pause();
+      slides.style.transition = 'none';
+    }, { passive: true });
+
+    slides.addEventListener('touchmove', function(e) {
+      if (!swiping) return;
+      touchDeltaX = e.touches[0].clientX - touchStartX;
+      var pct = -(current * 100) + (touchDeltaX / slides.offsetWidth) * 100;
+      slides.style.transform = 'translateX(' + pct + '%)';
+    }, { passive: true });
+
+    slides.addEventListener('touchend', function() {
+      if (!swiping) return;
+      swiping = false;
+      slides.style.transition = '';
+      var threshold = slides.offsetWidth * 0.2;
+      if (touchDeltaX < -threshold) {
+        next();
+      } else if (touchDeltaX > threshold) {
+        prev();
+      } else {
+        goTo(current);
+      }
+      progressElapsed = 0;
+      setTimeout(resume, 2000);
+    });
+
+    /* Start */
+    startAuto();
+
+    /* Shopify editor */
+    if (Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:block:select', function(e) {
+        if (e.detail.sectionId !== '{{ section.id }}') return;
+        var idx = Array.from(allSlides).findIndex(function(s) { return s.getAttribute('data-shopify-editor-block') === '{"id":"' + e.detail.blockId + '","type":"testimonial"}'; });
+        if (idx === -1) {
+          allSlides.forEach(function(s, i) {
+            if (s.closest('[data-shopify-block-id="' + e.detail.blockId + '"]') || s.querySelector('[data-shopify-block-id="' + e.detail.blockId + '"]')) idx = i;
+          });
+        }
+        if (idx >= 0) goTo(idx);
+        pause();
+      });
+      document.addEventListener('shopify:section:deselect', function(e) {
+        if (e.detail.sectionId === '{{ section.id }}') resume();
+      });
+    }
+  })();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Testimonial Slider",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f5f0eb"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content Max Width",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "header",
+      "content": "Quote Styling"
+    },
+    {
+      "type": "select",
+      "id": "quote_font",
+      "label": "Quote Font",
+      "options": [
+        { "value": "heading", "label": "Heading Font" },
+        { "value": "body", "label": "Body Font" }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "range",
+      "id": "quote_size",
+      "label": "Quote Size (Desktop)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "quote_size_mobile",
+      "label": "Quote Size (Mobile)",
+      "min": 18,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "quote_line_height",
+      "label": "Quote Line Height",
+      "min": 1.0,
+      "max": 2.0,
+      "step": 0.1,
+      "default": 1.4
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" },
+        { "value": "justify", "label": "Justify" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote Text Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Author Styling"
+    },
+    {
+      "type": "range",
+      "id": "author_size",
+      "label": "Author Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "author_style",
+      "label": "Author Font Style",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ],
+      "default": "italic"
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Author Text Color",
+      "default": "#4a4a4a"
+    },
+    {
+      "type": "header",
+      "content": "Auto-slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_slide",
+      "label": "Enable Auto-slide",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "reading_time",
+      "label": "Pause Duration",
+      "info": "Seconds each slide stays visible before advancing",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Navigation Arrows",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "label": "Arrow Size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show Indicator Dots",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "dot_size",
+      "label": "Dot Size",
+      "min": 6,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Dot Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress_bar",
+      "label": "Show Progress Bar",
+      "info": "Thin bar that fills during the reading pause",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "progress_bar_color",
+      "label": "Progress Bar Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "My skin has never looked this good. Shannon truly listens, builds a plan around your specific concerns, and the results speak for themselves."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Anna C."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial Slider",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Shannon completely transformed my skincare routine. Her expertise and personalized approach gave me the clear, glowing skin I had been chasing for years.",
+            "author": "Anna C."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I never thought I'd feel this confident about my skin. The personalized approach and genuine care made all the difference.",
+            "author": "Sarah M."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Professional, knowledgeable, and truly caring. I trust her completely with my skincare routine and recommend her to everyone.",
+            "author": "Jessica R."
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12
+}
+{% endschema %}
