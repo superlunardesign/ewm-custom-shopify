@@ -493,59 +493,6 @@
         "padding_bottom": 0
       }
     },
-    "how_it_works_PQ9iL8": {
-      "type": "how-it-works",
-      "blocks": {
-        "step_949nXc": {
-          "type": "step",
-          "settings": {
-            "step_title": "Book Your Session",
-            "step_description": "Choose your virtual consultation type and select a time that works for you. You'll receive a Zoom link via email."
-          }
-        },
-        "step_pWtJWG": {
-          "type": "step",
-          "settings": {
-            "step_title": "Meet & Learn",
-            "step_description": "We'll do a deep dive into your skin, answer all your questions, and educate you on how the skin functions."
-          }
-        },
-        "step_FyHNXM": {
-          "type": "step",
-          "settings": {
-            "step_title": "Get Your Products",
-            "step_description": "Products selected based on your skin goals will be shipped directly to you with detailed instructions."
-          }
-        }
-      },
-      "block_order": [
-        "step_949nXc",
-        "step_pWtJWG",
-        "step_FyHNXM"
-      ],
-      "custom_css": [
-        "p {line-height: 1.2em;}"
-      ],
-      "name": "How It Works",
-      "settings": {
-        "show_header": true,
-        "header_title": "How Virtual Consultations Work",
-        "header_subtitle": "",
-        "header_color": "#8c9b6d",
-        "background_color": "#faf9f7",
-        "accent_color": "#8c9b6d",
-        "show_cta": false,
-        "cta_title": "Ready to Begin Your Journey?",
-        "cta_subtitle": "Book your complimentary skin consultation today and discover the difference personalized care can make.",
-        "cta_button_text": "Book Appointment",
-        "cta_button_url": "https://ke18jq-r4.myshopify.com/",
-        "cta_background_color": "#8c9b6d",
-        "cta_text_color": "#ffffff",
-        "cta_button_color": "#ffffff",
-        "cta_button_text_color": "#8b7ba8",
-        "cta_heading_color": "#ffffff"
-      }
-    },
     "sl_custom_faq_r7Q6ht": {
       "type": "sl-custom-faq",
       "blocks": {
@@ -626,28 +573,28 @@
         "section_title": "Questions About Virtual Consultations",
         "section_subtitle": "Find answers to common questions",
         "header_alignment": "center",
-        "background_color": "#8b7ba8",
+        "background_color": "#FFFFFF",
         "section_padding": 40,
         "max_width": 900,
         "show_toggle_button": true,
         "default_open": false,
         "allow_multiple": true,
-        "header_color": "#ffffff",
+        "header_color": "#57614C",
         "header_size": 32,
         "header_weight": "600",
         "header_text_transform": "none",
         "header_margin": 40,
-        "subheader_color": "#ffffff",
+        "subheader_color": "#000000",
         "subheader_size": 16,
-        "question_color": "#ffffff",
+        "question_color": "#000000",
         "question_size": 18,
         "question_weight": "500",
-        "answer_color": "#ffffff",
+        "answer_color": "#000000",
         "answer_size": 16,
         "item_padding": 25,
-        "border_color": "#ffffff",
-        "toggle_color": "#ffffff",
-        "toggle_hover_color": "#ffffff",
+        "border_color": "#C3D0B4",
+        "toggle_color": "#57614C",
+        "toggle_hover_color": "#57614C",
         "mobile_header_size": 26,
         "mobile_subheader_size": 16,
         "mobile_question_size": 18,
@@ -1370,7 +1317,6 @@
     "sl_marquee_RR7r88",
     "sl_services_menu_EnDQbw",
     "sl_steps_sticky_HR4J8y",
-    "how_it_works_PQ9iL8",
     "sl_custom_faq_r7Q6ht",
     "testimonials_carousel_kK49RM",
     "sl_split_section_YNApNE",
