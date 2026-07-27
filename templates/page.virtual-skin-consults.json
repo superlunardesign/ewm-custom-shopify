@@ -990,31 +990,6 @@
         "padding_bottom": 80
       }
     },
-    "how_it_works_HqcDEd": {
-      "type": "how-it-works",
-      "custom_css": [
-        "p {line-height: 1.2em;}"
-      ],
-      "name": "How It Works",
-      "settings": {
-        "show_header": true,
-        "header_title": "Ready to Achieve Your Skincare Goals?",
-        "header_subtitle": "Don't let time or distance hold you back. Book your virtual skin consultation today and experience the convenience and effectiveness of expert skincare advice from anywhere.",
-        "header_color": "#8c9b6d",
-        "background_color": "#faf9f7",
-        "accent_color": "#8c9b6d",
-        "show_cta": true,
-        "cta_title": "Book Your Virtual Appointment",
-        "cta_subtitle": "Expert skincare advice, personalized treatment plans, and products shipped directly to you.",
-        "cta_button_text": "Book Virtual now",
-        "cta_button_url": "https://ke18jq-r4.myshopify.com/",
-        "cta_background_color": "#8c9b6d",
-        "cta_text_color": "#ffffff",
-        "cta_button_color": "#ffffff",
-        "cta_button_text_color": "#8c9b6d",
-        "cta_heading_color": "#ffffff"
-      }
-    },
     "image_with_text_waPRjx": {
       "type": "image-with-text",
       "blocks": {
@@ -1398,7 +1373,6 @@
     "sl_split_section_YNApNE",
     "sl_flexible_list_YRpKeG",
     "sl_content_banner_bRrVXP",
-    "how_it_works_HqcDEd",
     "image_with_text_waPRjx",
     "sl_marquee_wGAN4T",
     "sl_services_menu_tPA8Ja",
