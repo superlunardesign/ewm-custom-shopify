@@ -945,8 +945,8 @@
         "button_rCVnMi": {
           "type": "button",
           "settings": {
-            "text": "Explore Our Services",
-            "link": "",
+            "text": "BOOK YOUR VIRTUAL CONSULT NOW",
+            "link": "https://booking.mangomint.com/314399",
             "style": "secondary",
             "button_bg_color": "",
             "button_text_color": "",
