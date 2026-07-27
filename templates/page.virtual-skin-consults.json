@@ -155,8 +155,75 @@
         "hover_scale": 1.1,
         "caption_size": 14,
         "caption_color": "#666666",
-        "auto_scroll": true,
+        "auto_scroll_mode": "both",
         "auto_scroll_speed": 0.5
+      }
+    },
+    "sl_content_banner_dX8x9w": {
+      "type": "sl-content-banner",
+      "blocks": {
+        "subheading_kYx96W": {
+          "type": "subheading",
+          "settings": {
+            "text": "Skincare treatments tailored to your unique skin"
+          }
+        },
+        "heading_Bez3HF": {
+          "type": "heading",
+          "settings": {
+            "text": "Reveal Your Most Confident, Radiant Glow",
+            "size": "h0"
+          }
+        },
+        "spacer_wmRKVi": {
+          "type": "spacer",
+          "settings": {
+            "height": 12
+          }
+        },
+        "text_KhYACT": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share details about your approach, philosophy, or expertise here. This text area supports rich formatting for emphasis.</p>"
+          }
+        },
+        "button_PwNM7M": {
+          "type": "button",
+          "settings": {
+            "text": "Explore Our Services",
+            "link": "",
+            "style": "secondary",
+            "button_bg_color": "",
+            "button_text_color": "",
+            "button_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_kYx96W",
+        "heading_Bez3HF",
+        "spacer_wmRKVi",
+        "text_KhYACT",
+        "button_PwNM7M"
+      ],
+      "name": "Content Banner",
+      "settings": {
+        "full_width": true,
+        "content_alignment": "center",
+        "content_max_width": 800,
+        "bg_type": "color",
+        "bg_color": "#FFFFFF",
+        "bg_video_url": "",
+        "overlay_darkness": 100,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "text_color": "#8A9979",
+        "subheading_font": "body",
+        "subheading_size": 16,
+        "subheading_weight": "400",
+        "body_font_size": 16,
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "sl_flexible_list_yEnKh7": {
@@ -276,9 +343,9 @@
       "settings": {
         "colorBackground": "#8b7ba8",
         "colorText": "#ffffff",
-        "link": "",
         "marquee_height": 46,
         "font_size": 18,
+        "link": "",
         "marquee_speed": 21
       }
     },
@@ -691,6 +758,10 @@
       "settings": {
         "image": "shopify://shop_images/BrandingPhotography-C_Mae-5261.jpg",
         "swap_horizontal": false,
+        "heading": "Finally — Chemical Peels in McHenry That Actually Work",
+        "subheading": "At Esthetics with Me, we specialize in custom-blended PCA chemical peels that deliver real, visible results without disrupting your life. Unlike one-size-fits-all treatments, every peel is formulated specifically for YOUR skin type, concerns, and goals.",
+        "text": "Our professional-grade PCA peels work by gently accelerating cell turnover, revealing the fresh, luminous skin hiding beneath the surface. Dark spots fade, fine lines soften, and that healthy glow you've been missing? It comes back.\n\nThe best part? No downtime. You'll walk out of your chemical peel appointment in McHenry ready to continue your day — no hiding, no peeling, no social distancing from your own reflection.",
+        "text2": "Licensed Esthetician | PCA Certified | McHenry's Trusted Skincare Expert",
         "auto_height_desktop": true,
         "section_height_desktop": 40,
         "auto_height_tablet": true,
@@ -703,10 +774,6 @@
         "enable_animation": true,
         "animation_duration": 600,
         "animation_delay": 200,
-        "heading": "Finally — Chemical Peels in McHenry That Actually Work",
-        "subheading": "At Esthetics with Me, we specialize in custom-blended PCA chemical peels that deliver real, visible results without disrupting your life. Unlike one-size-fits-all treatments, every peel is formulated specifically for YOUR skin type, concerns, and goals.",
-        "text": "Our professional-grade PCA peels work by gently accelerating cell turnover, revealing the fresh, luminous skin hiding beneath the surface. Dark spots fade, fine lines soften, and that healthy glow you've been missing? It comes back.\n\nThe best part? No downtime. You'll walk out of your chemical peel appointment in McHenry ready to continue your day — no hiding, no peeling, no social distancing from your own reflection.",
-        "text2": "Licensed Esthetician | PCA Certified | McHenry's Trusted Skincare Expert",
         "heading_color": "#000000",
         "subheading_color": "#333333",
         "text_color": "#666666",
@@ -934,9 +1001,9 @@
       "settings": {
         "colorBackground": "#8c9b6d",
         "colorText": "#ffffff",
-        "link": "",
         "marquee_height": 46,
         "font_size": 18,
+        "link": "",
         "marquee_speed": 21
       }
     },
@@ -1239,6 +1306,7 @@
   "order": [
     "sl_full_image_hero_ChMHiX",
     "before_and_afters_QTJapz",
+    "sl_content_banner_dX8x9w",
     "sl_flexible_list_yEnKh7",
     "sl_marquee_RR7r88",
     "sl_services_menu_EnDQbw",
