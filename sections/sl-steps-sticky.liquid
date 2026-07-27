@@ -334,7 +334,7 @@
       position: -webkit-sticky;
       position: sticky;
       box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.12);
-      min-height: 250px;
+      min-height: var(--hiw-card-h, 250px);
     }
 
     #shopify-section-{{ section.id }} .sl-hiw__cta {
@@ -434,7 +434,7 @@
         align-self: start;
         top: calc(var(--hiw-sticky-top) + var(--hiw-header-h, 0px) + var(--hiw-marquee-h, 0px) - var(--hiw-overlap, 0px));
         margin-top: calc(var(--i) * {{ section.settings.desktop_stagger }}vh);
-        min-height: 280px;
+        min-height: var(--hiw-card-h, 280px);
       }
 
       #shopify-section-{{ section.id }} .sl-hiw__cta {
@@ -491,7 +491,9 @@
       el.style.setProperty('--hiw-header-h', (header ? header.offsetHeight : 0) + 'px');
       el.style.setProperty('--hiw-marquee-h', (marquee ? marquee.offsetHeight : 0) + 'px');
       var maxH = 0;
+      cards.forEach(function(c) { c.style.minHeight = 'auto'; });
       cards.forEach(function(c) { if (c.offsetHeight > maxH) maxH = c.offsetHeight; });
+      cards.forEach(function(c) { c.style.minHeight = ''; });
       el.style.setProperty('--hiw-card-h', maxH + 'px');
     }
     if (document.readyState === 'loading') {
