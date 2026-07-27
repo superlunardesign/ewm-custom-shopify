@@ -491,7 +491,7 @@
           "type": "button",
           "settings": {
             "text": "start with your assessment ↓",
-            "link": "#pricing",
+            "link": "https://booking.mangomint.com/314399#pricing",
             "style": "secondary"
           }
         }
@@ -770,7 +770,7 @@
             "features": "Comprehensive skin analysis|Acne education & expectation setting|Sensitivity check for your skin|Personalized treatment plan creation|Homecare routine recommendations",
             "duration": "45 minutes",
             "button_text": "BOOK NOW",
-            "button_url": "",
+            "button_url": "https://booking.mangomint.com/314399",
             "button_style": "outlined",
             "button_color": "#9b7bb8",
             "button_text_color": "#ffffff"
@@ -790,7 +790,7 @@
             "features": "Everything in the Assessment|Full acne treatment with extractions|Customized treatment for your skin type|Leave with guidance AND treatment complete|Best value for getting started",
             "duration": "90 minutes",
             "button_text": "BOOK NOW",
-            "button_url": "",
+            "button_url": "https://booking.mangomint.com/314399",
             "button_style": "filled",
             "button_color": "#a8b88c",
             "button_text_color": "#ffffff"
@@ -971,7 +971,7 @@
           "type": "button",
           "settings": {
             "text": "inquire about virtual bootcamp",
-            "link": "#treatments",
+            "link": "https://booking.mangomint.com/314399",
             "style": "secondary"
           }
         }
@@ -1317,7 +1317,7 @@
           "type": "button",
           "settings": {
             "text": "Book Your Consultation",
-            "link": "",
+            "link": "https://booking.mangomint.com/314399",
             "style": "secondary",
             "button_bg_color": "",
             "button_text_color": "",
