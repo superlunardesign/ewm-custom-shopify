@@ -284,7 +284,7 @@
         "background_size": "cover",
         "background_position_x": 50,
         "background_position_y": 50,
-        "section_background": "#EAE7EC",
+        "section_background": "#F5F0EB",
         "section_padding": 60,
         "max_width": 1200,
         "grid_gap": 30,
@@ -447,39 +447,6 @@
         "mobile_description_size": 13
       }
     },
-    "rich_text_MLxMeg": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_LhXK7V": {
-          "type": "heading",
-          "settings": {
-            "heading": "How To Prepare For LED Light Therapy",
-            "heading_size": "h1"
-          }
-        },
-        "text_9TtmJY": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Please arrive with clean and makeup free skin.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_LhXK7V",
-        "text_9TtmJY"
-      ],
-      "custom_css": [
-        "* {background-color: #f7f4ed;}",
-        "a {background-color: white; opacity: 100%;}"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
-    },
     "sl_content_banner_wNBe4Y": {
       "type": "sl-content-banner",
       "blocks": {
@@ -530,13 +497,13 @@
       "name": "Content Banner",
       "settings": {
         "full_width": true,
-        "content_alignment": "center",
+        "content_alignment": "left",
         "content_max_width": 800,
         "bg_type": "image",
         "bg_color": "#1a1612",
-        "bg_image": "shopify://shop_images/BrandingPhotography-C.Mae-5843.jpg",
+        "bg_image": "shopify://shop_images/BrandingPhotography-C.Mae-5852.jpg",
         "bg_video_url": "",
-        "overlay_darkness": 40,
+        "overlay_darkness": 70,
         "enable_animation": false,
         "animation_duration": 600,
         "text_color": "#f0e8d8",
@@ -977,7 +944,6 @@
     "sl_flexible_list_yEnKh7",
     "sl_marquee_RR7r88",
     "sl_services_menu_tPA8Ja",
-    "rich_text_MLxMeg",
     "sl_content_banner_wNBe4Y",
     "rich_text_DPyyGi",
     "sl_split_section_LYw6za",
