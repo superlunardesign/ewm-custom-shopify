@@ -18,32 +18,23 @@
 {%- endstyle -%}
 
 <div class="sl-icg" style="background-color: {{ section.settings.bg_color }};">
+  {% if section.settings.enable_marquee and section.settings.marquee_text != blank %}
+    <div class="sl-icg__marquee" aria-hidden="true">
+      <div class="sl-icg__marquee-track">
+        {% for i in (1..10) %}
+          <span class="sl-icg__marquee-item" style="color: {{ section.settings.marquee_color }}; font-size: {{ section.settings.marquee_size }}px; {% if section.settings.marquee_font == 'heading' %}font-family: var(--font-heading-family); font-weight: var(--font-heading-weight); font-style: var(--font-heading-style);{% else %}font-family: var(--font-body-family);{% endif %}">{{ section.settings.marquee_text }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
   <div class="sl-icg__container">
     {% if section.settings.heading != blank %}
       <h2 class="sl-icg__heading {{ section.settings.heading_size }}" style="color: {{ section.settings.heading_color }};">{{ section.settings.heading }}</h2>
     {% endif %}
 
     {% if section.blocks.size > 0 %}
-      <div class="sl-icg__grid-wrap">
-        {% if section.settings.enable_marquee and section.settings.marquee_text != blank %}
-          <div class="sl-icg__marquee" aria-hidden="true">
-            <div class="sl-icg__marquee-track">
-              {% for i in (1..10) %}
-                <span class="sl-icg__marquee-item" style="color: {{ section.settings.marquee_color }}; font-size: {{ section.settings.marquee_size }}px; {% if section.settings.marquee_font == 'heading' %}font-family: var(--font-heading-family); font-weight: var(--font-heading-weight); font-style: var(--font-heading-style);{% else %}font-family: var(--font-body-family);{% endif %}">{{ section.settings.marquee_text }}</span>
-              {% endfor %}
-            </div>
-          </div>
-
-          <div class="sl-icg__marquee-v" aria-hidden="true">
-            <div class="sl-icg__marquee-v-track">
-              {% for i in (1..10) %}
-                <span class="sl-icg__marquee-v-item" style="color: {{ section.settings.marquee_color }}; font-size: {{ section.settings.marquee_size }}px; {% if section.settings.marquee_font == 'heading' %}font-family: var(--font-heading-family); font-weight: var(--font-heading-weight); font-style: var(--font-heading-style);{% else %}font-family: var(--font-body-family);{% endif %}">{{ section.settings.marquee_text }}</span>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-
-        <div class="sl-icg__grid">
+      <div class="sl-icg__grid">
         {% for block in section.blocks %}
           <div class="sl-icg__card" {{ block.shopify_attributes }}>
             <div class="sl-icg__card-media">
@@ -126,7 +117,6 @@
             {% endif %}
           </div>
         {% endfor %}
-        </div>
       </div>
     {% endif %}
   </div>
@@ -138,17 +128,50 @@
     overflow: hidden;
   }
 
+  /* ── Scrolling marquee (normal flow, content overlaps it) ── */
+  {% if section.settings.enable_marquee and section.settings.marquee_text != blank %}
+    #shopify-section-{{ section.id }} .sl-icg__marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: {{ section.settings.marquee_padding | default: 20 }}px 0;
+      pointer-events: none;
+    }
+
+    #shopify-section-{{ section.id }} .sl-icg__marquee-track {
+      display: inline-flex;
+      animation: slIcgScroll {{ section.settings.marquee_speed }}s linear infinite;
+      white-space: nowrap;
+    }
+
+    #shopify-section-{{ section.id }} .sl-icg__marquee-item {
+      flex-shrink: 0;
+      padding-right: 0.3em;
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    @keyframes slIcgScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    #shopify-section-{{ section.id }} .sl-icg__container {
+      margin-top: -{{ section.settings.marquee_overlap | default: 40 }}px;
+    }
+  {% endif %}
+
   #shopify-section-{{ section.id }} .sl-icg__container {
     position: relative;
+    z-index: 1;
     max-width: var(--page-width, 1200px);
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
 
   #shopify-section-{{ section.id }} .sl-icg__heading {
-    position: relative;
-    z-index: 3;
     text-align: center;
     margin-bottom: 2rem;
     font-family: var(--font-heading-family);
@@ -156,81 +179,8 @@
     font-style: var(--font-heading-style);
   }
 
-  #shopify-section-{{ section.id }} .sl-icg__grid-wrap {
-    position: relative;
-  }
-
-  /* ── Horizontal marquee (desktop) ── */
-  #shopify-section-{{ section.id }} .sl-icg__marquee {
-    position: absolute;
-    top: {{ section.settings.marquee_offset_desktop | default: 0 }}px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    z-index: 1;
-    overflow: hidden;
-    white-space: nowrap;
-    pointer-events: none;
-    display: none;
-  }
-
-  #shopify-section-{{ section.id }} .sl-icg__marquee-track {
-    display: inline-flex;
-    animation: slIcgScroll {{ section.settings.marquee_speed }}s linear infinite;
-    white-space: nowrap;
-  }
-
-  #shopify-section-{{ section.id }} .sl-icg__marquee-item {
-    flex-shrink: 0;
-    padding-right: 0.3em;
-    line-height: 1;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  @keyframes slIcgScroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* ── Vertical marquee (mobile) ── */
-  #shopify-section-{{ section.id }} .sl-icg__marquee-v {
-    position: absolute;
-    top: 0;
-    left: calc(-1.5rem + {{ section.settings.marquee_offset_mobile | default: 0 }}px);
-    bottom: 0;
-    z-index: 1;
-    overflow: hidden;
-    pointer-events: none;
-    width: auto;
-    display: block;
-  }
-
-  #shopify-section-{{ section.id }} .sl-icg__marquee-v-track {
-    display: flex;
-    flex-direction: column;
-    animation: slIcgScrollV {{ section.settings.marquee_speed }}s linear infinite;
-    writing-mode: vertical-lr;
-    text-orientation: mixed;
-  }
-
-  #shopify-section-{{ section.id }} .sl-icg__marquee-v-item {
-    flex-shrink: 0;
-    padding-bottom: 0.3em;
-    line-height: 1;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  @keyframes slIcgScrollV {
-    from { transform: translateY(0); }
-    to { transform: translateY(-50%); }
-  }
-
   /* ── Card grid ── */
   #shopify-section-{{ section.id }} .sl-icg__grid {
-    position: relative;
-    z-index: 2;
     display: grid;
     grid-template-columns: 1fr;
     gap: {{ section.settings.card_gap }}px;
@@ -371,23 +321,8 @@
     opacity: 0.7;
   }
 
-  /* ── Mobile: vertical marquee on left, 1 col cards centered ── */
+  /* ── Mobile ── */
   @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} .sl-icg__marquee {
-      display: none !important;
-    }
-
-    {% if section.settings.enable_marquee and section.settings.marquee_text != blank %}
-      #shopify-section-{{ section.id }} .sl-icg__marquee-v {
-        display: block;
-      }
-    {% endif %}
-
-    #shopify-section-{{ section.id }} .sl-icg__container {
-      padding-left: 3rem;
-      padding-right: 1.5rem;
-    }
-
     #shopify-section-{{ section.id }} .sl-icg__grid {
       grid-template-columns: 1fr;
       max-width: 400px;
@@ -397,14 +332,6 @@
 
   /* ── Tablet: 2 cols ── */
   @media screen and (min-width: 750px) and (max-width: 989px) {
-    #shopify-section-{{ section.id }} .sl-icg__marquee {
-      display: block;
-    }
-
-    #shopify-section-{{ section.id }} .sl-icg__marquee-v {
-      display: none !important;
-    }
-
     #shopify-section-{{ section.id }} .sl-icg__container {
       padding-left: 3rem;
       padding-right: 3rem;
@@ -417,14 +344,6 @@
 
   /* ── Desktop: chosen column count ── */
   @media screen and (min-width: 990px) {
-    #shopify-section-{{ section.id }} .sl-icg__marquee {
-      display: block;
-    }
-
-    #shopify-section-{{ section.id }} .sl-icg__marquee-v {
-      display: none !important;
-    }
-
     #shopify-section-{{ section.id }} .sl-icg__container {
       padding-left: 5rem;
       padding-right: 5rem;
@@ -713,25 +632,25 @@
     },
     {
       "type": "range",
-      "id": "marquee_offset_desktop",
-      "label": "Marquee Vertical Offset (Desktop)",
-      "info": "Shift marquee down from top of cards. Use negative to peek above.",
-      "min": -200,
-      "max": 300,
-      "step": 10,
+      "id": "marquee_padding",
+      "label": "Marquee Vertical Padding",
+      "info": "Space above and below the marquee text",
+      "min": 0,
+      "max": 60,
+      "step": 5,
       "unit": "px",
-      "default": -40
+      "default": 20
     },
     {
       "type": "range",
-      "id": "marquee_offset_mobile",
-      "label": "Marquee Horizontal Offset (Mobile)",
-      "info": "Shift vertical marquee left (negative) or right (positive)",
-      "min": -200,
+      "id": "marquee_overlap",
+      "label": "Content Overlap",
+      "info": "How far the cards overlap the scrolling text",
+      "min": 0,
       "max": 200,
       "step": 10,
       "unit": "px",
-      "default": 0
+      "default": 40
     },
     {
       "type": "header",
