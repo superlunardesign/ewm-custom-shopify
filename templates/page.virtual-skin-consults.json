@@ -456,7 +456,7 @@
         "bg_image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5035.jpg",
         "bg_video_url": "",
         "bg_color": "#1a1a1a",
-        "overlay_opacity": 30,
+        "overlay_opacity": 65,
         "section_subheading": "",
         "section_heading": "Getting started is effortless",
         "section_heading_size": "h1",
@@ -914,6 +914,82 @@
         "animation_delay": 100
       }
     },
+    "sl_content_banner_bRrVXP": {
+      "type": "sl-content-banner",
+      "blocks": {
+        "subheading_KGNTnh": {
+          "type": "subheading",
+          "settings": {
+            "text": "Skincare treatments tailored to your unique skin"
+          }
+        },
+        "heading_HGmrLc": {
+          "type": "heading",
+          "settings": {
+            "text": "Reveal Your Most Confident, Radiant Glow",
+            "size": "h0"
+          }
+        },
+        "spacer_AxXVJR": {
+          "type": "spacer",
+          "settings": {
+            "height": 12
+          }
+        },
+        "text_yPyjEn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share details about your approach, philosophy, or expertise here. This text area supports rich formatting for emphasis.</p>"
+          }
+        },
+        "button_rCVnMi": {
+          "type": "button",
+          "settings": {
+            "text": "Explore Our Services",
+            "link": "",
+            "style": "secondary",
+            "button_bg_color": "",
+            "button_text_color": "",
+            "button_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_KGNTnh",
+        "heading_HGmrLc",
+        "spacer_AxXVJR",
+        "text_yPyjEn",
+        "button_rCVnMi"
+      ],
+      "name": "Content Banner",
+      "settings": {
+        "full_width": true,
+        "content_alignment": "center",
+        "content_max_width": 800,
+        "bg_type": "color",
+        "bg_color": "#1a1612",
+        "bg_video_url": "",
+        "overlay_darkness": 100,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "text_color": "#f0e8d8",
+        "subheading_font": "body",
+        "subheading_size": 16,
+        "subheading_weight": "400",
+        "body_font_size": 16,
+        "button_font": "heading",
+        "button_font_size": 14,
+        "button_font_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 10,
+        "button_padding_y": 14,
+        "button_padding_x": 36,
+        "button_border_radius": 0,
+        "button_hover_opacity": 85,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "how_it_works_HqcDEd": {
       "type": "how-it-works",
       "custom_css": [
@@ -1321,6 +1397,7 @@
     "testimonials_carousel_kK49RM",
     "sl_split_section_YNApNE",
     "sl_flexible_list_YRpKeG",
+    "sl_content_banner_bRrVXP",
     "how_it_works_HqcDEd",
     "image_with_text_waPRjx",
     "sl_marquee_wGAN4T",
