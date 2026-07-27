@@ -163,9 +163,9 @@
   /* ── Horizontal marquee (desktop) ── */
   #shopify-section-{{ section.id }} .sl-icg__marquee {
     position: absolute;
-    top: calc(50% + {{ section.settings.marquee_offset_desktop | default: 0 }}px);
+    top: {{ section.settings.marquee_offset_desktop | default: 0 }}px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     width: 100vw;
     z-index: 1;
     overflow: hidden;
@@ -715,12 +715,12 @@
       "type": "range",
       "id": "marquee_offset_desktop",
       "label": "Marquee Vertical Offset (Desktop)",
-      "info": "Shift marquee up (negative) or down (positive) from center",
-      "min": -300,
+      "info": "Shift marquee down from top of cards. Use negative to peek above.",
+      "min": -200,
       "max": 300,
       "step": 10,
       "unit": "px",
-      "default": 0
+      "default": -40
     },
     {
       "type": "range",
