@@ -417,8 +417,8 @@
         "step_7L6iFX": {
           "type": "step",
           "settings": {
-            "heading": "Book an Appointment",
-            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+            "heading": "Book your Session",
+            "text": "<p>Choose your virtual consultation type and select a time that works for you. You'll receive a Zoom link via email.</p>"
           }
         },
         "step_HPJptH": {
