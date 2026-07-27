@@ -817,7 +817,7 @@
         "text_dkVrVi": {
           "type": "text",
           "settings": {
-            "text": "<p>First time? Make sure hair is grown out at least 10-14 days before your appointment. If you currently don't shave - there is nothing you need to do before your appointment.</p>"
+            "text": "<p>First time? Make sure hair is grown out at least 10-14 days before your appointment. If you currently don't shave - there is nothing you need to do before your appointment.<br/><br/>Don't forget to fill out your waiver before your appointment ↓ </p>"
           }
         },
         "button_q4RP4t": {
@@ -867,27 +867,29 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/BrandingPhotography-C_Mae-5388_df0f947b-d6ce-4427-9126-029bed1a5c05.jpg",
-            "card_heading": "YADA",
-            "card_text": "BLAH BALH BLAH",
-            "button_text": "",
-            "button_link": ""
+            "card_heading": "Book your session",
+            "card_text": "Choose your service, date, and time.",
+            "button_text": "BOOK HERE",
+            "button_link": "https://booking.mangomint.com/314399"
           }
         },
         "card_HTyTkA": {
           "type": "card",
           "settings": {
-            "card_heading": "",
-            "card_text": "",
-            "button_text": "SKIN QUIZ",
+            "image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5066.jpg",
+            "card_heading": "We'll see you then",
+            "card_text": "Be sure to arrive with at least 10-14 days of growth (or more!) and in loose clothing.",
+            "button_text": "",
             "button_link": ""
           }
         },
         "card_nhixPe": {
           "type": "card",
           "settings": {
-            "card_heading": "",
-            "card_text": "",
-            "button_text": "SHOP SKINCARE",
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-6064_c4c0142f-cd1e-473d-8246-60e34146856e.jpg",
+            "card_heading": "We'll have you smooth in no time",
+            "card_text": "You'll leave with smooth skin & a post-wax care plan!",
+            "button_text": "",
             "button_link": ""
           }
         }
@@ -897,6 +899,9 @@
         "card_HTyTkA",
         "card_nhixPe"
       ],
+      "custom_css": [
+        ".sl-icg__marquee {margin-top: -200px;}"
+      ],
       "name": "EWM Image Card Grid",
       "settings": {
         "columns": "3",
@@ -905,7 +910,7 @@
         "heading": "",
         "heading_size": "h1",
         "heading_color": "#1a1a1a",
-        "text_position": "none",
+        "text_position": "overlay",
         "show_buttons": true,
         "card_title_size": 20,
         "card_desc_size": 14,
@@ -916,144 +921,127 @@
         "overlay_text_align": "center",
         "button_gap": 12,
         "button_font_size": 14,
-        "button_text_color": "#6b3a2a",
-        "button_border_color": "#6b3a2a",
+        "button_text_color": "#FFFFFF",
+        "button_border_color": "#FFFFFF",
         "enable_marquee": true,
-        "marquee_text": "SERVICES & TREATMENTS",
+        "marquee_text": "HOW IT WORKS",
         "marquee_size": 160,
-        "marquee_color": "#c4956a",
+        "marquee_color": "#8A9979",
         "marquee_font": "heading",
-        "marquee_speed": 20,
+        "marquee_speed": 60,
         "bg_color": "#f5f0eb",
-        "padding_top": 36,
+        "padding_top": 100,
         "padding_bottom": 36
       }
     },
-    "multicolumn_iQcB9a": {
-      "type": "multicolumn",
+    "sl_custom_faq_ppAhzx": {
+      "type": "sl-custom-faq",
       "blocks": {
-        "column_PNhpg7": {
-          "type": "column",
+        "faq_item_LWFRij": {
+          "type": "faq_item",
           "settings": {
-            "title": "If you are nervous about discomfort:",
-            "text": "<p>take an ibuprofen 30-40 minutes before your appointment.</p>",
-            "button_text": "",
-            "button_link": ""
+            "question": "I'm nervous about discomfort - What do you recommend?",
+            "answer": "<p>We get it! Many of our clients mention this being the least uncomfortable waxing experience they've had – but if you're still worried, <strong>we recommend taking an Ibuprofen 30-40 minutes before your appointment</strong></p>"
           }
         },
-        "column_YAeNWG": {
-          "type": "column",
+        "faq_item_KtX7dR": {
+          "type": "faq_item",
           "settings": {
-            "title": "Wear loose fitting clothing",
-            "text": "<p>to your appointment & for the rest of the day. Avoid lace & spandex underwear - cotton is best.</p>",
-            "button_text": "",
-            "button_link": ""
+            "question": "Can I still exercise or play sports?",
+            "answer": "<p>No – <strong>Avoid swimming and exercising for 48 hours post wax</strong>. Even though it is popular to get waxed before leaving for vacation, <strong>We advice getting waxed 2-3 days before you leave town.</strong></p>"
           }
         },
-        "column_MCPeCL": {
-          "type": "column",
+        "faq_item_7cwzea": {
+          "type": "faq_item",
           "settings": {
-            "title": "NO swimming or exercising",
-            "text": "<p>48 hours post wax. It is popular to get waxed right before leaving for vacation - It is advised to get waxed 2-3 days before you leave town.</p>",
-            "button_text": "",
-            "button_link": ""
+            "question": "Can I get waxed on my period?",
+            "answer": "<p>YES! We wax ladies on their periods every day. Please use a fresh tampon, disc, or an emptied cup before arrival. <strong>We also have tampons available for you in the bathroom.</strong></p>"
           }
         },
-        "column_MQeEx7": {
-          "type": "column",
+        "faq_item_MJGhNK": {
+          "type": "faq_item",
           "settings": {
-            "title": "Can I get waxed on my period?",
-            "text": "<p>YES! We wax ladies on their periods every day. Please use a fresh tampon before arrival. We also have tampons available for you in the bathroom.</p>",
-            "button_text": "",
-            "button_link": ""
+            "question": "Should I dress a specific way for my waxing appointment?",
+            "answer": "<p>Yes, please wear loose fitting clothing to your appointment and plan to for the rest of the day. <br/>Avoid lace and spandex.<br/><strong>Cotton is best.</strong></p>"
+          }
+        },
+        "faq_item_GPcWJw": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I book an appointment?",
+            "answer": "<p>You can book an appointment through our online booking system by clicking the 'Book Now' button, or you can call us directly at (555) 123-4567.</p>"
+          }
+        },
+        "faq_item_HKPkTw": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your cancellation policy?",
+            "answer": "<p>We require at least 24 hours notice for cancellations. Cancellations made less than 24 hours in advance may be subject to a cancellation fee.</p>"
+          }
+        },
+        "faq_item_kPgwxQ": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer gift cards?",
+            "answer": "<p>Yes! We offer both physical and digital gift cards in various denominations. They make perfect gifts for any occasion.</p>"
+          }
+        },
+        "faq_item_UewjjT": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are your business hours?",
+            "answer": "<p>We are open Monday through Friday from 9:00 AM to 6:00 PM, and Saturday from 10:00 AM to 4:00 PM. We are closed on Sundays and major holidays.</p>"
           }
         }
       },
       "block_order": [
-        "column_PNhpg7",
-        "column_YAeNWG",
-        "column_MCPeCL",
-        "column_MQeEx7"
+        "faq_item_LWFRij",
+        "faq_item_KtX7dR",
+        "faq_item_7cwzea",
+        "faq_item_MJGhNK",
+        "faq_item_GPcWJw",
+        "faq_item_HKPkTw",
+        "faq_item_kPgwxQ",
+        "faq_item_UewjjT"
       ],
-      "custom_css": [
-        ".multicolumn {background-color: #f7f4ed;}",
-        ".content-container {background-color: #f7f4ed;}"
-      ],
-      "name": "t:sections.multicolumn.presets.name",
+      "name": "FAQ Section",
       "settings": {
-        "heading": "Featured Collections",
-        "subheading": "",
+        "enable_anchor": false,
+        "anchor_id": "faq",
+        "anchor_offset": 80,
+        "section_title": "FREQUENTLY ASKED QUESTIONS",
+        "section_subtitle": "",
         "header_alignment": "center",
-        "header_spacing": 40,
-        "background_color": "#ffffff",
-        "max_width": 1200,
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "columns_desktop": 2,
-        "columns_tablet": 2,
-        "columns_mobile": "1",
-        "column_gap": 30,
-        "mobile_column_gap": 20,
-        "column_alignment": "left",
-        "image_width": 100,
-        "mobile_image_width": 100,
-        "image_ratio": "adapt",
-        "image_radius": 0,
-        "image_spacing": 20,
-        "card_background": "rgba(0,0,0,0)",
-        "card_padding": 0,
-        "card_radius": 0,
-        "card_shadow": false,
-        "heading_color": "#000000",
-        "heading_size": 32,
-        "heading_weight": "600",
-        "subheading_color": "#666666",
-        "subheading_size": 16,
-        "title_color": "#000000",
-        "title_size": 20,
-        "title_weight": "600",
-        "text_color": "#333333",
-        "text_size": 15,
-        "button_background": "#000000",
-        "button_text_color": "#ffffff",
-        "button_hover_background": "#333333",
-        "button_hover_text_color": "#ffffff",
-        "button_radius": 0,
-        "mobile_heading_size": 26,
-        "mobile_title_size": 18,
-        "mobile_text_size": 14
-      }
-    },
-    "rich_text_UbVpyD": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_FV8nUL": {
-          "type": "heading",
-          "settings": {
-            "heading": "Fill out The Proper Waiver Before Arrival",
-            "heading_size": "h1"
-          }
-        },
-        "button_d4ViGp": {
-          "type": "button",
-          "settings": {
-            "button_label": "SIGN HERE",
-            "button_link": "https://form.jotform.com/220666610688058",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_FV8nUL",
-        "button_d4ViGp"
-      ],
-      "custom_css": [],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "background_color": "#F5F0EB",
+        "section_padding": 40,
+        "max_width": 900,
+        "show_toggle_button": true,
+        "default_open": false,
+        "allow_multiple": true,
+        "header_color": "#000000",
+        "header_size": 32,
+        "header_weight": "600",
+        "header_text_transform": "none",
+        "header_margin": 40,
+        "subheader_color": "#666666",
+        "subheader_size": 16,
+        "question_color": "#000000",
+        "question_size": 18,
+        "question_weight": "500",
+        "answer_color": "#333333",
+        "answer_size": 16,
+        "item_padding": 25,
+        "border_color": "#C3D0B4",
+        "toggle_color": "#666666",
+        "toggle_hover_color": "#000000",
+        "mobile_header_size": 26,
+        "mobile_subheader_size": 14,
+        "mobile_question_size": 16,
+        "mobile_answer_size": 14,
+        "mobile_item_padding": 20,
+        "enable_animation": false,
+        "animation_duration": 500,
+        "animation_delay": 50
       }
     },
     "product_listing_LiVXYB": {
@@ -1061,16 +1049,16 @@
       "name": "Product Carousel",
       "settings": {
         "full_width": false,
-        "desktop_columns": "4",
-        "heading": "Trending Now",
-        "heading_alignment": "left",
+        "desktop_columns": "3",
+        "heading": "post-wax products",
+        "heading_alignment": "center",
         "heading_color": "#8c9b6d",
         "heading_font": "heading",
         "heading_size": 24,
         "heading_weight": "500",
         "heading_transform": "uppercase",
-        "price_placement": "title_row",
-        "collection": "acne",
+        "price_placement": "button",
+        "collection": "post-waxing-care",
         "fallback_collection_handle": "best-selling-skincare",
         "products_limit": 10,
         "auto_scroll_mode": "off",
@@ -1318,8 +1306,7 @@
     "sl_services_menu_F7imxi",
     "sl_content_banner_9QhcDF",
     "sl_image_card_grid_QWkRNF",
-    "multicolumn_iQcB9a",
-    "rich_text_UbVpyD",
+    "sl_custom_faq_ppAhzx",
     "product_listing_LiVXYB",
     "testimonials_carousel_kK49RM",
     "main",
