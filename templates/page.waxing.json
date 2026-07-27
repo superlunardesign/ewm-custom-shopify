@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "sl_scrapbook_hero_UnqQ3Y": {
@@ -126,45 +135,85 @@
         "animation_delay": 300
       }
     },
-    "sl_split_section_YNApNE": {
-      "type": "sl-split-section",
-      "name": "Split Section",
+    "sl_image_text_overlap_7Fmzin": {
+      "type": "sl-image-text-overlap",
+      "blocks": {
+        "subheading_Ec8V6k": {
+          "type": "subheading",
+          "settings": {
+            "text": "Meet Your Waxing Experts in McHenry"
+          }
+        },
+        "heading_eFifqB": {
+          "type": "heading",
+          "settings": {
+            "text": "Hi, I'm Shannon. Owner of Esthetics With Me",
+            "size": "h1"
+          }
+        },
+        "text_NMUWrE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>✓ Licensed and certified esthetician with specialized Brazilian waxing training<br/>✓ Years of experience with all skin types and sensitivities<br/>✓ Gentle technique that minimizes discomfort<br/>✓ Premium wax that grips hair, not skin<br/>✓ Personalized aftercare guidance for every client<br/><br/>I've been where you are - hesitant about waxing because of past experiences or fear of the unknown. That's why I've made it my mission to provide McHenry with a waxing service that prioritizes your comfort, privacy, and results.</p>"
+          }
+        },
+        "text_Kk6iEr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>I understand exactly what you're going through. After years of perfecting my technique and helping hundreds of clients achieve smooth, lasting results, my team and I have created a waxing experience that's different.</p><p></p><p></p>"
+          }
+        },
+        "button_QrjVek": {
+          "type": "button",
+          "settings": {
+            "text": "view all waxing services ↓",
+            "link": "#services",
+            "style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Ec8V6k",
+        "heading_eFifqB",
+        "text_NMUWrE",
+        "text_Kk6iEr",
+        "button_QrjVek"
+      ],
+      "name": "EWM Image + Text Overlap",
       "settings": {
         "image": "shopify://shop_images/BrandingPhotography-C.Mae-5943.jpg",
-        "swap_horizontal": false,
-        "auto_height_desktop": true,
-        "section_height_desktop": 40,
-        "auto_height_tablet": true,
-        "section_height_tablet": 50,
-        "wrapper_padding": 3,
-        "wrapper_padding_tablet": 3,
-        "wrapper_padding_mobile": 3,
+        "image_position": "left",
+        "desktop_height": 550,
+        "mobile_height": 350,
+        "image_fit": "cover",
         "image_position_x": 50,
-        "image_position_y": 20,
+        "image_position_y": 50,
+        "image_width": 3,
+        "content_width": 2,
+        "overlap_amount": 80,
+        "vertical_inset": 30,
+        "spread_content": false,
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "enable_scroll_text": false,
+        "scroll_text": "MEET YOUR ESTHETICIAN",
+        "scroll_font_size": 100,
+        "scroll_text_color": "#c4a882",
+        "scroll_text_padding": 20,
+        "scroll_overlap": 40,
+        "scroll_speed": 20,
+        "enable_anchor": false,
+        "anchor_id": "",
+        "scroll_offset": 80,
         "enable_animation": true,
         "animation_duration": 600,
         "animation_delay": 200,
-        "heading": "Meet Your Waxing Experts in McHenry",
-        "subheading": "Hi, I'm Shannon. Owner of Esthetics With Me",
-        "text": "I understand exactly what you're going through. After years of perfecting my technique and helping hundreds of clients achieve smooth, lasting results, my team and I have created a waxing experience that's different.",
-        "text2": "\u2713 Licensed and certified esthetician with specialized Brazilian waxing training\n\u2713 Years of experience with all skin types and sensitivities\n\u2713 Gentle technique that minimizes discomfort\n\u2713 Premium wax that grips hair, not skin\n\u2713 Personalized aftercare guidance for every client\n\nI've been where you are - hesitant about waxing because of past experiences or fear of the unknown. That's why I've made it my mission to provide McHenry with a waxing service that prioritizes your comfort, privacy, and results.",
-        "heading_color": "#000000",
-        "subheading_color": "#333333",
-        "text_color": "#666666",
-        "heading_size": 32,
-        "subheading_size": 24,
-        "text_size": 16,
-        "mobile_heading_size": 24,
-        "mobile_subheading_size": 18,
-        "mobile_text_size": 14,
-        "show_button": true,
-        "button_text": "View All Our Waxing Services \u2193",
-        "button_link": "#services",
-        "button_background": "#8c9b6d",
-        "button_text_color": "#ffffff",
-        "button_hover_background": "#dae2c7",
-        "button_hover_text_color": "#ffffff",
-        "button_border_radius": 0
+        "enable_sticky": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "sl_flexible_list_yEnKh7": {
@@ -297,9 +346,9 @@
       "settings": {
         "colorBackground": "#8d9976",
         "colorText": "#ffffff",
-        "link": "",
         "marquee_height": 46,
         "font_size": 18,
+        "link": "",
         "marquee_speed": 21
       }
     },
@@ -313,6 +362,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "55",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -326,6 +376,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "30",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -340,6 +391,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "45",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -354,6 +406,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "65",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -367,6 +420,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "15",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -380,6 +434,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "30",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -393,6 +448,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "30",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -406,6 +462,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "25",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -419,6 +476,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "55",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -432,6 +490,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "90",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -530,9 +589,9 @@
       "settings": {
         "colorBackground": "#8d9976",
         "colorText": "#ffffff",
-        "link": "",
         "marquee_height": 46,
         "font_size": 18,
+        "link": "",
         "marquee_speed": 21
       }
     },
@@ -547,6 +606,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "24",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -561,6 +621,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "45",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -575,6 +636,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "22",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -589,6 +651,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "17",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -603,6 +666,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "12",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -617,6 +681,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "12",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -631,6 +696,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "12",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -645,6 +711,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "15",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -659,6 +726,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "30",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -757,6 +825,75 @@
         "padding_bottom": 52
       }
     },
+    "sl_image_card_grid_QWkRNF": {
+      "type": "sl-image-card-grid",
+      "blocks": {
+        "card_iRBT98": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5388_df0f947b-d6ce-4427-9126-029bed1a5c05.jpg",
+            "card_heading": "YADA",
+            "card_text": "BLAH BALH BLAH",
+            "button_text": "FACIAL TREATMENTS",
+            "button_link": ""
+          }
+        },
+        "card_HTyTkA": {
+          "type": "card",
+          "settings": {
+            "card_heading": "",
+            "card_text": "",
+            "button_text": "SKIN QUIZ",
+            "button_link": ""
+          }
+        },
+        "card_nhixPe": {
+          "type": "card",
+          "settings": {
+            "card_heading": "",
+            "card_text": "",
+            "button_text": "SHOP SKINCARE",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_iRBT98",
+        "card_HTyTkA",
+        "card_nhixPe"
+      ],
+      "name": "EWM Image Card Grid",
+      "settings": {
+        "columns": "3",
+        "card_gap": 20,
+        "image_ratio": "3 / 4",
+        "heading": "",
+        "heading_size": "h1",
+        "heading_color": "#1a1a1a",
+        "text_position": "none",
+        "show_buttons": true,
+        "card_title_size": 20,
+        "card_desc_size": 14,
+        "card_text_below_color": "#4a4a4a",
+        "overlay_opacity": 30,
+        "overlay_text_color": "#ffffff",
+        "overlay_vertical_align": "flex-end",
+        "overlay_text_align": "center",
+        "button_gap": 12,
+        "button_font_size": 14,
+        "button_text_color": "#6b3a2a",
+        "button_border_color": "#6b3a2a",
+        "enable_marquee": true,
+        "marquee_text": "SERVICES & TREATMENTS",
+        "marquee_size": 160,
+        "marquee_color": "#c4956a",
+        "marquee_font": "heading",
+        "marquee_speed": 20,
+        "bg_color": "#f5f0eb",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "multicolumn_iQcB9a": {
       "type": "multicolumn",
       "blocks": {
@@ -765,9 +902,8 @@
           "settings": {
             "title": "If you are nervous about discomfort:",
             "text": "<p>take an ibuprofen 30-40 minutes before your appointment.</p>",
-            "link_label": "",
-            "link": "",
-            "icon_class": false
+            "button_text": "",
+            "button_link": ""
           }
         },
         "column_YAeNWG": {
@@ -775,9 +911,8 @@
           "settings": {
             "title": "Wear loose fitting clothing",
             "text": "<p>to your appointment & for the rest of the day. Avoid lace & spandex underwear - cotton is best.</p>",
-            "link_label": "",
-            "link": "",
-            "icon_class": false
+            "button_text": "",
+            "button_link": ""
           }
         },
         "column_MCPeCL": {
@@ -785,9 +920,8 @@
           "settings": {
             "title": "NO swimming or exercising",
             "text": "<p>48 hours post wax. It is popular to get waxed right before leaving for vacation - It is advised to get waxed 2-3 days before you leave town.</p>",
-            "link_label": "",
-            "link": "",
-            "icon_class": false
+            "button_text": "",
+            "button_link": ""
           }
         },
         "column_MQeEx7": {
@@ -795,9 +929,8 @@
           "settings": {
             "title": "Can I get waxed on my period?",
             "text": "<p>YES! We wax ladies on their periods every day. Please use a fresh tampon before arrival. We also have tampons available for you in the bathroom.</p>",
-            "link_label": "",
-            "link": "",
-            "icon_class": false
+            "button_text": "",
+            "button_link": ""
           }
         }
       },
@@ -813,36 +946,47 @@
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
-        "page_full_width": false,
-        "page_full_width_spacing": false,
-        "title": "",
-        "heading_size": 32,
-        "sub_heading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_style_secondary": false,
-        "image_width": 100,
-        "image_ratio": "adapt",
-        "columns_desktop": 2,
-        "column_alignment": "left",
-        "background_style": "primary",
-        "color_scheme": "background-1",
-        "enable_overlay": false,
+        "heading": "Featured Collections",
+        "subheading": "",
+        "header_alignment": "center",
+        "header_spacing": 40,
+        "background_color": "#ffffff",
+        "max_width": 1200,
         "padding_top": 40,
         "padding_bottom": 40,
-        "custom_class_name": "",
-        "swiper_enable": false,
-        "desktop_column": 4,
-        "tablet_column": 2,
-        "mobile_column": 1,
-        "centered_slide": false,
-        "swiper_pagination": false,
-        "swiper_navigation": false,
-        "auto_play": 0,
-        "swipe_on_mobile": false,
-        "arrow_on_mobile": false,
-        "columns_mobile": "1"
+        "columns_desktop": 2,
+        "columns_tablet": 2,
+        "columns_mobile": "1",
+        "column_gap": 30,
+        "mobile_column_gap": 20,
+        "column_alignment": "left",
+        "image_width": 100,
+        "mobile_image_width": 100,
+        "image_ratio": "adapt",
+        "image_radius": 0,
+        "image_spacing": 20,
+        "card_background": "rgba(0,0,0,0)",
+        "card_padding": 0,
+        "card_radius": 0,
+        "card_shadow": false,
+        "heading_color": "#000000",
+        "heading_size": 32,
+        "heading_weight": "600",
+        "subheading_color": "#666666",
+        "subheading_size": 16,
+        "title_color": "#000000",
+        "title_size": 20,
+        "title_weight": "600",
+        "text_color": "#333333",
+        "text_size": 15,
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#333333",
+        "button_hover_text_color": "#ffffff",
+        "button_radius": 0,
+        "mobile_heading_size": 26,
+        "mobile_title_size": 18,
+        "mobile_text_size": 14
       }
     },
     "rich_text_UbVpyD": {
@@ -868,10 +1012,7 @@
         "heading_FV8nUL",
         "button_d4ViGp"
       ],
-      "custom_css": [
-        "* {background-color: #f7f4ed;}",
-        "a {background-color: white; opacity: 100%;}"
-      ],
+      "custom_css": [],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "color_scheme": "background-1",
@@ -884,30 +1025,37 @@
       "type": "product-recommendations",
       "name": "Product Carousel",
       "settings": {
-        "section_title": "Premium Brazilian Wax Aftercare Products",
+        "full_width": false,
+        "desktop_columns": "4",
+        "heading": "Trending Now",
+        "heading_alignment": "left",
+        "heading_color": "#8c9b6d",
+        "heading_font": "heading",
+        "heading_size": 24,
+        "heading_weight": "500",
+        "heading_transform": "uppercase",
+        "price_placement": "title_row",
         "collection": "acne",
+        "fallback_collection_handle": "best-selling-skincare",
         "products_limit": 10,
-        "show_ratings": true,
-        "rating_metafield_namespace": "reviews",
-        "rating_metafield_key": "rating",
-        "review_count_metafield_key": "count",
-        "show_variant_options": true,
-        "auto_scroll": true,
+        "auto_scroll_mode": "off",
         "auto_scroll_speed": 0.5,
-        "new_product_tag": "new",
-        "editors_pick_tag": "editors-pick",
-        "new_badge_text": "NEW",
-        "sale_badge_text": "SALE",
-        "out_of_stock_badge_text": "OUT OF STOCK",
-        "editors_pick_badge_text": "Editor's Pick",
-        "add_to_cart_text": "ADD TO BAG",
-        "out_of_stock_button_text": "OUT OF STOCK",
-        "new_badge_color": "#8c9b6d",
-        "sale_badge_color": "#846599",
-        "editors_pick_badge_color": "#8c9b6d",
-        "out_of_stock_badge_color": "#999999",
-        "button_color": "#dae2c7",
-        "button_text_color": "#ffffff"
+        "show_rating": true,
+        "show_atc": false,
+        "atc_label": "Add To Cart",
+        "image_ratio": "1 / 1",
+        "card_border_radius": 8,
+        "card_image_bg": "#f5f5f3",
+        "section_bg": "#ffffff",
+        "atc_bg": "#7f9f6f",
+        "atc_text": "#ffffff",
+        "atc_border_width": 0,
+        "atc_border_color": "#ffffff",
+        "atc_radius": 0,
+        "button_font": "heading",
+        "button_font_size": 13,
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "testimonials_carousel_kK49RM": {
@@ -1127,13 +1275,14 @@
   "order": [
     "sl_scrapbook_hero_UnqQ3Y",
     "sl_flexible_list_mxjCPF",
-    "sl_split_section_YNApNE",
+    "sl_image_text_overlap_7Fmzin",
     "sl_flexible_list_yEnKh7",
     "sl_marquee_RR7r88",
     "sl_services_menu_tPA8Ja",
     "sl_marquee_Wi8VGJ",
     "sl_services_menu_F7imxi",
     "rich_text_MLxMeg",
+    "sl_image_card_grid_QWkRNF",
     "multicolumn_iQcB9a",
     "rich_text_UbVpyD",
     "product_listing_LiVXYB",
