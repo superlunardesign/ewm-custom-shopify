@@ -19,7 +19,7 @@
 
 <div id="sl-hiw-{{ section.id }}" class="sl-hiw" style="--hiw-peek: {{ section.settings.peek_height }}px; --hiw-sticky-top: {{ section.settings.sticky_offset }}px; --hiw-overlap: {{ section.settings.card_marquee_overlap }}px;">
 
-  <div class="sl-hiw__bg" {% if section.settings.bg_type == 'color' %}style="background-color: {{ section.settings.bg_color }};"{% endif %}>
+  <div class="sl-hiw__bg" style="background-color: {{ section.settings.bg_color }};">
     {% if section.settings.bg_type == 'image' and section.settings.bg_image != blank %}
       {{
         section.settings.bg_image
@@ -39,9 +39,6 @@
         <source src="{{ section.settings.bg_video_url }}" type="video/mp4">
       </video>
     {% endif %}
-    {% unless section.settings.bg_type == 'color' %}
-      <div class="sl-hiw__overlay"></div>
-    {% endunless %}
   </div>
 
   {% if section.settings.section_subheading != blank or section.settings.section_heading != blank %}
@@ -145,17 +142,7 @@
     height: 100%;
     object-fit: cover;
     z-index: 0;
-  }
-
-  #shopify-section-{{ section.id }} .sl-hiw__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
-    pointer-events: none;
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
   }
 
   /* ── Section heading ── */
@@ -563,13 +550,13 @@
     {
       "type": "range",
       "id": "overlay_opacity",
-      "label": "Overlay Darkness",
-      "info": "Darkens the background image or video",
+      "label": "Image/video opacity",
+      "info": "Reduce to let the background color show through. 100% = fully visible, 0% = hidden.",
       "min": 0,
-      "max": 90,
+      "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 40
+      "default": 100
     },
     {
       "type": "header",
