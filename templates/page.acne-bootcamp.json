@@ -641,6 +641,118 @@
         "animation_delay": 100
       }
     },
+    "testimonials_carousel_kK49RM": {
+      "type": "testimonials-carousel",
+      "blocks": {
+        "testimonial_LWteyz": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_WXDiQD": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Amazing results! My skin has never looked better. The personalized approach really makes a difference.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_r6Eapb": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Professional, knowledgeable, and caring. I trust her completely with my skincare routine.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_LWteyz",
+        "testimonial_WXDiQD",
+        "testimonial_r6Eapb"
+      ],
+      "custom_css": [
+        "a {}"
+      ],
+      "name": "Testimonials Carousel",
+      "settings": {
+        "section_title": "",
+        "section_subtitle": "",
+        "section_background": "#faf9f7",
+        "section_padding": 60,
+        "heading_color": "#000000",
+        "heading_size": 36,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#666666",
+        "header_spacing": 40,
+        "scroll_speed": 30,
+        "scroll_direction": "left",
+        "pause_on_hover": true,
+        "disable_auto_scroll_mobile": true,
+        "enable_fade": true,
+        "fade_width": 10,
+        "testimonial_width": 350,
+        "tablet_testimonial_width": 300,
+        "mobile_testimonial_width": 280,
+        "testimonial_gap": 30,
+        "card_background": "#ffffff",
+        "card_padding": 30,
+        "mobile_card_padding": 20,
+        "card_radius": 12,
+        "card_shadow": true,
+        "shadow_x": 0,
+        "shadow_y": 2,
+        "shadow_blur": 10,
+        "shadow_spread": 0,
+        "shadow_color": "#0000001a",
+        "card_border": false,
+        "border_width": 1,
+        "border_color": "#e0e0e0",
+        "card_hover_effect": true,
+        "show_quotes": true,
+        "quote_color": "#cccccc",
+        "italic_text": false,
+        "text_color": "#333333",
+        "text_size": 16,
+        "mobile_text_size": 15,
+        "star_size": 18,
+        "star_color": "#ffc107",
+        "empty_star_color": "#e0e0e0",
+        "show_divider": true,
+        "divider_color": "#eeeeee",
+        "avatar_size": 45,
+        "avatar_radius": 50,
+        "show_placeholder_avatar": true,
+        "placeholder_avatar_bg": "#e0e0e0",
+        "placeholder_avatar_text": "#666666",
+        "author_color": "#000000",
+        "author_size": 16,
+        "mobile_author_size": 14,
+        "title_color": "#000000",
+        "title_size": 14,
+        "date_color": "#999999",
+        "mobile_heading_size": 28,
+        "show_scroll_indicators": false,
+        "indicator_color": "#000000",
+        "indicator_bg": "#cccccc"
+      }
+    },
     "sl_pricing_cards_CLjw4D": {
       "type": "sl-pricing-cards",
       "blocks": {
@@ -671,7 +783,7 @@
             "badge_text": "Most Popular",
             "badge_color": "#ffffff",
             "card_title": "Assessment + First Treatment",
-            "header_color": "#a8b88c",
+            "header_color": "#57614C",
             "header_text_color": "#ffffff",
             "price": "145",
             "description": "Combines everything in the Assessment PLUS your first professional acne treatment with extractions — all in one visit.",
@@ -978,171 +1090,9 @@
         "marquee_speed": 60,
         "marquee_padding": 20,
         "marquee_overlap": 40,
-        "bg_color": "#f5f0eb",
+        "bg_color": "#FFFFFF",
         "padding_top": 36,
         "padding_bottom": 36
-      }
-    },
-    "how_it_works_RHBrHX": {
-      "type": "how-it-works",
-      "blocks": {
-        "step_yGaAtj": {
-          "type": "step",
-          "settings": {
-            "step_title": "Assessment & Education",
-            "step_description": "We analyze your skin, discuss your history, and create your personalized plan. You'll leave understanding exactly what's happening and what to do."
-          }
-        },
-        "step_L4DaN4": {
-          "type": "step",
-          "settings": {
-            "step_title": "Treatments & Homecare",
-            "step_description": "Regular professional treatments (in-spa or virtual guidance) paired with your customized homecare routine. We adjust as your skin evolves."
-          }
-        },
-        "step_mfYnbL": {
-          "type": "step",
-          "settings": {
-            "step_title": "Clear Skin & Confidence",
-            "step_description": "With consistent effort and expert guidance, you'll achieve the clear, healthy skin you've been working toward - and know how to maintain it."
-          }
-        }
-      },
-      "block_order": [
-        "step_yGaAtj",
-        "step_L4DaN4",
-        "step_mfYnbL"
-      ],
-      "name": "How It Works",
-      "settings": {
-        "show_header": true,
-        "header_title": "How Acne Bootcamp Works",
-        "header_subtitle": "",
-        "header_color": "#846599",
-        "background_color": "#ffffff",
-        "accent_color": "#846599",
-        "show_cta": true,
-        "cta_title": "Ready to Finally Get Clear Skin?",
-        "cta_subtitle": "You've tried the quick fixes. You've spent the money. You've dealt with the frustration. It's time for an approach that actually works.",
-        "cta_button_text": "Book Your Consultation",
-        "cta_button_url": "https://booking.mangomint.com/314399",
-        "cta_background_color": "#846599",
-        "cta_text_color": "#ffffff",
-        "cta_button_color": "#ffffff",
-        "cta_button_text_color": "#846599",
-        "cta_heading_color": "#ffffff"
-      }
-    },
-    "testimonials_carousel_kK49RM": {
-      "type": "testimonials-carousel",
-      "blocks": {
-        "testimonial_LWteyz": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_WXDiQD": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "Amazing results! My skin has never looked better. The personalized approach really makes a difference.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_r6Eapb": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "Professional, knowledgeable, and caring. I trust her completely with my skincare routine.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_LWteyz",
-        "testimonial_WXDiQD",
-        "testimonial_r6Eapb"
-      ],
-      "custom_css": [
-        "a {}"
-      ],
-      "name": "Testimonials Carousel",
-      "settings": {
-        "section_title": "Client Results",
-        "section_subtitle": "Real reviews from real people",
-        "section_background": "#faf9f7",
-        "section_padding": 60,
-        "heading_color": "#000000",
-        "heading_size": 36,
-        "heading_weight": "600",
-        "heading_transform": "none",
-        "subheading_color": "#666666",
-        "header_spacing": 40,
-        "scroll_speed": 30,
-        "scroll_direction": "left",
-        "pause_on_hover": true,
-        "disable_auto_scroll_mobile": true,
-        "enable_fade": true,
-        "fade_width": 10,
-        "testimonial_width": 350,
-        "tablet_testimonial_width": 300,
-        "mobile_testimonial_width": 280,
-        "testimonial_gap": 30,
-        "card_background": "#ffffff",
-        "card_padding": 30,
-        "mobile_card_padding": 20,
-        "card_radius": 12,
-        "card_shadow": true,
-        "shadow_x": 0,
-        "shadow_y": 2,
-        "shadow_blur": 10,
-        "shadow_spread": 0,
-        "shadow_color": "#0000001a",
-        "card_border": false,
-        "border_width": 1,
-        "border_color": "#e0e0e0",
-        "card_hover_effect": true,
-        "show_quotes": true,
-        "quote_color": "#cccccc",
-        "italic_text": false,
-        "text_color": "#333333",
-        "text_size": 16,
-        "mobile_text_size": 15,
-        "star_size": 18,
-        "star_color": "#ffc107",
-        "empty_star_color": "#e0e0e0",
-        "show_divider": true,
-        "divider_color": "#eeeeee",
-        "avatar_size": 45,
-        "avatar_radius": 50,
-        "show_placeholder_avatar": true,
-        "placeholder_avatar_bg": "#e0e0e0",
-        "placeholder_avatar_text": "#666666",
-        "author_color": "#000000",
-        "author_size": 16,
-        "mobile_author_size": 14,
-        "title_color": "#000000",
-        "title_size": 14,
-        "date_color": "#999999",
-        "mobile_heading_size": 28,
-        "show_scroll_indicators": false,
-        "indicator_color": "#000000",
-        "indicator_bg": "#cccccc"
       }
     },
     "sl_flexible_list_m9m6Jc": {
@@ -1191,7 +1141,7 @@
         "background_size": "cover",
         "background_position_x": 50,
         "background_position_y": 50,
-        "section_background": "#f7f4ed",
+        "section_background": "#F5F0EB",
         "section_padding": 60,
         "max_width": 1200,
         "grid_gap": 30,
@@ -1227,51 +1177,6 @@
         "enable_animation": false,
         "animation_duration": 600,
         "animation_delay": 100
-      }
-    },
-    "rich_text_UbVpyD": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_FV8nUL": {
-          "type": "heading",
-          "settings": {
-            "heading": "Fill out The Proper Waiver Before Arrival",
-            "heading_size": "h2"
-          }
-        },
-        "button_d4ViGp": {
-          "type": "button",
-          "settings": {
-            "button_label": "ACNE BOOTCAMP WAIVER",
-            "button_link": "https://form.jotform.com/220544223473146",
-            "button_style_secondary": false
-          }
-        },
-        "button_jk7G6V": {
-          "type": "button",
-          "settings": {
-            "button_label": "ACNE BOOTCAMP QUESTIONNAIRE",
-            "button_link": "https://form.jotform.com/220540506638048",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_FV8nUL",
-        "button_d4ViGp",
-        "button_jk7G6V"
-      ],
-      "custom_css": [
-        "* {background-color: #f7f4ed;}",
-        "a {background-color: white; opacity: 100%; margin: 2% 2%;}",
-        "a:nth-child(2) {background-color: #8c9b6d; color: white;}"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
       }
     },
     "main": {
@@ -1395,15 +1300,13 @@
     "sl_flexible_list_HiBcJ3",
     "sl_image_text_overlap_7JGChL",
     "sl_flexible_list_mMk3PN",
+    "testimonials_carousel_kK49RM",
     "sl_pricing_cards_CLjw4D",
     "sl_marquee_RR7r88",
     "sl_services_menu_tPA8Ja",
     "sl_image_text_overlap_68ghUT",
     "sl_image_card_grid_PdW3FV",
-    "how_it_works_RHBrHX",
-    "testimonials_carousel_kK49RM",
     "sl_flexible_list_m9m6Jc",
-    "rich_text_UbVpyD",
     "main",
     "sl_custom_faq_r7Q6ht"
   ]
