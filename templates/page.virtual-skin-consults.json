@@ -165,14 +165,14 @@
         "subheading_kYx96W": {
           "type": "subheading",
           "settings": {
-            "text": "Skincare treatments tailored to your unique skin"
+            "text": "OUR SAME LEVEL OF EXPERTISE, JUST VIRTUALLY"
           }
         },
         "heading_Bez3HF": {
           "type": "heading",
           "settings": {
-            "text": "Reveal Your Most Confident, Radiant Glow",
-            "size": "h0"
+            "text": "Receive the best possible care for your specific skincare concerns — no matter where you are",
+            "size": "h1"
           }
         },
         "spacer_wmRKVi": {
@@ -184,18 +184,7 @@
         "text_KhYACT": {
           "type": "text",
           "settings": {
-            "text": "<p>Share details about your approach, philosophy, or expertise here. This text area supports rich formatting for emphasis.</p>"
-          }
-        },
-        "button_PwNM7M": {
-          "type": "button",
-          "settings": {
-            "text": "Explore Our Services",
-            "link": "",
-            "style": "secondary",
-            "button_bg_color": "",
-            "button_text_color": "",
-            "button_border_color": ""
+            "text": "<p>Don't let time or distance hold you back from achieving your skincare goals. Experience the convenience and effectiveness of virtual skincare consultations.</p>"
           }
         }
       },
@@ -203,8 +192,7 @@
         "subheading_kYx96W",
         "heading_Bez3HF",
         "spacer_wmRKVi",
-        "text_KhYACT",
-        "button_PwNM7M"
+        "text_KhYACT"
       ],
       "name": "Content Banner",
       "settings": {
@@ -223,93 +211,82 @@
         "subheading_weight": "400",
         "body_font_size": 16,
         "padding_top": 80,
-        "padding_bottom": 80
+        "padding_bottom": 0
       }
     },
-    "sl_flexible_list_yEnKh7": {
-      "type": "sl-flexible-list",
+    "sl_image_card_grid_Fh6NL4": {
+      "type": "sl-image-card-grid",
       "blocks": {
-        "value_prop_i7yChD": {
-          "type": "value_prop",
+        "card_dBPHrX": {
+          "type": "card",
           "settings": {
-            "icon_type": "custom",
-            "icon_class": "fas fa-user-tie",
-            "icon": "shopify://shop_images/BrandingPhotography-C_Mae-5980.jpg",
-            "heading": "Personalized Expert Advice",
-            "text": "A deep dive into your skin concerns with education tailored just for you. We go over all your skincare questions and educate you on how the skin functions."
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5972.jpg",
+            "card_heading": "Personalized Expert Advice",
+            "card_text": "A deep dive into your skin concerns with education tailored just for you. We go over all your skincare questions and educate you on how the skin functions.",
+            "button_text": "FACIAL TREATMENTS",
+            "button_link": ""
           }
         },
-        "value_prop_TXi4QK": {
-          "type": "value_prop",
+        "card_pMVAq7": {
+          "type": "card",
           "settings": {
-            "icon_type": "custom",
-            "icon_class": "fas fa-box",
-            "icon": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5084.jpg",
-            "heading": "Products Shipped to You",
-            "text": "Products selected based on your skin goals will be shipped directly to you with detailed instructions. No guessing, no searching — just what your skin needs."
+            "image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5084.jpg",
+            "card_heading": "Products Shipped to You",
+            "card_text": "Products selected based on your skin goals will be shipped directly to you with detailed instructions. No guessing, no searching — just what your skin needs.",
+            "button_text": "SKIN QUIZ",
+            "button_link": ""
           }
         },
-        "value_prop_jgmTj3": {
-          "type": "value_prop",
+        "card_ExV8UG": {
+          "type": "card",
           "settings": {
-            "icon_type": "custom",
-            "icon_class": "fas fa-check-circle",
-            "icon": "shopify://shop_images/BrandingPhotography-C_Mae-5625.jpg",
-            "heading": "Complimentary Follow-Up",
-            "text": "A complimentary virtual follow-up will be booked at your appointment to ensure your routine is working and make any needed adjustments."
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5261.jpg",
+            "card_heading": "Complimentary Follow-Up",
+            "card_text": "A complimentary virtual follow-up will be booked at your appointment to ensure your routine is working and make any needed adjustments.",
+            "button_text": "SHOP SKINCARE",
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "value_prop_i7yChD",
-        "value_prop_TXi4QK",
-        "value_prop_jgmTj3"
+        "card_dBPHrX",
+        "card_pMVAq7",
+        "card_ExV8UG"
       ],
-      "name": "Flexible Value Props",
+      "name": "EWM Image Card Grid",
       "settings": {
-        "main_heading": "Our Virtual Sessions Offer the Same Level of Expertise as an In-Person Visit",
-        "main_subheading": "You receive the best possible care for your specific skincare concerns — no matter where you are. Don't let time or distance hold you back from achieving your skincare goals. Experience the convenience and effectiveness of virtual skincare consultations.",
-        "grid_columns": 3,
-        "background_opacity": 20,
-        "background_size": "cover",
-        "background_position_x": 50,
-        "background_position_y": 50,
-        "section_background": "#8c9b6d",
-        "section_padding": 60,
-        "max_width": 1200,
-        "grid_gap": 30,
-        "header_spacing": 50,
-        "text_alignment": "center",
-        "heading_color": "#f7f7f7",
-        "heading_size": 42,
-        "heading_weight": "600",
-        "heading_transform": "none",
-        "subheading_color": "#ffffff",
-        "subheading_size": 20,
-        "subheading_weight": "400",
-        "subheading_transform": "none",
-        "prop_heading_color": "#ffffff",
-        "prop_heading_size": 22,
-        "prop_heading_weight": "600",
-        "prop_text_color": "#ffffff",
-        "prop_text_size": 15,
-        "item_background": "rgba(0,0,0,0)",
-        "item_padding": 20,
-        "item_border_radius": 0,
-        "item_shadow": false,
-        "item_hover_effect": false,
-        "show_icons": true,
-        "icon_size": 15,
-        "icon_color": "#3a5c49",
-        "mobile_heading_size": 32,
-        "mobile_subheading_size": 16,
-        "mobile_prop_heading_size": 18,
-        "mobile_prop_text_size": 16,
-        "mobile_icon_size": 20,
-        "mobile_item_padding": 15,
-        "enable_animation": false,
-        "animation_duration": 600,
-        "animation_delay": 300
+        "columns": "3",
+        "card_gap": 20,
+        "image_ratio": "3 / 4",
+        "card_height_desktop": 0,
+        "card_height_mobile": 0,
+        "heading": "",
+        "heading_size": "h1",
+        "heading_color": "#1a1a1a",
+        "text_position": "below",
+        "show_buttons": false,
+        "card_title_size": 20,
+        "card_desc_size": 14,
+        "card_text_below_color": "#4a4a4a",
+        "overlay_opacity": 30,
+        "overlay_text_color": "#ffffff",
+        "overlay_vertical_align": "flex-end",
+        "overlay_text_align": "center",
+        "button_gap": 12,
+        "button_font_size": 14,
+        "button_text_color": "#6b3a2a",
+        "button_border_color": "#6b3a2a",
+        "enable_marquee": false,
+        "marquee_text": "SERVICES & TREATMENTS",
+        "marquee_size": 160,
+        "marquee_color": "#c4956a",
+        "marquee_font": "heading",
+        "marquee_speed": 20,
+        "marquee_offset_desktop": 0,
+        "marquee_offset_mobile": 0,
+        "bg_color": "#FFFFFF",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "sl_marquee_RR7r88": {
@@ -341,8 +318,8 @@
       ],
       "name": "Marquee",
       "settings": {
-        "colorBackground": "#8b7ba8",
-        "colorText": "#ffffff",
+        "colorBackground": "#C3D0B4",
+        "colorText": "#57614C",
         "marquee_height": 46,
         "font_size": 18,
         "link": "",
@@ -432,6 +409,79 @@
         "mobile_button_padding_x": 16,
         "mobile_button_padding_y": 8,
         "mobile_description_size": 13
+      }
+    },
+    "sl_steps_sticky_HR4J8y": {
+      "type": "sl-steps-sticky",
+      "blocks": {
+        "step_7L6iFX": {
+          "type": "step",
+          "settings": {
+            "heading": "Book an Appointment",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        },
+        "step_HPJptH": {
+          "type": "step",
+          "settings": {
+            "heading": "Arrive with Clean Skin",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        },
+        "step_4LQNQC": {
+          "type": "step",
+          "settings": {
+            "heading": "Enjoy your Spa Experience",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_7L6iFX",
+        "step_HPJptH",
+        "step_4LQNQC"
+      ],
+      "name": "EWM Sticky Steps",
+      "settings": {
+        "bg_type": "image",
+        "bg_image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5035.jpg",
+        "bg_video_url": "",
+        "bg_color": "#1a1a1a",
+        "overlay_opacity": 90,
+        "section_subheading": "",
+        "section_heading": "Getting started is effortless",
+        "section_heading_size": "h1",
+        "section_heading_color": "#ffffff",
+        "section_subheading_color": "#c4c4a0",
+        "columns": "3",
+        "card_gap": 16,
+        "enable_sticky": true,
+        "peek_height": 60,
+        "desktop_stagger": 25,
+        "card_marquee_overlap": 30,
+        "sticky_hold": 30,
+        "sticky_offset": 80,
+        "enable_marquee": true,
+        "marquee_text": "HOW IT WORKS",
+        "marquee_size": 160,
+        "marquee_color": "#6b7c5e",
+        "marquee_font": "heading",
+        "marquee_speed": 60,
+        "step_prefix": "STEP",
+        "step_color": "#6b7c5e",
+        "step_line_color": "#c4c4a0",
+        "card_bg": "#f5f3ed",
+        "card_radius": 0,
+        "heading_color": "#1a1a1a",
+        "text_color": "#4a4a4a",
+        "show_button": true,
+        "button_text": "BOOK HERE",
+        "button_link": "",
+        "button_style": "primary",
+        "button_bg_color": "#6b7c5e",
+        "button_text_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "how_it_works_PQ9iL8": {
@@ -1307,9 +1357,10 @@
     "sl_full_image_hero_ChMHiX",
     "before_and_afters_QTJapz",
     "sl_content_banner_dX8x9w",
-    "sl_flexible_list_yEnKh7",
+    "sl_image_card_grid_Fh6NL4",
     "sl_marquee_RR7r88",
     "sl_services_menu_EnDQbw",
+    "sl_steps_sticky_HR4J8y",
     "how_it_works_PQ9iL8",
     "sl_custom_faq_r7Q6ht",
     "testimonials_carousel_kK49RM",
