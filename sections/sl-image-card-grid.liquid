@@ -18,31 +18,32 @@
 {%- endstyle -%}
 
 <div class="sl-icg" style="background-color: {{ section.settings.bg_color }};">
-  {% if section.settings.enable_marquee and section.settings.marquee_text != blank %}
-    <div class="sl-icg__marquee" aria-hidden="true">
-      <div class="sl-icg__marquee-track">
-        {% for i in (1..10) %}
-          <span class="sl-icg__marquee-item" style="color: {{ section.settings.marquee_color }}; font-size: {{ section.settings.marquee_size }}px; {% if section.settings.marquee_font == 'heading' %}font-family: var(--font-heading-family); font-weight: var(--font-heading-weight); font-style: var(--font-heading-style);{% else %}font-family: var(--font-body-family);{% endif %}">{{ section.settings.marquee_text }}</span>
-        {% endfor %}
-      </div>
-    </div>
-
-    <div class="sl-icg__marquee-v" aria-hidden="true">
-      <div class="sl-icg__marquee-v-track">
-        {% for i in (1..10) %}
-          <span class="sl-icg__marquee-v-item" style="color: {{ section.settings.marquee_color }}; font-size: {{ section.settings.marquee_size }}px; {% if section.settings.marquee_font == 'heading' %}font-family: var(--font-heading-family); font-weight: var(--font-heading-weight); font-style: var(--font-heading-style);{% else %}font-family: var(--font-body-family);{% endif %}">{{ section.settings.marquee_text }}</span>
-        {% endfor %}
-      </div>
-    </div>
-  {% endif %}
-
   <div class="sl-icg__container">
     {% if section.settings.heading != blank %}
       <h2 class="sl-icg__heading {{ section.settings.heading_size }}" style="color: {{ section.settings.heading_color }};">{{ section.settings.heading }}</h2>
     {% endif %}
 
     {% if section.blocks.size > 0 %}
-      <div class="sl-icg__grid">
+      <div class="sl-icg__grid-wrap">
+        {% if section.settings.enable_marquee and section.settings.marquee_text != blank %}
+          <div class="sl-icg__marquee" aria-hidden="true">
+            <div class="sl-icg__marquee-track">
+              {% for i in (1..10) %}
+                <span class="sl-icg__marquee-item" style="color: {{ section.settings.marquee_color }}; font-size: {{ section.settings.marquee_size }}px; {% if section.settings.marquee_font == 'heading' %}font-family: var(--font-heading-family); font-weight: var(--font-heading-weight); font-style: var(--font-heading-style);{% else %}font-family: var(--font-body-family);{% endif %}">{{ section.settings.marquee_text }}</span>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="sl-icg__marquee-v" aria-hidden="true">
+            <div class="sl-icg__marquee-v-track">
+              {% for i in (1..10) %}
+                <span class="sl-icg__marquee-v-item" style="color: {{ section.settings.marquee_color }}; font-size: {{ section.settings.marquee_size }}px; {% if section.settings.marquee_font == 'heading' %}font-family: var(--font-heading-family); font-weight: var(--font-heading-weight); font-style: var(--font-heading-style);{% else %}font-family: var(--font-body-family);{% endif %}">{{ section.settings.marquee_text }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="sl-icg__grid">
         {% for block in section.blocks %}
           <div class="sl-icg__card" {{ block.shopify_attributes }}>
             <div class="sl-icg__card-media">
@@ -125,6 +126,7 @@
             {% endif %}
           </div>
         {% endfor %}
+        </div>
       </div>
     {% endif %}
   </div>
@@ -138,7 +140,6 @@
 
   #shopify-section-{{ section.id }} .sl-icg__container {
     position: relative;
-    z-index: 2;
     max-width: var(--page-width, 1200px);
     margin: 0 auto;
     padding-left: 1.5rem;
@@ -146,6 +147,8 @@
   }
 
   #shopify-section-{{ section.id }} .sl-icg__heading {
+    position: relative;
+    z-index: 3;
     text-align: center;
     margin-bottom: 2rem;
     font-family: var(--font-heading-family);
@@ -153,12 +156,16 @@
     font-style: var(--font-heading-style);
   }
 
+  #shopify-section-{{ section.id }} .sl-icg__grid-wrap {
+    position: relative;
+  }
+
   /* ── Horizontal marquee (desktop) ── */
   #shopify-section-{{ section.id }} .sl-icg__marquee {
     position: absolute;
     top: calc(50% + {{ section.settings.marquee_offset_desktop | default: 0 }}px);
-    left: 0;
-    right: 0;
+    left: -5rem;
+    right: -5rem;
     transform: translateY(-50%);
     z-index: 1;
     overflow: hidden;
@@ -189,8 +196,8 @@
   /* ── Vertical marquee (mobile) ── */
   #shopify-section-{{ section.id }} .sl-icg__marquee-v {
     position: absolute;
-    top: {{ section.settings.marquee_offset_mobile | default: 0 }}px;
-    left: -0.5rem;
+    top: 0;
+    left: calc(-1.5rem + {{ section.settings.marquee_offset_mobile | default: 0 }}px);
     bottom: 0;
     z-index: 1;
     overflow: hidden;
@@ -222,6 +229,8 @@
 
   /* ── Card grid ── */
   #shopify-section-{{ section.id }} .sl-icg__grid {
+    position: relative;
+    z-index: 2;
     display: grid;
     grid-template-columns: 1fr;
     gap: {{ section.settings.card_gap }}px;
@@ -716,8 +725,8 @@
     {
       "type": "range",
       "id": "marquee_offset_mobile",
-      "label": "Marquee Vertical Offset (Mobile)",
-      "info": "Shift vertical marquee down from top",
+      "label": "Marquee Horizontal Offset (Mobile)",
+      "info": "Shift vertical marquee left (negative) or right (positive)",
       "min": -200,
       "max": 200,
       "step": 10,
