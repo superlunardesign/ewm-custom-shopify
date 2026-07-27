@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "sl_scrapbook_hero_UnqQ3Y": {
@@ -126,45 +135,194 @@
         "animation_delay": 300
       }
     },
-    "sl_split_section_YNApNE": {
-      "type": "sl-split-section",
-      "name": "Split Section",
+    "testimonials_carousel_kK49RM": {
+      "type": "testimonials-carousel",
+      "blocks": {
+        "testimonial_LWteyz": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_WXDiQD": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Amazing results! My skin has never looked better. The personalized approach really makes a difference.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_r6Eapb": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Professional, knowledgeable, and caring. I trust her completely with my skincare routine.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_LWteyz",
+        "testimonial_WXDiQD",
+        "testimonial_r6Eapb"
+      ],
+      "name": "Testimonials Carousel",
+      "settings": {
+        "section_title": "",
+        "section_subtitle": "",
+        "section_background": "#F5F0EB",
+        "section_padding": 60,
+        "heading_color": "#000000",
+        "heading_size": 36,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#666666",
+        "header_spacing": 40,
+        "scroll_speed": 30,
+        "scroll_direction": "left",
+        "pause_on_hover": true,
+        "disable_auto_scroll_mobile": true,
+        "enable_fade": true,
+        "fade_width": 10,
+        "testimonial_width": 350,
+        "tablet_testimonial_width": 300,
+        "mobile_testimonial_width": 280,
+        "testimonial_gap": 30,
+        "card_background": "#ffffff",
+        "card_padding": 30,
+        "mobile_card_padding": 20,
+        "card_radius": 12,
+        "card_shadow": true,
+        "shadow_x": 0,
+        "shadow_y": 2,
+        "shadow_blur": 10,
+        "shadow_spread": 0,
+        "shadow_color": "#0000001a",
+        "card_border": false,
+        "border_width": 1,
+        "border_color": "#e0e0e0",
+        "card_hover_effect": true,
+        "show_quotes": true,
+        "quote_color": "#cccccc",
+        "italic_text": false,
+        "text_color": "#333333",
+        "text_size": 16,
+        "mobile_text_size": 15,
+        "star_size": 18,
+        "star_color": "#8A9979",
+        "empty_star_color": "#e0e0e0",
+        "show_divider": true,
+        "divider_color": "#eeeeee",
+        "avatar_size": 45,
+        "avatar_radius": 50,
+        "show_placeholder_avatar": true,
+        "placeholder_avatar_bg": "#e0e0e0",
+        "placeholder_avatar_text": "#666666",
+        "author_color": "#000000",
+        "author_size": 16,
+        "mobile_author_size": 14,
+        "title_color": "#000000",
+        "title_size": 14,
+        "date_color": "#999999",
+        "mobile_heading_size": 28,
+        "show_scroll_indicators": false,
+        "indicator_color": "#000000",
+        "indicator_bg": "#cccccc"
+      }
+    },
+    "sl_image_text_overlap_7Fmzin": {
+      "type": "sl-image-text-overlap",
+      "blocks": {
+        "subheading_Ec8V6k": {
+          "type": "subheading",
+          "settings": {
+            "text": "Meet Your Waxing Experts in McHenry"
+          }
+        },
+        "heading_eFifqB": {
+          "type": "heading",
+          "settings": {
+            "text": "Hi, I'm Shannon. Owner of Esthetics With Me",
+            "size": "h1"
+          }
+        },
+        "text_NMUWrE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>✓ Licensed and certified esthetician with specialized Brazilian waxing training<br/>✓ Years of experience with all skin types and sensitivities<br/>✓ Gentle technique that minimizes discomfort<br/>✓ Premium wax that grips hair, not skin<br/>✓ Personalized aftercare guidance for every client<br/><br/>I've been where you are - hesitant about waxing because of past experiences or fear of the unknown. That's why I've made it my mission to provide McHenry with a waxing service that prioritizes your comfort, privacy, and results.</p>"
+          }
+        },
+        "text_Kk6iEr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>I understand exactly what you're going through. After years of perfecting my technique and helping hundreds of clients achieve smooth, lasting results, my team and I have created a waxing experience that's different.</p><p></p><p></p>"
+          }
+        },
+        "button_QrjVek": {
+          "type": "button",
+          "settings": {
+            "text": "view all waxing services ↓",
+            "link": "#services",
+            "style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Ec8V6k",
+        "heading_eFifqB",
+        "text_NMUWrE",
+        "text_Kk6iEr",
+        "button_QrjVek"
+      ],
+      "name": "EWM Image + Text Overlap",
       "settings": {
         "image": "shopify://shop_images/BrandingPhotography-C.Mae-5943.jpg",
-        "swap_horizontal": false,
-        "auto_height_desktop": true,
-        "section_height_desktop": 40,
-        "auto_height_tablet": true,
-        "section_height_tablet": 50,
-        "wrapper_padding": 3,
-        "wrapper_padding_tablet": 3,
-        "wrapper_padding_mobile": 3,
+        "image_position": "left",
+        "desktop_height": 550,
+        "mobile_height": 350,
+        "image_fit": "cover",
         "image_position_x": 50,
-        "image_position_y": 20,
+        "image_position_y": 50,
+        "image_width": 3,
+        "content_width": 2,
+        "overlap_amount": 80,
+        "vertical_inset": 30,
+        "spread_content": false,
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "enable_scroll_text": false,
+        "scroll_text": "MEET YOUR ESTHETICIAN",
+        "scroll_font_size": 100,
+        "scroll_text_color": "#c4a882",
+        "scroll_text_padding": 20,
+        "scroll_overlap": 40,
+        "scroll_speed": 20,
+        "enable_anchor": false,
+        "anchor_id": "",
+        "scroll_offset": 80,
         "enable_animation": true,
         "animation_duration": 600,
         "animation_delay": 200,
-        "heading": "Meet Your Waxing Experts in McHenry",
-        "subheading": "Hi, I'm Shannon. Owner of Esthetics With Me",
-        "text": "I understand exactly what you're going through. After years of perfecting my technique and helping hundreds of clients achieve smooth, lasting results, my team and I have created a waxing experience that's different.",
-        "text2": "\u2713 Licensed and certified esthetician with specialized Brazilian waxing training\n\u2713 Years of experience with all skin types and sensitivities\n\u2713 Gentle technique that minimizes discomfort\n\u2713 Premium wax that grips hair, not skin\n\u2713 Personalized aftercare guidance for every client\n\nI've been where you are - hesitant about waxing because of past experiences or fear of the unknown. That's why I've made it my mission to provide McHenry with a waxing service that prioritizes your comfort, privacy, and results.",
-        "heading_color": "#000000",
-        "subheading_color": "#333333",
-        "text_color": "#666666",
-        "heading_size": 32,
-        "subheading_size": 24,
-        "text_size": 16,
-        "mobile_heading_size": 24,
-        "mobile_subheading_size": 18,
-        "mobile_text_size": 14,
-        "show_button": true,
-        "button_text": "View All Our Waxing Services \u2193",
-        "button_link": "#services",
-        "button_background": "#8c9b6d",
-        "button_text_color": "#ffffff",
-        "button_hover_background": "#dae2c7",
-        "button_hover_text_color": "#ffffff",
-        "button_border_radius": 0
+        "enable_sticky": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "sl_flexible_list_yEnKh7": {
@@ -242,7 +400,7 @@
         "background_size": "cover",
         "background_position_x": 50,
         "background_position_y": 50,
-        "section_background": "#dee7cd",
+        "section_background": "#F5F0EB",
         "section_padding": 60,
         "max_width": 1200,
         "grid_gap": 30,
@@ -297,9 +455,9 @@
       "settings": {
         "colorBackground": "#8d9976",
         "colorText": "#ffffff",
-        "link": "",
         "marquee_height": 46,
         "font_size": 18,
+        "link": "",
         "marquee_speed": 21
       }
     },
@@ -313,6 +471,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "55",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -326,6 +485,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "30",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -340,6 +500,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "45",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -354,6 +515,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "65",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -367,6 +529,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "15",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -380,6 +543,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "30",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -393,6 +557,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "30",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -406,6 +571,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "25",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -419,6 +585,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "55",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -432,6 +599,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "90",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -530,9 +698,9 @@
       "settings": {
         "colorBackground": "#8d9976",
         "colorText": "#ffffff",
-        "link": "",
         "marquee_height": 46,
         "font_size": 18,
+        "link": "",
         "marquee_speed": 21
       }
     },
@@ -547,6 +715,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "24",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -561,6 +730,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "45",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -575,6 +745,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "22",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -589,6 +760,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "17",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -603,6 +775,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "12",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -617,6 +790,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "12",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -631,6 +805,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "12",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -645,6 +820,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "15",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -659,6 +835,7 @@
             "add_line": false,
             "service_extra": "(Single Session or Pack)",
             "service_price": "30",
+            "is_complimentary": false,
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
@@ -724,370 +901,288 @@
         "mobile_description_size": 13
       }
     },
-    "rich_text_MLxMeg": {
-      "type": "rich-text",
+    "sl_content_banner_9QhcDF": {
+      "type": "sl-content-banner",
       "blocks": {
-        "heading_LhXK7V": {
+        "heading_n8NLch": {
           "type": "heading",
           "settings": {
-            "heading": "How to Prepare for Your Brazilian Wax",
-            "heading_size": "h1"
+            "text": "How to Prepare for Your Brazilian Wax",
+            "size": "h0"
           }
         },
-        "text_9TtmJY": {
+        "subheading_MyYXFk": {
+          "type": "subheading",
+          "settings": {
+            "text": "OR ANY WAXING APPOINTMENT"
+          }
+        },
+        "spacer_fXbPK3": {
+          "type": "spacer",
+          "settings": {
+            "height": 12
+          }
+        },
+        "text_dkVrVi": {
           "type": "text",
           "settings": {
-            "text": "<p>OR ANY WAXING APPOINTMENT<br/><br/>First time? Make sure hair is grown out at least 10-14 days before your appointment. If you currently don't shave - there is nothing you need to do before your appointment.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_LhXK7V",
-        "text_9TtmJY"
-      ],
-      "custom_css": [
-        "* {background-color: #f7f4ed;}",
-        "a {background-color: white; opacity: 100%;}"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
-    },
-    "multicolumn_iQcB9a": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_PNhpg7": {
-          "type": "column",
-          "settings": {
-            "title": "If you are nervous about discomfort:",
-            "text": "<p>take an ibuprofen 30-40 minutes before your appointment.</p>",
-            "link_label": "",
-            "link": "",
-            "icon_class": false
+            "text": "<p>First time? Make sure hair is grown out at least 10-14 days before your appointment. If you currently don't shave - there is nothing you need to do before your appointment.<br/><br/>Don't forget to fill out your waiver before your appointment ↓ </p>"
           }
         },
-        "column_YAeNWG": {
-          "type": "column",
-          "settings": {
-            "title": "Wear loose fitting clothing",
-            "text": "<p>to your appointment & for the rest of the day. Avoid lace & spandex underwear - cotton is best.</p>",
-            "link_label": "",
-            "link": "",
-            "icon_class": false
-          }
-        },
-        "column_MCPeCL": {
-          "type": "column",
-          "settings": {
-            "title": "NO swimming or exercising",
-            "text": "<p>48 hours post wax. It is popular to get waxed right before leaving for vacation - It is advised to get waxed 2-3 days before you leave town.</p>",
-            "link_label": "",
-            "link": "",
-            "icon_class": false
-          }
-        },
-        "column_MQeEx7": {
-          "type": "column",
-          "settings": {
-            "title": "Can I get waxed on my period?",
-            "text": "<p>YES! We wax ladies on their periods every day. Please use a fresh tampon before arrival. We also have tampons available for you in the bathroom.</p>",
-            "link_label": "",
-            "link": "",
-            "icon_class": false
-          }
-        }
-      },
-      "block_order": [
-        "column_PNhpg7",
-        "column_YAeNWG",
-        "column_MCPeCL",
-        "column_MQeEx7"
-      ],
-      "custom_css": [
-        ".multicolumn {background-color: #f7f4ed;}",
-        ".content-container {background-color: #f7f4ed;}"
-      ],
-      "name": "t:sections.multicolumn.presets.name",
-      "settings": {
-        "page_full_width": false,
-        "page_full_width_spacing": false,
-        "title": "",
-        "heading_size": 32,
-        "sub_heading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_style_secondary": false,
-        "image_width": 100,
-        "image_ratio": "adapt",
-        "columns_desktop": 2,
-        "column_alignment": "left",
-        "background_style": "primary",
-        "color_scheme": "background-1",
-        "enable_overlay": false,
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "custom_class_name": "",
-        "swiper_enable": false,
-        "desktop_column": 4,
-        "tablet_column": 2,
-        "mobile_column": 1,
-        "centered_slide": false,
-        "swiper_pagination": false,
-        "swiper_navigation": false,
-        "auto_play": 0,
-        "swipe_on_mobile": false,
-        "arrow_on_mobile": false,
-        "columns_mobile": "1"
-      }
-    },
-    "rich_text_UbVpyD": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_FV8nUL": {
-          "type": "heading",
-          "settings": {
-            "heading": "Fill out The Proper Waiver Before Arrival",
-            "heading_size": "h1"
-          }
-        },
-        "button_d4ViGp": {
+        "button_q4RP4t": {
           "type": "button",
           "settings": {
-            "button_label": "SIGN HERE",
-            "button_link": "https://form.jotform.com/220666610688058",
-            "button_style_secondary": false
+            "text": "Fill Out Your Waiver",
+            "link": "https://form.jotform.com/220666610688058",
+            "style": "secondary",
+            "button_bg_color": "",
+            "button_text_color": "",
+            "button_border_color": ""
           }
         }
       },
       "block_order": [
-        "heading_FV8nUL",
-        "button_d4ViGp"
+        "heading_n8NLch",
+        "subheading_MyYXFk",
+        "spacer_fXbPK3",
+        "text_dkVrVi",
+        "button_q4RP4t"
+      ],
+      "name": "Content Banner",
+      "settings": {
+        "full_width": true,
+        "content_alignment": "center",
+        "content_max_width": 800,
+        "bg_type": "image",
+        "bg_color": "#1a1612",
+        "bg_image": "shopify://shop_images/BrandingPhotography-C_Mae-6091.jpg",
+        "bg_video_url": "",
+        "overlay_darkness": 100,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "text_color": "#f0e8d8",
+        "subheading_font": "body",
+        "subheading_size": 16,
+        "subheading_weight": "400",
+        "body_font_size": 16,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "sl_image_card_grid_QWkRNF": {
+      "type": "sl-image-card-grid",
+      "blocks": {
+        "card_iRBT98": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5388_df0f947b-d6ce-4427-9126-029bed1a5c05.jpg",
+            "card_heading": "Book your session",
+            "card_text": "Choose your service, date, and time.",
+            "button_text": "BOOK HERE",
+            "button_link": "https://booking.mangomint.com/314399"
+          }
+        },
+        "card_HTyTkA": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5066.jpg",
+            "card_heading": "We'll see you then",
+            "card_text": "Be sure to arrive with at least 10-14 days of growth (or more!) and in loose clothing.",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "card_nhixPe": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/BrandingPhotography-C_Mae-6064_c4c0142f-cd1e-473d-8246-60e34146856e.jpg",
+            "card_heading": "We'll have you smooth in no time",
+            "card_text": "You'll leave with smooth skin & a post-wax care plan!",
+            "button_text": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_iRBT98",
+        "card_HTyTkA",
+        "card_nhixPe"
       ],
       "custom_css": [
-        "* {background-color: #f7f4ed;}",
-        "a {background-color: white; opacity: 100%;}"
+        ".sl-icg__marquee {margin-top: -200px;}"
       ],
-      "name": "t:sections.rich-text.presets.name",
+      "name": "EWM Image Card Grid",
       "settings": {
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "columns": "3",
+        "card_gap": 20,
+        "image_ratio": "3 / 4",
+        "heading": "",
+        "heading_size": "h1",
+        "heading_color": "#1a1a1a",
+        "text_position": "overlay",
+        "show_buttons": true,
+        "card_title_size": 20,
+        "card_desc_size": 14,
+        "card_text_below_color": "#4a4a4a",
+        "overlay_opacity": 30,
+        "overlay_text_color": "#ffffff",
+        "overlay_vertical_align": "flex-end",
+        "overlay_text_align": "center",
+        "button_gap": 12,
+        "button_font_size": 14,
+        "button_text_color": "#FFFFFF",
+        "button_border_color": "#FFFFFF",
+        "enable_marquee": true,
+        "marquee_text": "HOW IT WORKS",
+        "marquee_size": 160,
+        "marquee_color": "#8A9979",
+        "marquee_font": "heading",
+        "marquee_speed": 60,
+        "bg_color": "#FFFFFF",
+        "padding_top": 100,
+        "padding_bottom": 36
       }
     },
     "product_listing_LiVXYB": {
       "type": "product-recommendations",
       "name": "Product Carousel",
       "settings": {
-        "heading": "Premium Brazilian Wax Aftercare Products",
+        "full_width": false,
+        "desktop_columns": "3",
+        "heading": "post-wax products",
         "heading_alignment": "center",
-        "heading_color": "#8C9B6D",
+        "heading_color": "#8c9b6d",
         "heading_font": "heading",
         "heading_size": 24,
-        "heading_weight": "600",
+        "heading_weight": "500",
         "heading_transform": "uppercase",
-        "collection": "acne",
+        "price_placement": "button",
+        "collection": "post-waxing-care",
+        "fallback_collection_handle": "best-selling-skincare",
         "products_limit": 10,
-        "auto_scroll_mode": "both",
+        "auto_scroll_mode": "off",
         "auto_scroll_speed": 0.5,
         "show_rating": true,
-        "show_atc": true,
-        "atc_label": "ADD TO BAG",
-        "atc_bg": "#dae2c7",
+        "show_atc": false,
+        "atc_label": "Add To Cart",
+        "image_ratio": "1 / 1",
+        "card_border_radius": 8,
+        "card_image_bg": "#f5f5f3",
+        "section_bg": "#ffffff",
+        "atc_bg": "#7f9f6f",
         "atc_text": "#ffffff",
         "atc_border_width": 0,
+        "atc_border_color": "#ffffff",
         "atc_radius": 0,
-        "card_border_radius": 0,
-        "section_bg": "#ffffff"
-      }
-    },
-    "testimonials_carousel_kK49RM": {
-      "type": "testimonials-carousel",
-      "blocks": {
-        "testimonial_LWteyz": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_WXDiQD": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "Amazing results! My skin has never looked better. The personalized approach really makes a difference.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_r6Eapb": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "Professional, knowledgeable, and caring. I trust her completely with my skincare routine.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_LWteyz",
-        "testimonial_WXDiQD",
-        "testimonial_r6Eapb"
-      ],
-      "name": "Testimonials Carousel",
-      "settings": {
-        "section_title": "Client Results",
-        "section_subtitle": "Real reviews from real people",
-        "section_background": "#f8f8f8",
-        "section_padding": 60,
-        "heading_color": "#000000",
-        "heading_size": 36,
-        "heading_weight": "600",
-        "heading_transform": "none",
-        "subheading_color": "#666666",
-        "header_spacing": 40,
-        "scroll_speed": 30,
-        "scroll_direction": "left",
-        "pause_on_hover": true,
-        "disable_auto_scroll_mobile": true,
-        "enable_fade": true,
-        "fade_width": 10,
-        "testimonial_width": 350,
-        "tablet_testimonial_width": 300,
-        "mobile_testimonial_width": 280,
-        "testimonial_gap": 30,
-        "card_background": "#ffffff",
-        "card_padding": 30,
-        "mobile_card_padding": 20,
-        "card_radius": 12,
-        "card_shadow": true,
-        "shadow_x": 0,
-        "shadow_y": 2,
-        "shadow_blur": 10,
-        "shadow_spread": 0,
-        "shadow_color": "#0000001a",
-        "card_border": false,
-        "border_width": 1,
-        "border_color": "#e0e0e0",
-        "card_hover_effect": true,
-        "show_quotes": true,
-        "quote_color": "#cccccc",
-        "italic_text": false,
-        "text_color": "#333333",
-        "text_size": 16,
-        "mobile_text_size": 15,
-        "star_size": 18,
-        "star_color": "#ffc107",
-        "empty_star_color": "#e0e0e0",
-        "show_divider": true,
-        "divider_color": "#eeeeee",
-        "avatar_size": 45,
-        "avatar_radius": 50,
-        "show_placeholder_avatar": true,
-        "placeholder_avatar_bg": "#e0e0e0",
-        "placeholder_avatar_text": "#666666",
-        "author_color": "#000000",
-        "author_size": 16,
-        "mobile_author_size": 14,
-        "title_color": "#000000",
-        "title_size": 14,
-        "date_color": "#999999",
-        "mobile_heading_size": 28,
-        "show_scroll_indicators": false,
-        "indicator_color": "#000000",
-        "indicator_bg": "#cccccc"
-      }
-    },
-    "main": {
-      "type": "main-page",
-      "disabled": true,
-      "settings": {
-        "page_full_width": false,
-        "page_full_width_spacing": false,
-        "padding_top": 100,
+        "button_font": "heading",
+        "button_font_size": 13,
+        "padding_top": 40,
         "padding_bottom": 40
       }
     },
-    "sl_custom_faq_r7Q6ht": {
+    "sl_custom_faq_ppAhzx": {
       "type": "sl-custom-faq",
       "blocks": {
-        "faq_item_qjMHfp": {
+        "faq_item_LWFRij": {
+          "type": "faq_item",
+          "settings": {
+            "question": "I'm nervous about discomfort - What do you recommend?",
+            "answer": "<p>We get it! Many of our clients mention this being the least uncomfortable waxing experience they've had – but if you're still worried, <strong>we recommend taking an Ibuprofen 30-40 minutes before your appointment</strong></p>"
+          }
+        },
+        "faq_item_KtX7dR": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I still exercise or play sports?",
+            "answer": "<p>No – <strong>Avoid swimming and exercising for 48 hours post wax</strong>. Even though it is popular to get waxed before leaving for vacation, <strong>We advice getting waxed 2-3 days before you leave town.</strong></p>"
+          }
+        },
+        "faq_item_7cwzea": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I get waxed on my period?",
+            "answer": "<p>YES! We wax ladies on their periods every day. Please use a fresh tampon, disc, or an emptied cup before arrival. <strong>We also have tampons available for you in the bathroom.</strong></p>"
+          }
+        },
+        "faq_item_MJGhNK": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Should I dress a specific way for my waxing appointment?",
+            "answer": "<p>Yes, please wear loose fitting clothing to your appointment and plan to for the rest of the day. <br/>Avoid lace and spandex.<br/><strong>Cotton is best.</strong></p>"
+          }
+        },
+        "faq_item_94aHPJ": {
           "type": "faq_item",
           "settings": {
             "question": "How painful is Brazilian waxing really?",
             "answer": "<p>While everyone's pain tolerance is different, most clients say it's not nearly as bad as they expected! The first time is usually the most uncomfortable, but it gets easier with each visit as your hair becomes finer. Our gentle technique and premium hard wax minimize discomfort, and the whole process takes just 15-20 minutes. The smooth results for 4-6 weeks are absolutely worth those few minutes!</p>"
           }
         },
-        "faq_item_PzXEKn": {
+        "faq_item_GPcWJw": {
           "type": "faq_item",
           "settings": {
-            "question": "How long does my hair need to be?",
-            "answer": "<p>Your hair should be about 1/4 inch long (about the length of a grain of rice) for best results. This typically means waiting 2-3 weeks after shaving or 4-6 weeks after your last wax. If it's longer, that's okay too - we can trim if needed. Avoid the temptation to shave between appointments as this disrupts the hair growth cycle!</p>"
+            "question": "How do I book an appointment?",
+            "answer": "<p>You can book an appointment through our online booking system by clicking the 'Book Now' button, or you can call us directly at (555) 123-4567.</p>"
           }
         },
-        "faq_item_GmWhMf": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What if I'm on my period?",
-            "answer": "<p>You can absolutely get waxed during your period! Just wear a fresh tampon or cup to your appointment. Keep in mind you may be slightly more sensitive during this time, but many clients don't notice a difference. We're professionals and want you to feel comfortable maintaining your waxing schedule.</p>"
-          }
-        },
-        "faq_item_PGh67J": {
+        "faq_item_DiArcH": {
           "type": "faq_item",
           "settings": {
             "question": "How do I prevent ingrown hairs?",
             "answer": "<p>Prevention is key! Start gently exfoliating 48 hours after your wax, 2-3 times per week. Keep the area moisturized daily, wear loose cotton underwear when possible, and avoid tight clothing immediately after waxing. We'll provide you with specific aftercare instructions and recommend products that actually work. Most clients see a dramatic reduction in ingrowns when they follow our routine.</p>"
           }
         },
-        "faq_item_XkqtLR": {
+        "faq_item_HKPkTw": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your cancellation policy?",
+            "answer": "<p>We require at least 24 hours notice for cancellations. Cancellations made less than 24 hours in advance may be subject to a cancellation fee.</p>"
+          }
+        },
+        "faq_item_kPgwxQ": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer gift cards?",
+            "answer": "<p>Yes! We offer both physical and digital gift cards in various denominations. They make perfect gifts for any occasion.</p>"
+          }
+        },
+        "faq_item_tGYTxD": {
           "type": "faq_item",
           "settings": {
             "question": "Is Brazilian waxing worth the cost?",
             "answer": "<p>Absolutely! When you calculate the time and money spent on razors, shaving cream, and dealing with razor burn and ingrowns, professional waxing is actually cost-effective. Plus, you can't put a price on the confidence of being smooth for weeks, the reduction in hair growth over time, and healthier skin overall. Most clients say they wish they'd started sooner!</p>"
           }
         },
-        "faq_item_P6KPXe": {
+        "faq_item_UewjjT": {
           "type": "faq_item",
           "settings": {
-            "question": "What should I do to prepare for my appointment?",
-            "answer": "<p>Gently exfoliate the day before, avoid caffeine the day of (it can increase sensitivity), and wear comfortable, loose clothing to your appointment. Don't apply any lotions or oils the day of your service. Take an ibuprofen 30 minutes before if you're concerned about discomfort. Most importantly, relax - we'll take great care of you!</p>"
+            "question": "What are your business hours?",
+            "answer": "<p>We are open Monday through Friday from 9:00 AM to 6:00 PM, and Saturday from 10:00 AM to 4:00 PM. We are closed on Sundays and major holidays.</p>"
           }
         }
       },
       "block_order": [
-        "faq_item_qjMHfp",
-        "faq_item_PzXEKn",
-        "faq_item_GmWhMf",
-        "faq_item_PGh67J",
-        "faq_item_XkqtLR",
-        "faq_item_P6KPXe"
+        "faq_item_LWFRij",
+        "faq_item_KtX7dR",
+        "faq_item_7cwzea",
+        "faq_item_MJGhNK",
+        "faq_item_94aHPJ",
+        "faq_item_GPcWJw",
+        "faq_item_DiArcH",
+        "faq_item_HKPkTw",
+        "faq_item_kPgwxQ",
+        "faq_item_tGYTxD",
+        "faq_item_UewjjT"
       ],
       "name": "FAQ Section",
       "settings": {
         "enable_anchor": false,
         "anchor_id": "faq",
         "anchor_offset": 80,
-        "section_title": "Frequently Asked Questions",
-        "section_subtitle": "Find answers to common questions",
+        "section_title": "FREQUENTLY ASKED QUESTIONS",
+        "section_subtitle": "",
         "header_alignment": "center",
-        "background_color": "#e5edd5",
+        "background_color": "#F5F0EB",
         "section_padding": 40,
         "max_width": 900,
         "show_toggle_button": true,
@@ -1106,35 +1201,99 @@
         "answer_color": "#333333",
         "answer_size": 16,
         "item_padding": 25,
-        "border_color": "#8c9b6d",
+        "border_color": "#C3D0B4",
         "toggle_color": "#666666",
         "toggle_hover_color": "#000000",
         "mobile_header_size": 26,
-        "mobile_subheader_size": 16,
-        "mobile_question_size": 18,
-        "mobile_answer_size": 16,
+        "mobile_subheader_size": 14,
+        "mobile_question_size": 16,
+        "mobile_answer_size": 14,
         "mobile_item_padding": 20,
         "enable_animation": false,
         "animation_duration": 500,
         "animation_delay": 50
+      }
+    },
+    "sl_content_banner_3k6fDg": {
+      "type": "sl-content-banner",
+      "blocks": {
+        "heading_rL9meg": {
+          "type": "heading",
+          "settings": {
+            "text": "Ready for smooth skin?",
+            "size": "h0"
+          }
+        },
+        "spacer_JQyYat": {
+          "type": "spacer",
+          "settings": {
+            "height": 12
+          }
+        },
+        "button_wPeePb": {
+          "type": "button",
+          "settings": {
+            "text": "book your wax here",
+            "link": "https://booking.mangomint.com/314399",
+            "style": "secondary",
+            "button_bg_color": "",
+            "button_text_color": "",
+            "button_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_rL9meg",
+        "spacer_JQyYat",
+        "button_wPeePb"
+      ],
+      "name": "Content Banner",
+      "settings": {
+        "full_width": true,
+        "content_alignment": "center",
+        "content_max_width": 800,
+        "bg_type": "image",
+        "bg_color": "#1a1612",
+        "bg_image": "shopify://shop_images/BrandingPhotography-C_Mae-6127_83eb3558-98e7-48f7-8cac-1c661d9d6eab.jpg",
+        "bg_video_url": "",
+        "overlay_darkness": 100,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "text_color": "#f0e8d8",
+        "subheading_font": "body",
+        "subheading_size": 16,
+        "subheading_weight": "400",
+        "body_font_size": 16,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "page_full_width": false,
+        "page_full_width_spacing": false,
+        "padding_top": 100,
+        "padding_bottom": 40
       }
     }
   },
   "order": [
     "sl_scrapbook_hero_UnqQ3Y",
     "sl_flexible_list_mxjCPF",
-    "sl_split_section_YNApNE",
+    "testimonials_carousel_kK49RM",
+    "sl_image_text_overlap_7Fmzin",
     "sl_flexible_list_yEnKh7",
     "sl_marquee_RR7r88",
     "sl_services_menu_tPA8Ja",
     "sl_marquee_Wi8VGJ",
     "sl_services_menu_F7imxi",
-    "rich_text_MLxMeg",
-    "multicolumn_iQcB9a",
-    "rich_text_UbVpyD",
+    "sl_content_banner_9QhcDF",
+    "sl_image_card_grid_QWkRNF",
     "product_listing_LiVXYB",
-    "testimonials_carousel_kK49RM",
-    "main",
-    "sl_custom_faq_r7Q6ht"
+    "sl_custom_faq_ppAhzx",
+    "sl_content_banner_3k6fDg",
+    "main"
   ]
 }
