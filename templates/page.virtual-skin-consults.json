@@ -473,7 +473,7 @@
         "enable_marquee": true,
         "marquee_text": "HOW IT WORKS",
         "marquee_size": 160,
-        "marquee_color": "#6b7c5e",
+        "marquee_color": "#57614C",
         "marquee_font": "heading",
         "marquee_speed": 60,
         "step_prefix": "STEP",
