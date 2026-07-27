@@ -69,23 +69,7 @@
 
 :root,
 .color-background-1 {
-/*   --color-link: var(--color-base-outline-button-labels); */
-    --color-link: var(--color-icon)
-  --alpha-link: 0.85;
-}
-
-.color-background-2,
-.color-inverse,
-.color-accent-1,
-.color-accent-2 {
-  --color-link: var(--color-foreground);
-  --alpha-link: 0.7;
-}
-
-:root,
-.color-background-1 {
-/*   --color-link: var(--color-base-outline-button-labels); */
-    --color-link: var(--color-icon)
+    --color-link: var(--color-icon);
   --alpha-link: 0.85;
 }
 

@@ -511,8 +511,10 @@ class MenuDrawer extends HTMLElement {
   }
 
   onSummaryClick(event) {
-    var topBarHeight = document.getElementById('shopify-section-top-bar').offsetHeight;    
-    document.getElementById("menu-drawer").style.top = '-'+topBarHeight+"px";
+    var topBar = document.getElementById('shopify-section-top-bar');
+    var topBarHeight = topBar ? topBar.offsetHeight : 0;
+    var menuDrawer = document.getElementById("menu-drawer");
+    if (menuDrawer) menuDrawer.style.top = '-'+topBarHeight+"px";
     
     const summaryElement = event.currentTarget;
     const detailsElement = summaryElement.parentNode;

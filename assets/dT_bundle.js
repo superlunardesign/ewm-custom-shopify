@@ -114,6 +114,7 @@ var bundleProductDisplayAction = {
 
     _updateMedia: function(evt) {
         var variant = evt.detail.variant;
+        if (!variant.featured_media) return;
         var mediaId = variant.featured_media.id;
         var sectionMediaId = 'product-thumb-media' + '-' + mediaId;
         var sectionProductThumbMediaId = sectionMediaId;
