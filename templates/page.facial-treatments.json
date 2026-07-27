@@ -1002,8 +1002,8 @@
         "spread_content": true,
         "text": "<p>Complete your intake form before arrival to maximize treatment time. Let us know about allergies, sensitivities, and current medications.</p>",
         "show_button": true,
-        "button_text": "BOOK A TREATMENT",
-        "button_link": "",
+        "button_text": "FILL OUT YOUR WAIVER",
+        "button_link": "https://form.jotform.com/220544223473146",
         "button_style": "primary",
         "color_scheme": "background-1",
         "content_background": "#f5f0eb",
@@ -1019,83 +1019,6 @@
         "enable_sticky": false,
         "padding_top": 36,
         "padding_bottom": 36
-      }
-    },
-    "sl_content_banner_rhVR7D": {
-      "type": "sl-content-banner",
-      "blocks": {
-        "heading_frtz4C": {
-          "type": "heading",
-          "settings": {
-            "text": "How to Prepare for Your Facial Treatment",
-            "size": "h0"
-          }
-        },
-        "spacer_VRpA8y": {
-          "type": "spacer",
-          "settings": {
-            "height": 12
-          }
-        },
-        "text_a3pETy": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>Arrive with Clean Skin</h2>"
-          }
-        },
-        "text_Xz8MNg": {
-          "type": "text",
-          "settings": {
-            "text": "<p>This ensures a smooth and efficient experience so you can settle in, relax, and start enjoying your facial treatment as soon as possible after you arrive.</p>"
-          }
-        },
-        "button_jgbDi7": {
-          "type": "button",
-          "settings": {
-            "text": "fill out your waiver",
-            "link": "https://form.jotform.com/220544223473146",
-            "style": "secondary",
-            "button_bg_color": "",
-            "button_text_color": "",
-            "button_border_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading_frtz4C",
-        "spacer_VRpA8y",
-        "text_a3pETy",
-        "text_Xz8MNg",
-        "button_jgbDi7"
-      ],
-      "name": "Content Banner",
-      "settings": {
-        "full_width": true,
-        "content_alignment": "left",
-        "content_max_width": 800,
-        "bg_type": "image",
-        "bg_color": "#1a1612",
-        "bg_image": "shopify://shop_images/BrandingPhotography-C_Mae-5644.jpg",
-        "bg_video_url": "",
-        "overlay_darkness": 80,
-        "enable_animation": false,
-        "animation_duration": 600,
-        "text_color": "#FFFFFF",
-        "subheading_font": "body",
-        "subheading_size": 16,
-        "subheading_weight": "400",
-        "body_font_size": 16,
-        "button_font": "heading",
-        "button_font_size": 14,
-        "button_font_weight": "500",
-        "button_text_transform": "uppercase",
-        "button_letter_spacing": 10,
-        "button_padding_y": 14,
-        "button_padding_x": 36,
-        "button_border_radius": 0,
-        "button_hover_opacity": 85,
-        "padding_top": 80,
-        "padding_bottom": 80
       }
     },
     "main": {
@@ -1294,7 +1217,6 @@
     "sl_image_card_grid_zanmWg",
     "sl_flexible_list_mMk3PN",
     "sl_image_text_block_KUa468",
-    "sl_content_banner_rhVR7D",
     "main",
     "sl_custom_faq_r7Q6ht",
     "sl_content_banner_z8aDrK"
