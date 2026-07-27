@@ -24,9 +24,20 @@
 
 {% comment %} Debug — remove after confirming it works {% endcomment %}
 {% if tab_1_items == blank and tab_2_items == blank %}
-  <!-- DEBUG: No metafield data found. page.metafields.custom.tab_1_downloads = "{{ page.metafields.custom.tab_1_downloads }}" -->
+  <!-- DEBUG: No metafield data found.
+       page.metafields.custom.tab_1_downloads = "{{ page.metafields.custom.tab_1_downloads }}"
+       page.metafields.custom.tab_2_downloads = "{{ page.metafields.custom.tab_2_downloads }}"
+       page.handle = "{{ page.handle }}"
+       page.title = "{{ page.title }}"
+  -->
 {% else %}
   <!-- DEBUG: tab_1 has {{ tab_1_items.size }} items, tab_2 has {{ tab_2_items.size }} items -->
+  {% for item in tab_1_items %}
+    <!-- DEBUG tab_1 item {{ forloop.index }}: title="{{ item.title.value }}" display_name="{{ item.system.display_name }}" file_url="{{ item.file.value.url }}" file_value="{{ item.file.value }}" description="{{ item.description.value }}" -->
+  {% endfor %}
+  {% for item in tab_2_items %}
+    <!-- DEBUG tab_2 item {{ forloop.index }}: title="{{ item.title.value }}" display_name="{{ item.system.display_name }}" file_url="{{ item.file.value.url }}" file_value="{{ item.file.value }}" description="{{ item.description.value }}" -->
+  {% endfor %}
 {% endif %}
 
 <div class="sl-rp" style="background-color: {{ section.settings.bg_color }};">
@@ -531,10 +542,14 @@
       var downloadBtn = modal.querySelector('[data-sl-rp-download]');
 
       document.querySelectorAll('[data-sl-rp-open][data-section="' + sectionId + '"]').forEach(function(btn) {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
           var url = this.getAttribute('data-pdf-url');
           var title = this.getAttribute('data-pdf-title');
-          if (!url) return;
+          if (!url) {
+            alert('No file URL found for this download. Check that the metaobject entry has a file uploaded and Storefront API access is enabled on the Resource Download definition.');
+            return;
+          }
 
           if (isMobile()) {
             window.open(url, '_blank');
