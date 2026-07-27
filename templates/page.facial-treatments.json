@@ -272,7 +272,7 @@
         "enable_scroll_text": true,
         "scroll_text": "spa facials & skin treatments",
         "scroll_font_size": 100,
-        "scroll_text_color": "#C3D0B4",
+        "scroll_text_color": "#c3d0b4",
         "scroll_text_padding": 20,
         "scroll_overlap": 80,
         "scroll_speed": 60,
@@ -889,7 +889,7 @@
         "marquee_speed": 60,
         "marquee_offset_desktop": 0,
         "marquee_offset_mobile": 0,
-        "bg_color": "#f5f0eb",
+        "bg_color": "#FFFFFF",
         "padding_top": 36,
         "padding_bottom": 36
       }
