@@ -792,6 +792,73 @@
         "mobile_description_size": 13
       }
     },
+    "sl_content_banner_9QhcDF": {
+      "type": "sl-content-banner",
+      "blocks": {
+        "heading_n8NLch": {
+          "type": "heading",
+          "settings": {
+            "text": "How to Prepare for Your Brazilian Wax",
+            "size": "h0"
+          }
+        },
+        "subheading_MyYXFk": {
+          "type": "subheading",
+          "settings": {
+            "text": "OR ANY WAXING APPOINTMENT"
+          }
+        },
+        "spacer_fXbPK3": {
+          "type": "spacer",
+          "settings": {
+            "height": 12
+          }
+        },
+        "text_dkVrVi": {
+          "type": "text",
+          "settings": {
+            "text": "<p>First time? Make sure hair is grown out at least 10-14 days before your appointment. If you currently don't shave - there is nothing you need to do before your appointment.</p>"
+          }
+        },
+        "button_q4RP4t": {
+          "type": "button",
+          "settings": {
+            "text": "Explore Our Services",
+            "link": "",
+            "style": "secondary",
+            "button_bg_color": "",
+            "button_text_color": "",
+            "button_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_n8NLch",
+        "subheading_MyYXFk",
+        "spacer_fXbPK3",
+        "text_dkVrVi",
+        "button_q4RP4t"
+      ],
+      "name": "Content Banner",
+      "settings": {
+        "full_width": true,
+        "content_alignment": "center",
+        "content_max_width": 800,
+        "bg_type": "color",
+        "bg_color": "#1a1612",
+        "bg_video_url": "",
+        "overlay_darkness": 100,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "text_color": "#f0e8d8",
+        "subheading_font": "body",
+        "subheading_size": 16,
+        "subheading_weight": "400",
+        "body_font_size": 16,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "rich_text_MLxMeg": {
       "type": "rich-text",
       "blocks": {
@@ -1281,6 +1348,7 @@
     "sl_services_menu_tPA8Ja",
     "sl_marquee_Wi8VGJ",
     "sl_services_menu_F7imxi",
+    "sl_content_banner_9QhcDF",
     "rich_text_MLxMeg",
     "sl_image_card_grid_QWkRNF",
     "multicolumn_iQcB9a",
