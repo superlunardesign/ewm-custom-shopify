@@ -12,50 +12,6 @@
     },
     "resource_portal": {
       "type": "sl-resource-portal",
-      "blocks": {
-        "download_1": {
-          "type": "download",
-          "settings": {
-            "title": "What is Acne?",
-            "description": "",
-            "file_url": "",
-            "tab": "1"
-          }
-        },
-        "download_2": {
-          "type": "download",
-          "settings": {
-            "title": "Food & Supplements",
-            "description": "",
-            "file_url": "",
-            "tab": "1"
-          }
-        },
-        "download_3": {
-          "type": "download",
-          "settings": {
-            "title": "Daily Habits Impacting Acne",
-            "description": "",
-            "file_url": "",
-            "tab": "1"
-          }
-        },
-        "download_4": {
-          "type": "download",
-          "settings": {
-            "title": "Pore Clogging Ingredients",
-            "description": "",
-            "file_url": "",
-            "tab": "1"
-          }
-        }
-      },
-      "block_order": [
-        "download_1",
-        "download_2",
-        "download_3",
-        "download_4"
-      ],
       "settings": {
         "heading": "Acne Bootcamp Portal",
         "heading_size": "hxl",

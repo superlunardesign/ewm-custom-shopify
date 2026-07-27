@@ -1,6 +1,8 @@
 {% comment %}
   EWM Resource Portal
   Tabbed download section with inline PDF viewer
+  Downloads are managed via metaobjects (Content > Resource Downloads)
+  and connected to this page via page metafields.
 {% endcomment %}
 
 {%- style -%}
@@ -16,6 +18,9 @@
     }
   }
 {%- endstyle -%}
+
+{%- assign tab_1_items = page.metafields.custom.tab_1_downloads.value -%}
+{%- assign tab_2_items = page.metafields.custom.tab_2_downloads.value -%}
 
 <div class="sl-rp" style="background-color: {{ section.settings.bg_color }};">
 
@@ -50,47 +55,91 @@
   </nav>
 
   <div class="sl-rp__content">
-    {% for tab_num in (1..3) %}
-      <div class="sl-rp__panel{% if tab_num == 1 %} sl-rp__panel--active{% endif %}" data-sl-rp-panel="{{ tab_num }}" data-section="{{ section.id }}">
-        <div class="sl-rp__grid">
-          {% for block in section.blocks %}
-            {% assign block_tab = block.settings.tab | plus: 0 %}
-            {% if block_tab == tab_num %}
-              <div class="sl-rp__card" {{ block.shopify_attributes }}>
-                <button
-                  class="sl-rp__card-btn"
-                  data-sl-rp-open
-                  data-pdf-url="{{ block.settings.file_url }}"
-                  data-pdf-title="{{ block.settings.title | escape }}"
-                  data-section="{{ section.id }}"
-                  type="button"
-                >
-                  <span class="sl-rp__card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                      <polyline points="14 2 14 8 20 8"></polyline>
-                      <line x1="16" y1="13" x2="8" y2="13"></line>
-                      <line x1="16" y1="17" x2="8" y2="17"></line>
-                      <polyline points="10 9 9 9 8 9"></polyline>
-                    </svg>
-                  </span>
-                  <span class="sl-rp__card-info">
-                    <span class="sl-rp__card-title">{{ block.settings.title }}</span>
-                    {% if block.settings.description != blank %}
-                      <span class="sl-rp__card-desc">{{ block.settings.description }}</span>
-                    {% endif %}
-                    {% if block.settings.last_updated != blank %}
-                      <span class="sl-rp__card-updated">Updated {{ block.settings.last_updated }}</span>
-                    {% endif %}
-                  </span>
-                  <span class="sl-rp__card-arrow">&rarr;</span>
-                </button>
-              </div>
-            {% endif %}
+    {%- comment -%} Tab 1 — from page metafield {%- endcomment -%}
+    <div class="sl-rp__panel sl-rp__panel--active" data-sl-rp-panel="1" data-section="{{ section.id }}">
+      <div class="sl-rp__grid">
+        {% if tab_1_items %}
+          {% for item in tab_1_items %}
+            {%- assign file_url = item.file.value.url -%}
+            <div class="sl-rp__card">
+              <button
+                class="sl-rp__card-btn"
+                data-sl-rp-open
+                data-pdf-url="{{ file_url }}"
+                data-pdf-title="{{ item.title.value | escape }}"
+                data-section="{{ section.id }}"
+                type="button"
+              >
+                <span class="sl-rp__card-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </span>
+                <span class="sl-rp__card-info">
+                  <span class="sl-rp__card-title">{{ item.title.value }}</span>
+                  {% if item.description.value != blank %}
+                    <span class="sl-rp__card-desc">{{ item.description.value }}</span>
+                  {% endif %}
+                  {% if item.last_updated.value != blank %}
+                    <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
+                  {% endif %}
+                </span>
+                <span class="sl-rp__card-arrow">&rarr;</span>
+              </button>
+            </div>
           {% endfor %}
-        </div>
+        {% else %}
+          <p class="sl-rp__empty">No downloads added yet. Add Resource Download entries in Content, then connect them to this page.</p>
+        {% endif %}
       </div>
-    {% endfor %}
+    </div>
+
+    {%- comment -%} Tab 2 — from page metafield {%- endcomment -%}
+    <div class="sl-rp__panel" data-sl-rp-panel="2" data-section="{{ section.id }}">
+      <div class="sl-rp__grid">
+        {% if tab_2_items %}
+          {% for item in tab_2_items %}
+            {%- assign file_url = item.file.value.url -%}
+            <div class="sl-rp__card">
+              <button
+                class="sl-rp__card-btn"
+                data-sl-rp-open
+                data-pdf-url="{{ file_url }}"
+                data-pdf-title="{{ item.title.value | escape }}"
+                data-section="{{ section.id }}"
+                type="button"
+              >
+                <span class="sl-rp__card-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </span>
+                <span class="sl-rp__card-info">
+                  <span class="sl-rp__card-title">{{ item.title.value }}</span>
+                  {% if item.description.value != blank %}
+                    <span class="sl-rp__card-desc">{{ item.description.value }}</span>
+                  {% endif %}
+                  {% if item.last_updated.value != blank %}
+                    <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
+                  {% endif %}
+                </span>
+                <span class="sl-rp__card-arrow">&rarr;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="sl-rp__empty">No downloads added to this tab yet.</p>
+        {% endif %}
+      </div>
+    </div>
   </div>
 </div>
 
@@ -211,6 +260,14 @@
 
   #shopify-section-{{ section.id }} .sl-rp__panel--active {
     display: block;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__empty {
+    font-family: var(--font-body-family);
+    font-size: 1.4rem;
+    color: #999;
+    text-align: center;
+    padding: 3rem 0;
   }
 
   /* ── Card grid ── */
@@ -455,17 +512,16 @@
 
     function initModal() {
       var modal = document.querySelector('[data-sl-rp-modal][data-section="' + sectionId + '"]');
+      if (!modal) return;
       var iframe = modal.querySelector('[data-sl-rp-iframe]');
       var titleEl = modal.querySelector('[data-sl-rp-modal-title]');
       var downloadBtn = modal.querySelector('[data-sl-rp-download]');
-      var currentUrl = '';
 
       document.querySelectorAll('[data-sl-rp-open][data-section="' + sectionId + '"]').forEach(function(btn) {
         btn.addEventListener('click', function() {
           var url = this.getAttribute('data-pdf-url');
           var title = this.getAttribute('data-pdf-title');
           if (!url) return;
-          currentUrl = url;
           titleEl.textContent = title;
           iframe.src = url;
           downloadBtn.href = url;
@@ -482,12 +538,15 @@
         });
       });
 
-      modal.querySelector('[data-sl-rp-print]').addEventListener('click', function() {
-        if (iframe.contentWindow) {
-          iframe.contentWindow.focus();
-          iframe.contentWindow.print();
-        }
-      });
+      var printBtn = modal.querySelector('[data-sl-rp-print]');
+      if (printBtn) {
+        printBtn.addEventListener('click', function() {
+          if (iframe.contentWindow) {
+            iframe.contentWindow.focus();
+            iframe.contentWindow.print();
+          }
+        });
+      }
 
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
@@ -700,92 +759,11 @@
       "default": 60
     }
   ],
-  "blocks": [
-    {
-      "type": "download",
-      "name": "Download",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Document Title"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Description",
-          "info": "Optional short description shown below the title"
-        },
-        {
-          "type": "url",
-          "id": "file_url",
-          "label": "File URL",
-          "info": "Upload your PDF in Settings > Files, then paste the link here"
-        },
-        {
-          "type": "text",
-          "id": "last_updated",
-          "label": "Last Updated",
-          "info": "Optional. e.g. 'July 2026' — shown as small gray text on the card"
-        },
-        {
-          "type": "select",
-          "id": "tab",
-          "label": "Assign to Tab",
-          "options": [
-            { "value": "1", "label": "Tab 1" },
-            { "value": "2", "label": "Tab 2" },
-            { "value": "3", "label": "Tab 3" }
-          ],
-          "default": "1"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
       "name": "EWM Resource Portal",
-      "category": "Custom",
-      "settings": {
-        "heading": "Acne Bootcamp Portal",
-        "tab_1_label": "Consultation Downloads",
-        "tab_2_label": "Additional Downloads",
-        "tab_3_label": "Book an Appointment",
-        "tab_3_link": ""
-      },
-      "blocks": [
-        {
-          "type": "download",
-          "settings": {
-            "title": "What is Acne?",
-            "tab": "1"
-          }
-        },
-        {
-          "type": "download",
-          "settings": {
-            "title": "Food & Supplements",
-            "tab": "1"
-          }
-        },
-        {
-          "type": "download",
-          "settings": {
-            "title": "Daily Habits Impacting Acne",
-            "tab": "1"
-          }
-        },
-        {
-          "type": "download",
-          "settings": {
-            "title": "Pore Clogging Ingredients",
-            "tab": "1"
-          }
-        }
-      ]
+      "category": "Custom"
     }
-  ],
-  "max_blocks": 20
+  ]
 }
 {% endschema %}
