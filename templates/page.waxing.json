@@ -823,8 +823,8 @@
         "button_q4RP4t": {
           "type": "button",
           "settings": {
-            "text": "Explore Our Services",
-            "link": "",
+            "text": "Fill Out Your Waiver",
+            "link": "https://form.jotform.com/220666610688058",
             "style": "secondary",
             "button_bg_color": "",
             "button_text_color": "",
@@ -844,8 +844,9 @@
         "full_width": true,
         "content_alignment": "center",
         "content_max_width": 800,
-        "bg_type": "color",
+        "bg_type": "image",
         "bg_color": "#1a1612",
+        "bg_image": "shopify://shop_images/BrandingPhotography-C_Mae-6091.jpg",
         "bg_video_url": "",
         "overlay_darkness": 100,
         "enable_animation": false,
@@ -859,39 +860,6 @@
         "padding_bottom": 80
       }
     },
-    "rich_text_MLxMeg": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_LhXK7V": {
-          "type": "heading",
-          "settings": {
-            "heading": "How to Prepare for Your Brazilian Wax",
-            "heading_size": "h1"
-          }
-        },
-        "text_9TtmJY": {
-          "type": "text",
-          "settings": {
-            "text": "<p>OR ANY WAXING APPOINTMENT<br/><br/>First time? Make sure hair is grown out at least 10-14 days before your appointment. If you currently don't shave - there is nothing you need to do before your appointment.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_LhXK7V",
-        "text_9TtmJY"
-      ],
-      "custom_css": [
-        "* {background-color: #f7f4ed;}",
-        "a {background-color: white; opacity: 100%;}"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
-    },
     "sl_image_card_grid_QWkRNF": {
       "type": "sl-image-card-grid",
       "blocks": {
@@ -901,7 +869,7 @@
             "image": "shopify://shop_images/BrandingPhotography-C_Mae-5388_df0f947b-d6ce-4427-9126-029bed1a5c05.jpg",
             "card_heading": "YADA",
             "card_text": "BLAH BALH BLAH",
-            "button_text": "FACIAL TREATMENTS",
+            "button_text": "",
             "button_link": ""
           }
         },
@@ -1349,7 +1317,6 @@
     "sl_marquee_Wi8VGJ",
     "sl_services_menu_F7imxi",
     "sl_content_banner_9QhcDF",
-    "rich_text_MLxMeg",
     "sl_image_card_grid_QWkRNF",
     "multicolumn_iQcB9a",
     "rich_text_UbVpyD",
