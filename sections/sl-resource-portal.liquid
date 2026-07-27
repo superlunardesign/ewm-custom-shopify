@@ -68,12 +68,13 @@
         {% if tab_1_items %}
           {% for item in tab_1_items %}
             {%- assign file_url = item.file.value.url -%}
+            {%- assign card_title = item.title.value | default: item.system.display_name -%}
             <div class="sl-rp__card">
               <button
                 class="sl-rp__card-btn"
                 data-sl-rp-open
                 data-pdf-url="{{ file_url }}"
-                data-pdf-title="{{ item.title.value | escape }}"
+                data-pdf-title="{{ card_title | escape }}"
                 data-section="{{ section.id }}"
                 type="button"
               >
@@ -87,7 +88,7 @@
                   </svg>
                 </span>
                 <span class="sl-rp__card-info">
-                  <span class="sl-rp__card-title">{{ item.title.value }}</span>
+                  <span class="sl-rp__card-title">{{ card_title }}</span>
                   {% if item.description.value != blank %}
                     <span class="sl-rp__card-desc">{{ item.description.value }}</span>
                   {% endif %}
@@ -111,12 +112,13 @@
         {% if tab_2_items %}
           {% for item in tab_2_items %}
             {%- assign file_url = item.file.value.url -%}
+            {%- assign card_title = item.title.value | default: item.system.display_name -%}
             <div class="sl-rp__card">
               <button
                 class="sl-rp__card-btn"
                 data-sl-rp-open
                 data-pdf-url="{{ file_url }}"
-                data-pdf-title="{{ item.title.value | escape }}"
+                data-pdf-title="{{ card_title | escape }}"
                 data-section="{{ section.id }}"
                 type="button"
               >
@@ -130,7 +132,7 @@
                   </svg>
                 </span>
                 <span class="sl-rp__card-info">
-                  <span class="sl-rp__card-title">{{ item.title.value }}</span>
+                  <span class="sl-rp__card-title">{{ card_title }}</span>
                   {% if item.description.value != blank %}
                     <span class="sl-rp__card-desc">{{ item.description.value }}</span>
                   {% endif %}
@@ -517,6 +519,10 @@
       });
     }
 
+    function isMobile() {
+      return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (window.innerWidth < 750);
+    }
+
     function initModal() {
       var modal = document.querySelector('[data-sl-rp-modal][data-section="' + sectionId + '"]');
       if (!modal) return;
@@ -529,6 +535,12 @@
           var url = this.getAttribute('data-pdf-url');
           var title = this.getAttribute('data-pdf-title');
           if (!url) return;
+
+          if (isMobile()) {
+            window.open(url, '_blank');
+            return;
+          }
+
           titleEl.textContent = title;
           iframe.src = url;
           downloadBtn.href = url;
