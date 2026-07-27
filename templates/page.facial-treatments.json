@@ -1250,7 +1250,7 @@
         "overlay_darkness": 50,
         "enable_animation": false,
         "animation_duration": 600,
-        "text_color": "#f0e8d8",
+        "text_color": "#FFFFFF",
         "subheading_font": "body",
         "subheading_size": 16,
         "subheading_weight": "400",
