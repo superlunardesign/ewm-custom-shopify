@@ -22,6 +22,13 @@
 {%- assign tab_1_items = page.metafields.custom.tab_1_downloads.value -%}
 {%- assign tab_2_items = page.metafields.custom.tab_2_downloads.value -%}
 
+{% comment %} Debug — remove after confirming it works {% endcomment %}
+{% if tab_1_items == blank and tab_2_items == blank %}
+  <!-- DEBUG: No metafield data found. page.metafields.custom.tab_1_downloads = "{{ page.metafields.custom.tab_1_downloads }}" -->
+{% else %}
+  <!-- DEBUG: tab_1 has {{ tab_1_items.size }} items, tab_2 has {{ tab_2_items.size }} items -->
+{% endif %}
+
 <div class="sl-rp" style="background-color: {{ section.settings.bg_color }};">
 
   {% if section.settings.heading != blank %}
