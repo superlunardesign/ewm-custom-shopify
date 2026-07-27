@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -21,8 +30,8 @@
         "tab_3_label": "Book an Appointment",
         "tab_3_link": "https://booking.mangomint.com/314399",
         "tab_bg_color": "#8c9b6d",
-        "tab_text_color": "#ffffff",
-        "tab_active_color": "#ffffff",
+        "tab_text_color": "#FFFFFF",
+        "tab_active_color": "#FFFFFF",
         "grid_columns": "1",
         "card_gap": 12,
         "card_bg_color": "#ffffff",
