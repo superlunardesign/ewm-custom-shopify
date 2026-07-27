@@ -1,1 +1,991 @@
-{"sections":{"sl_scrapbook_hero_UnqQ3Y":{"type":"sl-scrapbook-hero","name":"Scrapbook Hero","settings":{"subheading":"Experience clinically proven LED therapy in McHenry for anti-aging, acne treatment, pain relief & accelerated healing","heading":"Red Light Therapy goes <em>deeper<\/em> than your skincare can reach.","top_left_image":"shopify:\/\/shop_images\/BrandingPhotography-C.Mae-5850.jpg","center_image":"shopify:\/\/shop_images\/BrandingPhotography-C.Mae-5843.jpg","bottom_right_image":"shopify:\/\/shop_images\/BrandingPhotography-C.Mae-5848.jpg","corner_image_position_x":50,"corner_image_position_y":50,"center_image_position_x":50,"center_image_position_y":50,"corner_image_border_radius":0,"center_image_border_radius":0,"show_button":true,"button_text":"BOOK RED LIGHT THERAPY HERE","button_link":"https:\/\/booking.mangomint.com\/314399","button_background":"#594268","button_text_color":"#ffffff","button_hover_background":"#3c2b48","button_hover_text_color":"#ffffff","button_font_size":16,"button_border_radius":0,"background_color":"#846599","heading_color":"#ffffff","subheading_color":"#ffffff","heading_size":40,"subheading_size":16,"heading_weight":"700","subheading_weight":"400","subheading_letter_spacing":1,"heading_line_height":"1.4","section_height":100,"tablet_section_height":100,"mobile_section_height":80,"tablet_heading_size":30,"mobile_heading_size":30,"mobile_subheading_size":16,"enable_animation":true,"animation_duration":600,"animation_delay":300}},"sl_flexible_list_mxjCPF":{"type":"sl-flexible-list","blocks":{"value_prop_HA8Xk4":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-face-sad-tear","heading":"Expensive Skincare Isn't Working","text":"You've invested hundreds in serums and creams, but they only treat the surface. Fine lines, wrinkles, and dullness persist because topical products can't reach the deeper layers where real change happens."}},"value_prop_YKYRkK":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-plant-wilt","heading":"Looking Tired & Aged","text":"Dark circles, sagging skin, and loss of elasticity make you look older than you feel. You want to stimulate collagen naturally without invasive procedures or downtime."}},"value_prop_x97neW":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-face-grimace","heading":"Slow Healing & Recovery","text":"Wounds, surgical scars, or injuries are taking forever to heal. Your body needs help accelerating its natural repair processes, but you don't know where to turn for safe, effective treatment."}}},"block_order":["value_prop_HA8Xk4","value_prop_YKYRkK","value_prop_x97neW"],"name":"Flexible List","settings":{"main_heading":"Still Struggling Despite Your Best Efforts?","main_subheading":"Experience McHenry's most trusted red light therapy service where you can safely improve your skin","grid_columns":3,"background_image":"shopify:\/\/shop_images\/BrandingPhotography-C.Mae-5852.jpg","background_opacity":85,"background_size":"cover","background_position_x":50,"background_position_y":50,"section_background":"#1a1a1a","section_padding":60,"max_width":1200,"grid_gap":30,"header_spacing":50,"text_alignment":"center","heading_color":"#ffffff","heading_size":42,"heading_weight":"600","heading_transform":"none","subheading_color":"#ffffff","subheading_size":16,"subheading_weight":"400","subheading_transform":"none","prop_heading_color":"#ffffff","prop_heading_size":22,"prop_heading_weight":"600","prop_text_color":"#ffffff","prop_text_size":15,"item_background":"rgba(0,0,0,0)","item_padding":20,"item_border_radius":0,"item_shadow":false,"item_hover_effect":false,"show_icons":false,"icon_size":15,"icon_color":"#ffffff","mobile_heading_size":32,"mobile_subheading_size":16,"mobile_prop_heading_size":18,"mobile_prop_text_size":14,"mobile_icon_size":50,"mobile_item_padding":15,"enable_animation":true,"animation_duration":700,"animation_delay":300}},"sl_split_section_YNApNE":{"type":"sl-split-section","name":"Split Section","settings":{"image":"shopify:\/\/shop_images\/BrandingPhotography-C.Mae-5848.jpg","swap_horizontal":false,"auto_height_desktop":true,"section_height_desktop":40,"auto_height_tablet":true,"section_height_tablet":50,"wrapper_padding":3,"wrapper_padding_tablet":3,"wrapper_padding_mobile":3,"image_position_x":50,"image_position_y":90,"enable_animation":true,"animation_duration":600,"animation_delay":200,"heading":"McHenry's Premier Red Light Therapy Center","subheading":"Using FDA-cleared Celluma LED panels, we're bringing medical-grade healing technology to McHenry.","text":"Why Our Red Light Therapy Is Different:\n\n✓ FDA-cleared Celluma panels - the gold standard in LED therapy\n✓ Clinically proven wavelengths for maximum effectiveness\n✓ Certified practitioner with advanced LED therapy training\n✓ Customized treatment protocols for your specific needs\n✓ Comfortable, spa-like environment for relaxation\n✓ Proven results backed by over 2,000 clinical studies","text2":"Shannon discovered red light therapy while searching for non-invasive solutions for her clients' toughest skin and pain concerns. After seeing the incredible, science-backed results firsthand, she invested in the best equipment available to bring this revolutionary treatment to our McHenry community.","heading_color":"#000000","subheading_color":"#333333","text_color":"#666666","heading_size":32,"subheading_size":24,"text_size":16,"mobile_heading_size":24,"mobile_subheading_size":18,"mobile_text_size":14,"show_button":true,"button_text":"See Our Red Light Treatment Options ↓","button_link":"#treatments","button_background":"#846599","button_text_color":"#ffffff","button_hover_background":"#594268","button_hover_text_color":"#ffffff","button_border_radius":0}},"sl_flexible_list_yEnKh7":{"type":"sl-flexible-list","blocks":{"value_prop_i7yChD":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-hand-sparkles","heading":"Reverse Signs of Aging","text":"Stimulate collagen and elastin production naturally. See visible reduction in fine lines, wrinkles, and age spots while improving skin texture and tone in just 4-6 weeks."}},"value_prop_TXi4QK":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-wand-sparkles","heading":"Clear Acne at the Source","text":"Blue light destroys acne-causing bacteria deep in pores while red light reduces inflammation. Clinical studies show up to 80% reduction in acne lesions."}},"value_prop_jgmTj3":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-seedling","heading":"Natural Pain Relief","text":"Reduce inflammation and accelerate healing in muscles, joints, and tissues. Perfect for arthritis, sports injuries, and chronic pain without medications."}},"value_prop_7GCkLt":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-circle-notch","heading":"Boost Circulation","text":"Improve blood flow and oxygenation to treated areas. This enhanced circulation brings nutrients to cells and removes toxins more efficiently."}},"value_prop_NeebM7":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-bolt","heading":"Accelerate Wound Healing","text":"Speed up recovery from surgery, injuries, or wounds by up to 50%. Red light therapy enhances cellular energy production for faster tissue repair."}},"value_prop_7WxYrr":{"type":"value_prop","settings":{"icon_type":"fontawesome","icon_class":"fas fa-face-smile-beam","heading":"Zero Downtime","text":"Completely non-invasive with no recovery time needed. Relax during your 30-minute session and return to normal activities immediately."}}},"block_order":["value_prop_i7yChD","value_prop_TXi4QK","value_prop_jgmTj3","value_prop_7GCkLt","value_prop_NeebM7","value_prop_7WxYrr"],"name":"Flexible Value Props","settings":{"main_heading":"Transform Your Skin & Body at the Cellular Level","main_subheading":"Benefits of Red Light Therapy","grid_columns":3,"background_opacity":20,"background_size":"cover","background_position_x":50,"background_position_y":50,"section_background":"#e9dcf2","section_padding":60,"max_width":1200,"grid_gap":30,"header_spacing":50,"text_alignment":"center","heading_color":"#000000","heading_size":42,"heading_weight":"600","heading_transform":"none","subheading_color":"#333333","subheading_size":20,"subheading_weight":"400","subheading_transform":"uppercase","prop_heading_color":"#000000","prop_heading_size":22,"prop_heading_weight":"600","prop_text_color":"#666666","prop_text_size":15,"item_background":"rgba(0,0,0,0)","item_padding":20,"item_border_radius":0,"item_shadow":false,"item_hover_effect":false,"show_icons":true,"icon_size":15,"icon_color":"#594268","mobile_heading_size":32,"mobile_subheading_size":16,"mobile_prop_heading_size":18,"mobile_prop_text_size":16,"mobile_icon_size":20,"mobile_item_padding":15,"enable_animation":true,"animation_duration":600,"animation_delay":300}},"sl_marquee_RR7r88":{"type":"sl-marquee","blocks":{"text_EjamFt":{"type":"text","settings":{"new_text":"RED LIGHT THERAPY TREATMENTS"}}},"block_order":["text_EjamFt"],"name":"Marquee","settings":{"colorBackground":"#846599","colorText":"#ffffff","link":"","marquee_height":46,"font_size":18,"marquee_speed":21}},"sl_services_menu_tPA8Ja":{"type":"sl-services-menu","blocks":{"service_item_Cp6frF":{"type":"service_item","name":"ANTI-AGING & SKIN REJUVENATION","settings":{"service_name":"RED LIGHT THERAPY","add_line":true,"service_extra":"Single Session","service_price":"60","show_button":true,"button_text":"BOOK NOW","button_link":"https:\/\/booking.mangomint.com\/314399","service_description":"<p>Get LED Light Therapy as a stand alone service!<br\/><br\/>Cleanse • 30 Minutes of LED Light Therapy • Moisturize or SPF<br\/><br\/>LED light therapy wavelengths penetrate deeply and provides cells with energy to restore. <br\/><br\/>LED is beneficial for <br\/>- Wrinkles & Fine Lines<br\/>- Circulation<br\/>- Inflammation <br\/>- & Inflamed Acne <br\/><br\/>This boost leads to an increase in microcirculation, tissue repair, and helping inflammation. <br\/><br\/>- Stand Alone Service: $60 <br\/>- Enhancement to Facial or Acne Bootcamp Treatment: $50<\/p>"}},"service_item_QJTPke":{"type":"service_item","name":"ACNE CLEARING TREATMENT ","settings":{"service_name":"RED LIGHT THERAPY PACKAGE","add_line":true,"service_extra":"6 Sessions","service_price":"300","show_button":true,"button_text":"BOOK NOW","button_link":"https:\/\/booking.mangomint.com\/314399","service_description":"<p><strong>Save $60 with purchasing the package of 6. <\/strong><\/p><p>Great for targeting fine lines & wrinkles!<\/p><p>You will come in once per week for 6 weeks. <\/p><ul><li>Please arrive makeup free.<\/li><\/ul><p>Treatment:<\/p><ul><li>Cleanse<\/li><li>30 minutes of Red Light Therapy on dry skin.<\/li><li>Then we apply serums & moisturizer onto your skin before you head out the door.<\/li><\/ul><p>*Headphones are welcome<\/p>"}},"service_item_q683fF":{"type":"service_item","name":"Brazilian Waxing","settings":{"service_name":"ADD ON TO FACIAL SERVICE","add_line":true,"service_extra":"*including Acne Bootcamp","service_price":"50","show_button":false,"button_text":"BOOK NOW","button_link":"https:\/\/booking.mangomint.com\/314399","service_description":""}}},"block_order":["service_item_Cp6frF","service_item_QJTPke","service_item_q683fF"],"custom_css":[],"name":"Body Waxing","settings":{"enable_anchor":true,"anchor_id":"treatments","anchor_offset":80,"section_title":"TREATMENT OPTIONS","background_color":"#ffffff","section_padding":40,"max_width":1000,"item_padding":20,"header_color":"#846599","header_size":30,"header_weight":"400","header_text_transform":"uppercase","header_margin":30,"service_name_color":"#000000","service_name_size":18,"service_name_weight":"400","price_color":"#000000","price_size":18,"price_weight":"400","dot_color":"#cccccc","border_color":"#eeeeee","button_background":"#846599","button_text_color":"#ffffff","button_hover_background":"#594268","button_hover_text_color":"#ffffff","button_padding_x":20,"button_padding_y":10,"button_font_size":14,"button_weight":"500","button_text_transform":"uppercase","button_border_radius":0,"toggle_color":"#666666","toggle_hover_color":"#000000","toggle_size":14,"description_color":"#333333","description_size":14,"mobile_header_size":32,"mobile_service_name_size":16,"mobile_price_size":16,"mobile_button_size":13,"mobile_button_padding_x":16,"mobile_button_padding_y":8,"mobile_description_size":13}},"rich_text_MLxMeg":{"type":"rich-text","blocks":{"heading_LhXK7V":{"type":"heading","settings":{"heading":"How To Prepare For LED Light Therapy","heading_size":"h1"}},"text_9TtmJY":{"type":"text","settings":{"text":"<p>Please arrive with clean and makeup free skin.<\/p>"}}},"block_order":["heading_LhXK7V","text_9TtmJY"],"custom_css":["* {background-color: #f7f4ed;}","a {background-color: white; opacity: 100%;}"],"name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"background-1","full_width":true,"padding_top":40,"padding_bottom":52}},"rich_text_UbVpyD":{"type":"rich-text","blocks":{"heading_FV8nUL":{"type":"heading","settings":{"heading":"Fill out The Proper Waiver Before Arrival","heading_size":"h2"}},"button_d4ViGp":{"type":"button","settings":{"button_label":"RED LIGHT WAIVER","button_link":"https:\/\/form.jotform.com\/220666610688058","button_style_secondary":false}}},"block_order":["heading_FV8nUL","button_d4ViGp"],"custom_css":["* {background-color: #f7f4ed;}","a {background-color: white; opacity: 100%;}"],"name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"background-1","full_width":true,"padding_top":40,"padding_bottom":52}},"rich_text_DPyyGi":{"type":"rich-text","blocks":{"heading_BYxTpj":{"type":"heading","settings":{"heading":"The Science Behind Your Results","heading_size":"h1"}},"text_rjLEAL":{"type":"text","settings":{"text":"<p>Red light therapy isn't just trendy - it's backed by over 2,000 peer-reviewed clinical studies<\/p>"}}},"block_order":["heading_BYxTpj","text_rjLEAL"],"name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"background-1","full_width":true,"padding_top":40,"padding_bottom":52}},"sl_split_section_LYw6za":{"type":"sl-split-section","name":"Split Section","settings":{"image":"shopify:\/\/shop_images\/BrandingPhotography-C.Mae-5843.jpg","swap_horizontal":false,"auto_height_desktop":true,"section_height_desktop":35,"auto_height_tablet":true,"section_height_tablet":50,"wrapper_padding":0,"wrapper_padding_tablet":0,"wrapper_padding_mobile":0,"image_position_x":50,"image_position_y":50,"enable_animation":true,"animation_duration":600,"animation_delay":200,"heading":"","subheading":"🔬 Cellular Energy Boost","text":"Red and near-infrared light stimulates mitochondria (your cells' power plants) to produce more ATP energy. This cellular fuel accelerates all healing and regeneration processes.","text2":"","heading_color":"#000000","subheading_color":"#333333","text_color":"#666666","heading_size":32,"subheading_size":24,"text_size":16,"mobile_heading_size":24,"mobile_subheading_size":18,"mobile_text_size":14,"show_button":false,"button_text":"Work With Us →","button_link":"","button_background":"#5f9ea0","button_text_color":"#ffffff","button_hover_background":"#4a7c80","button_hover_text_color":"#ffffff","button_border_radius":0}},"sl_split_section_WCQCJN":{"type":"sl-split-section","custom_css":["* {background-color: #f7f4ed;}"],"name":"Split Section","settings":{"image":"shopify:\/\/shop_images\/BrandingPhotography-C.Mae-6036.jpg","swap_horizontal":true,"auto_height_desktop":true,"section_height_desktop":35,"auto_height_tablet":true,"section_height_tablet":50,"wrapper_padding":0,"wrapper_padding_tablet":0,"wrapper_padding_mobile":0,"image_position_x":50,"image_position_y":75,"enable_animation":true,"animation_duration":600,"animation_delay":200,"heading":"","subheading":"🧬 Collagen Stimulation","text":"Specific wavelengths trigger fibroblasts to produce more collagen and elastin. Studies show up to 31% increase in collagen density after 12 treatments.","text2":"","heading_color":"#000000","subheading_color":"#333333","text_color":"#666666","heading_size":32,"subheading_size":24,"text_size":16,"mobile_heading_size":24,"mobile_subheading_size":18,"mobile_text_size":14,"show_button":false,"button_text":"Work With Us →","button_link":"","button_background":"#5f9ea0","button_text_color":"#ffffff","button_hover_background":"#4a7c80","button_hover_text_color":"#ffffff","button_border_radius":0}},"sl_split_section_3UUAWq":{"type":"sl-split-section","name":"Split Section","settings":{"image":"shopify:\/\/shop_images\/BrandingPhotography-C.Mae-5848.jpg","swap_horizontal":false,"auto_height_desktop":true,"section_height_desktop":35,"auto_height_tablet":true,"section_height_tablet":50,"wrapper_padding":0,"wrapper_padding_tablet":0,"wrapper_padding_mobile":0,"image_position_x":100,"image_position_y":100,"enable_animation":true,"animation_duration":600,"animation_delay":200,"heading":"","subheading":"💊 Anti-Inflammatory Action","text":"Red light reduces pro-inflammatory cytokines while increasing anti-inflammatory proteins. This dual action provides natural pain relief and faster healing.","text2":"","heading_color":"#000000","subheading_color":"#333333","text_color":"#666666","heading_size":32,"subheading_size":24,"text_size":16,"mobile_heading_size":24,"mobile_subheading_size":18,"mobile_text_size":14,"show_button":false,"button_text":"Work With Us →","button_link":"","button_background":"#5f9ea0","button_text_color":"#ffffff","button_hover_background":"#4a7c80","button_hover_text_color":"#ffffff","button_border_radius":0}},"sl_split_section_gqyhqb":{"type":"sl-split-section","custom_css":["* {background-color: #f7f4ed;}"],"name":"Split Section","settings":{"image":"shopify:\/\/shop_images\/BrandingPhotography-C.Mae-5846.jpg","swap_horizontal":true,"auto_height_desktop":true,"section_height_desktop":35,"auto_height_tablet":true,"section_height_tablet":50,"wrapper_padding":0,"wrapper_padding_tablet":0,"wrapper_padding_mobile":0,"image_position_x":50,"image_position_y":50,"enable_animation":true,"animation_duration":600,"animation_delay":200,"heading":"","subheading":"🦠 Antimicrobial Effects","text":"Blue light (415nm) destroys P. acnes bacteria by activating porphyrins that damage bacterial cell walls. Studies show 70-80% reduction in acne lesions.","text2":"","heading_color":"#000000","subheading_color":"#333333","text_color":"#666666","heading_size":32,"subheading_size":24,"text_size":16,"mobile_heading_size":24,"mobile_subheading_size":18,"mobile_text_size":14,"show_button":false,"button_text":"Work With Us →","button_link":"","button_background":"#5f9ea0","button_text_color":"#ffffff","button_hover_background":"#4a7c80","button_hover_text_color":"#ffffff","button_border_radius":0}},"testimonials_carousel_kK49RM":{"type":"testimonials-carousel","blocks":{"testimonial_LWteyz":{"type":"testimonial","settings":{"testimonial_text":"Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident.","author_name":"Sarah Johnson","author_title":"Verified Buyer","show_rating":true,"rating":5,"show_date":false,"testimonial_date":"October 2024"}},"testimonial_WXDiQD":{"type":"testimonial","settings":{"testimonial_text":"Amazing results! My skin has never looked better. The personalized approach really makes a difference.","author_name":"Sarah Johnson","author_title":"Verified Buyer","show_rating":true,"rating":5,"show_date":false,"testimonial_date":"October 2024"}},"testimonial_r6Eapb":{"type":"testimonial","settings":{"testimonial_text":"Professional, knowledgeable, and caring. I trust her completely with my skincare routine.","author_name":"Sarah Johnson","author_title":"Verified Buyer","show_rating":true,"rating":5,"show_date":false,"testimonial_date":"October 2024"}}},"block_order":["testimonial_LWteyz","testimonial_WXDiQD","testimonial_r6Eapb"],"name":"Testimonials Carousel","settings":{"section_title":"Client Results","section_subtitle":"Real reviews from real people","section_background":"#f8f8f8","section_padding":60,"heading_color":"#000000","heading_size":36,"heading_weight":"600","heading_transform":"none","subheading_color":"#666666","header_spacing":40,"scroll_speed":30,"scroll_direction":"left","pause_on_hover":true,"disable_auto_scroll_mobile":true,"enable_fade":true,"fade_width":10,"testimonial_width":350,"tablet_testimonial_width":300,"mobile_testimonial_width":280,"testimonial_gap":30,"card_background":"#ffffff","card_padding":30,"mobile_card_padding":20,"card_radius":12,"card_shadow":true,"shadow_x":0,"shadow_y":2,"shadow_blur":10,"shadow_spread":0,"shadow_color":"#0000001a","card_border":false,"border_width":1,"border_color":"#e0e0e0","card_hover_effect":true,"show_quotes":true,"quote_color":"#cccccc","italic_text":false,"text_color":"#333333","text_size":16,"mobile_text_size":15,"star_size":18,"star_color":"#ffc107","empty_star_color":"#e0e0e0","show_divider":true,"divider_color":"#eeeeee","avatar_size":45,"avatar_radius":50,"show_placeholder_avatar":true,"placeholder_avatar_bg":"#e0e0e0","placeholder_avatar_text":"#666666","author_color":"#000000","author_size":16,"mobile_author_size":14,"title_color":"#000000","title_size":14,"date_color":"#999999","mobile_heading_size":28,"show_scroll_indicators":false,"indicator_color":"#000000","indicator_bg":"#cccccc"}},"main":{"type":"main-page","disabled":true,"settings":{"page_full_width":false,"page_full_width_spacing":false,"padding_top":100,"padding_bottom":40}},"sl_custom_faq_r7Q6ht":{"type":"sl-custom-faq","blocks":{"faq_item_qjMHfp":{"type":"faq_item","settings":{"question":"Is red light therapy actually proven to work?","answer":"<p>Absolutely! Red light therapy is backed by over 2,000 peer-reviewed clinical studies published in major medical journals. NASA originally developed it for wound healing in space. The FDA has cleared it for multiple conditions including acne, wrinkles, pain, and wound healing. This isn't pseudoscience - it's proven medical technology used in hospitals and clinics worldwide.<\/p>"}},"faq_item_PzXEKn":{"type":"faq_item","settings":{"question":"How quickly will I see results?","answer":"<p>Results vary by condition and individual, but most clients notice initial improvements within 2-4 sessions. For acne, you may see reduction in active breakouts within a week. Anti-aging benefits like improved skin texture typically appear around week 3-4. Pain relief can be immediate for some, while others need 6-8 sessions. Maximum results usually occur after completing a full treatment series of 12-20 sessions.<\/p>"}},"faq_item_GmWhMf":{"type":"faq_item","settings":{"question":"Is it safe? Are there any side effects?","answer":"<p>Red light therapy is one of the safest treatments available with zero reported side effects when used properly. It's non-invasive, painless, and requires no recovery time. The wavelengths we use don't contain harmful UV rays and won't damage your skin. It's safe for all skin types, pregnant women (though we recommend consulting your doctor), and can even be used daily.<\/p>"}},"faq_item_PGh67J":{"type":"faq_item","settings":{"question":"How is this different from red light devices I can buy online?","answer":"<p>Professional-grade equipment like our Celluma panels deliver therapeutic doses of light at precisely calibrated wavelengths with sufficient power density. Home devices typically have 10-20% of the power output, single wavelengths, and rigid designs that don't conform to your body. Our panels combine three therapeutic wavelengths simultaneously and flex to maintain optimal distance from every treatment area. Plus, you get professional guidance on treatment protocols specific to your needs.<\/p>"}},"faq_item_XkqtLR":{"type":"faq_item","settings":{"question":"What does a treatment session feel like?","answer":"<p>It's incredibly relaxing! You'll lie comfortably while the LED panel is positioned over your treatment area. You'll feel gentle warmth but no heat or discomfort. Many clients describe it as meditation-like and some even fall asleep. There's no pain, no downtime, and you can return to normal activities immediately. Each session lasts 30 minutes, and you can even apply makeup or skincare products right after.<\/p>"}},"faq_item_P6KPXe":{"type":"faq_item","settings":{"question":"Can I combine red light therapy with other treatments?","answer":"<p>Yes! Red light therapy actually enhances the results of many other treatments. It's excellent after facials that include extractions to reduce inflammation and boost product absorption, or following chemical peels to accelerate healing. Many clients add it to their regular facial or waxing appointments. We can also combine it with your existing skincare routine - the increased circulation helps products penetrate deeper for better results.<\/p>"}}},"block_order":["faq_item_qjMHfp","faq_item_PzXEKn","faq_item_GmWhMf","faq_item_PGh67J","faq_item_XkqtLR","faq_item_P6KPXe"],"name":"FAQ Section","settings":{"enable_anchor":false,"anchor_id":"faq","anchor_offset":80,"section_title":"Frequently Asked Questions","section_subtitle":"Find answers to common questions","header_alignment":"center","background_color":"#e9dcf2","section_padding":40,"max_width":900,"show_toggle_button":true,"default_open":false,"allow_multiple":true,"header_color":"#000000","header_size":32,"header_weight":"600","header_text_transform":"none","header_margin":40,"subheader_color":"#666666","subheader_size":16,"question_color":"#000000","question_size":18,"question_weight":"500","answer_color":"#333333","answer_size":16,"item_padding":25,"border_color":"#846599","toggle_color":"#666666","toggle_hover_color":"#000000","mobile_header_size":26,"mobile_subheader_size":16,"mobile_question_size":18,"mobile_answer_size":16,"mobile_item_padding":20,"enable_animation":false,"animation_duration":500,"animation_delay":50}}},"order":["sl_scrapbook_hero_UnqQ3Y","sl_flexible_list_mxjCPF","sl_split_section_YNApNE","sl_flexible_list_yEnKh7","sl_marquee_RR7r88","sl_services_menu_tPA8Ja","rich_text_MLxMeg","rich_text_UbVpyD","rich_text_DPyyGi","sl_split_section_LYw6za","sl_split_section_WCQCJN","sl_split_section_3UUAWq","sl_split_section_gqyhqb","testimonials_carousel_kK49RM","main","sl_custom_faq_r7Q6ht"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "sl_scrapbook_hero_UnqQ3Y": {
+      "type": "sl-scrapbook-hero",
+      "name": "Scrapbook Hero",
+      "settings": {
+        "subheading": "Experience clinically proven LED therapy in McHenry for anti-aging, acne treatment, pain relief & accelerated healing",
+        "heading": "Red Light Therapy goes <em>deeper</em> than your skincare can reach.",
+        "top_left_image": "shopify://shop_images/BrandingPhotography-C.Mae-5850.jpg",
+        "center_image": "shopify://shop_images/BrandingPhotography-C.Mae-5843.jpg",
+        "bottom_right_image": "shopify://shop_images/BrandingPhotography-C.Mae-5848.jpg",
+        "corner_image_position_x": 50,
+        "corner_image_position_y": 50,
+        "center_image_position_x": 50,
+        "center_image_position_y": 50,
+        "corner_image_border_radius": 0,
+        "center_image_border_radius": 0,
+        "show_button": true,
+        "button_text": "BOOK RED LIGHT THERAPY HERE",
+        "button_link": "https://booking.mangomint.com/314399",
+        "button_background": "#594268",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#3c2b48",
+        "button_hover_text_color": "#ffffff",
+        "button_font_size": 16,
+        "button_border_radius": 0,
+        "background_color": "#846599",
+        "heading_color": "#ffffff",
+        "subheading_color": "#ffffff",
+        "heading_size": 40,
+        "subheading_size": 16,
+        "heading_weight": "700",
+        "subheading_weight": "400",
+        "subheading_letter_spacing": 1,
+        "heading_line_height": "1.4",
+        "mobile_section_height": 80,
+        "tablet_heading_size": 30,
+        "mobile_heading_size": 30,
+        "mobile_subheading_size": 16,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 300
+      }
+    },
+    "sl_flexible_list_mxjCPF": {
+      "type": "sl-flexible-list",
+      "blocks": {
+        "value_prop_HA8Xk4": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-face-sad-tear",
+            "heading": "Expensive Skincare Isn't Working",
+            "text": "You've invested hundreds in serums and creams, but they only treat the surface. Fine lines, wrinkles, and dullness persist because topical products can't reach the deeper layers where real change happens."
+          }
+        },
+        "value_prop_YKYRkK": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-plant-wilt",
+            "heading": "Looking Tired & Aged",
+            "text": "Dark circles, sagging skin, and loss of elasticity make you look older than you feel. You want to stimulate collagen naturally without invasive procedures or downtime."
+          }
+        },
+        "value_prop_x97neW": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-face-grimace",
+            "heading": "Slow Healing & Recovery",
+            "text": "Wounds, surgical scars, or injuries are taking forever to heal. Your body needs help accelerating its natural repair processes, but you don't know where to turn for safe, effective treatment."
+          }
+        }
+      },
+      "block_order": [
+        "value_prop_HA8Xk4",
+        "value_prop_YKYRkK",
+        "value_prop_x97neW"
+      ],
+      "name": "Flexible List",
+      "settings": {
+        "main_heading": "Still Struggling Despite Your Best Efforts?",
+        "main_subheading": "Experience McHenry's most trusted red light therapy service where you can safely improve your skin",
+        "grid_columns": 3,
+        "background_image": "shopify://shop_images/BrandingPhotography-C.Mae-5852.jpg",
+        "background_opacity": 85,
+        "background_size": "cover",
+        "background_position_x": 50,
+        "background_position_y": 50,
+        "section_background": "#1a1a1a",
+        "section_padding": 60,
+        "max_width": 1200,
+        "grid_gap": 30,
+        "header_spacing": 50,
+        "text_alignment": "center",
+        "heading_color": "#ffffff",
+        "heading_size": 42,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#ffffff",
+        "subheading_size": 16,
+        "subheading_weight": "400",
+        "subheading_transform": "none",
+        "prop_heading_color": "#ffffff",
+        "prop_heading_size": 22,
+        "prop_heading_weight": "600",
+        "prop_text_color": "#ffffff",
+        "prop_text_size": 15,
+        "item_background": "rgba(0,0,0,0)",
+        "item_padding": 20,
+        "item_border_radius": 0,
+        "item_shadow": false,
+        "item_hover_effect": false,
+        "show_icons": false,
+        "icon_size": 15,
+        "icon_color": "#ffffff",
+        "mobile_heading_size": 32,
+        "mobile_subheading_size": 16,
+        "mobile_prop_heading_size": 18,
+        "mobile_prop_text_size": 14,
+        "mobile_icon_size": 50,
+        "mobile_item_padding": 15,
+        "enable_animation": true,
+        "animation_duration": 700,
+        "animation_delay": 300
+      }
+    },
+    "sl_image_text_overlap_j4w7C9": {
+      "type": "sl-image-text-overlap",
+      "blocks": {
+        "subheading_tLPXqE": {
+          "type": "subheading",
+          "settings": {
+            "text": "McHenry's Premier Red Light Therapy Center"
+          }
+        },
+        "heading_HQFeYM": {
+          "type": "heading",
+          "settings": {
+            "text": "Using FDA-cleared Celluma LED panels, we're bringing medical-grade healing technology to McHenry.",
+            "size": "h1"
+          }
+        },
+        "text_q3xp78": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Why Our Red Light Therapy Is Different:<br/><br/>✓ FDA-cleared Celluma panels - the gold standard in LED therapy<br/>✓ Clinically proven wavelengths for maximum effectiveness<br/>✓ Certified practitioner with advanced LED therapy training<br/>✓ Customized treatment protocols for your specific needs<br/>✓ Comfortable, spa-like environment for relaxation<br/>✓ Proven results backed by over 2,000 clinical studies</p>"
+          }
+        },
+        "button_qin3qz": {
+          "type": "button",
+          "settings": {
+            "text": "see our red light treatment options ↓",
+            "link": "#services",
+            "style": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_tLPXqE",
+        "heading_HQFeYM",
+        "text_q3xp78",
+        "button_qin3qz"
+      ],
+      "name": "EWM Image + Text Overlap",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C.Mae-5848.jpg",
+        "image_position": "left",
+        "desktop_height": 550,
+        "mobile_height": 350,
+        "image_fit": "cover",
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "image_width": 2,
+        "content_width": 2,
+        "overlap_amount": 80,
+        "vertical_inset": 30,
+        "spread_content": false,
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "enable_scroll_text": false,
+        "scroll_text": "MEET YOUR ESTHETICIAN",
+        "scroll_font_size": 100,
+        "scroll_text_color": "#c4a882",
+        "scroll_text_padding": 20,
+        "scroll_overlap": 40,
+        "scroll_speed": 20,
+        "enable_anchor": false,
+        "anchor_id": "",
+        "scroll_offset": 80,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "enable_sticky": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "sl_flexible_list_yEnKh7": {
+      "type": "sl-flexible-list",
+      "blocks": {
+        "value_prop_i7yChD": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-hand-sparkles",
+            "heading": "Reverse Signs of Aging",
+            "text": "Stimulate collagen and elastin production naturally. See visible reduction in fine lines, wrinkles, and age spots while improving skin texture and tone in just 4-6 weeks."
+          }
+        },
+        "value_prop_TXi4QK": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-wand-sparkles",
+            "heading": "Clear Acne at the Source",
+            "text": "Blue light destroys acne-causing bacteria deep in pores while red light reduces inflammation. Clinical studies show up to 80% reduction in acne lesions."
+          }
+        },
+        "value_prop_jgmTj3": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-seedling",
+            "heading": "Natural Pain Relief",
+            "text": "Reduce inflammation and accelerate healing in muscles, joints, and tissues. Perfect for arthritis, sports injuries, and chronic pain without medications."
+          }
+        },
+        "value_prop_7GCkLt": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-circle-notch",
+            "heading": "Boost Circulation",
+            "text": "Improve blood flow and oxygenation to treated areas. This enhanced circulation brings nutrients to cells and removes toxins more efficiently."
+          }
+        },
+        "value_prop_NeebM7": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-bolt",
+            "heading": "Accelerate Wound Healing",
+            "text": "Speed up recovery from surgery, injuries, or wounds by up to 50%. Red light therapy enhances cellular energy production for faster tissue repair."
+          }
+        },
+        "value_prop_7WxYrr": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-face-smile-beam",
+            "heading": "Zero Downtime",
+            "text": "Completely non-invasive with no recovery time needed. Relax during your 30-minute session and return to normal activities immediately."
+          }
+        }
+      },
+      "block_order": [
+        "value_prop_i7yChD",
+        "value_prop_TXi4QK",
+        "value_prop_jgmTj3",
+        "value_prop_7GCkLt",
+        "value_prop_NeebM7",
+        "value_prop_7WxYrr"
+      ],
+      "name": "Flexible Value Props",
+      "settings": {
+        "main_heading": "Transform Your Skin & Body at the Cellular Level",
+        "main_subheading": "Benefits of Red Light Therapy",
+        "grid_columns": 3,
+        "background_opacity": 20,
+        "background_size": "cover",
+        "background_position_x": 50,
+        "background_position_y": 50,
+        "section_background": "#EAE7EC",
+        "section_padding": 60,
+        "max_width": 1200,
+        "grid_gap": 30,
+        "header_spacing": 50,
+        "text_alignment": "center",
+        "heading_color": "#000000",
+        "heading_size": 42,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#333333",
+        "subheading_size": 20,
+        "subheading_weight": "400",
+        "subheading_transform": "uppercase",
+        "prop_heading_color": "#000000",
+        "prop_heading_size": 22,
+        "prop_heading_weight": "600",
+        "prop_text_color": "#666666",
+        "prop_text_size": 15,
+        "item_background": "rgba(0,0,0,0)",
+        "item_padding": 20,
+        "item_border_radius": 0,
+        "item_shadow": false,
+        "item_hover_effect": false,
+        "show_icons": true,
+        "icon_size": 15,
+        "icon_color": "#594268",
+        "mobile_heading_size": 32,
+        "mobile_subheading_size": 16,
+        "mobile_prop_heading_size": 18,
+        "mobile_prop_text_size": 16,
+        "mobile_icon_size": 20,
+        "mobile_item_padding": 15,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 300
+      }
+    },
+    "sl_marquee_RR7r88": {
+      "type": "sl-marquee",
+      "blocks": {
+        "text_EjamFt": {
+          "type": "text",
+          "settings": {
+            "new_text": "RED LIGHT THERAPY TREATMENTS"
+          }
+        }
+      },
+      "block_order": [
+        "text_EjamFt"
+      ],
+      "name": "Marquee",
+      "settings": {
+        "colorBackground": "#846599",
+        "colorText": "#ffffff",
+        "marquee_height": 46,
+        "font_size": 18,
+        "link": "",
+        "marquee_speed": 21
+      }
+    },
+    "sl_services_menu_tPA8Ja": {
+      "type": "sl-services-menu",
+      "blocks": {
+        "service_item_Cp6frF": {
+          "type": "service_item",
+          "name": "ANTI-AGING & SKIN REJUVENATION",
+          "settings": {
+            "service_name": "RED LIGHT THERAPY",
+            "add_line": true,
+            "service_extra": "Single Session",
+            "service_price": "60",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "BOOK NOW",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p>Get LED Light Therapy as a stand alone service!<br/><br/>Cleanse • 30 Minutes of LED Light Therapy • Moisturize or SPF<br/><br/>LED light therapy wavelengths penetrate deeply and provides cells with energy to restore. <br/><br/>LED is beneficial for <br/>- Wrinkles & Fine Lines<br/>- Circulation<br/>- Inflammation <br/>- & Inflamed Acne <br/><br/>This boost leads to an increase in microcirculation, tissue repair, and helping inflammation. <br/><br/>- Stand Alone Service: $60 <br/>- Enhancement to Facial or Acne Bootcamp Treatment: $50</p>"
+          }
+        },
+        "service_item_QJTPke": {
+          "type": "service_item",
+          "name": "ACNE CLEARING TREATMENT ",
+          "settings": {
+            "service_name": "RED LIGHT THERAPY PACKAGE",
+            "add_line": true,
+            "service_extra": "6 Sessions",
+            "service_price": "300",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "BOOK NOW",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p><strong>Save $60 with purchasing the package of 6. </strong></p><p>Great for targeting fine lines & wrinkles!</p><p>You will come in once per week for 6 weeks. </p><ul><li>Please arrive makeup free.</li></ul><p>Treatment:</p><ul><li>Cleanse</li><li>30 minutes of Red Light Therapy on dry skin.</li><li>Then we apply serums & moisturizer onto your skin before you head out the door.</li></ul><p>*Headphones are welcome</p>"
+          }
+        },
+        "service_item_q683fF": {
+          "type": "service_item",
+          "name": "Brazilian Waxing",
+          "settings": {
+            "service_name": "ADD ON TO FACIAL SERVICE",
+            "add_line": true,
+            "service_extra": "*including Acne Bootcamp",
+            "service_price": "50",
+            "is_complimentary": false,
+            "show_button": false,
+            "button_text": "BOOK NOW",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": ""
+          }
+        }
+      },
+      "block_order": [
+        "service_item_Cp6frF",
+        "service_item_QJTPke",
+        "service_item_q683fF"
+      ],
+      "custom_css": [],
+      "name": "Body Waxing",
+      "settings": {
+        "enable_anchor": true,
+        "anchor_id": "treatments",
+        "anchor_offset": 80,
+        "section_title": "TREATMENT OPTIONS",
+        "background_color": "#ffffff",
+        "section_padding": 40,
+        "max_width": 1000,
+        "item_padding": 20,
+        "header_color": "#846599",
+        "header_size": 30,
+        "header_weight": "400",
+        "header_text_transform": "uppercase",
+        "header_margin": 30,
+        "service_name_color": "#000000",
+        "service_name_size": 18,
+        "service_name_weight": "400",
+        "price_color": "#000000",
+        "price_size": 18,
+        "price_weight": "400",
+        "dot_color": "#cccccc",
+        "border_color": "#eeeeee",
+        "button_background": "#846599",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#594268",
+        "button_hover_text_color": "#ffffff",
+        "button_padding_x": 20,
+        "button_padding_y": 10,
+        "button_font_size": 14,
+        "button_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_border_radius": 0,
+        "toggle_color": "#666666",
+        "toggle_hover_color": "#000000",
+        "toggle_size": 14,
+        "description_color": "#333333",
+        "description_size": 14,
+        "mobile_header_size": 32,
+        "mobile_service_name_size": 16,
+        "mobile_price_size": 16,
+        "mobile_button_size": 13,
+        "mobile_button_padding_x": 16,
+        "mobile_button_padding_y": 8,
+        "mobile_description_size": 13
+      }
+    },
+    "rich_text_MLxMeg": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_LhXK7V": {
+          "type": "heading",
+          "settings": {
+            "heading": "How To Prepare For LED Light Therapy",
+            "heading_size": "h1"
+          }
+        },
+        "text_9TtmJY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Please arrive with clean and makeup free skin.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LhXK7V",
+        "text_9TtmJY"
+      ],
+      "custom_css": [
+        "* {background-color: #f7f4ed;}",
+        "a {background-color: white; opacity: 100%;}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "sl_content_banner_wNBe4Y": {
+      "type": "sl-content-banner",
+      "blocks": {
+        "subheading_bD7DjB": {
+          "type": "subheading",
+          "settings": {
+            "text": "before your appointment"
+          }
+        },
+        "heading_MTdThh": {
+          "type": "heading",
+          "settings": {
+            "text": "How To Prepare For LED Light Therapy",
+            "size": "h0"
+          }
+        },
+        "spacer_FXYiVw": {
+          "type": "spacer",
+          "settings": {
+            "height": 12
+          }
+        },
+        "text_rbnAt6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Please arrive with clean skin and makeup free skin. </p><p>Don't forget to fill out your waiver before your appointment ↓ </p>"
+          }
+        },
+        "button_ky3yRj": {
+          "type": "button",
+          "settings": {
+            "text": "fill out your waiver",
+            "link": "https://form.jotform.com/220666610688058",
+            "style": "secondary",
+            "button_bg_color": "",
+            "button_text_color": "",
+            "button_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_bD7DjB",
+        "heading_MTdThh",
+        "spacer_FXYiVw",
+        "text_rbnAt6",
+        "button_ky3yRj"
+      ],
+      "name": "Content Banner",
+      "settings": {
+        "full_width": true,
+        "content_alignment": "center",
+        "content_max_width": 800,
+        "bg_type": "image",
+        "bg_color": "#1a1612",
+        "bg_image": "shopify://shop_images/BrandingPhotography-C.Mae-5843.jpg",
+        "bg_video_url": "",
+        "overlay_darkness": 40,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "text_color": "#f0e8d8",
+        "subheading_font": "body",
+        "subheading_size": 16,
+        "subheading_weight": "400",
+        "body_font_size": 16,
+        "button_font": "heading",
+        "button_font_size": 14,
+        "button_font_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 10,
+        "button_padding_y": 14,
+        "button_padding_x": 36,
+        "button_border_radius": 0,
+        "button_hover_opacity": 85,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "rich_text_DPyyGi": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_BYxTpj": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Science Behind Your Results",
+            "heading_size": "h1"
+          }
+        },
+        "text_rjLEAL": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Red light therapy isn't just trendy - it's backed by over 2,000 peer-reviewed clinical studies</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BYxTpj",
+        "text_rjLEAL"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "sl_split_section_LYw6za": {
+      "type": "sl-split-section",
+      "name": "Split Section",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C.Mae-5843.jpg",
+        "swap_horizontal": false,
+        "heading": "",
+        "subheading": "🔬 Cellular Energy Boost",
+        "text": "Red and near-infrared light stimulates mitochondria (your cells' power plants) to produce more ATP energy. This cellular fuel accelerates all healing and regeneration processes.",
+        "text2": "",
+        "auto_height_desktop": true,
+        "section_height_desktop": 35,
+        "auto_height_tablet": true,
+        "section_height_tablet": 50,
+        "wrapper_padding": 0,
+        "wrapper_padding_tablet": 0,
+        "wrapper_padding_mobile": 0,
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "heading_color": "#000000",
+        "subheading_color": "#333333",
+        "text_color": "#666666",
+        "heading_size": 32,
+        "subheading_size": 24,
+        "text_size": 16,
+        "mobile_heading_size": 24,
+        "mobile_subheading_size": 18,
+        "mobile_text_size": 14,
+        "show_button": false,
+        "button_text": "Work With Us →",
+        "button_link": "",
+        "button_background": "#5f9ea0",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#4a7c80",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 0
+      }
+    },
+    "sl_split_section_WCQCJN": {
+      "type": "sl-split-section",
+      "custom_css": [
+        "* {background-color: #f7f4ed;}"
+      ],
+      "name": "Split Section",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C.Mae-6036.jpg",
+        "swap_horizontal": true,
+        "heading": "",
+        "subheading": "🧬 Collagen Stimulation",
+        "text": "Specific wavelengths trigger fibroblasts to produce more collagen and elastin. Studies show up to 31% increase in collagen density after 12 treatments.",
+        "text2": "",
+        "auto_height_desktop": true,
+        "section_height_desktop": 35,
+        "auto_height_tablet": true,
+        "section_height_tablet": 50,
+        "wrapper_padding": 0,
+        "wrapper_padding_tablet": 0,
+        "wrapper_padding_mobile": 0,
+        "image_position_x": 50,
+        "image_position_y": 75,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "heading_color": "#000000",
+        "subheading_color": "#333333",
+        "text_color": "#666666",
+        "heading_size": 32,
+        "subheading_size": 24,
+        "text_size": 16,
+        "mobile_heading_size": 24,
+        "mobile_subheading_size": 18,
+        "mobile_text_size": 14,
+        "show_button": false,
+        "button_text": "Work With Us →",
+        "button_link": "",
+        "button_background": "#5f9ea0",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#4a7c80",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 0
+      }
+    },
+    "sl_split_section_3UUAWq": {
+      "type": "sl-split-section",
+      "name": "Split Section",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C.Mae-5848.jpg",
+        "swap_horizontal": false,
+        "heading": "",
+        "subheading": "💊 Anti-Inflammatory Action",
+        "text": "Red light reduces pro-inflammatory cytokines while increasing anti-inflammatory proteins. This dual action provides natural pain relief and faster healing.",
+        "text2": "",
+        "auto_height_desktop": true,
+        "section_height_desktop": 35,
+        "auto_height_tablet": true,
+        "section_height_tablet": 50,
+        "wrapper_padding": 0,
+        "wrapper_padding_tablet": 0,
+        "wrapper_padding_mobile": 0,
+        "image_position_x": 100,
+        "image_position_y": 100,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "heading_color": "#000000",
+        "subheading_color": "#333333",
+        "text_color": "#666666",
+        "heading_size": 32,
+        "subheading_size": 24,
+        "text_size": 16,
+        "mobile_heading_size": 24,
+        "mobile_subheading_size": 18,
+        "mobile_text_size": 14,
+        "show_button": false,
+        "button_text": "Work With Us →",
+        "button_link": "",
+        "button_background": "#5f9ea0",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#4a7c80",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 0
+      }
+    },
+    "sl_split_section_gqyhqb": {
+      "type": "sl-split-section",
+      "custom_css": [
+        "* {background-color: #f7f4ed;}"
+      ],
+      "name": "Split Section",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C.Mae-5846.jpg",
+        "swap_horizontal": true,
+        "heading": "",
+        "subheading": "🦠 Antimicrobial Effects",
+        "text": "Blue light (415nm) destroys P. acnes bacteria by activating porphyrins that damage bacterial cell walls. Studies show 70-80% reduction in acne lesions.",
+        "text2": "",
+        "auto_height_desktop": true,
+        "section_height_desktop": 35,
+        "auto_height_tablet": true,
+        "section_height_tablet": 50,
+        "wrapper_padding": 0,
+        "wrapper_padding_tablet": 0,
+        "wrapper_padding_mobile": 0,
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "heading_color": "#000000",
+        "subheading_color": "#333333",
+        "text_color": "#666666",
+        "heading_size": 32,
+        "subheading_size": 24,
+        "text_size": 16,
+        "mobile_heading_size": 24,
+        "mobile_subheading_size": 18,
+        "mobile_text_size": 14,
+        "show_button": false,
+        "button_text": "Work With Us →",
+        "button_link": "",
+        "button_background": "#5f9ea0",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#4a7c80",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 0
+      }
+    },
+    "testimonials_carousel_kK49RM": {
+      "type": "testimonials-carousel",
+      "blocks": {
+        "testimonial_LWteyz": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_WXDiQD": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Amazing results! My skin has never looked better. The personalized approach really makes a difference.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        },
+        "testimonial_r6Eapb": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "Professional, knowledgeable, and caring. I trust her completely with my skincare routine.",
+            "author_name": "Sarah Johnson",
+            "author_title": "Verified Buyer",
+            "show_rating": true,
+            "rating": 5,
+            "show_date": false,
+            "testimonial_date": "October 2024"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_LWteyz",
+        "testimonial_WXDiQD",
+        "testimonial_r6Eapb"
+      ],
+      "name": "Testimonials Carousel",
+      "settings": {
+        "section_title": "",
+        "section_subtitle": "",
+        "section_background": "#f8f8f8",
+        "section_padding": 60,
+        "heading_color": "#000000",
+        "heading_size": 36,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#666666",
+        "header_spacing": 40,
+        "scroll_speed": 30,
+        "scroll_direction": "left",
+        "pause_on_hover": true,
+        "disable_auto_scroll_mobile": true,
+        "enable_fade": true,
+        "fade_width": 10,
+        "testimonial_width": 350,
+        "tablet_testimonial_width": 300,
+        "mobile_testimonial_width": 280,
+        "testimonial_gap": 30,
+        "card_background": "#ffffff",
+        "card_padding": 30,
+        "mobile_card_padding": 20,
+        "card_radius": 12,
+        "card_shadow": true,
+        "shadow_x": 0,
+        "shadow_y": 2,
+        "shadow_blur": 10,
+        "shadow_spread": 0,
+        "shadow_color": "#0000001a",
+        "card_border": false,
+        "border_width": 1,
+        "border_color": "#e0e0e0",
+        "card_hover_effect": true,
+        "show_quotes": true,
+        "quote_color": "#cccccc",
+        "italic_text": false,
+        "text_color": "#333333",
+        "text_size": 16,
+        "mobile_text_size": 15,
+        "star_size": 18,
+        "star_color": "#ffc107",
+        "empty_star_color": "#e0e0e0",
+        "show_divider": true,
+        "divider_color": "#eeeeee",
+        "avatar_size": 45,
+        "avatar_radius": 50,
+        "show_placeholder_avatar": true,
+        "placeholder_avatar_bg": "#e0e0e0",
+        "placeholder_avatar_text": "#666666",
+        "author_color": "#000000",
+        "author_size": 16,
+        "mobile_author_size": 14,
+        "title_color": "#000000",
+        "title_size": 14,
+        "date_color": "#999999",
+        "mobile_heading_size": 28,
+        "show_scroll_indicators": false,
+        "indicator_color": "#000000",
+        "indicator_bg": "#cccccc"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "page_full_width": false,
+        "page_full_width_spacing": false,
+        "padding_top": 100,
+        "padding_bottom": 40
+      }
+    },
+    "sl_custom_faq_r7Q6ht": {
+      "type": "sl-custom-faq",
+      "blocks": {
+        "faq_item_qjMHfp": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is red light therapy actually proven to work?",
+            "answer": "<p>Absolutely! Red light therapy is backed by over 2,000 peer-reviewed clinical studies published in major medical journals. NASA originally developed it for wound healing in space. The FDA has cleared it for multiple conditions including acne, wrinkles, pain, and wound healing. This isn't pseudoscience - it's proven medical technology used in hospitals and clinics worldwide.</p>"
+          }
+        },
+        "faq_item_PzXEKn": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How quickly will I see results?",
+            "answer": "<p>Results vary by condition and individual, but most clients notice initial improvements within 2-4 sessions. For acne, you may see reduction in active breakouts within a week. Anti-aging benefits like improved skin texture typically appear around week 3-4. Pain relief can be immediate for some, while others need 6-8 sessions. Maximum results usually occur after completing a full treatment series of 12-20 sessions.</p>"
+          }
+        },
+        "faq_item_GmWhMf": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is it safe? Are there any side effects?",
+            "answer": "<p>Red light therapy is one of the safest treatments available with zero reported side effects when used properly. It's non-invasive, painless, and requires no recovery time. The wavelengths we use don't contain harmful UV rays and won't damage your skin. It's safe for all skin types, pregnant women (though we recommend consulting your doctor), and can even be used daily.</p>"
+          }
+        },
+        "faq_item_PGh67J": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How is this different from red light devices I can buy online?",
+            "answer": "<p>Professional-grade equipment like our Celluma panels deliver therapeutic doses of light at precisely calibrated wavelengths with sufficient power density. Home devices typically have 10-20% of the power output, single wavelengths, and rigid designs that don't conform to your body. Our panels combine three therapeutic wavelengths simultaneously and flex to maintain optimal distance from every treatment area. Plus, you get professional guidance on treatment protocols specific to your needs.</p>"
+          }
+        },
+        "faq_item_XkqtLR": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What does a treatment session feel like?",
+            "answer": "<p>It's incredibly relaxing! You'll lie comfortably while the LED panel is positioned over your treatment area. You'll feel gentle warmth but no heat or discomfort. Many clients describe it as meditation-like and some even fall asleep. There's no pain, no downtime, and you can return to normal activities immediately. Each session lasts 30 minutes, and you can even apply makeup or skincare products right after.</p>"
+          }
+        },
+        "faq_item_P6KPXe": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I combine red light therapy with other treatments?",
+            "answer": "<p>Yes! Red light therapy actually enhances the results of many other treatments. It's excellent after facials that include extractions to reduce inflammation and boost product absorption, or following chemical peels to accelerate healing. Many clients add it to their regular facial or waxing appointments. We can also combine it with your existing skincare routine - the increased circulation helps products penetrate deeper for better results.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_qjMHfp",
+        "faq_item_PzXEKn",
+        "faq_item_GmWhMf",
+        "faq_item_PGh67J",
+        "faq_item_XkqtLR",
+        "faq_item_P6KPXe"
+      ],
+      "name": "FAQ Section",
+      "settings": {
+        "enable_anchor": false,
+        "anchor_id": "faq",
+        "anchor_offset": 80,
+        "section_title": "Frequently Asked Questions",
+        "section_subtitle": "Find answers to common questions",
+        "header_alignment": "center",
+        "background_color": "#FFFFFF",
+        "section_padding": 40,
+        "max_width": 900,
+        "show_toggle_button": true,
+        "default_open": false,
+        "allow_multiple": true,
+        "header_color": "#000000",
+        "header_size": 32,
+        "header_weight": "600",
+        "header_text_transform": "none",
+        "header_margin": 40,
+        "subheader_color": "#666666",
+        "subheader_size": 16,
+        "question_color": "#000000",
+        "question_size": 18,
+        "question_weight": "500",
+        "answer_color": "#333333",
+        "answer_size": 16,
+        "item_padding": 25,
+        "border_color": "#846599",
+        "toggle_color": "#666666",
+        "toggle_hover_color": "#000000",
+        "mobile_header_size": 26,
+        "mobile_subheader_size": 16,
+        "mobile_question_size": 18,
+        "mobile_answer_size": 16,
+        "mobile_item_padding": 20,
+        "enable_animation": false,
+        "animation_duration": 500,
+        "animation_delay": 50
+      }
+    }
+  },
+  "order": [
+    "sl_scrapbook_hero_UnqQ3Y",
+    "sl_flexible_list_mxjCPF",
+    "sl_image_text_overlap_j4w7C9",
+    "sl_flexible_list_yEnKh7",
+    "sl_marquee_RR7r88",
+    "sl_services_menu_tPA8Ja",
+    "rich_text_MLxMeg",
+    "sl_content_banner_wNBe4Y",
+    "rich_text_DPyyGi",
+    "sl_split_section_LYw6za",
+    "sl_split_section_WCQCJN",
+    "sl_split_section_3UUAWq",
+    "sl_split_section_gqyhqb",
+    "testimonials_carousel_kK49RM",
+    "main",
+    "sl_custom_faq_r7Q6ht"
+  ]
+}
