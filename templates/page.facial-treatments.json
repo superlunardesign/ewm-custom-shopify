@@ -1190,6 +1190,83 @@
         "animation_duration": 500,
         "animation_delay": 50
       }
+    },
+    "sl_content_banner_z8aDrK": {
+      "type": "sl-content-banner",
+      "blocks": {
+        "subheading_aniGjh": {
+          "type": "subheading",
+          "settings": {
+            "text": "READY?"
+          }
+        },
+        "heading_z6WBTA": {
+          "type": "heading",
+          "settings": {
+            "text": "Treat Your Skin and Reach Your Complexion Goals",
+            "size": "h0"
+          }
+        },
+        "spacer_fpEDHi": {
+          "type": "spacer",
+          "settings": {
+            "height": 12
+          }
+        },
+        "text_fiqBCn": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_PKaHTm": {
+          "type": "button",
+          "settings": {
+            "text": "BOOK A FACIAL HERE",
+            "link": "https://booking.mangomint.com/314399",
+            "style": "secondary",
+            "button_bg_color": "",
+            "button_text_color": "",
+            "button_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_aniGjh",
+        "heading_z6WBTA",
+        "spacer_fpEDHi",
+        "text_fiqBCn",
+        "button_PKaHTm"
+      ],
+      "name": "Content Banner",
+      "settings": {
+        "full_width": true,
+        "content_alignment": "center",
+        "content_max_width": 800,
+        "bg_type": "image",
+        "bg_color": "#1a1612",
+        "bg_image": "shopify://shop_images/BrandingPhotography-C_Mae-5644.jpg",
+        "bg_video_url": "",
+        "overlay_darkness": 80,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "text_color": "#f0e8d8",
+        "subheading_font": "body",
+        "subheading_size": 16,
+        "subheading_weight": "400",
+        "body_font_size": 16,
+        "button_font": "heading",
+        "button_font_size": 14,
+        "button_font_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 10,
+        "button_padding_y": 14,
+        "button_padding_x": 36,
+        "button_border_radius": 0,
+        "button_hover_opacity": 85,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
@@ -1208,6 +1285,7 @@
     "sl_flexible_list_mMk3PN",
     "sl_content_banner_rhVR7D",
     "main",
-    "sl_custom_faq_r7Q6ht"
+    "sl_custom_faq_r7Q6ht",
+    "sl_content_banner_z8aDrK"
   ]
 }
