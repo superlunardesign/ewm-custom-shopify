@@ -1,0 +1,774 @@
+{% comment %}
+  EWM Resource Portal
+  Tabbed download section with inline PDF viewer
+{% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .sl-rp {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-rp {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="sl-rp" style="background-color: {{ section.settings.bg_color }};">
+
+  {% if section.settings.heading != blank %}
+    <div class="sl-rp__header">
+      <h2 class="sl-rp__heading {{ section.settings.heading_size }}" style="color: {{ section.settings.heading_color }};">
+        {{ section.settings.heading }}
+      </h2>
+    </div>
+  {% endif %}
+
+  <nav class="sl-rp__tabs" aria-label="Resource tabs">
+    <button class="sl-rp__tab sl-rp__tab--active" data-sl-rp-tab="1" data-section="{{ section.id }}">
+      {{ section.settings.tab_1_label | default: 'Downloads' }}
+    </button>
+    {% if section.settings.tab_2_label != blank %}
+      <button class="sl-rp__tab" data-sl-rp-tab="2" data-section="{{ section.id }}">
+        {{ section.settings.tab_2_label }}
+      </button>
+    {% endif %}
+    {% if section.settings.tab_3_label != blank %}
+      {% if section.settings.tab_3_link != blank %}
+        <a href="{{ section.settings.tab_3_link }}" class="sl-rp__tab">
+          {{ section.settings.tab_3_label }}
+        </a>
+      {% else %}
+        <button class="sl-rp__tab" data-sl-rp-tab="3" data-section="{{ section.id }}">
+          {{ section.settings.tab_3_label }}
+        </button>
+      {% endif %}
+    {% endif %}
+  </nav>
+
+  <div class="sl-rp__content">
+    {% for tab_num in (1..3) %}
+      <div class="sl-rp__panel{% if tab_num == 1 %} sl-rp__panel--active{% endif %}" data-sl-rp-panel="{{ tab_num }}" data-section="{{ section.id }}">
+        <div class="sl-rp__grid">
+          {% for block in section.blocks %}
+            {% assign block_tab = block.settings.tab | plus: 0 %}
+            {% if block_tab == tab_num %}
+              <div class="sl-rp__card" {{ block.shopify_attributes }}>
+                <button
+                  class="sl-rp__card-btn"
+                  data-sl-rp-open
+                  data-pdf-url="{{ block.settings.file_url }}"
+                  data-pdf-title="{{ block.settings.title | escape }}"
+                  data-section="{{ section.id }}"
+                  type="button"
+                >
+                  <span class="sl-rp__card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="16" y1="13" x2="8" y2="13"></line>
+                      <line x1="16" y1="17" x2="8" y2="17"></line>
+                      <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                  </span>
+                  <span class="sl-rp__card-info">
+                    <span class="sl-rp__card-title">{{ block.settings.title }}</span>
+                    {% if block.settings.description != blank %}
+                      <span class="sl-rp__card-desc">{{ block.settings.description }}</span>
+                    {% endif %}
+                  </span>
+                  <span class="sl-rp__card-arrow">&rarr;</span>
+                </button>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{%- comment -%} PDF Viewer Modal {%- endcomment -%}
+<div class="sl-rp__modal" data-sl-rp-modal data-section="{{ section.id }}" aria-hidden="true">
+  <div class="sl-rp__modal-backdrop" data-sl-rp-close data-section="{{ section.id }}"></div>
+  <div class="sl-rp__modal-dialog">
+    <div class="sl-rp__modal-header">
+      <h3 class="sl-rp__modal-title" data-sl-rp-modal-title></h3>
+      <div class="sl-rp__modal-actions">
+        <button type="button" class="sl-rp__modal-action" data-sl-rp-print data-section="{{ section.id }}" title="Print">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+        </button>
+        <a class="sl-rp__modal-action" data-sl-rp-download data-section="{{ section.id }}" title="Download" download>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </a>
+        <button type="button" class="sl-rp__modal-action" data-sl-rp-close data-section="{{ section.id }}" title="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="sl-rp__modal-body">
+      <iframe class="sl-rp__modal-iframe" data-sl-rp-iframe data-section="{{ section.id }}"></iframe>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Section ── */
+  #shopify-section-{{ section.id }} .sl-rp {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__header {
+    text-align: center;
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding: 0 1.5rem 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    line-height: 1.15;
+    margin: 0 0 2rem;
+  }
+
+  /* ── Tabs ── */
+  #shopify-section-{{ section.id }} .sl-rp__tabs {
+    display: flex;
+    background-color: {{ section.settings.tab_bg_color }};
+    margin-bottom: 3rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.4rem 1.5rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font-body-family);
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: {{ section.settings.tab_text_color }};
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: {{ section.settings.tab_active_color }};
+    transition: width 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__tab:hover::after,
+  #shopify-section-{{ section.id }} .sl-rp__tab--active::after {
+    width: 80%;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__tab--active {
+    color: {{ section.settings.tab_active_color }};
+  }
+
+  /* ── Content panels ── */
+  #shopify-section-{{ section.id }} .sl-rp__content {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__panel {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__panel--active {
+    display: block;
+  }
+
+  /* ── Card grid ── */
+  #shopify-section-{{ section.id }} .sl-rp__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ section.settings.card_gap }}px;
+  }
+
+  /* ── Download card ── */
+  #shopify-section-{{ section.id }} .sl-rp__card-btn {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    width: 100%;
+    padding: 1.4rem 1.8rem;
+    border: 1px solid {{ section.settings.card_border_color }};
+    border-radius: {{ section.settings.card_radius }}px;
+    background-color: {{ section.settings.card_bg_color }};
+    cursor: pointer;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card-btn:hover {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card-icon {
+    flex-shrink: 0;
+    color: {{ section.settings.icon_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card-title {
+    font-family: var(--font-body-family);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: {{ section.settings.card_text_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card-desc {
+    font-family: var(--font-body-family);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: {{ section.settings.card_desc_color }};
+    line-height: 1.5;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card-arrow {
+    flex-shrink: 0;
+    font-size: 1.8rem;
+    color: {{ section.settings.card_text_color }};
+    transition: transform 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card-btn:hover .sl-rp__card-arrow {
+    transform: translateX(3px);
+  }
+
+  /* ── Modal ── */
+  #shopify-section-{{ section.id }} .sl-rp__modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__modal[aria-hidden="false"] {
+    display: flex;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__modal-dialog {
+    position: relative;
+    width: 90vw;
+    max-width: 900px;
+    height: 85vh;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.8rem;
+    border-bottom: 1px solid #e5e5e5;
+    background: #fafafa;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__modal-title {
+    font-family: var(--font-body-family);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin: 0;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__modal-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #4a4a4a;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__modal-action:hover {
+    background: #e5e5e5;
+    color: #1a1a1a;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__modal-body {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__modal-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* ── Responsive ── */
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .sl-rp__tabs {
+      flex-direction: column;
+    }
+
+    #shopify-section-{{ section.id }} .sl-rp__tab {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    #shopify-section-{{ section.id }} .sl-rp__tab:last-child {
+      border-bottom: none;
+    }
+
+    #shopify-section-{{ section.id }} .sl-rp__tab::after {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .sl-rp__tab--active {
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    #shopify-section-{{ section.id }} .sl-rp__modal-dialog {
+      width: 95vw;
+      height: 90vh;
+    }
+
+    #shopify-section-{{ section.id }} .sl-rp__modal-title {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-rp__grid {
+      grid-template-columns: repeat({{ section.settings.grid_columns }}, 1fr);
+    }
+
+    #shopify-section-{{ section.id }} .sl-rp__content {
+      padding: 0 3rem;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .sl-rp__content {
+      padding: 0 5rem;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var sectionId = '{{ section.id }}';
+
+    function initTabs() {
+      var tabs = document.querySelectorAll('[data-sl-rp-tab][data-section="' + sectionId + '"]');
+      var panels = document.querySelectorAll('[data-sl-rp-panel][data-section="' + sectionId + '"]');
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var target = this.getAttribute('data-sl-rp-tab');
+          tabs.forEach(function(t) { t.classList.remove('sl-rp__tab--active'); });
+          panels.forEach(function(p) { p.classList.remove('sl-rp__panel--active'); });
+          this.classList.add('sl-rp__tab--active');
+          var panel = document.querySelector('[data-sl-rp-panel="' + target + '"][data-section="' + sectionId + '"]');
+          if (panel) panel.classList.add('sl-rp__panel--active');
+        });
+      });
+    }
+
+    function initModal() {
+      var modal = document.querySelector('[data-sl-rp-modal][data-section="' + sectionId + '"]');
+      var iframe = modal.querySelector('[data-sl-rp-iframe]');
+      var titleEl = modal.querySelector('[data-sl-rp-modal-title]');
+      var downloadBtn = modal.querySelector('[data-sl-rp-download]');
+      var currentUrl = '';
+
+      document.querySelectorAll('[data-sl-rp-open][data-section="' + sectionId + '"]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var url = this.getAttribute('data-pdf-url');
+          var title = this.getAttribute('data-pdf-title');
+          if (!url) return;
+          currentUrl = url;
+          titleEl.textContent = title;
+          iframe.src = url;
+          downloadBtn.href = url;
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      modal.querySelectorAll('[data-sl-rp-close]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          modal.setAttribute('aria-hidden', 'true');
+          iframe.src = '';
+          document.body.style.overflow = '';
+        });
+      });
+
+      modal.querySelector('[data-sl-rp-print]').addEventListener('click', function() {
+        if (iframe.contentWindow) {
+          iframe.contentWindow.focus();
+          iframe.contentWindow.print();
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+          modal.setAttribute('aria-hidden', 'true');
+          iframe.src = '';
+          document.body.style.overflow = '';
+        }
+      });
+    }
+
+    function init() {
+      initTabs();
+      initModal();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    if (typeof Shopify !== 'undefined' && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.detail.sectionId === sectionId) init();
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "EWM Resource Portal",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Resource Portal"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" },
+        { "value": "hxl", "label": "Extra Large" }
+      ],
+      "default": "h0"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#6b7c5e"
+    },
+    {
+      "type": "header",
+      "content": "Tabs"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_label",
+      "label": "Tab 1 Label",
+      "default": "Consultation Downloads"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_label",
+      "label": "Tab 2 Label",
+      "default": "Additional Downloads",
+      "info": "Leave blank to hide"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_label",
+      "label": "Tab 3 Label",
+      "info": "Leave blank to hide. If a link is set below, this tab navigates instead of filtering."
+    },
+    {
+      "type": "url",
+      "id": "tab_3_link",
+      "label": "Tab 3 Link",
+      "info": "If set, Tab 3 becomes a navigation link (e.g. booking page)"
+    },
+    {
+      "type": "color",
+      "id": "tab_bg_color",
+      "label": "Tab Bar Background",
+      "default": "#8c9b6d"
+    },
+    {
+      "type": "color",
+      "id": "tab_text_color",
+      "label": "Tab Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_color",
+      "label": "Active Tab Accent",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "select",
+      "id": "grid_columns",
+      "label": "Columns (Desktop)",
+      "options": [
+        { "value": "1", "label": "1 Column" },
+        { "value": "2", "label": "2 Columns" },
+        { "value": "3", "label": "3 Columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap Between Cards",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border Color",
+      "default": "#d4d4a0"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card Title Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "card_desc_color",
+      "label": "Card Description Color",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "File Icon Color",
+      "default": "#c0392b"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card Corner Radius",
+      "min": 0,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "download",
+      "name": "Download",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Document Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "info": "Optional short description shown below the title"
+        },
+        {
+          "type": "url",
+          "id": "file_url",
+          "label": "File URL",
+          "info": "Upload your PDF in Settings > Files, then paste the link here"
+        },
+        {
+          "type": "select",
+          "id": "tab",
+          "label": "Assign to Tab",
+          "options": [
+            { "value": "1", "label": "Tab 1" },
+            { "value": "2", "label": "Tab 2" },
+            { "value": "3", "label": "Tab 3" }
+          ],
+          "default": "1"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EWM Resource Portal",
+      "category": "Custom",
+      "settings": {
+        "heading": "Acne Bootcamp Portal",
+        "tab_1_label": "Consultation Downloads",
+        "tab_2_label": "Additional Downloads",
+        "tab_3_label": "Book an Appointment",
+        "tab_3_link": ""
+      },
+      "blocks": [
+        {
+          "type": "download",
+          "settings": {
+            "title": "What is Acne?",
+            "tab": "1"
+          }
+        },
+        {
+          "type": "download",
+          "settings": {
+            "title": "Food & Supplements",
+            "tab": "1"
+          }
+        },
+        {
+          "type": "download",
+          "settings": {
+            "title": "Daily Habits Impacting Acne",
+            "tab": "1"
+          }
+        },
+        {
+          "type": "download",
+          "settings": {
+            "title": "Pore Clogging Ingredients",
+            "tab": "1"
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20
+}
+{% endschema %}

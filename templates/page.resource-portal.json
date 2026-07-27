@@ -1,0 +1,88 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "page_full_width": true,
+        "page_full_width_spacing": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "resource_portal": {
+      "type": "sl-resource-portal",
+      "blocks": {
+        "download_1": {
+          "type": "download",
+          "settings": {
+            "title": "What is Acne?",
+            "description": "",
+            "file_url": "",
+            "tab": "1"
+          }
+        },
+        "download_2": {
+          "type": "download",
+          "settings": {
+            "title": "Food & Supplements",
+            "description": "",
+            "file_url": "",
+            "tab": "1"
+          }
+        },
+        "download_3": {
+          "type": "download",
+          "settings": {
+            "title": "Daily Habits Impacting Acne",
+            "description": "",
+            "file_url": "",
+            "tab": "1"
+          }
+        },
+        "download_4": {
+          "type": "download",
+          "settings": {
+            "title": "Pore Clogging Ingredients",
+            "description": "",
+            "file_url": "",
+            "tab": "1"
+          }
+        }
+      },
+      "block_order": [
+        "download_1",
+        "download_2",
+        "download_3",
+        "download_4"
+      ],
+      "settings": {
+        "heading": "Acne Bootcamp Portal",
+        "heading_size": "hxl",
+        "heading_color": "#6b7c5e",
+        "tab_1_label": "Consultation Downloads",
+        "tab_2_label": "Additional Downloads",
+        "tab_3_label": "Book an Appointment",
+        "tab_3_link": "https://booking.mangomint.com/314399",
+        "tab_bg_color": "#8c9b6d",
+        "tab_text_color": "#ffffff",
+        "tab_active_color": "#ffffff",
+        "grid_columns": "1",
+        "card_gap": 12,
+        "card_bg_color": "#ffffff",
+        "card_border_color": "#d4d4a0",
+        "card_text_color": "#1a1a1a",
+        "card_desc_color": "#6b6b6b",
+        "icon_color": "#c0392b",
+        "card_radius": 4,
+        "bg_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "resource_portal"
+  ]
+}
