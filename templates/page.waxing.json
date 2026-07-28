@@ -1057,7 +1057,7 @@
         "heading_weight": "500",
         "heading_transform": "uppercase",
         "price_placement": "button",
-        "collection": "post-waxing-care",
+        "collection": "post-waxing-care-products",
         "fallback_collection_handle": "best-selling-skincare",
         "products_limit": 10,
         "auto_scroll_mode": "off",
