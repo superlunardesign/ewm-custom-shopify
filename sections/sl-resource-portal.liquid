@@ -1,6 +1,6 @@
 {% comment %}
   EWM Resource Portal
-  Tabbed download section with inline PDF viewer
+  Sidebar file list + inline PDF viewer (no modal)
   Downloads are managed via metaobjects (Content > Resource Downloads)
   and connected to this page via page metafields.
 {% endcomment %}
@@ -21,24 +21,6 @@
 
 {%- assign tab_1_items = page.metafields.custom.tab_1_downloads.value -%}
 {%- assign tab_2_items = page.metafields.custom.tab_2_downloads.value -%}
-
-{% comment %} Debug — remove after confirming it works {% endcomment %}
-{% if tab_1_items == blank and tab_2_items == blank %}
-  <!-- DEBUG: No metafield data found.
-       page.metafields.custom.tab_1_downloads = "{{ page.metafields.custom.tab_1_downloads }}"
-       page.metafields.custom.tab_2_downloads = "{{ page.metafields.custom.tab_2_downloads }}"
-       page.handle = "{{ page.handle }}"
-       page.title = "{{ page.title }}"
-  -->
-{% else %}
-  <!-- DEBUG: tab_1 has {{ tab_1_items.size }} items, tab_2 has {{ tab_2_items.size }} items -->
-  {% for item in tab_1_items %}
-    <!-- DEBUG tab_1 item {{ forloop.index }}: title="{{ item.title.value }}" display_name="{{ item.system.display_name }}" file_url="{{ item.file.value.url }}" file_value="{{ item.file.value }}" description="{{ item.description.value }}" -->
-  {% endfor %}
-  {% for item in tab_2_items %}
-    <!-- DEBUG tab_2 item {{ forloop.index }}: title="{{ item.title.value }}" display_name="{{ item.system.display_name }}" file_url="{{ item.file.value.url }}" file_value="{{ item.file.value }}" description="{{ item.description.value }}" -->
-  {% endfor %}
-{% endif %}
 
 <div class="sl-rp" style="background-color: {{ section.settings.bg_color }};">
 
@@ -61,7 +43,7 @@
     {% endif %}
     {% if section.settings.tab_3_label != blank %}
       {% if section.settings.tab_3_link != blank %}
-        <a href="{{ section.settings.tab_3_link }}" class="sl-rp__tab">
+        <a href="{{ section.settings.tab_3_link }}" class="sl-rp__tab" target="_blank" rel="noopener">
           {{ section.settings.tab_3_label }}
         </a>
       {% else %}
@@ -72,129 +54,131 @@
     {% endif %}
   </nav>
 
-  <div class="sl-rp__content">
-    {%- comment -%} Tab 1 — from page metafield {%- endcomment -%}
-    <div class="sl-rp__panel sl-rp__panel--active" data-sl-rp-panel="1" data-section="{{ section.id }}">
-      <div class="sl-rp__grid">
+  <div class="sl-rp__layout" data-section="{{ section.id }}">
+
+    {%- comment -%} ── Sidebar ── {%- endcomment -%}
+    <div class="sl-rp__sidebar">
+
+      {%- comment -%} Tab 1 panel {%- endcomment -%}
+      <div class="sl-rp__panel sl-rp__panel--active" data-sl-rp-panel="1" data-section="{{ section.id }}">
         {% if tab_1_items %}
           {% for item in tab_1_items %}
             {%- assign file_url = item.file.value.url -%}
             {%- assign card_title = item.title.value | default: item.system.display_name -%}
-            <div class="sl-rp__card">
-              <button
-                class="sl-rp__card-btn"
-                data-sl-rp-open
-                data-pdf-url="{{ file_url }}"
-                data-pdf-title="{{ card_title | escape }}"
-                data-section="{{ section.id }}"
-                type="button"
-              >
-                <span class="sl-rp__card-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                  </svg>
-                </span>
-                <span class="sl-rp__card-info">
-                  <span class="sl-rp__card-title">{{ card_title }}</span>
-                  {% if item.description.value != blank %}
-                    <span class="sl-rp__card-desc">{{ item.description.value }}</span>
-                  {% endif %}
-                  {% if item.last_updated.value != blank %}
-                    <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
-                  {% endif %}
-                </span>
-                <span class="sl-rp__card-arrow">&rarr;</span>
-              </button>
-            </div>
+            <button
+              class="sl-rp__card{% if forloop.first %} sl-rp__card--active{% endif %}"
+              data-sl-rp-open
+              data-pdf-url="{{ file_url }}"
+              data-pdf-title="{{ card_title | escape }}"
+              data-section="{{ section.id }}"
+              type="button"
+            >
+              <span class="sl-rp__card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </span>
+              <span class="sl-rp__card-info">
+                <span class="sl-rp__card-title">{{ card_title }}</span>
+                {% if item.description.value != blank %}
+                  <span class="sl-rp__card-desc">{{ item.description.value }}</span>
+                {% endif %}
+                {% if item.last_updated.value != blank %}
+                  <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
+                {% endif %}
+              </span>
+            </button>
           {% endfor %}
         {% else %}
-          <p class="sl-rp__empty">No downloads added yet. Add Resource Download entries in Content, then connect them to this page.</p>
+          <p class="sl-rp__empty">No downloads added yet.</p>
         {% endif %}
       </div>
-    </div>
 
-    {%- comment -%} Tab 2 — from page metafield {%- endcomment -%}
-    <div class="sl-rp__panel" data-sl-rp-panel="2" data-section="{{ section.id }}">
-      <div class="sl-rp__grid">
+      {%- comment -%} Tab 2 panel {%- endcomment -%}
+      <div class="sl-rp__panel" data-sl-rp-panel="2" data-section="{{ section.id }}">
         {% if tab_2_items %}
           {% for item in tab_2_items %}
             {%- assign file_url = item.file.value.url -%}
             {%- assign card_title = item.title.value | default: item.system.display_name -%}
-            <div class="sl-rp__card">
-              <button
-                class="sl-rp__card-btn"
-                data-sl-rp-open
-                data-pdf-url="{{ file_url }}"
-                data-pdf-title="{{ card_title | escape }}"
-                data-section="{{ section.id }}"
-                type="button"
-              >
-                <span class="sl-rp__card-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                  </svg>
-                </span>
-                <span class="sl-rp__card-info">
-                  <span class="sl-rp__card-title">{{ card_title }}</span>
-                  {% if item.description.value != blank %}
-                    <span class="sl-rp__card-desc">{{ item.description.value }}</span>
-                  {% endif %}
-                  {% if item.last_updated.value != blank %}
-                    <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
-                  {% endif %}
-                </span>
-                <span class="sl-rp__card-arrow">&rarr;</span>
-              </button>
-            </div>
+            <button
+              class="sl-rp__card"
+              data-sl-rp-open
+              data-pdf-url="{{ file_url }}"
+              data-pdf-title="{{ card_title | escape }}"
+              data-section="{{ section.id }}"
+              type="button"
+            >
+              <span class="sl-rp__card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </span>
+              <span class="sl-rp__card-info">
+                <span class="sl-rp__card-title">{{ card_title }}</span>
+                {% if item.description.value != blank %}
+                  <span class="sl-rp__card-desc">{{ item.description.value }}</span>
+                {% endif %}
+                {% if item.last_updated.value != blank %}
+                  <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
+                {% endif %}
+              </span>
+            </button>
           {% endfor %}
         {% else %}
           <p class="sl-rp__empty">No downloads added to this tab yet.</p>
         {% endif %}
       </div>
-    </div>
-  </div>
-</div>
 
-{%- comment -%} PDF Viewer Modal {%- endcomment -%}
-<div class="sl-rp__modal" data-sl-rp-modal data-section="{{ section.id }}" aria-hidden="true">
-  <div class="sl-rp__modal-backdrop" data-sl-rp-close data-section="{{ section.id }}"></div>
-  <div class="sl-rp__modal-dialog">
-    <div class="sl-rp__modal-header">
-      <h3 class="sl-rp__modal-title" data-sl-rp-modal-title></h3>
-      <div class="sl-rp__modal-actions">
-        <button type="button" class="sl-rp__modal-action" data-sl-rp-print data-section="{{ section.id }}" title="Print">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 6 2 18 2 18 9"></polyline>
-            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-            <rect x="6" y="14" width="12" height="8"></rect>
+    </div>
+
+    {%- comment -%} ── Inline PDF Viewer ── {%- endcomment -%}
+    <div class="sl-rp__viewer" data-sl-rp-viewer data-section="{{ section.id }}">
+      <div class="sl-rp__viewer-toolbar">
+        <h3 class="sl-rp__viewer-title" data-sl-rp-viewer-title>Select a document to view</h3>
+        <div class="sl-rp__viewer-actions" data-sl-rp-viewer-actions style="display:none;">
+          <button type="button" class="sl-rp__viewer-btn" data-sl-rp-print data-section="{{ section.id }}" title="Print">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+          </button>
+          <a class="sl-rp__viewer-btn" data-sl-rp-download data-section="{{ section.id }}" title="Download" download>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </a>
+          <a class="sl-rp__viewer-btn" data-sl-rp-newtab data-section="{{ section.id }}" title="Open in new tab" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="sl-rp__viewer-body">
+        <iframe class="sl-rp__viewer-iframe" data-sl-rp-iframe data-section="{{ section.id }}"></iframe>
+        <div class="sl-rp__viewer-empty" data-sl-rp-viewer-empty>
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3;">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
           </svg>
-        </button>
-        <a class="sl-rp__modal-action" data-sl-rp-download data-section="{{ section.id }}" title="Download" download>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-        <button type="button" class="sl-rp__modal-action" data-sl-rp-close data-section="{{ section.id }}" title="Close">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+          <span>Click a document to preview it here</span>
+        </div>
       </div>
     </div>
-    <div class="sl-rp__modal-body">
-      <iframe class="sl-rp__modal-iframe" data-sl-rp-iframe data-section="{{ section.id }}"></iframe>
-    </div>
+
   </div>
 </div>
 
@@ -223,7 +207,8 @@
   #shopify-section-{{ section.id }} .sl-rp__tabs {
     display: flex;
     background-color: {{ section.settings.tab_bg_color }};
-    margin-bottom: 3rem;
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto 0;
   }
 
   #shopify-section-{{ section.id }} .sl-rp__tab {
@@ -267,11 +252,14 @@
     color: {{ section.settings.tab_active_color }};
   }
 
-  /* ── Content panels ── */
-  #shopify-section-{{ section.id }} .sl-rp__content {
+  /* ── Split layout ── */
+  #shopify-section-{{ section.id }} .sl-rp__layout {
+    display: flex;
+    flex-direction: column;
     max-width: var(--page-width, 1200px);
     margin: 0 auto;
     padding: 0 1.5rem;
+    gap: 0;
   }
 
   #shopify-section-{{ section.id }} .sl-rp__panel {
@@ -279,7 +267,9 @@
   }
 
   #shopify-section-{{ section.id }} .sl-rp__panel--active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.card_gap }}px;
   }
 
   #shopify-section-{{ section.id }} .sl-rp__empty {
@@ -290,127 +280,102 @@
     padding: 3rem 0;
   }
 
-  /* ── Card grid ── */
-  #shopify-section-{{ section.id }} .sl-rp__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: {{ section.settings.card_gap }}px;
+  /* ── Sidebar ── */
+  #shopify-section-{{ section.id }} .sl-rp__sidebar {
+    padding-top: 2rem;
   }
 
   /* ── Download card ── */
-  #shopify-section-{{ section.id }} .sl-rp__card-btn {
+  #shopify-section-{{ section.id }} .sl-rp__card {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
     width: 100%;
-    padding: 1.4rem 1.8rem;
+    padding: 1.2rem 1.4rem;
     border: 1px solid {{ section.settings.card_border_color }};
     border-radius: {{ section.settings.card_radius }}px;
     background-color: {{ section.settings.card_bg_color }};
     cursor: pointer;
     text-align: left;
     text-decoration: none;
-    transition: box-shadow 0.2s ease, transform 0.15s ease;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    font-family: var(--font-body-family);
   }
 
-  #shopify-section-{{ section.id }} .sl-rp__card-btn:hover {
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    transform: translateY(-1px);
+  #shopify-section-{{ section.id }} .sl-rp__card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-color: {{ section.settings.icon_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card--active {
+    border-color: {{ section.settings.icon_color }};
+    box-shadow: 0 0 0 1px {{ section.settings.icon_color }};
   }
 
   #shopify-section-{{ section.id }} .sl-rp__card-icon {
     flex-shrink: 0;
     color: {{ section.settings.icon_color }};
+    display: flex;
   }
 
   #shopify-section-{{ section.id }} .sl-rp__card-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.2rem;
+    min-width: 0;
   }
 
   #shopify-section-{{ section.id }} .sl-rp__card-title {
-    font-family: var(--font-body-family);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: {{ section.settings.card_text_color }};
   }
 
   #shopify-section-{{ section.id }} .sl-rp__card-desc {
-    font-family: var(--font-body-family);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: {{ section.settings.card_desc_color }};
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
   #shopify-section-{{ section.id }} .sl-rp__card-updated {
-    font-family: var(--font-body-family);
     font-size: 1.1rem;
     font-weight: 400;
     font-style: italic;
     color: #999;
   }
 
-  #shopify-section-{{ section.id }} .sl-rp__card-arrow {
-    flex-shrink: 0;
-    font-size: 1.8rem;
-    color: {{ section.settings.card_text_color }};
-    transition: transform 0.2s ease;
-  }
-
-  #shopify-section-{{ section.id }} .sl-rp__card-btn:hover .sl-rp__card-arrow {
-    transform: translateX(3px);
-  }
-
-  /* ── Modal ── */
-  #shopify-section-{{ section.id }} .sl-rp__modal {
+  /* ── Viewer ── */
+  #shopify-section-{{ section.id }} .sl-rp__viewer {
     display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #shopify-section-{{ section.id }} .sl-rp__modal[aria-hidden="false"] {
-    display: flex;
-  }
-
-  #shopify-section-{{ section.id }} .sl-rp__modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-  }
-
-  #shopify-section-{{ section.id }} .sl-rp__modal-dialog {
-    position: relative;
-    width: 90vw;
-    max-width: 900px;
-    height: 85vh;
-    background: #fff;
-    border-radius: 8px;
-    display: flex;
     flex-direction: column;
+    border: 1px solid #e0e0e0;
+    border-radius: {{ section.settings.card_radius }}px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    background: #fafafa;
+    min-height: 500px;
   }
 
-  #shopify-section-{{ section.id }} .sl-rp__modal-header {
+  #shopify-section-{{ section.id }} .sl-rp__viewer--active {
+    display: flex;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__viewer-toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.2rem 1.8rem;
-    border-bottom: 1px solid #e5e5e5;
-    background: #fafafa;
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid #e0e0e0;
+    background: #f5f5f5;
+    gap: 1rem;
   }
 
-  #shopify-section-{{ section.id }} .sl-rp__modal-title {
+  #shopify-section-{{ section.id }} .sl-rp__viewer-title {
     font-family: var(--font-body-family);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -420,48 +385,68 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-right: 1rem;
   }
 
-  #shopify-section-{{ section.id }} .sl-rp__modal-actions {
+  #shopify-section-{{ section.id }} .sl-rp__viewer-actions {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
+    flex-shrink: 0;
   }
 
-  #shopify-section-{{ section.id }} .sl-rp__modal-action {
+  #shopify-section-{{ section.id }} .sl-rp__viewer-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     background: transparent;
-    color: #4a4a4a;
+    color: #555;
     cursor: pointer;
     text-decoration: none;
     transition: background-color 0.15s ease, color 0.15s ease;
   }
 
-  #shopify-section-{{ section.id }} .sl-rp__modal-action:hover {
-    background: #e5e5e5;
+  #shopify-section-{{ section.id }} .sl-rp__viewer-btn:hover {
+    background: #e0e0e0;
     color: #1a1a1a;
   }
 
-  #shopify-section-{{ section.id }} .sl-rp__modal-body {
+  #shopify-section-{{ section.id }} .sl-rp__viewer-body {
     flex: 1;
-    overflow: hidden;
+    position: relative;
+    min-height: 450px;
   }
 
-  #shopify-section-{{ section.id }} .sl-rp__modal-iframe {
+  #shopify-section-{{ section.id }} .sl-rp__viewer-iframe {
     width: 100%;
     height: 100%;
     border: none;
+    position: absolute;
+    inset: 0;
   }
 
-  /* ── Responsive ── */
-  @media screen and (max-width: 749px) {
+  #shopify-section-{{ section.id }} .sl-rp__viewer-empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: #aaa;
+    font-family: var(--font-body-family);
+    font-size: 1.3rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__viewer-empty[hidden] {
+    display: none;
+  }
+
+  /* ── Mobile: stacked, cards on top, viewer below ── */
+  @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} .sl-rp__tabs {
       flex-direction: column;
     }
@@ -483,29 +468,40 @@
       background-color: rgba(255,255,255,0.1);
     }
 
-    #shopify-section-{{ section.id }} .sl-rp__modal-dialog {
-      width: 95vw;
-      height: 90vh;
+    #shopify-section-{{ section.id }} .sl-rp__viewer-body {
+      min-height: 60vh;
     }
 
-    #shopify-section-{{ section.id }} .sl-rp__modal-title {
-      font-size: 1.2rem;
-    }
-  }
-
-  @media screen and (min-width: 750px) {
-    #shopify-section-{{ section.id }} .sl-rp__grid {
-      grid-template-columns: repeat({{ section.settings.grid_columns }}, 1fr);
-    }
-
-    #shopify-section-{{ section.id }} .sl-rp__content {
-      padding: 0 3rem;
+    #shopify-section-{{ section.id }} .sl-rp__viewer {
+      margin-top: 1.5rem;
     }
   }
 
+  /* ── Desktop: sidebar left, viewer right ── */
   @media screen and (min-width: 990px) {
-    #shopify-section-{{ section.id }} .sl-rp__content {
-      padding: 0 5rem;
+    #shopify-section-{{ section.id }} .sl-rp__layout {
+      flex-direction: row;
+      gap: 2rem;
+      padding: 0 3rem;
+      margin-top: 2rem;
+    }
+
+    #shopify-section-{{ section.id }} .sl-rp__sidebar {
+      width: 28%;
+      flex-shrink: 0;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding-top: 0;
+    }
+
+    #shopify-section-{{ section.id }} .sl-rp__viewer {
+      flex: 1;
+      min-height: 80vh;
+    }
+
+    #shopify-section-{{ section.id }} .sl-rp__viewer-body {
+      min-height: 0;
+      flex: 1;
     }
   }
 </style>
@@ -513,6 +509,10 @@
 <script>
   (function() {
     var sectionId = '{{ section.id }}';
+
+    function isMobile() {
+      return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (window.innerWidth < 990);
+    }
 
     function initTabs() {
       var tabs = document.querySelectorAll('[data-sl-rp-tab][data-section="' + sectionId + '"]');
@@ -526,20 +526,48 @@
           this.classList.add('sl-rp__tab--active');
           var panel = document.querySelector('[data-sl-rp-panel="' + target + '"][data-section="' + sectionId + '"]');
           if (panel) panel.classList.add('sl-rp__panel--active');
+
+          var viewer = document.querySelector('[data-sl-rp-viewer][data-section="' + sectionId + '"]');
+          var iframe = viewer.querySelector('[data-sl-rp-iframe]');
+          var titleEl = viewer.querySelector('[data-sl-rp-viewer-title]');
+          var emptyEl = viewer.querySelector('[data-sl-rp-viewer-empty]');
+          var actionsEl = viewer.querySelector('[data-sl-rp-viewer-actions]');
+          iframe.src = '';
+          titleEl.textContent = 'Select a document to view';
+          emptyEl.hidden = false;
+          actionsEl.style.display = 'none';
+          viewer.classList.remove('sl-rp__viewer--active');
+
+          var allCards = document.querySelectorAll('[data-sl-rp-open][data-section="' + sectionId + '"]');
+          allCards.forEach(function(c) { c.classList.remove('sl-rp__card--active'); });
+
+          var firstCard = panel ? panel.querySelector('[data-sl-rp-open]') : null;
+          if (firstCard && !isMobile()) {
+            firstCard.click();
+          }
         });
       });
     }
 
-    function isMobile() {
-      return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (window.innerWidth < 750);
-    }
+    function initViewer() {
+      var viewer = document.querySelector('[data-sl-rp-viewer][data-section="' + sectionId + '"]');
+      if (!viewer) return;
+      var iframe = viewer.querySelector('[data-sl-rp-iframe]');
+      var titleEl = viewer.querySelector('[data-sl-rp-viewer-title]');
+      var downloadBtn = viewer.querySelector('[data-sl-rp-download]');
+      var newTabBtn = viewer.querySelector('[data-sl-rp-newtab]');
+      var emptyEl = viewer.querySelector('[data-sl-rp-viewer-empty]');
+      var actionsEl = viewer.querySelector('[data-sl-rp-viewer-actions]');
 
-    function initModal() {
-      var modal = document.querySelector('[data-sl-rp-modal][data-section="' + sectionId + '"]');
-      if (!modal) return;
-      var iframe = modal.querySelector('[data-sl-rp-iframe]');
-      var titleEl = modal.querySelector('[data-sl-rp-modal-title]');
-      var downloadBtn = modal.querySelector('[data-sl-rp-download]');
+      function loadPdf(url, title) {
+        titleEl.textContent = title;
+        iframe.src = url;
+        if (downloadBtn) downloadBtn.href = url;
+        if (newTabBtn) newTabBtn.href = url;
+        emptyEl.hidden = true;
+        actionsEl.style.display = '';
+        viewer.classList.add('sl-rp__viewer--active');
+      }
 
       document.querySelectorAll('[data-sl-rp-open][data-section="' + sectionId + '"]').forEach(function(btn) {
         btn.addEventListener('click', function(e) {
@@ -547,32 +575,24 @@
           var url = this.getAttribute('data-pdf-url');
           var title = this.getAttribute('data-pdf-title');
           if (!url) {
-            alert('No file URL found for this download. Check that the metaobject entry has a file uploaded and Storefront API access is enabled on the Resource Download definition.');
+            alert('No file URL found. Check that the metaobject entry has a file uploaded and Storefront API access is enabled.');
             return;
           }
 
-          if (isMobile()) {
+          if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
             window.open(url, '_blank');
             return;
           }
 
-          titleEl.textContent = title;
-          iframe.src = url;
-          downloadBtn.href = url;
-          modal.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
+          var allCards = document.querySelectorAll('[data-sl-rp-open][data-section="' + sectionId + '"]');
+          allCards.forEach(function(c) { c.classList.remove('sl-rp__card--active'); });
+          this.classList.add('sl-rp__card--active');
+
+          loadPdf(url, title);
         });
       });
 
-      modal.querySelectorAll('[data-sl-rp-close]').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          modal.setAttribute('aria-hidden', 'true');
-          iframe.src = '';
-          document.body.style.overflow = '';
-        });
-      });
-
-      var printBtn = modal.querySelector('[data-sl-rp-print]');
+      var printBtn = viewer.querySelector('[data-sl-rp-print]');
       if (printBtn) {
         printBtn.addEventListener('click', function() {
           if (iframe.contentWindow) {
@@ -582,18 +602,23 @@
         });
       }
 
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
-          modal.setAttribute('aria-hidden', 'true');
-          iframe.src = '';
-          document.body.style.overflow = '';
+      if (!isMobile()) {
+        var firstCard = document.querySelector('[data-sl-rp-panel--active] [data-sl-rp-open][data-section="' + sectionId + '"]')
+          || document.querySelector('.sl-rp__panel--active [data-sl-rp-open][data-section="' + sectionId + '"]');
+        if (firstCard) {
+          var url = firstCard.getAttribute('data-pdf-url');
+          var title = firstCard.getAttribute('data-pdf-title');
+          if (url) {
+            firstCard.classList.add('sl-rp__card--active');
+            loadPdf(url, title);
+          }
         }
-      });
+      }
     }
 
     function init() {
       initTabs();
-      initModal();
+      initViewer();
     }
 
     if (document.readyState === 'loading') {
@@ -696,17 +721,6 @@
     {
       "type": "header",
       "content": "Cards"
-    },
-    {
-      "type": "select",
-      "id": "grid_columns",
-      "label": "Columns (Desktop)",
-      "options": [
-        { "value": "1", "label": "1 Column" },
-        { "value": "2", "label": "2 Columns" },
-        { "value": "3", "label": "3 Columns" }
-      ],
-      "default": "2"
     },
     {
       "type": "range",

@@ -32,7 +32,6 @@
         "tab_bg_color": "#8c9b6d",
         "tab_text_color": "#FFFFFF",
         "tab_active_color": "#FFFFFF",
-        "grid_columns": "1",
         "card_gap": 12,
         "card_bg_color": "#ffffff",
         "card_border_color": "#d4d4a0",
