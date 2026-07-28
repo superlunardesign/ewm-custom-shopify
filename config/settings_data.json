@@ -199,43 +199,11 @@
           "enable_social_icon": false
         }
       },
-      "footer": {
-        "type": "footer",
-        "blocks": {
-          "footer-0": {
-            "type": "link_list",
-            "settings": {
-              "heading": "Quick links",
-              "menu": "footer",
-              "alignment": "center",
-              "list_style": "vertical"
-            }
-          },
-          "footer-1": {
-            "type": "text",
-            "settings": {
-              "heading": "Heading",
-              "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>",
-              "subtext_duplicate": "<p>Share contact information, store details, and brand content with your customers.</p>",
-              "alignment": "center"
-            }
-          }
-        },
-        "block_order": [
-          "footer-0",
-          "footer-1"
-        ],
+      "cart-drawer": {
+        "type": "cart-drawer",
         "settings": {
-          "page_full_width": false,
-          "page_full_width_spacing": false,
-          "color_scheme": "background-1",
-          "show_social": true,
-          "payment_enable": true,
-          "footer_default": false,
-          "border_right": true,
-          "margin_top": 0,
-          "padding_top": 36,
-          "padding_bottom": 36
+          "cart_logo": "shopify://shop_images/Submark-Green.png",
+          "cart_logo_width": 70
         }
       }
     },
