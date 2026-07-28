@@ -787,7 +787,7 @@
         "text_color": "#4a4a4a",
         "show_button": true,
         "button_text": "BOOK HERE",
-        "button_link": "",
+        "button_link": "https://booking.mangomint.com/314399",
         "button_style": "primary",
         "button_bg_color": "#8a9979",
         "button_text_color": "#ffffff",
@@ -812,8 +812,8 @@
         "spread_content": true,
         "text": "<p>Acne Bootcamp is our signature program that goes far beyond facials. Education, professional treatments, customized homecare, and ongoing support — everything you need to finally get clear.</p><p><em>Available in-spa or virtually.</em></p>",
         "show_button": true,
-        "button_text": "Acne Bootcamp Details →",
-        "button_link": "",
+        "button_text": "Acne Bootcamp Details",
+        "button_link": "https://booking.mangomint.com/314399",
         "button_style": "primary",
         "color_scheme": "background-1",
         "content_background": "#f5f0eb",
@@ -896,7 +896,7 @@
           "type": "button",
           "settings": {
             "text": "SHOP ALL SKINCARE",
-            "link": "shopify://collections",
+            "link": "shopify://collections/skincare",
             "style": "secondary"
           }
         }
@@ -977,7 +977,7 @@
           "type": "button",
           "settings": {
             "text": "BOOK YOUR SERVICE HERE",
-            "link": "",
+            "link": "https://booking.mangomint.com/314399",
             "style": "secondary",
             "button_bg_color": "",
             "button_text_color": "",
