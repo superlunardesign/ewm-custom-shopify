@@ -388,7 +388,7 @@
       "name": "Product Carousel",
       "settings": {
         "section_title": "Shop the Team's Favorites",
-        "collection": "anti-aging",
+        "collection": "anti-aging-skincare",
         "products_limit": 10,
         "show_ratings": true,
         "rating_metafield_namespace": "reviews",
