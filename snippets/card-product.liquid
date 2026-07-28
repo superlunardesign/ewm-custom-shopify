@@ -57,7 +57,7 @@
                 src="{{ card_product.featured_media | image_url: width: 533 }}"
                 sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
                 alt="{{ card_product.featured_media.alt | escape }}"
-                class="motion-reduce  loading-image"                
+                class="motion-reduce  loading-image"
                 {% unless lazy_load == false %}loading="lazy"{% endunless %}
                 width="{{ card_product.featured_media.width }}"
                 height="{{ card_product.featured_media.height }}"
@@ -84,9 +84,23 @@
               {%- endif -%}
             </div>
           </div>
+        {%- else -%}
+          <div class="card__media">
+            <div class="media media--transparent card__placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 525 525" fill="none" style="width:100%;height:100%;background:#f5f5f5;">
+                <rect width="525" height="525" fill="#f0ede8"/>
+                <path d="M262.5 180c-22.1 0-40 17.9-40 40s17.9 40 40 40 40-17.9 40-40-17.9-40-40-40zm0 64c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24z" fill="#ccc"/>
+                <path d="M350 148H175c-8.8 0-16 7.2-16 16v196c0 8.8 7.2 16 16 16h175c8.8 0 16-7.2 16-16V164c0-8.8-7.2-16-16-16zm0 212H175V164h175v196z" fill="#ccc"/>
+                <path d="M195 340l50-64.6 36.3 43.6L320 268l46 72H195z" fill="#ddd"/>
+              </svg>
+            </div>
+          </div>
         {%- endif -%}
         <div class="card__content">
           <div class="card__information">
+            {%- if show_vendor and card_product.vendor != blank -%}
+              <span class="card__vendor caption-with-letter-spacing">{{ card_product.vendor }}</span>
+            {%- endif -%}
             <h3 class="card__heading"{% if card_product.featured_media == nil and settings.card_style == 'standard' %} id="title-{{ section_id }}-{{ card_product.id }}"{% endif %}>
               <a href="{{ card_product.url }}" class="full-unstyled-link">
                 {{ card_product.title | escape }}
