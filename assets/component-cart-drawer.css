@@ -31,12 +31,24 @@
 }
 
 .drawer__inner-empty {
+  position: relative;
   height: 100%;
   padding: 0 1.5rem;
   background-color: rgb(var(--color-background));
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.drawer__inner-empty .button {
+  background: transparent;
+  color: var(--gradient-base-accent-1);
+  border: 1.5px solid var(--gradient-base-accent-1);
+}
+
+.drawer__inner-empty .button:hover {
+  background: var(--gradient-base-accent-1);
+  color: #ffffff;
 }
 
 .cart-drawer__warnings {
