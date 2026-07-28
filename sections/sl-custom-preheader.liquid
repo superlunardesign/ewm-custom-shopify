@@ -433,18 +433,20 @@
       searchResults.innerHTML = '<div class="sl-preheader__search-loading">Searching...</div>';
       searchResults.classList.add('is-visible');
 
-      fetch(window.routes.predictive_search_url + '?q=' + encodeURIComponent(term) + '&resources%5Btype%5D=product&resources%5Blimit%5D=2')
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-          var items = (data.resources && data.resources.results && data.resources.results.products) || [];
-          var products = items.map(function(p) {
-            return {
-              url: p.url,
-              image: p.image || '',
-              title: p.title || '',
-              vendor: p.vendor || '',
-              price: p.price
-            };
+      fetch(window.routes.predictive_search_url + '?q=' + encodeURIComponent(term) + '&resources%5Btype%5D=product&resources%5Blimit%5D=2&section_id=sl-predictive-search')
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var items = doc.querySelectorAll('.sl-ps-item');
+          var products = [];
+          items.forEach(function(el) {
+            products.push({
+              url: el.getAttribute('data-url') || '',
+              image: el.getAttribute('data-image') || '',
+              title: el.getAttribute('data-title') || '',
+              vendor: el.getAttribute('data-vendor') || '',
+              price: el.getAttribute('data-price') || ''
+            });
           });
 
           psCache[cacheKey] = products;

@@ -1,0 +1,13 @@
+{%- if predictive_search.performed -%}
+<div id="sl-predictive-search-results" data-count="{{ predictive_search.resources.products.size }}">
+  {%- for product in predictive_search.resources.products -%}
+    <div class="sl-ps-item"
+      data-url="{{ product.url }}"
+      data-title="{{ product.title | escape }}"
+      data-vendor="{{ product.vendor | escape }}"
+      data-price="{{ product.price | money }}"
+      data-image="{% if product.featured_media != blank %}{{ product.featured_media | image_url: width: 200 }}{% endif %}"
+    ></div>
+  {%- endfor -%}
+</div>
+{%- endif -%}
