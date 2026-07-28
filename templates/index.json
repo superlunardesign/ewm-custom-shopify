@@ -42,7 +42,7 @@
         "content_alignment": "left",
         "left_body": "Exceptional Customized Facials, Personalized Acne Treatments, & Brazilian Waxing in McHenry, IL",
         "left_button_text": "Book An Appointment",
-        "left_button_link": "",
+        "left_button_link": "https://booking.mangomint.com/314399",
         "hero_text_color": "#ffffff",
         "top_right_image": "shopify://shop_images/BrandingPhotography-C_Mae-6127.jpg",
         "card_overlay": 20,
@@ -52,7 +52,7 @@
         "bottom_right_image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5081.jpg",
         "bottom_right_heading": "Esthetician-Approved Skincare Products",
         "bottom_right_button_text": "Shop all",
-        "bottom_right_button_link": "shopify://collections",
+        "bottom_right_button_link": "shopify://collections/skincare",
         "card_text_color": "#ffffff",
         "button_style": "primary",
         "button_bg_color": "#6b7c5e",
@@ -93,8 +93,10 @@
         "atc_border_width": 0,
         "atc_border_color": "#ffffff",
         "atc_radius": 0,
-        "button_font": "heading",
+        "button_font": "body",
         "button_font_size": 13,
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 1,
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -216,6 +218,15 @@
         "subheading_size": 14,
         "subheading_weight": "500",
         "body_font_size": 16,
+        "button_font": "heading",
+        "button_font_size": 14,
+        "button_font_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 10,
+        "button_padding_y": 14,
+        "button_padding_x": 36,
+        "button_border_radius": 0,
+        "button_hover_opacity": 85,
         "padding_top": 80,
         "padding_bottom": 80
       }
@@ -395,6 +406,15 @@
         "subheading_size": 16,
         "subheading_weight": "400",
         "body_font_size": 16,
+        "button_font": "heading",
+        "button_font_size": 14,
+        "button_font_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 10,
+        "button_padding_y": 14,
+        "button_padding_x": 36,
+        "button_border_radius": 0,
+        "button_hover_opacity": 85,
         "padding_top": 80,
         "padding_bottom": 0
       }
@@ -844,6 +864,8 @@
         "atc_radius": 0,
         "button_font": "heading",
         "button_font_size": 13,
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 1,
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -987,6 +1009,15 @@
         "subheading_size": 16,
         "subheading_weight": "400",
         "body_font_size": 16,
+        "button_font": "heading",
+        "button_font_size": 14,
+        "button_font_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 10,
+        "button_padding_y": 14,
+        "button_padding_x": 36,
+        "button_border_radius": 0,
+        "button_hover_opacity": 85,
         "padding_top": 80,
         "padding_bottom": 80
       }
