@@ -190,7 +190,7 @@
 
   #shopify-section-{{ section.id }} .sl-rp__header {
     text-align: center;
-    max-width: var(--page-width, 1200px);
+    {% unless section.settings.full_width %}max-width: var(--page-width, 1200px);{% endunless %}
     margin: 0 auto;
     padding: 0 1.5rem 0;
   }
@@ -207,7 +207,7 @@
   #shopify-section-{{ section.id }} .sl-rp__tabs {
     display: flex;
     background-color: {{ section.settings.tab_bg_color }};
-    max-width: var(--page-width, 1200px);
+    {% unless section.settings.full_width %}max-width: var(--page-width, 1200px);{% endunless %}
     margin: 0 auto 0;
   }
 
@@ -256,7 +256,7 @@
   #shopify-section-{{ section.id }} .sl-rp__layout {
     display: flex;
     flex-direction: column;
-    max-width: var(--page-width, 1200px);
+    {% unless section.settings.full_width %}max-width: var(--page-width, 1200px);{% endunless %}
     margin: 0 auto;
     padding: 0 1.5rem;
     gap: 0;
@@ -482,7 +482,7 @@
     #shopify-section-{{ section.id }} .sl-rp__layout {
       flex-direction: row;
       gap: 2rem;
-      padding: 0 3rem;
+      padding: 0 {% if section.settings.full_width %}5rem{% else %}3rem{% endif %};
       margin-top: 2rem;
     }
 
@@ -781,6 +781,13 @@
       "id": "bg_color",
       "label": "Section Background",
       "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false,
+      "info": "Expand the portal to the full width of the page"
     },
     {
       "type": "header",
