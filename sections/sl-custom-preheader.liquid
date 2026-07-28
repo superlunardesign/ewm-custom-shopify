@@ -171,6 +171,90 @@
     height: 20px;
   }
 
+  /* Predictive search results */
+  .sl-preheader__search-results {
+    display: none;
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #e5e5e5;
+    border-top: none;
+    background: #fff;
+  }
+
+  .sl-preheader__search-results.is-visible {
+    display: block;
+  }
+
+  .sl-preheader__search-result {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+  }
+
+  .sl-preheader__search-result:hover {
+    background: #f7f7f5;
+  }
+
+  .sl-preheader__search-result img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .sl-preheader__search-result-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sl-preheader__search-result-title {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .sl-preheader__search-result-price {
+    font-family: var(--font-body-family);
+    font-size: 13px;
+    color: var(--gradient-base-accent-1);
+    margin: 0;
+  }
+
+  .sl-preheader__search-see-all {
+    display: block;
+    padding: 12px 16px;
+    text-align: center;
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gradient-base-accent-1);
+    text-decoration: none;
+    border-top: 1px solid #e5e5e5;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .sl-preheader__search-see-all:hover {
+    background: #f7f7f5;
+    color: var(--gradient-base-accent-4);
+  }
+
+  .sl-preheader__search-loading {
+    padding: 16px;
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+  }
+
   /* Mobile: hide CTA text and extra links */
   @media screen and (max-width: 749px) {
     .sl-preheader__hide-mobile {
@@ -253,6 +337,7 @@
         </svg>
       </button>
     </form>
+    <div class="sl-preheader__search-results" id="SLSearchResults"></div>
     <button type="button" class="sl-preheader__search-close" data-sl-search-close aria-label="{{ 'accessibility.close' | t }}">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
@@ -279,32 +364,115 @@
     });
 
     /* Close search — close button */
+    function closeSearchOverlay() {
+      if (searchOverlay) {
+        searchOverlay.classList.remove('is-open');
+        searchOverlay.setAttribute('aria-hidden', 'true');
+      }
+      if (searchResults) searchResults.classList.remove('is-visible');
+    }
+
     document.querySelectorAll('[data-sl-search-close]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        if (searchOverlay) {
-          searchOverlay.classList.remove('is-open');
-          searchOverlay.setAttribute('aria-hidden', 'true');
-        }
-      });
+      btn.addEventListener('click', closeSearchOverlay);
     });
 
     /* Close search — clicking the overlay background */
     if (searchOverlay) {
       searchOverlay.addEventListener('click', function(e) {
-        if (e.target === searchOverlay) {
-          searchOverlay.classList.remove('is-open');
-          searchOverlay.setAttribute('aria-hidden', 'true');
-        }
+        if (e.target === searchOverlay) closeSearchOverlay();
       });
     }
 
     /* Close search — Escape key */
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && searchOverlay && searchOverlay.classList.contains('is-open')) {
-        searchOverlay.classList.remove('is-open');
-        searchOverlay.setAttribute('aria-hidden', 'true');
+        closeSearchOverlay();
       }
     });
+
+    /* Predictive search */
+    var searchResults = document.getElementById('SLSearchResults');
+    var psCache = {};
+    var psTimer = null;
+
+    function slPredictiveSearch(term) {
+      if (!term || term.length < 2) {
+        if (searchResults) searchResults.classList.remove('is-visible');
+        return;
+      }
+
+      var cacheKey = term.toLowerCase().replace(/\s+/g, '-');
+      if (psCache[cacheKey]) {
+        renderPredictiveResults(psCache[cacheKey], term);
+        return;
+      }
+
+      searchResults.innerHTML = '<div class="sl-preheader__search-loading">Searching...</div>';
+      searchResults.classList.add('is-visible');
+
+      fetch(window.routes.predictive_search_url + '?q=' + encodeURIComponent(term) + '&resources%5Btype%5D=product&resources%5Blimit%5D=2&section_id=predictive-search')
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var items = doc.querySelectorAll('.predictive-search__list-item:not(#predictive-search-option-search-keywords)');
+          var products = [];
+          items.forEach(function(li) {
+            var link = li.querySelector('a');
+            if (!link) return;
+            var img = link.querySelector('img');
+            var title = link.querySelector('.predictive-search__item-heading');
+            var priceEl = link.querySelector('.price-item--sale, .price-item--regular, .price-item--last');
+            products.push({
+              url: link.getAttribute('href'),
+              image: img ? img.getAttribute('src') : '',
+              alt: img ? (img.getAttribute('alt') || '') : '',
+              title: title ? title.textContent.trim() : '',
+              price: priceEl ? priceEl.textContent.trim() : ''
+            });
+          });
+
+          psCache[cacheKey] = products;
+          renderPredictiveResults(products, term);
+        })
+        .catch(function() {
+          searchResults.classList.remove('is-visible');
+        });
+    }
+
+    function renderPredictiveResults(products, term) {
+      if (!products.length) {
+        searchResults.innerHTML = '<div class="sl-preheader__search-loading">No products found</div>';
+        searchResults.classList.add('is-visible');
+        return;
+      }
+
+      var html = '';
+      products.forEach(function(p) {
+        html += '<a href="' + p.url + '" class="sl-preheader__search-result">';
+        if (p.image) {
+          html += '<img src="' + p.image + '" alt="' + p.alt.replace(/"/g, '&quot;') + '" loading="lazy">';
+        } else {
+          html += '<div></div>';
+        }
+        html += '<div class="sl-preheader__search-result-info">';
+        html += '<p class="sl-preheader__search-result-title">' + p.title + '</p>';
+        if (p.price) html += '<p class="sl-preheader__search-result-price">' + p.price + '</p>';
+        html += '</div></a>';
+      });
+      html += '<a href="{{ routes.search_url }}?q=' + encodeURIComponent(term) + '&options%5Bprefix%5D=last" class="sl-preheader__search-see-all">See all results &rarr;</a>';
+      searchResults.innerHTML = html;
+      searchResults.classList.add('is-visible');
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        clearTimeout(psTimer);
+        var val = searchInput.value.trim();
+        psTimer = setTimeout(function() {
+          slPredictiveSearch(val);
+        }, 300);
+      });
+    }
 
     /* Keep cart-count bubble in sync after AJAX add-to-cart */
     function updateCartBubble() {
