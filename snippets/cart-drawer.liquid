@@ -338,12 +338,15 @@
       {%- endif -%}
       <div class="drawer__header">
         {%- if cart_logo != blank -%}
+          {%- assign _logo_w = cart_logo_width | default: 70 -%}
+          {%- assign _logo_src_w = _logo_w | times: 2 -%}
+          {%- assign _logo_h = _logo_w | divided_by: cart_logo.aspect_ratio | round -%}
           <a href="{{ routes.root_url }}" class="drawer__logo">
             <img
-              src="{{ cart_logo | image_url: width: cart_logo_width | times: 2 }}"
+              src="{{ cart_logo | image_url: width: _logo_src_w }}"
               alt="{{ shop.name | escape }}"
-              width="{{ cart_logo_width | default: 70 }}"
-              height="{{ cart_logo_width | default: 70 | divided_by: cart_logo.aspect_ratio | round }}"
+              width="{{ _logo_w }}"
+              height="{{ _logo_h }}"
               loading="lazy"
             >
           </a>
