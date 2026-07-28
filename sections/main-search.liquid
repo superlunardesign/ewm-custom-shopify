@@ -16,17 +16,36 @@
 {%- endif -%}
 
 <style>
+  /* ═══ EWM Search Results Overhaul ═══ */
+
   .template-search__header {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .template-search__header .h2 {
+    font-family: var(--font-body-family);
+    font-weight: 400;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gradient-base-accent-1);
+    margin-bottom: 0;
   }
 
   .template-search__search {
-    margin: 0 auto 3.5rem;
+    margin: 0 auto 2rem;
     max-width: 47.8rem;
   }
 
   .template-search__search .search {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
+  }
+
+  .template-search__search .field__input {
+    font-size: 16px;
+    font-family: var(--font-body-family);
+    border: 1px solid #ddd;
+    border-radius: 0;
   }
 
   .template-search--empty {
@@ -35,12 +54,208 @@
 
   @media screen and (min-width: 750px) {
     .template-search__header {
-      margin-bottom: 5rem;
+      margin-bottom: 3rem;
     }
   }
 
   .search__button .icon {
     height: 1.8rem;
+  }
+
+  /* Product Grid — match PLP grid system */
+  .template-search .product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+    .template-search .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+  }
+
+  .template-search .product-grid .grid__item {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0;
+  }
+
+  /* Card Styling — match PLP card appearance */
+  .template-search .card-wrapper {
+    height: 100%;
+  }
+
+  .template-search .card {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: none;
+    box-shadow: none;
+  }
+
+  .template-search .card__inner {
+    border-radius: 8px;
+    overflow: hidden;
+    border: none;
+  }
+
+  /* Image — portrait ratio with hover zoom */
+  .template-search .card__media {
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .template-search .card__media .media {
+    overflow: hidden;
+  }
+
+  .template-search .card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    transition: transform 0.3s ease;
+  }
+
+  .template-search .card-wrapper:hover .card__media img {
+    transform: scale(1.05);
+  }
+
+  /* Card Content — typography to match PLP */
+  .template-search .card__content {
+    padding: 15px;
+  }
+
+  .template-search .card__information {
+    padding: 0;
+  }
+
+  .template-search .card__heading {
+    font-family: var(--font-body-family);
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: capitalize;
+    margin: 0 0 5px;
+    line-height: 1.3;
+  }
+
+  .template-search .card__heading a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .template-search .card__heading a:hover {
+    opacity: 0.8;
+  }
+
+  /* Vendor */
+  .template-search .card-information .visually-hidden + .caption-with-letter-spacing {
+    font-size: 10px;
+    font-family: var(--font-body-family);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #8a8a7a;
+    margin-bottom: 4px;
+  }
+
+  /* Price */
+  .template-search .price {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gradient-base-accent-1);
+  }
+
+  .template-search .price-item--regular {
+    font-weight: 500;
+  }
+
+  .template-search .price-item--sale {
+    color: var(--gradient-base-accent-1);
+  }
+
+  .template-search .price--on-sale .price-item--regular {
+    text-decoration: line-through;
+    color: #999;
+  }
+
+  /* Badges — pill style at bottom-left of image */
+  .template-search .card__badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    top: auto;
+    right: auto;
+  }
+
+  .template-search .badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Rating */
+  .template-search .rating {
+    font-size: 13px;
+  }
+
+  /* Sort bar — clean minimal style */
+  .template-search .facets-vertical-sort {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 1rem;
+  }
+
+  .template-search .facets-vertical-sort .facets__summary span {
+    font-family: var(--font-body-family);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 0;
+  }
+
+  /* Hide janky grid/list toggle and product count */
+  .template-search .filter-style,
+  .template-search .product-count-vertical {
+    display: none;
+  }
+
+  /* Hide icon bar on cards (compare, quickview, etc.) */
+  .template-search .product-icons {
+    display: none !important;
+  }
+
+  /* Hide new tag badges on search */
+  .template-search .card-information.new--tag {
+    display: none;
+  }
+
+  /* Pagination — clean style */
+  .template-search .pagination-wrapper {
+    margin-top: 3rem;
+  }
+
+  /* Facets sidebar — hide on search (disabled in settings, but just in case) */
+  .template-search .facets-wrapper {
+    display: none;
+  }
+
+  .template-search .facets-vertical {
+    display: block;
+  }
+
+  .template-search .product-grid-container {
+    width: 100%;
   }
 </style>
 
@@ -101,6 +316,7 @@
             >
 
             <input name="options[prefix]" type="hidden" value="last">
+      <input type="hidden" name="type" value="product">
 
             {%- if settings.predictive_search_enabled -%}
               <div class="predictive-search predictive-search--search-template" tabindex="-1" data-predictive-search>
