@@ -52,7 +52,7 @@
         "bottom_right_image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5081.jpg",
         "bottom_right_heading": "Esthetician-Approved Skincare Products",
         "bottom_right_button_text": "Shop all",
-        "bottom_right_button_link": "shopify://collections/skincare",
+        "bottom_right_button_link": "shopify://collections/skincare-products",
         "card_text_color": "#ffffff",
         "button_style": "primary",
         "button_bg_color": "#6b7c5e",
@@ -896,7 +896,7 @@
           "type": "button",
           "settings": {
             "text": "SHOP ALL SKINCARE",
-            "link": "shopify://collections/skincare",
+            "link": "shopify://collections/skincare-products",
             "style": "secondary"
           }
         }
