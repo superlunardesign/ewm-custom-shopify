@@ -49,7 +49,7 @@
     gap: {{ section.settings.grid_gap_mobile }}px;
     list-style: none;
     padding: 0;
-    margin: 0 0 40px;
+    margin: 0;
   }
 
   /* Grid items use subgrid for cross-card row alignment.
@@ -328,7 +328,7 @@
   #SLCollection-{{ section.id }} .sl-product-title {
     font-size: {{ section.settings.title_font_size }}px;
     font-weight: 400;
-    font-family: var(--font-body-family);
+    font-family: var(--font-family-body);
     text-transform:capitalize !important;
     margin: 0 0 5px 0;
     color: {{ section.settings.title_color }};
@@ -480,19 +480,18 @@
 
   #SLCollection-{{ section.id }} .sl-add-to-cart-btn {
     width: 100%;
-    padding: 10px 30px;
+    padding: 12px 16px;
     background: {{ section.settings.atc_button_background }};
     color: {{ section.settings.atc_button_text }};
-    border: 1.5px solid {{ section.settings.atc_button_border_color }};
-    border-radius: 0;
-    font-size: 1.3rem;
-    font-weight: 600;
-    font-family: var(--font-body-family);
+    border: {{ section.settings.atc_button_border_width }}px solid {{ section.settings.atc_button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: 13px;
+    font-weight: 500;
     line-height: 1.4;
     cursor: pointer;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    transition: all 300ms linear;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
   }
 
   #SLCollection-{{ section.id }} .sl-add-to-cart-btn:hover {
@@ -508,16 +507,15 @@
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
-    padding: 10px 30px;
+    padding: 12px 16px;
     background: {{ section.settings.oos_button_background }};
-    border: 1.5px solid {{ section.settings.oos_button_border_color }};
-    border-radius: 0;
-    font-size: 1.3rem;
-    font-weight: 600;
-    font-family: var(--font-body-family);
+    border: {{ section.settings.oos_button_border_width }}px solid {{ section.settings.oos_button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: 13px;
+    font-weight: 500;
     line-height: 1.4;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.5px;
     color: {{ section.settings.oos_button_text }};
     opacity: {{ section.settings.oos_button_opacity | divided_by: 100.0 }};
     cursor: not-allowed;
@@ -544,8 +542,9 @@
       align-self: start;
     }
 
+    /* On mobile, OOS btn gets full border-radius (bell is separate row) */
     #SLCollection-{{ section.id }} .sl-oos-button-row .sl-oos-btn {
-      border-radius: 0 !important;
+      border-radius: {{ section.settings.button_border_radius }}px !important;
     }
 
   }
@@ -562,18 +561,17 @@
 
   #SLCollection-{{ section.id }} .sl-subscribe-btn {
     width: 100%;
-    padding: 10px 30px;
+    padding: 12px 16px;
     background: {{ section.settings.subscribe_button_background }};
     color: {{ section.settings.subscribe_button_text }};
-    border: 1.5px solid {{ section.settings.subscribe_button_border_color }};
-    border-radius: 0;
-    font-size: 1.3rem;
-    font-weight: 600;
-    font-family: var(--font-body-family);
+    border: {{ section.settings.subscribe_button_border_width }}px solid {{ section.settings.subscribe_button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    transition: all 300ms linear;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
     text-decoration: none;
     text-align: center;
     display: block;
@@ -635,17 +633,16 @@
 
   #SLCollection-{{ section.id }} .sl-promo-btn {
     display: inline-block;
-    padding: 10px 30px;
+    padding: 12px 24px;
     background: {{ section.settings.promo_button_background }};
     color: {{ section.settings.promo_button_text }};
     text-decoration: none;
-    border-radius: 0;
-    font-size: 1.3rem;
-    font-weight: 600;
-    font-family: var(--font-body-family);
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: 13px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    transition: all 300ms linear;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s ease;
   }
 
   #SLCollection-{{ section.id }} .sl-promo-btn:hover {
@@ -721,7 +718,7 @@ min-height:40px;
     font-weight: 600;
     color: {{ section.settings.title_color }};
     letter-spacing: 0.3px;
-    font-family: var(--font-body-family);
+    font-family: var(--font-heading-family);
   }
 
   #SLCollection-{{ section.id }} .sl-tag-filters {
@@ -857,25 +854,24 @@ min-height:40px;
   /* Scroll arrows */
   #SLCollection-{{ section.id }} .sl-category-arrow {
     position: absolute;
-    top: calc({{ section.settings.bubble_size }}px / 2 - 22px);
-    width: 44px;
-    height: 44px;
+    top: calc({{ section.settings.bubble_size }}px / 2 - 16px);
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: var(--gradient-base-background-1);
-    border: 1px solid var(--color-border, #e5e5e5);
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.12);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 3;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    transition: all 300ms linear;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: opacity 0.2s ease;
     padding: 0;
   }
 
   #SLCollection-{{ section.id }} .sl-category-arrow:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    background: var(--gradient-base-background-3);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
   }
 
   #SLCollection-{{ section.id }} .sl-category-arrow--prev {
@@ -890,11 +886,11 @@ min-height:40px;
     display: none;
   }
 
-  #SLCollection-{{ section.id }} .sl-category-arrow {
-    font-family: var(--font-body-family);
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: rgb(var(--color-base-text));
+  #SLCollection-{{ section.id }} .sl-category-arrow svg {
+    width: 16px;
+    height: 16px;
+    stroke: {{ section.settings.title_color }};
+    fill: none;
   }
 
   /* ========== Tag Filter Accordion ========== */
@@ -993,10 +989,6 @@ min-height:40px;
 
   @media screen and (max-width: 749px) {
     #SLCollection-{{ section.id }} .sl-filter-section {
-      display: none;
-    }
-
-    #SLCollection-{{ section.id }} .sl-filter-accordion {
       display: none;
     }
 
@@ -1286,18 +1278,6 @@ min-height:40px;
       endif
     endif
 
-    assign show_tag_filters = section.settings.enable_tag_filtering
-    if show_tag_filters and section.settings.filter_exclude_collections != blank
-      assign excluded_filter_handles = section.settings.filter_exclude_collections | split: ','
-      for handle in excluded_filter_handles
-        assign clean_handle = handle | strip | handleize
-        if collection.handle == clean_handle
-          assign show_tag_filters = false
-          break
-        endif
-      endfor
-    endif
-
     assign current_sort_by = collection.sort_by | default: collection.default_sort_by
     capture sort_param
       if current_sort_by != blank and current_sort_by != collection.default_sort_by
@@ -1332,7 +1312,7 @@ min-height:40px;
 
           {%- comment -%} Mobile sort button {%- endcomment -%}
           <div class="sl-mobile-controls">
-            {%- if show_tag_filters -%}
+            {%- if section.settings.enable_tag_filtering -%}
               <button type="button" class="sl-mobile-filter-btn" data-mobile-filter-toggle>
                 {{ section.settings.filter_label }}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
@@ -1348,15 +1328,11 @@ min-height:40px;
         </div>
 
         <div class="sl-category-track-wrapper">
-          <button type="button" class="sl-category-arrow sl-category-arrow--prev" hidden aria-label="Scroll left" data-bubble-prev>&#8592;</button>
+          <button type="button" class="sl-category-arrow sl-category-arrow--prev" hidden aria-label="Scroll left" data-bubble-prev>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
 
           <div class="sl-category-track" data-bubble-track>
-            <a href="/collections/all" class="sl-category-item">
-              <div class="sl-category-bubble">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-              </div>
-              <span class="sl-category-label">View All</span>
-            </a>
             {%- for col in collections -%}
               {%- assign parent_ref = col.metafields.custom.parent_collection.value -%}
               {%- if parent_ref != blank and parent_ref.handle == collection.handle -%}
@@ -1374,11 +1350,13 @@ min-height:40px;
             {%- endfor -%}
           </div>
 
-          <button type="button" class="sl-category-arrow sl-category-arrow--next" aria-label="Scroll right" data-bubble-next>&#8594;</button>
+          <button type="button" class="sl-category-arrow sl-category-arrow--next" aria-label="Scroll right" data-bubble-next>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
         </div>
 
         {%- comment -%} Tag filters in closed accordion for parent collections {%- endcomment -%}
-        {%- if show_tag_filters -%}
+        {%- if section.settings.enable_tag_filtering -%}
           <details class="sl-filter-accordion">
             <summary class="sl-filter-accordion__toggle">
               {{ section.settings.filter_label }}
@@ -1398,7 +1376,26 @@ min-height:40px;
                         {%- assign is_active = true -%}
                       {%- endif -%}
                     {%- endfor -%}
-                    <button type="button" class="sl-tag-btn{% if is_active %} sl-tag-btn--active{% endif %}" data-tag-handle="{{ clean_tag_handle }}">{{ clean_tag }}</button>
+                    {%- if is_active -%}
+                      {%- assign remaining_tags = '' -%}
+                      {%- for ct in current_tags -%}
+                        {%- assign ct_handle = ct | handleize -%}
+                        {%- unless ct_handle == clean_tag_handle -%}
+                          {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
+                          {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
+                        {%- endunless -%}
+                      {%- endfor -%}
+                      <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }}</a>
+                    {%- else -%}
+                      {%- assign new_tags = '' -%}
+                      {%- for ct in current_tags -%}
+                        {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
+                        {%- assign new_tags = new_tags | append: ct | handleize -%}
+                      {%- endfor -%}
+                      {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
+                      {%- assign new_tags = new_tags | append: clean_tag_handle -%}
+                      <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+                    {%- endif -%}
                   {%- endif -%}
                 {%- endfor -%}
               </div>
@@ -1407,7 +1404,7 @@ min-height:40px;
         {%- endif -%}
 
         {%- comment -%} Mobile drawers {%- endcomment -%}
-        {%- if show_tag_filters -%}
+        {%- if section.settings.enable_tag_filtering -%}
           <div class="sl-mobile-tag-drawer" data-mobile-tag-drawer>
             <button type="button" class="sl-mobile-drawer-close" data-mobile-drawer-close aria-label="Close filters">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -1424,7 +1421,26 @@ min-height:40px;
                     {%- assign is_active = true -%}
                   {%- endif -%}
                 {%- endfor -%}
-                <button type="button" class="sl-tag-btn{% if is_active %} sl-tag-btn--active{% endif %}" data-tag-handle="{{ clean_tag_handle }}">{{ clean_tag }}{% if is_active %} ✕{% endif %}</button>
+                {%- if is_active -%}
+                  {%- assign remaining_tags = '' -%}
+                  {%- for ct in current_tags -%}
+                    {%- assign ct_handle = ct | handleize -%}
+                    {%- unless ct_handle == clean_tag_handle -%}
+                      {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
+                      {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
+                    {%- endunless -%}
+                  {%- endfor -%}
+                  <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }} ✕</a>
+                {%- else -%}
+                  {%- assign new_tags = '' -%}
+                  {%- for ct in current_tags -%}
+                    {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
+                    {%- assign new_tags = new_tags | append: ct | handleize -%}
+                  {%- endfor -%}
+                  {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
+                  {%- assign new_tags = new_tags | append: clean_tag_handle -%}
+                  <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+                {%- endif -%}
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -1449,12 +1465,21 @@ min-height:40px;
       {%- comment -%} Mobile: Active tag pills (always visible) {%- endcomment -%}
       <div class="sl-mobile-active-tags">
         {%- for current_tag in current_tags -%}
-          <button type="button" class="sl-tag-btn sl-tag-btn--active" data-tag-handle="{{ current_tag | handleize }}">{{ current_tag }} ✕</button>
+          {%- assign remaining_tags = '' -%}
+          {%- assign current_tag_handle = current_tag | handleize -%}
+          {%- for ct in current_tags -%}
+            {%- assign ct_handle = ct | handleize -%}
+            {%- unless ct_handle == current_tag_handle -%}
+              {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
+              {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
+            {%- endunless -%}
+          {%- endfor -%}
+          <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ current_tag }} ✕</a>
         {%- endfor -%}
       </div>
     </div>
 
-  {%- elsif show_tag_filters -%}
+  {%- elsif section.settings.enable_tag_filtering -%}
     {%- comment -%} ===== Tag Filtering (standalone, no bubbles) ===== {%- endcomment -%}
     <div class="page-width">
       <div class="sl-filter-sort-bar">
@@ -1473,7 +1498,26 @@ min-height:40px;
                     {%- assign is_active = true -%}
                   {%- endif -%}
                 {%- endfor -%}
-                <button type="button" class="sl-tag-btn{% if is_active %} sl-tag-btn--active{% endif %}" data-tag-handle="{{ clean_tag_handle }}">{{ clean_tag }}</button>
+                {%- if is_active -%}
+                  {%- assign remaining_tags = '' -%}
+                  {%- for ct in current_tags -%}
+                    {%- assign ct_handle = ct | handleize -%}
+                    {%- unless ct_handle == clean_tag_handle -%}
+                      {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
+                      {%- assign remaining_tags = remaining_tags | append: ct -%}
+                    {%- endunless -%}
+                  {%- endfor -%}
+                  <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }}</a>
+                {%- else -%}
+                  {%- assign new_tags = '' -%}
+                  {%- for ct in current_tags -%}
+                    {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
+                    {%- assign new_tags = new_tags | append: ct -%}
+                  {%- endfor -%}
+                  {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
+                  {%- assign new_tags = new_tags | append: clean_tag_handle -%}
+                  <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+                {%- endif -%}
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -1522,11 +1566,30 @@ min-height:40px;
               {%- assign clean_tag_handle = clean_tag | handleize -%}
               {%- for current_tag in current_tags -%}
                 {%- assign current_tag_handle = current_tag | handleize -%}
-                  {%- if current_tag_handle == clean_tag_handle -%}
+                {%- if current_tag_handle == clean_tag_handle -%}
                   {%- assign is_active = true -%}
                 {%- endif -%}
               {%- endfor -%}
-              <button type="button" class="sl-tag-btn{% if is_active %} sl-tag-btn--active{% endif %}" data-tag-handle="{{ clean_tag_handle }}">{{ clean_tag }}{% if is_active %} ✕{% endif %}</button>
+              {%- if is_active -%}
+                {%- assign remaining_tags = '' -%}
+                {%- for ct in current_tags -%}
+                  {%- assign ct_handle = ct | handleize -%}
+                  {%- unless ct_handle == clean_tag_handle -%}
+                    {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
+                    {%- assign remaining_tags = remaining_tags | append: ct -%}
+                  {%- endunless -%}
+                {%- endfor -%}
+                <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }} ✕</a>
+              {%- else -%}
+                {%- assign new_tags = '' -%}
+                {%- for ct in current_tags -%}
+                  {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
+                  {%- assign new_tags = new_tags | append: ct -%}
+                {%- endfor -%}
+                {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
+                {%- assign new_tags = new_tags | append: clean_tag_handle -%}
+                <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+              {%- endif -%}
             {%- endif -%}
           {%- endfor -%}
         </div>
@@ -1550,18 +1613,27 @@ min-height:40px;
       {%- comment -%} Mobile: Active tag pills (always visible) {%- endcomment -%}
       <div class="sl-mobile-active-tags">
         {%- for current_tag in current_tags -%}
-          <button type="button" class="sl-tag-btn sl-tag-btn--active" data-tag-handle="{{ current_tag | handleize }}">{{ current_tag }} ✕</button>
+          {%- assign remaining_tags = '' -%}
+          {%- assign current_tag_handle = current_tag | handleize -%}
+          {%- for ct in current_tags -%}
+            {%- assign ct_handle = ct | handleize -%}
+            {%- unless ct_handle == current_tag_handle -%}
+              {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
+              {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
+            {%- endunless -%}
+          {%- endfor -%}
+          <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ current_tag }} ✕</a>
         {%- endfor -%}
       </div>
     </div>
   {%- endif -%}
 
-  {%- comment -%} Out-of-stock toggle — visible whenever the setting is on {%- endcomment -%}
-  {%- if section.settings.show_out_of_stock -%}
+  {%- comment -%} Out-of-stock toggle (always visible when OOS products exist) {%- endcomment -%}
+  {%- if oos_count > 0 -%}
     <div class="page-width">
       <div class="sl-oos-toggle" style="margin-bottom: 16px;">
         <input type="checkbox" id="sl-oos-toggle-{{ section.id }}" data-oos-toggle>
-        <label for="sl-oos-toggle-{{ section.id }}">Hide out of stock{% if oos_count > 0 %} ({{ oos_count }}){% endif %}</label>
+        <label for="sl-oos-toggle-{{ section.id }}">Hide out of stock ({{ oos_count }})</label>
       </div>
     </div>
   {%- endif -%}
@@ -2101,7 +2173,6 @@ min-height:40px;
 <script>
 (function() {
   const sectionId = '{{ section.id }}';
-  const collectionUrl = {{ collection.url | json }};
 
   /* ===== AJAX Section Rendering ===== */
   function renderSection(url, doPushState) {
@@ -2141,32 +2212,12 @@ min-height:40px;
       });
   }
 
-  /* ===== Bind Filter Tag Buttons (checkbox-style toggle) ===== */
+  /* ===== Bind Filter Tag Links (AJAX) ===== */
   function bindFilterLinks(sectionEl) {
-    sectionEl.querySelectorAll('.sl-tag-btn[data-tag-handle]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var handle = this.getAttribute('data-tag-handle');
-        var isActive = this.classList.contains('sl-tag-btn--active');
-
-        var activeBtns = sectionEl.querySelectorAll('.sl-tag-btn--active[data-tag-handle]');
-        var tags = [];
-        activeBtns.forEach(function(b) {
-          var h = b.getAttribute('data-tag-handle');
-          if (tags.indexOf(h) === -1) tags.push(h);
-        });
-
-        if (isActive) {
-          tags = tags.filter(function(t) { return t !== handle; });
-        } else {
-          if (tags.indexOf(handle) === -1) tags.push(handle);
-        }
-
-        var url = collectionUrl;
-        if (tags.length > 0) url += '/' + tags.join('+');
-        var sortParam = new URL(window.location.href).searchParams.get('sort_by');
-        if (sortParam) url += '?sort_by=' + sortParam;
-
-        renderSection(url);
+    sectionEl.querySelectorAll('.sl-tag-btn').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        renderSection(this.href);
       });
     });
   }
@@ -2260,9 +2311,6 @@ min-height:40px;
   /* ===== Bind Variant Selection ===== */
   function bindVariantSelection(sectionEl) {
     sectionEl.querySelectorAll('.sl-size-btn, .sl-color-swatch').forEach(function(button) {
-      if (button.hasAttribute('data-variant-bound')) return;
-      button.setAttribute('data-variant-bound', 'true');
-
       button.addEventListener('click', function() {
         if (this.getAttribute('data-unavailable') === 'true') return;
 
@@ -2358,16 +2406,9 @@ min-height:40px;
   }
 
   /* ===== Bind Add to Cart ===== */
-  var atcInProgress = false;
-
   function bindAddToCart(sectionEl) {
     sectionEl.querySelectorAll('.sl-add-to-cart-btn').forEach(function(button) {
-      if (button.hasAttribute('data-atc-bound')) return;
-      button.setAttribute('data-atc-bound', 'true');
-
       button.addEventListener('click', function() {
-        if (atcInProgress) return;
-
         var variantId = this.getAttribute('data-variant-id');
 
         if (!variantId) {
@@ -2375,7 +2416,6 @@ min-height:40px;
           return;
         }
 
-        atcInProgress = true;
         var originalContent = this.innerHTML;
         this.innerHTML = 'Adding...';
         this.disabled = true;
@@ -2388,7 +2428,7 @@ min-height:40px;
         if (cart) {
           try {
             var sectionsToRender = cart.getSectionsToRender().map(function(s) { return s.id; });
-            formData.append('sections', sectionsToRender.join(','));
+            formData.append('sections', sectionsToRender);
             formData.append('sections_url', window.location.pathname);
             cart.setActiveElement(document.activeElement);
           } catch (e) {
@@ -2424,14 +2464,12 @@ min-height:40px;
           setTimeout(function() {
             btn.innerHTML = originalContent;
             btn.disabled = false;
-            atcInProgress = false;
           }, 1500);
         })
         .catch(function(error) {
           console.error('Error adding to cart:', error);
           btn.innerHTML = originalContent;
           btn.disabled = false;
-          atcInProgress = false;
           alert('Error: ' + error.message);
         });
       });
@@ -3290,13 +3328,6 @@ min-height:40px;
       "default": true,
       "label": "Enable tag filter bar",
       "info": "Shows tag-based pill filters above the grid"
-    },
-    {
-      "type": "text",
-      "id": "filter_exclude_collections",
-      "label": "Hide filters on these collections",
-      "info": "Comma-separated collection handles (e.g. candles, merch). Filters won't appear on these collections.",
-      "default": ""
     },
     {
       "type": "text",
