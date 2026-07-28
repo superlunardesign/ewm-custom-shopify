@@ -201,6 +201,10 @@
       },
       "cart-drawer": {
         "type": "cart-drawer",
+        "custom_css": [
+          ".cart-drawer {background-color: white;}",
+          ".cart-drawer__empty-content{background-color:white;}"
+        ],
         "settings": {
           "cart_logo": "shopify://shop_images/Submark-Green.png",
           "cart_logo_width": 70
