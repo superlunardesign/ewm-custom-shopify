@@ -2260,6 +2260,9 @@ min-height:40px;
   /* ===== Bind Variant Selection ===== */
   function bindVariantSelection(sectionEl) {
     sectionEl.querySelectorAll('.sl-size-btn, .sl-color-swatch').forEach(function(button) {
+      if (button.hasAttribute('data-variant-bound')) return;
+      button.setAttribute('data-variant-bound', 'true');
+
       button.addEventListener('click', function() {
         if (this.getAttribute('data-unavailable') === 'true') return;
 
@@ -2355,9 +2358,16 @@ min-height:40px;
   }
 
   /* ===== Bind Add to Cart ===== */
+  var atcInProgress = false;
+
   function bindAddToCart(sectionEl) {
     sectionEl.querySelectorAll('.sl-add-to-cart-btn').forEach(function(button) {
+      if (button.hasAttribute('data-atc-bound')) return;
+      button.setAttribute('data-atc-bound', 'true');
+
       button.addEventListener('click', function() {
+        if (atcInProgress) return;
+
         var variantId = this.getAttribute('data-variant-id');
 
         if (!variantId) {
@@ -2365,6 +2375,7 @@ min-height:40px;
           return;
         }
 
+        atcInProgress = true;
         var originalContent = this.innerHTML;
         this.innerHTML = 'Adding...';
         this.disabled = true;
@@ -2377,7 +2388,7 @@ min-height:40px;
         if (cart) {
           try {
             var sectionsToRender = cart.getSectionsToRender().map(function(s) { return s.id; });
-            formData.append('sections', sectionsToRender);
+            formData.append('sections', sectionsToRender.join(','));
             formData.append('sections_url', window.location.pathname);
             cart.setActiveElement(document.activeElement);
           } catch (e) {
@@ -2413,12 +2424,14 @@ min-height:40px;
           setTimeout(function() {
             btn.innerHTML = originalContent;
             btn.disabled = false;
+            atcInProgress = false;
           }, 1500);
         })
         .catch(function(error) {
           console.error('Error adding to cart:', error);
           btn.innerHTML = originalContent;
           btn.disabled = false;
+          atcInProgress = false;
           alert('Error: ' + error.message);
         });
       });

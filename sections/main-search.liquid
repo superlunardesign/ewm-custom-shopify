@@ -750,7 +750,7 @@
       if (cart) {
         try {
           var sections = cart.getSectionsToRender().map(function(s) { return s.id; });
-          formData.append('sections', sections);
+          formData.append('sections', sections.join(','));
           formData.append('sections_url', window.location.pathname);
           cart.setActiveElement(document.activeElement);
         } catch (e) {}
