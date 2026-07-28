@@ -309,6 +309,25 @@
   <div id="CartDrawer" class="cart-drawer">
     <div id="CartDrawer-Overlay"class="cart-drawer__overlay"></div>
     <div class="drawer__inner" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
+      <div class="drawer__header">
+        {%- if cart_logo != blank -%}
+          {%- assign _logo_w = cart_logo_width | default: 70 -%}
+          {%- assign _logo_src_w = _logo_w | times: 2 -%}
+          {%- assign _logo_h = _logo_w | divided_by: cart_logo.aspect_ratio | round -%}
+          <a href="{{ routes.root_url }}" class="drawer__logo">
+            <img
+              src="{{ cart_logo | image_url: width: _logo_src_w }}"
+              alt="{{ shop.name | escape }}"
+              width="{{ _logo_w }}"
+              height="{{ _logo_h }}"
+              loading="lazy"
+            >
+          </a>
+        {%- else -%}
+          <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        {%- endif -%}
+        <button class="drawer__close close_icon_button" type="button" onclick="this.closest('cart-drawer').close()" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+      </div>
        {%- if cart == empty -%}
         <div class="drawer__inner-empty">
           <div class="cart-drawer__warnings center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
@@ -336,25 +355,6 @@
           {%- endif -%}
         </div>
       {%- endif -%}
-      <div class="drawer__header">
-        {%- if cart_logo != blank -%}
-          {%- assign _logo_w = cart_logo_width | default: 70 -%}
-          {%- assign _logo_src_w = _logo_w | times: 2 -%}
-          {%- assign _logo_h = _logo_w | divided_by: cart_logo.aspect_ratio | round -%}
-          <a href="{{ routes.root_url }}" class="drawer__logo">
-            <img
-              src="{{ cart_logo | image_url: width: _logo_src_w }}"
-              alt="{{ shop.name | escape }}"
-              width="{{ _logo_w }}"
-              height="{{ _logo_h }}"
-              loading="lazy"
-            >
-          </a>
-        {%- else -%}
-          <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
-        {%- endif -%}
-        <button class="drawer__close close_icon_button"  type="button" onclick="this.closest('cart-drawer').close()" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-      </div>
       <cart-drawer-items {% if cart == empty %}class=" is-empty"{% endif %}>
         <form action="{{ routes.cart_url }}" id="CartDrawer-Form" class="cart__contents cart-drawer__form" method="post">
           <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
