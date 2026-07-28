@@ -83,7 +83,7 @@
         "body_max_width": 700,
         "button_background": "#8c9b6d",
         "button_text_color": "#ffffff",
-        "button_hover_background": "#3a5c49",
+        "button_hover_background": "#57614C",
         "button_hover_text_color": "#ffffff",
         "button_border_radius": 0,
         "enable_animation": true,
@@ -887,7 +887,9 @@
         "marquee_color": "#c3d0b4",
         "marquee_font": "heading",
         "marquee_speed": 60,
-        "bg_color": "#FFFFFF",
+        "marquee_padding": 20,
+        "marquee_overlap": 40,
+        "bg_color": "#ffffff",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -1184,7 +1186,7 @@
         "overlay_darkness": 50,
         "enable_animation": false,
         "animation_duration": 600,
-        "text_color": "#FFFFFF",
+        "text_color": "#ffffff",
         "subheading_font": "body",
         "subheading_size": 16,
         "subheading_weight": "400",
