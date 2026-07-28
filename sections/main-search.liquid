@@ -733,11 +733,14 @@
   });
 
   /* Add to Cart */
+  var atcInProgress = false;
   searchGrid.querySelectorAll('.sl-add-to-cart-btn').forEach(function(button) {
     button.addEventListener('click', function() {
+      if (atcInProgress) return;
       var variantId = this.getAttribute('data-variant-id');
       if (!variantId) return;
 
+      atcInProgress = true;
       var originalContent = this.innerHTML;
       this.innerHTML = 'Adding...';
       this.disabled = true;
@@ -773,11 +776,12 @@
           window.location = '/cart';
           return;
         }
-        setTimeout(function() { btn.innerHTML = originalContent; btn.disabled = false; }, 1500);
+        setTimeout(function() { btn.innerHTML = originalContent; btn.disabled = false; atcInProgress = false; }, 1500);
       })
       .catch(function(error) {
         btn.innerHTML = originalContent;
         btn.disabled = false;
+        atcInProgress = false;
         alert('Error: ' + error.message);
       });
     });
