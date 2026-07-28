@@ -327,7 +327,7 @@
         "image_fit": "cover",
         "image_position_x": 50,
         "image_position_y": 50,
-        "image_width": 3,
+        "image_width": 2,
         "content_width": 2,
         "overlap_amount": 80,
         "vertical_inset": 30,
@@ -801,7 +801,7 @@
       "settings": {
         "image": "shopify://shop_images/BrandingPhotography-C_Mae-5672.jpg",
         "image_position": "left",
-        "desktop_height": 400,
+        "desktop_height": 300,
         "mobile_height": 200,
         "image_position_x": 50,
         "image_position_y": 50,
