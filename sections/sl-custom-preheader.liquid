@@ -87,18 +87,20 @@
 
   /* Search dropdown overlay */
   .sl-preheader__search-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0);
     z-index: 500;
+    pointer-events: none;
+    transition: background 0.3s ease;
   }
 
   .sl-preheader__search-overlay.is-open {
-    display: block;
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.4);
   }
 
   .sl-preheader__search-box {
@@ -106,10 +108,36 @@
     top: 0;
     left: 0;
     right: 0;
-    background: var(--gradient-base-background-1);
-    padding: 16px;
+    background: #fff;
+    padding: 0 16px 16px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sl-preheader__search-overlay.is-open .sl-preheader__search-box {
+    transform: translateY(0);
+  }
+
+  .sl-preheader__search-close-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0 6px;
+  }
+
+  .sl-preheader__search-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 4px;
+    display: flex;
+  }
+
+  .sl-preheader__search-close svg {
+    width: 22px;
+    height: 22px;
   }
 
   .sl-preheader__search-form {
@@ -149,24 +177,6 @@
   }
 
   .sl-preheader__search-form button[type="submit"] svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .sl-preheader__search-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #333;
-    padding: 4px;
-    display: flex;
-    z-index: 1;
-  }
-
-  .sl-preheader__search-close svg {
     width: 20px;
     height: 20px;
   }
@@ -330,6 +340,13 @@
 {%- comment -%} Search overlay (hidden by default, toggled by JS) {%- endcomment -%}
 <div class="sl-preheader__search-overlay" id="SLSearchOverlay" aria-hidden="true">
   <div class="sl-preheader__search-box">
+    <div class="sl-preheader__search-close-row">
+      <button type="button" class="sl-preheader__search-close" data-sl-search-close aria-label="{{ 'accessibility.close' | t }}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+        </svg>
+      </button>
+    </div>
     <form action="{{ routes.search_url }}" method="get" class="sl-preheader__search-form" role="search">
       <input
         type="search"
@@ -348,11 +365,6 @@
       </button>
     </form>
     <div class="sl-preheader__search-results" id="SLSearchResults"></div>
-    <button type="button" class="sl-preheader__search-close" data-sl-search-close aria-label="{{ 'accessibility.close' | t }}">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-      </svg>
-    </button>
   </div>
 </div>
 
@@ -368,7 +380,7 @@
         if (searchOverlay) {
           searchOverlay.classList.add('is-open');
           searchOverlay.setAttribute('aria-hidden', 'false');
-          if (searchInput) searchInput.focus();
+          if (searchInput) setTimeout(function() { searchInput.focus(); }, 150);
         }
       });
     });
