@@ -28,7 +28,7 @@
   text-align: {{ section.settings.heading_alignment | default: 'left' }};
   font-family: {% if section.settings.heading_font == 'body' %}var(--font-body-family){% else %}var(--font-heading-family){% endif %};
   font-size: {{ section.settings.heading_size | default: 24 }}px;
-  font-weight: {{ section.settings.heading_weight | default: '500' }};
+  font-weight: {% if section.settings.heading_font == 'body' %}{{ section.settings.heading_weight | default: '400' }}{% else %}{{ section.settings.heading_weight | default: '500' }}{% endif %};
   text-transform: {{ section.settings.heading_transform | default: 'uppercase' }};
   letter-spacing: 0.08em;
   color: {{ section.settings.heading_color | default: 'var(--gradient-base-accent-1)' }};
@@ -623,7 +623,7 @@
         { "value": "heading", "label": "Site heading font" },
         { "value": "body", "label": "Site body font" }
       ],
-      "default": "heading"
+      "default": "body"
     },
     {
       "type": "range",
@@ -645,7 +645,7 @@
         { "value": "600", "label": "Semi-bold (600)" },
         { "value": "700", "label": "Bold (700)" }
       ],
-      "default": "500"
+      "default": "400"
     },
     {
       "type": "select",
