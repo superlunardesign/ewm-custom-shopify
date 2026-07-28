@@ -60,7 +60,6 @@
 cart-drawer.is-empty .drawer__inner {
   display: flex;
   flex-direction: column;
-  padding: 0;
 }
 
 cart-drawer.is-empty .drawer__header {
