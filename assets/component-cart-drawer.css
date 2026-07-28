@@ -31,8 +31,7 @@
 }
 
 .drawer__inner-empty {
-  position: relative;
-  height: 100%;
+  flex: 1;
   padding: 0 1.5rem;
   background-color: rgb(var(--color-background));
   overflow: hidden;
@@ -59,14 +58,13 @@
 }
 
 cart-drawer.is-empty .drawer__inner {
-  display: grid;
-  grid-template-rows: 1fr;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
   padding: 0;
 }
 
 cart-drawer.is-empty .drawer__header {
-  display: none;
+  border-bottom: none;
 }
 
 cart-drawer:not(.is-empty) .cart-drawer__warnings,
