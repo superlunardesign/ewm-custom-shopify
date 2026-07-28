@@ -1556,12 +1556,12 @@ min-height:40px;
     </div>
   {%- endif -%}
 
-  {%- comment -%} Out-of-stock toggle (always visible when OOS products exist) {%- endcomment -%}
-  {%- if oos_count > 0 -%}
+  {%- comment -%} Out-of-stock toggle — visible whenever the setting is on {%- endcomment -%}
+  {%- if section.settings.show_out_of_stock -%}
     <div class="page-width">
       <div class="sl-oos-toggle" style="margin-bottom: 16px;">
         <input type="checkbox" id="sl-oos-toggle-{{ section.id }}" data-oos-toggle>
-        <label for="sl-oos-toggle-{{ section.id }}">Hide out of stock ({{ oos_count }})</label>
+        <label for="sl-oos-toggle-{{ section.id }}">Hide out of stock{% if oos_count > 0 %} ({{ oos_count }}){% endif %}</label>
       </div>
     </div>
   {%- endif -%}
