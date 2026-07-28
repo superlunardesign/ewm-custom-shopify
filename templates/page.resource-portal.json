@@ -111,7 +111,7 @@
     "resource_portal": {
       "type": "sl-resource-portal",
       "settings": {
-        "heading": "",
+        "heading": "Select a Document Below To View",
         "heading_size": "hxl",
         "heading_color": "#6b7c5e",
         "tab_1_label": "Consultation Downloads",
