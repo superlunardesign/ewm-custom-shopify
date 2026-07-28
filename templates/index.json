@@ -41,7 +41,7 @@
       "name": "Product Carousel",
       "settings": {
         "section_title": "Explore Our Acne Safe Skincare",
-        "collection": "acne",
+        "collection": "acne-safe-skincare",
         "products_limit": 10,
         "show_ratings": true,
         "rating_metafield_namespace": "reviews",

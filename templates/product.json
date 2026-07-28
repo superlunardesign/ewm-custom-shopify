@@ -253,7 +253,7 @@
         "heading_weight": "500",
         "heading_transform": "uppercase",
         "price_placement": "button",
-        "collection": "acne",
+        "collection": "acne-safe-skincare",
         "fallback_collection_handle": "{{ section.settings.collection.title }}",
         "products_limit": 8,
         "show_rating": true,
