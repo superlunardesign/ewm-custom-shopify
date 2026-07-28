@@ -19,10 +19,99 @@
         "padding_bottom": 0
       }
     },
+    "sl_content_banner_4zEzJF": {
+      "type": "sl-content-banner",
+      "blocks": {
+        "subheading_NrBY7H": {
+          "type": "subheading",
+          "settings": {
+            "text": "welcome to the acne bootcamp portal"
+          }
+        },
+        "heading_DRF77c": {
+          "type": "heading",
+          "settings": {
+            "text": "Everything You Need to Achieve Clearer Skin",
+            "size": "h0"
+          }
+        },
+        "spacer_R9Fbg8": {
+          "type": "spacer",
+          "settings": {
+            "height": 12
+          }
+        },
+        "text_WPfeF8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Below you'll find quick links, resources, documents and approved skincare to make your Acne Bootcamp experience smooth and successful.</p>"
+          }
+        },
+        "button_Ujp64f": {
+          "type": "button",
+          "settings": {
+            "text": "book a follow up",
+            "link": "https://booking.mangomint.com/314399",
+            "style": "secondary",
+            "button_bg_color": "",
+            "button_text_color": "",
+            "button_border_color": ""
+          }
+        },
+        "button_4cdUF6": {
+          "type": "button",
+          "settings": {
+            "text": "shop acne safe skincare",
+            "link": "shopify://collections/acne",
+            "style": "secondary",
+            "button_bg_color": "",
+            "button_text_color": "",
+            "button_border_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_NrBY7H",
+        "heading_DRF77c",
+        "spacer_R9Fbg8",
+        "text_WPfeF8",
+        "button_Ujp64f",
+        "button_4cdUF6"
+      ],
+      "name": "Content Banner",
+      "settings": {
+        "full_width": true,
+        "content_alignment": "center",
+        "content_max_width": 800,
+        "bg_type": "image",
+        "bg_color": "#1a1612",
+        "bg_image": "shopify://shop_images/BrandingPhotography-C_Mae-5608.jpg",
+        "bg_video_url": "",
+        "overlay_darkness": 40,
+        "enable_animation": false,
+        "animation_duration": 600,
+        "text_color": "#f0e8d8",
+        "subheading_font": "body",
+        "subheading_size": 16,
+        "subheading_weight": "400",
+        "body_font_size": 16,
+        "button_font": "heading",
+        "button_font_size": 14,
+        "button_font_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 10,
+        "button_padding_y": 14,
+        "button_padding_x": 36,
+        "button_border_radius": 0,
+        "button_hover_opacity": 85,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "resource_portal": {
       "type": "sl-resource-portal",
       "settings": {
-        "heading": "Acne Bootcamp Portal",
+        "heading": "",
         "heading_size": "hxl",
         "heading_color": "#6b7c5e",
         "tab_1_label": "Consultation Downloads",
@@ -44,10 +133,51 @@
         "padding_top": 40,
         "padding_bottom": 60
       }
+    },
+    "product_recommendations_aEkGtT": {
+      "type": "product-recommendations",
+      "name": "Product Carousel",
+      "settings": {
+        "full_width": false,
+        "desktop_columns": "4",
+        "heading": "ACNE-SAFE SKINCARE",
+        "heading_alignment": "left",
+        "heading_color": "#8C9B6D",
+        "heading_font": "heading",
+        "heading_size": 24,
+        "heading_weight": "500",
+        "heading_transform": "uppercase",
+        "price_placement": "title_row",
+        "collection": "acne",
+        "fallback_collection_handle": "best-selling-skincare",
+        "products_limit": 8,
+        "auto_scroll_mode": "off",
+        "auto_scroll_speed": 0.5,
+        "show_rating": true,
+        "show_atc": false,
+        "atc_label": "Add To Cart",
+        "image_ratio": "1 / 1",
+        "card_border_radius": 8,
+        "card_image_bg": "#f5f5f3",
+        "section_bg": "#ffffff",
+        "atc_bg": "#7f9f6f",
+        "atc_text": "#ffffff",
+        "atc_border_width": 0,
+        "atc_border_color": "#ffffff",
+        "atc_radius": 0,
+        "button_font": "heading",
+        "button_font_size": 13,
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 1,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
     "main",
-    "resource_portal"
+    "sl_content_banner_4zEzJF",
+    "resource_portal",
+    "product_recommendations_aEkGtT"
   ]
 }
