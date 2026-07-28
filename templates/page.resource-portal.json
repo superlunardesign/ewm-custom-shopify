@@ -30,8 +30,8 @@
         "tab_3_label": "Book an Appointment",
         "tab_3_link": "https://booking.mangomint.com/314399",
         "tab_bg_color": "#8c9b6d",
-        "tab_text_color": "#FFFFFF",
-        "tab_active_color": "#FFFFFF",
+        "tab_text_color": "#ffffff",
+        "tab_active_color": "#ffffff",
         "card_gap": 12,
         "card_bg_color": "#ffffff",
         "card_border_color": "#d4d4a0",
@@ -40,6 +40,7 @@
         "icon_color": "#c0392b",
         "card_radius": 4,
         "bg_color": "#ffffff",
+        "full_width": true,
         "padding_top": 40,
         "padding_bottom": 60
       }
