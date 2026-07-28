@@ -110,14 +110,15 @@
     right: 0;
     background: #fff;
     padding: 0 16px 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: none;
     box-sizing: border-box;
     transform: translateY(-100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .sl-preheader__search-overlay.is-open .sl-preheader__search-box {
     transform: translateY(0);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
   }
 
   .sl-preheader__search-close-row {
