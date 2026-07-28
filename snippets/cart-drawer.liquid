@@ -337,7 +337,19 @@
         </div>
       {%- endif -%}
       <div class="drawer__header">
-        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        {%- if cart_logo != blank -%}
+          <a href="{{ routes.root_url }}" class="drawer__logo">
+            <img
+              src="{{ cart_logo | image_url: width: cart_logo_width | times: 2 }}"
+              alt="{{ shop.name | escape }}"
+              width="{{ cart_logo_width | default: 70 }}"
+              height="{{ cart_logo_width | default: 70 | divided_by: cart_logo.aspect_ratio | round }}"
+              loading="lazy"
+            >
+          </a>
+        {%- else -%}
+          <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        {%- endif -%}
         <button class="drawer__close close_icon_button"  type="button" onclick="this.closest('cart-drawer').close()" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
       </div>
       <cart-drawer-items {% if cart == empty %}class=" is-empty"{% endif %}>

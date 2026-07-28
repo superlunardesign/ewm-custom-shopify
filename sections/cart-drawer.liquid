@@ -1,1 +1,25 @@
-{%- render 'cart-drawer' -%}
+{%- render 'cart-drawer', cart_logo: section.settings.cart_logo, cart_logo_width: section.settings.cart_logo_width -%}
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "cart_logo",
+      "label": "Cart Drawer Logo",
+      "info": "Displayed at the top of the cart drawer (e.g. monogram)"
+    },
+    {
+      "type": "range",
+      "id": "cart_logo_width",
+      "label": "Logo Width",
+      "min": 30,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 70
+    }
+  ]
+}
+{% endschema %}

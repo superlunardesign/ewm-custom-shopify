@@ -90,6 +90,15 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   border-bottom: 0.1rem solid rgba(var(--color-foreground),.2);
 }
 
+.drawer__logo {
+  display: flex;
+  align-items: center;
+}
+
+.drawer__logo img {
+  display: block;
+}
+
 .drawer__heading {
   margin: 0;
   font-size: 2.2rem;
