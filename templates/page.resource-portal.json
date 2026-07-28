@@ -62,7 +62,7 @@
           "type": "button",
           "settings": {
             "text": "shop acne safe skincare",
-            "link": "shopify://collections/acne",
+            "link": "shopify://collections/acne-safe-skincare",
             "style": "secondary",
             "button_bg_color": "",
             "button_text_color": "",
@@ -148,7 +148,7 @@
         "heading_weight": "500",
         "heading_transform": "uppercase",
         "price_placement": "title_row",
-        "collection": "acne",
+        "collection": "acne-safe-skincare",
         "fallback_collection_handle": "best-selling-skincare",
         "products_limit": 8,
         "auto_scroll_mode": "off",
