@@ -128,7 +128,7 @@
     min-width: 0;
     padding: 12px 16px;
     border: none;
-    font-size: 15px;
+    font-size: 16px;
     font-family: var(--font-body-family);
     outline: none;
     background: transparent;
@@ -212,6 +212,16 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+  }
+
+  .sl-preheader__search-result-vendor {
+    font-family: var(--font-body-family);
+    font-size: 11px;
+    font-weight: 400;
+    color: #999;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .sl-preheader__search-result-title {
@@ -410,25 +420,18 @@
       searchResults.innerHTML = '<div class="sl-preheader__search-loading">Searching...</div>';
       searchResults.classList.add('is-visible');
 
-      fetch(window.routes.predictive_search_url + '?q=' + encodeURIComponent(term) + '&resources%5Btype%5D=product&resources%5Blimit%5D=2&section_id=predictive-search')
-        .then(function(r) { return r.text(); })
-        .then(function(html) {
-          var doc = new DOMParser().parseFromString(html, 'text/html');
-          var items = doc.querySelectorAll('.predictive-search__list-item:not(#predictive-search-option-search-keywords)');
-          var products = [];
-          items.forEach(function(li) {
-            var link = li.querySelector('a');
-            if (!link) return;
-            var img = link.querySelector('img');
-            var title = link.querySelector('.predictive-search__item-heading');
-            var priceEl = link.querySelector('.price-item--sale, .price-item--regular, .price-item--last');
-            products.push({
-              url: link.getAttribute('href'),
-              image: img ? img.getAttribute('src') : '',
-              alt: img ? (img.getAttribute('alt') || '') : '',
-              title: title ? title.textContent.trim() : '',
-              price: priceEl ? priceEl.textContent.trim() : ''
-            });
+      fetch(window.routes.predictive_search_url + '?q=' + encodeURIComponent(term) + '&resources%5Btype%5D=product&resources%5Blimit%5D=2')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var items = (data.resources && data.resources.results && data.resources.results.products) || [];
+          var products = items.map(function(p) {
+            return {
+              url: p.url,
+              image: p.image || '',
+              title: p.title || '',
+              vendor: p.vendor || '',
+              price: p.price
+            };
           });
 
           psCache[cacheKey] = products;
@@ -450,11 +453,12 @@
       products.forEach(function(p) {
         html += '<a href="' + p.url + '" class="sl-preheader__search-result">';
         if (p.image) {
-          html += '<img src="' + p.image + '" alt="' + p.alt.replace(/"/g, '&quot;') + '" loading="lazy">';
+          html += '<img src="' + p.image + '" alt="" loading="lazy">';
         } else {
           html += '<div></div>';
         }
         html += '<div class="sl-preheader__search-result-info">';
+        if (p.vendor) html += '<p class="sl-preheader__search-result-vendor">' + p.vendor + '</p>';
         html += '<p class="sl-preheader__search-result-title">' + p.title + '</p>';
         if (p.price) html += '<p class="sl-preheader__search-result-price">' + p.price + '</p>';
         html += '</div></a>';
