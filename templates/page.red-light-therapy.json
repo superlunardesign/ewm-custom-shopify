@@ -161,7 +161,7 @@
           "type": "button",
           "settings": {
             "text": "see our red light treatment options ↓",
-            "link": "#services",
+            "link": "#treatments",
             "style": "secondary"
           }
         }
@@ -284,7 +284,7 @@
         "background_size": "cover",
         "background_position_x": 50,
         "background_position_y": 50,
-        "section_background": "#F5F0EB",
+        "section_background": "#f5f0eb",
         "section_padding": 60,
         "max_width": 1200,
         "grid_gap": 30,
@@ -904,7 +904,7 @@
         "section_title": "Frequently Asked Questions",
         "section_subtitle": "Find answers to common questions",
         "header_alignment": "center",
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "section_padding": 40,
         "max_width": 900,
         "show_toggle_button": true,
