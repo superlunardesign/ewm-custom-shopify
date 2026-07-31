@@ -291,8 +291,8 @@
         "marquee_color": "#c4956a",
         "marquee_font": "heading",
         "marquee_speed": 20,
-        "marquee_offset_desktop": 0,
-        "marquee_offset_mobile": 0,
+        "marquee_padding": 20,
+        "marquee_overlap": 40,
         "bg_color": "#ffffff",
         "padding_top": 36,
         "padding_bottom": 36
@@ -365,7 +365,7 @@
             "show_button": true,
             "button_text": "Book Virtual Acne Consultation",
             "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p>Meet via Zoom with Shannon — Certified Acne Expert — to work towards clear, healthier skin!</p><p><strong>We Will Discuss & Educate On:</strong> What acne is, Your specific acne and skin type, Lifestyle factors impacting your acne, Food factors & so much more</p><p><strong>What's Included:</strong></p><p>✦ Virtual visit via Zoom</p><p>✦ Customized skincare routine created for you</p><p>✦ Products shipped directly to you</p><p>✦ Resources to help you on your journey</p><p>✦ Complimentary virtual follow-up</p><p><strong>Good to know:</strong> This is a great option for those local who cannot make it in & for clients worldwide.</p>"
+            "service_description": "<p>Meet via Google Meet with one of our Certified Acne Experts to work towards clear, healthier skin!</p><p><strong>We Will Discuss & Educate On:</strong> What acne is, Your specific acne and skin type, Lifestyle factors impacting your acne, Food factors & so much more</p><p><strong>What's Included:</strong></p><p>✦ Virtual visit via Zoom</p><p>✦ Customized skincare routine created for you</p><p>✦ Products shipped directly to you</p><p>✦ Resources to help you on your journey</p><p>✦ Complimentary virtual follow-up</p><p><strong>Good to know:</strong> This is a great option for those local who cannot make it in & for clients worldwide.</p>"
           }
         }
       },
@@ -461,7 +461,7 @@
         "section_heading": "Getting started is effortless",
         "section_heading_size": "h1",
         "section_heading_color": "#000000",
-        "section_subheading_color": "#FFFFFF",
+        "section_subheading_color": "#ffffff",
         "columns": "3",
         "card_gap": 16,
         "enable_sticky": true,
@@ -473,7 +473,7 @@
         "enable_marquee": true,
         "marquee_text": "HOW IT WORKS",
         "marquee_size": 160,
-        "marquee_color": "#57614C",
+        "marquee_color": "#57614c",
         "marquee_font": "heading",
         "marquee_speed": 60,
         "step_prefix": "STEP",
