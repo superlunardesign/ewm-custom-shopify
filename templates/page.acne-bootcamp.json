@@ -83,7 +83,7 @@
         "body_max_width": 700,
         "button_background": "#8c9b6d",
         "button_text_color": "#ffffff",
-        "button_hover_background": "#57614C",
+        "button_hover_background": "#57614c",
         "button_hover_text_color": "#ffffff",
         "button_border_radius": 0,
         "enable_animation": true,
@@ -1113,7 +1113,7 @@
             "icon_type": "fontawesome",
             "icon_class": "fas fa-pencil",
             "heading": "Fill Out the Proper Materials",
-            "text": "Complete the proper waiver & questionnaire before your arrival to save time. Access Waiver below."
+            "text": "Complete the proper waiver & questionnaire before your arrival to save time. <a href=\"https://mangomint.co/VYNbRK\">Access Waiver here.</a>"
           }
         },
         "value_prop_8wr4FY": {
@@ -1131,7 +1131,9 @@
         "value_prop_LbwcT6",
         "value_prop_8wr4FY"
       ],
-      "custom_css": [],
+      "custom_css": [
+        "a{color:#8C9B6D; text-decoration:underline;}"
+      ],
       "name": "How to Prepare",
       "settings": {
         "main_heading": "How to Prepare for Your First Session",
