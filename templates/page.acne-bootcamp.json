@@ -1132,7 +1132,7 @@
         "value_prop_8wr4FY"
       ],
       "custom_css": [
-        "a{color:#8C9B6D; text-decoration:underline;}"
+        "a {color: #8c9b6d; text-decoration: underline;}"
       ],
       "name": "How to Prepare",
       "settings": {
@@ -1318,7 +1318,7 @@
         "button_eMk7Vk": {
           "type": "button",
           "settings": {
-            "text": "Book Your Consultation",
+            "text": "Book Your Assessment",
             "link": "https://booking.mangomint.com/314399",
             "style": "secondary",
             "button_bg_color": "",

@@ -184,7 +184,7 @@
         "text_KhYACT": {
           "type": "text",
           "settings": {
-            "text": "<p>Don't let time or distance hold you back from achieving your skincare goals. Experience the convenience and effectiveness of virtual skincare consultations.</p>"
+            "text": "<p>Don't let time or distance hold you back from achieving your skincare goals. Experience the convenience and effectiveness of virtual skincare appointments.</p>"
           }
         }
       },
@@ -350,20 +350,20 @@
             "show_button": true,
             "button_text": "Book Virtual Skin Consultation",
             "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p>This is for any skin concern that is not acne related.</p><p><strong>If You Struggle With:</strong> Dry skin, Oily or combo skin, Aging skin & more — this is the choice for you!</p><p><strong>What's Included:</strong></p><p>✦ Virtual visit via Zoom</p><p>✦ Deep dive into your skin</p><p>✦ Great skin education just for you</p><p>✦ All your skincare questions answered</p><p>✦ Products shipped directly to you with detailed instructions</p><p>✦ Complimentary virtual follow-up</p>"
+            "service_description": "<p>This is for any skin concern that is not acne related.</p><p><strong>If You Struggle With:</strong> Dry skin, Oily or combo skin, Aging skin & more — this is the choice for you!</p><p><strong>What's Included:</strong></p><p>✦ Virtual visit via Google Meet</p><p>✦ Deep dive into your skin</p><p>✦ Great skin education just for you</p><p>✦ All your skincare questions answered</p><p>✦ Products shipped directly to you with detailed instructions</p><p>✦ Complimentary virtual follow-up</p>"
           }
         },
         "service_item_gidiKJ": {
           "type": "service_item",
           "name": "Hand Treatment",
           "settings": {
-            "service_name": "Virtual Acne Bootcamp Consultation",
+            "service_name": "Virtual Acne Bootcamp Assessment",
             "add_line": false,
             "service_extra": "Meet via Zoom with Shannon — Certified Acne Expert",
             "service_price": "65 / 45 min",
             "is_complimentary": false,
             "show_button": true,
-            "button_text": "Book Virtual Acne Consultation",
+            "button_text": "Book Virtual Acne Assessment",
             "button_link": "https://booking.mangomint.com/314399",
             "service_description": "<p>Meet via Google Meet with one of our Certified Acne Experts to work towards clear, healthier skin!</p><p><strong>We Will Discuss & Educate On:</strong> What acne is, Your specific acne and skin type, Lifestyle factors impacting your acne, Food factors & so much more</p><p><strong>What's Included:</strong></p><p>✦ Virtual visit via Zoom</p><p>✦ Customized skincare routine created for you</p><p>✦ Products shipped directly to you</p><p>✦ Resources to help you on your journey</p><p>✦ Complimentary virtual follow-up</p><p><strong>Good to know:</strong> This is a great option for those local who cannot make it in & for clients worldwide.</p>"
           }
