@@ -57,7 +57,7 @@
         "media_opacity": 60,
         "desktop_height": 80,
         "min_height": 400,
-        "mobile_height": 80,
+        "mobile_height": 85,
         "mobile_min_height": 300,
         "vertical_alignment": "center",
         "text_alignment": "center",
