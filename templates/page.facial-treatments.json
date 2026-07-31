@@ -231,7 +231,7 @@
         "text_qaqr9X": {
           "type": "text",
           "settings": {
-            "text": "<p>Why We're Your Skin Solution:<br/><br/>✓ Licensed estheticians with advanced certification in corrective treatments<br/>✓ Expert in treating acne, aging, hyperpigmentation, and sensitive skin<br/>✓ Continuous education in the latest skincare science and techniques<br/>✓ Customized approach - no two facials are exactly alike<br/>✓ Professional-grade products and advanced modalities<br/>✓ Honest, realistic expectations and results-focused treatments</p><p>We believe in education as much as treatment. When you leave my treatment room, you'll understand your skin better and know exactly how to care for it at home. This isn't just about today's facial - it's about transforming your skin for life.</p>"
+            "text": "<p>Why We're Your Skin Solution:<br/><br/>✓ Licensed estheticians with advanced certification in corrective treatments<br/>✓ Expert in treating acne, aging, hyperpigmentation, and sensitive skin<br/>✓ Continuous education in the latest skincare science and techniques<br/>✓ Customized approach - no two facials are exactly alike<br/>✓ Professional products and advanced modalities<br/>✓ Honest, realistic expectations and results-focused treatments</p><p>We believe in education as much as treatment. When you leave my treatment room, you'll understand your skin better and know exactly how to care for it at home. This isn't just about today's facial - it's about transforming your skin for life.</p>"
           }
         },
         "button_VRtghC": {
@@ -314,7 +314,7 @@
             "icon_type": "fontawesome",
             "icon_class": "fas fa-star",
             "heading": "Advanced Treatment Options",
-            "text": "From dermaplaning to chemical peels, LED therapy to high-frequency, we offer cutting-edge treatments that deliver real, visible results."
+            "text": "Chemical peels, Red Light Therapy and more, we offer cutting-edge treatments that deliver real, visible results."
           }
         }
       },
@@ -1068,7 +1068,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Is there downtime after a facial?",
-            "answer": "<p>Most facials have no downtime - you'll leave glowing! You may have slight redness for a few hours, especially after extractions. We recommend avoiding heavy makeup for the rest of the day and skipping intense exercise for 24 hours. For treatments with peels or dermaplaning, we'll give you specific aftercare instructions, but you can return to normal activities immediately.</p>"
+            "answer": "<p>Most facials have no downtime - you'll leave glowing! You may have slight redness for a few hours, especially after extractions. We recommend avoiding heavy makeup for the rest of the day and skipping intense exercise for 24 hours. For treatments with peels we'll give you specific aftercare instructions, but you can return to normal activities immediately.</p>"
           }
         },
         "faq_item_P6KPXe": {
