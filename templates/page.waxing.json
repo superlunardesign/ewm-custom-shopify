@@ -1172,7 +1172,7 @@
           "type": "faq_item",
           "settings": {
             "question": "What are your business hours?",
-            "answer": "<p>We are open Monday through Friday from 9:00 AM to 6:00 PM, and Saturday from 10:00 AM to 4:00 PM. We are closed on Sundays and major holidays.</p>"
+            "answer": "<p>Monday through Friday: 9:00 AM to 8:00 PM, Saturday: 9:00 AM to 1:00 PM, Closed Sundays. These hours are subject to change for holidays.</p>"
           }
         }
       },
