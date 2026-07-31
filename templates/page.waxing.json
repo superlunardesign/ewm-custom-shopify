@@ -184,7 +184,7 @@
       "settings": {
         "section_title": "",
         "section_subtitle": "",
-        "section_background": "#F5F0EB",
+        "section_background": "#f5f0eb",
         "section_padding": 60,
         "heading_color": "#000000",
         "heading_size": 36,
@@ -223,7 +223,7 @@
         "text_size": 16,
         "mobile_text_size": 15,
         "star_size": 18,
-        "star_color": "#8A9979",
+        "star_color": "#8a9979",
         "empty_star_color": "#e0e0e0",
         "show_divider": true,
         "divider_color": "#eeeeee",
@@ -256,20 +256,20 @@
         "heading_eFifqB": {
           "type": "heading",
           "settings": {
-            "text": "Hi, I'm Shannon. Owner of Esthetics With Me",
+            "text": "Esthetics With Me is Different",
             "size": "h1"
           }
         },
         "text_NMUWrE": {
           "type": "text",
           "settings": {
-            "text": "<p>✓ Licensed and certified esthetician with specialized Brazilian waxing training<br/>✓ Years of experience with all skin types and sensitivities<br/>✓ Gentle technique that minimizes discomfort<br/>✓ Premium wax that grips hair, not skin<br/>✓ Personalized aftercare guidance for every client<br/><br/>I've been where you are - hesitant about waxing because of past experiences or fear of the unknown. That's why I've made it my mission to provide McHenry with a waxing service that prioritizes your comfort, privacy, and results.</p>"
+            "text": "<p>✓ Licensed and certified estheticians with specialized Brazilian waxing training<br/>✓ Years of experience with all skin types and sensitivities<br/>✓ Gentle technique that minimizes discomfort<br/>✓ Premium wax that grips hair, not skin<br/>✓ Personalized aftercare guidance for every client<br/><br/>We've all been where you are - hesitant about waxing because of past experiences or fear of the unknown. That's why we've made it our mission to provide McHenry with a waxing service that prioritizes your comfort, privacy, and results.</p>"
           }
         },
         "text_Kk6iEr": {
           "type": "text",
           "settings": {
-            "text": "<p>I understand exactly what you're going through. After years of perfecting my technique and helping hundreds of clients achieve smooth, lasting results, my team and I have created a waxing experience that's different.</p><p></p><p></p>"
+            "text": "<p>We understand exactly what you're going through. After years of perfecting our technique and helping hundreds of clients achieve smooth, lasting results, our team has created a waxing experience that's not just different, its unmatched.</p><p></p><p></p>"
           }
         },
         "button_QrjVek": {
@@ -290,7 +290,7 @@
       ],
       "name": "EWM Image + Text Overlap",
       "settings": {
-        "image": "shopify://shop_images/BrandingPhotography-C.Mae-5943.jpg",
+        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5620.jpg",
         "image_position": "left",
         "desktop_height": 550,
         "mobile_height": 350,
@@ -400,7 +400,7 @@
         "background_size": "cover",
         "background_position_x": 50,
         "background_position_y": 50,
-        "section_background": "#F5F0EB",
+        "section_background": "#f5f0eb",
         "section_padding": 60,
         "max_width": 1200,
         "grid_gap": 30,
@@ -965,6 +965,15 @@
         "subheading_size": 16,
         "subheading_weight": "400",
         "body_font_size": 16,
+        "button_font": "heading",
+        "button_font_size": 14,
+        "button_font_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 10,
+        "button_padding_y": 14,
+        "button_padding_x": 36,
+        "button_border_radius": 0,
+        "button_hover_opacity": 85,
         "padding_top": 80,
         "padding_bottom": 80
       }
@@ -1016,6 +1025,8 @@
         "columns": "3",
         "card_gap": 20,
         "image_ratio": "3 / 4",
+        "card_height_desktop": 0,
+        "card_height_mobile": 0,
         "heading": "",
         "heading_size": "h1",
         "heading_color": "#1a1a1a",
@@ -1030,15 +1041,17 @@
         "overlay_text_align": "center",
         "button_gap": 12,
         "button_font_size": 14,
-        "button_text_color": "#FFFFFF",
-        "button_border_color": "#FFFFFF",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#ffffff",
         "enable_marquee": true,
         "marquee_text": "HOW IT WORKS",
         "marquee_size": 160,
-        "marquee_color": "#8A9979",
+        "marquee_color": "#8a9979",
         "marquee_font": "heading",
         "marquee_speed": 60,
-        "bg_color": "#FFFFFF",
+        "marquee_padding": 20,
+        "marquee_overlap": 40,
+        "bg_color": "#ffffff",
         "padding_top": 100,
         "padding_bottom": 36
       }
@@ -1069,13 +1082,15 @@
         "card_border_radius": 8,
         "card_image_bg": "#f5f5f3",
         "section_bg": "#ffffff",
-        "atc_bg": "#8A9979",
+        "atc_bg": "#8a9979",
         "atc_text": "#ffffff",
         "atc_border_width": 0,
         "atc_border_color": "#ffffff",
         "atc_radius": 0,
         "button_font": "heading",
         "button_font_size": 13,
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 1,
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -1182,7 +1197,7 @@
         "section_title": "FREQUENTLY ASKED QUESTIONS",
         "section_subtitle": "",
         "header_alignment": "center",
-        "background_color": "#F5F0EB",
+        "background_color": "#f5f0eb",
         "section_padding": 40,
         "max_width": 900,
         "show_toggle_button": true,
@@ -1201,7 +1216,7 @@
         "answer_color": "#333333",
         "answer_size": 16,
         "item_padding": 25,
-        "border_color": "#C3D0B4",
+        "border_color": "#c3d0b4",
         "toggle_color": "#666666",
         "toggle_hover_color": "#000000",
         "mobile_header_size": 26,
@@ -1264,6 +1279,15 @@
         "subheading_size": 16,
         "subheading_weight": "400",
         "body_font_size": 16,
+        "button_font": "heading",
+        "button_font_size": 14,
+        "button_font_weight": "500",
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 10,
+        "button_padding_y": 14,
+        "button_padding_x": 36,
+        "button_border_radius": 0,
+        "button_hover_opacity": 85,
         "padding_top": 80,
         "padding_bottom": 80
       }
