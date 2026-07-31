@@ -428,44 +428,58 @@
             "concern_label": "Acne & Breakouts",
             "symptoms": "Persistent pimples, redness, and inflammation.",
             "service_subheading": "TRY OUR",
-            "service_title": "Clear Skin Facial",
+            "service_title": "Mini Refresh Facial",
             "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5625_b9bf1da6-5bce-4dc4-999a-cab564433c4b.jpg",
             "service_description": "A deep-cleansing facial that targets breakouts with antibacterial masks and gentle extractions.",
             "button_text": "BOOK HERE",
-            "button_link": ""
+            "button_link": "https://booking.mangomint.com/314399"
           }
         },
         "concern_8AEGbt": {
           "type": "concern",
           "settings": {
-            "concern_label": "Dryness & Dehydration",
+            "concern_label": "Dry, Flaky or Sensitive Skin",
             "symptoms": "Tight, flaky skin that feels rough and lacks moisture.",
             "service_subheading": "TRY OUR",
-            "service_title": "Hydra Glow Facial",
+            "service_title": "60 Minute Facial",
             "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5434.jpg",
-            "service_description": "A deeply hydrating treatment that replenishes moisture with hyaluronic acid serums and nourishing masks.",
+            "service_description": "A Full Relaxation & Corrective Focus Facial. Massage, A custom mask applied, and finished with Serums, Moisturizer, & SPF",
             "button_text": "BOOK HERE",
-            "button_link": ""
+            "button_link": "https://booking.mangomint.com/314399"
           }
         },
         "concern_jyT88p": {
           "type": "concern",
           "settings": {
-            "concern_label": "Aging & Fine Lines",
+            "concern_label": "Fine Lines & Wrinkles",
             "symptoms": "Visible wrinkles, loss of firmness, and uneven texture.",
             "service_subheading": "TRY OUR",
-            "service_title": "Anti-Aging Renewal",
+            "service_title": "Red Light Therapy Facial",
             "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5810.jpg",
-            "service_description": "A rejuvenating facial using peptides and retinol to smooth fine lines and restore youthful radiance.",
+            "service_description": "60 minute facial + Red Light Therapy that stimulates collagen production, reduces fine lines & wrinkles, and increases circulation & reduces inflammation",
             "button_text": "BOOK HERE",
-            "button_link": ""
+            "button_link": "https://booking.mangomint.com/314399"
+          }
+        },
+        "concern_4gEUF6": {
+          "type": "concern",
+          "settings": {
+            "concern_label": "Dullness, Uneven skin tone, or texture",
+            "symptoms": "Visible wrinkles, loss of firmness, and uneven texture.",
+            "service_subheading": "TRY OUR",
+            "service_title": "75 Minute Skin Reviver",
+            "service_image": "shopify://shop_images/BrandingPhotography-C_Mae-5810.jpg",
+            "service_description": "Best choice for those with dull, tired skin in need of a plumping reset with zero down time.",
+            "button_text": "BOOK HERE",
+            "button_link": "https://booking.mangomint.com/314399"
           }
         }
       },
       "block_order": [
         "concern_BX8qXY",
         "concern_8AEGbt",
-        "concern_jyT88p"
+        "concern_jyT88p",
+        "concern_4gEUF6"
       ],
       "name": "Skin Concern Selector",
       "settings": {
