@@ -684,8 +684,7 @@
         "judge_me_reviews_testimonials_carousel_jHqWy4"
       ],
       "custom_css": [
-        ".shopify-block .shopify-app-block {background-color: #f5f0eb !important;}",
-        ".jdgm-testimonials-carousel .jdgm-text {max-height: none;}",
+        ".page-width{padding:unset;background-color:#f5f0eb;}",
         "p {font-family: Old Standard TT; font-size: 32px;}",
         ".jdgm-reviewer-name {font-weight: 100; font-style: italic;}",
         ".jdgm-product-name {display: none;}"
