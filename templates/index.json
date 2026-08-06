@@ -615,6 +615,7 @@
         "testimonial_WUzb89",
         "testimonial_K7Gw7m"
       ],
+      "disabled": true,
       "name": "Testimonial Slider",
       "settings": {
         "bg_color": "#f5f0eb",
@@ -684,8 +685,8 @@
         "judge_me_reviews_testimonials_carousel_jHqWy4"
       ],
       "custom_css": [
-        ".page-width{padding:unset;background-color:#f5f0eb;}",
-        "p {font-family: Old Standard TT; font-size: 32px;}",
+        ".page-width {padding: unset; background-color: #f5f0eb;}",
+        "p {font-family: Old Standard TT; font-size: 24px;}",
         ".jdgm-reviewer-name {font-weight: 100; font-style: italic;}",
         ".jdgm-product-name {display: none;}"
       ],
