@@ -39,11 +39,11 @@
           "padding_vertical": 10,
           "login_text": "Log In",
           "link_1_text": "Contact Us",
-          "link_1_url": "tel:815-332-0918",
-          "link_2_text": "",
+          "link_1_url": "tel:815-762-7813",
+          "link_2_text": "Text Us: 815-332-0918",
           "link_2_url": "",
           "cta_text": "Book A Spa Service",
-          "cta_url": ""
+          "cta_url": "https://booking.mangomint.com/314399"
         }
       },
       "header": {
@@ -111,7 +111,7 @@
           "show_header_cart": true,
           "header_icon_type": "icon",
           "mobile_cta_text": "Book A Spa Service",
-          "mobile_cta_url": "",
+          "mobile_cta_url": "https://booking.mangomint.com/314399",
           "show_category_menu": false,
           "category_heading": "All categories",
           "category_menu": "",
