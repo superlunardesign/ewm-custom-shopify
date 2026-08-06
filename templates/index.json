@@ -684,10 +684,11 @@
         "judge_me_reviews_testimonials_carousel_jHqWy4"
       ],
       "custom_css": [
-        "body {background-color: #f5f0eb;}",
-        ".jdgm-text {max-height: none;}",
+        ".jdgm-widget {background-color: #f5f0eb;}",
+        "jdgm-widget jdgm-testimonials-carousel.jdgm-text {max-height: none;}",
         "p {font-family: Old Standard TT; font-size: 32px;}",
-        "span {font-weight: 100; font-style: italic;}"
+        ".jdgm-reviewer-name {font-weight: 100; font-style: italic;}",
+        ".jdgm-product-name {display: none;}"
       ],
       "settings": {
         "include_margins": false
