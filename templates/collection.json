@@ -124,7 +124,7 @@
         "bubble_label_size": 13,
         "enable_tag_filtering": true,
         "filter_label": "Filter For Your Skin",
-        "filter_tags": "Acne & Breakouts, Aging & Fine Lines, Dryness, Sensitive & Reactive, Dark Spots, Post Brazilian Skincare",
+        "filter_tags": "Acne & Breakouts, Aging & Fine Lines, Dryness, Sensitive & Reactive, Combination/Oily, Dark Spots, Post Brazilian Skincare",
         "filter_tag_border_color": "#999999",
         "filter_tag_text_color": "#333333",
         "filter_tag_active_bg": "#8c9b6d",
