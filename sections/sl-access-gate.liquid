@@ -1,0 +1,205 @@
+<style>
+  .sl-gate {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  .sl-gate__card {
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    padding: 60px 40px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+
+  .sl-gate__icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 24px;
+    color: {{ section.settings.accent_color }};
+  }
+
+  .sl-gate__heading {
+    font-family: var(--font-heading-family);
+    font-size: 28px;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 12px;
+  }
+
+  .sl-gate__text {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 32px;
+  }
+
+  .sl-gate__btn {
+    display: inline-block;
+    padding: 14px 40px;
+    background: {{ section.settings.accent_color }};
+    color: #ffffff;
+    text-decoration: none;
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .sl-gate__btn:hover {
+    opacity: 0.85;
+  }
+
+  .sl-gate__subtext {
+    margin-top: 16px;
+    font-size: 13px;
+    color: #999;
+  }
+
+  .sl-gate__subtext a {
+    color: {{ section.settings.accent_color }};
+  }
+
+  /* Hide all subsequent sections when gate is active */
+  .sl-gate-active ~ .shopify-section {
+    display: none !important;
+  }
+</style>
+
+{%- liquid
+  assign access_tag = section.settings.required_tag | default: 'acne-bootcamp'
+  assign has_access = false
+  if customer
+    for tag in customer.tags
+      if tag == access_tag
+        assign has_access = true
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- unless has_access -%}
+  <div class="sl-gate sl-gate-active" id="SLAccessGate-{{ section.id }}">
+    <div class="sl-gate__card">
+      <div class="sl-gate__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      {%- if customer -%}
+        <h2 class="sl-gate__heading">{{ section.settings.denied_heading }}</h2>
+        <p class="sl-gate__text">{{ section.settings.denied_text }}</p>
+        <a href="{{ section.settings.denied_button_link }}" class="sl-gate__btn">{{ section.settings.denied_button_text }}</a>
+      {%- else -%}
+        <h2 class="sl-gate__heading">{{ section.settings.login_heading }}</h2>
+        <p class="sl-gate__text">{{ section.settings.login_text }}</p>
+        <a href="/account/login?return_url={{ request.path | url_encode }}" class="sl-gate__btn">{{ section.settings.login_button_text }}</a>
+        <p class="sl-gate__subtext">Don't have an account? <a href="/account/register">Create one here</a></p>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "SL Access Gate",
+  "tag": "section",
+  "class": "sl-access-gate-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Access Control"
+    },
+    {
+      "type": "text",
+      "id": "required_tag",
+      "label": "Required customer tag",
+      "default": "acne-bootcamp",
+      "info": "Customers must have this tag on their account to view the page content below."
+    },
+    {
+      "type": "header",
+      "content": "Not Logged In"
+    },
+    {
+      "type": "text",
+      "id": "login_heading",
+      "label": "Login heading",
+      "default": "Client Portal Access"
+    },
+    {
+      "type": "textarea",
+      "id": "login_text",
+      "label": "Login message",
+      "default": "Please log in to your account to access the Acne Bootcamp Portal."
+    },
+    {
+      "type": "text",
+      "id": "login_button_text",
+      "label": "Login button text",
+      "default": "Log In"
+    },
+    {
+      "type": "header",
+      "content": "Logged In Without Access"
+    },
+    {
+      "type": "text",
+      "id": "denied_heading",
+      "label": "Denied heading",
+      "default": "Access Required"
+    },
+    {
+      "type": "textarea",
+      "id": "denied_text",
+      "label": "Denied message",
+      "default": "This portal is exclusively for Acne Bootcamp clients. If you've enrolled in Acne Bootcamp and can't access this page, please contact us."
+    },
+    {
+      "type": "text",
+      "id": "denied_button_text",
+      "label": "Denied button text",
+      "default": "Learn About Acne Bootcamp"
+    },
+    {
+      "type": "url",
+      "id": "denied_button_link",
+      "label": "Denied button link"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f5f0eb"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#8c9b6d"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SL Access Gate"
+    }
+  ]
+}
+{% endschema %}
