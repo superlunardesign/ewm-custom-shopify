@@ -627,10 +627,10 @@
         "judge_me_reviews_testimonials_carousel_4MKyR8"
       ],
       "custom_css": [
-        "p {font-family: Old Standard TT; font-size: 18px;}",
+        "p {font-family: Old Standard TT;}",
+        "p::after {}",
         ".jdgm-reviewer-name {font-weight: 100; font-style: italic;}",
-        ".jdgm-product-name {display: none;}",
-        ".jdgm-widget .jdgm-testimonials-carousel {--line-clamp-mobile: 20;}"
+        ".jdgm-product-name {display: none;}"
       ],
       "name": "SL Reviews Wrapper",
       "settings": {
@@ -638,7 +638,7 @@
         "heading": "",
         "heading_alignment": "center",
         "heading_font": "heading",
-        "heading_size": 24,
+        "heading_size": 16,
         "heading_weight": "500",
         "heading_transform": "uppercase",
         "heading_color": "#8c9b6d",
