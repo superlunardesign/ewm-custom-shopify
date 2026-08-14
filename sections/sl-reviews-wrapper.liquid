@@ -34,28 +34,28 @@
   /* Override Judge.me widget backgrounds */
   #SLReviews-{{ section.id }} .jdgm-widget,
   #SLReviews-{{ section.id }} .jdgm-carousel-wrapper,
-  #SLReviews-{{ section.id }} .jdgm-rev-widg,
   #SLReviews-{{ section.id }} .jdgm-carousel,
+  #SLReviews-{{ section.id }} .jdgm-rev-widg,
   #SLReviews-{{ section.id }} .jdgm-all-reviews-widget,
+  #SLReviews-{{ section.id }} .jdgm-all-reviews-page,
   #SLReviews-{{ section.id }} .jdgm-rev-widg__body,
   #SLReviews-{{ section.id }} .jdgm-rev-widg__header,
   #SLReviews-{{ section.id }} .jdgm-rev-widg__pagination,
   #SLReviews-{{ section.id }} .jdgm-rev,
   #SLReviews-{{ section.id }} .jdgm-rev__header,
   #SLReviews-{{ section.id }} .jdgm-rev__body,
+  #SLReviews-{{ section.id }} .jdgm-carousel__item,
   #SLReviews-{{ section.id }} [class*="jdgm-"] {
     background-color: {{ section.settings.bg_color }} !important;
     background: {{ section.settings.bg_color }} !important;
   }
 
-  /* Override Judge.me star colors if set */
   {%- if section.settings.star_color != blank -%}
   #SLReviews-{{ section.id }} .jdgm-star {
     color: {{ section.settings.star_color }} !important;
   }
   {%- endif -%}
 
-  /* Override Judge.me text color if set */
   {%- if section.settings.text_color != blank -%}
   #SLReviews-{{ section.id }} .jdgm-rev__body,
   #SLReviews-{{ section.id }} .jdgm-rev__author-name,
@@ -75,6 +75,21 @@
       <h2 class="sl-reviews__heading">{{ section.settings.heading }}</h2>
     {%- endif -%}
 
+    {%- case section.settings.widget_type -%}
+      {%- when 'carousel' -%}
+        <div class="jdgm-widget jdgm-carousel-widget"></div>
+      {%- when 'all_reviews' -%}
+        <div class="jdgm-widget jdgm-all-reviews-widget"></div>
+      {%- when 'review_page' -%}
+        <div class="jdgm-widget jdgm-all-reviews-page"></div>
+      {%- when 'badge' -%}
+        <div class="jdgm-widget jdgm-preview-badge" data-id="0"></div>
+      {%- when 'countdown' -%}
+        <div class="jdgm-widget jdgm-countdown-widget"></div>
+      {%- when 'questions' -%}
+        <div class="jdgm-widget jdgm-questions-widget"></div>
+    {%- endcase -%}
+
     {%- for block in section.blocks -%}
       {% render block %}
     {%- endfor -%}
@@ -87,6 +102,24 @@
   "tag": "section",
   "class": "sl-reviews-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "widget_type",
+      "label": "Judge.me widget type",
+      "options": [
+        { "value": "carousel", "label": "Review Carousel" },
+        { "value": "all_reviews", "label": "All Reviews" },
+        { "value": "review_page", "label": "Reviews Page" },
+        { "value": "badge", "label": "Store Badge" },
+        { "value": "countdown", "label": "Countdown" },
+        { "value": "questions", "label": "Questions" }
+      ],
+      "default": "carousel"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -161,7 +194,7 @@
       "type": "color",
       "id": "bg_color",
       "label": "Background color",
-      "default": "#ffffff"
+      "default": "#f5f0eb"
     },
     {
       "type": "range",
@@ -176,13 +209,13 @@
     {
       "type": "color",
       "id": "star_color",
-      "label": "Star color (leave blank for default)",
+      "label": "Star color override",
       "default": ""
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color (leave blank for default)",
+      "label": "Text color override",
       "default": ""
     },
     {
