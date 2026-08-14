@@ -627,10 +627,9 @@
         "judge_me_reviews_testimonials_carousel_4MKyR8"
       ],
       "custom_css": [
-        "p {font-family: Old Standard TT; font-size: 18px;}",
+        "p {font-family: Old Standard TT;}",
         ".jdgm-reviewer-name {font-weight: 100; font-style: italic;}",
-        ".jdgm-product-name {display: none;}",
-        ".jdgm-widget .jdgm-testimonials-carousel {--line-clamp-mobile: 20;}"
+        ".jdgm-product-name {display: none;}"
       ],
       "name": "SL Reviews Wrapper",
       "settings": {
