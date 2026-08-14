@@ -1,0 +1,224 @@
+<style>
+  #SLReviews-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #SLReviews-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #SLReviews-{{ section.id }} .sl-reviews__inner {
+    max-width: {{ section.settings.content_width }}px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  {%- if section.settings.heading != blank -%}
+  #SLReviews-{{ section.id }} .sl-reviews__heading {
+    font-family: var(--font-{{ section.settings.heading_font }}-family);
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    text-transform: {{ section.settings.heading_transform }};
+    letter-spacing: 0.08em;
+    color: {{ section.settings.heading_color }};
+    text-align: {{ section.settings.heading_alignment }};
+    margin: 0 0 2rem;
+  }
+  {%- endif -%}
+
+  /* Override Judge.me widget backgrounds */
+  #SLReviews-{{ section.id }} .jdgm-widget,
+  #SLReviews-{{ section.id }} .jdgm-carousel-wrapper,
+  #SLReviews-{{ section.id }} .jdgm-rev-widg,
+  #SLReviews-{{ section.id }} .jdgm-carousel,
+  #SLReviews-{{ section.id }} .jdgm-all-reviews-widget,
+  #SLReviews-{{ section.id }} .jdgm-rev-widg__body,
+  #SLReviews-{{ section.id }} .jdgm-rev-widg__header,
+  #SLReviews-{{ section.id }} .jdgm-rev-widg__pagination,
+  #SLReviews-{{ section.id }} .jdgm-rev,
+  #SLReviews-{{ section.id }} .jdgm-rev__header,
+  #SLReviews-{{ section.id }} .jdgm-rev__body,
+  #SLReviews-{{ section.id }} [class*="jdgm-"] {
+    background-color: {{ section.settings.bg_color }} !important;
+    background: {{ section.settings.bg_color }} !important;
+  }
+
+  /* Override Judge.me star colors if set */
+  {%- if section.settings.star_color != blank -%}
+  #SLReviews-{{ section.id }} .jdgm-star {
+    color: {{ section.settings.star_color }} !important;
+  }
+  {%- endif -%}
+
+  /* Override Judge.me text color if set */
+  {%- if section.settings.text_color != blank -%}
+  #SLReviews-{{ section.id }} .jdgm-rev__body,
+  #SLReviews-{{ section.id }} .jdgm-rev__author-name,
+  #SLReviews-{{ section.id }} .jdgm-rev__title,
+  #SLReviews-{{ section.id }} .jdgm-rev__timestamp,
+  #SLReviews-{{ section.id }} .jdgm-rev-widg__title,
+  #SLReviews-{{ section.id }} .jdgm-rev-widg__summary-text,
+  #SLReviews-{{ section.id }} [class*="jdgm-"] {
+    color: {{ section.settings.text_color }} !important;
+  }
+  {%- endif -%}
+</style>
+
+<div id="SLReviews-{{ section.id }}">
+  <div class="sl-reviews__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="sl-reviews__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {% render block %}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SL Reviews Wrapper",
+  "tag": "section",
+  "class": "sl-reviews-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        { "value": "heading", "label": "Heading" },
+        { "value": "body", "label": "Body" }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "select",
+      "id": "heading_transform",
+      "label": "Heading text transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "Uppercase" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#8c9b6d"
+    },
+    {
+      "type": "header",
+      "content": "Section Style"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color (leave blank for default)",
+      "default": ""
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color (leave blank for default)",
+      "default": ""
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SL Reviews Wrapper"
+    }
+  ]
+}
+{% endschema %}
