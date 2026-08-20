@@ -87,10 +87,10 @@
     column-gap: 0rem;
   }  
   .header--middle.secondary-menu-enabled .header-row #AccessibleNav {
-    justify-content: center;
+    justify-content: {% if section.settings.menu_alignment == 'left' %}flex-start{% elsif section.settings.menu_alignment == 'right' %}flex-end{% else %}center{% endif %};
   }
-  #header .header__inline-menu #AccessibleNav{justify-content: flex-start;}
-  #header .header__inline-menu+.secondary-menu #AccessibleNav{justify-content: flex-end;} 
+  #header .header__inline-menu #AccessibleNav{justify-content: {% if section.settings.menu_alignment == 'left' %}flex-start{% elsif section.settings.menu_alignment == 'right' %}flex-end{% else %}center{% endif %};}
+  #header .header__inline-menu+.secondary-menu #AccessibleNav{justify-content: {% if section.settings.menu_alignment == 'left' %}flex-start{% elsif section.settings.menu_alignment == 'right' %}flex-end{% else %}center{% endif %};}
   .header--middle.secondary-menu-enabled .header-row #AccessibleNav ul.dt-nav > li > a {padding: 25px 15px;}
   .header--middle.secondary-menu-enabled .header-row #AccessibleNav ul.dt-nav > li.top-level-link{padding:0;}  
   .header--top-center .header-row{
@@ -527,7 +527,7 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
 
 .sl-nav__list {
   display: flex;
-  justify-content: center;
+  justify-content: {% if section.settings.menu_alignment == 'left' %}flex-start{% elsif section.settings.menu_alignment == 'right' %}flex-end{% else %}center{% endif %};
   align-items: center;
   gap: 0;
   list-style: none;
