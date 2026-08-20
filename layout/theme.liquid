@@ -27,7 +27,10 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
-    {% render 'meta-tags' %}    
+    {%- if template == 'page.resource-portal' or product.tags contains 'acne-bootcamp-exclusive' -%}
+      <meta name="robots" content="noindex, nofollow">
+    {%- endif -%}
+    {% render 'meta-tags' %}
     <script src="{{ 'jquery.min.js' | asset_url }}"></script>
    <script src="{{ 'axios.min.js' | asset_url }}"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
