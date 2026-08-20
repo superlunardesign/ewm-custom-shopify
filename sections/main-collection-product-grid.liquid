@@ -1698,6 +1698,10 @@ min-height:40px;
                 {%- endif -%}
               {%- endfor -%}
 
+              {%- if product.tags contains 'acne-bootcamp-exclusive' -%}
+                {%- continue -%}
+              {%- endif -%}
+
               {%- comment -%} Skip out-of-stock when backend toggle is off {%- endcomment -%}
               {%- unless section.settings.show_out_of_stock or product_in_stock -%}
                 {%- continue -%}

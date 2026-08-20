@@ -505,6 +505,9 @@
       {% paginate search.results by 24 %}
         <ul class="sl-product-grid" role="list">
           {%- for item in search.results -%}
+            {%- if item.object_type == 'product' and item.tags contains 'acne-bootcamp-exclusive' -%}
+              {%- continue -%}
+            {%- endif -%}
             {%- if item.object_type == 'product' -%}
               {%- assign product_in_stock = false -%}
               {%- for variant in item.variants -%}
