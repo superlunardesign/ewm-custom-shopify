@@ -1237,6 +1237,79 @@ min-height:40px;
     display: none !important;
   }
 
+  /* ========== Collection Search Bar ========== */
+  #SLCollection-{{ section.id }} .sl-collection-search {
+    max-width: 400px;
+    margin: 0 auto 8px;
+    padding: 0 1.5rem;
+  }
+
+  #SLCollection-{{ section.id }} .sl-collection-search__input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  #SLCollection-{{ section.id }} .sl-collection-search__icon {
+    position: absolute;
+    left: 14px;
+    width: 16px;
+    height: 16px;
+    color: #999;
+    pointer-events: none;
+  }
+
+  #SLCollection-{{ section.id }} .sl-collection-search__input {
+    width: 100%;
+    padding: 10px 36px 10px 40px;
+    border: 1px solid {{ section.settings.filter_tag_border_color | default: '#ddd' }};
+    border-radius: 24px;
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    color: {{ section.settings.title_color | default: '#333' }};
+    background: transparent;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  #SLCollection-{{ section.id }} .sl-collection-search__input::placeholder {
+    color: #aaa;
+  }
+
+  #SLCollection-{{ section.id }} .sl-collection-search__input:focus {
+    border-color: {{ section.settings.filter_tag_active_bg | default: '#8c9b6d' }};
+  }
+
+  #SLCollection-{{ section.id }} .sl-collection-search__clear {
+    position: absolute;
+    right: 12px;
+    width: 18px;
+    height: 18px;
+    border: none;
+    background: none;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    display: none;
+  }
+
+  #SLCollection-{{ section.id }} .sl-collection-search__clear:hover {
+    color: #555;
+  }
+
+  #SLCollection-{{ section.id }} .sl-collection-search__no-results {
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+    padding: 40px 0;
+    display: none;
+    font-family: var(--font-body-family);
+  }
+
+  #SLCollection-{{ section.id }} .grid__item.sl-search-hidden {
+    display: none !important;
+  }
+
 {%- endstyle -%}
 
 {%- comment -%} Count out-of-stock products for frontend toggle {%- endcomment -%}
@@ -1287,6 +1360,22 @@ min-height:40px;
     endcapture
     assign sort_param = sort_param | strip
   -%}
+
+  {%- comment -%} ===== Collection Search Bar ===== {%- endcomment -%}
+  {%- if section.settings.enable_collection_search -%}
+    <div class="page-width">
+      <div class="sl-collection-search">
+        <div class="sl-collection-search__input-wrap">
+          <svg class="sl-collection-search__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="sl-collection-search__input" placeholder="Search {{ collection.title | downcase }}..." aria-label="Search products in this collection" autocomplete="off">
+          <button class="sl-collection-search__clear" aria-label="Clear search" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <p class="sl-collection-search__no-results">No products match your search.</p>
+      </div>
+    </div>
+  {%- endif -%}
 
   {%- comment -%} ===== Category Bubbles (auto from parent_collection metafield) ===== {%- endcomment -%}
   {%- if show_category_bubbles -%}
@@ -2701,6 +2790,56 @@ min-height:40px;
   }
   inlineSvgIcons();
 
+  {%- if section.settings.enable_collection_search -%}
+  (function() {
+    var section = document.getElementById('SLCollection-{{ section.id }}');
+    if (!section) return;
+    var input = section.querySelector('.sl-collection-search__input');
+    var clearBtn = section.querySelector('.sl-collection-search__clear');
+    var noResults = section.querySelector('.sl-collection-search__no-results');
+    if (!input) return;
+
+    var debounceTimer;
+    input.addEventListener('input', function() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(filterProducts, 150);
+      clearBtn.style.display = input.value.length > 0 ? 'block' : 'none';
+    });
+
+    clearBtn.addEventListener('click', function() {
+      input.value = '';
+      clearBtn.style.display = 'none';
+      filterProducts();
+      input.focus();
+    });
+
+    function filterProducts() {
+      var query = input.value.toLowerCase().trim();
+      var grid = section.querySelector('#product-grid');
+      if (!grid) return;
+      var items = grid.querySelectorAll('.grid__item');
+      var visible = 0;
+      items.forEach(function(item) {
+        if (!query) {
+          item.classList.remove('sl-search-hidden');
+          visible++;
+          return;
+        }
+        var card = item.querySelector('.sl-card-wrapper');
+        var title = (card && card.querySelector('.sl-product-title')) ? card.querySelector('.sl-product-title').textContent.toLowerCase() : '';
+        var vendor = (card && card.querySelector('.sl-product-vendor')) ? card.querySelector('.sl-product-vendor').textContent.toLowerCase() : '';
+        if (title.indexOf(query) > -1 || vendor.indexOf(query) > -1) {
+          item.classList.remove('sl-search-hidden');
+          visible++;
+        } else {
+          item.classList.add('sl-search-hidden');
+        }
+      });
+      if (noResults) noResults.style.display = (query && visible === 0) ? 'block' : 'none';
+    }
+  })();
+  {%- endif -%}
+
 })();
 </script>
 
@@ -2709,6 +2848,17 @@ min-height:40px;
   "name": "SL Collection Grid",
   "class": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Collection Search"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_collection_search",
+      "label": "Show search bar",
+      "default": true,
+      "info": "Adds a compact search bar above the product grid to filter products by name or vendor."
+    },
     {
       "type": "header",
       "content": "Layout"
