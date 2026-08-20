@@ -19,20 +19,6 @@
         "padding_bottom": 0
       }
     },
-    "access_gate": {
-      "type": "sl-access-gate",
-      "settings": {
-        "required_tag": "acne-bootcamp",
-        "login_heading": "Client Portal Access",
-        "login_text": "Please log in to your account to access the Acne Bootcamp Portal.",
-        "login_button_text": "Log In",
-        "denied_heading": "Access Required",
-        "denied_text": "This portal is exclusively for Acne Bootcamp clients. If you've enrolled in Acne Bootcamp and can't access this page, please contact us.",
-        "denied_button_text": "Learn About Acne Bootcamp",
-        "bg_color": "#f5f0eb",
-        "accent_color": "#8c9b6d"
-      }
-    },
     "sl_content_banner_4zEzJF": {
       "type": "sl-content-banner",
       "blocks": {
@@ -210,7 +196,6 @@
   "order": [
     "sl_access_gate_AQCUpw",
     "main",
-    "access_gate",
     "sl_content_banner_4zEzJF",
     "resource_portal",
     "product_recommendations_aEkGtT"
