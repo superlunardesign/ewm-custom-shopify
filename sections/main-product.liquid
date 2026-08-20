@@ -2076,6 +2076,43 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                       {% endif %}
                     {% endif %}
 
+                  {%- when 'product_notice' -%}
+                    {%- liquid
+                      assign show_notice = false
+                      if block.settings.display_mode == 'metafield'
+                        if product.metafields.custom.product_notice.value != blank
+                          assign show_notice = true
+                        endif
+                      elsif block.settings.display_mode == 'tag'
+                        if block.settings.required_tag != blank and product.tags contains block.settings.required_tag
+                          assign show_notice = true
+                        endif
+                      endif
+                    -%}
+                    {%- if show_notice -%}
+                      <div
+                        class="sl-product-notice"
+                        style="
+                          background: {{ block.settings.bg_color }};
+                          color: {{ block.settings.text_color }};
+                          font-size: {{ block.settings.font_size }}px;
+                          border-radius: {{ block.settings.border_radius }}px;
+                          padding: {{ block.settings.padding_y }}px {{ block.settings.padding_x }}px;
+                          {% if block.settings.margin_top > 0 %}margin-top: {{ block.settings.margin_top }}px;{% endif %}
+                          {% if block.settings.margin_bottom > 0 %}margin-bottom: {{ block.settings.margin_bottom }}px;{% endif %}
+                          font-family: var(--font-body-family);
+                          line-height: 1.5;
+                        "
+                        {{ block.shopify_attributes }}
+                      >
+                        {%- if block.settings.display_mode == 'metafield' -%}
+                          {{ product.metafields.custom.product_notice.value }}
+                        {%- else -%}
+                          {{ block.settings.notice_text }}
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+
                 {%- endcase -%}
               {%- endfor -%}
 
@@ -4005,6 +4042,112 @@ function updateDeliveryOption(input) {
   "content": "t:sections.main-product.blocks.rating.settings.paragraph.content"
   }
   ]
+  },
+  {
+    "type": "product_notice",
+    "name": "Product Notice",
+    "settings": [
+      {
+        "type": "select",
+        "id": "display_mode",
+        "label": "Display mode",
+        "options": [
+          { "value": "metafield", "label": "From metafield (custom.product_notice)" },
+          { "value": "tag", "label": "Show on products with a specific tag" }
+        ],
+        "default": "metafield",
+        "info": "Metafield mode pulls text from the product's custom.product_notice metafield. Tag mode shows the notice text below on products with the specified tag."
+      },
+      {
+        "type": "text",
+        "id": "required_tag",
+        "label": "Required product tag",
+        "info": "Only used in tag mode. Products with this tag will show the notice."
+      },
+      {
+        "type": "textarea",
+        "id": "notice_text",
+        "label": "Notice text",
+        "default": "*Please text us if you are not actively using this product.",
+        "info": "Only used in tag mode. In metafield mode, text comes from the product metafield."
+      },
+      {
+        "type": "header",
+        "content": "Style"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "#f0efe8"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "range",
+        "id": "font_size",
+        "min": 11,
+        "max": 18,
+        "step": 1,
+        "default": 14,
+        "unit": "px",
+        "label": "Font size"
+      },
+      {
+        "type": "range",
+        "id": "border_radius",
+        "min": 0,
+        "max": 16,
+        "step": 2,
+        "default": 4,
+        "unit": "px",
+        "label": "Border radius"
+      },
+      {
+        "type": "range",
+        "id": "padding_y",
+        "min": 4,
+        "max": 24,
+        "step": 2,
+        "default": 12,
+        "unit": "px",
+        "label": "Vertical padding"
+      },
+      {
+        "type": "range",
+        "id": "padding_x",
+        "min": 8,
+        "max": 32,
+        "step": 2,
+        "default": 16,
+        "unit": "px",
+        "label": "Horizontal padding"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 40,
+        "step": 4,
+        "default": 8,
+        "unit": "px",
+        "label": "Margin top"
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 40,
+        "step": 4,
+        "default": 8,
+        "unit": "px",
+        "label": "Margin bottom"
+      }
+    ]
   }
   ],
 
