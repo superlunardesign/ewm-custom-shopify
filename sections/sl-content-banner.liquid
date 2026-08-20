@@ -188,6 +188,23 @@
 {% endif %}
 {%- endstyle -%}
 
+{%- liquid
+  assign gate_tag = section.settings.required_tag
+  assign gate_pass = true
+  if gate_tag != blank
+    assign gate_pass = false
+    if customer
+      for tag in customer.tags
+        if tag == gate_tag
+          assign gate_pass = true
+          break
+        endif
+      endfor
+    endif
+  endif
+-%}
+
+{%- if gate_pass -%}
 <div class="sl-cb">
   {%- if section.settings.bg_type == 'image' and section.settings.bg_image != blank -%}
     <div class="sl-cb__bg-image">
@@ -280,6 +297,7 @@
   })();
 </script>
 {% endif %}
+{%- endif -%}
 
 {% schema %}
 {
@@ -287,6 +305,16 @@
   "tag": "section",
   "class": "sl-content-banner",
   "settings": [
+    {
+      "type": "header",
+      "content": "Access Control"
+    },
+    {
+      "type": "text",
+      "id": "required_tag",
+      "label": "Required customer tag",
+      "info": "If set, only customers with this tag will see this section. Leave blank to show to everyone."
+    },
     {
       "type": "header",
       "content": "Layout"

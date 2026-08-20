@@ -71,10 +71,6 @@
     color: {{ section.settings.accent_color }};
   }
 
-  /* Hide all subsequent sections when gate is active */
-  .sl-gate-active ~ .shopify-section {
-    display: none !important;
-  }
 </style>
 
 {%- liquid
@@ -91,7 +87,7 @@
 -%}
 
 {%- unless has_access -%}
-  <div class="sl-gate sl-gate-active" id="SLAccessGate-{{ section.id }}">
+  <div class="sl-gate" id="SLAccessGate-{{ section.id }}">
     <div class="sl-gate__card">
       <div class="sl-gate__icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">

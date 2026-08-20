@@ -19,6 +19,23 @@
   }
 {%- endstyle -%}
 
+{%- liquid
+  assign gate_tag = section.settings.required_tag
+  assign gate_pass = true
+  if gate_tag != blank
+    assign gate_pass = false
+    if customer
+      for tag in customer.tags
+        if tag == gate_tag
+          assign gate_pass = true
+          break
+        endif
+      endfor
+    endif
+  endif
+-%}
+
+{%- if gate_pass -%}
 {%- assign tab_1_items = page.metafields.custom.tab_1_downloads.value -%}
 {%- assign tab_2_items = page.metafields.custom.tab_2_downloads.value -%}
 
@@ -634,6 +651,7 @@
     }
   })();
 </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -643,6 +661,16 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "header",
+      "content": "Access Control"
+    },
+    {
+      "type": "text",
+      "id": "required_tag",
+      "label": "Required customer tag",
+      "info": "If set, only customers with this tag will see this section. Leave blank to show to everyone."
+    },
     {
       "type": "header",
       "content": "Heading"

@@ -286,6 +286,23 @@
 }
 {%- endstyle -%}
 
+{%- liquid
+  assign gate_tag = section.settings.required_tag
+  assign gate_pass = true
+  if gate_tag != blank
+    assign gate_pass = false
+    if customer
+      for tag in customer.tags
+        if tag == gate_tag
+          assign gate_pass = true
+          break
+        endif
+      endfor
+    endif
+  endif
+-%}
+
+{%- if gate_pass -%}
 {%- comment -%}
   Determine which products to show:
   1. Related products metafield (shopify--discovery--product_recommendation.related_products)
@@ -567,6 +584,7 @@
     });
   }
 </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -574,6 +592,16 @@
   "tag": "section",
   "class": "sl-product-recommendations",
   "settings": [
+    {
+      "type": "header",
+      "content": "Access Control"
+    },
+    {
+      "type": "text",
+      "id": "required_tag",
+      "label": "Required customer tag",
+      "info": "If set, only customers with this tag will see this section. Leave blank to show to everyone."
+    },
     {
       "type": "checkbox",
       "id": "full_width",
