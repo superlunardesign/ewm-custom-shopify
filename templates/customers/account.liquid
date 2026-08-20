@@ -1,5 +1,19 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 
+{%- if customer.tags contains 'acne-bootcamp' -%}
+<script>
+  (function() {
+    var ref = document.referrer || '';
+    var fromAuth = ref.indexOf('/account/activate') > -1
+                || ref.indexOf('/account/login') > -1
+                || ref.indexOf('/account/reset') > -1;
+    if (fromAuth) {
+      window.location.replace('{{ pages['resource-portal'].url | default: '/pages/resource-portal' }}');
+    }
+  })();
+</script>
+{%- endif -%}
+
 <div class="customer account">
   <div>
     <h1>{{ 'customer.account.title' | t }}</h1>
