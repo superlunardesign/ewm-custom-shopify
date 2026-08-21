@@ -288,6 +288,9 @@
 
 {%- liquid
   assign gate_tag = section.settings.required_tag
+  if gate_tag == blank and template.suffix == 'resource-portal'
+    assign gate_tag = 'acne-bootcamp'
+  endif
   assign gate_pass = true
   if gate_tag != blank
     assign gate_pass = false
