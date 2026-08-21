@@ -12,10 +12,14 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "html_c_tnMn3W": {
-          "type": "Html_c",
+        "description_DcKJ8m": {
+          "type": "description",
           "settings": {
-            "html": "<p>*Please text us if you are not actively using this product.</p>"
+            "heading_color": "",
+            "content_color": "",
+            "content_size": 15,
+            "margin_top": 0,
+            "margin_bottom": 0
           }
         },
         "breadcrumbs_dkTTCF": {
@@ -142,7 +146,7 @@
         }
       },
       "block_order": [
-        "html_c_tnMn3W",
+        "description_DcKJ8m",
         "breadcrumbs_dkTTCF",
         "74c34f57-4879-47de-b1af-567f04f341f4",
         "title",
