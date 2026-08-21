@@ -80,7 +80,7 @@
       ],
       "name": "Content Banner",
       "settings": {
-        "required_tag": "acne-bootcamp",
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "center",
         "content_max_width": 800,
@@ -112,7 +112,7 @@
     "resource_portal": {
       "type": "sl-resource-portal",
       "settings": {
-        "required_tag": "acne-bootcamp",
+        "required_tag": "",
         "heading": "Select a Document Below To View",
         "heading_size": "hxl",
         "heading_color": "#6b7c5e",
@@ -140,7 +140,7 @@
       "type": "product-recommendations",
       "name": "Product Carousel",
       "settings": {
-        "required_tag": "acne-bootcamp",
+        "required_tag": "",
         "full_width": false,
         "desktop_columns": "4",
         "heading": "ACNE-SAFE SKINCARE",
@@ -175,10 +175,10 @@
         "padding_top": 40,
         "padding_bottom": 40
       }
-    }
-  },
-  "access_gate": {
+    },
+    "sl_access_gate_prTCtB": {
       "type": "sl-access-gate",
+      "name": "SL Access Gate",
       "settings": {
         "required_tag": "acne-bootcamp",
         "login_heading": "Client Portal Access",
@@ -187,14 +187,15 @@
         "denied_heading": "Access Required",
         "denied_text": "This portal is exclusively for Acne Bootcamp clients. If you've enrolled in Acne Bootcamp and can't access this page, please contact us.",
         "denied_button_text": "Learn About Acne Bootcamp",
+        "denied_button_link": "",
         "bg_color": "#f5f0eb",
         "accent_color": "#8c9b6d"
       }
     }
   },
   "order": [
-    "access_gate",
     "main",
+    "sl_access_gate_prTCtB",
     "sl_content_banner_4zEzJF",
     "resource_portal",
     "product_recommendations_aEkGtT"
