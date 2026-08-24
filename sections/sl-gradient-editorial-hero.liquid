@@ -4,6 +4,9 @@
    ========================================================= */
 
 {%- assign overlay_opacity = section.settings.overlay_darkness | divided_by: 100.0 -%}
+{%- assign ov_r = section.settings.overlay_color | default: '#000000' | color_extract: 'red' -%}
+{%- assign ov_g = section.settings.overlay_color | default: '#000000' | color_extract: 'green' -%}
+{%- assign ov_b = section.settings.overlay_color | default: '#000000' | color_extract: 'blue' -%}
 
 #shopify-section-{{ section.id }} .sl-geh {
   position: relative;
@@ -62,8 +65,8 @@
   z-index: 1;
   background: linear-gradient(
     to bottom,
-    {{ section.settings.overlay_color | default: '#000000' | color_modify: 'alpha', 0 }} {{ section.settings.gradient_start | default: 0 }}%,
-    {{ section.settings.overlay_color | default: '#000000' | color_modify: 'alpha', overlay_opacity }} 100%
+    rgba({{ ov_r }}, {{ ov_g }}, {{ ov_b }}, 0) {{ section.settings.gradient_start | default: 0 }}%,
+    rgba({{ ov_r }}, {{ ov_g }}, {{ ov_b }}, {{ overlay_opacity }}) 100%
   );
   pointer-events: none;
 }
