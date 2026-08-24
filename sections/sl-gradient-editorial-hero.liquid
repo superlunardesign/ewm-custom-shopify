@@ -137,6 +137,7 @@
         width="{{ section.settings.bg_image.width }}"
         height="{{ section.settings.bg_image.height }}"
       >
+      <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;background:linear-gradient(to bottom, transparent {{ section.settings.gradient_start | default: 0 }}%, {{ section.settings.overlay_color | default: '#000000' }} 100%);opacity:{{ section.settings.overlay_darkness | times: 0.01 }};">&nbsp;</div>
     </div>
   {%- elsif section.settings.bg_type == 'video' -%}
     <div class="sl-geh__video">
@@ -156,10 +157,9 @@
           <iframe src="https://player.vimeo.com/video/{{ vimeo_id }}?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
         {%- endif -%}
       {%- endif -%}
+      <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;background:linear-gradient(to bottom, transparent {{ section.settings.gradient_start | default: 0 }}%, {{ section.settings.overlay_color | default: '#000000' }} 100%);opacity:{{ section.settings.overlay_darkness | times: 0.01 }};">&nbsp;</div>
     </div>
   {%- endif -%}
-
-  <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;background:linear-gradient(to bottom, transparent {{ section.settings.gradient_start | default: 0 }}%, {{ section.settings.overlay_color | default: '#000000' }} 100%);opacity:{{ section.settings.overlay_darkness | times: 0.01 }};"></div>
 
   <div class="sl-geh__inner {% unless section.settings.full_width %}sl-geh__inner--page-width{% endunless %}">
     {%- if section.settings.subheading != blank -%}
