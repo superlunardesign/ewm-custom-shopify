@@ -50,7 +50,7 @@
         "image_position_x": 50,
         "image_position_y": 50,
         "overlay_color": "#000000",
-        "overlay_darkness": 100,
+        "overlay_darkness": 0,
         "gradient_start": 0,
         "full_width": true,
         "desktop_height": 400,
@@ -71,6 +71,7 @@
         "heading_letter_spacing": 0,
         "heading_max_width": 100,
         "text_alignment": "center",
+        "text_alignment_mobile": "left",
         "text_color": "#ffffff"
       }
     },
@@ -80,20 +81,20 @@
         "subheading_tM7ndz": {
           "type": "subheading",
           "settings": {
-            "text": "WE'RE MORE THAN A SPA"
+            "text": "Premium Spa in McHenry, IL"
           }
         },
         "heading_MW9mhE": {
           "type": "heading",
           "settings": {
-            "text": "A Team That Actually Gets Skin",
+            "text": "Let's Create Healthy Skin Together",
             "size": "h1"
           }
         },
         "text_tJJJ6t": {
           "type": "text",
           "settings": {
-            "text": "<p>Our team consists of licensed estheticians, certified acne experts, and Brazilian wax specialists who've been exactly where you are. Let's create healthy skin together.</p>"
+            "text": "<p>Our team consists of licensed estheticians, certified acne experts, and Brazilian wax specialists who love giving you a relaxed, professional, and educational spa experience.</p>"
           }
         },
         "button_kFBFVd": {
