@@ -1,8 +1,3 @@
-{%- assign overlay_opacity = section.settings.overlay_darkness | divided_by: 100.0 -%}
-{%- assign ov_r = section.settings.overlay_color | default: '#000000' | color_extract: 'red' -%}
-{%- assign ov_g = section.settings.overlay_color | default: '#000000' | color_extract: 'green' -%}
-{%- assign ov_b = section.settings.overlay_color | default: '#000000' | color_extract: 'blue' -%}
-
 {%- style -%}
 /* =========================================================
    SL GRADIENT EDITORIAL HERO
@@ -170,7 +165,7 @@
     </div>
   {%- endif -%}
 
-  <div class="sl-geh__overlay" style="background: linear-gradient(to bottom, rgba({{ ov_r }}, {{ ov_g }}, {{ ov_b }}, 0) {{ section.settings.gradient_start | default: 0 }}%, rgba({{ ov_r }}, {{ ov_g }}, {{ ov_b }}, {{ overlay_opacity }}) 100%);"></div>
+  <div class="sl-geh__overlay" style="background: linear-gradient(to bottom, transparent {{ section.settings.gradient_start | default: 0 }}%, {{ section.settings.overlay_color | default: '#000000' }} 100%); opacity: {{ section.settings.overlay_darkness | times: 0.01 }};"></div>
 
   <div class="sl-geh__inner {% unless section.settings.full_width %}sl-geh__inner--page-width{% endunless %}">
     {%- if section.settings.subheading != blank -%}
