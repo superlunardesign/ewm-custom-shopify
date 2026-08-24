@@ -50,8 +50,8 @@
         "image_position_x": 50,
         "image_position_y": 50,
         "overlay_color": "#000000",
-        "overlay_darkness": 0,
-        "gradient_start": 0,
+        "overlay_darkness": 40,
+        "gradient_start": 75,
         "full_width": true,
         "desktop_height": 400,
         "mobile_height": 350,
@@ -148,12 +148,99 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "sl_value_props_ewUdWh": {
+      "type": "sl-value-props",
+      "name": "Value Props Section",
+      "settings": {
+        "main_heading": "OUR PHILOSPHY",
+        "main_subheading": "WHAT MAKES US DIFFERENT",
+        "corner_image_top": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5127.jpg",
+        "corner_image_bottom": "shopify://shop_images/BrandingPhotography-C_Mae-5495.jpg",
+        "corner_image_position_x": 50,
+        "corner_image_position_y": 50,
+        "prop1_heading": "Education First",
+        "prop1_text": "We don't just treat your skin. We teach you why it's doing what it's doing, so you finally understand how to care for it long after you leave our treatment room.",
+        "prop2_heading": "Customized, Not Cookie-Cutter",
+        "prop2_text": "No two faces are the same. Every treatment is tailored to your unique skin type, concerns, and goals. No generic facials. No one-size-fits-all routines.",
+        "prop3_heading": "Real Results, Not Empty Promises",
+        "prop3_text": "We only recommend what works. The products we sell are the same ones we use in treatments and on ourselves. If it doesn't deliver, it's not on our shelves.",
+        "prop4_heading": "Support Between Appointments",
+        "prop4_text": "Skin doesn't wait for your next booking. We offer ongoing guidance, check-ins, and real answers when you need them. You're never on your own.",
+        "section_background": "#F5F0EB",
+        "prop_background": "transparent",
+        "prop_border_radius": 0,
+        "heading_color": "#000000",
+        "subheading_color": "#333333",
+        "prop_heading_color": "#000000",
+        "prop_text_color": "#666666",
+        "section_height": 500,
+        "heading_size": 32,
+        "subheading_size": 20,
+        "prop_heading_size": 24,
+        "prop_text_size": 14,
+        "icon_size": 64,
+        "mobile_heading_size": 24,
+        "mobile_subheading_size": 16,
+        "mobile_prop_heading_size": 18,
+        "mobile_prop_text_size": 13,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200
+      }
+    },
+    "team_dKTyw6": {
+      "type": "team",
+      "blocks": {
+        "team_member_BgGHCw": {
+          "type": "team_member",
+          "settings": {
+            "name": "Shannon",
+            "title": "FOUNDER | LICENSED ESTHETICIAN | CERTIFIED ACNE EXPERT",
+            "bio": "Shannon knows what it's like to feel defeated by her skin.\n\nAs a teen, she dealt with painful breakouts, only to face red, flaky, reactive skin as an adult. After years of trial and error, she found herself frustrated and out of options.\n\nThat experience led her to become a Licensed Esthetician in 2021.",
+            "book_text": "BOOK WITH SHANNON",
+            "book_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "team_member_BgGHCw"
+      ],
+      "name": "Team Carousel",
+      "settings": {
+        "heading_size": "h0",
+        "image_position": "left",
+        "desktop_height": 625,
+        "mobile_image_height": 350,
+        "mobile_image_width": 100,
+        "mobile_overlap": 60,
+        "image_position_x": 50,
+        "image_position_y": 20,
+        "image_width": 3,
+        "content_width": 2,
+        "overlap_amount": 80,
+        "vertical_inset": 30,
+        "desktop_bio_max_height": 250,
+        "mobile_bio_max_height": 200,
+        "button_style": "primary",
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "select_border_color": "#ddd",
+        "enable_sticky": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
     "image_banner_PKwTLr",
     "sl_gradient_editorial_hero_ezDXRE",
-    "sl_image_text_overlap_grx3rD"
+    "sl_image_text_overlap_grx3rD",
+    "sl_value_props_ewUdWh",
+    "team_dKTyw6"
   ]
 }
