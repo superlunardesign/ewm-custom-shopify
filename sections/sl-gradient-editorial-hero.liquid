@@ -1,12 +1,12 @@
-{%- style -%}
-/* =========================================================
-   SL GRADIENT EDITORIAL HERO
-   ========================================================= */
-
 {%- assign overlay_opacity = section.settings.overlay_darkness | divided_by: 100.0 -%}
 {%- assign ov_r = section.settings.overlay_color | default: '#000000' | color_extract: 'red' -%}
 {%- assign ov_g = section.settings.overlay_color | default: '#000000' | color_extract: 'green' -%}
 {%- assign ov_b = section.settings.overlay_color | default: '#000000' | color_extract: 'blue' -%}
+
+{%- style -%}
+/* =========================================================
+   SL GRADIENT EDITORIAL HERO
+   ========================================================= */
 
 #shopify-section-{{ section.id }} .sl-geh {
   position: relative;
