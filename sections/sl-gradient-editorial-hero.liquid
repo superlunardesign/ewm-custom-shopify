@@ -1,0 +1,498 @@
+{%- style -%}
+/* =========================================================
+   SL GRADIENT EDITORIAL HERO
+   ========================================================= */
+
+{%- assign overlay_opacity = section.settings.overlay_darkness | divided_by: 100.0 -%}
+
+#shopify-section-{{ section.id }} .sl-geh {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: {{ section.settings.mobile_height | default: 350 }}px;
+  background: {{ section.settings.bg_color | default: '#1a1a1a' }};
+  overflow: hidden;
+}
+
+@media (min-width: 750px) {
+  #shopify-section-{{ section.id }} .sl-geh {
+    min-height: {{ section.settings.desktop_height | default: 500 }}px;
+  }
+}
+
+/* Background image */
+#shopify-section-{{ section.id }} .sl-geh__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#shopify-section-{{ section.id }} .sl-geh__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: {{ section.settings.image_position_x | default: 50 }}% {{ section.settings.image_position_y | default: 50 }}%;
+}
+
+/* Video background */
+#shopify-section-{{ section.id }} .sl-geh__video {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+#shopify-section-{{ section.id }} .sl-geh__video video,
+#shopify-section-{{ section.id }} .sl-geh__video iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+/* Gradient overlay — 0% opacity at top, overlay_darkness% at bottom */
+#shopify-section-{{ section.id }} .sl-geh__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    {{ section.settings.overlay_color | default: '#000000' | color_modify: 'alpha', 0 }} {{ section.settings.gradient_start | default: 0 }}%,
+    {{ section.settings.overlay_color | default: '#000000' | color_modify: 'alpha', overlay_opacity }} 100%
+  );
+  pointer-events: none;
+}
+
+/* Content */
+#shopify-section-{{ section.id }} .sl-geh__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px clamp(1.5rem, 4vw, 3rem) {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+}
+
+@media (min-width: 750px) {
+  #shopify-section-{{ section.id }} .sl-geh__inner {
+    padding: {{ section.settings.padding_top }}px clamp(1.5rem, 4vw, 3rem) {{ section.settings.padding_bottom }}px;
+  }
+}
+
+#shopify-section-{{ section.id }} .sl-geh__inner--page-width {
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+
+/* Heading */
+#shopify-section-{{ section.id }} .sl-geh__heading {
+  {% if section.settings.heading_font == 'body' %}
+    font-family: var(--font-body-family);
+  {% else %}
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+  {% endif %}
+  font-size: {{ section.settings.heading_size_mobile | default: 48 }}px;
+  font-weight: {{ section.settings.heading_weight | default: '400' }};
+  line-height: {{ section.settings.heading_line_height | default: 1.0 }};
+  letter-spacing: {{ section.settings.heading_letter_spacing | default: 0 | times: 0.01 }}em;
+  text-transform: {{ section.settings.heading_transform | default: 'uppercase' }};
+  color: {{ section.settings.text_color | default: '#ffffff' }};
+  margin: 0;
+  text-align: {{ section.settings.text_alignment | default: 'left' }};
+  max-width: {{ section.settings.heading_max_width | default: 100 }}%;
+}
+
+@media (min-width: 750px) {
+  #shopify-section-{{ section.id }} .sl-geh__heading {
+    font-size: {{ section.settings.heading_size | default: 96 }}px;
+  }
+}
+
+/* Subheading */
+#shopify-section-{{ section.id }} .sl-geh__subheading {
+  {% if section.settings.subheading_font == 'body' %}
+    font-family: var(--font-body-family);
+  {% else %}
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+  {% endif %}
+  font-size: {{ section.settings.subheading_size | default: 14 }}px;
+  font-weight: {{ section.settings.subheading_weight | default: '400' }};
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: {{ section.settings.text_color | default: '#ffffff' }};
+  margin: 0 0 16px;
+  text-align: {{ section.settings.text_alignment | default: 'left' }};
+}
+
+{%- endstyle -%}
+
+<div class="sl-geh">
+  {%- if section.settings.bg_type == 'image' and section.settings.bg_image != blank -%}
+    <div class="sl-geh__bg">
+      <img
+        src="{{ section.settings.bg_image | image_url: width: 2400 }}"
+        srcset="{{ section.settings.bg_image | image_url: width: 800 }} 800w, {{ section.settings.bg_image | image_url: width: 1200 }} 1200w, {{ section.settings.bg_image | image_url: width: 1800 }} 1800w, {{ section.settings.bg_image | image_url: width: 2400 }} 2400w"
+        sizes="100vw"
+        alt="{{ section.settings.bg_image.alt | escape }}"
+        loading="eager"
+        width="{{ section.settings.bg_image.width }}"
+        height="{{ section.settings.bg_image.height }}"
+      >
+    </div>
+  {%- elsif section.settings.bg_type == 'video' -%}
+    <div class="sl-geh__video">
+      {%- if section.settings.bg_video != blank -%}
+        {{ section.settings.bg_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true }}
+      {%- elsif section.settings.bg_video_url != blank -%}
+        {%- assign video_url = section.settings.bg_video_url -%}
+        {%- if video_url contains 'youtube.com' or video_url contains 'youtu.be' -%}
+          {%- if video_url contains 'youtu.be' -%}
+            {%- assign yt_id = video_url | split: 'youtu.be/' | last | split: '?' | first -%}
+          {%- else -%}
+            {%- assign yt_id = video_url | split: 'v=' | last | split: '&' | first -%}
+          {%- endif -%}
+          <iframe src="https://www.youtube.com/embed/{{ yt_id }}?autoplay=1&mute=1&loop=1&playlist={{ yt_id }}&controls=0&showinfo=0&modestbranding=1&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        {%- elsif video_url contains 'vimeo.com' -%}
+          {%- assign vimeo_id = video_url | split: 'vimeo.com/' | last | split: '?' | first -%}
+          <iframe src="https://player.vimeo.com/video/{{ vimeo_id }}?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="sl-geh__overlay"></div>
+
+  <div class="sl-geh__inner {% unless section.settings.full_width %}sl-geh__inner--page-width{% endunless %}">
+    {%- if section.settings.subheading != blank -%}
+      <p class="sl-geh__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h1 class="sl-geh__heading">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Gradient Editorial Hero",
+  "tag": "section",
+  "class": "sl-gradient-editorial-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Background type",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video" },
+        { "value": "color", "label": "Solid color" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "video",
+      "id": "bg_video",
+      "label": "Shopify-hosted video"
+    },
+    {
+      "type": "text",
+      "id": "bg_video_url",
+      "label": "YouTube or Vimeo URL",
+      "info": "Used when no Shopify video is selected"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#1a1a1a",
+      "info": "Visible when no image/video is set, or behind the overlay"
+    },
+    {
+      "type": "range",
+      "id": "image_position_x",
+      "label": "Image horizontal position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "image_position_y",
+      "label": "Image vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Gradient Overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000",
+      "info": "Color of the gradient overlay"
+    },
+    {
+      "type": "range",
+      "id": "overlay_darkness",
+      "label": "Overlay intensity at bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "%",
+      "info": "0% = no overlay, 100% = solid color at bottom"
+    },
+    {
+      "type": "range",
+      "id": "gradient_start",
+      "label": "Gradient start position",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 0,
+      "unit": "%",
+      "info": "Where the gradient begins (0% = from the very top, 50% = starts halfway)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width content",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop height",
+      "min": 200,
+      "max": 900,
+      "step": 10,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile height",
+      "min": 200,
+      "max": 700,
+      "step": 10,
+      "default": 350,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_font",
+      "label": "Subheading font",
+      "options": [
+        { "value": "heading", "label": "Heading" },
+        { "value": "body", "label": "Body" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "subheading_weight",
+      "label": "Subheading weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading text",
+      "default": "ABOUT OUR SPA"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Font family",
+      "options": [
+        { "value": "heading", "label": "Heading" },
+        { "value": "body", "label": "Body" }
+      ],
+      "default": "heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Desktop font size",
+      "min": 24,
+      "max": 200,
+      "step": 2,
+      "default": 96,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Mobile font size",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra-bold" },
+        { "value": "900", "label": "Black" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "heading_line_height",
+      "label": "Line height",
+      "options": [
+        { "value": "0.85", "label": "Extra tight (0.85)" },
+        { "value": "0.9", "label": "Very tight (0.9)" },
+        { "value": "0.95", "label": "Tight (0.95)" },
+        { "value": "1.0", "label": "Normal (1.0)" },
+        { "value": "1.1", "label": "Relaxed (1.1)" },
+        { "value": "1.2", "label": "Loose (1.2)" },
+        { "value": "1.3", "label": "Extra loose (1.3)" }
+      ],
+      "default": "1.0"
+    },
+    {
+      "type": "select",
+      "id": "heading_transform",
+      "label": "Text transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "UPPERCASE" },
+        { "value": "lowercase", "label": "lowercase" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "heading_letter_spacing",
+      "label": "Letter spacing",
+      "min": -5,
+      "max": 20,
+      "step": 1,
+      "default": 0,
+      "info": "In units of 0.01em"
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "label": "Heading max width",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gradient Editorial Hero",
+      "settings": {
+        "heading": "ABOUT OUR SPA"
+      }
+    }
+  ]
+}
+{% endschema %}
