@@ -1,0 +1,545 @@
+{% comment %}
+  SL Map + Text Block
+  Side-by-side layout with embedded map and text content, matching sl-image-text-block styling
+{% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .sl-mtb {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-mtb {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="sl-mtb color-{{ section.settings.color_scheme }} gradient">
+  <div class="sl-mtb__container page-width">
+    <div class="sl-mtb__grid{% if section.settings.map_position == 'right' %} sl-mtb__grid--reversed{% endif %}{% if section.settings.enable_animation %} sl-mtb__animate{% endif %}"
+      {% if section.settings.enable_animation %}
+        data-sl-mtb-animate
+        data-duration="{{ section.settings.animation_duration }}"
+        data-delay="{{ section.settings.animation_delay }}"
+      {% endif %}
+    >
+      <div class="sl-mtb__media">
+        {%- if section.settings.map_address != blank -%}
+          {%- assign encoded_address = section.settings.map_address | url_encode -%}
+          <iframe
+            class="sl-mtb__map"
+            src="https://maps.google.com/maps?q={{ encoded_address }}&t=&z={{ section.settings.map_zoom }}&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        {%- else -%}
+          <div class="sl-mtb__placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" width="64" height="64" style="opacity:0.3;">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <p style="opacity:0.4;margin-top:12px;font-size:14px;">Enter an address in the section settings</p>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="sl-mtb__content">
+        <div class="sl-mtb__content-top">
+          {% if section.settings.subheading != blank %}
+            <p class="sl-mtb__subheading">{{ section.settings.subheading }}</p>
+          {% endif %}
+
+          {% if section.settings.heading != blank %}
+            <h2 class="sl-mtb__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+          {% endif %}
+        </div>
+
+        <div class="sl-mtb__content-bottom">
+          {% if section.settings.text != blank %}
+            <div class="sl-mtb__text rte">{{ section.settings.text }}</div>
+          {% endif %}
+
+          {% if section.settings.show_button and section.settings.button_text != blank %}
+            <div class="sl-mtb__button-wrap">
+              <a
+                {% if section.settings.button_link != blank %}
+                  href="{{ section.settings.button_link }}"
+                {% endif %}
+                class="button{% if section.settings.button_style == 'secondary' %} button--secondary{% endif %}"
+                {% if section.settings.button_opens_new_tab %}target="_blank" rel="noopener"{% endif %}
+              >
+                {{ section.settings.button_text | escape }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if section.settings.enable_animation %}
+<script>
+  (function() {
+    function initSlMtbAnimation() {
+      var section = document.querySelector('#shopify-section-{{ section.id }}');
+      if (!section) return;
+      var target = section.querySelector('[data-sl-mtb-animate]');
+      if (!target) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            target.classList.add('sl-mtb__animate--visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(target);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSlMtbAnimation);
+    } else {
+      initSlMtbAnimation();
+    }
+
+    if (Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.detail.sectionId === '{{ section.id }}') initSlMtbAnimation();
+      });
+    }
+  })();
+</script>
+{% endif %}
+
+<style>
+  #shopify-section-{{ section.id }} .sl-mtb__container {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__media {
+    position: relative;
+    overflow: hidden;
+    background: #e8e8e8;
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__map {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 300px;
+    color: #666;
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__content {
+    display: flex;
+    flex-direction: column;
+    {% if section.settings.spread_content %}
+      justify-content: space-between;
+    {% else %}
+      justify-content: center;
+    {% endif %}
+    padding: 2.5rem;
+    background-color: {{ section.settings.content_background }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__content-top {
+    {% if section.settings.spread_content %}
+      margin-bottom: 2rem;
+    {% else %}
+      margin-bottom: 1.5rem;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__subheading {
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: {{ section.settings.subheading_color }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__heading {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+    line-height: 1.15;
+    margin-bottom: 0;
+    color: {{ section.settings.heading_color }};
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__text {
+    font-family: var(--font-body-family);
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__text p {
+    margin-bottom: 1em;
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-mtb__button-wrap {
+    margin-top: 0.5rem;
+  }
+
+  /* Animation */
+  .js #shopify-section-{{ section.id }} .sl-mtb__animate {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .js #shopify-section-{{ section.id }} .sl-mtb__animate.sl-mtb__animate--visible {
+    animation: slMtbFloatIn {{ section.settings.animation_duration }}ms ease-out {{ section.settings.animation_delay }}ms forwards;
+  }
+
+  .no-js #shopify-section-{{ section.id }} .sl-mtb__animate,
+  .shopify-design-mode #shopify-section-{{ section.id }} .sl-mtb__animate {
+    opacity: 1;
+    transform: none;
+  }
+
+  @keyframes slMtbFloatIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .sl-mtb__media {
+      height: {{ section.settings.mobile_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-mtb__map {
+      position: relative;
+      min-height: {{ section.settings.mobile_height }}px;
+    }
+  }
+
+  /* Desktop */
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sl-mtb__container {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+
+    #shopify-section-{{ section.id }} .sl-mtb__grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: minmax({{ section.settings.desktop_height }}px, auto);
+    }
+
+    #shopify-section-{{ section.id }} .sl-mtb__media {
+      min-height: {{ section.settings.desktop_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .sl-mtb__grid--reversed {
+      direction: rtl;
+    }
+
+    #shopify-section-{{ section.id }} .sl-mtb__grid--reversed > * {
+      direction: ltr;
+    }
+
+    #shopify-section-{{ section.id }} .sl-mtb__content {
+      padding: 3rem;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .sl-mtb__content {
+      padding: 4rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Map + Text Block",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Map"
+    },
+    {
+      "type": "text",
+      "id": "map_address",
+      "label": "Address",
+      "default": "1234 Main St, McHenry, IL",
+      "info": "Enter the full address for the map pin"
+    },
+    {
+      "type": "range",
+      "id": "map_zoom",
+      "label": "Map zoom level",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "info": "10 = zoomed out, 20 = street level"
+    },
+    {
+      "type": "select",
+      "id": "map_position",
+      "label": "Map position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "info": "Map side on desktop. On mobile, map always appears above."
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop height",
+      "min": 300,
+      "max": 800,
+      "step": 25,
+      "unit": "px",
+      "default": 450
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile map height",
+      "min": 200,
+      "max": 500,
+      "step": 25,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "COME VISIT US"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Location"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" },
+        { "value": "hxl", "label": "Extra Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "checkbox",
+      "id": "spread_content",
+      "label": "Spread content vertically",
+      "info": "Pushes heading to top and body text + button to bottom.",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body text",
+      "default": "<p>Share your address, hours, or directions here.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "GET DIRECTIONS"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_opens_new_tab",
+      "label": "Open link in new tab",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Primary (Filled)" },
+        { "value": "secondary", "label": "Secondary (Outline)" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Section background",
+      "options": [
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "background-1"
+    },
+    {
+      "type": "color",
+      "id": "content_background",
+      "label": "Text block background",
+      "default": "#f5f0eb"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text color",
+      "default": "#4a4a4a"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable float-in animation",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation duration",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "unit": "ms",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation delay",
+      "min": 0,
+      "max": 1000,
+      "step": 100,
+      "unit": "ms",
+      "default": 200
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Map + Text Block",
+      "settings": {
+        "subheading": "COME VISIT US",
+        "heading": "Our Location"
+      }
+    }
+  ]
+}
+{% endschema %}
