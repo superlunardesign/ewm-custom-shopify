@@ -100,13 +100,13 @@
         "background_size": "cover",
         "background_position_x": 50,
         "background_position_y": 50,
-        "section_background": "#F5F0EB",
+        "section_background": "#f5f0eb",
         "section_padding": 60,
         "max_width": 1200,
         "grid_gap": 30,
         "header_spacing": 50,
         "text_alignment": "center",
-        "heading_color": "#57614C",
+        "heading_color": "#57614c",
         "heading_size": 42,
         "heading_weight": "600",
         "heading_transform": "none",
@@ -119,7 +119,7 @@
         "prop_heading_weight": "600",
         "prop_text_color": "#666666",
         "prop_text_size": 15,
-        "item_background": "transparent",
+        "item_background": "rgba(0,0,0,0)",
         "item_padding": 20,
         "item_border_radius": 0,
         "item_shadow": false,
@@ -191,7 +191,7 @@
         "enable_marquee": true,
         "marquee_text": "HOW IT WORKS",
         "marquee_size": 160,
-        "marquee_color": "#C3D0B4",
+        "marquee_color": "#c3d0b4",
         "marquee_font": "heading",
         "marquee_speed": 20,
         "step_prefix": "STEP",
@@ -210,12 +210,44 @@
         "padding_top": 0,
         "padding_bottom": 0
       }
+    },
+    "sl_map_text_block_HUJRKf": {
+      "type": "sl-map-text-block",
+      "name": "Map + Text Block",
+      "settings": {
+        "map_address": "Esthetics With Me - Facial & Waxing Spa5404 W Elm St Ste M, McHenry, IL 60050, USA",
+        "map_zoom": 17,
+        "map_position": "left",
+        "desktop_height": 450,
+        "mobile_height": 300,
+        "subheading": "COME VISIT US",
+        "heading": "Where to Find Us",
+        "heading_size": "h1",
+        "spread_content": true,
+        "text": "<p>5404 W Elm St Ste M, McHenry, IL 60050, USA</p>",
+        "show_button": true,
+        "button_text": "GET DIRECTIONS",
+        "button_link": "",
+        "button_opens_new_tab": true,
+        "button_style": "primary",
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
     "sl_image_text_block_CE3mjW",
     "sl_flexible_list_FpFnwX",
-    "sl_steps_sticky_wikbj3"
+    "sl_steps_sticky_wikbj3",
+    "sl_map_text_block_HUJRKf"
   ]
 }
