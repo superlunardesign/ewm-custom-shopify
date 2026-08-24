@@ -1,24 +1,41 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "page_full_width": true,
+        "page_full_width_spacing": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "hero": {
       "type": "sl-full-image-hero",
+      "disabled": true,
       "settings": {}
     },
-    "rich_text": {
-      "type": "rich-text",
+    "tri_hero": {
+      "type": "sl-tri-hero",
+      "disabled": true,
       "settings": {}
     },
-    "value_props": {
-      "type": "sl-value-props",
+    "scrapbook_hero": {
+      "type": "sl-scrapbook-hero",
+      "disabled": true,
+      "settings": {}
+    },
+    "content_banner": {
+      "type": "sl-content-banner",
+      "disabled": true,
+      "settings": {}
+    },
+    "image_text_overlap": {
+      "type": "sl-image-text-overlap",
+      "disabled": true,
+      "settings": {}
+    },
+    "image_text_block": {
+      "type": "sl-image-text-block",
       "disabled": true,
       "settings": {}
     },
@@ -32,13 +49,78 @@
       "disabled": true,
       "settings": {}
     },
+    "value_props": {
+      "type": "sl-value-props",
+      "disabled": true,
+      "settings": {}
+    },
+    "image_card_grid": {
+      "type": "sl-image-card-grid",
+      "disabled": true,
+      "settings": {}
+    },
+    "skin_concern": {
+      "type": "sl-skin-concern",
+      "disabled": true,
+      "settings": {}
+    },
+    "steps_sticky": {
+      "type": "sl-steps-sticky",
+      "disabled": true,
+      "settings": {}
+    },
+    "services_menu": {
+      "type": "sl-services-menu",
+      "disabled": true,
+      "settings": {}
+    },
+    "pricing_cards": {
+      "type": "sl-pricing-cards",
+      "disabled": true,
+      "settings": {}
+    },
+    "flexible_list": {
+      "type": "sl-flexible-list",
+      "disabled": true,
+      "settings": {}
+    },
+    "why_we_love_it": {
+      "type": "sl-why-we-love-it",
+      "disabled": true,
+      "settings": {}
+    },
+    "how_to_use": {
+      "type": "sl-how-to-use",
+      "disabled": true,
+      "settings": {}
+    },
     "marquee": {
       "type": "sl-marquee",
       "disabled": true,
       "settings": {}
     },
+    "scrolling_offers": {
+      "type": "scrolling-offers",
+      "disabled": true,
+      "settings": {}
+    },
     "team_carousel": {
       "type": "team",
+      "disabled": true,
+      "settings": {}
+    },
+    "before_and_afters": {
+      "type": "before-and-afters",
+      "disabled": true,
+      "settings": {}
+    },
+    "testimonial_slider": {
+      "type": "sl-testimonial-slider",
+      "disabled": true,
+      "settings": {}
+    },
+    "reviews_wrapper": {
+      "type": "sl-reviews-wrapper",
       "disabled": true,
       "settings": {}
     },
@@ -52,8 +134,18 @@
       "disabled": true,
       "settings": {}
     },
+    "rich_text": {
+      "type": "rich-text",
+      "disabled": true,
+      "settings": {}
+    },
     "faq": {
       "type": "sl-custom-faq",
+      "disabled": true,
+      "settings": {}
+    },
+    "content_banner_cta": {
+      "type": "sl-content-banner",
       "disabled": true,
       "settings": {}
     },
@@ -64,16 +156,35 @@
     }
   },
   "order": [
+    "main",
     "hero",
-    "rich_text",
-    "value_props",
+    "tri_hero",
+    "scrapbook_hero",
+    "content_banner",
+    "image_text_overlap",
+    "image_text_block",
     "image_with_text",
     "split_section",
+    "value_props",
+    "image_card_grid",
+    "skin_concern",
+    "steps_sticky",
+    "services_menu",
+    "pricing_cards",
+    "flexible_list",
+    "why_we_love_it",
+    "how_to_use",
     "marquee",
+    "scrolling_offers",
     "team_carousel",
+    "before_and_afters",
+    "testimonial_slider",
+    "reviews_wrapper",
     "product_carousel",
     "featured_collection",
+    "rich_text",
     "faq",
+    "content_banner_cta",
     "newsletter"
   ]
 }
