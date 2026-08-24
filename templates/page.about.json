@@ -39,6 +39,41 @@
         "custom_class_name": ""
       }
     },
+    "sl_gradient_editorial_hero_ezDXRE": {
+      "type": "sl-gradient-editorial-hero",
+      "name": "Gradient Editorial Hero",
+      "settings": {
+        "bg_type": "image",
+        "bg_image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_7259.jpg",
+        "bg_video_url": "",
+        "bg_color": "#1a1a1a",
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "overlay_color": "#000000",
+        "overlay_darkness": 100,
+        "gradient_start": 0,
+        "full_width": true,
+        "desktop_height": 400,
+        "mobile_height": 350,
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "subheading": "",
+        "subheading_font": "body",
+        "subheading_size": 14,
+        "subheading_weight": "400",
+        "heading": "ABOUT OUR SPA",
+        "heading_font": "heading",
+        "heading_size": 96,
+        "heading_size_mobile": 48,
+        "heading_weight": "400",
+        "heading_line_height": "1.0",
+        "heading_transform": "uppercase",
+        "heading_letter_spacing": 0,
+        "heading_max_width": 100,
+        "text_alignment": "center",
+        "text_color": "#ffffff"
+      }
+    },
     "sl_image_text_overlap_grx3rD": {
       "type": "sl-image-text-overlap",
       "blocks": {
@@ -117,6 +152,7 @@
   "order": [
     "main",
     "image_banner_PKwTLr",
+    "sl_gradient_editorial_hero_ezDXRE",
     "sl_image_text_overlap_grx3rD"
   ]
 }
