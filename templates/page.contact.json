@@ -137,11 +137,85 @@
         "animation_duration": 600,
         "animation_delay": 100
       }
+    },
+    "sl_steps_sticky_wikbj3": {
+      "type": "sl-steps-sticky",
+      "blocks": {
+        "step_KnVUwj": {
+          "type": "step",
+          "settings": {
+            "heading": "Book an Appointment",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        },
+        "step_pwR8yc": {
+          "type": "step",
+          "settings": {
+            "heading": "Arrive with Clean Skin",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        },
+        "step_TKMFay": {
+          "type": "step",
+          "settings": {
+            "heading": "Enjoy your Spa Experience",
+            "text": "<p>You'll get a confirmation email and we'll send you any pre-appointment forms and prep you may need to have a smooth experience.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_KnVUwj",
+        "step_pwR8yc",
+        "step_TKMFay"
+      ],
+      "name": "EWM Sticky Steps",
+      "settings": {
+        "bg_type": "image",
+        "bg_image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_6757-2_d12f2762-ccf9-4faa-bb1d-87033b2305c4.jpg",
+        "bg_video_url": "",
+        "bg_color": "#1a1a1a",
+        "overlay_opacity": 55,
+        "section_subheading": "",
+        "section_heading": "Not sure what to expect?",
+        "section_heading_size": "h1",
+        "section_heading_color": "#ffffff",
+        "section_subheading_color": "#c4c4a0",
+        "columns": "3",
+        "card_gap": 16,
+        "enable_sticky": true,
+        "peek_height": 60,
+        "desktop_stagger": 25,
+        "card_marquee_overlap": 30,
+        "sticky_hold": 30,
+        "sticky_offset": 80,
+        "enable_marquee": true,
+        "marquee_text": "HOW IT WORKS",
+        "marquee_size": 160,
+        "marquee_color": "#C3D0B4",
+        "marquee_font": "heading",
+        "marquee_speed": 20,
+        "step_prefix": "STEP",
+        "step_color": "#6b7c5e",
+        "step_line_color": "#c4c4a0",
+        "card_bg": "#f5f3ed",
+        "card_radius": 6,
+        "heading_color": "#1a1a1a",
+        "text_color": "#4a4a4a",
+        "show_button": true,
+        "button_text": "BOOK HERE",
+        "button_link": "",
+        "button_style": "primary",
+        "button_bg_color": "#6b7c5e",
+        "button_text_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
     "main",
     "sl_image_text_block_CE3mjW",
-    "sl_flexible_list_FpFnwX"
+    "sl_flexible_list_FpFnwX",
+    "sl_steps_sticky_wikbj3"
   ]
 }
