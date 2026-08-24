@@ -17,9 +17,131 @@
         "padding_top": 0,
         "padding_bottom": 0
       }
+    },
+    "sl_image_text_block_CE3mjW": {
+      "type": "sl-image-text-block",
+      "name": "EWM Image + Text Block",
+      "settings": {
+        "image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_6516-2-Edit.jpg",
+        "image_position": "left",
+        "desktop_height": 500,
+        "mobile_height": 300,
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "image_fit": "cover",
+        "subheading": "contact us",
+        "heading": "We'd Love to Hear From You",
+        "heading_size": "h1",
+        "spread_content": true,
+        "text": "<p>Questions about services, products, or your skin? We're here to help. Reach out anytime. </p><p>Check out the ways to contact us below to find the best option for you.</p>",
+        "show_button": false,
+        "button_text": "BOOK A TREATMENT",
+        "button_link": "",
+        "button_style": "primary",
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "enable_anchor": false,
+        "anchor_id": "",
+        "scroll_offset": 80,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "enable_sticky": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "sl_flexible_list_FpFnwX": {
+      "type": "sl-flexible-list",
+      "blocks": {
+        "value_prop_KhnHU4": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-mobile-button",
+            "icon": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_7081-2.jpg",
+            "heading": "Text Us",
+            "text": "Texting is the best way to reach us. We're easily able to send you responses between clients."
+          }
+        },
+        "value_prop_rReqiU": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-phone",
+            "heading": "Call Us",
+            "text": "We're often with clients and can't answer calls, but leave a voicemail and we'll get back to you."
+          }
+        },
+        "value_prop_dYPGny": {
+          "type": "value_prop",
+          "settings": {
+            "icon_type": "fontawesome",
+            "icon_class": "fas fa-comment",
+            "heading": "Send us a chat",
+            "text": "There should be a green chat bubble in the bottom right corner of your screen. Send us a chat there and we'll reply as soon as we're able."
+          }
+        }
+      },
+      "block_order": [
+        "value_prop_KhnHU4",
+        "value_prop_rReqiU",
+        "value_prop_dYPGny"
+      ],
+      "name": "Flexible Value Props",
+      "settings": {
+        "main_heading": "Best Ways to Get in Touch",
+        "main_subheading": "choose the best for you",
+        "grid_columns": 3,
+        "background_opacity": 20,
+        "background_size": "cover",
+        "background_position_x": 50,
+        "background_position_y": 50,
+        "section_background": "#ffffff",
+        "section_padding": 60,
+        "max_width": 1200,
+        "grid_gap": 30,
+        "header_spacing": 50,
+        "text_alignment": "center",
+        "heading_color": "#000000",
+        "heading_size": 42,
+        "heading_weight": "600",
+        "heading_transform": "none",
+        "subheading_color": "#333333",
+        "subheading_size": 20,
+        "subheading_weight": "400",
+        "subheading_transform": "uppercase",
+        "prop_heading_color": "#000000",
+        "prop_heading_size": 22,
+        "prop_heading_weight": "600",
+        "prop_text_color": "#666666",
+        "prop_text_size": 15,
+        "item_background": "transparent",
+        "item_padding": 20,
+        "item_border_radius": 0,
+        "item_shadow": false,
+        "item_hover_effect": false,
+        "show_icons": true,
+        "icon_size": 15,
+        "icon_color": "#000000",
+        "mobile_heading_size": 32,
+        "mobile_subheading_size": 16,
+        "mobile_prop_heading_size": 18,
+        "mobile_prop_text_size": 14,
+        "mobile_icon_size": 15,
+        "mobile_item_padding": 15,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 100
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "sl_image_text_block_CE3mjW",
+    "sl_flexible_list_FpFnwX"
   ]
 }
