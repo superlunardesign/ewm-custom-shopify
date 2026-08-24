@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -8,9 +17,106 @@
         "padding_top": 0,
         "padding_bottom": 0
       }
+    },
+    "image_banner_PKwTLr": {
+      "type": "image-banner",
+      "disabled": true,
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "page_full_width": true,
+        "page_full_width_spacing": false,
+        "image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_7259.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false,
+        "custom_class_name": ""
+      }
+    },
+    "sl_image_text_overlap_grx3rD": {
+      "type": "sl-image-text-overlap",
+      "blocks": {
+        "subheading_tM7ndz": {
+          "type": "subheading",
+          "settings": {
+            "text": "WE'RE MORE THAN A SPA"
+          }
+        },
+        "heading_MW9mhE": {
+          "type": "heading",
+          "settings": {
+            "text": "A Team That Actually Gets Skin",
+            "size": "h1"
+          }
+        },
+        "text_tJJJ6t": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our team consists of licensed estheticians, certified acne experts, and Brazilian wax specialists who've been exactly where you are. Let's create healthy skin together.</p>"
+          }
+        },
+        "button_kFBFVd": {
+          "type": "button",
+          "settings": {
+            "text": "Book Your Appointment",
+            "link": "https://booking.mangomint.com/314399",
+            "style": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_tM7ndz",
+        "heading_MW9mhE",
+        "text_tJJJ6t",
+        "button_kFBFVd"
+      ],
+      "name": "EWM Image + Text Overlap",
+      "settings": {
+        "image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_7295-2.jpg",
+        "image_position": "left",
+        "desktop_height": 550,
+        "mobile_height": 350,
+        "image_fit": "cover",
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "image_width": 3,
+        "content_width": 2,
+        "overlap_amount": 80,
+        "vertical_inset": 30,
+        "spread_content": false,
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "enable_scroll_text": false,
+        "scroll_text": "MEET YOUR ESTHETICIAN",
+        "scroll_font_size": 100,
+        "scroll_text_color": "#c4a882",
+        "scroll_text_padding": 20,
+        "scroll_overlap": 40,
+        "scroll_speed": 20,
+        "enable_anchor": false,
+        "anchor_id": "",
+        "scroll_offset": 80,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "enable_sticky": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "image_banner_PKwTLr",
+    "sl_image_text_overlap_grx3rD"
   ]
 }
