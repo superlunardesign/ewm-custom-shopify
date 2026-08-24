@@ -105,13 +105,14 @@
   text-transform: {{ section.settings.heading_transform | default: 'uppercase' }};
   color: {{ section.settings.text_color | default: '#ffffff' }};
   margin: 0;
-  text-align: {{ section.settings.text_alignment | default: 'left' }};
+  text-align: {{ section.settings.text_alignment_mobile | default: section.settings.text_alignment | default: 'left' }};
   max-width: {{ section.settings.heading_max_width | default: 100 }}%;
 }
 
 @media (min-width: 750px) {
   #shopify-section-{{ section.id }} .sl-geh__heading {
     font-size: {{ section.settings.heading_size | default: 96 }}px;
+    text-align: {{ section.settings.text_alignment | default: 'left' }};
   }
 }
 
@@ -129,7 +130,13 @@
   letter-spacing: 0.12em;
   color: {{ section.settings.text_color | default: '#ffffff' }};
   margin: 0 0 16px;
-  text-align: {{ section.settings.text_alignment | default: 'left' }};
+  text-align: {{ section.settings.text_alignment_mobile | default: section.settings.text_alignment | default: 'left' }};
+}
+
+@media (min-width: 750px) {
+  #shopify-section-{{ section.id }} .sl-geh__subheading {
+    text-align: {{ section.settings.text_alignment | default: 'left' }};
+  }
 }
 
 {%- endstyle -%}
@@ -474,7 +481,18 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Text alignment",
+      "label": "Desktop text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment_mobile",
+      "label": "Mobile text alignment",
       "options": [
         { "value": "left", "label": "Left" },
         { "value": "center", "label": "Center" },
