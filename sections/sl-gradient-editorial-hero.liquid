@@ -58,16 +58,11 @@
   object-fit: cover;
 }
 
-/* Gradient overlay — 0% opacity at top, overlay_darkness% at bottom */
+/* Gradient overlay */
 #shopify-section-{{ section.id }} .sl-geh__overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    rgba({{ ov_r }}, {{ ov_g }}, {{ ov_b }}, 0) {{ section.settings.gradient_start | default: 0 }}%,
-    rgba({{ ov_r }}, {{ ov_g }}, {{ ov_b }}, {{ overlay_opacity }}) 100%
-  );
   pointer-events: none;
 }
 
@@ -175,7 +170,7 @@
     </div>
   {%- endif -%}
 
-  <div class="sl-geh__overlay"></div>
+  <div class="sl-geh__overlay" style="background: linear-gradient(to bottom, rgba({{ ov_r }}, {{ ov_g }}, {{ ov_b }}, 0) {{ section.settings.gradient_start | default: 0 }}%, rgba({{ ov_r }}, {{ ov_g }}, {{ ov_b }}, {{ overlay_opacity }}) 100%);"></div>
 
   <div class="sl-geh__inner {% unless section.settings.full_width %}sl-geh__inner--page-width{% endunless %}">
     {%- if section.settings.subheading != blank -%}
