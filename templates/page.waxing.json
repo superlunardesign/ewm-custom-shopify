@@ -926,18 +926,7 @@
         "text_dkVrVi": {
           "type": "text",
           "settings": {
-            "text": "<p>First time? Make sure hair is grown out at least 10-14 days before your appointment. If you currently don't shave - there is nothing you need to do before your appointment.<br/><br/>Don't forget to fill out your waiver before your appointment ↓ </p>"
-          }
-        },
-        "button_q4RP4t": {
-          "type": "button",
-          "settings": {
-            "text": "Fill Out Your Waiver",
-            "link": "https://form.jotform.com/220666610688058",
-            "style": "secondary",
-            "button_bg_color": "",
-            "button_text_color": "",
-            "button_border_color": ""
+            "text": "<p>First time? Make sure hair is grown out at least 10-14 days before your appointment. If you currently don't shave - there is nothing you need to do before your appointment.<br/><br/>Don't forget to fill out the waiver we send you before your appointment.</p>"
           }
         }
       },
@@ -945,8 +934,7 @@
         "heading_n8NLch",
         "subheading_MyYXFk",
         "spacer_fXbPK3",
-        "text_dkVrVi",
-        "button_q4RP4t"
+        "text_dkVrVi"
       ],
       "name": "Content Banner",
       "settings": {
@@ -1111,7 +1099,21 @@
           "type": "faq_item",
           "settings": {
             "question": "Can I still exercise or play sports?",
-            "answer": "<p>No – <strong>Avoid swimming and exercising for 48 hours post wax</strong>. Even though it is popular to get waxed before leaving for vacation, <strong>We advice getting waxed 2-3 days before you leave town.</strong></p>"
+            "answer": "<p>No – <strong>Avoid swimming and exercising for 24-48 hours post-wax</strong>. Even though it is popular to get waxed before leaving for vacation, <strong>we advise getting waxed 2-3 days before you leave town.</strong></p>"
+          }
+        },
+        "faq_item_8nXf9X": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many waxes should I plan to get before my wedding?",
+            "answer": "<p>We recommend 3 waxes so your skin is as comfortable and smooth as possible before your wedding date.</p>"
+          }
+        },
+        "faq_item_WkzBt6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many waxes should I plan to get before my vacation?",
+            "answer": "<p>We recommend getting waxed 2–3× beforehand (a little stubble after the first wax is normal because of hair growth cycles).</p>"
           }
         },
         "faq_item_7cwzea": {
@@ -1181,6 +1183,8 @@
       "block_order": [
         "faq_item_LWFRij",
         "faq_item_KtX7dR",
+        "faq_item_8nXf9X",
+        "faq_item_WkzBt6",
         "faq_item_7cwzea",
         "faq_item_MJGhNK",
         "faq_item_94aHPJ",
