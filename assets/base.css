@@ -12,6 +12,10 @@
   max-width: 400px;
 }
 
+.jdgm-cards-carousel{
+  width:400px;
+}
+
 /**
  * CSS Helper Classes to add to your theme's CSS
  * These work with the global animation handler above
