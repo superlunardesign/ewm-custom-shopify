@@ -686,6 +686,7 @@
         "testimonial_WXDiQD",
         "testimonial_r6Eapb"
       ],
+      "disabled": true,
       "custom_css": [
         "a {}"
       ],
@@ -840,7 +841,7 @@
             "show_product_name": true,
             "hide_arrows_mobile": true,
             "arrows_position": "bottom",
-            "max_width": 1100,
+            "max_width": 1400,
             "corner_styling": "soft",
             "header_text_color": "#000000",
             "text_color": "#000000",
