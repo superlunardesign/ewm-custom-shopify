@@ -17,7 +17,7 @@
   width:400px !important;
       flex: 0 0 400px !important;
 }
-.jdgm-arrow {
+.jdgm-arrow svg{
   width:20px !important; 
   height:20px !important; 
   color:#8c9b6d;
