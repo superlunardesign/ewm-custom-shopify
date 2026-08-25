@@ -18,7 +18,9 @@
       flex: 0 0 400px !important;
 }
 .jdgm-arrow {
-  content: "←"
+  width:20px !important; 
+  height:20px !important; 
+  color:#8c9b6d;
 }
 
 /**
