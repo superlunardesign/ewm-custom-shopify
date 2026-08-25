@@ -505,7 +505,7 @@
       ],
       "name": "EWM Image + Text Overlap",
       "settings": {
-        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5388_b2119344-2956-4957-93d2-2099eeb58ee5.jpg",
+        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5625.jpg",
         "image_position": "left",
         "desktop_height": 550,
         "mobile_height": 350,
@@ -1335,6 +1335,7 @@
       ],
       "name": "Content Banner",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "center",
         "content_max_width": 800,
