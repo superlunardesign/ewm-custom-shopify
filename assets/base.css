@@ -6,7 +6,7 @@
   --gradient-background: var(--gradient-base-background-1);
 }
 
-.jdgm-cards-carousel .jdgm-text {
+.jdgm-cards-carousel .jdgm-text p{
   -webkit-line-clamp: 8 !important;
   text-align: left;
   max-width: 400px;
