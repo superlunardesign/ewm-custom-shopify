@@ -815,6 +815,52 @@
         "anchor_offset": 80
       }
     },
+    "178769404994701cd5": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_cwCgqE": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "store_reviews",
+            "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "acne",
+            "star_rating": "all",
+            "show_review_media": false,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "medium",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#F9F9F9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "",
+            "show_average_rating": false,
+            "rating_display": "default"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_cwCgqE"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "sl_marquee_RR7r88": {
       "type": "sl-marquee",
       "blocks": {
@@ -1375,6 +1421,7 @@
     "sl_flexible_list_mMk3PN",
     "testimonials_carousel_kK49RM",
     "sl_pricing_cards_CLjw4D",
+    "178769404994701cd5",
     "sl_marquee_RR7r88",
     "sl_services_menu_tPA8Ja",
     "sl_image_text_overlap_68ghUT",
