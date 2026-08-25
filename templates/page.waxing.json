@@ -343,7 +343,7 @@
             "icon_type": "fontawesome",
             "icon_class": "fas fa-heart",
             "heading": "Gentle, Comfortable Experience",
-            "text": "Using premium hard wax and expert techniques, we minimize discomfort while maximizing results. Our calm, private environment helps you relax throughout your service."
+            "text": "Using both premium soft & hard waxes and expert techniques, we minimize discomfort while maximizing results. Our calm, private environment helps you relax throughout your service."
           }
         },
         "value_prop_jgmTj3": {
@@ -950,6 +950,7 @@
       ],
       "name": "Content Banner",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "center",
         "content_max_width": 800,
@@ -1060,6 +1061,7 @@
       "type": "product-recommendations",
       "name": "Product Carousel",
       "settings": {
+        "required_tag": "",
         "full_width": false,
         "desktop_columns": "3",
         "heading": "post-wax products",
@@ -1264,6 +1266,7 @@
       ],
       "name": "Content Banner",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "center",
         "content_max_width": 800,
