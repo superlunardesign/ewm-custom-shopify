@@ -838,11 +838,11 @@
             "image_ratio": "1",
             "reviews_shown": 5,
             "show_reviewer_name": true,
-            "show_product_name": true,
+            "show_product_name": false,
             "hide_arrows_mobile": true,
             "arrows_position": "bottom",
             "max_width": 1400,
-            "corner_styling": "soft",
+            "corner_styling": "square",
             "header_text_color": "#000000",
             "text_color": "#000000",
             "card_color": "#F9F9F9",
@@ -859,7 +859,7 @@
         "judge_me_reviews_cards_carousel_cwCgqE"
       ],
       "settings": {
-        "include_margins": true
+        "include_margins": false
       }
     },
     "sl_marquee_RR7r88": {
