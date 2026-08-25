@@ -883,42 +883,6 @@
         "padding_bottom": 40
       }
     },
-    "sl_image_text_block_3TXUnj": {
-      "type": "sl-image-text-block",
-      "name": "EWM Image + Text Block",
-      "settings": {
-        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5990.jpg",
-        "image_position": "left",
-        "desktop_height": 500,
-        "mobile_height": 300,
-        "image_position_x": 50,
-        "image_position_y": 50,
-        "image_fit": "cover",
-        "subheading": "don't forget",
-        "heading": "Fill Out The Proper Materials Before Your Appointment",
-        "heading_size": "h1",
-        "spread_content": true,
-        "text": "<p>Complete the proper waiver(s) before your arrival to save time. Access Waiver below.</p>",
-        "show_button": true,
-        "button_text": "fill out your waiver",
-        "button_link": "https://mangomint.co/ky5y7l",
-        "button_style": "primary",
-        "color_scheme": "background-1",
-        "content_background": "#f5f0eb",
-        "heading_color": "#1a1a1a",
-        "subheading_color": "#6b6b6b",
-        "text_color": "#4a4a4a",
-        "enable_anchor": false,
-        "anchor_id": "",
-        "scroll_offset": 80,
-        "enable_animation": true,
-        "animation_duration": 600,
-        "animation_delay": 200,
-        "enable_sticky": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "sl_custom_faq_r7Q6ht": {
       "type": "sl-custom-faq",
       "blocks": {
@@ -1062,6 +1026,7 @@
       ],
       "name": "Content Banner",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "left",
         "content_max_width": 800,
@@ -1104,7 +1069,6 @@
     "sl_services_menu_EnDQbw",
     "sl_flexible_list_mMk3PN",
     "main",
-    "sl_image_text_block_3TXUnj",
     "sl_custom_faq_r7Q6ht",
     "sl_content_banner_cwJK67"
   ]
