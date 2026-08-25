@@ -12,16 +12,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "description_DcKJ8m": {
-          "type": "description",
-          "settings": {
-            "heading_color": "",
-            "content_color": "",
-            "content_size": 15,
-            "margin_top": 0,
-            "margin_bottom": 0
-          }
-        },
         "breadcrumbs_dkTTCF": {
           "type": "breadcrumbs",
           "settings": {
@@ -68,6 +58,22 @@
             "text_size": 16,
             "margin_top": 0,
             "margin_bottom": 0
+          }
+        },
+        "product_notice_ffLTie": {
+          "type": "product_notice",
+          "settings": {
+            "display_mode": "tag",
+            "required_tag": "text-us",
+            "notice_text": "*Please text us if you are not actively using this product.",
+            "bg_color": "#D4DCCB",
+            "text_color": "#1a1a1a",
+            "font_size": 14,
+            "border_radius": 4,
+            "padding_y": 12,
+            "padding_x": 16,
+            "margin_top": 8,
+            "margin_bottom": 8
           }
         },
         "variant_picker": {
@@ -146,13 +152,13 @@
         }
       },
       "block_order": [
-        "description_DcKJ8m",
         "breadcrumbs_dkTTCF",
         "74c34f57-4879-47de-b1af-567f04f341f4",
         "title",
         "judge_me_reviews_preview_badge_WhnPkC",
         "price",
         "richtext_BppkBB",
+        "product_notice_ffLTie",
         "variant_picker",
         "3af326dc-16f5-43a2-8f14-6a0c1e158452",
         "194cfccd-07e7-4a3a-bece-85dfbb6e658d",
