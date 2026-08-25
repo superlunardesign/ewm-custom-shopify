@@ -17,6 +17,9 @@
   width:400px !important;
       flex: 0 0 400px !important;
 }
+.jdgm-arrow {
+  content: "←"
+}
 
 /**
  * CSS Helper Classes to add to your theme's CSS
