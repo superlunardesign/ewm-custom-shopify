@@ -49,7 +49,7 @@
       "name": "Hero Section",
       "settings": {
         "background_type": "image",
-        "background_image": "shopify://shop_images/BrandingPhotography-C_Mae-5657.jpg",
+        "background_image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_7201-2.jpg",
         "background_video": "",
         "image_position": "center center",
         "mobile_image_position": "center center",
@@ -1176,6 +1176,7 @@
       ],
       "name": "Content Banner",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "center",
         "content_max_width": 800,
