@@ -262,7 +262,7 @@
             "no_image_fallback": "review_text_only",
             "max_reviews": 20,
             "review_length": "large",
-            "text_size": "medium",
+            "text_size": "large",
             "image_ratio": "1",
             "reviews_shown": 5,
             "show_reviewer_name": true,
@@ -287,7 +287,7 @@
         "judge_me_reviews_cards_carousel_PqKnfd"
       ],
       "custom_css": [
-        ".jdgm-cards-carousel{overflow:visible;}"
+        ".jdgm-cards-wrapper {max-width: 100%; overflow: visible;}"
       ],
       "settings": {
         "include_margins": false
