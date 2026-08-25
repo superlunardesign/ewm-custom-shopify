@@ -858,9 +858,7 @@
       "block_order": [
         "judge_me_reviews_cards_carousel_cwCgqE"
       ],
-      "custom_css": [
-        ".jdgm-cards-wrapper {max-width: 100%; overflow: visible;}"
-      ],
+      "custom_css": [],
       "settings": {
         "include_margins": false
       }
