@@ -859,8 +859,7 @@
         "judge_me_reviews_cards_carousel_cwCgqE"
       ],
       "custom_css": [
-        ".jdgm-cards-wrapper {max-width: 100%; overflow: visible;}",
-        ".jdgm-cards-carousel .jdgm-text{-webkit-line-clamp: 8 !important; text-align: left; max-width: 400px;}"
+        ".jdgm-cards-wrapper {max-width: 100%; overflow: visible;}"
       ],
       "settings": {
         "include_margins": false
