@@ -244,6 +244,55 @@
         "indicator_bg": "#cccccc"
       }
     },
+    "1787696393d3a88d4f": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_PqKnfd": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": false,
+            "reviews_selection": "all",
+            "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "wax",
+            "star_rating": "all",
+            "show_review_media": false,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "large",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 5,
+            "show_reviewer_name": true,
+            "show_product_name": false,
+            "hide_arrows_mobile": true,
+            "arrows_position": "bottom",
+            "max_width": 1400,
+            "corner_styling": "square",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#F9F9F9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "",
+            "show_average_rating": false,
+            "rating_display": "default"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_PqKnfd"
+      ],
+      "custom_css": [
+        ".jdgm-cards-carousel{overflow:visible;}"
+      ],
+      "settings": {
+        "include_margins": false
+      }
+    },
     "sl_image_text_overlap_7Fmzin": {
       "type": "sl-image-text-overlap",
       "blocks": {
@@ -1314,6 +1363,7 @@
     "sl_scrapbook_hero_UnqQ3Y",
     "sl_flexible_list_mxjCPF",
     "testimonials_carousel_kK49RM",
+    "1787696393d3a88d4f",
     "sl_image_text_overlap_7Fmzin",
     "sl_flexible_list_yEnKh7",
     "sl_marquee_RR7r88",
