@@ -13,8 +13,8 @@
 }
 
 .jdgm-cards-carousel .jdgm-media-card{
-  width:400px;
-      flex: 0 0 400px;
+  width:400px !important;
+      flex: 0 0 400px !important;
 }
 
 /**
