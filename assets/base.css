@@ -12,8 +12,9 @@
   max-width: 400px;
 }
 
-.jdgm-cards-carousel{
+.jdgm-cards-carousel .jdgm-media-card{
   width:400px;
+      flex: 0 0 400px;
 }
 
 /**
