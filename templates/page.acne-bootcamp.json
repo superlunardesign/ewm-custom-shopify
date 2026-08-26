@@ -891,9 +891,24 @@
     "sl_services_menu_tPA8Ja": {
       "type": "sl-services-menu",
       "blocks": {
-        "service_item_zittUh": {
+        "service_item_WYFF6p": {
           "type": "service_item",
-          "name": "Mini Refresh Facial",
+          "name": "Pre-Treatment",
+          "settings": {
+            "service_name": "Acne Bootcamp Pre-Treatment Assessment",
+            "add_line": true,
+            "service_extra": "25-35 Minutes",
+            "service_price": "65",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "BOOK NOW",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p>Meet with our Certified Acne Expert to work towards clear, healthier skin! <br/>We will discuss:  <br/>- A clear explanation of what really causes acne<br/>- A review of your skin type and acne type<br/>- A quick sensitivity check so we know the best place to start<br/>- Guidance on how to spot hidden pore-clogging ingredients in hair care, hygiene products, makeup, and even food choices<br/>- Go home with a personalized skincare routine built just for you <br/><br/>You must receive a consultation and purchase the appropriate homecare to receive treatments (Expect 250-300 for regimen).</p>"
+          }
+        },
+        "service_item_4nGtnz": {
+          "type": "service_item",
+          "name": "Acne Bootcamp Treatment",
           "settings": {
             "service_name": "Acne Bootcamp Treatment",
             "add_line": true,
@@ -921,6 +936,21 @@
             "service_description": "<p>Everything in the standard treatment plus Red Light Therapy to calm inflamed acne, reduce redness, and support skin healing after extractions.</p>"
           }
         },
+        "service_item_zrDrbW": {
+          "type": "service_item",
+          "name": "Virtual Acne Bootcamp Assessment",
+          "settings": {
+            "service_name": "Virtual Acne Bootcamp Assessment",
+            "add_line": false,
+            "service_extra": "(Single Session or Pack)",
+            "service_price": "65",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "BOOK NOW",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p>Meet via Google Meet with our Certified Acne Expert to work towards clear, healthier skin! <br/><br/>We will discuss:  <br/>- A clear explanation of what really causes acne<br/>- A review of your skin type and acne type<br/>- Guidance on how to spot hidden pore-clogging ingredients in hair care, hygiene products, makeup, and even food choices<br/>- Ship to you a personalized skincare routine built just for you (Expect to spend $250-300 for entire routine)<br/><br/>This is a good option for those local who cannot make it in and also for those world-wide.<br/><br/>A complimentary follow up visit will be scheduled</p>"
+          }
+        },
         "service_item_jnNHiq": {
           "type": "service_item",
           "settings": {
@@ -932,13 +962,15 @@
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p>Ongoing online support via Google Meet to review your progress, answer questions, and adjust your homecare plan as your skin evolves.</p>"
+            "service_description": "<p>Our Acne Experts are available through Google Meet to help support you and your skin at home! Connect with an Acne Expert as part of your ongoing care to discuss any questions or concerns you may have regarding your skin or home care routine.</p>"
           }
         }
       },
       "block_order": [
-        "service_item_zittUh",
+        "service_item_WYFF6p",
+        "service_item_4nGtnz",
         "service_item_6V4KRF",
+        "service_item_zrDrbW",
         "service_item_jnNHiq"
       ],
       "custom_css": [],
@@ -947,7 +979,7 @@
         "enable_anchor": false,
         "anchor_id": "services",
         "anchor_offset": 80,
-        "section_title": "Virtual Check-In",
+        "section_title": "ACNE BOOTCAMP SERVICES",
         "background_color": "#ffffff",
         "section_padding": 40,
         "max_width": 1000,

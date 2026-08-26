@@ -445,113 +445,53 @@
         "padding_bottom": 36
       }
     },
-    "testimonials_carousel_kK49RM": {
-      "type": "testimonials-carousel",
+    "1787770850db53806d": {
+      "type": "apps",
       "blocks": {
-        "testimonial_LWteyz": {
-          "type": "testimonial",
+        "judge_me_reviews_cards_carousel_kn9wG8": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "testimonial_text": "Her professionalism is unparalleled. She is very knowledgeable about the products she uses, the processes she follows, and the services she performs. I've never been happier about my skin, and I've never felt more confident.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_WXDiQD": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "Amazing results! My skin has never looked better. The personalized approach really makes a difference.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
-          }
-        },
-        "testimonial_r6Eapb": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial_text": "Professional, knowledgeable, and caring. I trust her completely with my skincare routine.",
-            "author_name": "Sarah Johnson",
-            "author_title": "Verified Buyer",
-            "show_rating": true,
-            "rating": 5,
-            "show_date": false,
-            "testimonial_date": "October 2024"
+            "show_sample_reviews": false,
+            "reviews_selection": "all",
+            "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "facial",
+            "star_rating": "5_star",
+            "show_review_media": false,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "medium",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": false,
+            "hide_arrows_mobile": true,
+            "arrows_position": "bottom",
+            "max_width": 1400,
+            "corner_styling": "square",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#F9F9F9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "",
+            "show_average_rating": false,
+            "rating_display": "default"
           }
         }
       },
       "block_order": [
-        "testimonial_LWteyz",
-        "testimonial_WXDiQD",
-        "testimonial_r6Eapb"
+        "judge_me_reviews_cards_carousel_kn9wG8"
       ],
-      "name": "Testimonials Carousel",
+      "custom_css": [
+        ".jdgm-cards-wrapper {overflow: visible; max-width: 100%;}"
+      ],
       "settings": {
-        "section_title": "",
-        "section_subtitle": "",
-        "section_background": "#ffffff",
-        "section_padding": 60,
-        "heading_color": "#000000",
-        "heading_size": 36,
-        "heading_weight": "600",
-        "heading_transform": "none",
-        "subheading_color": "#666666",
-        "header_spacing": 40,
-        "scroll_speed": 30,
-        "scroll_direction": "left",
-        "pause_on_hover": true,
-        "disable_auto_scroll_mobile": true,
-        "enable_fade": true,
-        "fade_width": 10,
-        "testimonial_width": 350,
-        "tablet_testimonial_width": 300,
-        "mobile_testimonial_width": 280,
-        "testimonial_gap": 30,
-        "card_background": "#ffffff",
-        "card_padding": 30,
-        "mobile_card_padding": 20,
-        "card_radius": 12,
-        "card_shadow": true,
-        "shadow_x": 0,
-        "shadow_y": 2,
-        "shadow_blur": 10,
-        "shadow_spread": 0,
-        "shadow_color": "#0000001a",
-        "card_border": false,
-        "border_width": 1,
-        "border_color": "#e0e0e0",
-        "card_hover_effect": true,
-        "show_quotes": true,
-        "quote_color": "#cccccc",
-        "italic_text": false,
-        "text_color": "#333333",
-        "text_size": 16,
-        "mobile_text_size": 15,
-        "star_size": 18,
-        "star_color": "#ffc107",
-        "empty_star_color": "#e0e0e0",
-        "show_divider": true,
-        "divider_color": "#eeeeee",
-        "avatar_size": 45,
-        "avatar_radius": 50,
-        "show_placeholder_avatar": true,
-        "placeholder_avatar_bg": "#e0e0e0",
-        "placeholder_avatar_text": "#666666",
-        "author_color": "#000000",
-        "author_size": 16,
-        "mobile_author_size": 14,
-        "title_color": "#000000",
-        "title_size": 14,
-        "date_color": "#999999",
-        "mobile_heading_size": 28,
-        "show_scroll_indicators": false,
-        "indicator_color": "#000000",
-        "indicator_bg": "#cccccc"
+        "include_margins": true
       }
     },
     "sl_marquee_RR7r88": {
@@ -639,13 +579,29 @@
             "button_link": "https://booking.mangomint.com/314399",
             "service_description": "<p><strong>Most popular treatment for targeting fine lines & wrinkles.</strong></p><p>Includes everything that our 60 minute facial includes + Red Light Therapy</p><p></p><p><strong>What Red Light Therapy Does:</strong></p><ul><li>Stimulates Collagen Production</li><li> Reduces fine lines & wrinkles</li><li>Increases circulation & reduces inflammation</li></ul>"
           }
+        },
+        "service_item_E667qM": {
+          "type": "service_item",
+          "name": "Raspberry Scrub Facial",
+          "settings": {
+            "service_name": "Raspberry Scrub Back Facial",
+            "add_line": true,
+            "service_extra": "",
+            "service_price": "90",
+            "is_complimentary": false,
+            "show_button": true,
+            "button_text": "BOOK NOW",
+            "button_link": "https://booking.mangomint.com/314399",
+            "service_description": "<p>Back treatment focusing on skin results & light massage ✨️<br/><br/>Enjoy: <br/>• Cleanse, <br/>• Professional exfoliation with our sweet raspberry scrub.<br/>• Topped with a Raspberry Peach Enzyme to break up stubborn dead skin cells. <br/>• Light massage, <br/>• Scalp / Shoulder / Hand Massage, <br/>• Masking, <br/>• Serums & more!</p>"
+          }
         }
       },
       "block_order": [
         "service_item_zittUh",
         "service_item_6V4KRF",
         "service_item_rLQd36",
-        "service_item_cq7HXb"
+        "service_item_cq7HXb",
+        "service_item_E667qM"
       ],
       "custom_css": [],
       "name": "Facial Treatments",
@@ -1176,7 +1132,7 @@
     "sl_image_text_overlap_UCkCwm",
     "sl_flexible_list_YRpKeG",
     "sl_image_text_overlap_e8WPDG",
-    "testimonials_carousel_kK49RM",
+    "1787770850db53806d",
     "sl_marquee_RR7r88",
     "sl_services_menu_tPA8Ja",
     "sl_marquee_wGAN4T",
