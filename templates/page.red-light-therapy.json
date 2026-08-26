@@ -887,11 +887,18 @@
             "answer": "<p>Absolutely! Red light therapy is backed by over 2,000 peer-reviewed clinical studies published in major medical journals. NASA originally developed it for wound healing in space. The FDA has cleared it for multiple conditions including acne, wrinkles, pain, and wound healing. This isn't pseudoscience - it's proven medical technology used in hospitals and clinics worldwide.</p>"
           }
         },
+        "faq_item_3UMHBR": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does red light therapy help with acne?",
+            "answer": "<p>In many ways! We frequently use the combination red + blue light settings for our <a href=\"/pages/acne-bootcamp\" title=\"Acne Bootcamp\">Acne Bootcamp</a> Sessions because it calms histamine / hive-like reactions after performing extractions, and it speeds healing while also helping with active acne.</p>"
+          }
+        },
         "faq_item_PzXEKn": {
           "type": "faq_item",
           "settings": {
             "question": "How quickly will I see results?",
-            "answer": "<p>Results vary by condition and individual, but most clients notice initial improvements within 2-4 sessions. For acne, you may see reduction in active breakouts within a week. Anti-aging benefits like improved skin texture typically appear around week 3-4. Pain relief can be immediate for some, while others need 6-8 sessions. Maximum results usually occur after completing a full treatment series of 12-20 sessions.</p>"
+            "answer": "<p>Results vary by condition and individual, but most clients notice initial improvements within 2-4 sessions. For acne, we use the combination red + blue light settings in our <a href=\"/pages/acne-bootcamp\" title=\"Acne Bootcamp\">Acne Bootcamp</a> Sessions because it calms histamine / hive-like reactions after performing extractions, and it speeds healing while also helping with active acne. Anti-aging benefits like improved skin texture typically appear around week 3-4. Pain relief can be immediate for some, while others need 6-8 sessions. Maximum results usually occur after completing a full treatment series of 12-20 sessions.</p>"
           }
         },
         "faq_item_GmWhMf": {
@@ -905,7 +912,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How is this different from red light devices I can buy online?",
-            "answer": "<p>Professional-grade equipment like our Celluma panels deliver therapeutic doses of light at precisely calibrated wavelengths with sufficient power density. Home devices typically have 10-20% of the power output, single wavelengths, and rigid designs that don't conform to your body. Our panels combine three therapeutic wavelengths simultaneously and flex to maintain optimal distance from every treatment area. Plus, you get professional guidance on treatment protocols specific to your needs.</p>"
+            "answer": "<p>Celluma delivers the correct dose of RLT; at-home devices run too high in J/cm², overwhelming the cell and causing water retention that lowers collagen; Celluma is low and slow, the right wavelength at the correct output over 30 min; most devices promise 5–10 min because they deliver energy too fiercely (think tortoise vs. hare).</p>"
           }
         },
         "faq_item_XkqtLR": {
@@ -919,12 +926,13 @@
           "type": "faq_item",
           "settings": {
             "question": "Can I combine red light therapy with other treatments?",
-            "answer": "<p>Yes! Red light therapy actually enhances the results of many other treatments. It's excellent after facials that include extractions to reduce inflammation and boost product absorption, or following chemical peels to accelerate healing. Many clients add it to their regular facial or waxing appointments. We can also combine it with your existing skincare routine - the increased circulation helps products penetrate deeper for better results.</p>"
+            "answer": "<p>Yes! Red light therapy actually enhances the results of many other treatments. It's excellent after facials that include extractions to reduce inflammation or following chemical peels to accelerate healing. Many clients add it to their regular facial or waxing appointments. We can also combine it with your existing skincare routine - the increased circulation helps products penetrate deeper for better results.</p>"
           }
         }
       },
       "block_order": [
         "faq_item_qjMHfp",
+        "faq_item_3UMHBR",
         "faq_item_PzXEKn",
         "faq_item_GmWhMf",
         "faq_item_PGh67J",
