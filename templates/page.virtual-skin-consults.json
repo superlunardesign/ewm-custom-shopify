@@ -196,6 +196,7 @@
       ],
       "name": "Content Banner",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "center",
         "content_max_width": 800,
@@ -239,7 +240,7 @@
         "card_pMVAq7": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/BarndingPhotos-C_MaePhotography-5084.jpg",
+            "image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_7333-2.jpg",
             "card_heading": "Products Shipped to You",
             "card_text": "Products selected based on your skin goals will be shipped directly to you with detailed instructions. No guessing, no searching — just what your skin needs.",
             "button_text": "SKIN QUIZ",
@@ -249,7 +250,7 @@
         "card_ExV8UG": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/BrandingPhotography-C_Mae-5261.jpg",
+            "image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_7106-2.jpg",
             "card_heading": "Complimentary Follow-Up",
             "card_text": "A complimentary virtual follow-up will be booked at your appointment to ensure your routine is working and make any needed adjustments.",
             "button_text": "SHOP SKINCARE",
@@ -359,7 +360,7 @@
           "settings": {
             "service_name": "Virtual Acne Bootcamp Assessment",
             "add_line": false,
-            "service_extra": "Meet via Zoom with Shannon — Certified Acne Expert",
+            "service_extra": "Meet via Google Meet with Shannon — Certified Acne Expert",
             "service_price": "65 / 45 min",
             "is_complimentary": false,
             "show_button": true,
@@ -427,7 +428,7 @@
           "type": "step",
           "settings": {
             "heading": "Book your Session",
-            "text": "<p>Choose your virtual consultation type and select a time that works for you. You'll receive a Zoom link via email.</p>"
+            "text": "<p>Choose your virtual consultation type and select a time that works for you. You'll receive a Google Meet link via email.</p>"
           }
         },
         "step_HPJptH": {
@@ -500,14 +501,14 @@
           "type": "faq_item",
           "settings": {
             "question": "What do I need for my virtual appointment?",
-            "answer": "<p>All you need is a device with Zoom (computer, tablet, or phone), good lighting so we can see your skin clearly, and a quiet space where we can talk. We'll send you the Zoom link before your appointment.</p>"
+            "answer": "<p>All you need is a device with Google Meet (computer, tablet, or phone), good lighting so we can see your skin clearly, and a quiet space where we can talk. We'll send you the Google Meet link before your appointment.</p>"
           }
         },
         "faq_item_qjMHfp": {
           "type": "faq_item",
           "settings": {
             "question": "How do virtual skin consultations work?",
-            "answer": "<p>We meet via Zoom for your scheduled appointment time. We'll do a deep dive into your skin, go over all your skincare questions, and educate you on how the skin functions. After your consultation, products selected based on your skin goals will be shipped directly to you with detailed instructions. A complimentary virtual follow-up will be booked at your appointment.</p>"
+            "answer": "<p>We meet via Google Meet for your scheduled appointment time. We'll do a deep dive into your skin, go over all your skincare questions, and educate you on how the skin functions. After your consultation, products selected based on your skin goals will be shipped directly to you with detailed instructions. A complimentary virtual follow-up will be booked at your appointment.</p>"
           }
         },
         "faq_item_PzXEKn": {
@@ -963,6 +964,7 @@
       ],
       "name": "Content Banner",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "center",
         "content_max_width": 800,
