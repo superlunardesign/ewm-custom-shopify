@@ -167,7 +167,7 @@
         "prop3_text": "We only recommend what works. The products we sell are the same ones we use in treatments and on ourselves. If it doesn't deliver, it's not on our shelves.",
         "prop4_heading": "Support Between Appointments",
         "prop4_text": "Skin doesn't wait for your next booking. We offer ongoing guidance, check-ins, and real answers when you need them. You're never on your own.",
-        "section_background": "#D4DCCB",
+        "section_background": "#d4dccb",
         "prop_background": "rgba(0,0,0,0)",
         "prop_border_radius": 0,
         "heading_color": "#000000",
@@ -353,7 +353,7 @@
         "enable_marquee": true,
         "marquee_text": "our space  •  your retreat  •",
         "marquee_size": 80,
-        "marquee_color": "#8C9B6D",
+        "marquee_color": "#8c9b6d",
         "marquee_font": "heading",
         "marquee_speed": 40,
         "marquee_padding": 30,
@@ -369,7 +369,7 @@
         "heading_6P3P9a": {
           "type": "heading",
           "settings": {
-            "text": "Ready to Meet Your Skin's New Best Friends?",
+            "text": "Ready to Meet Your Skincare & Waxing Professionals?",
             "size": "h0"
           }
         },
