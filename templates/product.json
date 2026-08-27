@@ -287,12 +287,12 @@
         "card_border_radius": 8,
         "card_image_bg": "#f5f5f3",
         "section_bg": "#f7f7f7",
-        "atc_bg": "#ffffff",
-        "atc_text": "#8c9b6d",
+        "atc_bg": "#8C9B6D",
+        "atc_text": "#FFFFFF",
         "atc_border_width": 1,
         "atc_border_color": "#8c9b6d",
         "atc_radius": 0,
-        "button_font": "heading",
+        "button_font": "body",
         "button_font_size": 13,
         "button_text_transform": "uppercase",
         "button_letter_spacing": 1,
@@ -318,7 +318,7 @@
       ],
       "custom_css": [
         ".jm-reviewer-info__name {font-weight: 400;}",
-        ".jm-button {border-radius: 0px; font-family: old standard tt; text-transform:uppercase;}"
+        ".jm-button {border-radius: 0px; font-family: old standard tt; text-transform: uppercase;}"
       ],
       "settings": {
         "include_margins": true
