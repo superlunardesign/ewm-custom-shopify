@@ -66,7 +66,7 @@
             "display_mode": "tag",
             "required_tag": "text-us",
             "notice_text": "*Please text us if you are not actively using this product.",
-            "bg_color": "#D4DCCB",
+            "bg_color": "#d4dccb",
             "text_color": "#1a1a1a",
             "font_size": 14,
             "border_radius": 4,
@@ -197,6 +197,7 @@
         "show_wishlist": true,
         "show_review_tab": true,
         "enable_sticky_bar": true,
+        "enable_desktop_sticky_bar": false,
         "sticky_bar_bg": "#ffffff",
         "sticky_btn_bg": "#8c9b6d",
         "sticky_btn_color": "#ffffff",
@@ -305,7 +306,7 @@
         "judge_me_reviews_review_widget_NdVzTW": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "review_data": "sample_data",
+            "review_data": "real_data",
             "max_width": 1200,
             "show_shop_reviews": true,
             "empty_state": "other_products_reviews"
@@ -314,6 +315,10 @@
       },
       "block_order": [
         "judge_me_reviews_review_widget_NdVzTW"
+      ],
+      "custom_css": [
+        ".jm-reviewer-info__name {font-weight: 400;}",
+        ".jm-button {border-radius: 0px; font-family: old standard tt; text-transform:uppercase;}"
       ],
       "settings": {
         "include_margins": true
