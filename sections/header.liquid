@@ -1303,9 +1303,6 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
        </details-modal>
     {%- endif -%}
     {%- endif -%}  
-    {%- if request.page_type == 'index' -%}
-      <h1 class="header__heading">
-    {%- endif -%}
         <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
           {%- if section.settings.logo != blank -%}
             {%- assign image_size_2x = section.settings.logo_width | times: 2 | at_most: 5760 -%}
@@ -1321,9 +1318,6 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
             <span class="h2">{{ shop.name }}</span>
           {%- endif -%}
         </a>
-    {%- if request.page_type == 'index' -%}
-      </h1>
-    {%- endif -%}
 
      {%- if section.settings.menu != blank -%}
               {%- comment -%} SL Custom Navigation with Mega Menu {%- endcomment -%}
@@ -2165,24 +2159,58 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
 
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "Organization",
     "name": {{ shop.name | json }},
     {% if section.settings.logo %}
       "logo": {{ section.settings.logo | image_url: width: section.settings.logo_width | prepend: "https:" | json }},
     {% endif %}
     "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tiktok_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
+      {%- liquid
+        assign social_links = ''
+        if settings.social_twitter_link != blank
+          unless social_links == ''
+            assign social_links = social_links | append: ','
+          endunless
+          assign social_links = social_links | append: settings.social_twitter_link
+        endif
+        if settings.social_facebook_link != blank
+          unless social_links == ''
+            assign social_links = social_links | append: ','
+          endunless
+          assign social_links = social_links | append: settings.social_facebook_link
+        endif
+        if settings.social_pinterest_link != blank
+          unless social_links == ''
+            assign social_links = social_links | append: ','
+          endunless
+          assign social_links = social_links | append: settings.social_pinterest_link
+        endif
+        if settings.social_instagram_link != blank
+          unless social_links == ''
+            assign social_links = social_links | append: ','
+          endunless
+          assign social_links = social_links | append: settings.social_instagram_link
+        endif
+        if settings.social_tiktok_link != blank
+          unless social_links == ''
+            assign social_links = social_links | append: ','
+          endunless
+          assign social_links = social_links | append: settings.social_tiktok_link
+        endif
+        if settings.social_youtube_link != blank
+          unless social_links == ''
+            assign social_links = social_links | append: ','
+          endunless
+          assign social_links = social_links | append: settings.social_youtube_link
+        endif
+        assign social_array = social_links | split: ','
+      -%}
+      {%- for link in social_array -%}
+        {{ link | json }}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
     ],
-    "url": {{ request.origin | append: page.url | json }}
+    "url": {{ request.origin | json }}
   }
 </script>
 
@@ -2190,7 +2218,7 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
   {% assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" %}
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "WebSite",
       "name": {{ shop.name | json }},
       "potentialAction": {
@@ -2198,9 +2226,71 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
         "target": {{ potential_action_target | json }},
         "query-input": "required name=search_term_string"
       },
-      "url": {{ request.origin | append: page.url | json }}
+      "url": {{ request.origin | json }}
     }
   </script>
+{%- endif -%}
+
+{%- if request.page_type == 'index' -%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": {{ request.origin | json }},
+    "name": "Esthetics With Me",
+    "description": "Exceptional Customized Facials, Personalized Acne Treatments, & Brazilian Waxing in McHenry, IL",
+    "url": {{ request.origin | json }},
+    {% if section.settings.logo %}
+      "image": {{ section.settings.logo | image_url: width: section.settings.logo_width | prepend: "https:" | json }},
+    {% endif %}
+    "telephone": "",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1214 N Green St Suite 104",
+      "addressLocality": "McHenry",
+      "addressRegion": "IL",
+      "postalCode": "60050",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 42.3356,
+      "longitude": -88.2726
+    },
+    "priceRange": "$$",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday"],
+        "opens": "09:30",
+        "closes": "20:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "13:00"
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Esthetics Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Customized Facials" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Acne Bootcamp" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brazilian Waxing" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Chemical Peels" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Red Light Therapy" } }
+      ]
+    }
+  }
+</script>
 {%- endif -%}
 
 {% schema %}

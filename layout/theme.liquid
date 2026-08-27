@@ -8,6 +8,7 @@
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
@@ -31,11 +32,11 @@
       <meta name="robots" content="noindex, nofollow">
     {%- endif -%}
     {% render 'meta-tags' %}
-    <script src="{{ 'jquery.min.js' | asset_url }}"></script>
-   <script src="{{ 'axios.min.js' | asset_url }}"></script>
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'axios.min.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'swiper-bundle.min.js' | asset_url }}"></script>
-    <script  src="{{ 'jquery-cookie-min.js' | asset_url }}"></script>     
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'jquery-cookie-min.js' | asset_url }}" defer="defer"></script>     
     {{ content_for_header }}
 
     {%- liquid
@@ -474,8 +475,8 @@
     <script src="{{ 'dT_bundle_base.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'dT_bundle.js' | asset_url }}" defer="defer"></script>
     {% endif %}            
-    <script src="{{ 'dt_wishlist.js' | asset_url }}"></script>    
-    <script src="{{ 'dt-theme.js' | asset_url }}"></script>
+    <script src="{{ 'dt_wishlist.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'dt-theme.js' | asset_url }}" defer="defer"></script>
     {% section 'suggested-products' %}
     {% render 'scroll-to-top' %}
     {% section 'newsletter-modal' %}
