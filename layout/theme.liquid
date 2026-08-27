@@ -481,21 +481,5 @@
     {% render 'scroll-to-top' %}
     {% section 'newsletter-modal' %}
 
-    {%- if customer -%}
-      <script>
-        (function(){
-          try {
-            var dest = localStorage.getItem('sl_return');
-            if (dest) {
-              localStorage.removeItem('sl_return');
-              if (window.location.pathname !== dest) {
-                window.location.replace(dest);
-              }
-            }
-          } catch(e) {}
-        })();
-      </script>
-    {%- endif -%}
-
   </body>
 </html>
