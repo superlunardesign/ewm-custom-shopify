@@ -13,7 +13,7 @@
   <style>
     .cookie-disclaimer {display:none;}
     .cookie-disclaimer .cookie-content p {
-      font-size:16px; letter-spacing: normal;
+      font-size: {{ section.settings.text_font_size | default: 16 }}px; letter-spacing: normal;
     }
     .cookie-disclaimer .cookie-content {
       position: fixed;
@@ -48,8 +48,8 @@
       right: 15px; 
     }
     .cookie-disclaimer .cookie-content button {
-      font-size: 1.5rem;
-      padding: 10px 30px;
+      font-size: {{ section.settings.button_font_size | default: 15 }}px;
+      padding: {{ section.settings.button_padding | default: '10px 30px' }};
     min-width: calc(10rem + var(--buttons-border-width) * 2);
     min-height: calc(3.5rem + var(--buttons-border-width) * 2);
     transition: all 300ms linear;
@@ -234,11 +234,31 @@
   "default": "Decline"
   },
   {
+  "type": "range",
+  "id": "text_font_size",
+  "label": "Banner text font size",
+  "min": 12,
+  "max": 24,
+  "step": 1,
+  "default": 16,
+  "unit": "px"
+  },
+  {
+  "type": "range",
+  "id": "button_font_size",
+  "label": "Button font size",
+  "min": 10,
+  "max": 24,
+  "step": 1,
+  "default": 15,
+  "unit": "px"
+  },
+  {
   "type": "text",
   "id": "button_padding",
-  "label": "t:sections.cookie-banner.settings.button_padding.label",
-  "default": "10px 20px 10px 20px",
-  "info": "t:sections.cookie-banner.settings.button_padding.info"
+  "label": "Button padding",
+  "default": "10px 30px",
+  "info": "CSS padding (e.g. 10px 30px or 8px 20px 8px 20px)"
   }
   ]
   }
