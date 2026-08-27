@@ -28,6 +28,9 @@
   height:20px !important; 
   color:#8c9b6d;
 }
+.jdgm-cards-carousel .jdgm-arrow {
+  display: flex !important;
+}
 
 /**
  * CSS Helper Classes to add to your theme's CSS
