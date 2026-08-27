@@ -72,16 +72,20 @@
   #shopify-section-{{ section.id }} .hero-subheading {
     color: {{ section.settings.subheading_color }};
     font-family: var(--font-body-family);
+    font-style: normal;
     font-size: {{ section.settings.subheading_size }}px;
     font-weight: {{ section.settings.subheading_weight }};
+    line-height: 1.5;
     text-transform: {{ section.settings.subheading_transform }};
     letter-spacing: {{ section.settings.subheading_spacing }}px;
+    word-break: normal;
     margin: 0;
   }
 
   #shopify-section-{{ section.id }} .hero-heading {
     color: {{ section.settings.heading_color }};
     font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
     font-size: {{ section.settings.heading_size }}px;
     font-weight: {{ section.settings.heading_weight }};
     line-height: {{ section.settings.heading_line_height }};
