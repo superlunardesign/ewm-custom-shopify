@@ -1830,17 +1830,6 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
               </a>
               {%- endif -%}
 
-              {%- if section.settings.show_header_compare -%}          
-              <a href="/pages/compare" class="header__icon header__icon--compare link">
-                {% render 'icon-compare' %}
-                <span class="icon__fallback-text">{{ 'products.product.compare' | t }}</span>
-                <dtx-wish-count class="dtxc-compare-count cart-count-bubble" grid_type="compareList" count="0">
-                  <div class="grid-count-bubble">
-                    <span aria-hidden="true"></span>
-                  </div>
-                </dtx-wish-count>
-              </a>          
-              {%- endif -%}
               
      {%- if shop.customer_accounts_enabled and section.settings.show_account -%}
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
