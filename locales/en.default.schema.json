@@ -1794,48 +1794,6 @@
         "name": "Blog posts"
       }
     },
-    "cookie-banner": {
-      "name": "GDPR Cookies",
-      "settings": {
-        "show_gdpr": {
-          "label": "Enable GDPR cookies"
-        },
-        "header": {
-          "header__1": "Shipping rate calculator"
-        },
-        "style": {
-          "label": "Choose Style",
-          "options__1": {
-            "label": "Bottom"
-          },
-          "options__2": {
-            "label": "Left"
-          },
-          "options__3": {
-            "label": "Right"
-          }
-        },
-        "color_scheme": {
-          "info": "Visible when container displayed."
-        },
-        "enable_box_shadow": {
-          "label": "Enable box shadow"
-        },
-        "text": {
-          "label": "Text"
-        },
-        "accept": {
-          "label": "Button label"
-        },
-        "decline": {
-          "label": "Button label"
-        },
-        "button_padding": {
-          "label": "Button padding",
-          "info": "Format - Top, Right, Bottom, Left"
-        }
-      }
-    },
     "newsletter-modal": {
       "name": "Email signup",
       "settings": {
