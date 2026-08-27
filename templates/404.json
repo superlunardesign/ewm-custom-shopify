@@ -148,6 +148,7 @@
         "service_link_rlt",
         "service_link_virtual"
       ],
+      "custom_css": [],
       "name": "Services",
       "settings": {
         "image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_7013-2-Edit.jpg",
@@ -187,6 +188,7 @@
     },
     "product_recommendations_tgRTTJ": {
       "type": "product-recommendations",
+      "custom_css": [],
       "name": "Product Carousel",
       "settings": {
         "required_tag": "",
