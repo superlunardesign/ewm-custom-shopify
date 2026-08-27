@@ -1622,7 +1622,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                             {% render 'icon-close' %}
                           </button>
                           <div class="product-popup-modal__content-info">
-                            <h1 class="h2">{{ popup_block.settings.page.title }}</h1>
+                            <h2 class="h2">{{ popup_block.settings.page.title }}</h2>
                             {{ popup_block.settings.page.content }}
                           </div>
                         </div>
@@ -1938,9 +1938,9 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                           <details class="dt-details"{% if section.settings.details_open_default %} open{% endif %}>
                             <summary>
                               <div class="summary__title">
-                                <h6 class="accordion__title" style="{% if block.settings.heading_color != blank %}color: {{ block.settings.heading_color }};{% endif %}">
+                                <h3 class="accordion__title h6" style="{% if block.settings.heading_color != blank %}color: {{ block.settings.heading_color }};{% endif %}">
                                   Details
-                                </h6>
+                                </h3>
                               </div>
                               {% render 'icon-caret' %}
                               <span class="sl-accordion-icon">
@@ -1962,7 +1962,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                             <div class="product__info-bottom tabs">
                               {%- if product.description != blank -%}
                                 <div class="summary__title tablinks" onclick="openTab(event, 'tab-description')" data-id="tab-description">
-                                  <h6 class="accordion__title">{{ 'products.product.description' | t }}</h6>
+                                  <h3 class="accordion__title h6">{{ 'products.product.description' | t }}</h3>
                                 </div>
                               {%- endif -%}
                               {%- for tab_block in section.blocks -%}
@@ -1970,7 +1970,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                                   {%- assign tab_block_heading_lower = tab_block.settings.heading | downcase -%}
                                   {%- unless tab_block_heading_lower contains 'ingredient' and product.metafields.custom.ingredients == blank -%}
                                   <div class="summary__title tablinks" onclick="openTab(event, '{{ tab_block.settings.heading | handle }}')" data-id="{{ tab_block.settings.heading | handle }}">
-                                    <h6 class="accordion__title">{{ tab_block.settings.heading | default: tab_block.settings.page.title }}</h6>
+                                    <h3 class="accordion__title h6">{{ tab_block.settings.heading | default: tab_block.settings.page.title }}</h3>
                                   </div>
                                   {%- endunless -%}
                                 {%- endif -%}
@@ -2011,9 +2011,9 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                           <details class="dt-details"{% if is_ingredients and section.settings.ingredients_open_default %} open{% elsif is_ingredients == false and section.settings.details_open_default %} open{% endif %}>
                             <summary style="{% if block.settings.border_color != blank %}border-bottom-color: {{ block.settings.border_color }};{% endif %}">
                               <div class="summary__title">
-                                <h6 class="accordion__title" style="{% if block.settings.heading_color != blank %}color: {{ block.settings.heading_color }};{% endif %}{% if block.settings.heading_size != blank and block.settings.heading_size != 16 %}font-size: {{ block.settings.heading_size }}px;{% endif %}">
+                                <h3 class="accordion__title h6" style="{% if block.settings.heading_color != blank %}color: {{ block.settings.heading_color }};{% endif %}{% if block.settings.heading_size != blank and block.settings.heading_size != 16 %}font-size: {{ block.settings.heading_size }}px;{% endif %}">
                                   {{ block.settings.heading | default: block.settings.page.title }}
-                                </h6>
+                                </h3>
                               </div>
                               {% render 'icon-caret' %}
                               <span class="sl-accordion-icon" style="{% if block.settings.icon_color != blank %}color: {{ block.settings.icon_color }};{% endif %}">
@@ -2035,7 +2035,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                             <div class="product__info-bottom tabs">
                               {%- if product.description != blank -%}
                                 <div class="summary__title tablinks" onclick="openTab(event, 'tab-description')" data-id="tab-description">
-                                  <h6 class="accordion__title">{{ 'products.product.description' | t }}</h6>
+                                  <h3 class="accordion__title h6">{{ 'products.product.description' | t }}</h3>
                                 </div>
                               {%- endif -%}
                               {%- for tab_block in section.blocks -%}
@@ -2043,7 +2043,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                                   {%- assign tab_block_heading_lower = tab_block.settings.heading | downcase -%}
                                   {%- unless tab_block_heading_lower contains 'ingredient' and product.metafields.custom.ingredients == blank -%}
                                   <div class="summary__title tablinks" onclick="openTab(event, '{{ tab_block.settings.heading | handle }}')" data-id="{{ tab_block.settings.heading | handle }}">
-                                    <h6 class="accordion__title">{{ tab_block.settings.heading | default: tab_block.settings.page.title }}</h6>
+                                    <h3 class="accordion__title h6">{{ tab_block.settings.heading | default: tab_block.settings.page.title }}</h3>
                                   </div>
                                   {%- endunless -%}
                                 {%- endif -%}
@@ -2177,9 +2177,9 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                   <details class="dt-details"{% if section.settings.details_open_default %} open{% endif %}>
                     <summary>
                       <div class="summary__title">
-                        <h6 class="accordion__title" style="{% if block.settings.heading_color != blank %}color: {{ block.settings.heading_color }};{% endif %}">
+                        <h3 class="accordion__title h6" style="{% if block.settings.heading_color != blank %}color: {{ block.settings.heading_color }};{% endif %}">
                           Details
-                        </h6>
+                        </h3>
                       </div>
                       {% render 'icon-caret' %}
                     <span class="sl-accordion-icon">
@@ -2205,9 +2205,9 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                   <details class="dt-details"{% if is_ingredients and section.settings.ingredients_open_default %} open{% elsif is_ingredients == false and section.settings.details_open_default %} open{% endif %}>
                     <summary style="{% if block.settings.border_color != blank %}border-bottom-color: {{ block.settings.border_color }};{% endif %}">
                       <div class="summary__title">
-                        <h6 class="accordion__title" style="{% if block.settings.heading_color != blank %}color: {{ block.settings.heading_color }};{% endif %}{% if block.settings.heading_size != blank and block.settings.heading_size != 16 %}font-size: {{ block.settings.heading_size }}px;{% endif %}">
+                        <h3 class="accordion__title h6" style="{% if block.settings.heading_color != blank %}color: {{ block.settings.heading_color }};{% endif %}{% if block.settings.heading_size != blank and block.settings.heading_size != 16 %}font-size: {{ block.settings.heading_size }}px;{% endif %}">
                           {{ block.settings.heading | default: block.settings.page.title }}
-                        </h6>
+                        </h3>
                       </div>
                       {% render 'icon-caret' %}
                     <span class="sl-accordion-icon" style="{% if block.settings.icon_color != blank %}color: {{ block.settings.icon_color }};{% endif %}">
@@ -2239,9 +2239,9 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                   onclick="openTab(event, 'tab-description')"
                   data-id="tab-description"
                 >
-                  <h6 class="accordion__title">
+                  <h3 class="accordion__title h6">
                     {{ 'products.product.description' | t }}
-                  </h6>
+                  </h3>
                 </div>
               {%- endif -%}
 
@@ -2253,9 +2253,9 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                       onclick="openTab(event, '{{ block.settings.heading | handle }}')"
                       data-id="{{ block.settings.heading | handle }}"
                     >
-                      <h6 class="accordion__title">
+                      <h3 class="accordion__title h6">
                         {{ block.settings.heading | default: block.settings.page.title }}
-                      </h6>
+                      </h3>
                     </div>
                 {%- endcase -%}
               {%- endfor -%}

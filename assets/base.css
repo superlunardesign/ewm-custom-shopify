@@ -948,7 +948,7 @@ ul ul {
   list-style: disc;
 }
 /*sidebar*/
-.optional-sidebar h5.sidebar_title {
+.optional-sidebar .sidebar_title {
   font-size: 1.8rem;
   font-weight: 700;
   letter-spacing: normal;

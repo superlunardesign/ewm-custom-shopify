@@ -31,7 +31,7 @@
   {% if section.settings.show_articles %}  
   <div class="widget-articles">
     {% if section.settings.article_title != blank %} 
-    <h4 class="sidebar_title">{{ section.settings.article_title }}</h4>  
+    <h2 class="sidebar_title h4">{{ section.settings.article_title }}</h2>
     {% endif %}
     <div class="blog-sidebar-panel">
       <ul class="recent_article">
@@ -56,7 +56,7 @@
           </div>
           {% endif %}               
           <div class="article-description">
-            <h6 class="article-title"><a href="{{ article.url }}">{{ article.title | truncate: 40 }}</a></h6>
+            <h3 class="article-title h6"><a href="{{ article.url }}">{{ article.title | truncate: 40 }}</a></h3>
             {% if section.settings.show_excerpts  %}
             <p>{{ article.content | strip_html | truncatewords: 7 }}</p>
             {% endif %}
@@ -70,7 +70,7 @@
   {% if section.settings.show_tags %}  
   <div class="widget-tags">
     {% if section.settings.tags_title != blank %} 
-    <h4 class="sidebar_title">{{ section.settings.tags_title }}</h4>  
+    <h2 class="sidebar_title h4">{{ section.settings.tags_title }}</h2>
     {% endif %}
     <div class="blog-sidebar-panel">
       <ul class="categories">
@@ -89,7 +89,7 @@
 <div class="widget-carousel">
   {% if collections[section.settings.carousel].products.size > 0 %} 
   {% if section.settings.carousel_title != blank %}
-  <h5 class="sidebar_title">{{ section.settings.carousel_title }}</h5> 
+  <h2 class="sidebar_title h5">{{ section.settings.carousel_title }}</h2>
   {% endif %}
   {% endif %}   
   <div class="swiper-container" id="swiper-sidebar-carousel">        
@@ -121,7 +121,7 @@
 {% if section.settings.sidebar_image != blank %}
 <div class="widget-image">
   {% if section.settings.sidebar_title != blank %}
-  <h5 class="sidebar_title"> {{section.settings.sidebar_title}}</h5>
+  <h2 class="sidebar_title h5"> {{section.settings.sidebar_title}}</h2>
   {% endif %}
   <a href="{{section.settings.sidebar_link}}">    
     <img srcset="{%- if section.settings.sidebar_image.width >= 375 -%}{{ section.settings.sidebar_image | img_url: '375x' }} 375w,{%- endif -%}
@@ -154,7 +154,7 @@
 <div class="widget-collection">
   {% if collections[section.settings.collection].products.size > 0 %} 
   {% if section.settings.collection_title != blank %}
-  <h5 class="sidebar_title">{{ section.settings.collection_title }}</h5>  
+  <h2 class="sidebar_title h5">{{ section.settings.collection_title }}</h2>
   {% endif %}
   {% endif %}
   <div class="dT_VProdWrapperOther">  

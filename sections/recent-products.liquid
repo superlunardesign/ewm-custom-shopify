@@ -1,8 +1,8 @@
 <div class="page-width  recent-view-container">
-  <h5 class="product-heading h5" id="recently">
+  <h2 class="product-heading h5" id="recently">
     {{ section.settings.heading | escape }}
     {% render 'icon-caret' %}
-  </h5>
+  </h2>
   <div class="view-product">
     <div class="recently-viewed " role="list" id="recently-viewed-products">
       <div class="recently-view-product-lists">
@@ -68,7 +68,7 @@ function getRecentlyViewedProducts() {
          </div>
        <div class="card__information_content">
        <a class="full-unstyled-link" href="${item.productUrl}">
-       <h5 class="product_heading"> ${item.productTitle}</h5>
+       <span class="product_heading h5"> ${item.productTitle}</span>
         <div class="price-item price-item--regular"> ${item.productPrice}</div>
        </a> 
        </div>
