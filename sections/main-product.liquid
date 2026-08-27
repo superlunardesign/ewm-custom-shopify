@@ -2783,6 +2783,9 @@ function updateDeliveryOption(input) {
 </div>
 {%- endif -%}
 
+{%- if section.settings.enable_desktop_sticky_bar -%}
+  {% render 'sticky-cart-bar', section: section, product: product %}
+{%- endif -%}
 
 <script>
   var variantStock = {};
@@ -4386,6 +4389,13 @@ function updateDeliveryOption(input) {
     "default": true,
     "label": "Show sticky add-to-cart bar",
     "info": "Mobile only. Slides away when the main Add to Cart is visible. This bar won't highlight in the theme editor because it renders outside the section."
+  },
+  {
+    "type": "checkbox",
+    "id": "enable_desktop_sticky_bar",
+    "default": false,
+    "label": "Show desktop sticky add-to-cart bar",
+    "info": "Fixed bar at the bottom of the screen on desktop (above 950px) with product image, title, variant selector, and Add to Cart."
   },
   {
     "type": "color",

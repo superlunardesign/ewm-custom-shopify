@@ -1,5 +1,5 @@
 {%- assign sticky_form_id = 'product-form-' | append: section.id -%}
-<product-form class="product-form sticky-bar-form" style="{% if section.settings.enable_sticky_bar %}display:block; {% else %} display:none; {% endif %}" id="sticky-bar-form">
+<product-form class="product-form sticky-bar-form" id="sticky-bar-form">
 {%- form 'product',
                       product,
                       id: sticky_form_id,
