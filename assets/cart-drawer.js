@@ -37,13 +37,21 @@ class CartDrawer extends HTMLElement {
       trapFocus(containerToTrapFocusOn, focusElement);
     }, { once: true });
 
+    this._scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${this._scrollY}px`;
+    document.body.style.width = '100%';
     document.body.classList.add('overflow-hidden');
   }
 
   close() {
     this.classList.remove('active');
     removeTrapFocus(this.activeElement);
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
     document.body.classList.remove('overflow-hidden');
+    window.scrollTo(0, this._scrollY || 0);
   }
 
   setSummaryAccessibility(cartDrawerNote) {
