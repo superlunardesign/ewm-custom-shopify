@@ -619,9 +619,9 @@
     const cartSubmitInput = document.createElement('input');
     cartSubmitInput.setAttribute('name', 'checkout');
     cartSubmitInput.setAttribute('type', 'hidden');
-    document.querySelector('#cart').appendChild(cartSubmitInput);
-    document.querySelector('#checkout').addEventListener('click', function(event) {
-      document.querySelector('#cart').submit();
+    document.querySelector('#CartDrawer-Form').appendChild(cartSubmitInput);
+    document.querySelector('#CartDrawer-Checkout').addEventListener('click', function(event) {
+      document.querySelector('#CartDrawer-Form').submit();
     });
   });
 </script>

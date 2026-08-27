@@ -86,7 +86,7 @@
                 </div>
     {% if product.has_only_default_variant %}
     <span class="sticky-bar-price">
-    {%- render 'price', product: product, use_variant: true' -%}
+    {%- render 'price', product: product, use_variant: true -%}
     </span>
     {% endif %}
    {%- unless product.has_only_default_variant -%}

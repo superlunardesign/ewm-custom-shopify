@@ -2106,7 +2106,6 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
     }
 
     openSelector() {
-      console.log("chumma");
       this.elements.button.focus();
       this.elements.panel.toggleAttribute('hidden');
       this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());

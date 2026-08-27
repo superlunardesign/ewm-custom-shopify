@@ -768,7 +768,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
 /* --- Hide Mangomint chat --- */
 .mangomint-chat-container { display: none !important; }
 
-/* --- Anchor Thumbnails --->
+/* --- Anchor Thumbnails --- */
 
 /* ====================  DELIVERY OPTIONS  ==================== */
 .delivery-options-section { margin: 20px 0; font-family: inherit; }
@@ -2585,7 +2585,6 @@ function selectVariantUpdated(element) {
         stickyBtn.setAttribute('data-variant-id', matchingVariant.id);
       }
 
-      console.log('Selected variant:', matchingVariant.id);
     }
   } catch (error) {
     console.error('Error selecting variant:', error);
@@ -2605,8 +2604,6 @@ function addToCart(button) {
   const productInfoWrapper = button.closest('.product__info-wrapper');
   const quantityInput = productInfoWrapper.querySelector('.quantity__input');
   const quantity = quantityInput ? quantityInput.value : '1';
-
-  console.log('Adding variant to cart:', variantId, 'Quantity:', quantity);
 
   // Show loading state
   const originalContent = button.innerHTML;
@@ -2629,7 +2626,7 @@ function addToCart(button) {
       formData.append('sections_url', window.location.pathname);
       cart.setActiveElement(document.activeElement);
     } catch (e) {
-      console.log('Cart sections error (non-critical):', e);
+      // Cart sections error (non-critical)
     }
   }
 
@@ -2643,8 +2640,6 @@ function addToCart(button) {
   })
   .then(response => response.json())
   .then(response => {
-    console.log('Cart add response:', response);
-
     if (response.status) {
       throw new Error(response.description || 'Error adding to cart');
     }
@@ -3332,7 +3327,7 @@ function updateDeliveryOption(input) {
     "type": "html",
     "id": "html",
     "label": "Shipping & delivery",
-    "default": "<p>Estimated deliver 5-7 days</p>",
+    "default": "<p>Estimated delivery 5-7 days</p>",
     "info": "Use HTML format"
     }
     ]

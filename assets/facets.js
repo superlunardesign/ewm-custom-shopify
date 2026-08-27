@@ -35,7 +35,9 @@ class FacetFiltersForm extends HTMLElement {
     const sections = FacetFiltersForm.getSections();
     const countContainer = document.getElementById('ProductCount');
     const countContainerDesktop = document.getElementById('ProductCountDesktop');
-    document.getElementById('ProductGridContainer').querySelector('.collection').classList.add('loading');
+    const productGridContainer = document.getElementById('ProductGridContainer');
+    const collectionEl = productGridContainer ? productGridContainer.querySelector('.collection') : null;
+    if (collectionEl) collectionEl.classList.add('loading');
     if (countContainer){
       countContainer.classList.add('loading');
     }
@@ -84,8 +86,10 @@ class FacetFiltersForm extends HTMLElement {
     const count = new DOMParser().parseFromString(html, 'text/html').getElementById('ProductCount').innerHTML
     const container = document.getElementById('ProductCount');
     const containerDesktop = document.getElementById('ProductCountDesktop');
-    container.innerHTML = count;
-    container.classList.remove('loading');
+    if (container) {
+      container.innerHTML = count;
+      container.classList.remove('loading');
+    }
     if (containerDesktop) {
       containerDesktop.innerHTML = count;
       containerDesktop.classList.remove('loading');

@@ -170,7 +170,7 @@
           qty = qArray[i]
           Shopify.queue.push({
             variantId: product,
-            quanity: qty,
+            quantity: qty,
           });
         }
 
@@ -178,8 +178,7 @@
         Shopify.moveAlong = function() {
           if (Shopify.queue.length) {
             var request = Shopify.queue.shift();
-            var data = 'id='+ request.variantId + '&quantity='+request.quanity;
-            console.log(data);
+            var data = 'id='+ request.variantId + '&quantity='+request.quantity;
             $.ajax({
               type: 'POST',
               url: '/cart/add.js',
@@ -207,7 +206,7 @@
       };
 
       function addToCartOk(quantity){
-        $('.product-form__buttons .product-form__s').trigger('click');
+        $('.product-form__buttons .product-form__submit').trigger('click');
       }
  
   </script>

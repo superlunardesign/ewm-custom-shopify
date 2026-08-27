@@ -67,7 +67,7 @@ $('.thumbnail-list').not('.slick-initialized').slick({
 }
 
 $(window).scroll(function() {    
-  if($(window).width() > "1024"){
+  if($(window).width() > 1024){
   if ( $(window).scrollTop() >= 500 ) {
     $('.sticky-bar').css('display', 'flex');
     } else {
@@ -77,7 +77,7 @@ $(window).scroll(function() {
 
 
 $(window).scroll(function(){
-if($(window).width() < "1024"){
+if($(window).width() < 1024){
   if ($(window).scrollTop() >= 900) {
         $('.sticky-bar').css('display', 'flex');
     } else {

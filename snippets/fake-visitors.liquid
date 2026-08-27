@@ -33,12 +33,12 @@
       if(r <=10 ){
         range =  Math.floor(Math.random() * plus.length);
         var final =  plus[range];
-        r=r+final;
+        r=r+parseInt(final);
       }
       if(r>200){
         range =  Math.floor(Math.random() * plus.length);
         var final =  plus[range];
-        r=r-final;
+        r=r-parseInt(final);
       }
       jQuery("#dynamic_counter").html(r);
 
