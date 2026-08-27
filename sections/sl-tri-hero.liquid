@@ -22,8 +22,8 @@
     <div class="sl-tri__grid{% if section.settings.grid_layout == 'stacked' %} sl-tri__grid--stacked{% endif %}">
 
       {%- comment -%} ── Hero Panel ── {%- endcomment -%}
-      <div class="sl-tri__panel sl-tri__hero">
-        <div class="sl-tri__panel-bg">
+      <div class="sl-tri__panel sl-tri__hero" style="background-color: {{ section.settings.hero_overlay_color }};">
+        <div class="sl-tri__panel-bg" style="opacity: {{ section.settings.hero_media_opacity | times: 0.01 }};">
           {% if section.settings.hero_bg_type == 'image' and section.settings.left_image != blank %}
             {{
               section.settings.left_image
@@ -43,7 +43,6 @@
               <source src="{{ section.settings.hero_video_url }}" type="video/mp4">
             </video>
           {% endif %}
-          <div class="sl-tri__panel-overlay" style="background: rgba(0,0,0,{{ section.settings.hero_overlay | divided_by: 100.0 }});"></div>
         </div>
 
         <div class="sl-tri__hero-content{% if section.settings.spread_content %} sl-tri__hero-content--spread{% endif %}" style="text-align: {{ section.settings.content_alignment }};">
@@ -60,7 +59,8 @@
 
           <div class="sl-tri__hero-bottom">
             {% if section.settings.left_body != blank %}
-              <div class="sl-tri__body" style="color: {{ section.settings.hero_text_color }};">{{ section.settings.left_body }}</div>
+              {%- assign body_text_tag = section.settings.body_text_tag | default: 'div' -%}
+              <{{ body_text_tag }} class="sl-tri__body" style="color: {{ section.settings.hero_text_color }};">{{ section.settings.left_body }}</{{ body_text_tag }}>
             {% endif %}
 
             {% if section.settings.left_button_text != blank %}
@@ -80,8 +80,8 @@
       </div>
 
       {%- comment -%} ── Card 1 ── {%- endcomment -%}
-      <div class="sl-tri__panel sl-tri__card">
-        <div class="sl-tri__panel-bg">
+      <div class="sl-tri__panel sl-tri__card" style="background-color: {{ section.settings.card_overlay_color }};">
+        <div class="sl-tri__panel-bg" style="opacity: {{ section.settings.card_media_opacity | times: 0.01 }};">
           {% if section.settings.top_right_image != blank %}
             {{
               section.settings.top_right_image
@@ -93,7 +93,6 @@
                 loading: 'lazy'
             }}
           {% endif %}
-          <div class="sl-tri__panel-overlay" style="background: rgba(0,0,0,{{ section.settings.card_overlay | divided_by: 100.0 }});"></div>
         </div>
 
         <div class="sl-tri__card-content">
@@ -116,8 +115,8 @@
       </div>
 
       {%- comment -%} ── Card 2 ── {%- endcomment -%}
-      <div class="sl-tri__panel sl-tri__card">
-        <div class="sl-tri__panel-bg">
+      <div class="sl-tri__panel sl-tri__card" style="background-color: {{ section.settings.card_overlay_color }};">
+        <div class="sl-tri__panel-bg" style="opacity: {{ section.settings.card_media_opacity | times: 0.01 }};">
           {% if section.settings.bottom_right_image != blank %}
             {{
               section.settings.bottom_right_image
@@ -129,7 +128,6 @@
                 loading: 'lazy'
             }}
           {% endif %}
-          <div class="sl-tri__panel-overlay" style="background: rgba(0,0,0,{{ section.settings.card_overlay | divided_by: 100.0 }});"></div>
         </div>
 
         <div class="sl-tri__card-content">
@@ -193,12 +191,6 @@
     z-index: 0;
   }
 
-  #shopify-section-{{ section.id }} .sl-tri__panel-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-
   /* ── Hero content ── */
   #shopify-section-{{ section.id }} .sl-tri__hero-content {
     position: relative;
@@ -241,9 +233,13 @@
 
   #shopify-section-{{ section.id }} .sl-tri__body {
     font-family: var(--font-body-family);
+    font-style: normal;
+    font-weight: 400;
     font-size: 1.5rem;
     line-height: 1.7;
-    margin-bottom: 1.5rem;
+    letter-spacing: normal;
+    word-break: normal;
+    margin: 0 0 1.5rem;
     max-width: 60ch;
   }
 
@@ -564,14 +560,22 @@
       "info": "Direct link to .mp4 file"
     },
     {
+      "type": "color",
+      "id": "hero_overlay_color",
+      "label": "Hero Background Color",
+      "info": "Shows behind the image/video. The image opacity controls how much this color shows through.",
+      "default": "#000000"
+    },
+    {
       "type": "range",
-      "id": "hero_overlay",
-      "label": "Hero Overlay Darkness",
-      "min": 0,
-      "max": 80,
+      "id": "hero_media_opacity",
+      "label": "Hero Image/Video Opacity",
+      "info": "Lower values let more of the background color show through",
+      "min": 10,
+      "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 25
+      "default": 75
     },
     {
       "type": "text",
@@ -627,6 +631,20 @@
       "default": "h3"
     },
     {
+      "type": "select",
+      "id": "body_text_tag",
+      "label": "Body text tag (SEO)",
+      "info": "Controls the HTML tag for the body text. Use H1 when this text is the page's main heading.",
+      "options": [
+        { "value": "div", "label": "None (div)" },
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "p", "label": "Paragraph" }
+      ],
+      "default": "div"
+    },
+    {
       "type": "checkbox",
       "id": "spread_content",
       "label": "Spread content vertically",
@@ -676,14 +694,22 @@
       "label": "Card 1 Image"
     },
     {
+      "type": "color",
+      "id": "card_overlay_color",
+      "label": "Cards Background Color",
+      "info": "Shows behind the card images. The image opacity controls how much this color shows through.",
+      "default": "#000000"
+    },
+    {
       "type": "range",
-      "id": "card_overlay",
-      "label": "Cards Overlay Darkness",
-      "min": 0,
-      "max": 80,
+      "id": "card_media_opacity",
+      "label": "Cards Image Opacity",
+      "info": "Lower values let more of the background color show through",
+      "min": 10,
+      "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 20
+      "default": 80
     },
     {
       "type": "text",
