@@ -2386,6 +2386,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
             var nativeATC = document.getElementById('sl-native-atc-{{ section.id }}');
             var stickyBar = document.getElementById('sl-sticky-atc-{{ section.id }}');
             if (nativeATC && stickyBar) {
+              document.body.appendChild(stickyBar);
               var observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
                   if (entry.isIntersecting) {
