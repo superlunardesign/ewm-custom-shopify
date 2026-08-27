@@ -34,11 +34,14 @@
         "hero_bg_type": "image",
         "left_image": "shopify://shop_images/BrandingPhotography-C_Mae-5763.jpg",
         "hero_video_url": "",
+        "hero_overlay_color": "#000000",
+        "hero_media_opacity": 100,
         "left_subheading": "",
         "left_headline": "Creating Healthy Skin Together.",
         "heading_size": "h0",
         "hero_heading_tag": "h2",
         "card_heading_tag": "h2",
+        "body_text_tag": "div",
         "spread_content": true,
         "content_alignment": "left",
         "left_body": "Exceptional Customized Facials, Personalized Acne Treatments, & Brazilian Waxing in McHenry, IL",
@@ -46,6 +49,8 @@
         "left_button_link": "https://booking.mangomint.com/314399",
         "hero_text_color": "#ffffff",
         "top_right_image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_6729-2.jpg",
+        "card_overlay_color": "#000000",
+        "card_media_opacity": 50,
         "top_right_heading": "Best Brazilian Wax in McHenry",
         "top_right_button_text": "Book Appointment",
         "top_right_button_link": "shopify://pages/brazilian-wax-mchenry",
@@ -257,6 +262,7 @@
           "settings": {
             "text": "Facials & Skin Treatments",
             "link": "shopify://pages/facial-treatments",
+            "heading_tag": "h3",
             "border_color": "#cccccc",
             "text_color": "#1a1a1a",
             "arrow_color": "#1a1a1a"
@@ -267,6 +273,7 @@
           "settings": {
             "text": "Brazilian Wax",
             "link": "shopify://pages/brazilian-wax-mchenry",
+            "heading_tag": "h3",
             "border_color": "#cccccc",
             "text_color": "#1a1a1a",
             "arrow_color": "#1a1a1a"
@@ -277,6 +284,7 @@
           "settings": {
             "text": "Chemical Peels",
             "link": "shopify://pages/chemical-peels-in-mchenry-il-reveal-your-best-skin-at-esthetics-with-me-esthetics-with-me",
+            "heading_tag": "h3",
             "border_color": "#cccccc",
             "text_color": "#1a1a1a",
             "arrow_color": "#1a1a1a"
@@ -287,6 +295,7 @@
           "settings": {
             "text": "Acne Bootcamp",
             "link": "shopify://pages/acne-bootcamp",
+            "heading_tag": "h3",
             "border_color": "#cccccc",
             "text_color": "#1a1a1a",
             "arrow_color": "#1a1a1a"
@@ -297,6 +306,7 @@
           "settings": {
             "text": "Red Light Therapy",
             "link": "shopify://pages/red-light-therapy",
+            "heading_tag": "h3",
             "border_color": "#cccccc",
             "text_color": "#1a1a1a",
             "arrow_color": "#1a1a1a"
@@ -307,6 +317,7 @@
           "settings": {
             "text": "Virtual Skin Consultations",
             "link": "shopify://pages/virtual-skin-consults",
+            "heading_tag": "h3",
             "border_color": "#cccccc",
             "text_color": "#1a1a1a",
             "arrow_color": "#1a1a1a"
