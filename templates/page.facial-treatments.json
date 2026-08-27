@@ -15,13 +15,15 @@
         "subheading_j3pddP": {
           "type": "subheading",
           "settings": {
-            "text": "Spa facial treatments available in McHenry, IL"
+            "text": "Spa facial treatments available in McHenry, IL",
+            "subheading_tag": "h1"
           }
         },
         "heading_44AWxR": {
           "type": "heading",
           "settings": {
-            "text": "Discover what your skin <i>craves</i> & gain education on how to reach your skin goals."
+            "text": "Discover what your skin <i>craves</i> & gain education on how to reach your skin goals.",
+            "heading_tag": "h2"
           }
         },
         "body_XHcgH4": {
@@ -474,7 +476,7 @@
             "corner_styling": "square",
             "header_text_color": "#000000",
             "text_color": "#000000",
-            "card_color": "#F9F9F9",
+            "card_color": "#f9f9f9",
             "stars_color": "",
             "arrows_color": "#000000",
             "transition_speed": 5,
