@@ -11,87 +11,103 @@
   </div>
 
   <style>
-    .cookie-disclaimer {display:none;}
-    .cookie-disclaimer .cookie-content p {
-      font-size: {{ section.settings.text_font_size | default: 16 }}px; letter-spacing: normal;
+    .cookie-disclaimer {
+      display: none;
+      position: fixed !important;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      pointer-events: none;
+      top: auto !important;
     }
     .cookie-disclaimer .cookie-content {
-      position: fixed;
+      pointer-events: auto;
       max-width: 500px;
-      bottom: 15px;
+      margin: 0 auto;
       padding: 15px;
-      z-index: 1000;
-      display: flex; 
-      flex-wrap: wrap; 
+      display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
       text-align: center;
       box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
-          }
+    }
+    .cookie-disclaimer .cookie-content p {
+      font-size: {{ section.settings.text_font_size | default: 16 }}px; letter-spacing: normal;
+    }
     .cookie-disclaimer .cookie-content > * {
-      margin: 5px; 
+      margin: 5px;
+    }
+    .cookie-disclaimer.bottom {
+      bottom: 0;
     }
     .cookie-disclaimer.bottom .cookie-content {
-      bottom: 0; 
-      left: 0;
-      right: 0; 
-      padding:10px 0; 
+      padding: 10px 0;
       max-width: 100%;
-      border-radius:0;
+      border-radius: 0;
+    }
+    .cookie-disclaimer.left {
+      left: 15px;
+      right: auto;
     }
     .cookie-disclaimer.left .cookie-content {
-      left: 15px;
-      right: auto; 
+      max-width: 500px;
+      margin: 0;
+    }
+    .cookie-disclaimer.right {
+      left: auto;
+      right: 15px;
     }
     .cookie-disclaimer.right .cookie-content {
-      left: auto;
-      right: 15px; 
+      max-width: 500px;
+      margin: 0;
     }
     .cookie-disclaimer .cookie-content button {
       font-size: {{ section.settings.button_font_size | default: 15 }}px;
       padding: {{ section.settings.button_padding | default: '10px 30px' }};
-    min-width: calc(10rem + var(--buttons-border-width) * 2);
-    min-height: calc(3.5rem + var(--buttons-border-width) * 2);
-    transition: all 300ms linear;
+      min-width: calc(10rem + var(--buttons-border-width) * 2);
+      min-height: calc(3.5rem + var(--buttons-border-width) * 2);
+      transition: all 300ms linear;
       text-transform: uppercase;
-    font-weight: 600;
-    border: 1.5px solid var(--gradient-base-accent-1);
-    background: var(--gradient-base-accent-1);
-    color: #ffffff;
-    line-height: 1.4;
-    letter-spacing: 0.08em;
-    border-radius: 0;
-    font-family: var(--font-body-family);
+      font-weight: 600;
+      border: 1.5px solid var(--gradient-base-accent-1);
+      background: var(--gradient-base-accent-1);
+      color: #ffffff;
+      line-height: 1.4;
+      letter-spacing: 0.08em;
+      border-radius: 0;
+      font-family: var(--font-body-family);
     }
-    
+
     .cookie-disclaimer.left .cookie-content{flex-direction: column;}
     .cookie-disclaimer .cookie-content .cookie-button .button.decline-cookie:last-child{
       background: transparent; color: var(--gradient-base-accent-1); border-color: var(--gradient-base-accent-1);
     }
     .cookie-disclaimer .cookie-content .button:first-child:hover{
       background: transparent;
-    color: var(--gradient-base-accent-1);
+      color: var(--gradient-base-accent-1);
     }
     .cookie-disclaimer .cookie-content .button:last-child:hover{
       background: var(--gradient-base-accent-1); color: #ffffff;
     }
-    
-    
-    @media screen and (max-width: 767px){
 
-      .cookie-disclaimer .cookie-content {
+
+    @media screen and (max-width: 767px){
+      .cookie-disclaimer {
         left: 0 !important;
         right: 0 !important;
+        bottom: 0 !important;
+      }
+      .cookie-disclaimer .cookie-content {
         max-width: 100%;
-        bottom: 0; 
       }
       .cookie-disclaimer .cookie-content > p {width: 100%;}
-
     }
     .cookie-content .button:hover {
-    background: transparent;
-    color: var(--gradient-base-accent-1);
-}
+      background: transparent;
+      color: var(--gradient-base-accent-1);
+    }
   </style>
 
   <script type="text/javascript">
