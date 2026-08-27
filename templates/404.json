@@ -61,6 +61,130 @@
         "custom_class_name": ""
       }
     },
+    "sl_image_text_overlap_404svc": {
+      "type": "sl-image-text-overlap",
+      "blocks": {
+        "heading_404svc": {
+          "type": "heading",
+          "settings": {
+            "text": "Ways We Care For Your Skin",
+            "size": "h1"
+          }
+        },
+        "text_404svc": {
+          "type": "text",
+          "settings": {
+            "text": "<p>From relaxing facials to results-driven acne programs — find the service that fits your skin goals.</p>"
+          }
+        },
+        "service_link_facials": {
+          "type": "service_link",
+          "settings": {
+            "text": "Facials & Skin Treatments",
+            "link": "shopify://pages/facial-treatments",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        },
+        "service_link_brazilian": {
+          "type": "service_link",
+          "settings": {
+            "text": "Brazilian Wax",
+            "link": "shopify://pages/brazilian-wax-mchenry",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        },
+        "service_link_peels": {
+          "type": "service_link",
+          "settings": {
+            "text": "Chemical Peels",
+            "link": "shopify://pages/chemical-peels-in-mchenry-il-reveal-your-best-skin-at-esthetics-with-me-esthetics-with-me",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        },
+        "service_link_acne": {
+          "type": "service_link",
+          "settings": {
+            "text": "Acne Bootcamp",
+            "link": "shopify://pages/acne-bootcamp",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        },
+        "service_link_rlt": {
+          "type": "service_link",
+          "settings": {
+            "text": "Red Light Therapy",
+            "link": "shopify://pages/red-light-therapy",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        },
+        "service_link_virtual": {
+          "type": "service_link",
+          "settings": {
+            "text": "Virtual Skin Consultations",
+            "link": "shopify://pages/virtual-skin-consults",
+            "border_color": "#cccccc",
+            "text_color": "#1a1a1a",
+            "arrow_color": "#1a1a1a"
+          }
+        }
+      },
+      "block_order": [
+        "heading_404svc",
+        "text_404svc",
+        "service_link_facials",
+        "service_link_brazilian",
+        "service_link_peels",
+        "service_link_acne",
+        "service_link_rlt",
+        "service_link_virtual"
+      ],
+      "name": "Services",
+      "settings": {
+        "image": "shopify://shop_images/BrandingPhotography-C_Mae-5261.jpg",
+        "image_position": "left",
+        "desktop_height": 550,
+        "mobile_height": 350,
+        "image_fit": "cover",
+        "image_position_x": 50,
+        "image_position_y": 50,
+        "image_width": 2,
+        "content_width": 2,
+        "overlap_amount": 80,
+        "vertical_inset": 30,
+        "spread_content": false,
+        "color_scheme": "background-1",
+        "content_background": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#6b6b6b",
+        "text_color": "#4a4a4a",
+        "enable_scroll_text": true,
+        "scroll_text": "our services",
+        "scroll_font_size": 100,
+        "scroll_text_color": "#8a9979",
+        "scroll_text_padding": 20,
+        "scroll_overlap": 70,
+        "scroll_speed": 60,
+        "enable_anchor": false,
+        "anchor_id": "",
+        "scroll_offset": 80,
+        "enable_animation": true,
+        "animation_duration": 600,
+        "animation_delay": 200,
+        "enable_sticky": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "product_recommendations_tgRTTJ": {
       "type": "product-recommendations",
       "name": "Product Carousel",
@@ -109,6 +233,7 @@
   },
   "order": [
     "image_banner_zLEPUP",
+    "sl_image_text_overlap_404svc",
     "product_recommendations_tgRTTJ",
     "main"
   ]
