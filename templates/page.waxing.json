@@ -87,6 +87,9 @@
         "value_prop_YKYRkK",
         "value_prop_x97neW"
       ],
+      "custom_css": [
+        "p {font-family: var(--font-body-family);}"
+      ],
       "name": "Flexible List",
       "settings": {
         "main_heading": "We know what you're going through",
