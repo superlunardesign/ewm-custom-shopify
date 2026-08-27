@@ -49,7 +49,8 @@
             <div class="sl-team__panel{% if forloop.first %} sl-team__panel--active{% endif %}" data-team-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
               <div class="sl-team__panel-top">
                 <p class="sl-team__subheading">MEET</p>
-                <h2 class="sl-team__name {{ section.settings.heading_size }}">{{ block.settings.name }}</h2>
+                {%- assign team_name_tag = section.settings.heading_tag | default: 'h3' -%}
+                <{{ team_name_tag }} class="sl-team__name {{ section.settings.heading_size }}">{{ block.settings.name }}</{{ team_name_tag }}>
                 {% if block.settings.title != blank %}
                   <p class="sl-team__title">{{ block.settings.title }}</p>
                 {% endif %}
@@ -275,6 +276,8 @@
     font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
     line-height: 1.15;
+    letter-spacing: normal;
+    word-break: normal;
     margin: 0 0 0.6rem;
     color: {{ section.settings.heading_color }};
   }
@@ -488,6 +491,20 @@
         { "value": "hxl", "label": "Extra Large" }
       ],
       "default": "h0"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Name heading tag (SEO)",
+      "info": "Controls the HTML tag for team member names. Does not affect visual styling.",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h3"
     },
     {
       "type": "select",

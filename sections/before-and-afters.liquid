@@ -5,7 +5,8 @@
 <div class="sl-imgc" id="sl-imgc-{{ section.id }}">
   <div class="sl-imgc__container">
     {% if section.settings.section_title != blank %}
-      <h2 class="sl-imgc__title">{{ section.settings.section_title }}</h2>
+      {%- assign imgc_heading_tag = section.settings.heading_tag | default: 'h2' -%}
+      <{{ imgc_heading_tag }} class="sl-imgc__title">{{ section.settings.section_title }}</{{ imgc_heading_tag }}>
     {% endif %}
 
     <div class="sl-imgc__wrap">
@@ -50,10 +51,15 @@
 
   #shopify-section-{{ section.id }} .sl-imgc__title {
     text-align: center;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
     font-size: {{ section.settings.title_size }}px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: normal;
+    word-break: normal;
     margin-bottom: 40px;
     color: {{ section.settings.title_color }};
-    font-weight: 400;
   }
 
   #shopify-section-{{ section.id }} .sl-imgc__wrap {
@@ -190,6 +196,20 @@
       "id": "section_title",
       "label": "Section Title",
       "default": "Gallery"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag (SEO)",
+      "info": "Controls the HTML tag for search engines. Does not affect visual styling.",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
     },
     {
       "type": "range",

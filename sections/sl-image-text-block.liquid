@@ -55,7 +55,8 @@
           {% endif %}
 
           {% if section.settings.heading != blank %}
-            <h2 class="sl-itb__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+            {%- assign itb_heading_tag = section.settings.heading_tag | default: 'h2' -%}
+            <{{ itb_heading_tag }} class="sl-itb__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</{{ itb_heading_tag }}>
           {% endif %}
         </div>
 
@@ -196,6 +197,7 @@
     font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
     line-height: 1.15;
+    letter-spacing: normal;
     margin-bottom: 0;
     color: {{ section.settings.heading_color }};
     overflow-wrap: break-word;
@@ -426,6 +428,20 @@
         { "value": "hxxl", "label": "Extra Extra Large" }
       ],
       "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag (SEO)",
+      "info": "Controls the HTML tag for search engines. Does not affect visual styling.",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
     },
     {
       "type": "checkbox",

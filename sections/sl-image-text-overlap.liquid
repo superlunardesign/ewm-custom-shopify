@@ -79,7 +79,8 @@
 
             {% when 'heading' %}
               {% if block.settings.text != blank %}
-                <h2 class="sl-ito__heading {{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+                {%- assign ito_heading_tag = block.settings.heading_tag | default: 'h2' -%}
+                <{{ ito_heading_tag }} class="sl-ito__heading {{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</{{ ito_heading_tag }}>
               {% endif %}
 
             {% when 'text' %}
@@ -292,6 +293,8 @@
     font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
     line-height: 1.15;
+    letter-spacing: normal;
+    word-break: normal;
     margin-bottom: 1.5rem;
     color: {{ section.settings.heading_color }};
   }
@@ -841,6 +844,20 @@
             { "value": "hxxl", "label": "Extra Extra Large" }
           ],
           "default": "h1"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading tag (SEO)",
+          "info": "Controls the HTML tag for search engines. Does not affect visual styling.",
+          "options": [
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" }
+          ],
+          "default": "h2"
         }
       ]
     },

@@ -27,10 +27,13 @@
 #shopify-section-{{ section.id }} .sl-recs__heading {
   text-align: {{ section.settings.heading_alignment | default: 'left' }};
   font-family: {% if section.settings.heading_font == 'body' %}var(--font-body-family){% else %}var(--font-heading-family){% endif %};
+  font-style: normal;
   font-size: {{ section.settings.heading_size | default: 24 }}px;
   font-weight: {% if section.settings.heading_font == 'body' %}{{ section.settings.heading_weight | default: '400' }}{% else %}{{ section.settings.heading_weight | default: '500' }}{% endif %};
+  line-height: 1.2;
   text-transform: {{ section.settings.heading_transform | default: 'uppercase' }};
   letter-spacing: 0.08em;
+  word-break: normal;
   color: {{ section.settings.heading_color | default: 'var(--gradient-base-accent-1)' }};
   margin: 0 0 24px;
 }
@@ -210,8 +213,11 @@
   font-size: 14px;
   font-weight: 400;
   font-family: var(--font-body-family);
+  font-style: normal;
   margin: 0;
   line-height: 1.3;
+  letter-spacing: normal;
+  word-break: normal;
   color: #1a1a1a;
   flex: 1;
 }
@@ -356,7 +362,8 @@
      {% endif %}>
   <div class="sl-recs__inner {% if section.settings.full_width %}sl-recs__inner--full-width{% else %}page-width{% endif %}">
     {%- if section.settings.heading != blank -%}
-      <h2 class="sl-recs__heading">{{ section.settings.heading }}</h2>
+      {%- assign recs_heading_tag = section.settings.heading_tag | default: 'h2' -%}
+      <{{ recs_heading_tag }} class="sl-recs__heading">{{ section.settings.heading }}</{{ recs_heading_tag }}>
     {%- endif -%}
 
     <div class="sl-recs__carousel-wrap">
@@ -688,6 +695,20 @@
         { "value": "capitalize", "label": "Capitalize" }
       ],
       "default": "uppercase"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag (SEO)",
+      "info": "Controls the HTML tag for search engines. Does not affect visual styling.",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
     },
     {
       "type": "header",

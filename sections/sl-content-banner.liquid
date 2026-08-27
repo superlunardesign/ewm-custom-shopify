@@ -107,9 +107,13 @@
 /* Block: Heading */
 #shopify-section-{{ section.id }} .sl-cb__heading {
   font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
   color: {{ section.settings.text_color | default: '#f0e8d8' }};
   margin: 0 0 24px;
   line-height: 1.1;
+  letter-spacing: normal;
+  word-break: normal;
 }
 
 /* Block: Text */
@@ -245,7 +249,8 @@
 
           {%- when 'heading' -%}
             {%- if block.settings.text != blank -%}
-              <h2 class="sl-cb__heading {{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+              {%- assign cb_heading_tag = block.settings.heading_tag | default: 'h2' -%}
+              <{{ cb_heading_tag }} class="sl-cb__heading {{ block.settings.size }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</{{ cb_heading_tag }}>
             {%- endif -%}
 
           {%- when 'text' -%}
@@ -629,6 +634,20 @@
             { "value": "hxxl", "label": "XXL" }
           ],
           "default": "h0"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading tag (SEO)",
+          "info": "Controls the HTML tag for search engines. Does not affect visual styling.",
+          "options": [
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" }
+          ],
+          "default": "h2"
         }
       ]
     },

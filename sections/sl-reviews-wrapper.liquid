@@ -26,10 +26,13 @@
   {%- if section.settings.heading != blank -%}
   #SLReviews-{{ section.id }} .sl-reviews__heading {
     font-family: var(--font-{{ section.settings.heading_font }}-family);
+    font-style: normal;
     font-size: {{ section.settings.heading_size }}px;
     font-weight: {{ section.settings.heading_weight }};
+    line-height: 1.2;
     text-transform: {{ section.settings.heading_transform }};
     letter-spacing: 0.08em;
+    word-break: normal;
     color: {{ section.settings.heading_color }};
     text-align: {{ section.settings.heading_alignment }};
     margin: 0 0 2rem;
@@ -77,7 +80,8 @@
 <div id="SLReviews-{{ section.id }}">
   <div class="sl-reviews__inner">
     {%- if section.settings.heading != blank -%}
-      <h2 class="sl-reviews__heading">{{ section.settings.heading }}</h2>
+      {%- assign reviews_heading_tag = section.settings.heading_tag | default: 'h2' -%}
+      <{{ reviews_heading_tag }} class="sl-reviews__heading">{{ section.settings.heading }}</{{ reviews_heading_tag }}>
     {%- endif -%}
 
     {%- case section.settings.widget_type -%}
@@ -189,6 +193,20 @@
       "id": "heading_color",
       "label": "Heading color",
       "default": "#8c9b6d"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag (SEO)",
+      "info": "Controls the HTML tag for search engines. Does not affect visual styling.",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
     },
     {
       "type": "header",

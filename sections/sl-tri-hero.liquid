@@ -53,7 +53,8 @@
             {% endif %}
 
             {% if section.settings.left_headline != blank %}
-              <h1 class="sl-tri__heading {{ section.settings.heading_size }}" style="color: {{ section.settings.hero_text_color }};">{{ section.settings.left_headline }}</h1>
+              {%- assign hero_heading_tag = section.settings.hero_heading_tag | default: 'h1' -%}
+              <{{ hero_heading_tag }} class="sl-tri__heading {{ section.settings.heading_size }}" style="color: {{ section.settings.hero_text_color }};">{{ section.settings.left_headline }}</{{ hero_heading_tag }}>
             {% endif %}
           </div>
 
@@ -97,7 +98,8 @@
 
         <div class="sl-tri__card-content">
           {% if section.settings.top_right_heading != blank %}
-            <h2 class="sl-tri__card-heading" style="color: {{ section.settings.card_text_color }};">{{ section.settings.top_right_heading }}</h2>
+            {%- assign card_heading_tag = section.settings.card_heading_tag | default: 'h3' -%}
+            <{{ card_heading_tag }} class="sl-tri__card-heading" style="color: {{ section.settings.card_text_color }};">{{ section.settings.top_right_heading }}</{{ card_heading_tag }}>
           {% endif %}
 
           {% if section.settings.top_right_button_text != blank %}
@@ -132,7 +134,8 @@
 
         <div class="sl-tri__card-content">
           {% if section.settings.bottom_right_heading != blank %}
-            <h2 class="sl-tri__card-heading" style="color: {{ section.settings.card_text_color }};">{{ section.settings.bottom_right_heading }}</h2>
+            {%- assign card_heading_tag = section.settings.card_heading_tag | default: 'h3' -%}
+            <{{ card_heading_tag }} class="sl-tri__card-heading" style="color: {{ section.settings.card_text_color }};">{{ section.settings.bottom_right_heading }}</{{ card_heading_tag }}>
           {% endif %}
 
           {% if section.settings.bottom_right_button_text != blank %}
@@ -231,6 +234,8 @@
     font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
     line-height: 1.1;
+    letter-spacing: normal;
+    word-break: normal;
     margin: 0;
   }
 
@@ -265,6 +270,8 @@
     font-style: var(--font-heading-style);
     font-size: clamp(2rem, 3vw, 3.2rem);
     line-height: 1.15;
+    letter-spacing: normal;
+    word-break: normal;
     margin-bottom: 1rem;
   }
 
@@ -589,6 +596,35 @@
         { "value": "hxl", "label": "Extra Large" }
       ],
       "default": "h0"
+    },
+    {
+      "type": "select",
+      "id": "hero_heading_tag",
+      "label": "Hero heading tag (SEO)",
+      "info": "Controls the HTML tag for search engines. Does not affect visual styling.",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "card_heading_tag",
+      "label": "Card heading tag (SEO)",
+      "info": "Controls the HTML tag for card headings. Does not affect visual styling.",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h3"
     },
     {
       "type": "checkbox",

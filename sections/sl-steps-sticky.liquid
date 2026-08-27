@@ -47,7 +47,8 @@
         <p class="sl-hiw__section-sub">{{ section.settings.section_subheading }}</p>
       {% endif %}
       {% if section.settings.section_heading != blank %}
-        <h2 class="sl-hiw__section-heading {{ section.settings.section_heading_size }}">{{ section.settings.section_heading }}</h2>
+        {%- assign hiw_heading_tag = section.settings.heading_tag | default: 'h2' -%}
+        <{{ hiw_heading_tag }} class="sl-hiw__section-heading {{ section.settings.section_heading_size }}">{{ section.settings.section_heading }}</{{ hiw_heading_tag }}>
       {% endif %}
     </div>
   {% endif %}
@@ -73,7 +74,8 @@
           </div>
           <div class="sl-hiw__card-body">
             {% if block.settings.heading != blank %}
-              <h3 class="sl-hiw__card-heading">{{ block.settings.heading }}</h3>
+              {%- assign hiw_card_tag = section.settings.card_heading_tag | default: 'h3' -%}
+              <{{ hiw_card_tag }} class="sl-hiw__card-heading">{{ block.settings.heading }}</{{ hiw_card_tag }}>
             {% endif %}
             {% if block.settings.text != blank %}
               <div class="sl-hiw__card-text rte">{{ block.settings.text }}</div>
@@ -168,6 +170,8 @@
     font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
     line-height: 1.15;
+    letter-spacing: normal;
+    word-break: normal;
     color: {{ section.settings.section_heading_color }};
     margin: 0;
   }
@@ -258,6 +262,8 @@
     font-style: var(--font-heading-style);
     font-size: 2.4rem;
     line-height: 1.2;
+    letter-spacing: normal;
+    word-break: normal;
     margin: 0 0 auto;
     color: {{ section.settings.heading_color }};
   }
@@ -585,6 +591,33 @@
         { "value": "hxl", "label": "Extra Large" }
       ],
       "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag (SEO)",
+      "info": "Controls the HTML tag for the section heading. Does not affect visual styling.",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "card_heading_tag",
+      "label": "Card heading tag (SEO)",
+      "info": "Controls the HTML tag for step card headings. Does not affect visual styling.",
+      "options": [
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h3"
     },
     {
       "type": "color",

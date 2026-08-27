@@ -54,7 +54,8 @@
           <p class="sl-sc__subline">{{ section.settings.subline }}</p>
         {% endif %}
         {% if section.settings.heading != blank %}
-          <h2 class="sl-sc__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+          {%- assign sc_heading_tag = section.settings.heading_tag | default: 'h2' -%}
+          <{{ sc_heading_tag }} class="sl-sc__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</{{ sc_heading_tag }}>
         {% endif %}
 
         {% if section.blocks.size > 0 %}
@@ -294,6 +295,8 @@
     font-weight: var(--font-heading-weight);
     font-style: var(--font-heading-style);
     line-height: 1.15;
+    letter-spacing: normal;
+    word-break: normal;
     margin: 0 0 1.5rem;
     color: {{ section.settings.heading_color }};
   }
@@ -378,6 +381,8 @@
     font-style: var(--font-heading-style);
     font-size: clamp(2rem, 3vw, 2.8rem);
     line-height: 1.2;
+    letter-spacing: normal;
+    word-break: normal;
     color: {{ section.settings.heading_color }};
     margin: 0 0 1.5rem;
   }
@@ -488,6 +493,20 @@
         { "value": "hxl", "label": "Extra Large" }
       ],
       "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag (SEO)",
+      "info": "Controls the HTML tag for search engines. Does not affect visual styling.",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
     },
     {
       "type": "select",
