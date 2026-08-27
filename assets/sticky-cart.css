@@ -77,15 +77,15 @@ display:none;
  .sticky-bar-form .product__media-list {  margin: 0;}
  .sticky-bar-form img {  margin: 5px 15px; width: 70px; height: 80px; width: 60px; height: 60px; border: 1px solid var(--gradient-base-background-3);} 
  .product-title-sticky{    margin-right: 25px;} 
- .sticky-bar-title { margin: 5px 15px; font-weight: 700; font-size: 2rem; display: none;}  
+ .sticky-bar-title { margin: 5px 15px; font-weight: 400; font-size: 2rem; display: none;}  
  .sticky-bar .product-form__input { padding: 0; margin: 0 2rem 0rem 0; min-width: fit-content; border: none; display: flex;align-items: center;}  
- .sticky-bar .product-form__quantity .form__label { margin-bottom: 0.6rem; font-size: 1.4rem; font-weight: 700;}  
+ .sticky-bar .product-form__quantity .form__label { margin-bottom: 0.6rem; font-size: 1.4rem; font-weight: 400;}  
  .sticky-bar .quantity { width: calc(13rem / var(--font-body-scale) + var(--inputs-border-width) * 2);}  
  .sticky-bar  .product-form__input--dropdown { margin-bottom: 0rem; margin-right: 2rem;}
-  .sticky-bar .product-form__input .form__label { padding-left: 0; font-size: 1.6rem;  font-weight: 700; margin: 0 10px 0 0; letter-spacing: normal;}
-  .sticky-bar .select__select{padding: 5px 3rem 5px 2rem;  height: unset;   font-size: 1.6rem; font-weight: 700; transition: all 0.3s linear;}
+  .sticky-bar .product-form__input .form__label { padding-left: 0; font-size: 1.6rem;  font-weight: 400; margin: 0 10px 0 0; letter-spacing: normal;}
+  .sticky-bar .select__select{padding: 5px 3rem 5px 2rem;  height: unset;   font-size: 1.6rem; font-weight: 400; transition: all 0.3s linear;}
  .sticky-bar .product-form__buttons { font-weight: 400; display: flex; align-items: center; flex-wrap: wrap; margin: 0px; min-height: 45px; line-height: 30px; clear: both;}
- .sticky-bar .product-form__submit { margin-bottom: 0; border: 1.5px solid var(--gradient-base-accent-1); background: var(--gradient-base-accent-1); color: #ffffff; transition: all 300ms linear; opacity: 1; text-transform: uppercase; font-weight: 600; font-family: var(--font-body-family); letter-spacing: 0.08em; border-radius: 0;}
+ .sticky-bar .product-form__submit { margin-bottom: 0; border: 1.5px solid var(--gradient-base-accent-1); background: var(--gradient-base-accent-1); color: #ffffff; transition: all 300ms linear; opacity: 1; text-transform: uppercase; font-weight: 400; font-family: var(--font-body-family); letter-spacing: 0.08em; border-radius: 0;}
 .sticky-bar .product-form__submit:hover{background: transparent; color: var(--gradient-base-accent-1);}
 @media (max-width:950px) {
   .sticky-bar { display: none !important;}

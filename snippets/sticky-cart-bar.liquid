@@ -134,7 +134,7 @@
                         <button
                           type="submit"
                           name="add"
-                          class="product-form__submit  button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                          class="product-form__submit button button--full-width button--primary"
                           {% if product.selected_or_first_available_variant.available == false %}
                             disabled
                           {% endif %}
@@ -161,8 +161,10 @@
                         </button>
     </div>
     </div>
-    {% endform %}    
+    </div>
       <span class="sticky-bar-close">{% render 'icon-close' %}</span>
+    </div>
+    {% endform %}
 </product-form>
       <script>       
         document.querySelector('.sticky-bar-close').addEventListener('click', function () {

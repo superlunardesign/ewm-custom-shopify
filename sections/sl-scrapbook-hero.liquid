@@ -46,11 +46,12 @@ background-color: {{ section.settings.background_color }};}
     margin-top: -15%;
   }
 
-  #shopify-section-{{ section.id }} .box2 h4 {
+  #shopify-section-{{ section.id }} .box2 .scrapbook-subheading {
     color: {{ section.settings.subheading_color }};
     font-size: {{ section.settings.subheading_size }}px;
     letter-spacing: {{ section.settings.subheading_letter_spacing }}px;
     font-weight: {{ section.settings.subheading_weight }};
+    margin: 0;
   }
 
   #shopify-section-{{ section.id }} .box3 {
@@ -83,7 +84,7 @@ background-color: {{ section.settings.background_color }};}
     margin-top: 10%;
   }
 
-  #shopify-section-{{ section.id }} .box4 h2 {
+  #shopify-section-{{ section.id }} .box4 .scrapbook-heading {
     color: {{ section.settings.heading_color }};
     font-size: {{ section.settings.heading_size }}px;
     font-weight: {{ section.settings.heading_weight }};
@@ -197,7 +198,7 @@ background-color: {{ section.settings.background_color }};}
       align-content: center;
     }
 
-    #shopify-section-{{ section.id }} .box4 h2 {
+    #shopify-section-{{ section.id }} .box4 .scrapbook-heading {
       font-size: {{ section.settings.tablet_heading_size }}px;
     }
   }
@@ -218,7 +219,7 @@ background-color: {{ section.settings.background_color }};}
       grid-column-end: 7;
     }
 
-    #shopify-section-{{ section.id }} .box2 h4 {
+    #shopify-section-{{ section.id }} .box2 .scrapbook-subheading {
       font-size: {{ section.settings.mobile_subheading_size }}px;
     }
 
@@ -233,7 +234,7 @@ background-color: {{ section.settings.background_color }};}
       margin-top: 10%;
     }
 
-    #shopify-section-{{ section.id }} .box4 h2 {
+    #shopify-section-{{ section.id }} .box4 .scrapbook-heading {
       font-size: {{ section.settings.mobile_heading_size }}px;
     }
 
@@ -250,7 +251,8 @@ background-color: {{ section.settings.background_color }};}
   
   <div class="box2">
     {% if section.settings.subheading != blank %}
-      <h4>{{ section.settings.subheading }}</h4>
+      {%- assign scrapbook_sub_tag = section.settings.subheading_tag | default: 'h4' -%}
+      <{{ scrapbook_sub_tag }} class="scrapbook-subheading">{{ section.settings.subheading }}</{{ scrapbook_sub_tag }}>
     {% endif %}
   </div>
   
@@ -258,7 +260,8 @@ background-color: {{ section.settings.background_color }};}
   
   <div class="box4">
     {% if section.settings.heading != blank %}
-      <h2>{{ section.settings.heading }}</h2>
+      {%- assign scrapbook_heading_tag = section.settings.heading_tag | default: 'h2' -%}
+      <{{ scrapbook_heading_tag }} class="scrapbook-heading">{{ section.settings.heading }}</{{ scrapbook_heading_tag }}>
     {% endif %}
     {% if section.settings.show_button and section.settings.button_text != blank %}
       <a class="custom-button" href="{{ section.settings.button_link }}">
@@ -321,6 +324,33 @@ background-color: {{ section.settings.background_color }};}
       "id": "heading",
       "label": "Main Heading",
       "default": "YOUR SKIN IS ONE OF A KIND. YOUR SKINCARE SHOULD BE TOO."
+    },
+    {
+      "type": "select",
+      "id": "subheading_tag",
+      "label": "Subheading SEO Tag",
+      "info": "Set to H1 if the subheading contains your primary SEO keyword",
+      "options": [
+        { "value": "h4", "label": "H4 (default)" },
+        { "value": "h1", "label": "H1 (SEO primary)" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "p", "label": "Paragraph" }
+      ],
+      "default": "h4"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading SEO Tag",
+      "info": "Set to H2 if the subheading is the H1",
+      "options": [
+        { "value": "h2", "label": "H2 (default)" },
+        { "value": "h1", "label": "H1 (SEO primary)" },
+        { "value": "h3", "label": "H3" },
+        { "value": "p", "label": "Paragraph" }
+      ],
+      "default": "h2"
     },
     {
       "type": "header",

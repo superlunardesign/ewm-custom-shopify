@@ -255,12 +255,14 @@
       {% case block.type %}
         {% when 'subheading' %}
           {% if block.settings.text != blank %}
-            <p class="hero-subheading">{{ block.settings.text }}</p>
+            {%- assign hero_subheading_tag = block.settings.subheading_tag | default: 'p' -%}
+            <{{ hero_subheading_tag }} class="hero-subheading">{{ block.settings.text }}</{{ hero_subheading_tag }}>
           {% endif %}
 
         {% when 'heading' %}
           {% if block.settings.text != blank %}
-            <h1 class="hero-heading">{{ block.settings.text }}</h1>
+            {%- assign hero_heading_tag = block.settings.heading_tag | default: 'h1' -%}
+            <{{ hero_heading_tag }} class="hero-heading">{{ block.settings.text }}</{{ hero_heading_tag }}>
           {% endif %}
 
         {% when 'body' %}
@@ -763,6 +765,19 @@
           "id": "text",
           "label": "Subheading Text",
           "default": "SPA FACIAL TREATMENTS AVAILABLE IN MCHENRY, IL"
+        },
+        {
+          "type": "select",
+          "id": "subheading_tag",
+          "label": "SEO Tag",
+          "info": "Set to H1 if this text contains your page's primary SEO keyword",
+          "options": [
+            { "value": "p", "label": "Paragraph (default)" },
+            { "value": "h1", "label": "H1 (SEO primary)" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" }
+          ],
+          "default": "p"
         }
       ]
     },
@@ -775,6 +790,19 @@
           "id": "text",
           "label": "Heading Text",
           "default": "You are here to discover what your skin craves & gain education on how to reach your skin goals."
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "SEO Tag",
+          "info": "Set to H2 if the subheading is already the H1",
+          "options": [
+            { "value": "h1", "label": "H1 (default)" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "p", "label": "Paragraph" }
+          ],
+          "default": "h1"
         }
       ]
     },

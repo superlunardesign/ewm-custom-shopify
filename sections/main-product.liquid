@@ -1522,6 +1522,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                     </div>
 
                   {%- when 'product_highlights' -%}
+                    {% if section.settings.enable_highlights %}
                     <div class="product-highlights-block" style="{% if block.settings.margin_top > 0 %}margin-top: {{ block.settings.margin_top }}px;{% endif %}{% if block.settings.margin_bottom > 0 %}margin-bottom: {{ block.settings.margin_bottom }}px;{% endif %}" {{ block.shopify_attributes }}>
                       {% assign highlights = product.metafields.custom.product_highlights2.value %}
                       {% if highlights and highlights.size > 0 %}
@@ -1555,6 +1556,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                         </div>
                       {% endif %}
                     </div>
+                    {% endif %}
 
                   {%- when 'fbt' -%}
                     {% render 'frequently-bought-together' %}

@@ -3,25 +3,9 @@
   Dynamically adjusts layout based on number of value props
   Supports background image with opacity control
   Supports Font Awesome icons or custom image uploads
-  
-  IMPORTANT: Add this to your theme.liquid <head> if using Font Awesome icons:
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 {% endcomment %}
 
-{% comment %} Include Font Awesome if icons are shown and any block uses it {% endcomment %}
-{% if section.settings.show_icons %}
-  {% assign uses_fontawesome = false %}
-  {% for block in section.blocks %}
-    {% if block.settings.icon_type == 'fontawesome' %}
-      {% assign uses_fontawesome = true %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-
-  {% if uses_fontawesome %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  {% endif %}
-{% endif %}
+{% comment %} Font Awesome v6 is loaded globally in theme.liquid {% endcomment %}
 
 <style>
   #shopify-section-{{ section.id }} {
