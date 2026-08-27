@@ -38,6 +38,8 @@
         "left_subheading": "",
         "left_headline": "Creating Healthy Skin Together.",
         "heading_size": "h0",
+        "hero_heading_tag": "h2",
+        "card_heading_tag": "h2",
         "spread_content": true,
         "content_alignment": "left",
         "left_body": "Exceptional Customized Facials, Personalized Acne Treatments, & Brazilian Waxing in McHenry, IL",
@@ -53,9 +55,9 @@
         "bottom_right_heading": "Esthetician-Approved Skincare Products",
         "bottom_right_button_text": "Shop all",
         "bottom_right_button_link": "shopify://collections/skincare-products",
-        "card_text_color": "#FFFFFF",
+        "card_text_color": "#ffffff",
         "button_style": "primary",
-        "button_bg_color": "#8C9B6D",
+        "button_bg_color": "#8c9b6d",
         "button_text_color": "#ffffff",
         "padding_top": 0,
         "padding_bottom": 20
@@ -76,6 +78,7 @@
         "heading_size": 24,
         "heading_weight": "500",
         "heading_transform": "uppercase",
+        "heading_tag": "h2",
         "price_placement": "button",
         "collection": "acne-safe-skincare",
         "fallback_collection_handle": "best-selling-skincare",
@@ -168,7 +171,8 @@
           "type": "heading",
           "settings": {
             "text": "We believe skincare should be personal, effective, and never one-size-fits-all.",
-            "size": "h0"
+            "size": "h0",
+            "heading_tag": "h2"
           }
         },
         "spacer_wmfVM7": {
@@ -240,7 +244,8 @@
           "type": "heading",
           "settings": {
             "text": "Ways We Care For Your Skin",
-            "size": "h1"
+            "size": "h1",
+            "heading_tag": "h2"
           }
         },
         "text_UDtpAP": {
@@ -370,7 +375,8 @@
           "type": "heading",
           "settings": {
             "text": "Let us recommend something",
-            "size": "h0"
+            "size": "h0",
+            "heading_tag": "h2"
           }
         },
         "spacer_AVNNcT": {
@@ -490,6 +496,7 @@
         "subline": "",
         "heading": "I'm experiencing...",
         "heading_size": "h1",
+        "heading_tag": "h2",
         "image_position": "left",
         "desktop_height": 400,
         "mobile_image_height": 300,
@@ -571,6 +578,7 @@
       "name": "Before & Afters",
       "settings": {
         "section_title": "Before & After Esthetics With Me",
+        "heading_tag": "h2",
         "title_size": 32,
         "title_color": "#333333",
         "container_width": 1400,
@@ -645,6 +653,7 @@
         "heading_weight": "500",
         "heading_transform": "uppercase",
         "heading_color": "#8c9b6d",
+        "heading_tag": "h2",
         "bg_color": "#f5f0eb",
         "content_width": 1200,
         "star_color": "",
@@ -785,6 +794,7 @@
       "name": "Team Carousel",
       "settings": {
         "heading_size": "h0",
+        "heading_tag": "h3",
         "image_position": "left",
         "desktop_height": 525,
         "mobile_image_height": 300,
@@ -850,6 +860,8 @@
         "section_subheading": "",
         "section_heading": "Getting started is effortless",
         "section_heading_size": "h1",
+        "heading_tag": "h2",
+        "card_heading_tag": "h3",
         "section_heading_color": "#ffffff",
         "section_subheading_color": "#c4c4a0",
         "columns": "3",
@@ -897,6 +909,7 @@
         "subheading": "Struggling With Acne?",
         "heading": "ENROLL IN ACNE BOOTCAMP",
         "heading_size": "h1",
+        "heading_tag": "h2",
         "spread_content": true,
         "text": "<p>Acne Bootcamp is our signature program that goes far beyond facials. Education, professional treatments, customized homecare, and ongoing support — everything you need to finally get clear.</p><p><em>Available in-spa or virtually.</em></p>",
         "show_button": true,
@@ -933,6 +946,7 @@
         "heading_size": 24,
         "heading_weight": "500",
         "heading_transform": "uppercase",
+        "heading_tag": "h2",
         "price_placement": "button",
         "collection": "acne-safe-skincare",
         "fallback_collection_handle": "best-selling-skincare",
@@ -972,7 +986,8 @@
           "type": "heading",
           "settings": {
             "text": "Professional Skincare, Delivered",
-            "size": "h1"
+            "size": "h1",
+            "heading_tag": "h2"
           }
         },
         "text_kYpgtc": {
@@ -1047,7 +1062,8 @@
           "type": "heading",
           "settings": {
             "text": "Start your journey with professionals you can trust.",
-            "size": "h0"
+            "size": "h0",
+            "heading_tag": "h2"
           }
         },
         "spacer_FiiWHg": {
