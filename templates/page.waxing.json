@@ -15,9 +15,9 @@
       "settings": {
         "subheading": "MOST POPULAR WAXING TREATMENTS IN MCHENRY",
         "heading": "There are a <i>brazilian</i> reasons why you should get waxed here.",
-        "top_left_image": "shopify://shop_images/BrandingPhotography-C_Mae-6064.jpg",
-        "center_image": "shopify://shop_images/BrandingPhotography-C_Mae-6127.jpg",
-        "bottom_right_image": "shopify://shop_images/BrandingPhotography-C_Mae-6083.jpg",
+        "top_left_image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_6729-2.jpg",
+        "center_image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_6683-2.jpg",
+        "bottom_right_image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_6668-2_1dc18ea6-2cbc-4505-9c0e-13f7f178d1d4.jpg",
         "corner_image_position_x": 50,
         "corner_image_position_y": 50,
         "center_image_position_x": 50,
@@ -274,7 +274,7 @@
             "corner_styling": "square",
             "header_text_color": "#000000",
             "text_color": "#000000",
-            "card_color": "#F9F9F9",
+            "card_color": "#f9f9f9",
             "stars_color": "",
             "arrows_color": "#000000",
             "transition_speed": 5,
@@ -1043,7 +1043,7 @@
         "card_nhixPe": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/BrandingPhotography-C_Mae-6064_c4c0142f-cd1e-473d-8246-60e34146856e.jpg",
+            "image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_6729-2.jpg",
             "card_heading": "We'll have you smooth in no time",
             "card_text": "You'll leave with smooth skin & a post-wax care plan!",
             "button_text": "",
