@@ -66,6 +66,7 @@
       "custom_css": [],
       "name": "Featured Products",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "desktop_columns": "5",
         "heading": "Explore Our Acne Safe Skincare",
@@ -203,6 +204,7 @@
       ],
       "name": "We Believe",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "center",
         "content_max_width": 800,
@@ -392,6 +394,7 @@
       ],
       "name": "Content Banner",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "center",
         "content_max_width": 800,
@@ -609,8 +612,8 @@
             "max_width": 1100,
             "corner_styling": "soft",
             "quote_marks_style": "serif",
-            "card_color": "#F5F0EB",
-            "stars_and_quote_marks_color": "#8C9B6D",
+            "card_color": "#f5f0eb",
+            "stars_and_quote_marks_color": "#8c9b6d",
             "text_color": "#000000",
             "arrows_color": "#000000",
             "show_border": false,
@@ -898,7 +901,7 @@
         "text": "<p>Acne Bootcamp is our signature program that goes far beyond facials. Education, professional treatments, customized homecare, and ongoing support — everything you need to finally get clear.</p><p><em>Available in-spa or virtually.</em></p>",
         "show_button": true,
         "button_text": "Acne Bootcamp Details",
-        "button_link": "https://booking.mangomint.com/314399",
+        "button_link": "shopify://pages/acne-bootcamp",
         "button_style": "primary",
         "color_scheme": "background-1",
         "content_background": "#f5f0eb",
@@ -920,6 +923,7 @@
       "type": "product-recommendations",
       "name": "Product Carousel",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "desktop_columns": "5",
         "heading": "SHOP Acne Safe Skincare",
@@ -1079,6 +1083,7 @@
       ],
       "name": "Content Banner",
       "settings": {
+        "required_tag": "",
         "full_width": true,
         "content_alignment": "left",
         "content_max_width": 800,
