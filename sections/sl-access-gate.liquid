@@ -102,7 +102,7 @@
       {%- else -%}
         <h2 class="sl-gate__heading">{{ section.settings.login_heading }}</h2>
         <p class="sl-gate__text">{{ section.settings.login_text }}</p>
-        <a href="/account/login?return_url={{ request.path | url_encode }}" class="sl-gate__btn">{{ section.settings.login_button_text }}</a>
+        <a href="/account/login?return_url={{ request.path | url_encode }}" class="sl-gate__btn" onclick="try{localStorage.setItem('sl_return','{{ request.path }}')}catch(e){}">{{ section.settings.login_button_text }}</a>
         <p class="sl-gate__subtext">Don't have an account? <a href="/account/register">Create one here</a></p>
       {%- endif -%}
     </div>
