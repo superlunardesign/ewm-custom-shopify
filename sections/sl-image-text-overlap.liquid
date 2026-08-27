@@ -104,6 +104,7 @@
               <div class="sl-ito__spacer" style="height: {{ block.settings.height }}px;" {{ block.shopify_attributes }}></div>
 
             {% when 'service_link' %}
+              {%- assign sl_link_tag = block.settings.heading_tag | default: 'h3' -%}
               <a
                 href="{{ block.settings.link | default: '#' }}"
                 class="sl-ito__service-link"
@@ -114,7 +115,7 @@
                 "
                 {{ block.shopify_attributes }}
               >
-                <span class="sl-ito__service-link-text">{{ block.settings.text }}</span>
+                <{{ sl_link_tag }} class="sl-ito__service-link-text">{{ block.settings.text }}</{{ sl_link_tag }}>
                 <span class="sl-ito__service-link-arrow">&rarr;</span>
               </a>
           {% endcase %}
@@ -338,9 +339,14 @@
 
   #shopify-section-{{ section.id }} .sl-ito__service-link-text {
     font-family: var(--font-heading-family);
+    font-style: normal;
     font-weight: var(--font-heading-weight);
     font-size: 1.6rem;
+    line-height: 1.4;
+    letter-spacing: normal;
+    word-break: normal;
     color: var(--sl-link-text, #1a1a1a);
+    margin: 0;
     transition: transform 0.2s ease;
   }
 
@@ -930,6 +936,20 @@
           "type": "url",
           "id": "link",
           "label": "Link URL"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading tag (SEO)",
+          "info": "Controls the HTML tag for search engines. Does not affect visual styling.",
+          "options": [
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "span", "label": "None (span)" }
+          ],
+          "default": "h3"
         },
         {
           "type": "color",
