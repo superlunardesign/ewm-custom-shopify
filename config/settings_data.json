@@ -177,14 +177,19 @@
       },
       "cookie-banner": {
         "type": "cookie-banner",
+        "custom_css": [
+          "button{font-family:old standard tt;}"
+        ],
         "settings": {
-          "show_gdpr": false,
+          "show_gdpr": true,
           "style": "bottom",
           "color_scheme": "background-1",
           "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
           "accept": "Accept",
           "decline": "Decline",
-          "button_padding": "10px 20px 10px 20px"
+          "text_font_size": 16,
+          "button_font_size": 15,
+          "button_padding": "5px"
         }
       },
       "newsletter-modal": {
