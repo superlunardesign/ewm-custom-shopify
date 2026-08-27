@@ -1457,8 +1457,15 @@ min-height:40px;
                 {%- for tag in filter_tags -%}
                   {%- assign clean_tag = tag | strip -%}
                   {%- if clean_tag != blank -%}
+                    {%- if clean_tag contains '|' -%}
+                      {%- assign tag_parts = clean_tag | split: '|' -%}
+                      {%- assign tag_label = tag_parts[0] | strip -%}
+                      {%- assign clean_tag_handle = tag_parts[1] | strip -%}
+                    {%- else -%}
+                      {%- assign tag_label = clean_tag -%}
+                      {%- assign clean_tag_handle = clean_tag | handleize -%}
+                    {%- endif -%}
                     {%- assign is_active = false -%}
-                    {%- assign clean_tag_handle = clean_tag | handleize -%}
                     {%- for current_tag in current_tags -%}
                       {%- assign current_tag_handle = current_tag | handleize -%}
                       {%- if current_tag_handle == clean_tag_handle -%}
@@ -1474,7 +1481,7 @@ min-height:40px;
                           {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
                         {%- endunless -%}
                       {%- endfor -%}
-                      <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }}</a>
+                      <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ tag_label }}</a>
                     {%- else -%}
                       {%- assign new_tags = '' -%}
                       {%- for ct in current_tags -%}
@@ -1483,7 +1490,7 @@ min-height:40px;
                       {%- endfor -%}
                       {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
                       {%- assign new_tags = new_tags | append: clean_tag_handle -%}
-                      <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+                      <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ tag_label }}</a>
                     {%- endif -%}
                   {%- endif -%}
                 {%- endfor -%}
@@ -1502,8 +1509,15 @@ min-height:40px;
             {%- for tag in filter_tags -%}
               {%- assign clean_tag = tag | strip -%}
               {%- if clean_tag != blank -%}
+                {%- if clean_tag contains '|' -%}
+                  {%- assign tag_parts = clean_tag | split: '|' -%}
+                  {%- assign tag_label = tag_parts[0] | strip -%}
+                  {%- assign clean_tag_handle = tag_parts[1] | strip -%}
+                {%- else -%}
+                  {%- assign tag_label = clean_tag -%}
+                  {%- assign clean_tag_handle = clean_tag | handleize -%}
+                {%- endif -%}
                 {%- assign is_active = false -%}
-                {%- assign clean_tag_handle = clean_tag | handleize -%}
                 {%- for current_tag in current_tags -%}
                   {%- assign current_tag_handle = current_tag | handleize -%}
                   {%- if current_tag_handle == clean_tag_handle -%}
@@ -1519,7 +1533,7 @@ min-height:40px;
                       {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
                     {%- endunless -%}
                   {%- endfor -%}
-                  <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }} ✕</a>
+                  <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ tag_label }} ✕</a>
                 {%- else -%}
                   {%- assign new_tags = '' -%}
                   {%- for ct in current_tags -%}
@@ -1528,7 +1542,7 @@ min-height:40px;
                   {%- endfor -%}
                   {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
                   {%- assign new_tags = new_tags | append: clean_tag_handle -%}
-                  <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+                  <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ tag_label }}</a>
                 {%- endif -%}
               {%- endif -%}
             {%- endfor -%}
@@ -1579,8 +1593,15 @@ min-height:40px;
             {%- for tag in filter_tags -%}
               {%- assign clean_tag = tag | strip -%}
               {%- if clean_tag != blank -%}
+                {%- if clean_tag contains '|' -%}
+                  {%- assign tag_parts = clean_tag | split: '|' -%}
+                  {%- assign tag_label = tag_parts[0] | strip -%}
+                  {%- assign clean_tag_handle = tag_parts[1] | strip -%}
+                {%- else -%}
+                  {%- assign tag_label = clean_tag -%}
+                  {%- assign clean_tag_handle = clean_tag | handleize -%}
+                {%- endif -%}
                 {%- assign is_active = false -%}
-                {%- assign clean_tag_handle = clean_tag | handleize -%}
                 {%- for current_tag in current_tags -%}
                   {%- assign current_tag_handle = current_tag | handleize -%}
                   {%- if current_tag_handle == clean_tag_handle -%}
@@ -1593,19 +1614,19 @@ min-height:40px;
                     {%- assign ct_handle = ct | handleize -%}
                     {%- unless ct_handle == clean_tag_handle -%}
                       {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
-                      {%- assign remaining_tags = remaining_tags | append: ct -%}
+                      {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
                     {%- endunless -%}
                   {%- endfor -%}
-                  <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }}</a>
+                  <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ tag_label }}</a>
                 {%- else -%}
                   {%- assign new_tags = '' -%}
                   {%- for ct in current_tags -%}
                     {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
-                    {%- assign new_tags = new_tags | append: ct -%}
+                    {%- assign new_tags = new_tags | append: ct | handleize -%}
                   {%- endfor -%}
                   {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
                   {%- assign new_tags = new_tags | append: clean_tag_handle -%}
-                  <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+                  <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ tag_label }}</a>
                 {%- endif -%}
               {%- endif -%}
             {%- endfor -%}
@@ -1651,8 +1672,15 @@ min-height:40px;
           {%- for tag in filter_tags -%}
             {%- assign clean_tag = tag | strip -%}
             {%- if clean_tag != blank -%}
+              {%- if clean_tag contains '|' -%}
+                {%- assign tag_parts = clean_tag | split: '|' -%}
+                {%- assign tag_label = tag_parts[0] | strip -%}
+                {%- assign clean_tag_handle = tag_parts[1] | strip -%}
+              {%- else -%}
+                {%- assign tag_label = clean_tag -%}
+                {%- assign clean_tag_handle = clean_tag | handleize -%}
+              {%- endif -%}
               {%- assign is_active = false -%}
-              {%- assign clean_tag_handle = clean_tag | handleize -%}
               {%- for current_tag in current_tags -%}
                 {%- assign current_tag_handle = current_tag | handleize -%}
                 {%- if current_tag_handle == clean_tag_handle -%}
@@ -1665,10 +1693,10 @@ min-height:40px;
                   {%- assign ct_handle = ct | handleize -%}
                   {%- unless ct_handle == clean_tag_handle -%}
                     {%- if remaining_tags != '' -%}{%- assign remaining_tags = remaining_tags | append: '+' -%}{%- endif -%}
-                    {%- assign remaining_tags = remaining_tags | append: ct -%}
+                    {%- assign remaining_tags = remaining_tags | append: ct_handle -%}
                   {%- endunless -%}
                 {%- endfor -%}
-                <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ clean_tag }} ✕</a>
+                <a href="{{ collection.url }}{% if remaining_tags != '' %}/{{ remaining_tags }}{% endif %}{{ sort_param }}" class="sl-tag-btn sl-tag-btn--active">{{ tag_label }} ✕</a>
               {%- else -%}
                 {%- assign new_tags = '' -%}
                 {%- for ct in current_tags -%}
@@ -1677,7 +1705,7 @@ min-height:40px;
                 {%- endfor -%}
                 {%- if new_tags != '' -%}{%- assign new_tags = new_tags | append: '+' -%}{%- endif -%}
                 {%- assign new_tags = new_tags | append: clean_tag_handle -%}
-                <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ clean_tag }}</a>
+                <a href="{{ collection.url }}/{{ new_tags }}{{ sort_param }}" class="sl-tag-btn">{{ tag_label }}</a>
               {%- endif -%}
             {%- endif -%}
           {%- endfor -%}
@@ -3493,7 +3521,7 @@ min-height:40px;
       "type": "textarea",
       "id": "filter_tags",
       "label": "Filter tags",
-      "info": "Comma-separated tags to show as filter pills",
+      "info": "Comma-separated. Use Display Name|tag-handle for custom labels (e.g. Dryness|dry-skin)",
       "default": "Acne Safe, Anti-Aging, SPF, Sensitive Skin, Body Care"
     },
     {
