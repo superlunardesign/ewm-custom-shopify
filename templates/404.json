@@ -1,1 +1,115 @@
-{"sections":{"main":{"type":"main-404","settings":{}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_zLEPUP": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_hDxqLX": {
+          "type": "heading",
+          "settings": {
+            "heading": "404 - This Page Link Doesn't Exist",
+            "heading_size": "h1"
+          }
+        },
+        "text_r6Y4jV": {
+          "type": "text",
+          "settings": {
+            "text": "Did you type this correctly in your URL bar?",
+            "text_style": "body"
+          }
+        },
+        "buttons_3bmUKx": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "GO TO HOMEPAGE",
+            "button_link_1": "/",
+            "button_style_secondary_1": false,
+            "button_label_2": "SHOP SKINCARE",
+            "button_link_2": "shopify://collections/skincare-products",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_hDxqLX",
+        "text_r6Y4jV",
+        "buttons_3bmUKx"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "page_full_width": false,
+        "page_full_width_spacing": false,
+        "image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_7081-2.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true,
+        "custom_class_name": ""
+      }
+    },
+    "product_recommendations_tgRTTJ": {
+      "type": "product-recommendations",
+      "name": "Product Carousel",
+      "settings": {
+        "required_tag": "",
+        "full_width": false,
+        "desktop_columns": "4",
+        "heading": "Start shopping",
+        "heading_alignment": "center",
+        "heading_color": "#8C9B6D",
+        "heading_font": "heading",
+        "heading_size": 24,
+        "heading_weight": "400",
+        "heading_transform": "uppercase",
+        "price_placement": "button",
+        "collection": "skincare-products",
+        "fallback_collection_handle": "",
+        "products_limit": 8,
+        "auto_scroll_mode": "both",
+        "auto_scroll_speed": 0.5,
+        "show_rating": true,
+        "show_atc": true,
+        "atc_label": "Add To Cart",
+        "image_ratio": "1 / 1",
+        "card_border_radius": 8,
+        "card_image_bg": "#f5f5f3",
+        "section_bg": "#ffffff",
+        "atc_bg": "#7f9f6f",
+        "atc_text": "#ffffff",
+        "atc_border_width": 0,
+        "atc_border_color": "#ffffff",
+        "atc_radius": 0,
+        "button_font": "body",
+        "button_font_size": 13,
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 1,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "main": {
+      "type": "main-404",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "image_banner_zLEPUP",
+    "product_recommendations_tgRTTJ",
+    "main"
+  ]
+}
