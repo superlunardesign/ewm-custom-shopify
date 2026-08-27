@@ -127,19 +127,19 @@
             <div class="image-group">
              {% if block.settings.image_1 != blank %}
                <div class="images">
-            <img src="{{  block.settings.image_1 | image_url: width: 100 }}" width="80" height="80" loading="lazy">
+            <img src="{{  block.settings.image_1 | image_url: width: 100 }}" width="80" height="80" loading="lazy" alt="">
               <p>{{ block.settings.image1_text }}</p>
                </div>
             {% endif %} 
          {% if block.settings.image_2 != blank %}
             <div class="images">
-            <img src="{{  block.settings.image_2 | image_url: width: 100 }}" width="80" height="80" loading="lazy">
+            <img src="{{  block.settings.image_2 | image_url: width: 100 }}" width="80" height="80" loading="lazy" alt="">
                <p>{{ block.settings.image2_text }}</p>
             </div>
             {% endif %}
          {% if block.settings.image_3 != blank %}
             <div class="images">
-            <img src="{{  block.settings.image_3 | image_url: width: 100 }}" width="80" height="80" loading="lazy">
+            <img src="{{  block.settings.image_3 | image_url: width: 100 }}" width="80" height="80" loading="lazy" alt="">
             <p>{{ block.settings.image3_text }}</p3
             </div>
             {% endif %}

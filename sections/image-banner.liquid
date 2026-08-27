@@ -96,7 +96,7 @@
       {%- when 'list' -%}
       <div class="banner__list  {{ block.settings.text_style }} {% unless block.settings.icon == blank %} icon{% endunless %}" {{ block.shopify_attributes }}>
         {% unless block.settings.icon == blank %}              
-        <img src="{{ block.settings.icon | image_url: width: 70 }}" />
+        <img src="{{ block.settings.icon | image_url: width: 70 }}" alt="" />
         {% endunless %}
         <span>{{ block.settings.text | escape }}</span>
       </div>

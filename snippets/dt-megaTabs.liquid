@@ -37,7 +37,7 @@
     </li>
     {%- endfor -%}
     {% if block.settings.tab1_image != blank %}
-    <li>{{ block.settings.tab1_image | image_url: width: 800 | image_tag: srcset: nil, loading: 'lazy'  }}</li>
+    <li>{{ block.settings.tab1_image | image_url: width: 800 | image_tag: srcset: nil, loading: 'lazy', alt: block.settings.tab1_image.alt }}</li>
     {% endif %}
   </ul>
 </li>
@@ -79,7 +79,7 @@
     </li>
     {%- endfor -%}
     {% if block.settings.tab2_image != blank %}
-    <li>{{ block.settings.tab2_image | image_url: width: 800 | image_tag: srcset: nil, loading: 'lazy'  }}</li>
+    <li>{{ block.settings.tab2_image | image_url: width: 800 | image_tag: srcset: nil, loading: 'lazy', alt: block.settings.tab2_image.alt }}</li>
     {% endif %}
   </ul>
 </li>
@@ -121,7 +121,7 @@
     </li>
     {%- endfor -%}
     {% if block.settings.tab3_image != blank %}
-    <li>{{ block.settings.tab3_image | image_url: width: 800 | image_tag: srcset: nil, loading: 'lazy'  }}</li>
+    <li>{{ block.settings.tab3_image | image_url: width: 800 | image_tag: srcset: nil, loading: 'lazy', alt: block.settings.tab3_image.alt }}</li>
     {% endif %}
   </ul>
 </li>
@@ -163,7 +163,7 @@
     </li>
     {%- endfor -%}
     {% if block.settings.tab4_image != blank %}
-    <li>{{ block.settings.tab4_image | image_url: width: 800 | image_tag: srcset: nil, loading: 'lazy'  }}</li>
+    <li>{{ block.settings.tab4_image | image_url: width: 800 | image_tag: srcset: nil, loading: 'lazy', alt: block.settings.tab4_image.alt }}</li>
     {% endif %}
   </ul>
 </li>
@@ -205,7 +205,7 @@
     </li>
     {%- endfor -%}
     {% if block.settings.tab5_image != blank %}
-    <li>{{ block.settings.tab5_image | image_url: width: 800 | image_tag: srcset: nil, loading: 'lazy'  }}</li>
+    <li>{{ block.settings.tab5_image | image_url: width: 800 | image_tag: srcset: nil, loading: 'lazy', alt: block.settings.tab5_image.alt }}</li>
     {% endif %}
   </ul>
 </li>

@@ -32,7 +32,8 @@
                 sizes: '(min-width: 750px) 60vw, 100vw',
                 widths: '550, 750, 1000, 1400, 1800',
                 class: 'sl-tri__panel-img',
-                loading: 'eager'
+                loading: 'eager',
+                alt: section.settings.left_image.alt
             }}
           {% elsif section.settings.hero_bg_type == 'video' and section.settings.hero_video != blank %}
             <video class="sl-tri__panel-video" autoplay muted loop playsinline>
@@ -90,7 +91,8 @@
                 sizes: '(min-width: 750px) 40vw, 100vw',
                 widths: '375, 550, 750, 1000, 1200',
                 class: 'sl-tri__panel-img',
-                loading: 'lazy'
+                loading: 'lazy',
+                alt: section.settings.top_right_image.alt
             }}
           {% endif %}
         </div>
@@ -125,7 +127,8 @@
                 sizes: '(min-width: 750px) 40vw, 100vw',
                 widths: '375, 550, 750, 1000, 1200',
                 class: 'sl-tri__panel-img',
-                loading: 'lazy'
+                loading: 'lazy',
+                alt: section.settings.bottom_right_image.alt
             }}
           {% endif %}
         </div>

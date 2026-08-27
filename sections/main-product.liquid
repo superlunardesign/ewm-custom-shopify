@@ -1342,7 +1342,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                           {% for pro in choose_style_metafields limit: 3 %}
                             <li class="{% if pro.handle == product.handle %}active {% endif %}">
                               <a href="{{ pro.url }}">
-                                {{ pro.featured_image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                                {{ pro.featured_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: pro.featured_image.alt }}
                                 <span>{{ pro.title }}</span>
                               </a>
                             </li>

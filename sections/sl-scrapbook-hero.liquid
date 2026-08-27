@@ -253,8 +253,8 @@ background-color: {{ section.settings.background_color }};}
 </style>
 
 <div class="wrapper">
-  <div class="box1">&nbsp;</div>
-  
+  <div class="box1" {% if section.settings.top_left_image != blank %}role="img" aria-label="{{ section.settings.top_left_image.alt | escape }}"{% endif %}>&nbsp;</div>
+
   <div class="box2">
     {% if section.settings.subheading != blank %}
       {%- assign scrapbook_sub_tag = section.settings.subheading_tag | default: 'h4' -%}
@@ -262,8 +262,8 @@ background-color: {{ section.settings.background_color }};}
     {% endif %}
   </div>
   
-  <div class="box3">&nbsp;</div>
-  
+  <div class="box3" {% if section.settings.center_image != blank %}role="img" aria-label="{{ section.settings.center_image.alt | escape }}"{% endif %}>&nbsp;</div>
+
   <div class="box4">
     {% if section.settings.heading != blank %}
       {%- assign scrapbook_heading_tag = section.settings.heading_tag | default: 'h2' -%}
@@ -276,7 +276,7 @@ background-color: {{ section.settings.background_color }};}
     {% endif %}
   </div>
   
-  <div class="box5">&nbsp;</div>
+  <div class="box5" {% if section.settings.bottom_right_image != blank %}role="img" aria-label="{{ section.settings.bottom_right_image.alt | escape }}"{% endif %}>&nbsp;</div>
 </div>
 
 {% if section.settings.enable_animation %}

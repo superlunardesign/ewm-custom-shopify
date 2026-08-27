@@ -7,7 +7,7 @@
         <div  class="fbt-product" id="dT_fbt-product-{{ main_current_variant.id }}" data-fbt-product-id="{{ main_current_variant.id }}" data-fbt-product-handle="{{ product.handle }}">
                   {% assign featured_media = main_current_variant.featured_media %}
                   <div class="product-fbt__media"  data-fb-media-id="{{ featured_media.id }}">
-                  {{ featured_media | image_url: width: 250 | image_tag }}
+                  {{ featured_media | image_url: width: 250 | image_tag: alt: featured_media.alt }}
                   </div>
         <div class="fbt-product__meta">
                   <select name="selectVariant" class="selectVariant selectVariant0">
@@ -37,7 +37,7 @@
           {%- assign current_variant = pro.selected_or_first_available_variant -%}
           {%- assign featured_media = current_variant.featured_media -%}
           <div class="product-fbt__media" data-fb-media-id="{{ featured_media.id }}">
-            {{ featured_media | image_url: width: 250 | image_tag }}
+            {{ featured_media | image_url: width: 250 | image_tag: alt: featured_media.alt }}
           </div>
           <div class="fbt-product__meta">
             <select name="selectVariant" class="selectVariant selectVariant{{ forloop.index }} d-none">
