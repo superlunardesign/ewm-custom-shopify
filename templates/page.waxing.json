@@ -267,13 +267,13 @@
             "display_order": "media_first",
             "no_image_fallback": "review_text_only",
             "max_reviews": 20,
-            "review_length": "large",
-            "text_size": "large",
+            "review_length": "medium",
+            "text_size": "medium",
             "image_ratio": "1",
             "reviews_shown": 5,
             "show_reviewer_name": true,
             "show_product_name": false,
-            "hide_arrows_mobile": true,
+            "hide_arrows_mobile": false,
             "arrows_position": "bottom",
             "max_width": 1400,
             "corner_styling": "square",
@@ -293,7 +293,8 @@
         "judge_me_reviews_cards_carousel_PqKnfd"
       ],
       "custom_css": [
-        ".jdgm-cards-wrapper {max-width: 100%; overflow: visible;}"
+        ".jdgm-cards-wrapper {max-width: 100%; overflow: visible;}",
+        ".jdgm-cards-carousel .jdgm-arrow {display: flex !important;}"
       ],
       "settings": {
         "include_margins": false
