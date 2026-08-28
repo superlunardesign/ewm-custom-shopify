@@ -1015,6 +1015,7 @@
       ],
       "name": "FAQ Section",
       "settings": {
+        "enable_faq_schema": true,
         "enable_anchor": false,
         "anchor_id": "faq",
         "anchor_offset": 80,

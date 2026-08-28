@@ -144,6 +144,7 @@
       "name": "Image Carousel",
       "settings": {
         "section_title": "Chemical Peel Results",
+        "heading_tag": "h2",
         "title_size": 32,
         "title_color": "#333333",
         "container_width": 1400,
@@ -287,7 +288,8 @@
           "type": "heading",
           "settings": {
             "text": "At Esthetics with Me, we specialize in custom-blended PCA chemical peels that deliver real, visible results without disrupting your life.",
-            "size": "h1"
+            "size": "h1",
+            "heading_tag": "h2"
           }
         },
         "text_CLMgxq": {
@@ -829,6 +831,7 @@
       ],
       "name": "FAQ Section",
       "settings": {
+        "enable_faq_schema": true,
         "enable_anchor": false,
         "anchor_id": "faq",
         "anchor_offset": 80,
@@ -880,7 +883,8 @@
           "type": "heading",
           "settings": {
             "text": "Reveal Your Most Confident, Radiant Glow",
-            "size": "h0"
+            "size": "h0",
+            "heading_tag": "h2"
           }
         },
         "spacer_eBHybn": {
