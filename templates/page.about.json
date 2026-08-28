@@ -41,6 +41,7 @@
         "subheading_size": 14,
         "subheading_weight": "400",
         "heading": "ABOUT OUR SPA",
+        "heading_tag": "p",
         "heading_font": "heading",
         "heading_size": 96,
         "heading_size_mobile": 48,
