@@ -293,8 +293,9 @@
         "judge_me_reviews_cards_carousel_PqKnfd"
       ],
       "custom_css": [
-        ".jdgm-cards-wrapper {max-width:95%; overflow: visible;}",
-        ".jdgm-cards-carousel .jdgm-arrow {display: flex !important;}"
+        ".jdgm-cards-wrapper {max-width: 95%; overflow: visible;}",
+        ".jdgm-cards-carousel .jdgm-arrow {display: flex !important;}",
+        "@media and (max-width:756px){.jdgm-cards-wrapper{max-width:90%}}"
       ],
       "settings": {
         "include_margins": false
