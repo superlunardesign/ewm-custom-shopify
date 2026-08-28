@@ -45,6 +45,7 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
+        "enable_collection_search": true,
         "products_per_page": 16,
         "pagination_type": "paginated",
         "compact_layout_collections": "",
@@ -61,7 +62,6 @@
         "show_hover_image": true,
         "show_star_rating": true,
         "star_rating_color": "#8c9b6d",
-        "show_empty_reviews": false,
         "empty_star_color": "#d3d3d3",
         "title_font_size": 16,
         "title_color": "#1a1a1a",
@@ -75,7 +75,7 @@
         "soldout_badge_priority": true,
         "soldout_text": "SOLD OUT",
         "soldout_badge_color": "#666666",
-        "badge_tags": "ACNE SAFE",
+        "badge_tags": "acne safe",
         "tag_badge_color": "#816197",
         "show_variants": true,
         "max_visible_variants": 3,
