@@ -10,10 +10,10 @@
 .jdgm-cards-carousel .jdgm-text p{
   -webkit-line-clamp: 8 !important;
   text-align: left;
-  max-width: 400px !important;
-  width:380px !important;
+  max-width: 400px ;
+  width:380px;
 }
-@media screen and (max-width: 780pxpx) {
+@media screen and (max-width: 780px) {
 .jdgm-cards-carousel .jdgm-text p{
   -webkit-line-clamp: 8 !important;
   text-align: left;
