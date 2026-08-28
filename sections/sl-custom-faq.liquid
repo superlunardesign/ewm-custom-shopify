@@ -426,10 +426,50 @@
   });
 </script>
 
+{%- if section.settings.enable_faq_schema -%}
+{%- assign faq_count = 0 -%}
+{%- capture faq_items -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'faq_item' -%}
+      {%- assign q = block.settings.question -%}
+      {%- assign a = block.settings.answer | strip_html | strip -%}
+      {%- if q != blank and a != blank -%}
+        {%- if faq_count > 0 -%},{%- endif -%}
+        {
+          "@type": "Question",
+          "name": {{ q | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ a | json }}
+          }
+        }
+        {%- assign faq_count = faq_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if faq_items != blank -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{{ faq_items }}]
+}
+</script>
+{%- endif -%}
+{%- endif -%}
+
 {% schema %}
 {
   "name": "FAQ Section",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_faq_schema",
+      "default": false,
+      "label": "Enable FAQPage schema (SEO)",
+      "info": "Adds structured data so Google can show Q&A rich results for this page."
+    },
     {
       "type": "header",
       "content": "Anchor Link Settings"
