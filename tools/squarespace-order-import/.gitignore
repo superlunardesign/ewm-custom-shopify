@@ -1,0 +1,4 @@
+.env
+node_modules/
+orders.csv
+import-log-*.json

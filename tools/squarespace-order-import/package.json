@@ -1,0 +1,13 @@
+{
+  "name": "squarespace-order-import",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "import": "node import-orders.js",
+    "dry-run": "node import-orders.js --dry-run"
+  },
+  "dependencies": {
+    "csv-parse": "^5.5.6"
+  }
+}
