@@ -87,12 +87,46 @@
   </div>
 </div>
 
+{%- if section.settings.enable_faq_schema -%}
+{%- capture faq_items -%}
+  {%- for block in section.blocks -%}
+    {%- assign q = block.settings.heading | default: block.settings.page.title -%}
+    {%- assign a = block.settings.row_content | default: block.settings.page.content | strip_html | strip -%}
+    {%- if q != blank and a != blank -%}
+      {%- unless forloop.first -%},{%- endunless -%}
+      {
+        "@type": "Question",
+        "name": {{ q | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ a | json }}
+        }
+      }
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{{ faq_items }}]
+}
+</script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "t:sections.collapsible_content.name",
   "tag": "section",
   "class": "section",
   "settings": [
+      {
+      "type": "checkbox",
+      "id": "enable_faq_schema",
+      "default": false,
+      "label": "Enable FAQPage schema (SEO)",
+      "info": "Adds structured data so Google can show Q&A rich results. Turn on for FAQ sections only."
+    },
       {
       "type": "text",
       "id": "title",
