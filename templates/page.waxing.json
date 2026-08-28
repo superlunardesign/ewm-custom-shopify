@@ -293,7 +293,7 @@
         "judge_me_reviews_cards_carousel_PqKnfd"
       ],
       "custom_css": [
-        ".jdgm-cards-wrapper {max-width: 100%; overflow: visible;}",
+        ".jdgm-cards-wrapper {max-width:95%; overflow: visible;}",
         ".jdgm-cards-carousel .jdgm-arrow {display: flex !important;}"
       ],
       "settings": {
@@ -313,7 +313,8 @@
           "type": "heading",
           "settings": {
             "text": "Esthetics With Me is Different",
-            "size": "h1"
+            "size": "h1",
+            "heading_tag": "h2"
           }
         },
         "text_NMUWrE": {
@@ -964,7 +965,8 @@
           "type": "heading",
           "settings": {
             "text": "How to Prepare for Your Brazilian Wax",
-            "size": "h0"
+            "size": "h0",
+            "heading_tag": "h2"
           }
         },
         "subheading_MyYXFk": {
@@ -1115,6 +1117,7 @@
         "heading_size": 24,
         "heading_weight": "500",
         "heading_transform": "uppercase",
+        "heading_tag": "h2",
         "price_placement": "button",
         "collection": "post-waxing-care-products",
         "fallback_collection_handle": "best-selling-skincare",
@@ -1298,7 +1301,8 @@
           "type": "heading",
           "settings": {
             "text": "Ready for smooth skin?",
-            "size": "h0"
+            "size": "h0",
+            "heading_tag": "h2"
           }
         },
         "spacer_JQyYat": {
