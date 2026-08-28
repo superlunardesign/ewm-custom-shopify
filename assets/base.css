@@ -21,8 +21,8 @@
     width: 280px;
   }
   .jdgm-cards-carousel .jdgm-media-card {
-    width: 300px;
-    flex: 0 0 300px;
+    width: 300px !important;
+    flex: 0 0 300px !important;
   }
 }
 
@@ -32,8 +32,8 @@
 }
 
 .jdgm-cards-carousel .jdgm-media-card{
-  width:400px;
-      flex: 0 0 400px;
+  width:400px !important;
+      flex: 0 0 400px !important;
 }
 .jdgm-arrow svg{
   width:20px !important; 
