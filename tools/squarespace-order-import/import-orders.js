@@ -1,17 +1,5 @@
 #!/usr/bin/env node
 
-/**
- * Order history import with product linking.
- *
- * Usage:
- *   1. Save your order export CSV to this folder as orders.csv
- *   2. Create a .env with your Shopify credentials (see .env.example)
- *   3. npm install
- *   4. node delete-orders.js          (delete existing orders first)
- *   5. node import-orders.js --dry-run (preview)
- *   6. node import-orders.js           (import for real)
- */
-
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import { parse } from "csv-parse/sync";
 import { resolve, dirname } from "path";
@@ -19,14 +7,10 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// ── Config ──────────────────────────────────────────────────────────
 function loadEnv() {
   const envPath = resolve(__dirname, ".env");
   if (!existsSync(envPath)) {
-    console.error("Missing .env file. Create one with:");
-    console.error("  SHOPIFY_STORE=your-store.myshopify.com");
-    console.error("  SHOPIFY_ACCESS_TOKEN=shpat_...");
-    console.error("  CSV_FILE=orders.csv");
+    console.error("Missing .env file.");
     process.exit(1);
   }
   const lines = readFileSync(envPath, "utf8").split("\n");
@@ -54,134 +38,132 @@ if (!STORE || !TOKEN) {
   process.exit(1);
 }
 
-// ── Product name mapping ───────────────────────────────────────────
-// Maps old CSV product names → Shopify product handles.
-// Products not in this map will import as custom (unlinked) line items.
-const PRODUCT_NAME_TO_HANDLE = {
-  "Tizo TIZO3 Facial Primer Tinted": "tizo-primer-sunscreen-tinted",
-  "TIZO3 Facial Primer Tinted": "tizo-primer-sunscreen-tinted",
-  "8% L-MANDELIC SERUM": "spring-bowl-rltkk-dnchc",
-  "HydraBalance | Face Reality": "hydrabalance",
-  "FACE REALITY HYDRABALANCE": "hydrabalance",
-  "HYDRABALANCE": "hydrabalance",
-  "Barrier Care Gel Cream": "barrier-care-gel-cream",
-  "hydraRemedy Gel Serum": "hydraremedy-gel-serum",
-  "Hale & Hush QUIET WASH CLEANSER": "quiet-wash",
-  "QUIET WASH": "quiet-wash",
-  "Skin Script Clarifying Toner Pads": "clarifying-toner-pads",
-  "Ultra Zinc Body & Face Tinted": "ultrazincbodyandfacetinted",
-  "Skin Script Light Aloe Moisturizer": "lightaloemoisturizer",
-  "Light Aloe Moisturizer": "lightaloemoisturizer",
-  "Soothing Radiance Toner | Face Reality": "soothing-radiance-toner",
-  "Hush Hydrate Gel | Hale & Hush": "hush-hydrate-gel-hale-hush",
-  "Hale & Hush HUSH HYDRATE GEL": "hush-hydrate-gel-hale-hush",
-  "HUSH HYDRATE GEL": "hush-hydrate-gel-hale-hush",
-  "Antioxidant Peptide Eye Gel | Face Reality": "antioxidant-peptide-eye-gel-face-reality",
-  "FACE REALITY ANTIOXIDANT PEPTIDE EYE GEL": "antioxidant-peptide-eye-gel-face-reality",
-  "ANTIOXIDANT PEPTIDE EYE GEL": "antioxidant-peptide-eye-gel-face-reality",
-  "Raspberry Refining Scrub | Skin Script": "raspberry-refining-scrub-skin-script",
-  "Skin Script Raspberry Refining Scrub": "raspberry-refining-scrub-skin-script",
-  "Barrier Balance Creamy Cleanser | Face Reality": "face-reality-barrier-balance-creamy-cleanser",
-  "FACE REALITY Barrier Balance Creamy Cleanser": "face-reality-barrier-balance-creamy-cleanser",
-  "Barrier Balance Creamy Cleanser": "face-reality-barrier-balance-creamy-cleanser",
-  "Beta-Glucan Serum": "beta-serum",
-  "Mixi Peptide Rescue Cream": "mixi-peptide-rescue-cream",
-  "15% L-Mandelic Serum | Face Reality": "15-mandelic-serum-face-reality",
-  "Tizo TIZO2 Facial Primer Non-Tinted": "tizo-primer-sunscreen-non-tinted",
-  "TIZO2 Facial Primer Non-Tinted": "tizo-primer-sunscreen-non-tinted",
-  "Antioxidant Scrub | Face Reality": "antioxidant-scrub-face-reality",
-  "Hale & Hush RELIEF BIO-POWDER": "relief-bio-powder",
-  "RELIEF BIO-POWDER": "relief-bio-powder",
-  "Skin Script Acai Berry Moisturizer": "acai-berry-moisturizer",
-  "Acai Berry Moisturizer": "acai-berry-moisturizer",
-  "Skin Script Pomegranate Antioxidant Cleanser": "pomegranate-antioxidant-cleanser",
-  "Pomegranate Antioxidant Cleanser": "pomegranate-antioxidant-cleanser",
-  "Skin Script Ageless Hydrating Serum": "ageless-hydrating-serum",
-  "Ageless Hydrating Serum": "ageless-hydrating-serum",
-  "DAILY SPF 30 PLUS | FACE REALITY": "daily-spf-30-lotion",
-  "FACE REALITY DAILY SPF 30 PLUS": "daily-spf-30-lotion",
-  "FACE REALITY DAILY SPF 30 LOTION": "daily-spf-30-lotion",
-  "DAILY SPF 30 LOTION": "daily-spf-30-lotion",
-  "Hydroxi Acne Cream": "hydroxi-acne-cream",
-  "FACE REALITY CRAN-PEPTIDE CREAM": "cran-peptide-cream",
-  "CRAN-PEPTIDE CREAM": "cran-peptide-cream",
-  "2x2 Dental Gauze For Toner": "2x2-dental-gauze-pads-for-toner",
-  "FACE REALITY MINERAL MATTE SPF 28": "ultimate-protection-spf-28",
-  "MINERAL MATTE SPF 28": "ultimate-protection-spf-28",
-  "ULTIMATE PROTECTION SPF 28": "ultimate-protection-spf-28",
-  "5% L-MANDELIC SERUM": "golden-mist-cup-weny8-srrdt",
-  "FACE REALITY ANTIOXIDANT PEPTIDE FACE SERUM": "antioxidant-peptide-face-serum",
-  "ANTIOXIDANT PEPTIDE FACE SERUM": "antioxidant-peptide-face-serum",
-  "Skin Script Peptide Eye Serum": "peptide-eye-serum",
-  "Peptide Eye Serum": "peptide-eye-serum",
-  "Hale & Hush Remedy Rehab Oil": "remedy-rehab-oil",
-  "Remedy Rehab Oil": "remedy-rehab-oil",
-  "Premium Compressed Face Cleansing Towels | Mixi": "mixi-premium-compressed-towels",
-  "FACE REALITY SALICYLIC+ SERUM": "salicylic-serum",
-  "SALICYLIC+ SERUM": "salicylic-serum",
-  "SALICYLIC SERUM": "salicylic-serum",
-  "Sport SPF 50 Continuous Spray Sunscreen 6 oz | SolRX": "sport-spf-50-continuous-spray-solrx",
-  "Sport SPF 50 Lotion | Sol RX": "sport-spf-50-lotion-solrx",
-  "Skin Script Tri-Peptide Eye Cream": "tri-peptide-eye-cream",
-  "Refine Polish | Hale & Hush": "refine-polish-exfoliant-hale-hush",
-  "Hale & Hush REFINE POLISH": "refine-polish-exfoliant-hale-hush",
-  "REFINE POLISH": "refine-polish-exfoliant-hale-hush",
-  "Skin Script Citrus-C Nourishing Cream": "citrus-c-nourishing-cream",
-  "Hale & Hush BRILLIANT EYE & LIP SERUM": "hale-hush-brilliant-eye-lip-serum",
-  "BRILLIANT EYE & LIP SERUM": "hale-hush-brilliant-eye-lip-serum",
-  "Botanical Bloom Hydrating Mask": "botanical-bloom-hydrating-mask",
-  "Michele Corley Pore Clearing Cleansing Oil": "michele-corley-pore-clearing-cleansing-oil",
-  "Skin Script Retinol 2% Exfoliating Scrub/Mask": "retinol-2-exfoliating-scrub-mask",
-  "Retinol 2% Exfoliating Scrub/Mask": "retinol-2-exfoliating-scrub-mask",
-  "11% L-MANDELIC SERUM": "11-l-mandelic-serum",
-  "Skin Script Glycolic and Retinol Pads": "glycolicandreinolpads",
-  "Glycolic and Retinol Pads": "glycolicandreinolpads",
-  "Agent 88 - Ingrown Hair & Body Acne Serum": "agent-88-ingrown-hair-body-acne-serum",
-  "CLEARDERMA MOISTURIZER | FACE REALITY": "clearderma-moisturizer",
-  "FACE REALITY CLEARDERMA MOISTURIZER": "clearderma-moisturizer",
-  "CLEARDERMA MOISTURIZER": "clearderma-moisturizer",
-  "FACE REALITY CALMING FACIAL TONER": "calming-facial-toner",
-  "Tizo Ultra Zinc Body & Face Non-Tinted": "ultra-zinc-body-face-non-tinted",
-  "Ultra Zinc Body & Face Non-Tinted": "ultra-zinc-body-face-non-tinted",
-  "Mixi Mist Hypochlorous Acid Spray": "mixi-mist",
-  "Biogel | AnteAGE": "anteage-biogel",
-  "FACE REALITY ACNE-SAFE KIT FOR NORMAL OR COMBINATION SKIN": "acne-safe-kit-normal-combination-skin",
-  "ACNE-SAFE KIT FOR NORMAL OR COMBINATION SKIN": "acne-safe-kit-normal-combination-skin",
-  "GlowTone™ Corrective Serum | Face Reality": "glowtone-corrective-serum",
-  "Face Reality | glowTone™ Corrective Serum": "glowtone-corrective-serum",
-  "GREEN ENVEE | RELAX HAND + BODY LOTION": "relax-hand-body-lotion",
-  "L-Mandelic Face & Body Wash | Face Reality": "v5xfxmdwvahg1dyaeqqxvu5eke0550",
-  "FACE REALITY L-Mandelic Face And Body Wash": "v5xfxmdwvahg1dyaeqqxvu5eke0550",
-  "L-Mandelic Face And Body Wash": "v5xfxmdwvahg1dyaeqqxvu5eke0550",
-  "FACE REALITY HYDRACALM MASK": "hydracalm-mask",
-  "HYDRACALM MASK": "hydracalm-mask",
-  "Hale & Hush Duo Hush Hydrate Gel & Relief Bio Powder": "haleandhushduo",
-  "Brighten-C Mask | Acne-Safe Brightening Mask by Face Reality": "brighten-c-mask-face-reality",
-  "BRIGHTEN-C MASK": "brighten-c-mask-face-reality",
-  "Hale & Hush Broad Spectrum SPF 30": "broad-spectrum-spf30",
-  "Broad Spectrum SPF 30": "broad-spectrum-spf30",
-  "FACE REALITY SULFUR SPOT TREATMENT": "sulfur-spot-treatment",
-  "SULFUR SPOT TREATMENT": "sulfur-spot-treatment",
-  "Saint Tropez | Tuff Peach Craft Co": "saint-tropez",
-  "GREEN ENVEE | ZEN HAND + BODY LOTION": "zen-hand-body-lotion",
-  "GREEN ENVEE | STRESS REMEDY HAND + BODY LOTION": "stress-remedy-hand-body-lotion",
-  "BALANCE HAND + BODY LOTION": "balance-hand-body-lotion",
-  "Skin Script Cucumber Hydration Toner": "cucumber-hydration-toner",
-  "Cucumber Hydration Toner": "cucumber-hydration-toner",
-  "Mixi 5% Mandelic Serum": "5-mandelic-serum",
-  "Mixi Clear Plex 5%": "clear-plex-5",
-  "Mixi 8% Mandelic Serum": "8-mandelic-serum",
-  "8% Mandelic Serum": "8-mandelic-serum",
-  "Mixi Clear Plex 10%": "clear-plex-10",
-  "Mixi Clear Plex 2.8%": "clear-plex-2-8",
-  "Hale & Hush Charcoal Clarifying Mask 3oz.": "charcoal-clarifying-mask",
-  "BUSHBALM Mini Exfoliating Mitt": "miniexfoliatingmitt",
-  "Mini Exfoliating Mitt": "miniexfoliatingmitt",
-  "SAL-C TONER": "sal-c-toner-face-reality",
-  "Sal-C Toner | Face Reality": "sal-c-toner-face-reality",
-  "L-MANDELIC FACE AND BODY SCRUB": "face-reality-l-mandelic-face-body-scrub",
-  "Steel Eye Rollers": "steel-eye-roller",
-  "Gift Card": "gift-card-for-facial-spa-in-mchenry-il-esthetics-with-me",
+// ── Direct variant ID mapping ──────────────────────────────────────
+// Maps old CSV product names → Shopify variant IDs (no runtime lookup needed)
+const NAME_TO_VARIANT = {
+  "Tizo TIZO3 Facial Primer Tinted": 46470967066836,
+  "TIZO3 Facial Primer Tinted": 46470967066836,
+  "8% L-MANDELIC SERUM": 46470966804692,
+  "HydraBalance | Face Reality": 46470965199060,
+  "FACE REALITY HYDRABALANCE": 46470965199060,
+  "HYDRABALANCE": 46470965199060,
+  "Barrier Care Gel Cream": 47559291470036,
+  "hydraRemedy Gel Serum": 46461759193300,
+  "Hale & Hush QUIET WASH CLEANSER": 46470966083796,
+  "QUIET WASH": 46470966083796,
+  "Skin Script Clarifying Toner Pads": 46470963527892,
+  "Ultra Zinc Body & Face Tinted": 46470967230676,
+  "Skin Script Light Aloe Moisturizer": 46470965297364,
+  "Light Aloe Moisturizer": 46470965297364,
+  "Soothing Radiance Toner | Face Reality": 47559291437268,
+  "Hush Hydrate Gel | Hale & Hush": 47559291863252,
+  "Hale & Hush HUSH HYDRATE GEL": 47559291863252,
+  "HUSH HYDRATE GEL": 47559291863252,
+  "Antioxidant Peptide Eye Gel | Face Reality": 46461757915348,
+  "FACE REALITY ANTIOXIDANT PEPTIDE EYE GEL": 46461757915348,
+  "ANTIOXIDANT PEPTIDE EYE GEL": 46461757915348,
+  "Raspberry Refining Scrub | Skin Script": 46470966247636,
+  "Skin Script Raspberry Refining Scrub": 46470966247636,
+  "Barrier Balance Creamy Cleanser | Face Reality": 46461758144724,
+  "FACE REALITY Barrier Balance Creamy Cleanser": 46461758144724,
+  "Barrier Balance Creamy Cleanser": 46461758144724,
+  "Beta-Glucan Serum": 47559291535572,
+  "Mixi Peptide Rescue Cream": 47559291699412,
+  "15% L-Mandelic Serum | Face Reality": 46470963003604,
+  "Tizo TIZO2 Facial Primer Non-Tinted": 46470967001300,
+  "TIZO2 Facial Primer Non-Tinted": 46470967001300,
+  "Antioxidant Scrub | Face Reality": 46461758079188,
+  "Hale & Hush RELIEF BIO-POWDER": 46470966345940,
+  "RELIEF BIO-POWDER": 46470966345940,
+  "Skin Script Acai Berry Moisturizer": 46470963036372,
+  "Acai Berry Moisturizer": 46470963036372,
+  "Skin Script Pomegranate Antioxidant Cleanser": 46470966018260,
+  "Pomegranate Antioxidant Cleanser": 46470966018260,
+  "Skin Script Ageless Hydrating Serum": 46470963134676,
+  "Ageless Hydrating Serum": 46470963134676,
+  "DAILY SPF 30 PLUS | FACE REALITY": 46470964969684,
+  "FACE REALITY DAILY SPF 30 PLUS": 46470964969684,
+  "FACE REALITY DAILY SPF 30 LOTION": 46470964969684,
+  "DAILY SPF 30 LOTION": 46470964969684,
+  "Hydroxi Acne Cream": 46461759226068,
+  "FACE REALITY CRAN-PEPTIDE CREAM": 46470964871380,
+  "CRAN-PEPTIDE CREAM": 46470964871380,
+  "2x2 Dental Gauze For Toner": 47559291601108,
+  "FACE REALITY MINERAL MATTE SPF 28": 46470967165140,
+  "MINERAL MATTE SPF 28": 46470967165140,
+  "ULTIMATE PROTECTION SPF 28": 46470967165140,
+  "5% L-MANDELIC SERUM": 46470965133524,
+  "FACE REALITY ANTIOXIDANT PEPTIDE FACE SERUM": 46470963167444,
+  "ANTIOXIDANT PEPTIDE FACE SERUM": 46470963167444,
+  "Skin Script Peptide Eye Serum": 46470965952724,
+  "Peptide Eye Serum": 46470965952724,
+  "Hale & Hush Remedy Rehab Oil": 46470966378708,
+  "Remedy Rehab Oil": 46470966378708,
+  "Premium Compressed Face Cleansing Towels | Mixi": 48373049163988,
+  "FACE REALITY SALICYLIC+ SERUM": 46470966640852,
+  "SALICYLIC+ SERUM": 46470966640852,
+  "SALICYLIC SERUM": 46470966640852,
+  "Sport SPF 50 Continuous Spray Sunscreen 6 oz | SolRX": 48373049000148,
+  "Sport SPF 50 Lotion | Sol RX": 48373048967380,
+  "Skin Script Tri-Peptide Eye Cream": 47559291797716,
+  "Refine Polish | Hale & Hush": 46470966280404,
+  "Hale & Hush REFINE POLISH": 46470966280404,
+  "REFINE POLISH": 46470966280404,
+  "Skin Script Citrus-C Nourishing Cream": 46470963495124,
+  "Hale & Hush BRILLIANT EYE & LIP SERUM": 46461758243028,
+  "BRILLIANT EYE & LIP SERUM": 46461758243028,
+  "Botanical Bloom Hydrating Mask": 47533813498068,
+  "Michele Corley Pore Clearing Cleansing Oil": 46470965493972,
+  "Skin Script Retinol 2% Exfoliating Scrub/Mask": 46470966411476,
+  "Retinol 2% Exfoliating Scrub/Mask": 46470966411476,
+  "11% L-MANDELIC SERUM": 46461758800084,
+  "Skin Script Glycolic and Retinol Pads": 46470965100756,
+  "Glycolic and Retinol Pads": 46470965100756,
+  "Agent 88 - Ingrown Hair & Body Acne Serum": 46461757849812,
+  "CLEARDERMA MOISTURIZER | FACE REALITY": 46470964248788,
+  "FACE REALITY CLEARDERMA MOISTURIZER": 46470964248788,
+  "CLEARDERMA MOISTURIZER": 46470964248788,
+  "FACE REALITY CALMING FACIAL TONER": 46470963462356,
+  "Tizo Ultra Zinc Body & Face Non-Tinted": 46470967197908,
+  "Ultra Zinc Body & Face Non-Tinted": 46470967197908,
+  "Mixi Mist Hypochlorous Acid Spray": 47559291502804,
+  "Biogel | AnteAGE": 47559291568340,
+  "FACE REALITY ACNE-SAFE KIT FOR NORMAL OR COMBINATION SKIN": 46470963069140,
+  "ACNE-SAFE KIT FOR NORMAL OR COMBINATION SKIN": 46470963069140,
+  "GlowTone™ Corrective Serum | Face Reality": 47559291764948,
+  "Face Reality | glowTone™ Corrective Serum": 47559291764948,
+  "GREEN ENVEE | RELAX HAND + BODY LOTION": 47559292027092,
+  "L-Mandelic Face & Body Wash | Face Reality": 46470967263444,
+  "FACE REALITY L-Mandelic Face And Body Wash": 46470967263444,
+  "L-Mandelic Face And Body Wash": 46470967263444,
+  "FACE REALITY HYDRACALM MASK": 46470965231828,
+  "HYDRACALM MASK": 46470965231828,
+  "Hale & Hush Duo Hush Hydrate Gel & Relief Bio Powder": 46470965166292,
+  "Brighten-C Mask | Acne-Safe Brightening Mask by Face Reality": 46470963200212,
+  "BRIGHTEN-C MASK": 46470963200212,
+  "Hale & Hush Broad Spectrum SPF 30": 46470963265748,
+  "Broad Spectrum SPF 30": 46470963265748,
+  "FACE REALITY SULFUR SPOT TREATMENT": 46470966902996,
+  "SULFUR SPOT TREATMENT": 46470966902996,
+  "Saint Tropez | Tuff Peach Craft Co": 46470966444244,
+  "GREEN ENVEE | ZEN HAND + BODY LOTION": 47559291961556,
+  "GREEN ENVEE | STRESS REMEDY HAND + BODY LOTION": 47203497509076,
+  "BALANCE HAND + BODY LOTION": 47559291928788,
+  "Skin Script Cucumber Hydration Toner": 48474732986580,
+  "Cucumber Hydration Toner": 48474732986580,
+  "Mixi 5% Mandelic Serum": 48515555786964,
+  "Mixi Clear Plex 5%": 48515490283732,
+  "Mixi 8% Mandelic Serum": 48515471802580,
+  "8% Mandelic Serum": 48515471802580,
+  "Mixi Clear Plex 10%": 48515467411668,
+  "Mixi Clear Plex 2.8%": 48515488219348,
+  "Hale & Hush Charcoal Clarifying Mask 3oz.": 47559291830484,
+  "BUSHBALM Mini Exfoliating Mitt": 46470965559508,
+  "Mini Exfoliating Mitt": 46470965559508,
+  "SAL-C TONER": 46476644745428,
+  "Sal-C Toner | Face Reality": 46476644745428,
+  "L-MANDELIC FACE AND BODY SCRUB": 46470965035220,
+  "Steel Eye Rollers": 46470966837460,
 };
 
 // ── Rate limiter ───────────────────────────────────────────────────
@@ -216,59 +198,6 @@ async function shopifyFetch(endpoint, options = {}) {
   return body;
 }
 
-// ── Fetch all Shopify products to build handle → variant_id map ───
-async function fetchProductVariantMap() {
-  console.log("Fetching Shopify products for variant linking...");
-  const handleToVariant = new Map();
-  let url = "/products.json?limit=250&fields=id,handle,variants";
-
-  while (url) {
-    const fullUrl = `${BASE_URL}${url}`;
-    const res = await fetch(fullUrl, {
-      headers: {
-        "Content-Type": "application/json",
-        "X-Shopify-Access-Token": TOKEN,
-      },
-    });
-
-    if (res.status === 429) {
-      const retryAfter = parseFloat(res.headers.get("Retry-After") || "2");
-      await wait(retryAfter * 1000);
-      continue;
-    }
-
-    const body = await res.json();
-    if (body.products) {
-      for (const product of body.products) {
-        if (product.variants && product.variants.length > 0) {
-          handleToVariant.set(product.handle, {
-            productId: product.id,
-            variantId: product.variants[0].id,
-          });
-        }
-      }
-    }
-
-    const linkHeader = res.headers.get("Link");
-    if (linkHeader && linkHeader.includes('rel="next"')) {
-      const match = linkHeader.match(/<([^>]+)>;\s*rel="next"/);
-      if (match) {
-        const nextUrl = new URL(match[1]);
-        url = nextUrl.pathname.replace(`/admin/api/${API_VERSION}`, "") + nextUrl.search;
-      } else {
-        url = null;
-      }
-    } else {
-      url = null;
-    }
-
-    await wait(550);
-  }
-
-  console.log(`  Found ${handleToVariant.size} products with variants\n`);
-  return handleToVariant;
-}
-
 // ── CSV parsing ─────────────────────────────────────────────────────
 function readOrders() {
   if (!existsSync(CSV_FILE)) {
@@ -288,7 +217,6 @@ function readOrders() {
   return records;
 }
 
-// ── Column mapping ──────────────────────────────────────────────────
 function findCol(row, ...candidates) {
   for (const c of candidates) {
     if (row[c] !== undefined) return row[c];
@@ -306,7 +234,6 @@ function parseRow(row) {
   return {
     orderId: findCol(row, "ID", "Order ID", "Order Number", "orderNumber", "Order No"),
     date: findCol(row, "Date Created", "Order Date", "Date", "Created On", "Created at"),
-    dateFulfilled: findCol(row, "Date Fulfilled", "Fulfilled At", "Fulfilled at"),
     email: findCol(row, "Customer Email", "Email", "Billing Email"),
     customerName: findCol(row, "Customer Name", "Name", "Billing Name"),
     cancelledAt: findCol(row, "Cancelled at", "Cancelled At", "Canceled at"),
@@ -336,14 +263,12 @@ function parseRow(row) {
     discountCode: findCol(row, "Discount Code"),
     discount: findCol(row, "Discount", "Discount Amount"),
     total: findCol(row, "Grand Total", "Total"),
-    fulfillmentStatus: findCol(row, "Fulfillment Status", "Fulfilled"),
     paymentStatus: findCol(row, "Payment Status", "Financial Status"),
     note: findCol(row, "Note", "Notes", "Customer Note", "Private Notes"),
     currency: findCol(row, "Currency"),
   };
 }
 
-// ── Group rows by order ─────────────────────────────────────────────
 function groupByOrder(records) {
   const orders = new Map();
   for (const record of records) {
@@ -374,7 +299,6 @@ function cleanPrice(val) {
   return val.toString().replace(/[^0-9.-]/g, "") || "0.00";
 }
 
-// ── Build Shopify order payload ─────────────────────────────────────
 function splitName(full) {
   if (!full) return { first: "", last: "" };
   const parts = full.trim().split(/\s+/);
@@ -420,7 +344,7 @@ function buildAddress(order, prefix) {
   };
 }
 
-function buildShopifyOrder(order, handleToVariant) {
+function buildShopifyOrder(order) {
   const { first, last } = splitName(order.customerName);
   const processedAt = order.date ? new Date(order.date).toISOString() : undefined;
 
@@ -428,13 +352,12 @@ function buildShopifyOrder(order, handleToVariant) {
   let unlinked = 0;
 
   const lineItems = order.lineItems.map((item) => {
-    const handle = PRODUCT_NAME_TO_HANDLE[item.name];
-    const variant = handle ? handleToVariant.get(handle) : null;
+    const variantId = NAME_TO_VARIANT[item.name];
 
-    if (variant) {
+    if (variantId) {
       linked++;
       return {
-        variant_id: variant.variantId,
+        variant_id: variantId,
         quantity: item.quantity,
         price: item.price,
         requires_shipping: true,
@@ -509,9 +432,8 @@ function buildShopifyOrder(order, handleToVariant) {
 async function main() {
   console.log(DRY_RUN ? "=== DRY RUN ===" : "=== IMPORTING ORDERS ===");
   console.log(`Store: ${STORE}`);
-  console.log(`CSV: ${CSV_FILE}\n`);
-
-  const handleToVariant = await fetchProductVariantMap();
+  console.log(`CSV: ${CSV_FILE}`);
+  console.log(`Product mappings loaded: ${Object.keys(NAME_TO_VARIANT).length}\n`);
 
   const records = readOrders();
   const orders = groupByOrder(records);
@@ -525,7 +447,7 @@ async function main() {
     const email = order.email || "(no email)";
     const total = order.total || order.subtotal || "?";
     const items = order.lineItems.length;
-    const { payload, linked, unlinked } = buildShopifyOrder(order, handleToVariant);
+    const { payload, linked, unlinked } = buildShopifyOrder(order);
     totalLinked += linked;
     totalUnlinked += unlinked;
 
@@ -534,10 +456,9 @@ async function main() {
         `  [DRY RUN] Order ${id} | ${email} | ${items} items (${linked} linked, ${unlinked} custom) | $${cleanPrice(total)}`
       );
       for (const item of order.lineItems) {
-        const handle = PRODUCT_NAME_TO_HANDLE[item.name];
-        const variant = handle ? handleToVariant.get(handle) : null;
-        const tag = variant ? "✓" : "✗";
-        console.log(`    ${tag} ${item.name} x${item.quantity} @ $${item.price}`);
+        const vid = NAME_TO_VARIANT[item.name];
+        const tag = vid ? "LINKED" : "custom";
+        console.log(`    [${tag}] ${item.name} x${item.quantity} @ $${item.price}`);
       }
       results.created.push(id);
       continue;
@@ -565,7 +486,7 @@ async function main() {
   console.log(`Created: ${results.created.length}`);
   console.log(`Errors: ${results.errors.length}`);
   console.log(`Line items linked to products: ${totalLinked}`);
-  console.log(`Line items as custom (unlinked): ${totalUnlinked}`);
+  console.log(`Line items as custom (discontinued): ${totalUnlinked}`);
   console.log(`Log saved: ${logPath}`);
 }
 
