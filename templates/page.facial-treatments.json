@@ -221,7 +221,8 @@
           "type": "heading",
           "settings": {
             "text": "Spa facial treatments are more than just relaxation",
-            "size": "h1"
+            "size": "h1",
+            "heading_tag": "h2"
           }
         },
         "text_cPU7UF": {
@@ -386,7 +387,8 @@
           "type": "heading",
           "settings": {
             "text": "\"They are the best of the best - hands down\"",
-            "size": "h1"
+            "size": "h1",
+            "heading_tag": "h2"
           }
         },
         "text_wyWQ4P": {
@@ -470,7 +472,7 @@
             "reviews_shown": 4,
             "show_reviewer_name": true,
             "show_product_name": false,
-            "hide_arrows_mobile": true,
+            "hide_arrows_mobile": false,
             "arrows_position": "bottom",
             "max_width": 1400,
             "corner_styling": "square",
@@ -490,7 +492,9 @@
         "judge_me_reviews_cards_carousel_kn9wG8"
       ],
       "custom_css": [
-        ".jdgm-cards-wrapper {overflow: visible; max-width: 100%;}"
+        ".jdgm-cards-wrapper {max-width: 90%; overflow: visible;}",
+        ".jdgm-cards-carousel .jdgm-arrow {display: flex !important;}",
+        "@media screen and (max-width: 780px) {.jdgm-cards-carousel .jdgm-text p {-webkit-line-clamp: 8; text-align: left; max-width: 300px; width: 280px; } .jdgm-cards-carousel .jdgm-media-card {width: 300px; flex: 0 0 300px; }}"
       ],
       "settings": {
         "include_margins": true
@@ -1062,7 +1066,8 @@
           "type": "heading",
           "settings": {
             "text": "Treat Your Skin and Reach Your Complexion Goals",
-            "size": "h0"
+            "size": "h0",
+            "heading_tag": "h2"
           }
         },
         "spacer_fpEDHi": {
