@@ -15,13 +15,13 @@
 }
 
 .jdgm-cards-wrapper {
-  max-width: 90%;
+  max-width: 100%;
   overflow: visible;
 }
 
 .jdgm-cards-carousel .jdgm-media-card{
-  width:380px !important;
-      flex: 0 0 380px !important;
+  width:400px !important;
+      flex: 0 0 400px !important;
 }
 .jdgm-arrow svg{
   width:20px !important; 
