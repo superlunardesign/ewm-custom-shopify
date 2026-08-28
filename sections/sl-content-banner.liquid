@@ -211,7 +211,7 @@
   endif
 -%}
 
-{%- if gate_pass -%}
+{%- if gate_pass or request.design_mode -%}
 <div class="sl-cb">
   {%- if section.settings.bg_type == 'image' and section.settings.bg_image != blank -%}
     <div class="sl-cb__bg-image">
@@ -305,16 +305,6 @@
   })();
 </script>
 {% endif %}
-{%- elsif request.design_mode -%}
-<div style="padding:40px 20px;text-align:center;background:#f5f0eb;border:2px dashed #8c9b6d;margin:20px;">
-  <p style="font-family:var(--font-heading-family);font-size:20px;color:#1a1a1a;margin:0 0 8px;">
-    Content Banner (Access-Gated)
-  </p>
-  <p style="font-family:var(--font-body-family);font-size:14px;color:#666;margin:0;">
-    This section is hidden from visitors without the <strong>{{ gate_tag }}</strong> customer tag.
-    Use the section settings on the right to configure content and styling.
-  </p>
-</div>
 {%- endif -%}
 
 {% schema %}

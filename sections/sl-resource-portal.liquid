@@ -38,7 +38,7 @@
   endif
 -%}
 
-{%- if gate_pass -%}
+{%- if gate_pass or request.design_mode -%}
 {%- assign tab_1_items = page.metafields.custom.tab_1_downloads.value -%}
 {%- assign tab_2_items = page.metafields.custom.tab_2_downloads.value -%}
 
@@ -654,17 +654,6 @@
     }
   })();
 </script>
-{%- elsif request.design_mode -%}
-<div style="padding:40px 20px;text-align:center;background:#f5f0eb;border:2px dashed #8c9b6d;margin:20px;">
-  <p style="font-family:var(--font-heading-family);font-size:20px;color:#1a1a1a;margin:0 0 8px;">
-    Resource Portal (Access-Gated)
-  </p>
-  <p style="font-family:var(--font-body-family);font-size:14px;color:#666;margin:0;">
-    This section is hidden from visitors who don't have the <strong>{{ gate_tag }}</strong> customer tag.
-    Content is only visible on the live site to authorized users.
-    Use the section settings on the right to configure tabs, colors, and layout.
-  </p>
-</div>
 {%- endif -%}
 
 {% schema %}
