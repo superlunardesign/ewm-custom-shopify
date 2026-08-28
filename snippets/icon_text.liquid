@@ -1,7 +1,8 @@
 <div class="product-additional__information">
-  <div class="product_meta-content {{ class }}">           
+  <div class="product_meta-content {{ class }}">
+    {% if block.settings.link1 != blank %}<a href="{{ block.settings.link1 }}">{% endif %}
     {% if block.settings.icon1 != blank %}
-  <div class="product_meta-icon">            
+  <div class="product_meta-icon">
   <img
       srcset="{%- if block.settings.icon1.width >= 275 -%}{{ block.settings.icon1 | image_url: width: 275 }} 275w,{%- endif -%}
       {%- if block.settings.icon1.width >= 550 -%}{{ block.settings.icon1 | image_url: width: 550 }} 550w,{%- endif -%}
@@ -15,19 +16,21 @@
       height="{{ block.settings.icon1.height }}"
       width="{{ block.settings.icon1.width }}"
       loading="lazy"
-    >  
+    >
   </div>
-  {% endif%}  
-    {% if block.settings.text1 != blank  %}  
+  {% endif%}
+    {% if block.settings.text1 != blank  %}
     <h5 class="icon-title">{{ block.settings.text1 }}</h5>
-  {% endif %} 
-  {% if block.settings.html1 != blank  %}  
+  {% endif %}
+  {% if block.settings.html1 != blank  %}
     <div class="icon-description"> {{ block.settings.html1}}</div>
-  {% endif %}     
+  {% endif %}
+    {% if block.settings.link1 != blank %}</a>{% endif %}
   </div>
-  <div class="product_meta-content {{ class }}">           
+  <div class="product_meta-content {{ class }}">
+  {% if block.settings.link2 != blank %}<a href="{{ block.settings.link2 }}">{% endif %}
   {% if block.settings.icon2 != blank %}
-  <div class="product_meta-icon">            
+  <div class="product_meta-icon">
   <img
       srcset="{%- if block.settings.icon2.width >= 275 -%}{{ block.settings.icon2 | image_url: width: 275 }} 275w,{%- endif -%}
       {%- if block.settings.icon2.width >= 550 -%}{{ block.settings.icon2 | image_url: width: 550 }} 550w,{%- endif -%}
@@ -41,20 +44,22 @@
       height="{{ block.settings.icon2.height }}"
       width="{{ block.settings.icon2.width }}"
       loading="lazy"
-    >  
+    >
   </div>
-  {% endif%}              
-    {% if block.settings.text2 != blank  %}  
+  {% endif%}
+    {% if block.settings.text2 != blank  %}
     <h5 class="icon-title">{{ block.settings.text2 }}</h5>
-  {% endif %} 
-  {% if block.settings.html2 != blank  %}  
+  {% endif %}
+  {% if block.settings.html2 != blank  %}
     <div class="icon-description"> {{ block.settings.html2}}</div>
-  {% endif %}            
+  {% endif %}
+  {% if block.settings.link2 != blank %}</a>{% endif %}
   </div>
-    
-  <div class="product_meta-content {{ class }}">           
+
+  <div class="product_meta-content {{ class }}">
+  {% if block.settings.link3 != blank %}<a href="{{ block.settings.link3 }}">{% endif %}
   {% if block.settings.icon3 != blank %}
-  <div class="product_meta-icon">            
+  <div class="product_meta-icon">
   <img
       srcset="{%- if block.settings.icon3.width >= 275 -%}{{ block.settings.icon3 | image_url: width: 275 }} 275w,{%- endif -%}
       {%- if block.settings.icon3.width >= 550 -%}{{ block.settings.icon3 | image_url: width: 550 }} 550w,{%- endif -%}
@@ -68,15 +73,16 @@
       height="{{ block.settings.icon3.height }}"
       width="{{ block.settings.icon3.width }}"
       loading="lazy"
-    >  
+    >
   </div>
-  {% endif%}            
-    {% if block.settings.text3 != blank  %}  
+  {% endif%}
+    {% if block.settings.text3 != blank  %}
     <h5 class="icon-title">{{ block.settings.text3 }}</h5>
-  {% endif %} 
-  {% if block.settings.html3 != blank  %}  
+  {% endif %}
+  {% if block.settings.html3 != blank  %}
     <div class="icon-description"> {{ block.settings.html3}}</div>
-  {% endif %}            
+  {% endif %}
+  {% if block.settings.link3 != blank %}</a>{% endif %}
   </div>
 </div>
 
@@ -85,15 +91,15 @@
   .product_meta-content:not(:last-child) { margin-right: 20px;}
   .product_meta-icon img { border-radius: 50%; width: 70px; height: 70px;}
   .product-additional__information  h5.icon-title { margin-top: 15px; font-size: 16px; font-weight: 600;}
-  {% for block in section.blocks %} 
+  .product-additional__information a { text-decoration: none; color: inherit; }
+  {% for block in section.blocks %}
   .product-additional__information .product_meta-content:first-child h5.icon-title {color:{{block.settings.text1_color}};}
   .product-additional__information .product_meta-content:nth-child(2) h5.icon-title {color:{{block.settings.text2_color}};}
   .product-additional__information .product_meta-content-block:last-child h5.icon-title {color:{{block.settings.text3_color}};}
-  
+
   .product-additional__information .product_meta-content:first-child .icon-description {color:{{block.settings.html1_color}};}
   .product-additional__information .product_meta-content:nth-child(2) .icon-description {color:{{block.settings.html2_color}};}
   .product-additional__information .product_meta-content-block:last-child .icon-description {color:{{block.settings.html3_color}};}
   {% endfor %}
 </style>
-  
-  
+
