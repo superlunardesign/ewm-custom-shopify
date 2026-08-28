@@ -10,21 +10,10 @@
 .jdgm-cards-carousel .jdgm-text p{
   -webkit-line-clamp: 8 !important;
   text-align: left;
-  max-width: 400px!important;
-  width:380px!important;
+  max-width: 350px!important;
+  width:320px!important;
 }
-@media screen and (max-width: 780px) {
-  .jdgm-cards-carousel .jdgm-text p {
-    -webkit-line-clamp: 8;
-    text-align: left;
-    max-width: 300px!important;
-    width: 280px!important;
-  }
-  .jdgm-cards-carousel .jdgm-media-card {
-    width: 300px !important;
-    flex: 0 0 300px !important;
-  }
-}
+
 
 .jdgm-cards-wrapper {
   max-width: 100%;
@@ -32,8 +21,8 @@
 }
 
 .jdgm-cards-carousel .jdgm-media-card{
-  width:400px !important;
-      flex: 0 0 400px !important;
+  width:350px !important;
+      flex: 0 0 350px !important;
 }
 .jdgm-arrow svg{
   width:20px !important; 
