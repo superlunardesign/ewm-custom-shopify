@@ -1,5 +1,5 @@
-<div class="product-tile-container wishlist-tile-container" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}">
-  <div class="product-tile wishlist-tile">
+<div class="product-tile-container" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}">
+  <div class="product-tile">
     <div class="product-tile--tile-media">
       <a class="tile-media--media-link" href="{{ product.url }}">
         <div class="media-link--image">
@@ -19,7 +19,6 @@
         {% endif %}
       </div>
       <div class="product-tile--tile-actions flex">
-        {% include 'wishlist-button'%}
         <a class="action--quick-cart tile-actions--btn flex cart-btn" href="/cart/add?id={{ product.selected_or_first_available_variant.id }}&quantity=1">Add To Cart</a>
       </div>
     </div>

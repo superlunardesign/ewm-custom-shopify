@@ -194,7 +194,6 @@
         "image_border_color": "#1a1a1a",
         "tab_position": "right",
         "tab_style": "toggle",
-        "show_wishlist": true,
         "show_review_tab": true,
         "enable_sticky_bar": true,
         "enable_desktop_sticky_bar": false,

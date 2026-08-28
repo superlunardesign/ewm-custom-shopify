@@ -2782,7 +2782,6 @@ input[type="checkbox"] {
   position: relative;
   /*   margin-right: -1.2rem; */
 }
-.header__icon--wishlist,
 .header__icon--compare {
   position: relative;
 }

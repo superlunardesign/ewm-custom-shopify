@@ -222,11 +222,6 @@
                {%-  endif -%}  
              {%- endif -%} 
         
-        {%- if settings.enable_wishlist -%}
-        <li><dtx-wishlist><a href="javascript:void(0);" class="add-wishlist" data-product_handle="{{ card_product.handle }}"> </a></dtx-wishlist>
-            <tooltip class="tooltip">{{ 'products.wishlist.addToWishListTag' | t }}</tooltip>
-          </li>        
-        {%- endif -%} 
         </ul>  
         </div>
   {%  render 'deal-snippet', product: card_product %}

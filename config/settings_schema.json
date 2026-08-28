@@ -284,12 +284,6 @@
       },
       {
         "type": "checkbox",
-        "id": "enable_wishlist",
-        "default": true,
-        "label": "t:settings_schema.general_settings.settings.enable_wishlist.label"
-      },
-      {
-        "type": "checkbox",
         "id": "enable_compare",
         "default": true,
         "label": "t:settings_schema.general_settings.settings.enable_compare.label"

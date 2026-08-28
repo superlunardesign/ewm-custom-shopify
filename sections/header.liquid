@@ -1812,17 +1812,6 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
         </details>
       </details-modal>
         {%- endif -%}
-              {%- if section.settings.show_header_wishlist -%}        
-              <a href="/pages/wishlist" class="header__icon header__icon--wishlist link">
-                {% render 'icon-wishlist' %}
-                <span class="icon__fallback-text">{{ 'products.product.wishlist' | t }}</span>
-                <dtx-wish-count class="dtxc-wishlist-count cart-count-bubble" grid_type="wishList" count="0">
-                  <div class="grid-count-bubble">
-                    <span aria-hidden="true"></span>
-                  </div>
-                </dtx-wish-count>
-              </a>
-              {%- endif -%}
 
               
      {%- if shop.customer_accounts_enabled and section.settings.show_account -%}
@@ -2565,12 +2554,6 @@ a, button, summary, [role="button"], .sl-nav__link, .sl-dropdown__list a,
     "label": "t:sections.header.settings.show_search.label",
     "default": false
     }, 
-    {
-    "type": "checkbox",
-    "id": "show_header_wishlist",
-    "label": "t:sections.header.settings.show_header_wishlist.label",
-    "default": true
-    },
     {
     "type": "checkbox",
     "id": "show_account",

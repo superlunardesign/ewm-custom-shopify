@@ -1272,11 +1272,6 @@ button.product-form__submit.button.button--full-width.button--secondary {
   margin-bottom: 25px;
   width: 100%;
 }
-.dT_VProdWishList {
-  margin-right: 0px;
-  margin-bottom: 25px;
-  width: calc(50% - 10px);
-}
 /* Product form buttons layout controlled by main-product.html inline styles */
 .product-form__buttons {
   font-weight: 400;
@@ -1292,12 +1287,6 @@ button.product-form__submit.button.button--full-width.button--secondary {
 }
 .product-form__buttons .shopify-payment-button {
   width: calc(100% + 50px);
-}
-a.dt-sc-btn.add-wishlist {
-  margin-top: 0;
-  width: 100%;
-  padding-left: 0;
-  padding-right: 0;
 }
 .product__info-as-bottom-tabs .dt-sc-tabs-content h4 {
   font-size: 2.2rem;
@@ -1319,11 +1308,6 @@ p.product__text.subtitle {
 }
 .dt-sc-tabs-content blockquote{color: var(--gradient-base-accent-1); padding-left: 30px;}
 .dt-sc-tabs-content blockquote{margin-left: 0;}
-a.button.add-wishlist.button--secondary {
-  /*background:transparent;*/
-  white-space: nowrap;
-  z-index: 0;
-}
 /* Product Tab */
 .product__info-as-bottom-tabs {
   margin-top: 7.5rem;
@@ -1431,20 +1415,6 @@ label.swatch-variant-image {
   color: var(--color-icon);
 }
 
-/* .product-form__buttons button,  .dT_VProdWishList a.button.add-wishlist.button--secondary  {
-    background: var(--gradient-base-accent-1);
-    color: var(--gradient-base-accent-3);
-} */
-
-a.button.add-wishlist.button--secondary {
-  background-color: transparent;
-  border: 1.5px solid var(--gradient-base-accent-1);
-  color: var(--gradient-base-accent-1);
-  border-radius: 0;
-  height: 47px;
-  width: 47px;
-  padding: 0;
-}
 @media (max-width:990px){
 
   .product-form__buttons{
@@ -1470,8 +1440,7 @@ a.button.add-wishlist.button--secondary {
     padding: 10px 30px;
 }
 .product-form__buttons
-  button.product-form__submit.button.button--full-width.button--secondary:hover,
-.product-form__buttons a.button.add-wishlist.button--secondary:hover {
+  button.product-form__submit.button.button--full-width.button--secondary:hover {
   background: transparent;
   color: var(--gradient-base-accent-1);
   border: 1.5px solid var(--gradient-base-accent-1);

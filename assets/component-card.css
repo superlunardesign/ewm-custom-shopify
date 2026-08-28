@@ -117,8 +117,7 @@
   grid-template-rows: max-content minmax(0,1fr) max-content auto;
 }
 .product-icons a:empty{display:block;}
-.product-icons a.add-compare:before, 
-.product-icons a.add-wishlist:before
+.product-icons a.add-compare:before
 /* .product-icons button:before */
 { 
   display: block;
@@ -174,8 +173,6 @@ ul.product-icons.top-aligned { top: 0; bottom: auto; transform: initial;}
 .product-icons li  a:not(.adding).add-compare:before { -webkit-mask-image:url("compare.svg");mask-image: url("compare.svg"); background: currentColor;}
 .product-icons li a:not(.adding).added.add-compare:before { -webkit-mask-image:url("compare2.svg");mask-image: url("compare2.svg"); background: currentColor;}
 
-.product-icons li a:not(.adding).add-wishlist:before { -webkit-mask-image:url("wishlist.svg");mask-image: url("wishlist.svg"); background: currentColor;}
-.product-icons li a:not(.adding).added.add-wishlist:before { -webkit-mask-image:url("wishlist2.svg");mask-image:url("wishlist2.svg"); background: currentColor;}
 /* .product-icons li button:not(.loading).quick-add__submit:before { -webkit-mask-image:url("eye.svg");mask-image:url("eye.svg"); background: currentColor;} */
 
 .product-icons li a.adding:before{
@@ -212,7 +209,6 @@ ul.product-icons.top-aligned { top: 0; bottom: auto; transform: initial;}
     margin:auto;
 } */
 
-.product-icons a.add-wishlist:before,
 .product-icons a.add-compare:before
 /* .product-icons button:before  */
 { 

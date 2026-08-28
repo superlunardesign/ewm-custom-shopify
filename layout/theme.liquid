@@ -443,8 +443,6 @@
 
       var DT_THEME = {
         strings: {
-          addToWishList: {{ 'products.wishlist.addToWishList' | t | json }},
-          viewMyWishList: {{ 'products.wishlist.viewMyWishList' | t | json }},             
           unavailable: {{ 'products.product.unavailable' | t | json }},
           addToCompareList: {{ 'products.compare.addToCompareList' | t | json }},
           viewMyCompareList: {{ 'products.compare.viewMyCompareList' | t | json }},
@@ -475,7 +473,6 @@
     <script src="{{ 'dT_bundle_base.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'dT_bundle.js' | asset_url }}" defer="defer"></script>
     {% endif %}            
-    <script src="{{ 'dt_wishlist.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'dt-theme.js' | asset_url }}" defer="defer"></script>
     {% section 'suggested-products' %}
     {% render 'scroll-to-top' %}

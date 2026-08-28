@@ -105,7 +105,6 @@
           "enable_country_selector": true,
           "enable_language_selector": true,
           "show_search": false,
-          "show_header_wishlist": true,
           "show_header_compare": true,
           "show_account": true,
           "show_header_cart": true,
