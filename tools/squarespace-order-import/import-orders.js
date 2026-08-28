@@ -129,11 +129,12 @@ function findCol(row, ...candidates) {
 
 function parseRow(row) {
   return {
-    orderId: findCol(row, "Order ID", "Order Number", "orderNumber", "Order No"),
-    date: findCol(row, "Date Created", "Order Date", "Date", "Created On"),
-    dateFulfilled: findCol(row, "Date Fulfilled", "Fulfilled At"),
+    orderId: findCol(row, "ID", "Order ID", "Order Number", "orderNumber", "Order No"),
+    date: findCol(row, "Date Created", "Order Date", "Date", "Created On", "Created at"),
+    dateFulfilled: findCol(row, "Date Fulfilled", "Fulfilled At", "Fulfilled at"),
     email: findCol(row, "Customer Email", "Email", "Billing Email"),
     customerName: findCol(row, "Customer Name", "Name", "Billing Name"),
+    cancelledAt: findCol(row, "Cancelled at", "Cancelled At", "Canceled at"),
     billingAddr1: findCol(row, "Billing Address Line 1", "Billing Address1", "Billing Street"),
     billingAddr2: findCol(row, "Billing Address Line 2", "Billing Address2"),
     billingCity: findCol(row, "Billing City"),
@@ -157,11 +158,12 @@ function parseRow(row) {
     subtotal: findCol(row, "Subtotal"),
     tax: findCol(row, "Tax", "Taxes"),
     shipping: findCol(row, "Shipping", "Shipping Total"),
+    discountCode: findCol(row, "Discount Code"),
     discount: findCol(row, "Discount", "Discount Amount"),
     total: findCol(row, "Grand Total", "Total"),
     fulfillmentStatus: findCol(row, "Fulfillment Status", "Fulfilled"),
     paymentStatus: findCol(row, "Payment Status", "Financial Status"),
-    note: findCol(row, "Note", "Notes", "Customer Note"),
+    note: findCol(row, "Note", "Notes", "Customer Note", "Private Notes"),
     currency: findCol(row, "Currency"),
   };
 }
@@ -174,6 +176,7 @@ function groupByOrder(records) {
     const row = parseRow(record);
     const id = row.orderId;
     if (!id) continue;
+    if (row.cancelledAt) continue;
 
     if (!orders.has(id)) {
       orders.set(id, { ...row, lineItems: [] });
@@ -306,7 +309,7 @@ function buildShopifyOrder(order) {
   if (discount > 0) {
     payload.order.discount_codes = [
       {
-        code: "SQUARESPACE-IMPORT",
+        code: order.discountCode || "IMPORTED-DISCOUNT",
         amount: discount.toFixed(2),
         type: "fixed_amount",
       },
