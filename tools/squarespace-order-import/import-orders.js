@@ -1,20 +1,15 @@
 #!/usr/bin/env node
 
 /**
- * One-time Squarespace → Shopify order import.
+ * Order history import with product linking.
  *
  * Usage:
- *   1. Export orders from Squarespace (Commerce > Orders > Export)
- *   2. Save the CSV to this folder
- *   3. Create a .env file with your Shopify credentials (see below)
- *   4. npm install
- *   5. npm run dry-run     (preview what will be created)
- *   6. npm run import      (actually create the orders)
- *
- * .env format:
- *   SHOPIFY_STORE=ke18jq-r4.myshopify.com
- *   SHOPIFY_ACCESS_TOKEN=shpat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
- *   CSV_FILE=orders.csv
+ *   1. Save your order export CSV to this folder as orders.csv
+ *   2. Create a .env with your Shopify credentials (see .env.example)
+ *   3. npm install
+ *   4. node delete-orders.js          (delete existing orders first)
+ *   5. node import-orders.js --dry-run (preview)
+ *   6. node import-orders.js           (import for real)
  */
 
 import { readFileSync, writeFileSync, existsSync } from "fs";
@@ -59,7 +54,137 @@ if (!STORE || !TOKEN) {
   process.exit(1);
 }
 
-// ── Rate limiter (2 req/sec for Shopify REST) ───────────────────────
+// ── Product name mapping ───────────────────────────────────────────
+// Maps old CSV product names → Shopify product handles.
+// Products not in this map will import as custom (unlinked) line items.
+const PRODUCT_NAME_TO_HANDLE = {
+  "Tizo TIZO3 Facial Primer Tinted": "tizo-primer-sunscreen-tinted",
+  "TIZO3 Facial Primer Tinted": "tizo-primer-sunscreen-tinted",
+  "8% L-MANDELIC SERUM": "spring-bowl-rltkk-dnchc",
+  "HydraBalance | Face Reality": "hydrabalance",
+  "FACE REALITY HYDRABALANCE": "hydrabalance",
+  "HYDRABALANCE": "hydrabalance",
+  "Barrier Care Gel Cream": "barrier-care-gel-cream",
+  "hydraRemedy Gel Serum": "hydraremedy-gel-serum",
+  "Hale & Hush QUIET WASH CLEANSER": "quiet-wash",
+  "QUIET WASH": "quiet-wash",
+  "Skin Script Clarifying Toner Pads": "clarifying-toner-pads",
+  "Ultra Zinc Body & Face Tinted": "ultrazincbodyandfacetinted",
+  "Skin Script Light Aloe Moisturizer": "lightaloemoisturizer",
+  "Light Aloe Moisturizer": "lightaloemoisturizer",
+  "Soothing Radiance Toner | Face Reality": "soothing-radiance-toner",
+  "Hush Hydrate Gel | Hale & Hush": "hush-hydrate-gel-hale-hush",
+  "Hale & Hush HUSH HYDRATE GEL": "hush-hydrate-gel-hale-hush",
+  "HUSH HYDRATE GEL": "hush-hydrate-gel-hale-hush",
+  "Antioxidant Peptide Eye Gel | Face Reality": "antioxidant-peptide-eye-gel-face-reality",
+  "FACE REALITY ANTIOXIDANT PEPTIDE EYE GEL": "antioxidant-peptide-eye-gel-face-reality",
+  "ANTIOXIDANT PEPTIDE EYE GEL": "antioxidant-peptide-eye-gel-face-reality",
+  "Raspberry Refining Scrub | Skin Script": "raspberry-refining-scrub-skin-script",
+  "Skin Script Raspberry Refining Scrub": "raspberry-refining-scrub-skin-script",
+  "Barrier Balance Creamy Cleanser | Face Reality": "face-reality-barrier-balance-creamy-cleanser",
+  "FACE REALITY Barrier Balance Creamy Cleanser": "face-reality-barrier-balance-creamy-cleanser",
+  "Barrier Balance Creamy Cleanser": "face-reality-barrier-balance-creamy-cleanser",
+  "Beta-Glucan Serum": "beta-serum",
+  "Mixi Peptide Rescue Cream": "mixi-peptide-rescue-cream",
+  "15% L-Mandelic Serum | Face Reality": "15-mandelic-serum-face-reality",
+  "Tizo TIZO2 Facial Primer Non-Tinted": "tizo-primer-sunscreen-non-tinted",
+  "TIZO2 Facial Primer Non-Tinted": "tizo-primer-sunscreen-non-tinted",
+  "Antioxidant Scrub | Face Reality": "antioxidant-scrub-face-reality",
+  "Hale & Hush RELIEF BIO-POWDER": "relief-bio-powder",
+  "RELIEF BIO-POWDER": "relief-bio-powder",
+  "Skin Script Acai Berry Moisturizer": "acai-berry-moisturizer",
+  "Acai Berry Moisturizer": "acai-berry-moisturizer",
+  "Skin Script Pomegranate Antioxidant Cleanser": "pomegranate-antioxidant-cleanser",
+  "Pomegranate Antioxidant Cleanser": "pomegranate-antioxidant-cleanser",
+  "Skin Script Ageless Hydrating Serum": "ageless-hydrating-serum",
+  "Ageless Hydrating Serum": "ageless-hydrating-serum",
+  "DAILY SPF 30 PLUS | FACE REALITY": "daily-spf-30-lotion",
+  "FACE REALITY DAILY SPF 30 PLUS": "daily-spf-30-lotion",
+  "FACE REALITY DAILY SPF 30 LOTION": "daily-spf-30-lotion",
+  "DAILY SPF 30 LOTION": "daily-spf-30-lotion",
+  "Hydroxi Acne Cream": "hydroxi-acne-cream",
+  "FACE REALITY CRAN-PEPTIDE CREAM": "cran-peptide-cream",
+  "CRAN-PEPTIDE CREAM": "cran-peptide-cream",
+  "2x2 Dental Gauze For Toner": "2x2-dental-gauze-pads-for-toner",
+  "FACE REALITY MINERAL MATTE SPF 28": "ultimate-protection-spf-28",
+  "MINERAL MATTE SPF 28": "ultimate-protection-spf-28",
+  "ULTIMATE PROTECTION SPF 28": "ultimate-protection-spf-28",
+  "5% L-MANDELIC SERUM": "golden-mist-cup-weny8-srrdt",
+  "FACE REALITY ANTIOXIDANT PEPTIDE FACE SERUM": "antioxidant-peptide-face-serum",
+  "ANTIOXIDANT PEPTIDE FACE SERUM": "antioxidant-peptide-face-serum",
+  "Skin Script Peptide Eye Serum": "peptide-eye-serum",
+  "Peptide Eye Serum": "peptide-eye-serum",
+  "Hale & Hush Remedy Rehab Oil": "remedy-rehab-oil",
+  "Remedy Rehab Oil": "remedy-rehab-oil",
+  "Premium Compressed Face Cleansing Towels | Mixi": "mixi-premium-compressed-towels",
+  "FACE REALITY SALICYLIC+ SERUM": "salicylic-serum",
+  "SALICYLIC+ SERUM": "salicylic-serum",
+  "SALICYLIC SERUM": "salicylic-serum",
+  "Sport SPF 50 Continuous Spray Sunscreen 6 oz | SolRX": "sport-spf-50-continuous-spray-solrx",
+  "Sport SPF 50 Lotion | Sol RX": "sport-spf-50-lotion-solrx",
+  "Skin Script Tri-Peptide Eye Cream": "tri-peptide-eye-cream",
+  "Refine Polish | Hale & Hush": "refine-polish-exfoliant-hale-hush",
+  "Hale & Hush REFINE POLISH": "refine-polish-exfoliant-hale-hush",
+  "REFINE POLISH": "refine-polish-exfoliant-hale-hush",
+  "Skin Script Citrus-C Nourishing Cream": "citrus-c-nourishing-cream",
+  "Hale & Hush BRILLIANT EYE & LIP SERUM": "hale-hush-brilliant-eye-lip-serum",
+  "BRILLIANT EYE & LIP SERUM": "hale-hush-brilliant-eye-lip-serum",
+  "Botanical Bloom Hydrating Mask": "botanical-bloom-hydrating-mask",
+  "Michele Corley Pore Clearing Cleansing Oil": "michele-corley-pore-clearing-cleansing-oil",
+  "Skin Script Retinol 2% Exfoliating Scrub/Mask": "retinol-2-exfoliating-scrub-mask",
+  "Retinol 2% Exfoliating Scrub/Mask": "retinol-2-exfoliating-scrub-mask",
+  "11% L-MANDELIC SERUM": "11-l-mandelic-serum",
+  "Skin Script Glycolic and Retinol Pads": "glycolicandreinolpads",
+  "Glycolic and Retinol Pads": "glycolicandreinolpads",
+  "Agent 88 - Ingrown Hair & Body Acne Serum": "agent-88-ingrown-hair-body-acne-serum",
+  "CLEARDERMA MOISTURIZER | FACE REALITY": "clearderma-moisturizer",
+  "FACE REALITY CLEARDERMA MOISTURIZER": "clearderma-moisturizer",
+  "CLEARDERMA MOISTURIZER": "clearderma-moisturizer",
+  "FACE REALITY CALMING FACIAL TONER": "calming-facial-toner",
+  "Tizo Ultra Zinc Body & Face Non-Tinted": "ultra-zinc-body-face-non-tinted",
+  "Ultra Zinc Body & Face Non-Tinted": "ultra-zinc-body-face-non-tinted",
+  "Mixi Mist Hypochlorous Acid Spray": "mixi-mist",
+  "Biogel | AnteAGE": "anteage-biogel",
+  "FACE REALITY ACNE-SAFE KIT FOR NORMAL OR COMBINATION SKIN": "acne-safe-kit-normal-combination-skin",
+  "ACNE-SAFE KIT FOR NORMAL OR COMBINATION SKIN": "acne-safe-kit-normal-combination-skin",
+  "GlowTone™ Corrective Serum | Face Reality": "glowtone-corrective-serum",
+  "Face Reality | glowTone™ Corrective Serum": "glowtone-corrective-serum",
+  "GREEN ENVEE | RELAX HAND + BODY LOTION": "relax-hand-body-lotion",
+  "L-Mandelic Face & Body Wash | Face Reality": "v5xfxmdwvahg1dyaeqqxvu5eke0550",
+  "FACE REALITY L-Mandelic Face And Body Wash": "v5xfxmdwvahg1dyaeqqxvu5eke0550",
+  "L-Mandelic Face And Body Wash": "v5xfxmdwvahg1dyaeqqxvu5eke0550",
+  "FACE REALITY HYDRACALM MASK": "hydracalm-mask",
+  "HYDRACALM MASK": "hydracalm-mask",
+  "Hale & Hush Duo Hush Hydrate Gel & Relief Bio Powder": "haleandhushduo",
+  "Brighten-C Mask | Acne-Safe Brightening Mask by Face Reality": "brighten-c-mask-face-reality",
+  "BRIGHTEN-C MASK": "brighten-c-mask-face-reality",
+  "Hale & Hush Broad Spectrum SPF 30": "broad-spectrum-spf30",
+  "Broad Spectrum SPF 30": "broad-spectrum-spf30",
+  "FACE REALITY SULFUR SPOT TREATMENT": "sulfur-spot-treatment",
+  "SULFUR SPOT TREATMENT": "sulfur-spot-treatment",
+  "Saint Tropez | Tuff Peach Craft Co": "saint-tropez",
+  "GREEN ENVEE | ZEN HAND + BODY LOTION": "zen-hand-body-lotion",
+  "GREEN ENVEE | STRESS REMEDY HAND + BODY LOTION": "stress-remedy-hand-body-lotion",
+  "BALANCE HAND + BODY LOTION": "balance-hand-body-lotion",
+  "Skin Script Cucumber Hydration Toner": "cucumber-hydration-toner",
+  "Cucumber Hydration Toner": "cucumber-hydration-toner",
+  "Mixi 5% Mandelic Serum": "5-mandelic-serum",
+  "Mixi Clear Plex 5%": "clear-plex-5",
+  "Mixi 8% Mandelic Serum": "8-mandelic-serum",
+  "8% Mandelic Serum": "8-mandelic-serum",
+  "Mixi Clear Plex 10%": "clear-plex-10",
+  "Mixi Clear Plex 2.8%": "clear-plex-2-8",
+  "Hale & Hush Charcoal Clarifying Mask 3oz.": "charcoal-clarifying-mask",
+  "BUSHBALM Mini Exfoliating Mitt": "miniexfoliatingmitt",
+  "Mini Exfoliating Mitt": "miniexfoliatingmitt",
+  "SAL-C TONER": "sal-c-toner-face-reality",
+  "Sal-C Toner | Face Reality": "sal-c-toner-face-reality",
+  "L-MANDELIC FACE AND BODY SCRUB": "face-reality-l-mandelic-face-body-scrub",
+  "Steel Eye Rollers": "steel-eye-roller",
+  "Gift Card": "gift-card-for-facial-spa-in-mchenry-il-esthetics-with-me",
+};
+
+// ── Rate limiter ───────────────────────────────────────────────────
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function shopifyFetch(endpoint, options = {}) {
@@ -91,11 +216,63 @@ async function shopifyFetch(endpoint, options = {}) {
   return body;
 }
 
+// ── Fetch all Shopify products to build handle → variant_id map ───
+async function fetchProductVariantMap() {
+  console.log("Fetching Shopify products for variant linking...");
+  const handleToVariant = new Map();
+  let url = "/products.json?limit=250&fields=id,handle,variants";
+
+  while (url) {
+    const fullUrl = `${BASE_URL}${url}`;
+    const res = await fetch(fullUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Access-Token": TOKEN,
+      },
+    });
+
+    if (res.status === 429) {
+      const retryAfter = parseFloat(res.headers.get("Retry-After") || "2");
+      await wait(retryAfter * 1000);
+      continue;
+    }
+
+    const body = await res.json();
+    if (body.products) {
+      for (const product of body.products) {
+        if (product.variants && product.variants.length > 0) {
+          handleToVariant.set(product.handle, {
+            productId: product.id,
+            variantId: product.variants[0].id,
+          });
+        }
+      }
+    }
+
+    const linkHeader = res.headers.get("Link");
+    if (linkHeader && linkHeader.includes('rel="next"')) {
+      const match = linkHeader.match(/<([^>]+)>;\s*rel="next"/);
+      if (match) {
+        const nextUrl = new URL(match[1]);
+        url = nextUrl.pathname.replace(`/admin/api/${API_VERSION}`, "") + nextUrl.search;
+      } else {
+        url = null;
+      }
+    } else {
+      url = null;
+    }
+
+    await wait(550);
+  }
+
+  console.log(`  Found ${handleToVariant.size} products with variants\n`);
+  return handleToVariant;
+}
+
 // ── CSV parsing ─────────────────────────────────────────────────────
 function readOrders() {
   if (!existsSync(CSV_FILE)) {
     console.error(`CSV file not found: ${CSV_FILE}`);
-    console.error("Export your orders from Squarespace and save the CSV here.");
     process.exit(1);
   }
 
@@ -112,8 +289,6 @@ function readOrders() {
 }
 
 // ── Column mapping ──────────────────────────────────────────────────
-// Squarespace CSV columns vary slightly by export version.
-// This maps common column names to our internal keys.
 function findCol(row, ...candidates) {
   for (const c of candidates) {
     if (row[c] !== undefined) return row[c];
@@ -169,7 +344,6 @@ function parseRow(row) {
 }
 
 // ── Group rows by order ─────────────────────────────────────────────
-// Multi-item orders have one CSV row per line item
 function groupByOrder(records) {
   const orders = new Map();
   for (const record of records) {
@@ -217,14 +391,6 @@ function mapFinancialStatus(status) {
   return "paid";
 }
 
-function mapFulfillmentStatus(status) {
-  const s = (status || "").toLowerCase();
-  if (s.includes("fulfilled") || s.includes("shipped") || s.includes("completed"))
-    return "fulfilled";
-  if (s.includes("partial")) return "partial";
-  return null;
-}
-
 function buildAddress(order, prefix) {
   const name =
     prefix === "shipping"
@@ -254,21 +420,40 @@ function buildAddress(order, prefix) {
   };
 }
 
-function buildShopifyOrder(order) {
+function buildShopifyOrder(order, handleToVariant) {
   const { first, last } = splitName(order.customerName);
   const processedAt = order.date ? new Date(order.date).toISOString() : undefined;
 
-  const lineItems = order.lineItems.map((item) => ({
-    title: item.name,
-    sku: item.sku || undefined,
-    quantity: item.quantity,
-    price: item.price,
-    requires_shipping: true,
-  }));
+  let linked = 0;
+  let unlinked = 0;
+
+  const lineItems = order.lineItems.map((item) => {
+    const handle = PRODUCT_NAME_TO_HANDLE[item.name];
+    const variant = handle ? handleToVariant.get(handle) : null;
+
+    if (variant) {
+      linked++;
+      return {
+        variant_id: variant.variantId,
+        quantity: item.quantity,
+        price: item.price,
+        requires_shipping: true,
+      };
+    }
+
+    unlinked++;
+    return {
+      title: item.name,
+      sku: item.sku || undefined,
+      quantity: item.quantity,
+      price: item.price,
+      requires_shipping: true,
+    };
+  });
 
   if (lineItems.length === 0) {
     lineItems.push({
-      title: "Squarespace order (details unavailable)",
+      title: "Order (details unavailable)",
       quantity: 1,
       price: cleanPrice(order.total || order.subtotal),
     });
@@ -292,7 +477,7 @@ function buildShopifyOrder(order) {
       suppress_notifications: true,
       inventory_behaviour: "bypass",
       tags: "imported, squarespace",
-      note: `Imported from Squarespace order ${order.orderId}${order.note ? ". " + order.note : ""}`,
+      note: `Imported from order ${order.orderId}${order.note ? ". " + order.note : ""}`,
       customer: {
         first_name: first,
         last_name: last,
@@ -317,7 +502,7 @@ function buildShopifyOrder(order) {
     ];
   }
 
-  return payload;
+  return { payload, linked, unlinked };
 }
 
 // ── Main ────────────────────────────────────────────────────────────
@@ -326,51 +511,61 @@ async function main() {
   console.log(`Store: ${STORE}`);
   console.log(`CSV: ${CSV_FILE}\n`);
 
+  const handleToVariant = await fetchProductVariantMap();
+
   const records = readOrders();
   const orders = groupByOrder(records);
   console.log(`Found ${orders.size} unique orders\n`);
 
-  const results = { created: [], skipped: [], errors: [] };
+  const results = { created: [], errors: [] };
+  let totalLinked = 0;
+  let totalUnlinked = 0;
 
   for (const [id, order] of orders) {
     const email = order.email || "(no email)";
     const total = order.total || order.subtotal || "?";
     const items = order.lineItems.length;
+    const { payload, linked, unlinked } = buildShopifyOrder(order, handleToVariant);
+    totalLinked += linked;
+    totalUnlinked += unlinked;
 
     if (DRY_RUN) {
       console.log(
-        `  [DRY RUN] Order ${id} | ${email} | ${items} items | $${cleanPrice(total)}`
+        `  [DRY RUN] Order ${id} | ${email} | ${items} items (${linked} linked, ${unlinked} custom) | $${cleanPrice(total)}`
       );
       for (const item of order.lineItems) {
-        console.log(`    - ${item.name} x${item.quantity} @ $${item.price}`);
+        const handle = PRODUCT_NAME_TO_HANDLE[item.name];
+        const variant = handle ? handleToVariant.get(handle) : null;
+        const tag = variant ? "✓" : "✗";
+        console.log(`    ${tag} ${item.name} x${item.quantity} @ $${item.price}`);
       }
       results.created.push(id);
       continue;
     }
 
     try {
-      const payload = buildShopifyOrder(order);
       const res = await shopifyFetch("/orders.json", {
         method: "POST",
         body: JSON.stringify(payload),
       });
       const shopifyId = res.order?.id;
       console.log(
-        `  Created order ${id} → Shopify #${shopifyId} | ${email} | ${items} items | $${cleanPrice(total)}`
+        `  Created order ${id} → Shopify #${shopifyId} | ${email} | ${linked}/${items} linked | $${cleanPrice(total)}`
       );
-      results.created.push({ sqId: id, shopifyId, email });
+      results.created.push({ sqId: id, shopifyId, email, linked, unlinked });
     } catch (err) {
       console.error(`  FAILED order ${id}: ${err.message}`);
       results.errors.push({ sqId: id, email, error: err.message });
     }
   }
 
-  // Write results log
   const logPath = resolve(__dirname, `import-log-${Date.now()}.json`);
   writeFileSync(logPath, JSON.stringify(results, null, 2));
   console.log(`\n--- Results ---`);
   console.log(`Created: ${results.created.length}`);
   console.log(`Errors: ${results.errors.length}`);
+  console.log(`Line items linked to products: ${totalLinked}`);
+  console.log(`Line items as custom (unlinked): ${totalUnlinked}`);
   console.log(`Log saved: ${logPath}`);
 }
 
