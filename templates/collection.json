@@ -75,7 +75,7 @@
         "soldout_badge_priority": true,
         "soldout_text": "SOLD OUT",
         "soldout_badge_color": "#666666",
-        "badge_tags": "acne safe",
+        "badge_tags": "",
         "tag_badge_color": "#816197",
         "show_variants": true,
         "max_visible_variants": 3,
