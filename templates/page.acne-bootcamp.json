@@ -277,7 +277,7 @@
         "subheading_color": "#333333",
         "subheading_size": 20,
         "subheading_weight": "400",
-        "subheading_transform": "uppercase",
+        "subheading_transform": "none",
         "prop_heading_color": "#000000",
         "prop_heading_size": 22,
         "prop_heading_weight": "600",
@@ -316,7 +316,7 @@
           "type": "heading",
           "settings": {
             "text": "Here's What No One Told You About <i>Why</i> Your Acne Won't Clear",
-            "heading_tag": "h1"
+            "heading_tag": "h2"
           }
         }
       },

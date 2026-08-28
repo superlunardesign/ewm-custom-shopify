@@ -18,27 +18,6 @@
         "padding_bottom": 0
       }
     },
-    "image_banner_PKwTLr": {
-      "type": "image-banner",
-      "disabled": true,
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "page_full_width": true,
-        "page_full_width_spacing": false,
-        "image": "shopify://shop_images/McHentryEstheticsHeadshots-C.MaePhotographyIMG_7259.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "small",
-        "adapt_height_first_image": false,
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "background-1",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": false,
-        "custom_class_name": ""
-      }
-    },
     "sl_gradient_editorial_hero_ezDXRE": {
       "type": "sl-gradient-editorial-hero",
       "name": "Gradient Editorial Hero",
@@ -88,7 +67,8 @@
           "type": "heading",
           "settings": {
             "text": "Let's Create Healthy Skin Together",
-            "size": "h1"
+            "size": "h1",
+            "heading_tag": "h2"
           }
         },
         "text_tJJJ6t": {
@@ -263,6 +243,7 @@
       "name": "Team Carousel",
       "settings": {
         "heading_size": "h0",
+        "heading_tag": "h3",
         "image_position": "left",
         "desktop_height": 525,
         "mobile_image_height": 300,
@@ -370,7 +351,8 @@
           "type": "heading",
           "settings": {
             "text": "Ready to Meet Your Skincare & Waxing Professionals?",
-            "size": "h0"
+            "size": "h0",
+            "heading_tag": "h2"
           }
         },
         "spacer_kxniYm": {
@@ -437,7 +419,6 @@
   },
   "order": [
     "main",
-    "image_banner_PKwTLr",
     "sl_gradient_editorial_hero_ezDXRE",
     "sl_image_text_overlap_grx3rD",
     "sl_value_props_ewUdWh",
