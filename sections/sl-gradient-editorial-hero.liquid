@@ -166,7 +166,7 @@
       <p class="sl-geh__subheading">{{ section.settings.subheading }}</p>
     {%- endif -%}
     {%- if section.settings.heading != blank -%}
-      <h1 class="sl-geh__heading">{{ section.settings.heading }}</h1>
+      <{{ section.settings.heading_tag | default: 'h1' }} class="sl-geh__heading">{{ section.settings.heading }}</{{ section.settings.heading_tag | default: 'h1' }}>
     {%- endif -%}
   </div>
 </div>
@@ -369,6 +369,19 @@
       "id": "heading",
       "label": "Heading text",
       "default": "ABOUT OUR SPA"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading SEO tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "p", "label": "Paragraph" }
+      ],
+      "default": "h1",
+      "info": "Set to H1 for the main page heading. Only one H1 per page."
     },
     {
       "type": "select",
