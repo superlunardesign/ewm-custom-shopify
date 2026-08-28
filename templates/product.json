@@ -126,7 +126,6 @@
           "name": "Ingredients",
           "settings": {
             "heading": "Ingredients",
-            "icon": "check_mark",
             "content": "{{ product.metafields.custom.ingredients | metafield_tag }}",
             "page": "",
             "heading_color": "#1a1a1a",
