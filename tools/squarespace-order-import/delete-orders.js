@@ -137,14 +137,52 @@ async function main() {
     }
 
     try {
+      // Step 1: Cancel if not already cancelled
       if (order.cancelled_at === null && order.financial_status !== "refunded" && order.financial_status !== "voided") {
-        await shopifyFetch(`/orders/${order.id}/cancel.json`, { method: "POST", body: JSON.stringify({}) });
-        cancelled++;
+        try {
+          await shopifyFetch(`/orders/${order.id}/cancel.json`, { method: "POST", body: JSON.stringify({}) });
+          cancelled++;
+          await wait(1000);
+        } catch (cancelErr) {
+          console.log(`    Cancel failed (${cancelErr.message}), trying delete anyway...`);
+        }
       }
 
-      await shopifyFetch(`/orders/${order.id}.json`, { method: "DELETE" });
-      deleted++;
-      console.log(`  Deleted: ${label}`);
+      // Step 2: Delete (move to trash)
+      const delUrl = `${BASE_URL}/orders/${order.id}.json`;
+      const delRes = await fetch(delUrl, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Shopify-Access-Token": TOKEN,
+        },
+      });
+
+      if (delRes.status === 429) {
+        const retryAfter = parseFloat(delRes.headers.get("Retry-After") || "2");
+        await wait(retryAfter * 1000);
+        const retry = await fetch(delUrl, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json", "X-Shopify-Access-Token": TOKEN },
+        });
+        if (retry.ok) {
+          deleted++;
+          console.log(`  Deleted: ${label}`);
+        } else {
+          const retryBody = await retry.text();
+          console.error(`  DELETE FAILED (retry): ${label} — ${retry.status} ${retryBody.slice(0, 200)}`);
+          errors++;
+        }
+      } else if (delRes.ok) {
+        deleted++;
+        console.log(`  Deleted: ${label}`);
+      } else {
+        const errBody = await delRes.text();
+        console.error(`  DELETE FAILED: ${label} — ${delRes.status} ${errBody.slice(0, 200)}`);
+        errors++;
+      }
+
+      await wait(550);
     } catch (err) {
       console.error(`  FAILED: ${label} — ${err.message}`);
       errors++;
