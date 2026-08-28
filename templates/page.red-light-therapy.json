@@ -150,7 +150,8 @@
           "type": "heading",
           "settings": {
             "text": "Using FDA-cleared Celluma LED panels, we're bringing medical-grade healing technology to McHenry.",
-            "size": "h1"
+            "size": "h1",
+            "heading_tag": "h2"
           }
         },
         "text_q3xp78": {
@@ -462,7 +463,8 @@
           "type": "heading",
           "settings": {
             "text": "How To Prepare For LED Light Therapy",
-            "size": "h0"
+            "size": "h0",
+            "heading_tag": "h2"
           }
         },
         "spacer_FXYiVw": {
@@ -943,6 +945,7 @@
       ],
       "name": "FAQ Section",
       "settings": {
+        "enable_faq_schema": true,
         "enable_anchor": false,
         "anchor_id": "faq",
         "anchor_offset": 80,
