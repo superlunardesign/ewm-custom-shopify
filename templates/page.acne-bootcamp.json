@@ -556,7 +556,7 @@
             "icon_class": "fas fa-clipboard-list",
             "icon": "shopify://shop_images/BrandingPhotography-C_Mae-5978.jpg",
             "heading": "Personalized Assessment & Treatment Plan",
-            "text": "We analyze your skin, your history, your products, and your lifestyle to create a treatment plan and homecare routine designed specifically for YOU — not a generic protocol."
+            "text": "We analyze your skin, your history, your products, and your day-to-day routine to create a treatment plan and homecare routine designed specifically for YOU — not a generic protocol."
           }
         },
         "value_prop_YbcJUy": {
@@ -575,7 +575,7 @@
             "icon_type": "custom",
             "icon_class": "fas fa-magnifying-glass",
             "icon": "shopify://shop_images/BrandingPhotography-C_Mae-5990.jpg",
-            "heading": "Lifestyle & Product Analysis",
+            "heading": "Daily Routine & Product Analysis",
             "text": "We check your makeup, haircare, body products, and more for hidden pore-clogging ingredients. You'd be shocked how often this is the culprit."
           }
         },
@@ -642,7 +642,7 @@
         "mobile_prop_text_size": 14,
         "mobile_icon_size": 15,
         "mobile_item_padding": 15,
-        "enable_animation": true,
+        "enable_animation": false,
         "animation_duration": 600,
         "animation_delay": 100
       }
@@ -1055,7 +1055,7 @@
         "text_dLp3jt": {
           "type": "text",
           "settings": {
-            "text": "<p>What Virtual Acne Bootcamp Includes:<br/><br/>✓ Video consultations via Google Meet<br/>✓ Comprehensive skin & lifestyle analysis<br/>✓ Personalized homecare routine<br/>✓ Product & ingredient guidance<br/>✓ Bi-weekly check-ins (first 3 months), then monthly<br/>✓ Text support throughout your journey<br/>✓ Full access to Acne Bootcamp Portal</p>"
+            "text": "<p>What Virtual Acne Bootcamp Includes:<br/><br/>✓ Video consultations via Google Meet<br/>✓ Comprehensive skin & daily routine analysis<br/>✓ Personalized homecare routine<br/>✓ Product & ingredient guidance<br/>✓ Bi-weekly check-ins (first 3 months), then monthly<br/>✓ Text support throughout your journey<br/>✓ Full access to Acne Bootcamp Portal</p>"
           }
         },
         "button_QDQ8HT": {
