@@ -2350,6 +2350,7 @@ min-height:40px;
       sortSelect.addEventListener('change', function() {
         var url = new URL(window.location.href);
         url.searchParams.set('sort_by', this.value);
+        url.searchParams.delete('page');
         renderSection(url.toString());
       });
     }
