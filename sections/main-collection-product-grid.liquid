@@ -2315,6 +2315,7 @@ min-height:40px;
   var defaultSort = '{{ collection.sort_by | default: collection.default_sort_by }}';
 
   var allProducts = [];
+  var promoCards = [];
   var allLoaded = false;
   var currentSort = defaultSort;
   var searchQuery = '';
@@ -2389,6 +2390,14 @@ min-height:40px;
     if (!g) return;
 
     allProducts = Array.from(g.querySelectorAll(':scope > .grid__item:not([data-sl-promo])'));
+
+    promoCards = [];
+    var allItems = Array.from(g.querySelectorAll(':scope > .grid__item'));
+    allItems.forEach(function(item, i) {
+      if (item.hasAttribute('data-sl-promo')) {
+        promoCards.push({ el: item, position: i });
+      }
+    });
 
     var sectionEl = el();
     var totalPages = 1;
@@ -2543,9 +2552,20 @@ min-height:40px;
         break;
     }
 
+    promoCards.forEach(function(pc) { if (pc.el.parentNode === g) g.removeChild(pc.el); });
+
     visible.forEach(function(item) { g.appendChild(item); });
     allProducts.forEach(function(item) {
       if (item.classList.contains('sl-search-hidden') && item.parentNode === g) g.appendChild(item);
+    });
+
+    promoCards.forEach(function(pc) {
+      var children = g.children;
+      if (pc.position < children.length) {
+        g.insertBefore(pc.el, children[pc.position]);
+      } else {
+        g.appendChild(pc.el);
+      }
     });
   }
 
