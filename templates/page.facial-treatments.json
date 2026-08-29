@@ -414,7 +414,7 @@
       ],
       "name": "EWM Image + Text Overlap",
       "settings": {
-        "image": "shopify://shop_images/km_facial.jpg",
+        "image": "shopify://shop_images/Maryalice.webp",
         "image_position": "right",
         "desktop_height": 550,
         "mobile_height": 350,
