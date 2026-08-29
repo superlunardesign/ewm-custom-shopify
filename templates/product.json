@@ -193,7 +193,7 @@
         "image_border_color": "#1a1a1a",
         "tab_position": "right",
         "tab_style": "toggle",
-        "show_review_tab": true,
+        "show_review_tab": false,
         "enable_sticky_bar": true,
         "enable_desktop_sticky_bar": false,
         "sticky_bar_bg": "#ffffff",
@@ -206,7 +206,7 @@
         "show_adv_product": true,
         "choose_label": "Choose style",
         "details_open_default": false,
-        "ingredients_open_default": true
+        "ingredients_open_default": false
       }
     },
     "sl_how_to_use_fDRQVt": {
@@ -272,6 +272,7 @@
         "heading_size": 24,
         "heading_weight": "500",
         "heading_transform": "uppercase",
+        "heading_tag": "h2",
         "price_placement": "button",
         "collection": "acne-safe-skincare",
         "fallback_collection_handle": "{{ section.settings.collection.title }}",
@@ -285,8 +286,8 @@
         "card_border_radius": 8,
         "card_image_bg": "#f5f5f3",
         "section_bg": "#f7f7f7",
-        "atc_bg": "#8C9B6D",
-        "atc_text": "#FFFFFF",
+        "atc_bg": "#8c9b6d",
+        "atc_text": "#ffffff",
         "atc_border_width": 1,
         "atc_border_color": "#8c9b6d",
         "atc_radius": 0,
