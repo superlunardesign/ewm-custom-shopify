@@ -619,7 +619,7 @@
             "show_button": true,
             "button_text": "BOOK NOW",
             "button_link": "https://booking.mangomint.com/314399",
-            "service_description": "<p>*If planning to get a leg wax for vacation  - plan to schedule 2-3 leg waxes before vacation so you have the best results possible*<br/><br/>Includes knees & lower legs. Feet & toes upon request.</p>"
+            "service_description": "<p>Includes cheeks & butt strip</p>"
           }
         },
         "service_item_Bdngye": {
@@ -1257,6 +1257,7 @@
       ],
       "name": "FAQ Section",
       "settings": {
+        "enable_faq_schema": true,
         "enable_anchor": false,
         "anchor_id": "faq",
         "anchor_offset": 80,
