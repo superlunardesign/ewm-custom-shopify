@@ -211,5 +211,10 @@
         "settings": {}
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".mangomint-chat-bubble{border: 1px solid #fff;}"
+    ]
   }
 }
