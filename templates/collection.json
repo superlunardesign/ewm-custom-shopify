@@ -44,6 +44,80 @@
     },
     "product-grid": {
       "type": "main-collection-product-grid",
+      "blocks": {
+        "category_bubble_4Aj3PX": {
+          "type": "category_bubble",
+          "settings": {
+            "collection": "acne-safe-skincare"
+          }
+        },
+        "category_bubble_UEVqyw": {
+          "type": "category_bubble",
+          "settings": {
+            "collection": "anti-aging-skincare"
+          }
+        },
+        "category_bubble_tM7AkB": {
+          "type": "category_bubble",
+          "settings": {
+            "collection": "sensitive-skin-products"
+          }
+        },
+        "category_bubble_3tb8Dg": {
+          "type": "category_bubble",
+          "settings": {
+            "collection": "cleansers"
+          }
+        },
+        "category_bubble_wHFNFx": {
+          "type": "category_bubble",
+          "settings": {
+            "collection": "toners"
+          }
+        },
+        "category_bubble_RQeXW3": {
+          "type": "category_bubble",
+          "settings": {
+            "collection": "serums"
+          }
+        },
+        "category_bubble_wjgznm": {
+          "type": "category_bubble",
+          "settings": {
+            "collection": "moisturizers"
+          }
+        },
+        "category_bubble_JzwyrH": {
+          "type": "category_bubble",
+          "settings": {
+            "collection": "spf-products"
+          }
+        },
+        "category_bubble_tmWyEF": {
+          "type": "category_bubble",
+          "settings": {
+            "collection": "masks"
+          }
+        },
+        "category_bubble_GDhUcL": {
+          "type": "category_bubble",
+          "settings": {
+            "collection": "body-skincare"
+          }
+        }
+      },
+      "block_order": [
+        "category_bubble_4Aj3PX",
+        "category_bubble_UEVqyw",
+        "category_bubble_tM7AkB",
+        "category_bubble_3tb8Dg",
+        "category_bubble_wHFNFx",
+        "category_bubble_RQeXW3",
+        "category_bubble_wjgznm",
+        "category_bubble_JzwyrH",
+        "category_bubble_tmWyEF",
+        "category_bubble_GDhUcL"
+      ],
       "settings": {
         "enable_collection_search": true,
         "products_per_page": 16,
