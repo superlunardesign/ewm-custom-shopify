@@ -1433,9 +1433,31 @@ min-height:40px;
           </button>
 
           <div class="sl-category-track" data-bubble-track>
-            {%- for col in collections -%}
-              {%- assign parent_ref = col.metafields.custom.parent_collection.value -%}
-              {%- if parent_ref != blank and parent_ref.handle == collection.handle -%}
+            {%- liquid
+              assign _bubble_entries = ''
+              for col in collections
+                assign parent_ref = col.metafields.custom.parent_collection.value
+                if parent_ref != blank and parent_ref.handle == collection.handle
+                  assign _sort_val = col.metafields.custom.bubble_sort_order | default: 999 | plus: 0
+                  if _sort_val < 10
+                    assign _padded = _sort_val | prepend: '00'
+                  elsif _sort_val < 100
+                    assign _padded = _sort_val | prepend: '0'
+                  else
+                    assign _padded = _sort_val | append: ''
+                  endif
+                  assign _entry = _padded | append: '::' | append: col.handle
+                  if _bubble_entries != ''
+                    assign _bubble_entries = _bubble_entries | append: ','
+                  endif
+                  assign _bubble_entries = _bubble_entries | append: _entry
+                endif
+              endfor
+              assign _sorted_bubbles = _bubble_entries | split: ',' | sort
+            -%}
+            {%- for _entry in _sorted_bubbles -%}
+              {%- assign _child_handle = _entry | split: '::' | last -%}
+              {%- assign col = collections[_child_handle] -%}
                 <a href="{{ col.url }}" class="sl-category-item">
                   <div class="sl-category-bubble">
                     {%- if col.metafields.custom.category_bubble_icon != blank -%}
@@ -1446,7 +1468,6 @@ min-height:40px;
                   </div>
                   <span class="sl-category-label">{{ col.title }}</span>
                 </a>
-              {%- endif -%}
             {%- endfor -%}
           </div>
 
