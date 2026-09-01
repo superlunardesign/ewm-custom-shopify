@@ -1715,14 +1715,14 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                         <span>{{ block.settings.notice_text }}</span>
                       </div>
                       <div class="sl-gc-toggle">
-                        <button type="button" class="sl-gc-btn sl-gc-btn--active" data-gc-type="online">
+                        <button type="button" class="sl-gc-btn" data-gc-type="online">
                           {{ block.settings.online_label }}
                         </button>
-                        <button type="button" class="sl-gc-btn" data-gc-type="instore">
+                        <button type="button" class="sl-gc-btn sl-gc-btn--active" data-gc-type="instore">
                           {{ block.settings.instore_label }}
                         </button>
                       </div>
-                      <div class="sl-gc-panel sl-gc-panel--instore" hidden>
+                      <div class="sl-gc-panel sl-gc-panel--instore">
                         <p class="sl-gc-instore-desc">{{ block.settings.instore_description }}</p>
                         <a href="{{ block.settings.instore_url }}" target="_blank" rel="noopener"
                            class="button button--primary sl-gc-instore-btn"
@@ -1769,6 +1769,8 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                             el.style.display = isInstore ? 'none' : '';
                           });
                         }
+
+                        toggle(true);
 
                         btns.forEach(function(btn) {
                           btn.addEventListener('click', function() {
