@@ -1360,7 +1360,10 @@ min-height:40px;
       if child_count > 0
         for block in section.blocks
           if block.type == 'category_bubble' and block.settings.collection != blank
-            assign bubble_block_count = bubble_block_count | plus: 1
+            assign _bp = block.settings.collection.metafields.custom.parent_collection.value
+            if _bp != blank and _bp.handle == collection.handle
+              assign bubble_block_count = bubble_block_count | plus: 1
+            endif
           endif
         endfor
         assign show_category_bubbles = true
@@ -1439,10 +1442,12 @@ min-height:40px;
 
           <div class="sl-category-track" data-bubble-track>
             {%- if bubble_block_count > 0 -%}
-              {%- comment -%} Customizer blocks (drag-to-reorder) {%- endcomment -%}
+              {%- comment -%} Customizer blocks — only show children of the current collection {%- endcomment -%}
               {%- for block in section.blocks -%}
                 {%- if block.type == 'category_bubble' and block.settings.collection != blank -%}
                   {%- assign col = block.settings.collection -%}
+                  {%- assign col_parent = col.metafields.custom.parent_collection.value -%}
+                  {%- if col_parent != blank and col_parent.handle == collection.handle -%}
                   <a href="{{ col.url }}" class="sl-category-item" {{ block.shopify_attributes }}>
                     <div class="sl-category-bubble">
                       {%- if col.metafields.custom.category_bubble_icon != blank -%}
@@ -1453,6 +1458,7 @@ min-height:40px;
                     </div>
                     <span class="sl-category-label">{{ col.title }}</span>
                   </a>
+                  {%- endif -%}
                 {%- endif -%}
               {%- endfor -%}
             {%- else -%}
