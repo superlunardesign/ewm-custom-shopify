@@ -152,7 +152,10 @@ async function updateVariantSku(variantId, newSku) {
     await wait(2000);
     return updateVariantSku(variantId, newSku);
   }
-  if (!res.ok) throw new Error(`Failed to update variant ${variantId}: ${res.status}`);
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`Variant ${variantId}: ${res.status} — ${body}`);
+  }
   await wait(500);
   return res.json();
 }
