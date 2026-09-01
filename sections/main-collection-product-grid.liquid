@@ -1343,22 +1343,31 @@ min-height:40px;
 <div class="section-{{ section.id }}-padding" id="SLCollection-{{ section.id }}">
   {%- liquid
     comment
-      Category bubbles auto-populate from child collections.
-      A child collection has its parent_collection metafield set to the
-      current collection. We loop all store collections and count
-      the ones pointing here — if any exist, we show bubbles.
+      Category bubbles: if category_bubble blocks exist in the customizer,
+      use those (in the order they appear). Otherwise auto-populate from
+      child collections via the parent_collection metafield.
     endcomment
     assign show_category_bubbles = false
+    assign bubble_block_count = 0
     assign child_count = 0
     if section.settings.enable_category_bubbles
-      for col in collections
-        assign parent_ref = col.metafields.custom.parent_collection.value
-        if parent_ref != blank and parent_ref.handle == collection.handle
-          assign child_count = child_count | plus: 1
+      for block in section.blocks
+        if block.type == 'category_bubble' and block.settings.collection != blank
+          assign bubble_block_count = bubble_block_count | plus: 1
         endif
       endfor
-      if child_count > 0
+      if bubble_block_count > 0
         assign show_category_bubbles = true
+      else
+        for col in collections
+          assign parent_ref = col.metafields.custom.parent_collection.value
+          if parent_ref != blank and parent_ref.handle == collection.handle
+            assign child_count = child_count | plus: 1
+          endif
+        endfor
+        if child_count > 0
+          assign show_category_bubbles = true
+        endif
       endif
     endif
 
@@ -1433,42 +1442,62 @@ min-height:40px;
           </button>
 
           <div class="sl-category-track" data-bubble-track>
-            {%- liquid
-              assign _bubble_entries = ''
-              for col in collections
-                assign parent_ref = col.metafields.custom.parent_collection.value
-                if parent_ref != blank and parent_ref.handle == collection.handle
-                  assign _sort_val = col.metafields.custom.bubble_sort_order | default: 999 | plus: 0
-                  if _sort_val < 10
-                    assign _padded = _sort_val | prepend: '00'
-                  elsif _sort_val < 100
-                    assign _padded = _sort_val | prepend: '0'
-                  else
-                    assign _padded = _sort_val | append: ''
+            {%- if bubble_block_count > 0 -%}
+              {%- comment -%} Customizer blocks (drag-to-reorder) {%- endcomment -%}
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'category_bubble' and block.settings.collection != blank -%}
+                  {%- assign col = block.settings.collection -%}
+                  <a href="{{ col.url }}" class="sl-category-item" {{ block.shopify_attributes }}>
+                    <div class="sl-category-bubble">
+                      {%- if col.metafields.custom.category_bubble_icon != blank -%}
+                        <div class="sl-bubble-icon" data-inline-svg>{{ col.metafields.custom.category_bubble_icon | metafield_tag }}</div>
+                      {%- else -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                      {%- endif -%}
+                    </div>
+                    <span class="sl-category-label">{{ col.title }}</span>
+                  </a>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- comment -%} Auto-discover from parent_collection metafield {%- endcomment -%}
+              {%- liquid
+                assign _bubble_entries = ''
+                for col in collections
+                  assign parent_ref = col.metafields.custom.parent_collection.value
+                  if parent_ref != blank and parent_ref.handle == collection.handle
+                    assign _sort_val = col.metafields.custom.bubble_sort_order | default: 999 | plus: 0
+                    if _sort_val < 10
+                      assign _padded = _sort_val | prepend: '00'
+                    elsif _sort_val < 100
+                      assign _padded = _sort_val | prepend: '0'
+                    else
+                      assign _padded = _sort_val | append: ''
+                    endif
+                    assign _entry = _padded | append: '::' | append: col.handle
+                    if _bubble_entries != ''
+                      assign _bubble_entries = _bubble_entries | append: ','
+                    endif
+                    assign _bubble_entries = _bubble_entries | append: _entry
                   endif
-                  assign _entry = _padded | append: '::' | append: col.handle
-                  if _bubble_entries != ''
-                    assign _bubble_entries = _bubble_entries | append: ','
-                  endif
-                  assign _bubble_entries = _bubble_entries | append: _entry
-                endif
-              endfor
-              assign _sorted_bubbles = _bubble_entries | split: ',' | sort
-            -%}
-            {%- for _entry in _sorted_bubbles -%}
-              {%- assign _child_handle = _entry | split: '::' | last -%}
-              {%- assign col = collections[_child_handle] -%}
-                <a href="{{ col.url }}" class="sl-category-item">
-                  <div class="sl-category-bubble">
-                    {%- if col.metafields.custom.category_bubble_icon != blank -%}
-                      <div class="sl-bubble-icon" data-inline-svg>{{ col.metafields.custom.category_bubble_icon | metafield_tag }}</div>
-                    {%- else -%}
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
-                    {%- endif -%}
-                  </div>
-                  <span class="sl-category-label">{{ col.title }}</span>
-                </a>
-            {%- endfor -%}
+                endfor
+                assign _sorted_bubbles = _bubble_entries | split: ',' | sort
+              -%}
+              {%- for _entry in _sorted_bubbles -%}
+                {%- assign _child_handle = _entry | split: '::' | last -%}
+                {%- assign col = collections[_child_handle] -%}
+                  <a href="{{ col.url }}" class="sl-category-item">
+                    <div class="sl-category-bubble">
+                      {%- if col.metafields.custom.category_bubble_icon != blank -%}
+                        <div class="sl-bubble-icon" data-inline-svg>{{ col.metafields.custom.category_bubble_icon | metafield_tag }}</div>
+                      {%- else -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                      {%- endif -%}
+                    </div>
+                    <span class="sl-category-label">{{ col.title }}</span>
+                  </a>
+              {%- endfor -%}
+            {%- endif -%}
           </div>
 
           <button type="button" class="sl-category-arrow sl-category-arrow--next" aria-label="Scroll right" data-bubble-next>
@@ -3647,6 +3676,17 @@ min-height:40px;
     }
   ],
   "blocks": [
+    {
+      "type": "category_bubble",
+      "name": "Category Bubble",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    },
     {
       "type": "promo_card",
       "name": "Promo Card",
