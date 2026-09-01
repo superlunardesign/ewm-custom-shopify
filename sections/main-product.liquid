@@ -1707,6 +1707,65 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                       </div>
                     </noscript>
 
+                  {%- when 'gift_card_selector' -%}
+                    <div class="sl-gc-selector" {{ block.shopify_attributes }}>
+                      <p class="sl-gc-label">{{ block.settings.label }}</p>
+                      <div class="sl-gc-notice">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        <span>{{ block.settings.notice_text }}</span>
+                      </div>
+                      <div class="sl-gc-toggle">
+                        <button type="button" class="sl-gc-btn sl-gc-btn--active" data-gc-type="online">
+                          {{ block.settings.online_label }}
+                        </button>
+                        <button type="button" class="sl-gc-btn" data-gc-type="instore">
+                          {{ block.settings.instore_label }}
+                        </button>
+                      </div>
+                      <div class="sl-gc-panel sl-gc-panel--instore" hidden>
+                        <p class="sl-gc-instore-desc">{{ block.settings.instore_description }}</p>
+                        <a href="{{ block.settings.instore_url }}" target="_blank" rel="noopener"
+                           class="button button--primary sl-gc-instore-btn"
+                           style="display:block;text-align:center;width:100%;padding:12px;background:{{ block.settings.button_bg }};color:{{ block.settings.button_color }};border:none;text-decoration:none;">
+                          {{ block.settings.instore_button_text }}
+                        </a>
+                      </div>
+                    </div>
+                    <style>
+                      .sl-gc-selector { margin: 4px 0 12px; }
+                      .sl-gc-label { font-size: 14px; font-weight: 500; margin: 0 0 8px; }
+                      .sl-gc-notice { display: flex; align-items: flex-start; gap: 8px; padding: 10px 14px; background: #fef9e7; border: 1px solid #f0d860; border-radius: 6px; margin-bottom: 12px; font-size: 13px; line-height: 1.45; color: #6b5c00; }
+                      .sl-gc-notice svg { flex-shrink: 0; margin-top: 1px; color: #b8960c; }
+                      .sl-gc-toggle { display: flex; gap: 0; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+                      .sl-gc-btn { flex: 1; padding: 10px 16px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; transition: background .15s, color .15s; background: #f5f5f5; color: #666; }
+                      .sl-gc-btn--active { background: #8c9b6d; color: #fff; }
+                      .sl-gc-btn:not(.sl-gc-btn--active):hover { background: #eee; }
+                      .sl-gc-instore-desc { font-size: 14px; color: #555; line-height: 1.5; margin: 12px 0; }
+                      .sl-gc-instore-btn { border-radius: 0 !important; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: .5px; }
+                    </style>
+                    <script>
+                      (function(){
+                        const sel = document.querySelector('.sl-gc-selector');
+                        if (!sel) return;
+                        const btns = sel.querySelectorAll('.sl-gc-btn');
+                        const instorePanel = sel.querySelector('.sl-gc-panel--instore');
+                        const section = sel.closest('.product');
+                        const variantPicker = section ? section.querySelector('[data-gc-hide="variant"]') || section.querySelector('variant-radios, variant-selects, .product-form__input--pill') : null;
+                        const qtyAtc = section ? section.querySelector('#sl-native-atc-{{ section.id }}') : null;
+
+                        btns.forEach(function(btn) {
+                          btn.addEventListener('click', function() {
+                            btns.forEach(function(b) { b.classList.remove('sl-gc-btn--active'); });
+                            btn.classList.add('sl-gc-btn--active');
+                            var isInstore = btn.getAttribute('data-gc-type') === 'instore';
+                            instorePanel.hidden = !isInstore;
+                            if (variantPicker) variantPicker.hidden = isInstore;
+                            if (qtyAtc) qtyAtc.hidden = isInstore;
+                          });
+                        });
+                      })();
+                    </script>
+
                   {%- when 'buy_buttons' -%}
                     <div id="sl-native-atc-{{ section.id }}" style="{% if block.settings.margin_top > 0 %}margin-top: {{ block.settings.margin_top }}px;{% endif %}{% if block.settings.margin_bottom > 0 %}margin-bottom: {{ block.settings.margin_bottom }}px;{% endif %}" {{ block.shopify_attributes }}>
                       <product-form class="product-form">
@@ -3493,6 +3552,67 @@ function updateDeliveryOption(input) {
   ]
 },
 
+  {
+  "type": "gift_card_selector",
+  "name": "Gift Card Type Selector",
+  "limit": 1,
+  "settings": [
+  {
+    "type": "text",
+    "id": "label",
+    "label": "Label text",
+    "default": "Choose gift card type:"
+  },
+  {
+    "type": "text",
+    "id": "online_label",
+    "label": "Online button label",
+    "default": "Online Store Gift Card"
+  },
+  {
+    "type": "text",
+    "id": "instore_label",
+    "label": "In-store button label",
+    "default": "Spa Service Gift Card"
+  },
+  {
+    "type": "textarea",
+    "id": "notice_text",
+    "label": "Attention notice",
+    "default": "Please make sure you are selecting the correct gift card type. Online Store gift cards can only be used for online purchases. Spa Service gift cards can only be redeemed for in-store services."
+  },
+  {
+    "type": "textarea",
+    "id": "instore_description",
+    "label": "In-store description",
+    "default": "Purchase a gift card redeemable for in-store spa services including facials, waxing, and more."
+  },
+  {
+    "type": "url",
+    "id": "instore_url",
+    "label": "In-store gift card URL",
+    "default": "https://clients.mangomint.com/gift-cards/estheticswithme"
+  },
+  {
+    "type": "text",
+    "id": "instore_button_text",
+    "label": "In-store button text",
+    "default": "Buy In-Store Gift Card"
+  },
+  {
+    "type": "color",
+    "id": "button_bg",
+    "label": "Button background",
+    "default": "#8c9b6d"
+  },
+  {
+    "type": "color",
+    "id": "button_color",
+    "label": "Button text color",
+    "default": "#ffffff"
+  }
+  ]
+  },
   {
   "type": "custom_liquid",
   "name": "t:sections.main-product.blocks.custom_liquid.name",

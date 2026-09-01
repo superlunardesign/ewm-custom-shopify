@@ -1,0 +1,194 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "breadcrumbs_gc": {
+          "type": "breadcrumbs",
+          "settings": {
+            "show_breadcrumbs": true,
+            "breadcrumb_color": "#888888",
+            "font_size": 13,
+            "margin_bottom": 8
+          }
+        },
+        "vendor_gc": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title_gc": {
+          "type": "title",
+          "settings": {
+            "heading_color": "#121212",
+            "heading_size": 24,
+            "subtitle_color": "",
+            "subtitle_size": 14,
+            "badge_color": "#8c9b6d",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "price_gc": {
+          "type": "price",
+          "settings": {
+            "price_color": "#121212",
+            "price_size": 16,
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "richtext_gc": {
+          "type": "richtext",
+          "settings": {
+            "description-rich": "{{ product.description }}",
+            "text_color": "",
+            "text_size": 16,
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "gift_card_selector_gc": {
+          "type": "gift_card_selector",
+          "settings": {
+            "label": "Choose gift card type:",
+            "online_label": "Online Store Gift Card",
+            "instore_label": "Spa Service Gift Card",
+            "notice_text": "Please make sure you are selecting the correct gift card type. Online Store gift cards can only be used for online purchases. Spa Service gift cards can only be redeemed for in-store services.",
+            "instore_description": "Purchase a gift card redeemable for in-store spa services including facials, waxing, and more.",
+            "instore_url": "https://clients.mangomint.com/gift-cards/estheticswithme",
+            "instore_button_text": "Buy Spa Service Gift Card",
+            "button_bg": "#8c9b6d",
+            "button_color": "#ffffff"
+          }
+        },
+        "variant_picker_gc": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "picker_method": "variant_image"
+          }
+        },
+        "quantity_selector_gc": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_gc": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "button_color": "#ffffff",
+            "button_bg": "#8c9b6d",
+            "button_border_width": 0,
+            "button_border_radius": 0,
+            "button_border_color": "#121212",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "breadcrumbs_gc",
+        "vendor_gc",
+        "title_gc",
+        "price_gc",
+        "richtext_gc",
+        "gift_card_selector_gc",
+        "variant_picker_gc",
+        "quantity_selector_gc",
+        "buy_buttons_gc"
+      ],
+      "custom_css": [
+        "p {line-height: 1.5em; color: black;}",
+        ".price {color: black;}"
+      ],
+      "settings": {
+        "page_full_width": false,
+        "enable_highlights": false,
+        "page_full_width_spacing": false,
+        "enable_sticky_info": true,
+        "enable_product_zoom": "default",
+        "gallery_layout": "thumbnail_slider",
+        "stacked_column_alignment": "one",
+        "slider_position": "right",
+        "media_size": "medium",
+        "mobile_layout": "carousel",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "image_aspect_ratio": "1 / 1",
+        "image_fit": "cover",
+        "image_border_radius": 8,
+        "image_border_width": 1,
+        "image_border_color": "#1a1a1a",
+        "tab_position": "right",
+        "tab_style": "toggle",
+        "show_review_tab": false,
+        "enable_sticky_bar": false,
+        "enable_desktop_sticky_bar": false,
+        "sticky_bar_bg": "#ffffff",
+        "sticky_btn_bg": "#8c9b6d",
+        "sticky_btn_color": "#ffffff",
+        "sticky_btn_text": "Add To Cart",
+        "enable_enquiry": false,
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "show_adv_product": false,
+        "choose_label": "Choose style",
+        "details_open_default": false,
+        "ingredients_open_default": false
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "required_tag": "",
+        "full_width": false,
+        "desktop_columns": "4",
+        "heading": "Trending Now",
+        "heading_alignment": "left",
+        "heading_color": "#8c9b6d",
+        "heading_font": "heading",
+        "heading_size": 24,
+        "heading_weight": "500",
+        "heading_transform": "uppercase",
+        "heading_tag": "h2",
+        "price_placement": "button",
+        "collection": "acne-safe-skincare",
+        "fallback_collection_handle": "{{ section.settings.collection.title }}",
+        "products_limit": 8,
+        "auto_scroll_mode": "off",
+        "auto_scroll_speed": 0.5,
+        "show_rating": true,
+        "show_atc": true,
+        "atc_label": "Add To Cart",
+        "image_ratio": "1 / 1",
+        "card_border_radius": 8,
+        "card_image_bg": "#f5f5f3",
+        "section_bg": "#f7f7f7",
+        "atc_bg": "#8c9b6d",
+        "atc_text": "#ffffff",
+        "atc_border_width": 1,
+        "atc_border_color": "#8c9b6d",
+        "atc_radius": 0,
+        "button_font": "body",
+        "button_font_size": 13,
+        "button_text_transform": "uppercase",
+        "button_letter_spacing": 1,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product-recommendations"
+  ]
+}
