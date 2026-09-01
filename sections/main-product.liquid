@@ -1754,6 +1754,8 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
 
                         function getHideTargets() {
                           var targets = [];
+                          var price = section.querySelector('#price-{{ section.id }}');
+                          if (price) targets.push(price);
                           var vr = section.querySelector('variant-radios, variant-selects');
                           if (vr) targets.push(vr);
                           var pills = section.querySelectorAll('.product-form__input--pill');
