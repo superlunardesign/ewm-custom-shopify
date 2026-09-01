@@ -1744,26 +1744,40 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow { display: none !im
                       .sl-gc-instore-btn { border-radius: 0 !important; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: .5px; }
                     </style>
                     <script>
-                      (function(){
-                        const sel = document.querySelector('.sl-gc-selector');
+                      document.addEventListener('DOMContentLoaded', function(){
+                        var sel = document.querySelector('.sl-gc-selector');
                         if (!sel) return;
-                        const btns = sel.querySelectorAll('.sl-gc-btn');
-                        const instorePanel = sel.querySelector('.sl-gc-panel--instore');
-                        const section = sel.closest('.product');
-                        const variantPicker = section ? section.querySelector('[data-gc-hide="variant"]') || section.querySelector('variant-radios, variant-selects, .product-form__input--pill') : null;
-                        const qtyAtc = section ? section.querySelector('#sl-native-atc-{{ section.id }}') : null;
+                        var section = sel.closest('.product') || sel.closest('[id^="shopify-section"]');
+                        if (!section) return;
+                        var btns = sel.querySelectorAll('.sl-gc-btn');
+                        var instorePanel = sel.querySelector('.sl-gc-panel--instore');
+
+                        function getHideTargets() {
+                          var targets = [];
+                          var vr = section.querySelector('variant-radios, variant-selects');
+                          if (vr) targets.push(vr);
+                          var pills = section.querySelectorAll('.product-form__input--pill');
+                          pills.forEach(function(p) { targets.push(p); });
+                          var atc = section.querySelector('#sl-native-atc-{{ section.id }}');
+                          if (atc) targets.push(atc);
+                          return targets;
+                        }
+
+                        function toggle(isInstore) {
+                          instorePanel.hidden = !isInstore;
+                          getHideTargets().forEach(function(el) {
+                            el.style.display = isInstore ? 'none' : '';
+                          });
+                        }
 
                         btns.forEach(function(btn) {
                           btn.addEventListener('click', function() {
                             btns.forEach(function(b) { b.classList.remove('sl-gc-btn--active'); });
                             btn.classList.add('sl-gc-btn--active');
-                            var isInstore = btn.getAttribute('data-gc-type') === 'instore';
-                            instorePanel.hidden = !isInstore;
-                            if (variantPicker) variantPicker.hidden = isInstore;
-                            if (qtyAtc) qtyAtc.hidden = isInstore;
+                            toggle(btn.getAttribute('data-gc-type') === 'instore');
                           });
                         });
-                      })();
+                      });
                     </script>
 
                   {%- when 'buy_buttons' -%}
