@@ -48,7 +48,8 @@
           "type": "heading",
           "settings": {
             "text": "Everything You Need to Achieve Clearer Skin",
-            "size": "h0"
+            "size": "h0",
+            "heading_tag": "h2"
           }
         },
         "spacer_R9Fbg8": {
@@ -166,14 +167,16 @@
         "heading_size": 24,
         "heading_weight": "500",
         "heading_transform": "uppercase",
-        "price_placement": "title_row",
+        "heading_tag": "h2",
+        "price_placement": "button",
         "collection": "acne-bootcamp",
-        "fallback_collection_handle": "best-selling-skincare",
-        "products_limit": 8,
+        "fallback_collection_handle": "",
+        "products_limit": 12,
         "auto_scroll_mode": "off",
         "auto_scroll_speed": 0.5,
+        "show_vendor": true,
         "show_rating": true,
-        "show_atc": false,
+        "show_atc": true,
         "atc_label": "Add To Cart",
         "image_ratio": "1 / 1",
         "card_border_radius": 8,
