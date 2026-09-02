@@ -155,6 +155,7 @@
     },
     "product_recommendations_aEkGtT": {
       "type": "product-recommendations",
+      "custom_css": [],
       "name": "Product Carousel",
       "settings": {
         "required_tag": "",
@@ -187,7 +188,7 @@
         "atc_border_width": 0,
         "atc_border_color": "#ffffff",
         "atc_radius": 0,
-        "button_font": "heading",
+        "button_font": "body",
         "button_font_size": 13,
         "button_text_transform": "uppercase",
         "button_letter_spacing": 1,
