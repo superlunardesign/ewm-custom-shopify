@@ -301,6 +301,37 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+#shopify-section-{{ section.id }} .sl-recs__collection-link {
+  text-align: center;
+  margin-top: 28px;
+}
+
+#shopify-section-{{ section.id }} .sl-recs__collection-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  background: {{ section.settings.atc_bg | default: '#8c9b6d' }};
+  color: {{ section.settings.atc_text | default: '#fff' }};
+  border: {{ section.settings.atc_border_width | default: 0 }}px solid {{ section.settings.atc_border_color | default: 'transparent' }};
+  border-radius: {{ section.settings.atc_radius | default: 0 }}px;
+  {% if section.settings.button_font == 'body' %}
+    font-family: var(--font-body-family);
+  {% else %}
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-style: var(--font-heading-style);
+  {% endif %}
+  font-size: {{ section.settings.button_font_size | default: 13 }}px;
+  font-weight: 400;
+  text-transform: {{ section.settings.button_text_transform | default: 'uppercase' }};
+  letter-spacing: {{ section.settings.button_letter_spacing | default: 1 | times: 0.01 }}em;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+#shopify-section-{{ section.id }} .sl-recs__collection-btn:hover {
+  opacity: 0.85;
+}
 {%- endstyle -%}
 
 {%- liquid
@@ -465,6 +496,17 @@
         </svg>
       </button>
     </div>
+
+    {%- if section.settings.show_collection_link -%}
+      {%- assign link_collection = rec_collection | default: fallback_col -%}
+      {%- if link_collection != blank -%}
+      <div class="sl-recs__collection-link">
+        <a href="{{ link_collection.url }}" class="sl-recs__collection-btn">
+          {{ section.settings.collection_link_text | default: 'View All' }}
+        </a>
+      </div>
+      {%- endif -%}
+    {%- endif -%}
   </div>
 </div>
 {%- endif -%}
@@ -817,6 +859,19 @@
       "id": "atc_label",
       "label": "Add to cart label",
       "default": "Add To Cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_link",
+      "label": "Show view collection button",
+      "default": false,
+      "info": "Displays a button below the carousel linking to the full collection page."
+    },
+    {
+      "type": "text",
+      "id": "collection_link_text",
+      "label": "Collection button text",
+      "default": "View All"
     },
     {
       "type": "header",
