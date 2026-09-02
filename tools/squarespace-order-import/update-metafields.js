@@ -145,16 +145,14 @@ async function getExistingMetafields(productId) {
 }
 
 function toRichText(plainText) {
-  const paragraphs = plainText.split(/\n{2,}/);
-  const children = paragraphs.map((para) => {
-    const lines = para.split(/\n/);
-    const textNodes = [];
-    lines.forEach((line, i) => {
-      if (i > 0) textNodes.push({ type: "hardBreak" });
-      textNodes.push({ type: "text", value: line });
-    });
-    return { type: "paragraph", children: textNodes };
-  });
+  const lines = plainText.split(/\n/).filter((l) => l.trim());
+  const children = lines.map((line) => ({
+    type: "paragraph",
+    children: [{ type: "text", value: line }],
+  }));
+  if (children.length === 0) {
+    children.push({ type: "paragraph", children: [{ type: "text", value: " " }] });
+  }
   return JSON.stringify({ type: "root", children });
 }
 
