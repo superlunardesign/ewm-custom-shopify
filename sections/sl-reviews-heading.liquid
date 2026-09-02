@@ -1,0 +1,107 @@
+{%- style -%}
+#SLReviewsHeading-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+#SLReviewsHeading-{{ section.id }} .sl-reviews-heading__title {
+  font-family: var(--font-heading-family);
+  font-size: {{ section.settings.heading_size_mobile }}px;
+  font-weight: {{ section.settings.heading_weight }};
+  color: {{ section.settings.heading_color }};
+  margin: 0;
+  line-height: 1.3;
+  text-align: {{ section.settings.heading_alignment }};
+}
+@media (min-width: 750px) {
+  #SLReviewsHeading-{{ section.id }} .sl-reviews-heading__title {
+    font-size: {{ section.settings.heading_size }}px;
+  }
+}
+{%- endstyle -%}
+
+{%- if product != blank -%}
+<div id="SLReviewsHeading-{{ section.id }}" class="page-width">
+  <h2 class="sl-reviews-heading__title">{{ product.vendor }} {{ product.title }} Reviews</h2>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Reviews Heading",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 36,
+      "step": 1,
+      "default": 22,
+      "unit": "px",
+      "label": "Heading size (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 16,
+      "max": 28,
+      "step": 1,
+      "default": 20,
+      "unit": "px",
+      "label": "Heading size (mobile)"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "default": 40,
+      "unit": "px",
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "default": 8,
+      "unit": "px",
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Heading"
+    }
+  ]
+}
+{% endschema %}

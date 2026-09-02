@@ -299,6 +299,18 @@
         "padding_bottom": 40
       }
     },
+    "sl_reviews_heading": {
+      "type": "sl-reviews-heading",
+      "settings": {
+        "heading_size": 22,
+        "heading_size_mobile": 20,
+        "heading_weight": "500",
+        "heading_color": "#1a1a1a",
+        "heading_alignment": "left",
+        "padding_top": 40,
+        "padding_bottom": 8
+      }
+    },
     "1770745290351c4759": {
       "type": "apps",
       "blocks": {
@@ -336,6 +348,7 @@
     "sl_how_to_use_fDRQVt",
     "sl_why_we_love_it_VAzFmC",
     "product-recommendations",
+    "sl_reviews_heading",
     "1770745290351c4759",
     "recent-products"
   ]

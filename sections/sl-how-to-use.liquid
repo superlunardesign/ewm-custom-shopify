@@ -33,6 +33,9 @@
     min-height: 260px;
     margin: 0;
   }
+  #SLHowToUse-{{ section.id }}.sl-htu--no-image .sl-htu__card {
+    grid-template-columns: 1fr;
+  }
 }
 
 #SLHowToUse-{{ section.id }} .sl-htu__image-wrap {
@@ -113,10 +116,10 @@
 {%- endif -%}
 
 {%- if htu_heading != blank and htu_body != blank -%}
-<div id="SLHowToUse-{{ section.id }}" class="page-width">
+<div id="SLHowToUse-{{ section.id }}" class="page-width{% if htu_image == blank %} sl-htu--no-image{% endif %}">
   <div class="sl-htu__card">
+    {%- if htu_image != blank -%}
     <div class="sl-htu__image-wrap">
-      {%- if htu_image != blank -%}
         <img
           src="{{ htu_image | image_url: width: 800 }}"
           srcset="{{ htu_image | image_url: width: 400 }} 400w,
@@ -128,8 +131,8 @@
           height="{{ htu_image.height }}"
           loading="lazy"
         >
-      {%- endif -%}
     </div>
+    {%- endif -%}
     <div class="sl-htu__text">
       {%- if htu_heading != blank -%}
         <h2 class="sl-htu__heading">{{ htu_heading }}</h2>
