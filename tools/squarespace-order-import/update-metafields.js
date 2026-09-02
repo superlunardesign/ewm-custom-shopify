@@ -144,7 +144,22 @@ async function getExistingMetafields(productId) {
   return map;
 }
 
+function toRichText(plainText) {
+  const paragraphs = plainText.split(/\n{2,}/);
+  const children = paragraphs.map((para) => {
+    const lines = para.split(/\n/);
+    const textNodes = [];
+    lines.forEach((line, i) => {
+      if (i > 0) textNodes.push({ type: "hardBreak" });
+      textNodes.push({ type: "text", value: line });
+    });
+    return { type: "paragraph", children: textNodes };
+  });
+  return JSON.stringify({ type: "root", children });
+}
+
 async function setMetafield(productId, namespace, key, value) {
+  const richValue = toRichText(value);
   const res = await fetch(`${BASE_URL}/products/${productId}/metafields.json`, {
     method: "POST",
     headers: {
@@ -155,8 +170,8 @@ async function setMetafield(productId, namespace, key, value) {
       metafield: {
         namespace,
         key,
-        value,
-        type: "multi_line_text_field",
+        value: richValue,
+        type: "rich_text_field",
       },
     }),
   });
