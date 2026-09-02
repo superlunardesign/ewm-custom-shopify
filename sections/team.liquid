@@ -391,7 +391,7 @@
   #shopify-section-{{ section.id }} .sl-team__dots {
     display: flex;
     gap: 8px;
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom: 1rem;
   }
 
@@ -412,7 +412,7 @@
   }
 
   #shopify-section-{{ section.id }} .sl-team__dot--active {
-    background: {{ section.settings.heading_color | default: '#1a1a1a' }};
+    background: #8c9b6d;
     transform: scale(1.2);
   }
 
@@ -427,8 +427,7 @@
     letter-spacing: 0.06em;
     color: {{ section.settings.heading_color }};
     cursor: pointer;
-    text-align: center;
-    width: 100%;
+    text-align: left;
     transition: opacity 0.2s ease;
   }
 
