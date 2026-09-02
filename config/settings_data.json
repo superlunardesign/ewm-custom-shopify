@@ -43,8 +43,8 @@
           "link_1_url": "",
           "link_2_text": "Text Us: 815-332-0918",
           "link_2_url": "",
-          "cta_text": "Book A Spa Service",
-          "cta_url": "https://booking.mangomint.com/314399"
+          "cta_text": "Access Acne Bootcamp Portal",
+          "cta_url": "shopify://pages/acne-bootcamp-portal"
         }
       },
       "header": {
@@ -214,7 +214,7 @@
   },
   "platform_customizations": {
     "custom_css": [
-      ".mangomint-chat-bubble{border: 1px solid #fff;}"
+      ".mangomint-chat-bubble {border: 1px solid #fff;}"
     ]
   }
 }
