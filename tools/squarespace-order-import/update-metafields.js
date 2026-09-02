@@ -193,11 +193,17 @@ async function main() {
   const allProducts = await getAllProducts();
   console.log(`Found ${allProducts.length} products in Shopify\n`);
 
-  const skuMap = new Map();
+  function normalize(str) {
+    return str.toLowerCase()
+      .replace(/[|–—]/g, ' ')
+      .replace(/[''""™®©]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  const titleMap = new Map();
   for (const p of allProducts) {
-    for (const v of p.variants) {
-      if (v.sku) skuMap.set(v.sku.toLowerCase(), { id: p.id, title: p.title });
-    }
+    titleMap.set(normalize(p.title), { id: p.id, title: p.title });
   }
 
   let updated = 0;
@@ -207,12 +213,23 @@ async function main() {
   let alreadyFilled = 0;
 
   for (const row of csvWithContent) {
-    const sku = (row.sku || "").trim();
-    if (!sku) { noMatch++; continue; }
+    const csvTitle = (row.title || "").trim();
+    if (!csvTitle) { noMatch++; continue; }
 
-    const product = skuMap.get(sku.toLowerCase());
+    const normCsv = normalize(csvTitle);
+    let product = titleMap.get(normCsv);
+
     if (!product) {
-      console.log(`  ? No match for SKU "${sku}" (${row.title})`);
+      for (const [normShopify, p] of titleMap) {
+        if (normShopify.includes(normCsv) || normCsv.includes(normShopify)) {
+          product = p;
+          break;
+        }
+      }
+    }
+
+    if (!product) {
+      console.log(`  ? No match for "${csvTitle}"`);
       noMatch++;
       continue;
     }
