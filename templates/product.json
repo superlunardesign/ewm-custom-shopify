@@ -329,7 +329,8 @@
       ],
       "custom_css": [
         ".jm-reviewer-info__name {font-weight: 400;}",
-        ".jm-button {border-radius: 0px; font-family: old standard tt; text-transform: uppercase;}"
+        ".jm-button {border-radius: 0px; font-family: old standard tt; text-transform: uppercase;}",
+        ".jm-review-widget-minimal-header__title {display:none;}"
       ],
       "settings": {
         "include_margins": true
