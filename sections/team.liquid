@@ -49,7 +49,7 @@
           {% for block in section.blocks %}
             <div class="sl-team__panel{% if forloop.first %} sl-team__panel--active{% endif %}" data-team-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
               <div class="sl-team__panel-top">
-                <p class="sl-team__subheading">MEET</p>
+                <p class="sl-team__subheading">MEET THE TEAM</p>
                 {%- assign team_name_tag = section.settings.heading_tag | default: 'h3' -%}
                 <{{ team_name_tag }} class="sl-team__name {{ section.settings.heading_size }}">{{ block.settings.name }}</{{ team_name_tag }}>
                 {% if block.settings.title != blank %}
