@@ -8,7 +8,7 @@
       data-url="{{ product.url }}"
       data-title="{{ product.title | escape }}"
       data-vendor="{{ product.vendor | escape }}"
-      data-price="{{ product.price | money }}"
+      data-price="{{ product.selected_or_first_available_variant.price | money }}"
       data-image="{% if product.featured_media != blank %}{{ product.featured_media | image_url: width: 200 }}{% endif %}"
     ></div>
   {%- endfor -%}

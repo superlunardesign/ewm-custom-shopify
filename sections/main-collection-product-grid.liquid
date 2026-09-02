@@ -2019,9 +2019,9 @@ min-height:40px;
                         {%- endif -%}
                         {%- if section.settings.price_position == 'card' or section.settings.price_position == 'both' -%}
                         <div class="sl-product-price">
-                          <span class="sl-price-current" data-product-price>{{ product.price | money }}</span>
-                          {%- if product.compare_at_price > product.price -%}
-                            <span class="sl-price-compare">{{ product.compare_at_price | money }}</span>
+                          <span class="sl-price-current" data-product-price>{{ product.selected_or_first_available_variant.price | money }}</span>
+                          {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+                            <span class="sl-price-compare">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
                           {%- endif -%}
                         </div>
                         {%- endif -%}
@@ -2039,7 +2039,7 @@ min-height:40px;
                             {%- if section.settings.price_position == 'card' -%}
                               {{ section.settings.add_to_cart_text }}
                             {%- else -%}
-                              <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price><span class="sl-btn-price--full">{{ product.price | money }}</span><span class="sl-btn-price--short">{{ product.price | money | remove: '.00' }}</span></span>
+                              <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price><span class="sl-btn-price--full">{{ product.selected_or_first_available_variant.price | money }}</span><span class="sl-btn-price--short">{{ product.selected_or_first_available_variant.price | money | remove: '.00' }}</span></span>
                             {%- endif -%}
                           </button>
                         {%- else -%}
@@ -2049,7 +2049,7 @@ min-height:40px;
                                 <span>{{ section.settings.soldout_button_text }}</span>
                               {%- else -%}
                                 <span>{{ section.settings.soldout_button_text }}</span>
-                                <span data-product-price><span class="sl-btn-price--full">{{ product.price | money }}</span><span class="sl-btn-price--short">{{ product.price | money | remove: '.00' }}</span></span>
+                                <span data-product-price><span class="sl-btn-price--full">{{ product.selected_or_first_available_variant.price | money }}</span><span class="sl-btn-price--short">{{ product.selected_or_first_available_variant.price | money | remove: '.00' }}</span></span>
                               {%- endif -%}
                             </div>
                           </div>
@@ -2197,9 +2197,9 @@ min-height:40px;
                         {%- endif -%}
                         {%- if section.settings.price_position == 'card' or section.settings.price_position == 'both' -%}
                         <div class="sl-product-price">
-                          <span class="sl-price-current" data-product-price>{{ product.price | money }}</span>
-                          {%- if product.compare_at_price > product.price -%}
-                            <span class="sl-price-compare">{{ product.compare_at_price | money }}</span>
+                          <span class="sl-price-current" data-product-price>{{ product.selected_or_first_available_variant.price | money }}</span>
+                          {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+                            <span class="sl-price-compare">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
                           {%- endif -%}
                         </div>
                         {%- endif -%}
@@ -2271,7 +2271,7 @@ min-height:40px;
                               {%- if section.settings.price_position == 'card' -%}
                                 {{ section.settings.add_to_cart_text }}
                               {%- else -%}
-                                <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price><span class="sl-btn-price--full">{{ product.price | money }}</span><span class="sl-btn-price--short">{{ product.price | money | remove: '.00' }}</span></span>
+                                <span style="float:left">{{ section.settings.add_to_cart_text }}</span> <span style="float:right" data-product-price><span class="sl-btn-price--full">{{ product.selected_or_first_available_variant.price | money }}</span><span class="sl-btn-price--short">{{ product.selected_or_first_available_variant.price | money | remove: '.00' }}</span></span>
                               {%- endif -%}
                             </button>
                           {%- else -%}
@@ -2281,7 +2281,7 @@ min-height:40px;
                                   <span>{{ section.settings.soldout_button_text }}</span>
                                 {%- else -%}
                                   <span>{{ section.settings.soldout_button_text }}</span>
-                                  <span data-product-price><span class="sl-btn-price--full">{{ product.price | money }}</span><span class="sl-btn-price--short">{{ product.price | money | remove: '.00' }}</span></span>
+                                  <span data-product-price><span class="sl-btn-price--full">{{ product.selected_or_first_available_variant.price | money }}</span><span class="sl-btn-price--short">{{ product.selected_or_first_available_variant.price | money | remove: '.00' }}</span></span>
                                 {%- endif -%}
                               </div>
                             </div>
@@ -2378,7 +2378,7 @@ min-height:40px;
   function el() { return document.getElementById('SLCollection-' + sectionId); }
   function grid() { var s = el(); return s ? s.querySelector('#product-grid') : null; }
 
-  /* ===== Mark Unavailable Variants ===== */
+  /* ===== Mark Unavailable Variants & Sync Initial Price ===== */
   function initVariants(sectionEl) {
     sectionEl.querySelectorAll('[data-product-id]').forEach(function(pc) {
       var script = pc.querySelector('.sl-variant-data');
@@ -2391,6 +2391,36 @@ min-height:40px;
           var has = variants.some(function(v) { return v['option' + pos] === val && v.available; });
           if (!has) btn.setAttribute('data-unavailable', 'true');
         });
+
+        var selected = {};
+        pc.querySelectorAll('.sl-size-btn[data-selected="true"], .sl-color-swatch[data-selected="true"]').forEach(function(b) {
+          var pos = b.getAttribute('data-option-position');
+          var val = b.getAttribute('data-option-value');
+          if (pos && val) selected['option' + pos] = val;
+        });
+        if (Object.keys(selected).length === 0) return;
+
+        var match = variants.find(function(v) {
+          return Object.keys(selected).every(function(k) { return v[k] === selected[k]; }) && v.available;
+        });
+        if (!match) return;
+
+        var cartBtn = pc.querySelector('.sl-add-to-cart-btn');
+        if (cartBtn) cartBtn.setAttribute('data-variant-id', match.id);
+
+        pc.querySelectorAll('[data-product-price]').forEach(function(priceEl) {
+          var fmt = Shopify.formatMoney ? Shopify.formatMoney(match.price) : '$' + (match.price / 100).toFixed(2);
+          var full = priceEl.querySelector('.sl-btn-price--full');
+          var short = priceEl.querySelector('.sl-btn-price--short');
+          if (full && short) { full.textContent = fmt; short.textContent = fmt.replace('.00', ''); }
+          else { priceEl.textContent = fmt; }
+        });
+
+        var cmp = pc.querySelector('.sl-price-compare');
+        if (cmp && match.compare_at_price) {
+          cmp.textContent = Shopify.formatMoney ? Shopify.formatMoney(match.compare_at_price) : '$' + (match.compare_at_price / 100).toFixed(2);
+          cmp.style.display = 'inline';
+        } else if (cmp) { cmp.style.display = 'none'; }
       } catch(e) {}
     });
   }

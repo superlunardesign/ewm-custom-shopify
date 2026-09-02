@@ -422,9 +422,9 @@
                   </div>
                   {%- unless section.settings.price_placement == 'button' -%}
                   <span class="sl-recs__price">
-                    {{ rec_product.price | money }}
-                    {%- if rec_product.compare_at_price > rec_product.price -%}
-                      <span class="sl-recs__price-compare">{{ rec_product.compare_at_price | money }}</span>
+                    {{ rec_product.selected_or_first_available_variant.price | money }}
+                    {%- if rec_product.selected_or_first_available_variant.compare_at_price > rec_product.selected_or_first_available_variant.price -%}
+                      <span class="sl-recs__price-compare">{{ rec_product.selected_or_first_available_variant.compare_at_price | money }}</span>
                     {%- endif -%}
                   </span>
                   {%- endunless -%}
@@ -450,7 +450,7 @@
                         onclick="slRecsAddToCart(this)">
                   <span>{% if rec_product.available %}{{ section.settings.atc_label | default: 'Add To Cart' }}{% else %}Sold Out{% endif %}</span>
                   {%- unless section.settings.price_placement == 'title_row' -%}
-                  <span>{{ rec_product.price | money }}</span>
+                  <span>{{ rec_product.selected_or_first_available_variant.price | money }}</span>
                   {%- endunless -%}
                 </button>
               {%- endif -%}

@@ -19,7 +19,7 @@ function setRecentlyViewedProducts() {
     productImg: "{{ product.featured_media | image_url: width: 533 }}",
     imgWidth:"{{ product.featured_media.width }}",
     imgHeight:"{{ product.featured_media.height }}",
-    productPrice: "{{ product.price | money_with_currency }}",
+    productPrice: "{{ product.selected_or_first_available_variant.price | money_with_currency }}",
     productUrl: "{{ product.url }}",
     productImageAltText: "{{product.featured_media.alt | escape }}"
   };
