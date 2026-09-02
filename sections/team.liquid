@@ -75,10 +75,20 @@
         </div>
 
         {% if section.blocks.size > 1 %}
-          <button class="sl-team__next" id="sl-team-next-{{ section.id }}" type="button">
-            Meet {{ section.blocks[1].settings.name }} &rarr;
-          </button>
-          <p style="font-size:14px;">Click through to meet the whole team</p>
+          <div class="sl-team__nav">
+            <div class="sl-team__dots" id="sl-team-dots-{{ section.id }}">
+              {% for block in section.blocks %}
+                <button type="button"
+                        class="sl-team__dot{% if forloop.first %} sl-team__dot--active{% endif %}"
+                        data-team-dot="{{ forloop.index0 }}"
+                        aria-label="View {{ block.settings.name }}">
+                </button>
+              {% endfor %}
+            </div>
+            <button class="sl-team__next" id="sl-team-next-{{ section.id }}" type="button">
+              Meet {{ section.blocks[1].settings.name }} &rarr;
+            </button>
+          </div>
         {% endif %}
       </div>
 
@@ -96,6 +106,7 @@
       var panels = document.getElementById('sl-team-panels-' + sectionId);
       var mediaWrap = document.getElementById('sl-team-media-' + sectionId);
       var nextBtn = document.getElementById('sl-team-next-' + sectionId);
+      var dotsWrap = document.getElementById('sl-team-dots-' + sectionId);
       if (!panels) return;
 
       function show(idx) {
@@ -111,6 +122,12 @@
           el.classList.toggle('sl-team__media-item--active', el.dataset.teamMedia === '' + idx);
         });
 
+        if (dotsWrap) {
+          dotsWrap.querySelectorAll('[data-team-dot]').forEach(function(dot) {
+            dot.classList.toggle('sl-team__dot--active', dot.dataset.teamDot === '' + idx);
+          });
+        }
+
         if (nextBtn && names.length > 1) {
           var nextIdx = (idx + 1) % names.length;
           nextBtn.innerHTML = 'Meet ' + names[nextIdx] + ' &rarr;';
@@ -120,6 +137,14 @@
       if (nextBtn) {
         nextBtn.addEventListener('click', function() {
           show((current + 1) % names.length);
+        });
+      }
+
+      if (dotsWrap) {
+        dotsWrap.querySelectorAll('[data-team-dot]').forEach(function(dot) {
+          dot.addEventListener('click', function() {
+            show(parseInt(dot.dataset.teamDot, 10));
+          });
         });
       }
 
@@ -150,6 +175,12 @@
             medias.forEach(function(m) {
               m.classList.toggle('sl-team__media-item--active', m.dataset.teamMedia === '' + idx);
             });
+            var dotsWrap = document.getElementById('sl-team-dots-' + sectionId);
+            if (dotsWrap) {
+              dotsWrap.querySelectorAll('[data-team-dot]').forEach(function(dot) {
+                dot.classList.toggle('sl-team__dot--active', dot.dataset.teamDot === '' + idx);
+              });
+            }
             var nextBtn = document.getElementById('sl-team-next-' + sectionId);
             if (nextBtn && names.length > 1) {
               var nextIdx = (idx + 1) % names.length;
@@ -348,22 +379,57 @@
     width: 100%;
   }
 
+  /* ── Navigation wrapper ── */
+  #shopify-section-{{ section.id }} .sl-team__nav {
+    flex-shrink: 0;
+    margin-top: 1.5rem;
+    border-top: 1px solid {{ section.settings.select_border_color | default: '#ddd' }};
+    padding-top: 1.4rem;
+  }
+
+  /* ── Pagination dots ── */
+  #shopify-section-{{ section.id }} .sl-team__dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-team__dot {
+    appearance: none;
+    border: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: {{ section.settings.select_border_color | default: '#ddd' }};
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+
+  #shopify-section-{{ section.id }} .sl-team__dot:hover {
+    background: {{ section.settings.subheading_color | default: '#6b6b6b' }};
+  }
+
+  #shopify-section-{{ section.id }} .sl-team__dot--active {
+    background: {{ section.settings.heading_color | default: '#1a1a1a' }};
+    transform: scale(1.2);
+  }
+
   /* ── Meet Next link ── */
   #shopify-section-{{ section.id }} .sl-team__next {
     appearance: none;
     background: none;
     border: none;
-    border-top: 1px solid {{ section.settings.select_border_color | default: '#ddd' }};
-    padding: 1.4rem 0 0;
-    margin-top: 1.5rem;
+    padding: 0;
     font-family: var(--font-body-family);
     font-size: 1.5rem;
     letter-spacing: 0.06em;
     color: {{ section.settings.heading_color }};
     cursor: pointer;
-    text-align: left;
+    text-align: center;
+    width: 100%;
     transition: opacity 0.2s ease;
-    flex-shrink: 0;
   }
 
   #shopify-section-{{ section.id }} .sl-team__next:hover {
