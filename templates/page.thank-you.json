@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "page_full_width": true,
+        "page_full_width_spacing": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "booking_confirmation": {
+      "type": "sl-booking-confirmation",
+      "settings": {
+        "icon": "✓",
+        "heading": "You are booked!",
+        "body": "<p>A confirmation has been sent to your email address.</p><p>Please fill out the proper waiver attached in your email confirmation before arrival.<\/p>",
+        "notice": "",
+        "text_alignment": "center",
+        "max_width": 600,
+        "heading_size": 32,
+        "heading_size_mobile": 26,
+        "body_size": 16,
+        "heading_color": "#1a1a1a",
+        "body_color": "#444444",
+        "notice_bg": "#d4dccb",
+        "notice_text_color": "#1a1a1a",
+        "notice_font_size": 14,
+        "notice_border_radius": 4,
+        "notice_padding_y": 12,
+        "notice_padding_x": 24,
+        "padding_top": 60,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "booking_confirmation"
+  ]
+}
