@@ -279,6 +279,7 @@
         "products_limit": 8,
         "auto_scroll_mode": "off",
         "auto_scroll_speed": 0.5,
+        "show_vendor": true,
         "show_rating": true,
         "show_atc": true,
         "atc_label": "Add To Cart",
@@ -330,7 +331,7 @@
       "custom_css": [
         ".jm-reviewer-info__name {font-weight: 400;}",
         ".jm-button {border-radius: 0px; font-family: old standard tt; text-transform: uppercase;}",
-        ".jm-review-widget-minimal-header__title {display:none;}"
+        ".jm-review-widget-minimal-header__title {display: none;}"
       ],
       "settings": {
         "include_margins": true
