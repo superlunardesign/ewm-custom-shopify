@@ -3,7 +3,7 @@
 <script src="{{ 'magnific-popup.js' | asset_url }}" defer="defer"></script>
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {% liquid
-    case section.settings.icon_format == 'numbered' 
+    case section.settings.icon_format
     when 'numbered'
     assign icon_format = 'numbered'
     when 'alphabets'
@@ -659,4 +659,13 @@
 }
 ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: 'case section.settings.icon_format == ''numbered'' '
+  to: case section.settings.icon_format
+  position: 259..292
+{%- endcomment -%}

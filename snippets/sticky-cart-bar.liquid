@@ -86,7 +86,7 @@
                 </div>
     {% if product.has_only_default_variant %}
     <span class="sticky-bar-price">
-    {%- render 'price', product: product, use_variant: true' -%}
+    {%- render 'price', product: product, use_variant: true -%}
     </span>
     {% endif %}
    {%- unless product.has_only_default_variant -%}
@@ -172,3 +172,13 @@
       </script>
   
    
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'price', product: product, use_variant: true' -%}"
+  to: "{%- render 'price', product: product, use_variant: true -%}"
+  position: 4775..4834
+{% endcomment %}
