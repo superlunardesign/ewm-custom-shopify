@@ -540,18 +540,8 @@
     }
 
     var country = (window.Shopify && window.Shopify.country) || '';
-    log('Shopify.country = "' + country + '"');
-
-    if (country === 'US') {
-      log('US detected — showing CCPA banner');
-      showBanner(ccpaBanner);
-    } else if (GDPR_COUNTRIES.indexOf(country) !== -1) {
-      log('GDPR country detected (' + country + ') — showing GDPR banner');
-      showBanner(gdprBanner);
-    } else {
-      log('Country: "' + country + '" — showing full consent banner');
-      showBanner(gdprBanner);
-    }
+    log('Shopify.country = "' + country + '" — showing consent banner');
+    showBanner(gdprBanner);
   }
 
   window.slCookieConsent = {
