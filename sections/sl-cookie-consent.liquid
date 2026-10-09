@@ -389,6 +389,10 @@
   }
 
   function showBanner(el) {
+    gdprBanner.classList.remove('sl-consent-banner--visible');
+    gdprBanner.setAttribute('aria-hidden', 'true');
+    ccpaBanner.classList.remove('sl-consent-banner--visible');
+    ccpaBanner.setAttribute('aria-hidden', 'true');
     el.classList.add('sl-consent-banner--visible');
     el.setAttribute('aria-hidden', 'false');
   }
