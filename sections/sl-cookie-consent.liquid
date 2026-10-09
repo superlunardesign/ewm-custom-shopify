@@ -1,0 +1,677 @@
+{%- comment -%}
+  SL Cookie Consent — GDPR + CCPA/US Privacy compliant consent banner.
+  Uses Shopify Customer Privacy API for geo-detection and consent state.
+  Integrates with Google Consent Mode v2.
+{%- endcomment -%}
+
+{%- style -%}
+/* ── Consent Banner ── */
+.sl-consent-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  transform: translateY(100%);
+  transition: transform 0.35s ease;
+  font-family: var(--font-body-family);
+}
+
+.sl-consent-banner--visible {
+  transform: translateY(0);
+}
+
+.sl-consent-banner__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  background: {{ section.settings.banner_bg }};
+  color: {{ section.settings.banner_text }};
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.12);
+}
+
+.sl-consent-banner__copy {
+  flex: 1 1 400px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.sl-consent-banner__copy a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.sl-consent-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.sl-consent-btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body-family);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 22px;
+  border-radius: {{ section.settings.button_radius }}px;
+  transition: opacity 0.2s ease;
+  line-height: 1;
+}
+
+.sl-consent-btn:hover { opacity: 0.85; }
+
+.sl-consent-btn--accept {
+  background: {{ section.settings.accept_bg }};
+  color: {{ section.settings.accept_text }};
+}
+
+.sl-consent-btn--reject {
+  background: transparent;
+  color: {{ section.settings.banner_text }};
+  border: 1px solid {{ section.settings.banner_text }};
+}
+
+.sl-consent-btn--settings {
+  background: transparent;
+  color: {{ section.settings.banner_text }};
+  text-decoration: underline;
+  padding: 10px 8px;
+}
+
+/* ── Preference Modal ── */
+.sl-consent-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.sl-consent-modal-overlay--visible {
+  display: flex;
+}
+
+.sl-consent-modal {
+  background: {{ section.settings.banner_bg }};
+  color: {{ section.settings.banner_text }};
+  max-width: 520px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  padding: 32px 28px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.sl-consent-modal__title {
+  font-family: var(--font-heading-family);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.sl-consent-modal__desc {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 24px;
+  opacity: 0.85;
+}
+
+.sl-consent-category {
+  border-top: 1px solid rgba(128,128,128,0.2);
+  padding: 16px 0;
+}
+
+.sl-consent-category__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sl-consent-category__name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sl-consent-category__desc {
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.75;
+  margin-top: 6px;
+}
+
+.sl-consent-category__label {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* Toggle switch */
+.sl-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.sl-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.sl-toggle__track {
+  position: absolute;
+  inset: 0;
+  background: rgba(128,128,128,0.3);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sl-toggle input:checked + .sl-toggle__track {
+  background: {{ section.settings.accept_bg }};
+}
+
+.sl-toggle__track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.sl-toggle input:checked + .sl-toggle__track::after {
+  transform: translateX(20px);
+}
+
+.sl-consent-modal__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.sl-consent-modal__actions .sl-consent-btn {
+  flex: 1;
+  text-align: center;
+  min-width: 120px;
+}
+
+/* ── CCPA notice (simpler) ── */
+.sl-consent-banner--ccpa .sl-consent-banner__inner {
+  font-size: 13px;
+}
+
+/* ── Footer link trigger ── */
+.sl-consent-trigger {
+  cursor: pointer;
+}
+
+/* ── Mobile adjustments ── */
+@media (max-width: 749px) {
+  .sl-consent-banner__inner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+  .sl-consent-banner__actions {
+    justify-content: stretch;
+  }
+  .sl-consent-btn {
+    flex: 1;
+    text-align: center;
+  }
+  .sl-consent-modal {
+    padding: 24px 20px;
+  }
+}
+{%- endstyle -%}
+
+<!-- GDPR Banner -->
+<div class="sl-consent-banner sl-consent-banner--gdpr" id="sl-consent-gdpr" aria-hidden="true" role="dialog" aria-label="Cookie consent">
+  <div class="sl-consent-banner__inner">
+    <div class="sl-consent-banner__copy">
+      {{ section.settings.gdpr_message }}
+      {%- if section.settings.privacy_url != blank -%}
+        <a href="{{ section.settings.privacy_url }}">{{ section.settings.privacy_link_text }}</a>
+      {%- endif -%}
+    </div>
+    <div class="sl-consent-banner__actions">
+      <button type="button" class="sl-consent-btn sl-consent-btn--accept" data-consent-accept>{{ section.settings.accept_text }}</button>
+      <button type="button" class="sl-consent-btn sl-consent-btn--reject" data-consent-reject>{{ section.settings.reject_text }}</button>
+      <button type="button" class="sl-consent-btn sl-consent-btn--settings" data-consent-settings>{{ section.settings.settings_text }}</button>
+    </div>
+  </div>
+</div>
+
+<!-- CCPA / US Privacy Banner -->
+<div class="sl-consent-banner sl-consent-banner--ccpa" id="sl-consent-ccpa" aria-hidden="true" role="dialog" aria-label="Privacy notice">
+  <div class="sl-consent-banner__inner">
+    <div class="sl-consent-banner__copy">
+      {{ section.settings.ccpa_message }}
+      {%- if section.settings.privacy_url != blank -%}
+        <a href="{{ section.settings.privacy_url }}">{{ section.settings.privacy_link_text }}</a>
+      {%- endif -%}
+    </div>
+    <div class="sl-consent-banner__actions">
+      <button type="button" class="sl-consent-btn sl-consent-btn--accept" data-consent-accept>Got it</button>
+      <button type="button" class="sl-consent-btn sl-consent-btn--reject" data-consent-optout>{{ section.settings.optout_text }}</button>
+    </div>
+  </div>
+</div>
+
+<!-- Preference Modal -->
+<div class="sl-consent-modal-overlay" id="sl-consent-modal" aria-hidden="true">
+  <div class="sl-consent-modal" role="dialog" aria-label="Cookie preferences">
+    <h2 class="sl-consent-modal__title">Privacy Preferences</h2>
+    <p class="sl-consent-modal__desc">Choose which cookies you allow. Essential cookies are always active because they're needed for the site to function.</p>
+
+    <div class="sl-consent-category">
+      <div class="sl-consent-category__header">
+        <span class="sl-consent-category__name">Essential</span>
+        <span class="sl-consent-category__label">Always on</span>
+      </div>
+      <p class="sl-consent-category__desc">Required for the site to work — cart, checkout, authentication, security.</p>
+    </div>
+
+    <div class="sl-consent-category">
+      <div class="sl-consent-category__header">
+        <span class="sl-consent-category__name">Analytics</span>
+        <label class="sl-toggle">
+          <input type="checkbox" id="sl-pref-analytics">
+          <span class="sl-toggle__track"></span>
+        </label>
+      </div>
+      <p class="sl-consent-category__desc">Help us understand how visitors interact with the site so we can improve it. No personal data is shared.</p>
+    </div>
+
+    <div class="sl-consent-category">
+      <div class="sl-consent-category__header">
+        <span class="sl-consent-category__name">Marketing</span>
+        <label class="sl-toggle">
+          <input type="checkbox" id="sl-pref-marketing">
+          <span class="sl-toggle__track"></span>
+        </label>
+      </div>
+      <p class="sl-consent-category__desc">Used to deliver relevant ads and measure campaign performance across platforms.</p>
+    </div>
+
+    <div class="sl-consent-category">
+      <div class="sl-consent-category__header">
+        <span class="sl-consent-category__name">Preferences</span>
+        <label class="sl-toggle">
+          <input type="checkbox" id="sl-pref-preferences">
+          <span class="sl-toggle__track"></span>
+        </label>
+      </div>
+      <p class="sl-consent-category__desc">Remember your settings like language and region for a personalized experience.</p>
+    </div>
+
+    <div class="sl-consent-category">
+      <div class="sl-consent-category__header">
+        <span class="sl-consent-category__name">Sale of Personal Data</span>
+        <label class="sl-toggle">
+          <input type="checkbox" id="sl-pref-sale">
+          <span class="sl-toggle__track"></span>
+        </label>
+      </div>
+      <p class="sl-consent-category__desc">Under US privacy laws you can opt out of the sale or sharing of your personal data for targeted advertising.</p>
+    </div>
+
+    <div class="sl-consent-modal__actions">
+      <button type="button" class="sl-consent-btn sl-consent-btn--reject" data-modal-reject>Reject All</button>
+      <button type="button" class="sl-consent-btn sl-consent-btn--accept" data-modal-save>Save Preferences</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var COOKIE_NAME = 'sl_consent';
+  var COOKIE_DAYS = 365;
+
+  var gdprBanner = document.getElementById('sl-consent-gdpr');
+  var ccpaBanner = document.getElementById('sl-consent-ccpa');
+  var modal = document.getElementById('sl-consent-modal');
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+
+  function setCookie(name, val, days) {
+    var d = new Date();
+    d.setTime(d.getTime() + days * 86400000);
+    document.cookie = name + '=' + encodeURIComponent(val) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax;Secure';
+  }
+
+  function getConsent() {
+    var raw = getCookie(COOKIE_NAME);
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch(e) { return null; }
+  }
+
+  function saveConsent(prefs) {
+    setCookie(COOKIE_NAME, JSON.stringify(prefs), COOKIE_DAYS);
+    applyConsent(prefs);
+    hideAll();
+  }
+
+  function hideAll() {
+    gdprBanner.classList.remove('sl-consent-banner--visible');
+    gdprBanner.setAttribute('aria-hidden', 'true');
+    ccpaBanner.classList.remove('sl-consent-banner--visible');
+    ccpaBanner.setAttribute('aria-hidden', 'true');
+    modal.classList.remove('sl-consent-modal-overlay--visible');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  function showBanner(el) {
+    el.classList.add('sl-consent-banner--visible');
+    el.setAttribute('aria-hidden', 'false');
+  }
+
+  function showModal() {
+    var prefs = getConsent() || { analytics: false, marketing: false, preferences: false, sale_of_data: true };
+    document.getElementById('sl-pref-analytics').checked = prefs.analytics;
+    document.getElementById('sl-pref-marketing').checked = prefs.marketing;
+    document.getElementById('sl-pref-preferences').checked = prefs.preferences;
+    document.getElementById('sl-pref-sale').checked = prefs.sale_of_data !== false;
+    modal.classList.add('sl-consent-modal-overlay--visible');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  function applyConsent(prefs) {
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        'analytics_storage': prefs.analytics ? 'granted' : 'denied',
+        'ad_storage': prefs.marketing ? 'granted' : 'denied',
+        'ad_user_data': prefs.marketing ? 'granted' : 'denied',
+        'ad_personalization': prefs.sale_of_data !== false ? 'granted' : 'denied',
+        'personalization_storage': prefs.preferences ? 'granted' : 'denied'
+      });
+    }
+
+    try {
+      Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function(error) {
+        if (error || !window.Shopify.customerPrivacy) return;
+        window.Shopify.customerPrivacy.setTrackingConsent({
+          analytics: prefs.analytics,
+          marketing: prefs.marketing,
+          preferences: prefs.preferences,
+          sale_of_data: prefs.sale_of_data !== false
+        }, function() {});
+      });
+    } catch(e) {}
+
+    window.slConsentState = prefs;
+    document.dispatchEvent(new CustomEvent('sl:consent', { detail: prefs }));
+  }
+
+  function acceptAll() {
+    saveConsent({ analytics: true, marketing: true, preferences: true, sale_of_data: true });
+  }
+
+  function rejectAll() {
+    saveConsent({ analytics: false, marketing: false, preferences: false, sale_of_data: false });
+  }
+
+  function optOutSale() {
+    var prefs = getConsent() || { analytics: true, marketing: true, preferences: true, sale_of_data: true };
+    prefs.sale_of_data = false;
+    prefs.marketing = false;
+    saveConsent(prefs);
+  }
+
+  function saveModalPrefs() {
+    saveConsent({
+      analytics: document.getElementById('sl-pref-analytics').checked,
+      marketing: document.getElementById('sl-pref-marketing').checked,
+      preferences: document.getElementById('sl-pref-preferences').checked,
+      sale_of_data: document.getElementById('sl-pref-sale').checked
+    });
+  }
+
+  gdprBanner.querySelector('[data-consent-accept]').addEventListener('click', acceptAll);
+  gdprBanner.querySelector('[data-consent-reject]').addEventListener('click', rejectAll);
+  gdprBanner.querySelector('[data-consent-settings]').addEventListener('click', function() { hideAll(); showModal(); });
+
+  ccpaBanner.querySelector('[data-consent-accept]').addEventListener('click', function() {
+    var prefs = getConsent() || { analytics: true, marketing: true, preferences: true, sale_of_data: true };
+    saveConsent(prefs);
+  });
+  ccpaBanner.querySelector('[data-consent-optout]').addEventListener('click', optOutSale);
+
+  modal.querySelector('[data-modal-save]').addEventListener('click', saveModalPrefs);
+  modal.querySelector('[data-modal-reject]').addEventListener('click', rejectAll);
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) hideAll();
+  });
+
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('[data-open-consent]') || e.target.closest('.sl-consent-trigger')) {
+      e.preventDefault();
+      showModal();
+    }
+  });
+
+  /* ── Region detection & initialization ── */
+  var GDPR_COUNTRIES = [
+    'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU',
+    'IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES',
+    'SE','GB','IS','LI','NO','CH'
+  ];
+
+  var US_PRIVACY_STATES = [
+    'CA','CO','CT','VA','UT','TX','OR','MT','DE','IA','IN','TN','FL','NE','NH','NJ','MD','MN','KY'
+  ];
+
+  function init() {
+    var existing = getConsent();
+    if (existing) {
+      applyConsent(existing);
+      return;
+    }
+
+    if (navigator.globalPrivacyControl) {
+      saveConsent({ analytics: true, marketing: false, preferences: true, sale_of_data: false });
+      return;
+    }
+
+    try {
+      Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function(error) {
+        if (error || !window.Shopify.customerPrivacy) {
+          fallbackDetect();
+          return;
+        }
+        var privacy = window.Shopify.customerPrivacy;
+
+        if (typeof privacy.shouldShowGDPRBanner === 'function' && privacy.shouldShowGDPRBanner()) {
+          showBanner(gdprBanner);
+          return;
+        }
+
+        if (typeof privacy.shouldShowCCPABanner === 'function' && privacy.shouldShowCCPABanner()) {
+          showBanner(ccpaBanner);
+          return;
+        }
+
+        grantByDefault();
+      });
+    } catch(e) {
+      fallbackDetect();
+    }
+  }
+
+  function fallbackDetect() {
+    var country = (window.Shopify && window.Shopify.country) || '';
+    if (GDPR_COUNTRIES.indexOf(country) !== -1) {
+      showBanner(gdprBanner);
+    } else if (country === 'US') {
+      showBanner(ccpaBanner);
+    } else if (country) {
+      grantByDefault();
+    } else {
+      detectByTimezone();
+    }
+  }
+
+  function detectByTimezone() {
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      if (tz.indexOf('Europe/') === 0) { showBanner(gdprBanner); return; }
+      if (tz.indexOf('America/') === 0) { showBanner(ccpaBanner); return; }
+    } catch(e) {}
+    grantByDefault();
+  }
+
+  function grantByDefault() {
+    saveConsent({ analytics: true, marketing: true, preferences: true, sale_of_data: true });
+  }
+
+  window.slCookieConsent = {
+    openPreferences: showModal,
+    getConsent: getConsent,
+    acceptAll: acceptAll,
+    rejectAll: rejectAll,
+    optOutSale: optOutSale
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Cookie Consent",
+  "class": "sl-cookie-consent-section",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "GDPR Banner (EU/UK)"
+    },
+    {
+      "type": "textarea",
+      "id": "gdpr_message",
+      "label": "GDPR message",
+      "default": "We use cookies to improve your experience, analyze site traffic, and personalize content. You can choose which cookies to allow. "
+    },
+    {
+      "type": "text",
+      "id": "accept_text",
+      "label": "Accept button text",
+      "default": "Accept All"
+    },
+    {
+      "type": "text",
+      "id": "reject_text",
+      "label": "Reject button text",
+      "default": "Reject All"
+    },
+    {
+      "type": "text",
+      "id": "settings_text",
+      "label": "Settings link text",
+      "default": "Customize"
+    },
+    {
+      "type": "header",
+      "content": "US Privacy Banner (CCPA)"
+    },
+    {
+      "type": "textarea",
+      "id": "ccpa_message",
+      "label": "CCPA message",
+      "default": "We value your privacy. We and our partners use cookies and similar technologies to personalize content and ads. You may opt out of the sale or sharing of your personal data. "
+    },
+    {
+      "type": "text",
+      "id": "optout_text",
+      "label": "Opt-out button text",
+      "default": "Do Not Sell My Data"
+    },
+    {
+      "type": "header",
+      "content": "Shared Settings"
+    },
+    {
+      "type": "text",
+      "id": "privacy_url",
+      "label": "Privacy policy URL",
+      "default": "/pages/privacy-policy"
+    },
+    {
+      "type": "text",
+      "id": "privacy_link_text",
+      "label": "Privacy link text",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "banner_bg",
+      "label": "Banner background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "banner_text",
+      "label": "Banner text color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "accept_bg",
+      "label": "Accept button background",
+      "default": "#8c9b6d"
+    },
+    {
+      "type": "color",
+      "id": "accept_text",
+      "label": "Accept button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

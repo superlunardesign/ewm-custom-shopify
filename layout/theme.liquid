@@ -1,15 +1,27 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
+    <!-- Google Consent Mode v2 — defaults before gtag loads -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'functionality_storage': 'granted',
+        'personalization_storage': 'denied',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+      });
+    </script>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQVDNWG3DJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQVDNWG3DJ');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LQVDNWG3DJ"></script>
+    <script>
+      gtag('js', new Date());
+      gtag('config', 'G-LQVDNWG3DJ');
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -486,6 +498,7 @@
     {% section 'suggested-products' %}
     {% render 'scroll-to-top' %}
     {% section 'newsletter-modal' %}
+    {% section 'sl-cookie-consent' %}
 
   </body>
 </html>
