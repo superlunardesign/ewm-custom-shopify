@@ -499,6 +499,16 @@
       return;
     }
 
+    var params = new URLSearchParams(window.location.search);
+    var forceConsent = params.get('force_consent');
+    if (forceConsent) {
+      hideAll();
+      if (forceConsent === 'gdpr') { showBanner(gdprBanner); }
+      else if (forceConsent === 'ccpa') { showBanner(ccpaBanner); }
+      else if (forceConsent === 'modal') { showModal(); }
+      return;
+    }
+
     var existing = getConsent();
     if (existing) {
       applyConsent(existing);
