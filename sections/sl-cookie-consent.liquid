@@ -5,20 +5,29 @@
 {%- endcomment -%}
 
 {%- style -%}
+/* ── Section wrapper — keep out of flow ── */
+.sl-cookie-consent-section {
+  position: static !important;
+  display: contents !important;
+}
+
 /* ── Consent Banner ── */
 .sl-consent-banner {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  width: 100%;
   z-index: 9999;
-  transform: translateY(100%);
-  transition: transform 0.35s ease;
   font-family: var(--font-body-family);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
 .sl-consent-banner--visible {
-  transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
 }
 
 .sl-consent-banner__inner {
