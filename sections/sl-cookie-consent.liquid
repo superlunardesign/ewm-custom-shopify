@@ -509,13 +509,19 @@
       return;
     }
 
+    var log = function(msg) { try { console.log('[CookieConsent] ' + msg); } catch(e) {} };
+
     var existing = getConsent();
     if (existing) {
+      log('Existing consent found — applying saved preferences');
       applyConsent(existing);
       return;
     }
 
+    log('No existing consent — detecting region...');
+
     if (navigator.globalPrivacyControl) {
+      log('GPC signal detected — opting out of sale/marketing');
       saveConsent({ analytics: true, marketing: false, preferences: true, sale_of_data: false });
       return;
     }
@@ -523,52 +529,60 @@
     try {
       Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function(error) {
         if (error || !window.Shopify.customerPrivacy) {
+          log('Shopify Privacy API unavailable — using fallback detection');
           fallbackDetect();
           return;
         }
         var privacy = window.Shopify.customerPrivacy;
 
         if (typeof privacy.shouldShowGDPRBanner === 'function' && privacy.shouldShowGDPRBanner()) {
+          log('Shopify API → GDPR region detected — showing GDPR banner');
           showBanner(gdprBanner);
           return;
         }
 
         if (typeof privacy.shouldShowCCPABanner === 'function' && privacy.shouldShowCCPABanner()) {
+          log('Shopify API → US privacy state detected — showing CCPA banner');
           showBanner(ccpaBanner);
           return;
         }
 
-        grantByDefault();
+        log('Shopify API → no GDPR/CCPA required — using fallback detection');
+        fallbackDetect();
       });
     } catch(e) {
+      log('Shopify API error — using fallback detection');
       fallbackDetect();
     }
   }
 
   function fallbackDetect() {
+    var log = function(msg) { try { console.log('[CookieConsent] ' + msg); } catch(e) {} };
     var country = (window.Shopify && window.Shopify.country) || '';
+    log('Shopify.country = "' + country + '"');
+
     if (GDPR_COUNTRIES.indexOf(country) !== -1) {
+      log('Country in GDPR list — showing GDPR banner');
       showBanner(gdprBanner);
     } else if (country === 'US') {
+      log('Country is US — showing CCPA banner');
       showBanner(ccpaBanner);
-    } else if (country) {
-      grantByDefault();
     } else {
-      detectByTimezone();
+      var tz = '';
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e) {}
+      log('Timezone = "' + tz + '"');
+
+      if (tz.indexOf('Europe/') === 0) {
+        log('European timezone — showing GDPR banner');
+        showBanner(gdprBanner);
+      } else if (tz.indexOf('America/') === 0) {
+        log('Americas timezone — showing CCPA banner');
+        showBanner(ccpaBanner);
+      } else {
+        log('No matching region — showing simple consent notice');
+        showBanner(ccpaBanner);
+      }
     }
-  }
-
-  function detectByTimezone() {
-    try {
-      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      if (tz.indexOf('Europe/') === 0) { showBanner(gdprBanner); return; }
-      if (tz.indexOf('America/') === 0) { showBanner(ccpaBanner); return; }
-    } catch(e) {}
-    grantByDefault();
-  }
-
-  function grantByDefault() {
-    saveConsent({ analytics: true, marketing: true, preferences: true, sale_of_data: true });
   }
 
   window.slCookieConsent = {
