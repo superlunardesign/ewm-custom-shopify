@@ -490,6 +490,15 @@
   ];
 
   function init() {
+    if (window.Shopify && window.Shopify.designMode) {
+      var preview = '{{ section.settings.editor_preview }}';
+      hideAll();
+      if (preview === 'gdpr') { showBanner(gdprBanner); }
+      else if (preview === 'ccpa') { showBanner(ccpaBanner); }
+      else if (preview === 'modal') { showBanner(gdprBanner); showModal(); }
+      return;
+    }
+
     var existing = getConsent();
     if (existing) {
       applyConsent(existing);
@@ -565,6 +574,10 @@
   } else {
     init();
   }
+
+  document.addEventListener('shopify:section:load', function(e) {
+    if (e.target.querySelector('.sl-cookie-consent-section, #sl-consent-gdpr')) init();
+  });
 })();
 </script>
 
@@ -574,6 +587,19 @@
   "class": "sl-cookie-consent-section",
   "limit": 1,
   "settings": [
+    {
+      "type": "select",
+      "id": "editor_preview",
+      "label": "Preview in editor",
+      "info": "Force-show a banner while in the theme editor. Set to None for live behavior.",
+      "options": [
+        { "value": "none", "label": "None (live behavior)" },
+        { "value": "gdpr", "label": "GDPR Banner (EU/UK)" },
+        { "value": "ccpa", "label": "US Privacy Banner (CCPA)" },
+        { "value": "modal", "label": "Preferences Modal" }
+      ],
+      "default": "gdpr"
+    },
     {
       "type": "header",
       "content": "GDPR Banner (EU/UK)"
