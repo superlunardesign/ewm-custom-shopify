@@ -561,27 +561,12 @@
     var country = (window.Shopify && window.Shopify.country) || '';
     log('Shopify.country = "' + country + '"');
 
-    if (GDPR_COUNTRIES.indexOf(country) !== -1) {
-      log('Country in GDPR list — showing GDPR banner');
-      showBanner(gdprBanner);
-    } else if (country === 'US') {
+    if (country === 'US') {
       log('Country is US — showing CCPA banner');
       showBanner(ccpaBanner);
     } else {
-      var tz = '';
-      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e) {}
-      log('Timezone = "' + tz + '"');
-
-      if (tz.indexOf('Europe/') === 0) {
-        log('European timezone — showing GDPR banner');
-        showBanner(gdprBanner);
-      } else if (tz.indexOf('America/') === 0) {
-        log('Americas timezone — showing CCPA banner');
-        showBanner(ccpaBanner);
-      } else {
-        log('No matching region — showing simple consent notice');
-        showBanner(ccpaBanner);
-      }
+      log('Showing full consent banner');
+      showBanner(gdprBanner);
     }
   }
 
