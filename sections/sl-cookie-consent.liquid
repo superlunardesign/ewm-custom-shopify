@@ -505,10 +505,6 @@
     'SE','GB','IS','LI','NO','CH'
   ];
 
-  var US_PRIVACY_STATES = [
-    'CA','CO','CT','VA','UT','TX','OR','MT','DE','IA','IN','TN','FL','NE','NH','NJ','MD','MN','KY'
-  ];
-
   function init() {
     if (window.Shopify && window.Shopify.designMode) {
       var preview = '{{ section.settings.editor_preview }}';
@@ -551,11 +547,36 @@
       saveConsent({ analytics: true, marketing: true, preferences: true, sale_of_data: true });
     }
 
-    function checkByCountry() {
+    function isGDPR() {
       var country = (window.Shopify && window.Shopify.country) || '';
       log('Shopify.country = "' + country + '"');
       if (GDPR_COUNTRIES.indexOf(country) !== -1) {
-        log('GDPR country (' + country + ') — showing consent banner');
+        log('GDPR country (' + country + ')');
+        return true;
+      }
+      if (country) {
+        log('Non-GDPR country (' + country + ')');
+        return false;
+      }
+      log('Shopify.country is empty — checking timezone');
+      try {
+        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        log('Timezone = "' + tz + '"');
+        var euroTz = ['Europe/', 'Atlantic/Reykjavik', 'Atlantic/Canary', 'Atlantic/Faroe', 'Atlantic/Madeira'];
+        for (var i = 0; i < euroTz.length; i++) {
+          if (tz.indexOf(euroTz[i]) === 0 || tz === euroTz[i]) {
+            log('European timezone detected');
+            return true;
+          }
+        }
+      } catch(e) {}
+      log('Non-European timezone');
+      return false;
+    }
+
+    function detect() {
+      if (isGDPR()) {
+        log('Showing GDPR consent banner');
         showBanner(gdprBanner);
       } else {
         grantByDefault();
@@ -565,8 +586,8 @@
     try {
       Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function(error) {
         if (error || !window.Shopify.customerPrivacy) {
-          log('Shopify Privacy API unavailable — falling back to country');
-          checkByCountry();
+          log('Shopify Privacy API unavailable — using country/timezone');
+          detect();
           return;
         }
         var privacy = window.Shopify.customerPrivacy;
@@ -577,12 +598,12 @@
           return;
         }
 
-        log('Shopify API → not GDPR — checking country fallback');
-        checkByCountry();
+        log('Shopify API → not GDPR — checking country/timezone');
+        detect();
       });
     } catch(e) {
-      log('Shopify API error — falling back to country');
-      checkByCountry();
+      log('Shopify API error — using country/timezone');
+      detect();
     }
   }
 
