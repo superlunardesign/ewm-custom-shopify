@@ -547,63 +547,104 @@
       saveConsent({ analytics: true, marketing: true, preferences: true, sale_of_data: true });
     }
 
-    function isGDPR() {
-      var country = (window.Shopify && window.Shopify.country) || '';
-      log('Shopify.country = "' + country + '"');
-      if (GDPR_COUNTRIES.indexOf(country) !== -1) {
-        log('GDPR country (' + country + ')');
-        return true;
+    function resolveCountry(country) {
+      if (!country) {
+        log('Country still unknown after all checks — showing banner for legal safety');
+        showBanner(gdprBanner);
+        return;
       }
-      if (country) {
-        log('Non-GDPR country (' + country + ')');
-        return false;
+      var upper = country.toUpperCase();
+      if (GDPR_COUNTRIES.indexOf(upper) !== -1) {
+        log('GDPR country (' + upper + ') — showing consent banner');
+        showBanner(gdprBanner);
+      } else {
+        log('Non-GDPR country (' + upper + ') — no banner required');
+        grantByDefault();
       }
-      log('Shopify.country is empty — checking timezone');
+    }
+
+    function timezoneFallback() {
+      log('All country detection failed — checking timezone');
       try {
         var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
         log('Timezone = "' + tz + '"');
         var euroTz = ['Europe/', 'Atlantic/Reykjavik', 'Atlantic/Canary', 'Atlantic/Faroe', 'Atlantic/Madeira'];
         for (var i = 0; i < euroTz.length; i++) {
           if (tz.indexOf(euroTz[i]) === 0 || tz === euroTz[i]) {
-            log('European timezone detected');
-            return true;
+            log('European timezone — showing banner');
+            showBanner(gdprBanner);
+            return;
+          }
+        }
+        var nonGdprTz = ['America/', 'Pacific/', 'Australia/', 'Asia/'];
+        for (var j = 0; j < nonGdprTz.length; j++) {
+          if (tz.indexOf(nonGdprTz[j]) === 0) {
+            log('Non-GDPR timezone (' + tz + ') — no banner');
+            grantByDefault();
+            return;
           }
         }
       } catch(e) {}
-      log('Region unknown — showing banner for legal safety');
-      return true;
+      log('Timezone unknown — showing banner for legal safety');
+      showBanner(gdprBanner);
     }
 
-    function detect() {
-      if (isGDPR()) {
-        log('Showing GDPR consent banner');
-        showBanner(gdprBanner);
-      } else {
-        grantByDefault();
-      }
+    function detectByThirdParty() {
+      log('Trying third-party IP geo-detection...');
+      fetch('https://ipapi.co/country/')
+        .then(function(r) { return r.text(); })
+        .then(function(code) {
+          var country = (code || '').trim().substring(0, 2);
+          log('ipapi.co country = "' + country + '"');
+          if (country && country.length === 2 && country !== 'Re') {
+            resolveCountry(country);
+          } else {
+            log('ipapi.co returned invalid response');
+            timezoneFallback();
+          }
+        })
+        .catch(function(err) {
+          log('ipapi.co failed: ' + err);
+          timezoneFallback();
+        });
+    }
+
+    function detectByBrowsingContext() {
+      log('Fetching /browsing_context_suggestions.json...');
+      fetch('/browsing_context_suggestions.json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var country = '';
+          try { country = data.detected_values.country.handle; } catch(e) {}
+          log('Browsing context country = "' + country + '"');
+          if (country) {
+            resolveCountry(country);
+          } else {
+            detectByThirdParty();
+          }
+        })
+        .catch(function(err) {
+          log('Browsing context fetch failed: ' + err);
+          detectByThirdParty();
+        });
     }
 
     try {
       Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function(error) {
-        if (error || !window.Shopify.customerPrivacy) {
-          log('Shopify Privacy API unavailable — using country/timezone');
-          detect();
-          return;
+        if (!error && window.Shopify.customerPrivacy) {
+          var privacy = window.Shopify.customerPrivacy;
+          if (typeof privacy.shouldShowGDPRBanner === 'function' && privacy.shouldShowGDPRBanner()) {
+            log('Shopify Privacy API → GDPR region');
+            showBanner(gdprBanner);
+            return;
+          }
         }
-        var privacy = window.Shopify.customerPrivacy;
-
-        if (typeof privacy.shouldShowGDPRBanner === 'function' && privacy.shouldShowGDPRBanner()) {
-          log('Shopify API → GDPR region — showing consent banner');
-          showBanner(gdprBanner);
-          return;
-        }
-
-        log('Shopify API → not GDPR — checking country/timezone');
-        detect();
+        log('Shopify Privacy API did not confirm GDPR — detecting country');
+        detectByBrowsingContext();
       });
     } catch(e) {
-      log('Shopify API error — using country/timezone');
-      detect();
+      log('Shopify API error — detecting country');
+      detectByBrowsingContext();
     }
   }
 
