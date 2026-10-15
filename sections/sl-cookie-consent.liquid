@@ -546,15 +546,19 @@
       return;
     }
 
-    function showByCountry() {
+    function grantByDefault() {
+      log('No consent banner required — granting by default');
+      saveConsent({ analytics: true, marketing: true, preferences: true, sale_of_data: true });
+    }
+
+    function checkByCountry() {
       var country = (window.Shopify && window.Shopify.country) || '';
       log('Shopify.country = "' + country + '"');
-      if (country === 'US') {
-        log('US visitor — showing CCPA banner');
-        showBanner(ccpaBanner);
-      } else {
-        log('Non-US visitor (' + country + ') — showing full consent banner');
+      if (GDPR_COUNTRIES.indexOf(country) !== -1) {
+        log('GDPR country (' + country + ') — showing consent banner');
         showBanner(gdprBanner);
+      } else {
+        grantByDefault();
       }
     }
 
@@ -562,23 +566,23 @@
       Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function(error) {
         if (error || !window.Shopify.customerPrivacy) {
           log('Shopify Privacy API unavailable — falling back to country');
-          showByCountry();
+          checkByCountry();
           return;
         }
         var privacy = window.Shopify.customerPrivacy;
 
         if (typeof privacy.shouldShowGDPRBanner === 'function' && privacy.shouldShowGDPRBanner()) {
-          log('Shopify API → GDPR region — showing full consent banner');
+          log('Shopify API → GDPR region — showing consent banner');
           showBanner(gdprBanner);
           return;
         }
 
-        log('Shopify API → not GDPR — checking country');
-        showByCountry();
+        log('Shopify API → not GDPR — checking country fallback');
+        checkByCountry();
       });
     } catch(e) {
       log('Shopify API error — falling back to country');
-      showByCountry();
+      checkByCountry();
     }
   }
 
