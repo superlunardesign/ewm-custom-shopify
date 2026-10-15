@@ -529,8 +529,6 @@
       return;
     }
 
-    return;
-
     var log = function(msg) { try { console.log('[CookieConsent] ' + msg); } catch(e) {} };
 
     var existing = getConsent();
@@ -548,9 +546,40 @@
       return;
     }
 
-    var country = (window.Shopify && window.Shopify.country) || '';
-    log('Shopify.country = "' + country + '" — showing consent banner');
-    showBanner(ccpaBanner);
+    function showByCountry() {
+      var country = (window.Shopify && window.Shopify.country) || '';
+      log('Shopify.country = "' + country + '"');
+      if (country === 'US') {
+        log('US visitor — showing CCPA banner');
+        showBanner(ccpaBanner);
+      } else {
+        log('Non-US visitor (' + country + ') — showing full consent banner');
+        showBanner(gdprBanner);
+      }
+    }
+
+    try {
+      Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function(error) {
+        if (error || !window.Shopify.customerPrivacy) {
+          log('Shopify Privacy API unavailable — falling back to country');
+          showByCountry();
+          return;
+        }
+        var privacy = window.Shopify.customerPrivacy;
+
+        if (typeof privacy.shouldShowGDPRBanner === 'function' && privacy.shouldShowGDPRBanner()) {
+          log('Shopify API → GDPR region — showing full consent banner');
+          showBanner(gdprBanner);
+          return;
+        }
+
+        log('Shopify API → not GDPR — checking country');
+        showByCountry();
+      });
+    } catch(e) {
+      log('Shopify API error — falling back to country');
+      showByCountry();
+    }
   }
 
   window.slCookieConsent = {
