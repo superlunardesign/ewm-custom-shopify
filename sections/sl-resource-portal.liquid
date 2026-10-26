@@ -658,6 +658,13 @@
       var actionsEl = viewer.querySelector('[data-sl-rp-viewer-actions]');
 
       function toEmbedUrl(url) {
+        if (/\/pubhtml/.test(url) || /\/pub\?/.test(url) || /\/pub$/.test(url)) {
+          return url;
+        }
+        var sheetPubMatch = url.match(/docs\.google\.com\/spreadsheets\/d\/e\/([a-zA-Z0-9_-]+)/);
+        if (sheetPubMatch) {
+          return 'https://docs.google.com/spreadsheets/d/e/' + sheetPubMatch[1] + '/pubhtml?widget=true&headers=false';
+        }
         var sheetMatch = url.match(/docs\.google\.com\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
         if (sheetMatch) {
           return 'https://docs.google.com/spreadsheets/d/' + sheetMatch[1] + '/pubhtml?widget=true&headers=false';
