@@ -135,7 +135,8 @@
                 {% endif %}
                 {% if is_google %}
                   <span class="sl-rp__card-live">Live Document</span>
-                {% elsif item.last_updated.value != blank %}
+                {% endif %}
+                {% if item.last_updated.value != blank %}
                   <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
                 {% endif %}
               </span>
@@ -199,7 +200,8 @@
                 {% endif %}
                 {% if is_google %}
                   <span class="sl-rp__card-live">Live Document</span>
-                {% elsif item.last_updated.value != blank %}
+                {% endif %}
+                {% if item.last_updated.value != blank %}
                   <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
                 {% endif %}
               </span>
