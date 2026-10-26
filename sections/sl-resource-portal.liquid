@@ -3,9 +3,8 @@
   Sidebar file list + inline document viewer (PDFs + Google Sheets/Docs)
   Downloads are managed via metaobjects (Content > Resource Downloads)
   and connected to this page via page metafields.
-  Metaobjects with an `embed_url` field containing a Google URL
-  are displayed as live embedded documents; otherwise the `file` field
-  is used for PDF viewing.
+  Metaobjects with an `google_link` field containing a Google URL
+  are displayed as live embedded documents; otherwise the `file` field is used for PDF viewing.
 {% endcomment %}
 
 {%- style -%}
@@ -88,7 +87,7 @@
         {% if tab_1_items %}
           {% for item in tab_1_items %}
             {%- assign file_url = item.file.value.url -%}
-            {%- assign embed_url = item.embed_url.value -%}
+            {%- assign embed_url = item.google_link.value -%}
             {%- assign card_url = embed_url | default: file_url -%}
             {%- assign card_title = item.title.value | default: item.system.display_name -%}
             {%- assign url_lower = card_url | downcase -%}
@@ -152,7 +151,7 @@
         {% if tab_2_items %}
           {% for item in tab_2_items %}
             {%- assign file_url = item.file.value.url -%}
-            {%- assign embed_url = item.embed_url.value -%}
+            {%- assign embed_url = item.google_link.value -%}
             {%- assign card_url = embed_url | default: file_url -%}
             {%- assign card_title = item.title.value | default: item.system.display_name -%}
             {%- assign url_lower = card_url | downcase -%}
