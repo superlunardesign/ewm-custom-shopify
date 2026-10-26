@@ -42,6 +42,18 @@
 {%- assign tab_1_items = page.metafields.custom.tab_1_downloads.value -%}
 {%- assign tab_2_items = page.metafields.custom.tab_2_downloads.value -%}
 
+{%- assign has_tab1_blocks = false -%}
+{%- assign has_tab2_blocks = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'google_embed' and block.settings.embed_url != blank -%}
+    {%- if block.settings.tab == '1' -%}
+      {%- assign has_tab1_blocks = true -%}
+    {%- elsif block.settings.tab == '2' -%}
+      {%- assign has_tab2_blocks = true -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
 <div class="sl-rp" style="background-color: {{ section.settings.bg_color }};">
 
   {% if section.settings.heading != blank %}
@@ -90,6 +102,7 @@
               data-sl-rp-open
               data-pdf-url="{{ file_url }}"
               data-pdf-title="{{ card_title | escape }}"
+              data-embed-type="pdf"
               data-section="{{ section.id }}"
               type="button"
             >
@@ -113,9 +126,54 @@
               </span>
             </button>
           {% endfor %}
-        {% else %}
-          <p class="sl-rp__empty">No downloads added yet.</p>
         {% endif %}
+
+        {%- comment -%} Google Sheet / Doc blocks {%- endcomment -%}
+        {% for block in section.blocks %}
+          {% if block.type == 'google_embed' and block.settings.tab == '1' and block.settings.embed_url != blank %}
+            {%- assign embed_lower = block.settings.embed_url | downcase -%}
+            <button
+              class="sl-rp__card"
+              data-sl-rp-open
+              data-pdf-url="{{ block.settings.embed_url | escape }}"
+              data-pdf-title="{{ block.settings.title | escape }}"
+              data-embed-type="google"
+              data-section="{{ section.id }}"
+              type="button"
+              {{ block.shopify_attributes }}
+            >
+              <span class="sl-rp__card-icon sl-rp__card-icon--google">
+                {% if embed_lower contains 'spreadsheets' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                    <line x1="3" y1="15" x2="21" y2="15"></line>
+                    <line x1="9" y1="3" x2="9" y2="21"></line>
+                  </svg>
+                {% else %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <line x1="10" y1="9" x2="8" y2="9"></line>
+                  </svg>
+                {% endif %}
+              </span>
+              <span class="sl-rp__card-info">
+                <span class="sl-rp__card-title">{{ block.settings.title }}</span>
+                {% if block.settings.description != blank %}
+                  <span class="sl-rp__card-desc">{{ block.settings.description }}</span>
+                {% endif %}
+                <span class="sl-rp__card-live">Live Document</span>
+              </span>
+            </button>
+          {% endif %}
+        {% endfor %}
+
+        {% unless tab_1_items or has_tab1_blocks %}
+          <p class="sl-rp__empty">No downloads added yet.</p>
+        {% endunless %}
       </div>
 
       {%- comment -%} Tab 2 panel {%- endcomment -%}
@@ -129,6 +187,7 @@
               data-sl-rp-open
               data-pdf-url="{{ file_url }}"
               data-pdf-title="{{ card_title | escape }}"
+              data-embed-type="pdf"
               data-section="{{ section.id }}"
               type="button"
             >
@@ -152,9 +211,54 @@
               </span>
             </button>
           {% endfor %}
-        {% else %}
-          <p class="sl-rp__empty">No downloads added to this tab yet.</p>
         {% endif %}
+
+        {%- comment -%} Google Sheet / Doc blocks {%- endcomment -%}
+        {% for block in section.blocks %}
+          {% if block.type == 'google_embed' and block.settings.tab == '2' and block.settings.embed_url != blank %}
+            {%- assign embed_lower = block.settings.embed_url | downcase -%}
+            <button
+              class="sl-rp__card"
+              data-sl-rp-open
+              data-pdf-url="{{ block.settings.embed_url | escape }}"
+              data-pdf-title="{{ block.settings.title | escape }}"
+              data-embed-type="google"
+              data-section="{{ section.id }}"
+              type="button"
+              {{ block.shopify_attributes }}
+            >
+              <span class="sl-rp__card-icon sl-rp__card-icon--google">
+                {% if embed_lower contains 'spreadsheets' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                    <line x1="3" y1="15" x2="21" y2="15"></line>
+                    <line x1="9" y1="3" x2="9" y2="21"></line>
+                  </svg>
+                {% else %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <line x1="10" y1="9" x2="8" y2="9"></line>
+                  </svg>
+                {% endif %}
+              </span>
+              <span class="sl-rp__card-info">
+                <span class="sl-rp__card-title">{{ block.settings.title }}</span>
+                {% if block.settings.description != blank %}
+                  <span class="sl-rp__card-desc">{{ block.settings.description }}</span>
+                {% endif %}
+                <span class="sl-rp__card-live">Live Document</span>
+              </span>
+            </button>
+          {% endif %}
+        {% endfor %}
+
+        {% unless tab_2_items or has_tab2_blocks %}
+          <p class="sl-rp__empty">No downloads added to this tab yet.</p>
+        {% endunless %}
       </div>
 
     </div>
@@ -368,6 +472,28 @@
     color: #999;
   }
 
+  #shopify-section-{{ section.id }} .sl-rp__card-live {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #0f9d58;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card-live::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #0f9d58;
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .sl-rp__card-icon--google {
+    color: #0f9d58;
+  }
+
   /* ── Viewer ── */
   #shopify-section-{{ section.id }} .sl-rp__viewer {
     display: none;
@@ -576,14 +702,36 @@
       var titleEl = viewer.querySelector('[data-sl-rp-viewer-title]');
       var downloadBtn = viewer.querySelector('[data-sl-rp-download]');
       var newTabBtn = viewer.querySelector('[data-sl-rp-newtab]');
+      var printBtn = viewer.querySelector('[data-sl-rp-print]');
       var emptyEl = viewer.querySelector('[data-sl-rp-viewer-empty]');
       var actionsEl = viewer.querySelector('[data-sl-rp-viewer-actions]');
 
-      function loadPdf(url, title) {
+      function toEmbedUrl(url) {
+        var sheetMatch = url.match(/docs\.google\.com\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
+        if (sheetMatch) {
+          return 'https://docs.google.com/spreadsheets/d/' + sheetMatch[1] + '/pubhtml?widget=true&headers=false';
+        }
+        var docMatch = url.match(/docs\.google\.com\/document\/d\/([a-zA-Z0-9_-]+)/);
+        if (docMatch) {
+          return 'https://docs.google.com/document/d/' + docMatch[1] + '/pub?embedded=true';
+        }
+        return url;
+      }
+
+      function loadDocument(url, title, embedType) {
+        var isGoogle = (embedType === 'google');
+        var displayUrl = isGoogle ? toEmbedUrl(url) : url;
+
         titleEl.textContent = title;
-        iframe.src = url;
-        if (downloadBtn) downloadBtn.href = url;
+        iframe.src = displayUrl;
         if (newTabBtn) newTabBtn.href = url;
+        if (downloadBtn) {
+          downloadBtn.href = isGoogle ? '' : url;
+          downloadBtn.style.display = isGoogle ? 'none' : '';
+        }
+        if (printBtn) {
+          printBtn.style.display = isGoogle ? 'none' : '';
+        }
         emptyEl.hidden = true;
         actionsEl.style.display = '';
         viewer.classList.add('sl-rp__viewer--active');
@@ -594,8 +742,9 @@
           e.preventDefault();
           var url = this.getAttribute('data-pdf-url');
           var title = this.getAttribute('data-pdf-title');
+          var embedType = this.getAttribute('data-embed-type') || 'pdf';
           if (!url) {
-            alert('No file URL found. Check that the metaobject entry has a file uploaded and Storefront API access is enabled.');
+            alert('No file URL found. Check that the entry has a file uploaded or URL configured.');
             return;
           }
 
@@ -608,11 +757,10 @@
           allCards.forEach(function(c) { c.classList.remove('sl-rp__card--active'); });
           this.classList.add('sl-rp__card--active');
 
-          loadPdf(url, title);
+          loadDocument(url, title, embedType);
         });
       });
 
-      var printBtn = viewer.querySelector('[data-sl-rp-print]');
       if (printBtn) {
         printBtn.addEventListener('click', function() {
           if (iframe.contentWindow) {
@@ -628,9 +776,10 @@
         if (firstCard) {
           var url = firstCard.getAttribute('data-pdf-url');
           var title = firstCard.getAttribute('data-pdf-title');
+          var embedType = firstCard.getAttribute('data-embed-type') || 'pdf';
           if (url) {
             firstCard.classList.add('sl-rp__card--active');
-            loadPdf(url, title);
+            loadDocument(url, title, embedType);
           }
         }
       }
@@ -843,6 +992,42 @@
       "step": 4,
       "unit": "px",
       "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "google_embed",
+      "name": "Google Sheet / Doc",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "info": "Display name shown on the card"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "info": "Optional short description below the title"
+        },
+        {
+          "type": "text",
+          "id": "embed_url",
+          "label": "Google URL",
+          "info": "Paste the share or edit link from Google Sheets or Docs. The document must be set to \"Published to the web\" (File → Share → Publish to web) for the embed to display."
+        },
+        {
+          "type": "select",
+          "id": "tab",
+          "label": "Show in tab",
+          "options": [
+            { "value": "1", "label": "Tab 1" },
+            { "value": "2", "label": "Tab 2" }
+          ],
+          "default": "1"
+        }
+      ]
     }
   ],
   "presets": [
