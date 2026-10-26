@@ -1,8 +1,11 @@
 {% comment %}
   EWM Resource Portal
-  Sidebar file list + inline PDF viewer (no modal)
+  Sidebar file list + inline document viewer (PDFs + Google Sheets/Docs)
   Downloads are managed via metaobjects (Content > Resource Downloads)
   and connected to this page via page metafields.
+  Metaobjects with an `embed_url` field containing a Google URL
+  are displayed as live embedded documents; otherwise the `file` field
+  is used for PDF viewing.
 {% endcomment %}
 
 {%- style -%}
@@ -42,17 +45,6 @@
 {%- assign tab_1_items = page.metafields.custom.tab_1_downloads.value -%}
 {%- assign tab_2_items = page.metafields.custom.tab_2_downloads.value -%}
 
-{%- assign has_tab1_blocks = false -%}
-{%- assign has_tab2_blocks = false -%}
-{%- for block in section.blocks -%}
-  {%- if block.type == 'google_embed' and block.settings.embed_url != blank -%}
-    {%- if block.settings.tab == '1' -%}
-      {%- assign has_tab1_blocks = true -%}
-    {%- elsif block.settings.tab == '2' -%}
-      {%- assign has_tab2_blocks = true -%}
-    {%- endif -%}
-  {%- endif -%}
-{%- endfor -%}
 
 <div class="sl-rp" style="background-color: {{ section.settings.bg_color }};">
 
@@ -96,61 +88,30 @@
         {% if tab_1_items %}
           {% for item in tab_1_items %}
             {%- assign file_url = item.file.value.url -%}
+            {%- assign embed_url = item.embed_url.value -%}
+            {%- assign card_url = embed_url | default: file_url -%}
             {%- assign card_title = item.title.value | default: item.system.display_name -%}
+            {%- assign url_lower = card_url | downcase -%}
+            {%- assign is_google = false -%}
+            {%- if url_lower contains 'docs.google.com' -%}{%- assign is_google = true -%}{%- endif -%}
             <button
               class="sl-rp__card{% if forloop.first %} sl-rp__card--active{% endif %}"
               data-sl-rp-open
-              data-pdf-url="{{ file_url }}"
+              data-pdf-url="{{ card_url }}"
               data-pdf-title="{{ card_title | escape }}"
-              data-embed-type="pdf"
+              data-embed-type="{% if is_google %}google{% else %}pdf{% endif %}"
               data-section="{{ section.id }}"
               type="button"
             >
-              <span class="sl-rp__card-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                  <line x1="16" y1="13" x2="8" y2="13"></line>
-                  <line x1="16" y1="17" x2="8" y2="17"></line>
-                  <polyline points="10 9 9 9 8 9"></polyline>
-                </svg>
-              </span>
-              <span class="sl-rp__card-info">
-                <span class="sl-rp__card-title">{{ card_title }}</span>
-                {% if item.description.value != blank %}
-                  <span class="sl-rp__card-desc">{{ item.description.value }}</span>
-                {% endif %}
-                {% if item.last_updated.value != blank %}
-                  <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
-                {% endif %}
-              </span>
-            </button>
-          {% endfor %}
-        {% endif %}
-
-        {%- comment -%} Google Sheet / Doc blocks {%- endcomment -%}
-        {% for block in section.blocks %}
-          {% if block.type == 'google_embed' and block.settings.tab == '1' and block.settings.embed_url != blank %}
-            {%- assign embed_lower = block.settings.embed_url | downcase -%}
-            <button
-              class="sl-rp__card"
-              data-sl-rp-open
-              data-pdf-url="{{ block.settings.embed_url | escape }}"
-              data-pdf-title="{{ block.settings.title | escape }}"
-              data-embed-type="google"
-              data-section="{{ section.id }}"
-              type="button"
-              {{ block.shopify_attributes }}
-            >
-              <span class="sl-rp__card-icon sl-rp__card-icon--google">
-                {% if embed_lower contains 'spreadsheets' %}
+              <span class="sl-rp__card-icon{% if is_google %} sl-rp__card-icon--google{% endif %}">
+                {% if is_google and url_lower contains 'spreadsheets' %}
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                     <line x1="3" y1="9" x2="21" y2="9"></line>
                     <line x1="3" y1="15" x2="21" y2="15"></line>
                     <line x1="9" y1="3" x2="9" y2="21"></line>
                   </svg>
-                {% else %}
+                {% elsif is_google %}
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>
@@ -158,22 +119,32 @@
                     <line x1="16" y1="17" x2="8" y2="17"></line>
                     <line x1="10" y1="9" x2="8" y2="9"></line>
                   </svg>
+                {% else %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
                 {% endif %}
               </span>
               <span class="sl-rp__card-info">
-                <span class="sl-rp__card-title">{{ block.settings.title }}</span>
-                {% if block.settings.description != blank %}
-                  <span class="sl-rp__card-desc">{{ block.settings.description }}</span>
+                <span class="sl-rp__card-title">{{ card_title }}</span>
+                {% if item.description.value != blank %}
+                  <span class="sl-rp__card-desc">{{ item.description.value }}</span>
                 {% endif %}
-                <span class="sl-rp__card-live">Live Document</span>
+                {% if is_google %}
+                  <span class="sl-rp__card-live">Live Document</span>
+                {% elsif item.last_updated.value != blank %}
+                  <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
+                {% endif %}
               </span>
             </button>
-          {% endif %}
-        {% endfor %}
-
-        {% unless tab_1_items or has_tab1_blocks %}
+          {% endfor %}
+        {% else %}
           <p class="sl-rp__empty">No downloads added yet.</p>
-        {% endunless %}
+        {% endif %}
       </div>
 
       {%- comment -%} Tab 2 panel {%- endcomment -%}
@@ -181,61 +152,30 @@
         {% if tab_2_items %}
           {% for item in tab_2_items %}
             {%- assign file_url = item.file.value.url -%}
+            {%- assign embed_url = item.embed_url.value -%}
+            {%- assign card_url = embed_url | default: file_url -%}
             {%- assign card_title = item.title.value | default: item.system.display_name -%}
+            {%- assign url_lower = card_url | downcase -%}
+            {%- assign is_google = false -%}
+            {%- if url_lower contains 'docs.google.com' -%}{%- assign is_google = true -%}{%- endif -%}
             <button
               class="sl-rp__card"
               data-sl-rp-open
-              data-pdf-url="{{ file_url }}"
+              data-pdf-url="{{ card_url }}"
               data-pdf-title="{{ card_title | escape }}"
-              data-embed-type="pdf"
+              data-embed-type="{% if is_google %}google{% else %}pdf{% endif %}"
               data-section="{{ section.id }}"
               type="button"
             >
-              <span class="sl-rp__card-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                  <line x1="16" y1="13" x2="8" y2="13"></line>
-                  <line x1="16" y1="17" x2="8" y2="17"></line>
-                  <polyline points="10 9 9 9 8 9"></polyline>
-                </svg>
-              </span>
-              <span class="sl-rp__card-info">
-                <span class="sl-rp__card-title">{{ card_title }}</span>
-                {% if item.description.value != blank %}
-                  <span class="sl-rp__card-desc">{{ item.description.value }}</span>
-                {% endif %}
-                {% if item.last_updated.value != blank %}
-                  <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
-                {% endif %}
-              </span>
-            </button>
-          {% endfor %}
-        {% endif %}
-
-        {%- comment -%} Google Sheet / Doc blocks {%- endcomment -%}
-        {% for block in section.blocks %}
-          {% if block.type == 'google_embed' and block.settings.tab == '2' and block.settings.embed_url != blank %}
-            {%- assign embed_lower = block.settings.embed_url | downcase -%}
-            <button
-              class="sl-rp__card"
-              data-sl-rp-open
-              data-pdf-url="{{ block.settings.embed_url | escape }}"
-              data-pdf-title="{{ block.settings.title | escape }}"
-              data-embed-type="google"
-              data-section="{{ section.id }}"
-              type="button"
-              {{ block.shopify_attributes }}
-            >
-              <span class="sl-rp__card-icon sl-rp__card-icon--google">
-                {% if embed_lower contains 'spreadsheets' %}
+              <span class="sl-rp__card-icon{% if is_google %} sl-rp__card-icon--google{% endif %}">
+                {% if is_google and url_lower contains 'spreadsheets' %}
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                     <line x1="3" y1="9" x2="21" y2="9"></line>
                     <line x1="3" y1="15" x2="21" y2="15"></line>
                     <line x1="9" y1="3" x2="9" y2="21"></line>
                   </svg>
-                {% else %}
+                {% elsif is_google %}
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>
@@ -243,22 +183,32 @@
                     <line x1="16" y1="17" x2="8" y2="17"></line>
                     <line x1="10" y1="9" x2="8" y2="9"></line>
                   </svg>
+                {% else %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
                 {% endif %}
               </span>
               <span class="sl-rp__card-info">
-                <span class="sl-rp__card-title">{{ block.settings.title }}</span>
-                {% if block.settings.description != blank %}
-                  <span class="sl-rp__card-desc">{{ block.settings.description }}</span>
+                <span class="sl-rp__card-title">{{ card_title }}</span>
+                {% if item.description.value != blank %}
+                  <span class="sl-rp__card-desc">{{ item.description.value }}</span>
                 {% endif %}
-                <span class="sl-rp__card-live">Live Document</span>
+                {% if is_google %}
+                  <span class="sl-rp__card-live">Live Document</span>
+                {% elsif item.last_updated.value != blank %}
+                  <span class="sl-rp__card-updated">Updated {{ item.last_updated.value }}</span>
+                {% endif %}
               </span>
             </button>
-          {% endif %}
-        {% endfor %}
-
-        {% unless tab_2_items or has_tab2_blocks %}
+          {% endfor %}
+        {% else %}
           <p class="sl-rp__empty">No downloads added to this tab yet.</p>
-        {% endunless %}
+        {% endif %}
       </div>
 
     </div>
@@ -992,42 +942,6 @@
       "step": 4,
       "unit": "px",
       "default": 60
-    }
-  ],
-  "blocks": [
-    {
-      "type": "google_embed",
-      "name": "Google Sheet / Doc",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "info": "Display name shown on the card"
-        },
-        {
-          "type": "text",
-          "id": "description",
-          "label": "Description",
-          "info": "Optional short description below the title"
-        },
-        {
-          "type": "text",
-          "id": "embed_url",
-          "label": "Google URL",
-          "info": "Paste the share or edit link from Google Sheets or Docs. The document must be set to \"Published to the web\" (File → Share → Publish to web) for the embed to display."
-        },
-        {
-          "type": "select",
-          "id": "tab",
-          "label": "Show in tab",
-          "options": [
-            { "value": "1", "label": "Tab 1" },
-            { "value": "2", "label": "Tab 2" }
-          ],
-          "default": "1"
-        }
-      ]
     }
   ],
   "presets": [
